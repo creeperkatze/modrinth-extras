@@ -6,6 +6,9 @@ Adds unofficial extra features to the [Modrinth](https://modrinth.com) website.
 ![GitHub Pull Requests](https://img.shields.io/github/issues-pr/creeperkatze/modrinth-extras?labelColor=0d143c)
 ![GitHub Repo stars](https://img.shields.io/github/stars/creeperkatze/modrinth-extras?style=flat&labelColor=0d143c)
 
+> [!NOTE]
+> This repository is a mirror of [`apps/browser-extension`](https://github.com/creeperkatze/modrinth/tree/browser-extension/apps/browser-extension) in the [creeperkatze/modrinth](https://github.com/creeperkatze/modrinth) monorepo, synced via `git subtree`. Pull requests should be created there, while issues should be opened in this repository.
+
 ## 🚀 Installation
 
 Install from your browser's extension store:
@@ -42,8 +45,8 @@ The extension version is shown in the site footer alongside the other Modrinth l
 
 ```bash
 # Clone the repository
-git clone https://github.com/creeperkatze/modrinth-extra.git
-cd modrinth-extra/apps/browser-extension
+git clone https://github.com/creeperkatze/modrinth-extras.git
+cd modrinth-extras
 
 # Install dependencies
 pnpm install
@@ -74,6 +77,10 @@ pnpm wxt build -b firefox
 ## 🤝 Contributing
 
 Contributions are always welcome!
+
+This repository is a publish mirror, development happens in the [`browser-extension` branch](https://github.com/creeperkatze/modrinth/tree/browser-extension) of [creeperkatze/modrinth](https://github.com/creeperkatze/modrinth). To contribute, open a pull request there against `apps/browser-extension`.
+
+The extension depends on `@modrinth/ui` and `@modrinth/assets` as local workspace packages, so it cannot be built outside of the monorepo.
 
 ## 📜 License
 
