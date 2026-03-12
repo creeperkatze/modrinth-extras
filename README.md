@@ -28,18 +28,16 @@ A live bell icon is injected into the Modrinth header, showing the count of unre
 
 On project, user, organization, and collection pages, an **Extra** card is added to the sidebar with quick actions:
 
-- **Generate embed** — opens [Modfolio](https://modfolio.creeperkatze.de) pre-loaded with the current page URL to generate an embeddable card or badge.
+- **Generate embed:** opens [Modfolio](https://modfolio.creeperkatze.de) pre-loaded with the current page URL to generate an embeddable card or badge.
 
 ## 👨‍💻 Development
 
-This repository is a publish mirror, development happens in the [`browser-extension` branch](https://github.com/creeperkatze/modrinth/tree/browser-extension) of [creeperkatze/modrinth](https://github.com/creeperkatze/modrinth). To contribute, open a pull request there against `apps/browser-extension`.
-
-The extension depends on `@modrinth/ui` and `@modrinth/assets` as local workspace packages, so it cannot be built outside of the monorepo.
+The extension depends on `@modrinth/ui` and `@modrinth/assets` as local workspace packages, so it must be built from within the [creeperkatze/modrinth](https://github.com/creeperkatze/modrinth/tree/browser-extension) monorepo.
 
 ### Setup
 
 ```bash
-git clone https://github.com/creeperkatze/modrinth.git
+git clone https://github.com/creeperkatze/modrinth.git -b browser-extension
 cd modrinth
 
 # Install dependencies
@@ -70,11 +68,7 @@ pnpm ext:build:firefox
 
 ## 🤝 Contributing
 
-Contributions are always welcome!
-
-This repository is a publish mirror, development happens in the [`browser-extension` branch](https://github.com/creeperkatze/modrinth/tree/browser-extension) of [creeperkatze/modrinth](https://github.com/creeperkatze/modrinth). To contribute, open a pull request there against `apps/browser-extension`.
-
-The extension depends on `@modrinth/ui` and `@modrinth/assets` as local workspace packages, so it cannot be built outside of the monorepo.
+Contributions are always welcome! Open a pull request in the [creeperkatze/modrinth](https://github.com/creeperkatze/modrinth/tree/browser-extension) monorepo against `apps/browser-extension`.
 
 ## 📜 License
 
