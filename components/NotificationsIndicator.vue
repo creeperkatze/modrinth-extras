@@ -255,12 +255,24 @@ function resolveLink(link: string): string {
 	return 'https://modrinth.com' + link
 }
 
-// Navigate using the page's Nuxt router when available to avoid full reloads
-function navigate(path: string) {
+// Navigate using the page's Nuxt/Vue router to avoid full page reloads.
+// Vue 3 attaches __vue_app__ to the root mount element (#__nuxt), which
+// gives us reliable access to the router without relying on window globals.
+function getPageRouter(): { push: (path: string) => void } | null {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const nuxtRouter = (window as any).__nuxt_app?.vueApp?.config?.globalProperties?.$router
-	if (nuxtRouter) {
-		nuxtRouter.push(path)
+	const nuxtRoot = document.getElementById('__nuxt') as any
+	return (
+		nuxtRoot?.__vue_app__?.config?.globalProperties?.$router ??
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		(window as any).__nuxt_app?.vueApp?.config?.globalProperties?.$router ??
+		null
+	)
+}
+
+function navigate(path: string) {
+	const router = getPageRouter()
+	if (router) {
+		router.push(path)
 	} else {
 		window.location.href = resolveLink(path)
 	}

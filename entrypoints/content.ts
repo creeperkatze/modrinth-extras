@@ -96,12 +96,24 @@ export default defineContentScript({
 			}, 300)
 		}
 
-		// Hook into the page's Nuxt router to re-inject after each navigation.
-		// This handles layout switches that remove and recreate the header.
+		// Hook into the page's Nuxt router so we can unmount *before* navigation
+		// starts (beforeEach) and re-inject *after* it completes (afterEach).
+		//
+		// Vue 3 attaches __vue_app__ to the root mount element (#__nuxt), giving
+		// reliable access to the router without relying on window globals.
+		//
+		// Without beforeEach: Nuxt swaps layouts mid-navigation, our container is
+		// removed from the DOM, and the still-running Vue app tries to insert into
+		// a null parent — corrupting the page's DOM and crashing its floating-vue.
 		function hookRouter() {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			const nuxtRouter = (window as any).__nuxt_app?.vueApp?.config?.globalProperties?.$router
+			const nuxtRoot = document.getElementById('__nuxt') as any
+			const nuxtRouter =
+				nuxtRoot?.__vue_app__?.config?.globalProperties?.$router ??
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				(window as any).__nuxt_app?.vueApp?.config?.globalProperties?.$router
 			if (!nuxtRouter) return false
+			nuxtRouter.beforeEach(() => unmount())
 			nuxtRouter.afterEach(() => scheduleInject())
 			return true
 		}
@@ -109,21 +121,24 @@ export default defineContentScript({
 		// Schedule the initial injection and try to hook the router right away.
 		scheduleInject()
 		if (!hookRouter()) {
-			// Router not ready yet — watch for the Nuxt app to initialise.
+			// Router not ready yet — keep trying on DOM mutations until it is.
 			const initObserver = new MutationObserver(() => {
 				if (hookRouter()) initObserver.disconnect()
 			})
 			initObserver.observe(document.documentElement, { childList: true, subtree: true })
 		}
 
-		// Fallback MutationObserver for the initial injection before the Nuxt app
-		// is ready (covers pages that are already hydrated when the script runs).
+		// Safety-net MutationObserver: if the container is removed from the DOM
+		// by anything OTHER than our beforeEach hook (e.g. Nuxt re-rendering the
+		// header during hydration), unmount the Vue app IMMEDIATELY so it stops
+		// trying to write to a detached DOM tree, then schedule re-injection.
+		//
+		// Do NOT disconnect on success — we must keep watching for future removals.
 		const domObserver = new MutationObserver(() => {
-			if (container && document.contains(container)) {
-				domObserver.disconnect()
-				return
+			if (container && !document.contains(container)) {
+				unmount()
+				scheduleInject()
 			}
-			scheduleInject()
 		})
 		domObserver.observe(document.documentElement, { childList: true, subtree: true })
 	},
