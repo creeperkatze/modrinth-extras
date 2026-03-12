@@ -7,7 +7,7 @@ export default defineConfig({
 	manifest: {
 		name: 'Modrinth Extra',
 		description: 'Adds extra features to Modrinth',
-		version: '0.0.1',
+		version: '0.0.2',
 		permissions: [],
 		host_permissions: [
 			'https://modrinth.com/*',

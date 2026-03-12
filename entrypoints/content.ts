@@ -1,6 +1,7 @@
 import { createApp, h, ref } from 'vue'
 import FloatingVue from 'floating-vue'
 import { provideI18n } from '@modrinth/ui'
+import FooterBadge from '../components/FooterBadge.vue'
 import NotificationsIndicator from '../components/NotificationsIndicator.vue'
 import '../assets/modrinth-classes.css'
 import '../assets/tailwind.css'
@@ -139,7 +140,48 @@ export default defineContentScript({
 				unmount()
 				scheduleInject()
 			}
+			if (footerContainer && !document.contains(footerContainer)) {
+				unmountFooter()
+			}
+			injectFooterBadge()
 		})
 		domObserver.observe(document.documentElement, { childList: true, subtree: true })
+
+		let footerContainer: HTMLElement | null = null
+		let footerApp: ReturnType<typeof createApp> | null = null
+
+		function unmountFooter() {
+			if (footerApp) {
+				footerApp.unmount()
+				footerApp = null
+			}
+			if (footerContainer?.parentElement) {
+				footerContainer.parentElement.removeChild(footerContainer)
+			}
+			footerContainer = null
+		}
+
+		function injectFooterBadge() {
+			if (footerContainer && document.contains(footerContainer)) return
+			unmountFooter()
+
+			const openSourceLink = document.querySelector<HTMLAnchorElement>(
+				'footer a[href="https://github.com/modrinth/code"]',
+			)
+			if (!openSourceLink) return
+
+			const flexCol = openSourceLink.closest('.flex.flex-wrap.justify-center.gap-3')
+			if (!flexCol) return
+
+			footerContainer = document.createElement('div')
+			footerContainer.id = 'modrinth-ext-footer-badge'
+			footerContainer.style.display = 'contents'
+			flexCol.appendChild(footerContainer)
+
+			footerApp = createApp(h(FooterBadge))
+			footerApp.mount(footerContainer)
+		}
+
+		injectFooterBadge()
 	},
 })
