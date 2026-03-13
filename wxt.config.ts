@@ -7,7 +7,7 @@ export default defineConfig({
 	manifest: {
 		name: 'Modrinth Extras',
 		description: 'Adds unofficial extra features to the Modrinth website.',
-		version: '1.0.0',
+		version: '1.0.1',
 		icons: {
 			16: '/icon-16.png',
 			32: '/icon-32.png',
@@ -22,10 +22,10 @@ export default defineConfig({
 				id: 'contact@creeperkatze.de',
 				data_collection_permissions: {
 					required: ['none'],
-					optional: []
-				}
-			}
-		}
+					optional: [],
+				},
+			},
+		},
 	},
 	vite: () => ({
 		plugins: [
@@ -37,6 +37,7 @@ export default defineConfig({
 							params: {
 								overrides: {
 									removeViewBox: false,
+									cleanupIds: false,
 								},
 							},
 						},
