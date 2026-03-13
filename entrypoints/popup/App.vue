@@ -1,7 +1,7 @@
 <template>
-	<div class="popup-root">
-		<header class="popup-header">
-			<img src="/icon-48.png" alt="" class="popup-logo" aria-hidden="true" />
+	<div class="w-[300px]">
+		<header class="flex items-center gap-3 px-4 py-3.5">
+			<img src="/icon-48.png" alt="" class="size-9 shrink-0 rounded-lg" aria-hidden="true" />
 			<div class="flex flex-col gap-0.5">
 				<span class="text-sm font-semibold text-contrast">Modrinth Extras</span>
 				<span class="text-xs text-secondary">v{{ version }}</span>
@@ -10,10 +10,12 @@
 
 		<HorizontalRule />
 
-		<div class="popup-body">
-			<p class="popup-section-heading">Notifications</p>
+		<div class="flex flex-col gap-2 px-4 py-3">
+			<p class="m-0 mb-1 text-[11px] font-semibold uppercase tracking-[0.06em] text-secondary">
+				Notifications
+			</p>
 
-			<div class="popup-row">
+			<div class="flex items-start justify-between gap-4">
 				<SettingsLabel
 					id="toggle-badge"
 					title="Show count on icon"
@@ -24,11 +26,14 @@
 					type="button"
 					role="switch"
 					:aria-checked="showBadge"
-					class="toggle"
-					:class="showBadge ? 'toggle--on' : 'toggle--off'"
+					class="relative m-0 inline-flex h-5 w-[38px] shrink-0 cursor-pointer items-center rounded-full border-0 p-0 transition-colors duration-200"
+					:class="showBadge ? 'bg-brand' : 'bg-button-bg'"
 					@click="showBadge = !showBadge"
 				>
-					<span class="toggle__knob" />
+					<span
+						class="absolute left-0.5 top-0.5 size-4 rounded-full transition-[transform,background-color] duration-200"
+						:class="showBadge ? 'translate-x-[18px] bg-black/85' : 'bg-gray-400'"
+					/>
 				</button>
 			</div>
 		</div>
@@ -54,89 +59,3 @@ watch(showBadge, (value) => {
 	chrome.storage.local.set({ showBadge: value })
 })
 </script>
-
-<style scoped>
-.popup-root {
-	width: 300px;
-	background-color: var(--color-bg);
-	color: var(--color-base);
-}
-
-.popup-header {
-	display: flex;
-	align-items: center;
-	gap: 0.75rem;
-	padding: 0.875rem 1rem;
-}
-
-.popup-logo {
-	width: 2.25rem;
-	height: 2.25rem;
-	border-radius: 0.5rem;
-	flex-shrink: 0;
-}
-
-.popup-body {
-	padding: 0.75rem 1rem;
-	display: flex;
-	flex-direction: column;
-	gap: 0.5rem;
-}
-
-.popup-section-heading {
-	margin: 0 0 0.25rem;
-	font-size: 0.6875rem;
-	font-weight: 600;
-	text-transform: uppercase;
-	letter-spacing: 0.06em;
-	color: var(--color-secondary);
-}
-
-.popup-row {
-	display: flex;
-	align-items: flex-start;
-	justify-content: space-between;
-	gap: 1rem;
-}
-
-.toggle {
-	flex-shrink: 0;
-	position: relative;
-	display: inline-flex;
-	align-items: center;
-	width: 38px;
-	height: 20px;
-	border-radius: 9999px;
-	border: none;
-	margin: 0;
-	padding: 0;
-	cursor: pointer;
-	transition: background-color 0.2s ease;
-}
-
-.toggle--on {
-	background-color: var(--color-brand);
-}
-
-.toggle--off {
-	background-color: var(--color-button-bg);
-}
-
-.toggle__knob {
-	position: absolute;
-	top: 2px;
-	left: 2px;
-	width: 16px;
-	height: 16px;
-	border-radius: 9999px;
-	background-color: var(--color-gray-400);
-	transition:
-		transform 0.2s ease,
-		background-color 0.2s ease;
-}
-
-.toggle--on .toggle__knob {
-	transform: translateX(18px);
-	background-color: rgba(0, 0, 0, 0.85);
-}
-</style>

@@ -3,8 +3,7 @@ import FloatingVue from 'floating-vue'
 import { provideI18n } from '@modrinth/ui'
 import FooterBadge from '../components/FooterBadge.vue'
 import NotificationsIndicator from '../components/NotificationsIndicator.vue'
-import SidebarExtra from '../components/SidebarExtra.vue'
-import '../assets/modrinth-classes.css'
+import Sidebar from '../components/Sidebar.vue'
 import '../assets/tailwind.css'
 
 export default defineContentScript({
@@ -84,8 +83,12 @@ export default defineContentScript({
 				render: () => h(NotificationsIndicator),
 			})
 			app.use(FloatingVue)
-			app.mount(container)
-			currentApp = app
+			try {
+				app.mount(container)
+				currentApp = app
+			} catch {
+				unmount()
+			}
 		}
 
 		// Debounce helper — waits for DOM activity to settle before injecting.
@@ -209,9 +212,20 @@ export default defineContentScript({
 				anchor.after.after(sidebarContainer)
 			}
 
+			// Guard: the anchor may have been removed by Nuxt's DOM patching
+			// between when we found it and now.
+			if (!document.contains(sidebarContainer)) {
+				sidebarContainer = null
+				return
+			}
+
 			const pageUrl = window.location.href.split('?')[0].split('#')[0]
-			sidebarApp = createApp(h(SidebarExtra, { pageUrl }))
-			sidebarApp.mount(sidebarContainer)
+			sidebarApp = createApp(h(Sidebar, { pageUrl }))
+			try {
+				sidebarApp.mount(sidebarContainer)
+			} catch {
+				unmountSidebar()
+			}
 		}
 
 		let sidebarDebounce: ReturnType<typeof setTimeout> | null = null
@@ -265,7 +279,11 @@ export default defineContentScript({
 			flexCol.appendChild(footerContainer)
 
 			footerApp = createApp(h(FooterBadge))
-			footerApp.mount(footerContainer)
+			try {
+				footerApp.mount(footerContainer)
+			} catch {
+				unmountFooter()
+			}
 		}
 
 		scheduleInjectFooterBadge()

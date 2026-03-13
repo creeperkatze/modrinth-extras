@@ -1,6 +1,6 @@
 <template>
 	<div class="card flex-card experimental-styles-within">
-		<h2>Extra</h2>
+		<h2>Tools</h2>
 		<div class="details-list">
 			<div class="details-list__item">
 				<CodeIcon aria-hidden="true" />
@@ -11,11 +11,13 @@
 			</div>
 		</div>
 	</div>
+	<DependencyTree v-if="projectSlug" :project-slug="projectSlug" />
 </template>
 
 <script setup lang="ts">
+import { CodeIcon, ExternalIcon } from '@modrinth/assets'
 import { computed } from 'vue'
-import { CodeIcon, ExternalIcon, ImageIcon } from '@modrinth/assets'
+import DependencyTree from './DependencyTree.vue'
 
 const props = defineProps<{
 	pageUrl: string
@@ -25,4 +27,14 @@ const modfolioUrl = computed(
 	() => `https://modfolio.creeperkatze.de/?url=${encodeURIComponent(props.pageUrl)}`,
 )
 
+const projectSlug = computed(() => {
+	try {
+		const match = new URL(props.pageUrl).pathname.match(
+			/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/([^/]+)/,
+		)
+		return match?.[2] ?? null
+	} catch {
+		return null
+	}
+})
 </script>

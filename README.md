@@ -24,11 +24,13 @@ You must be logged in to modrinth.com for all features to work.
 
 A live bell icon is injected into the Modrinth header, showing the count of unread notifications. Click it to open a dropdown with your recent unread notifications, accept or decline team/organization invites, mark individual notifications as read, or clear them all at once.
 
-### Sidebar Extras
+### Sidebar
 
-On project, user, organization, and collection pages, an **Extra** card is added to the sidebar with quick actions:
+On project, user, organization, and collection pages, a **Tools** card is added to the sidebar:
 
 - **Generate embed:** opens [Modfolio](https://modfolio.creeperkatze.de) pre-loaded with the current page URL to generate an embeddable card or badge.
+
+On project pages specifically, a **Dependencies** card is added, showing the project's dependency tree. Dependencies can be expanded up to two levels deep to inspect transitive dependencies, with lazy loading on each expand.
 
 ## 👨‍💻 Development
 
