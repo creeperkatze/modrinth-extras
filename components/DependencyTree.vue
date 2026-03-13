@@ -4,10 +4,10 @@
 		<div class="details-list">
 			<div v-if="loading" class="details-list__item">
 				<LoaderCircleIcon class="animate-spin" />
-				Loading...
+				Loading
 			</div>
 			<div v-else-if="error" class="details-list__item font-normal text-secondary">
-				Failed to load dependencies.
+				Failed to load dependencies
 			</div>
 			<div v-else-if="roots.length === 0" class="details-list__item font-normal text-secondary">
 				No dependencies

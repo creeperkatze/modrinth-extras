@@ -37,7 +37,7 @@
 			</a>
 
 			<span
-				class="shrink-0 rounded-full border border-solid px-2 py-0.5 text-xs font-medium leading-none"
+				class="shrink-0 rounded-full border border-solid px-2 py-1 text-xs font-medium leading-none"
 				:class="badgeClass"
 			>
 				{{ typeLabel }}

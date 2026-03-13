@@ -22,15 +22,23 @@ You must be logged in to modrinth.com for all features to work.
 
 ### Notification Indicator
 
-A live bell icon is injected into the Modrinth header, showing the count of unread notifications. Click it to open a dropdown with your recent unread notifications, accept or decline team/organization invites, mark individual notifications as read, or clear them all at once.
+Adds a live bell icon to the Modrinth header showing your unread notification count. Click it to open a dropdown with your recent unread notifications, accept or decline team/organization invites, mark individual notifications as read, or clear them all at once.
 
-### Sidebar
+### Tools Sidebar
 
-On project, user, organization, and collection pages, a **Tools** card is added to the sidebar:
+Adds a tools card to the sidebar on project, user, organization, and collection pages with the following items:
 
 - **Generate embed:** opens [Modfolio](https://modfolio.creeperkatze.de) pre-loaded with the current page URL to generate an embeddable card or badge.
+- **View API response:** opens the raw Modrinth API JSON for the current page in a new tab. Works on projects, users, organizations, and collections.
 
-On project pages specifically, a **Dependencies** card is added, showing the project's dependency tree. Dependencies can be expanded up to two levels deep to inspect transitive dependencies, with lazy loading on each expand.
+On project pages, two additional developer utilities are shown:
+
+- **Copy download URL:** copies the direct download URL of the project's latest primary file to the clipboard.
+- **Copy packwiz:** copies the `packwiz mr add <slug>` command to the clipboard.
+
+### Dependency Sidebar
+
+On project pages, a dependencies card shows the project's full dependency tree. Each dependency can be expanded up to two levels deep to inspect transitive dependencies, with lazy loading on expand.
 
 ## 👨‍💻 Development
 
