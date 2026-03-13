@@ -7,7 +7,7 @@ export default defineConfig({
 	manifest: {
 		name: 'Modrinth Extras',
 		description: 'Adds unofficial extra features to the Modrinth website.',
-		version: '0.0.11',
+		version: '0.0.12',
 		icons: {
 			16: '/icon-16.png',
 			32: '/icon-32.png',
@@ -26,11 +26,11 @@ export default defineConfig({
 			gecko: {
 				id: 'contact@creeperkatze.de',
 				data_collection_permissions: {
-      			required: ['none'],
-				optional: []
+					required: ['none'],
+					optional: []
+				}
 			}
 		}
-    }
 	},
 	vite: () => ({
 		plugins: [
