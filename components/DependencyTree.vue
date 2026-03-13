@@ -10,6 +10,7 @@
 				Failed to load dependencies
 			</div>
 			<div v-else-if="roots.length === 0" class="details-list__item font-normal text-secondary">
+				<XIcon aria-hidden="true" />
 				No dependencies
 			</div>
 			<ul v-else class="m-0 flex list-none flex-col gap-3 p-0">
@@ -25,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { LoaderCircleIcon } from '@modrinth/assets'
+import { LoaderCircleIcon, XIcon } from '@modrinth/assets'
 import { onMounted, ref } from 'vue'
 import { fetchProjectDependencies, type EnrichedDep } from '../helpers/dependencies'
 import DependencyNode from './DependencyNode.vue'
