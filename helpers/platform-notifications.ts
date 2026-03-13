@@ -2,6 +2,8 @@ import type { Organization, Project, Report, User, Version } from '@modrinth/uti
 
 import { useBaseFetch } from '../composables/useBaseFetch'
 
+type Fetcher = (url: string, options?: RequestInit & { apiVersion?: number }) => Promise<any>
+
 export type PlatformNotificationAction = {
 	title: string
 	action_route: [string, string]
@@ -51,6 +53,7 @@ export type PlatformNotification = {
 async function getBulk<T extends { id: string }>(
 	type: string,
 	ids: string[],
+	fetcher: Fetcher,
 	apiVersion = 2,
 ): Promise<T[]> {
 	if (!ids || ids.length === 0) {
@@ -58,7 +61,7 @@ async function getBulk<T extends { id: string }>(
 	}
 	const url = `${type}?ids=${encodeURIComponent(JSON.stringify([...new Set(ids)]))}`
 	try {
-		const res = await useBaseFetch(url, { apiVersion })
+		const res = await fetcher(url, { apiVersion })
 		return Array.isArray(res) ? res : []
 	} catch {
 		return []
@@ -67,6 +70,7 @@ async function getBulk<T extends { id: string }>(
 
 export async function fetchExtraNotificationData(
 	notifications: PlatformNotification[],
+	fetcher: Fetcher = useBaseFetch,
 ): Promise<PlatformNotification[]> {
 	const bulk = {
 		projects: [] as string[],
@@ -89,7 +93,7 @@ export async function fetchExtraNotificationData(
 		}
 	}
 
-	const reports = (await getBulk<Report>('reports', bulk.reports)).filter(Boolean)
+	const reports = (await getBulk<Report>('reports', bulk.reports, fetcher)).filter(Boolean)
 	for (const r of reports) {
 		if (!r?.item_type) continue
 		if (r.item_type === 'project') bulk.projects.push(r.item_id)
@@ -97,14 +101,14 @@ export async function fetchExtraNotificationData(
 		else if (r.item_type === 'version') bulk.versions.push(r.item_id)
 	}
 
-	const versions = (await getBulk<Version>('versions', bulk.versions)).filter(Boolean)
+	const versions = (await getBulk<Version>('versions', bulk.versions, fetcher)).filter(Boolean)
 	for (const v of versions) bulk.projects.push(v.project_id)
 
 	const [projects, threads, users, organizations] = await Promise.all([
-		getBulk<Project>('projects', bulk.projects),
-		getBulk<{ id: string }>('threads', bulk.threads),
-		getBulk<User>('users', bulk.users),
-		getBulk<Organization>('organizations', bulk.organizations, 3),
+		getBulk<Project>('projects', bulk.projects, fetcher),
+		getBulk<{ id: string }>('threads', bulk.threads, fetcher),
+		getBulk<User>('users', bulk.users, fetcher),
+		getBulk<Organization>('organizations', bulk.organizations, fetcher, 3),
 	])
 
 	for (const n of notifications) {
@@ -169,8 +173,9 @@ function isSimilar(a: PlatformNotification, b: PlatformNotification | undefined)
 	return !!a?.body?.project_id && a.body!.project_id === b?.body?.project_id
 }
 
-export async function markAsRead(ids: string[]): Promise<void> {
-	await useBaseFetch(`notifications?ids=${JSON.stringify([...new Set(ids)])}`, {
-		method: 'PATCH',
-	})
+export async function markAsRead(
+	ids: string[],
+	fetcher: Fetcher = useBaseFetch,
+): Promise<void> {
+	await fetcher(`notifications?ids=${JSON.stringify([...new Set(ids)])}`, { method: 'PATCH' })
 }
