@@ -1,6 +1,6 @@
 # <img src="public/icon.svg" alt="Modrinth Extras" width="32"> Modrinth Extras
 
-Adds unofficial extra features to the [Modrinth](https://modrinth.com) website.
+A browser extension adding unofficial extra features to the [Modrinth](https://modrinth.com) website.
 
 ![GitHub Issues](https://img.shields.io/github/issues/creeperkatze/modrinth-extras?labelColor=0d143c)
 ![GitHub Pull Requests](https://img.shields.io/github/issues-pr/creeperkatze/modrinth-extras?labelColor=0d143c)
