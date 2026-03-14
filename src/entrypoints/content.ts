@@ -3,11 +3,11 @@ import '../assets/tailwind.css'
 import { provideI18n } from '@modrinth/ui'
 import FloatingVue from 'floating-vue'
 import { type App, createApp, h, ref } from 'vue'
+import { browser } from 'wxt/browser'
 
 import FooterBadge from '../components/FooterBadge.vue'
 import NotificationsIndicator from '../components/NotificationsIndicator.vue'
 import Sidebar from '../components/Sidebar.vue'
-import { browser } from 'wxt/browser'
 import { DEFAULTS, type ExtensionSettings, loadSettings } from '../helpers/settings'
 
 // Debounce only during initial page load to avoid injecting during Nuxt

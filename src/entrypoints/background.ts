@@ -1,5 +1,6 @@
-import { getAuthToken, usePopupFetch } from '../composables/usePopupFetch'
 import { browser } from 'wxt/browser'
+
+import { getAuthToken, usePopupFetch } from '../composables/usePopupFetch'
 import { groupNotifications } from '../helpers/platform-notifications'
 
 const ALARM_NAME = 'modrinth-extras-poll'

@@ -100,8 +100,8 @@
 import { ArrowUpRightIcon, CheckCircleIcon, ClockIcon, LoaderCircleIcon } from '@modrinth/assets'
 import { ButtonStyled, HorizontalRule } from '@modrinth/ui'
 import { onMounted, reactive, ref, watch } from 'vue'
-
 import { browser } from 'wxt/browser'
+
 import { DEFAULTS, loadSettings } from '../../helpers/settings'
 import ToggleRow from './ToggleRow.vue'
 

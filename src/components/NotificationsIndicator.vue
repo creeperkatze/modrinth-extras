@@ -239,6 +239,7 @@ import {
 	SmartClickable,
 } from '@modrinth/ui'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { browser } from 'wxt/browser'
 
 import { invalidateTokenCache, useBaseFetch } from '../composables/useBaseFetch'
 import { navigate, resolveLink } from '../helpers/page-router'
@@ -250,7 +251,6 @@ import {
 	type PlatformNotificationBody,
 	type PlatformNotificationExtraData,
 } from '../helpers/platform-notifications'
-import { browser } from 'wxt/browser'
 import { acceptTeamInvite, removeSelfFromTeam } from '../helpers/teams'
 
 const props = defineProps({
