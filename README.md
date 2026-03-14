@@ -1,4 +1,4 @@
-# <img src="/src/public/icon.svg" alt="Modrinth Extras" width="32"> Modrinth Extras
+# <img src="/src/public/icon.svg" alt="Icon" width="32">Modrinth Extras
 
 A browser extension adding unofficial extra features to the [Modrinth](https://modrinth.com) website.
 
