@@ -92,9 +92,9 @@ const apiUrl = computed(() => {
 		const user = path.match(/^\/user\/([^/]+)/)
 		if (user) return `https://api.modrinth.com/v2/user/${user[1]}`
 		const org = path.match(/^\/organization\/([^/]+)/)
-		if (org) return `https://api.modrinth.com/v2/organization/${org[1]}`
+		if (org) return `https://api.modrinth.com/v3/organization/${org[1]}`
 		const collection = path.match(/^\/collection\/([^/]+)/)
-		if (collection) return `https://api.modrinth.com/v2/collection/${collection[1]}`
+		if (collection) return `https://api.modrinth.com/v3/collection/${collection[1]}`
 		return null
 	} catch {
 		return null

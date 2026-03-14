@@ -9,7 +9,7 @@
 			<div v-else-if="error" class="details-list__item font-normal text-secondary">
 				Failed to load dependencies
 			</div>
-			<div v-else-if="roots.length === 0" class="details-list__item font-normal text-secondary">
+			<div v-else-if="roots.length === 0" class="details-list__item text-secondary">
 				<XIcon aria-hidden="true" />
 				No dependencies
 			</div>
