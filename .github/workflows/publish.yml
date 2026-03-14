@@ -91,7 +91,7 @@ jobs:
           refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
 
   publish-firefox:
-    name: Publish to Firefox Add-ons
+    name: Publish to Firefox Add-Ons
     needs: build
     runs-on: ubuntu-latest
     steps:
