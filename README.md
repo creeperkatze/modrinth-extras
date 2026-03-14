@@ -15,34 +15,7 @@ Install from your browser's extension store:
 - **[Firefox Add-Ons](#)**
 - **[Edge Add-Ons](#)**
 
-Prefer to build from source? See [Building from source](#building-from-source) below.
-
-## 🔒 Building from source
-
-If you don't want to trust the store release, you can build the extension yourself directly from the source code and verify it matches what's in this repository.
-
-**Prerequisites:** [Node.js](https://nodejs.org) and [pnpm](https://pnpm.io)
-
-```bash
-# Clone and check out the version you want to verify (e.g. v1.0.6)
-git clone https://github.com/creeperkatze/modrinth-extras.git
-cd modrinth-extras
-git checkout v1.0.6
-
-pnpm install
-
-# Chrome / Edge
-pnpm zip
-
-# Firefox
-pnpm zip:firefox
-```
-
-The resulting zips in `.output/` are identical to those attached to the [GitHub release](https://github.com/creeperkatze/modrinth-extras/releases) for that tag.
-
-**Chrome / Edge:** go to `chrome://extensions/`, enable **Developer mode**, then drag and drop the zip onto the page.
-
-**Firefox:** see the [Development](#development) section below for instructions on loading the zip. Note that Firefox removes the extension on browser restart since it is loaded as a temporary add-on.
+Prefer to build from source? See [Building from source](#-building-from-source) below.
 
 ## ✨ Features
 
@@ -73,6 +46,33 @@ On project pages, a dependencies card shows the project's full dependency tree. 
 <img src=".github/assets/screenshots/dependencies.png" width="400">
 
 ### More features coming soon™!
+
+## 🔒 Building from source
+
+If you don't want to trust the store release, you can build the extension yourself directly from the source code and verify it matches what's in this repository.
+
+**Prerequisites:** [Node.js](https://nodejs.org) and [pnpm](https://pnpm.io)
+
+```bash
+# Clone and check out the version you want to verify (e.g. v1.0.6)
+git clone https://github.com/creeperkatze/modrinth-extras.git
+cd modrinth-extras
+git checkout v1.0.6
+
+pnpm install
+
+# Chrome / Edge
+pnpm zip
+
+# Firefox
+pnpm zip:firefox
+```
+
+The resulting zips in `.output/` are identical to those attached to the [GitHub release](https://github.com/creeperkatze/modrinth-extras/releases) for that tag.
+
+**Chrome / Edge:** go to `chrome://extensions/`, enable **Developer mode**, then drag and drop the zip onto the page.
+
+**Firefox:** see the [Development](#-development) section below for instructions on loading the zip. Note that Firefox removes the extension on browser restart since it is loaded as a temporary add-on.
 
 ## 👨‍💻 Development
 
