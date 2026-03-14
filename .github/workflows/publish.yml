@@ -80,7 +80,7 @@ jobs:
 
       - name: Find Chrome zip
         id: zip
-        run: echo "path=$(ls zips/*.zip | grep -v firefox | head -1)" >> $GITHUB_OUTPUT
+        run: echo "path=$(ls zips/*.zip | grep -v firefox | grep -v sources | head -1)" >> $GITHUB_OUTPUT
 
       - uses: wdzeng/chrome-extension@v1.3.0
         with:
@@ -89,6 +89,7 @@ jobs:
           client-id: ${{ secrets.CHROME_CLIENT_ID }}
           client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
           refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+          upload-only: true
 
   publish-firefox:
     name: Publish to Firefox Add-Ons
@@ -104,6 +105,7 @@ jobs:
         with:
           addon-guid: contact@creeperkatze.de
           xpi-path: zips/*firefox*.zip
+          source-file-path: zips/*sources*.zip
           jwt-issuer: ${{ secrets.FIREFOX_JWT_ISSUER }}
           jwt-secret: ${{ secrets.FIREFOX_JWT_SECRET }}
 
@@ -119,7 +121,7 @@ jobs:
 
       - name: Find Chrome zip (used for Edge)
         id: zip
-        run: echo "path=$(ls zips/*.zip | grep -v firefox | head -1)" >> $GITHUB_OUTPUT
+        run: echo "path=$(ls zips/*.zip | grep -v firefox | grep -v sources | head -1)" >> $GITHUB_OUTPUT
 
       - uses: wdzeng/edge-addon@v2.1.0
         with:
@@ -127,3 +129,4 @@ jobs:
           zip-path: ${{ steps.zip.outputs.path }}
           api-key: ${{ secrets.EDGE_API_KEY }}
           client-id: ${{ secrets.EDGE_CLIENT_ID }}
+          upload-only: true
