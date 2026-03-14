@@ -12,7 +12,7 @@ on:
 
 jobs:
   lint:
-    name: Lint
+    name: Test
     uses: ./.github/workflows/test.yml
     with:
       ref: ${{ inputs.tag || github.ref }}
