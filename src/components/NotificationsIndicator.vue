@@ -388,6 +388,10 @@ onBeforeUnmount(() => {
 	if (refreshInterval) clearInterval(refreshInterval)
 })
 
+function syncBadgeCount() {
+	chrome.runtime.sendMessage({ type: 'badge-count', count: unreadCount.value }).catch(() => {})
+}
+
 // Action handlers
 async function handleAcceptInvite(notif: PlatformNotification) {
 	try {
@@ -395,6 +399,7 @@ async function handleAcceptInvite(notif: PlatformNotification) {
 			const n = notificationsData.value.find((n) => n.id === notif.id)
 			if (n) n.read = true
 		}
+		syncBadgeCount()
 		await acceptTeamInvite((notif.body as PlatformNotificationBody).team_id as string)
 		markAsRead([notif.id]).catch((err) => console.error('Error marking as read:', err))
 	} catch (err) {
@@ -408,6 +413,7 @@ async function handleDeclineInvite(notif: PlatformNotification) {
 			const n = notificationsData.value.find((n) => n.id === notif.id)
 			if (n) n.read = true
 		}
+		syncBadgeCount()
 		await removeSelfFromTeam(
 			(notif.body as PlatformNotificationBody).team_id as string,
 			userId.value as string,
@@ -427,6 +433,7 @@ async function handleMarkAsRead(notif: PlatformNotification) {
 				if (n) n.read = true
 			}
 		}
+		syncBadgeCount()
 		markAsRead(ids).catch((err) => console.error('Error marking as read:', err))
 	} catch (err) {
 		console.error('Error marking as read:', err)
@@ -439,6 +446,7 @@ async function handleMarkAllAsRead() {
 		if (notificationsData.value) {
 			for (const n of notificationsData.value) n.read = true
 		}
+		syncBadgeCount()
 		markAsRead(ids).catch((err) => console.error('Error marking all as read:', err))
 	} catch (err) {
 		console.error('Error marking all as read:', err)

@@ -84,6 +84,14 @@ export default defineBackground(() => {
 			updateBadge().then(() => sendResponse({ ok: true }))
 			return true
 		}
+		if (message.type === 'badge-count') {
+			const count = message.count as number
+			actionAPI
+				.setBadgeBackgroundColor({ color: '#1bd96a' })
+				.then(() => actionAPI.setBadgeText({ text: count > 0 ? String(Math.min(count, 99)) : '' }))
+				.then(() => sendResponse({ ok: true }))
+			return true
+		}
 	})
 
 	// Ensure the service worker wakes immediately on browser start
