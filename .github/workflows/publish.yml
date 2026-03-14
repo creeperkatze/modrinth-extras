@@ -107,6 +107,7 @@ jobs:
           addon-guid: contact@creeperkatze.de
           xpi-path: zips/*firefox*.zip
           source-file-path: zips/*sources*.zip
+          license: agpl-3.0
           jwt-issuer: ${{ secrets.FIREFOX_JWT_ISSUER }}
           jwt-secret: ${{ secrets.FIREFOX_JWT_SECRET }}
 
