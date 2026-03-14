@@ -1,6 +1,8 @@
+import { browser } from 'wxt/browser'
+
 export async function getAuthToken(): Promise<string> {
 	try {
-		const cookie = await chrome.cookies.get({ url: 'https://modrinth.com', name: 'auth-token' })
+		const cookie = await browser.cookies.get({ url: 'https://modrinth.com', name: 'auth-token' })
 		return cookie?.value ? decodeURIComponent(cookie.value) : ''
 	} catch {
 		return ''

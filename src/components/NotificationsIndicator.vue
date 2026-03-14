@@ -250,6 +250,7 @@ import {
 	type PlatformNotificationBody,
 	type PlatformNotificationExtraData,
 } from '../helpers/platform-notifications'
+import { browser } from 'wxt/browser'
 import { acceptTeamInvite, removeSelfFromTeam } from '../helpers/teams'
 
 const props = defineProps({
@@ -389,7 +390,7 @@ onBeforeUnmount(() => {
 })
 
 function syncBadgeCount() {
-	chrome.runtime.sendMessage({ type: 'badge-count', count: unreadCount.value }).catch(() => {})
+	browser.runtime.sendMessage({ type: 'badge-count', count: unreadCount.value }).catch(() => {})
 }
 
 // Action handlers

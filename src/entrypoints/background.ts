@@ -1,4 +1,5 @@
 import { getAuthToken, usePopupFetch } from '../composables/usePopupFetch'
+import { browser } from 'wxt/browser'
 import { groupNotifications } from '../helpers/platform-notifications'
 
 const ALARM_NAME = 'modrinth-extras-poll'
@@ -6,10 +7,10 @@ const POLL_INTERVAL_MINUTES = 5
 
 export default defineBackground(() => {
 	// Firefox MV2 uses browserAction; Chrome MV3 uses action.
-	const actionAPI = chrome.action ?? (chrome as any).browserAction
+	const actionAPI = browser.action ?? (browser as any).browserAction
 
 	async function showCachedBadge() {
-		const { showBadge = true, notifications } = await chrome.storage.local.get([
+		const { showBadge = true, notifications } = await browser.storage.local.get([
 			'showBadge',
 			'notifications',
 		])
@@ -22,7 +23,7 @@ export default defineBackground(() => {
 
 	async function updateBadge() {
 		try {
-			const { showBadge = true } = await chrome.storage.local.get('showBadge')
+			const { showBadge = true } = await browser.storage.local.get('showBadge')
 			if (!showBadge) {
 				console.log('[Modrinth Extras] Badge disabled, skipping update')
 				actionAPI?.setBadgeText({ text: '' })
@@ -33,7 +34,7 @@ export default defineBackground(() => {
 			if (!token) {
 				console.log('[Modrinth Extras] No auth token, clearing badge')
 				actionAPI?.setBadgeText({ text: '' })
-				await chrome.storage.local.set({
+				await browser.storage.local.set({
 					userId: null,
 					notifications: null,
 					lastUpdated: Date.now(),
@@ -42,6 +43,11 @@ export default defineBackground(() => {
 			}
 
 			const user = await usePopupFetch('user')
+			if (!user?.id) {
+				console.log('[Modrinth Extras] Could not fetch user, clearing badge')
+				actionAPI?.setBadgeText({ text: '' })
+				return
+			}
 			const notifs = await usePopupFetch(`user/${user.id}/notifications`)
 			const unread: number = Array.isArray(notifs)
 				? groupNotifications(notifs.filter((n: any) => !n.read)).length
@@ -53,7 +59,7 @@ export default defineBackground(() => {
 			await actionAPI.setBadgeBackgroundColor({ color: '#1bd96a' })
 			await actionAPI.setBadgeText({ text: unread > 0 ? String(Math.min(unread, 99)) : '' })
 
-			await chrome.storage.local.set({
+			await browser.storage.local.set({
 				userId: user.id,
 				notifications: notifs,
 				lastUpdated: Date.now(),
@@ -64,7 +70,7 @@ export default defineBackground(() => {
 		}
 	}
 
-	chrome.storage.onChanged.addListener((changes, area) => {
+	browser.storage.onChanged.addListener((changes, area) => {
 		if (area !== 'local' || !('showBadge' in changes)) return
 		if (changes.showBadge.newValue === false) {
 			actionAPI?.setBadgeText({ text: '' })
@@ -73,35 +79,36 @@ export default defineBackground(() => {
 		}
 	})
 
-	chrome.alarms.create(ALARM_NAME, { periodInMinutes: POLL_INTERVAL_MINUTES })
+	browser.alarms.create(ALARM_NAME, { periodInMinutes: POLL_INTERVAL_MINUTES })
 
-	chrome.alarms.onAlarm.addListener((alarm) => {
+	browser.alarms.onAlarm.addListener((alarm) => {
 		if (alarm.name === ALARM_NAME) updateBadge()
 	})
 
-	chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+	browser.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 		if (message.type === 'refresh') {
 			updateBadge().then(() => sendResponse({ ok: true }))
 			return true
 		}
 		if (message.type === 'badge-count') {
 			const count = message.count as number
-			actionAPI
-				.setBadgeBackgroundColor({ color: '#1bd96a' })
-				.then(() => actionAPI.setBadgeText({ text: count > 0 ? String(Math.min(count, 99)) : '' }))
-				.then(() => sendResponse({ ok: true }))
+			;(async () => {
+				await actionAPI.setBadgeBackgroundColor({ color: '#1bd96a' })
+				await actionAPI.setBadgeText({ text: count > 0 ? String(Math.min(count, 99)) : '' })
+				sendResponse({ ok: true })
+			})()
 			return true
 		}
 	})
 
 	// Ensure the service worker wakes immediately on browser start
-	chrome.runtime.onStartup.addListener(() => {
+	browser.runtime.onStartup.addListener(() => {
 		showCachedBadge()
 		updateBadge()
 	})
 
 	// React instantly when the user signs in or out
-	chrome.cookies.onChanged.addListener((changeInfo) => {
+	browser.cookies.onChanged.addListener((changeInfo) => {
 		if (changeInfo.cookie.name === 'auth-token' && changeInfo.cookie.domain.includes('modrinth')) {
 			updateBadge()
 		}

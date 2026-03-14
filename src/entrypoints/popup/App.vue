@@ -101,6 +101,7 @@ import { ArrowUpRightIcon, CheckCircleIcon, ClockIcon, LoaderCircleIcon } from '
 import { ButtonStyled, HorizontalRule } from '@modrinth/ui'
 import { onMounted, reactive, ref, watch } from 'vue'
 
+import { browser } from 'wxt/browser'
 import { DEFAULTS, loadSettings } from '../../helpers/settings'
 import ToggleRow from './ToggleRow.vue'
 
@@ -135,6 +136,6 @@ onMounted(async () => {
 })
 
 watch(settings, () => {
-	if (mounted) chrome.storage.local.set({ ...settings })
+	if (mounted) browser.storage.local.set({ ...settings })
 })
 </script>

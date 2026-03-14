@@ -7,6 +7,7 @@ import { type App, createApp, h, ref } from 'vue'
 import FooterBadge from '../components/FooterBadge.vue'
 import NotificationsIndicator from '../components/NotificationsIndicator.vue'
 import Sidebar from '../components/Sidebar.vue'
+import { browser } from 'wxt/browser'
 import { DEFAULTS, type ExtensionSettings, loadSettings } from '../helpers/settings'
 
 // Debounce only during initial page load to avoid injecting during Nuxt
@@ -241,7 +242,7 @@ export default defineContentScript({
 			for (const inj of injections) inj.schedule()
 		})
 
-		chrome.storage.onChanged.addListener((changes) => {
+		browser.storage.onChanged.addListener((changes: Record<string, { newValue?: unknown }>) => {
 			for (const [key, { newValue }] of Object.entries(changes)) {
 				;(settings as unknown as Record<string, unknown>)[key] = newValue
 			}

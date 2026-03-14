@@ -12,7 +12,9 @@ export const DEFAULTS: ExtensionSettings = {
 	showDependenciesSidebar: true,
 }
 
+import { browser } from 'wxt/browser'
+
 export async function loadSettings(): Promise<ExtensionSettings> {
-	const stored = await chrome.storage.local.get(Object.keys(DEFAULTS) as string[])
+	const stored = await browser.storage.local.get(Object.keys(DEFAULTS) as string[])
 	return { ...DEFAULTS, ...(stored as Partial<ExtensionSettings>) }
 }
