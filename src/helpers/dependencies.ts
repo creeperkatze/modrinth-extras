@@ -19,9 +19,11 @@ export interface EnrichedDep extends RawDep {
 }
 
 export async function fetchProjectDependencies(slugOrId: string): Promise<EnrichedDep[]> {
-	let versions: any[]
+	let versions: { dependencies?: RawDep[] }[]
 	try {
-		versions = await useBaseFetch(`project/${slugOrId}/version?limit=1`)
+		versions = (await useBaseFetch(`project/${slugOrId}/version?limit=1`)) as {
+			dependencies?: RawDep[]
+		}[]
 	} catch {
 		return []
 	}

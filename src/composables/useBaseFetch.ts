@@ -17,7 +17,7 @@ export function invalidateTokenCache() {
 export async function useBaseFetch(
 	url: string,
 	options: RequestInit & { apiVersion?: number } = {},
-): Promise<any> {
+): Promise<unknown> {
 	const { apiVersion = 2, ...fetchOptions } = options as RequestInit & { apiVersion?: number }
 	const token = getToken()
 

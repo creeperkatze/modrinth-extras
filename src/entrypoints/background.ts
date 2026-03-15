@@ -1,14 +1,15 @@
 import { browser } from 'wxt/browser'
 
 import { getAuthToken, usePopupFetch } from '../composables/usePopupFetch'
-import { groupNotifications } from '../helpers/platform-notifications'
+import { groupNotifications, type PlatformNotification } from '../helpers/platform-notifications'
 
 const ALARM_NAME = 'modrinth-extras-poll'
 const POLL_INTERVAL_MINUTES = 5
 
 export default defineBackground(() => {
 	// Firefox MV2 uses browserAction; Chrome MV3 uses action.
-	const actionAPI = browser.action ?? (browser as any).browserAction
+	const actionAPI =
+		browser.action ?? (browser as unknown as { browserAction: typeof browser.action }).browserAction
 
 	async function showCachedBadge() {
 		const { showBadge = true, notifications } = await browser.storage.local.get([
@@ -16,7 +17,9 @@ export default defineBackground(() => {
 			'notifications',
 		])
 		if (!showBadge || !Array.isArray(notifications)) return
-		const unread = groupNotifications(notifications.filter((n: any) => !n.read)).length
+		const unread = groupNotifications(
+			(notifications as PlatformNotification[]).filter((n) => !n.read),
+		).length
 		console.log(`[Modrinth Extras] Restored cached badge: ${unread} unread`)
 		await actionAPI.setBadgeBackgroundColor({ color: '#1bd96a' })
 		await actionAPI.setBadgeText({ text: unread > 0 ? String(Math.min(unread, 99)) : '' })
@@ -43,7 +46,7 @@ export default defineBackground(() => {
 				return
 			}
 
-			const user = await usePopupFetch('user')
+			const user = (await usePopupFetch('user')) as { id?: string } | null
 			if (!user?.id) {
 				console.log('[Modrinth Extras] Could not fetch user, clearing badge')
 				actionAPI?.setBadgeText({ text: '' })
@@ -51,7 +54,7 @@ export default defineBackground(() => {
 			}
 			const notifs = await usePopupFetch(`user/${user.id}/notifications`)
 			const unread: number = Array.isArray(notifs)
-				? groupNotifications(notifs.filter((n: any) => !n.read)).length
+				? groupNotifications((notifs as PlatformNotification[]).filter((n) => !n.read)).length
 				: 0
 
 			console.log(

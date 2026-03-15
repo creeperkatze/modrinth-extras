@@ -17,14 +17,26 @@ export default defineContentScript({
 	runAt: 'document_idle',
 
 	main() {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		const w = window as any
+		const w = window as Window &
+			typeof globalThis & {
+				__nuxt_app?: { $router?: unknown; hook?: (event: string, cb: () => void) => void }
+			}
 
-		function getRouter() {
+		type VueRouter = {
+			beforeEach: (cb: () => void) => void
+			afterEach: (cb: () => void) => void
+			push: (path: string) => void
+		}
+
+		function getRouter(): VueRouter | null {
+			const nuxtEl = document.getElementById('__nuxt') as
+				| (HTMLElement & {
+						__vue_app__?: { config?: { globalProperties?: { $router?: VueRouter } } }
+				  })
+				| null
 			return (
-				w.__nuxt_app?.$router ??
-				(document.getElementById('__nuxt') as any)?.__vue_app__?.config?.globalProperties
-					?.$router ??
+				(w.__nuxt_app?.$router as VueRouter | undefined) ??
+				nuxtEl?.__vue_app__?.config?.globalProperties?.$router ??
 				null
 			)
 		}

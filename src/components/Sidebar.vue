@@ -124,7 +124,8 @@ onMounted(async () => {
 	try {
 		const versions = await useBaseFetch(`project/${projectSlug.value}/version?limit=1`)
 		const primaryFile =
-			versions?.[0]?.files?.find((f: any) => f.primary) ?? versions?.[0]?.files?.[0]
+			versions?.[0]?.files?.find((f: { primary?: boolean; url?: string }) => f.primary) ??
+			versions?.[0]?.files?.[0]
 		downloadUrl.value = primaryFile?.url ?? null
 	} catch {
 		downloadUrl.value = null

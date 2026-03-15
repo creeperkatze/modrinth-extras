@@ -12,7 +12,7 @@ export async function getAuthToken(): Promise<string> {
 export async function usePopupFetch(
 	url: string,
 	options: RequestInit & { apiVersion?: number } = {},
-): Promise<any> {
+): Promise<unknown> {
 	const { apiVersion = 2, ...fetchOptions } = options as RequestInit & { apiVersion?: number }
 	const token = await getAuthToken()
 

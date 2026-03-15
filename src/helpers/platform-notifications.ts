@@ -2,7 +2,7 @@ import type { Organization, Project, Report, User, Version } from '@modrinth/uti
 
 import { useBaseFetch } from '../composables/useBaseFetch'
 
-type Fetcher = (url: string, options?: RequestInit & { apiVersion?: number }) => Promise<any>
+type Fetcher = (url: string, options?: RequestInit & { apiVersion?: number }) => Promise<unknown>
 
 export type PlatformNotificationAction = {
 	title: string
