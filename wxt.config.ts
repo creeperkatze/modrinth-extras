@@ -1,5 +1,9 @@
+import { createRequire } from 'node:module'
+
 import svgLoader from 'vite-svg-loader'
 import { defineConfig } from 'wxt'
+
+const { version } = createRequire(import.meta.url)('./package.json')
 
 export default defineConfig({
 	srcDir: 'src',
@@ -8,7 +12,7 @@ export default defineConfig({
 	manifest: {
 		name: 'Modrinth Extras',
 		description: 'Adds unofficial extra features to the Modrinth website.',
-		version: '1.0.8',
+		version,
 		icons: {
 			16: '/icon-16.png',
 			32: '/icon-32.png',

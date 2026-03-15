@@ -12,7 +12,8 @@
         "zip:firefox": "wxt zip -b firefox",
         "postinstall": "wxt prepare",
         "lint": "eslint src/",
-        "lint:fix": "eslint src/ --fix"
+        "lint:fix": "eslint src/ --fix",
+        "release": "pnpm version ${npm_config_bump:-patch} && git push --follow-tags"
     },
     "dependencies": {
         "@modrinth/api-client": "github:modrinth/code#path:packages/api-client",
