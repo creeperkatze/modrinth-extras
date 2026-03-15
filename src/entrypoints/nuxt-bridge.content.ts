@@ -1,10 +1,11 @@
 /**
- * MAIN world content script that bridges the Nuxt router to the extension.
+ * MAIN world content script that bridges the Nuxt app to the extension.
  *
  * The primary content script (content.ts) runs in the ISOLATED world and
  * cannot access the page's JavaScript — including `window.__nuxt_app` and
  * the Nuxt router. This tiny MAIN world script acts as a bridge:
  *
+ *  - Dispatches `modrinth-extras:router-ready` after Nuxt hydration completes.
  *  - Hooks into the Nuxt router lifecycle (beforeEach / afterEach) and
  *    dispatches CustomEvents so the ISOLATED script can react.
  *  - Listens for `modrinth-extras:navigate` events and calls `router.push()`
@@ -40,6 +41,16 @@ export default defineContentScript({
 			}
 		})
 
+		function dispatchReady() {
+			// Ensures we fire after Vue's synchronous hydration
+			// patching and the subsequent browser paint.
+			requestAnimationFrame(() => {
+				requestAnimationFrame(() => {
+					window.dispatchEvent(new CustomEvent('modrinth-extras:router-ready'))
+				})
+			})
+		}
+
 		function hookRouter(): boolean {
 			const router = getRouter()
 			if (!router) return false
@@ -51,7 +62,7 @@ export default defineContentScript({
 				window.dispatchEvent(new CustomEvent('modrinth-extras:after-navigate'))
 			})
 
-			window.dispatchEvent(new CustomEvent('modrinth-extras:router-ready'))
+			dispatchReady()
 			return true
 		}
 
