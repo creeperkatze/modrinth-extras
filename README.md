@@ -15,6 +15,12 @@ Install from your browser's extension store:
 - **[Firefox Add-Ons](#)**
 - **[Edge Add-Ons](#)**
 
+Or install manually from the latest [GitHub release](https://github.com/creeperkatze/modrinth-extras/releases):
+
+1. Download the zip for your browser from the release assets.
+2. **Chrome / Edge:** go to `chrome://extensions/`, enable **Developer mode**, then drag and drop the zip onto the page.
+3. **Firefox:** go to `about:debugging#/runtime/this-firefox`, click **Load Temporary Add-on**, and select the zip. Note that Firefox removes the extension on browser restart since it is loaded as a temporary add-on.
+
 Prefer to build from source? See [Building from source](#-building-from-source) below.
 
 ## ✨ Features
@@ -68,11 +74,7 @@ pnpm zip
 pnpm zip:firefox
 ```
 
-The resulting zips in `.output/` are identical to those attached to the [GitHub release](https://github.com/creeperkatze/modrinth-extras/releases) for that tag.
-
-**Chrome / Edge:** go to `chrome://extensions/`, enable **Developer mode**, then drag and drop the zip onto the page.
-
-**Firefox:** see the [Development](#-development) section below for instructions on loading the zip. Note that Firefox removes the extension on browser restart since it is loaded as a temporary add-on.
+The resulting zips in `.output/` are identical to those attached to the [GitHub release](https://github.com/creeperkatze/modrinth-extras/releases) for that tag. See the [Installation](#-installation) section for instructions on loading the zip in your browser.
 
 ## 👨‍💻 Development
 
