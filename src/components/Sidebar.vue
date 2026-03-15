@@ -127,9 +127,8 @@ onMounted(async () => {
 			versions?.[0]?.files?.find((f: { primary?: boolean; url?: string }) => f.primary) ??
 			versions?.[0]?.files?.[0]
 		downloadUrl.value = primaryFile?.url ?? null
-	} catch {
-		downloadUrl.value = null
-	} finally {
+	} catch (err) {
+		console.error('[Modrinth Extras] Failed to fetch download URL:', err)
 		downloadLoading.value = false
 	}
 })

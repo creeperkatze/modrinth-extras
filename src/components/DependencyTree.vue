@@ -43,7 +43,8 @@ const error = ref(false)
 onMounted(async () => {
 	try {
 		roots.value = await fetchProjectDependencies(props.projectSlug)
-	} catch {
+	} catch (err) {
+		console.error('[Modrinth Extras] Failed to fetch dependencies:', err)
 		error.value = true
 	} finally {
 		loading.value = false

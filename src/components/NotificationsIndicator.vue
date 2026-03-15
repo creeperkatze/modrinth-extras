@@ -296,7 +296,7 @@ async function refreshNotifications() {
 		const notifs = await useBaseFetch(`user/${userId.value}/notifications`)
 		notificationsData.value = await fetchExtraNotificationData(notifs)
 	} catch (err) {
-		console.error('[Modrinth Ext] Failed to fetch notifications:', err)
+		console.error('[Modrinth Extras] Failed to fetch notifications:', err)
 	}
 }
 
