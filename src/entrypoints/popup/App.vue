@@ -1,6 +1,6 @@
 <template>
-	<div class="w-[360px]">
-		<header class="flex items-center gap-3 px-4 py-3.5">
+	<div class="flex h-[500px] w-[360px] flex-col">
+		<header class="flex shrink-0 items-center gap-3 px-4 py-3.5">
 			<a
 				href="https://github.com/creeperkatze/modrinth-extras"
 				target="_blank"
@@ -26,47 +26,51 @@
 			</ButtonStyled>
 		</header>
 
-		<HorizontalRule />
+		<HorizontalRule class="shrink-0" />
 
-		<div class="flex flex-col gap-3 px-4 py-3">
-			<p class="m-0 text-[11px] font-semibold uppercase tracking-[0.06em] text-secondary">
-				Extension
-			</p>
-			<ToggleRow
-				id="toggle-badge"
-				v-model="settings.showBadge"
-				title="Notification count on icon"
-				description="Display unread notification count as a badge on the extension icon."
-			/>
+		<div class="min-h-0 flex-1 overflow-y-auto">
+			<div class="flex flex-col gap-3 px-4 py-3">
+				<p class="m-0 text-[11px] font-semibold uppercase tracking-[0.06em] text-secondary">
+					Extension
+				</p>
+				<ToggleRow
+					id="toggle-badge"
+					v-model="settings.showBadge"
+					title="Notification count on icon"
+					description="Display unread notification count as a badge on the extension icon."
+				/>
+			</div>
+
+			<HorizontalRule />
+
+			<div class="flex flex-col gap-3 px-4 py-3">
+				<p class="m-0 text-[11px] font-semibold uppercase tracking-[0.06em] text-secondary">
+					Extras
+				</p>
+				<ToggleRow
+					id="toggle-notifications"
+					v-model="settings.showNotificationsIndicator"
+					title="Notifications indicator"
+					description="Adds a notification indicator to the header. Clicking it opens a popout where you can view and manage your notifications."
+				/>
+				<ToggleRow
+					id="toggle-tools"
+					v-model="settings.showToolsSidebar"
+					title="Tools sidebar"
+					description="Adds a tools card to the sidebar on project, user, organization, and collection pages."
+				/>
+				<ToggleRow
+					id="toggle-deps"
+					v-model="settings.showDependenciesSidebar"
+					title="Dependency tree sidebar"
+					description="Shows a collapsible dependency tree sidebar on project pages."
+				/>
+			</div>
 		</div>
 
-		<HorizontalRule />
+		<HorizontalRule class="shrink-0" />
 
-		<div class="flex flex-col gap-3 px-4 py-3">
-			<p class="m-0 text-[11px] font-semibold uppercase tracking-[0.06em] text-secondary">Extras</p>
-			<ToggleRow
-				id="toggle-notifications"
-				v-model="settings.showNotificationsIndicator"
-				title="Notifications indicator"
-				description="Adds a notification indicator to the header. Clicking it opens a popout where you can view and manage your notifications."
-			/>
-			<ToggleRow
-				id="toggle-tools"
-				v-model="settings.showToolsSidebar"
-				title="Tools sidebar"
-				description="Adds a tools card to the sidebar on project, user, organization, and collection pages."
-			/>
-			<ToggleRow
-				id="toggle-deps"
-				v-model="settings.showDependenciesSidebar"
-				title="Dependency tree sidebar"
-				description="Shows a collapsible dependency tree sidebar on project pages."
-			/>
-		</div>
-
-		<HorizontalRule />
-
-		<div class="flex items-center gap-1 px-4 py-2">
+		<div class="flex shrink-0 items-center gap-1 px-4 py-2">
 			<span class="text-xs text-secondary">v{{ version }}</span>
 			<span v-if="checking" class="flex items-center gap-1 text-xs text-secondary">
 				<LoaderCircleIcon class="size-4 animate-spin" aria-hidden="true" />
@@ -91,6 +95,14 @@
 			>
 				<ClockIcon class="size-4" aria-hidden="true" />
 				Update available
+			</a>
+			<a
+				href="https://github.com/creeperkatze/modrinth-extras"
+				target="_blank"
+				rel="noopener"
+				class="ml-auto flex items-center gap-1 text-xs text-yellow-500 no-underline"
+			>
+				★ On GitHub
 			</a>
 		</div>
 	</div>
