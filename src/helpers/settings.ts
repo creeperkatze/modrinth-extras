@@ -5,6 +5,7 @@ export interface ExtensionSettings {
 	showDependenciesSidebar: boolean
 	showActivitySparkline: boolean
 	showGitHubSidebar: boolean
+	showQuickSearch: boolean
 }
 
 export const DEFAULTS: ExtensionSettings = {
@@ -14,6 +15,7 @@ export const DEFAULTS: ExtensionSettings = {
 	showDependenciesSidebar: true,
 	showActivitySparkline: true,
 	showGitHubSidebar: true,
+	showQuickSearch: true,
 }
 
 import { browser } from 'wxt/browser'

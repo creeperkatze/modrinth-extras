@@ -77,6 +77,12 @@
 					title="GitHub sidebar"
 					description="Shows a GitHub card in the sidebar with stars, open issues, pull requests, and forks for projects with a GitHub source."
 				/>
+				<ToggleRow
+					id="toggle-quick-search"
+					v-model="settings.showQuickSearch"
+					title="Quick search"
+					description="Opens a search modal with faceted filtering when pressing Ctrl+K or / anywhere on Modrinth."
+				/>
 			</div>
 		</div>
 

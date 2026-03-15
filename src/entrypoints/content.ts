@@ -9,6 +9,7 @@ import ActivitySparkline from '../components/ActivitySparkline.vue'
 import FooterBadge from '../components/FooterBadge.vue'
 import GitHubSidebar from '../components/GitHubSidebar.vue'
 import NotificationsIndicator from '../components/NotificationsIndicator.vue'
+import QuickSearch from '../components/QuickSearch.vue'
 import Sidebar from '../components/Sidebar.vue'
 import { DEFAULTS, type ExtensionSettings, loadSettings } from '../helpers/settings'
 
@@ -289,7 +290,26 @@ export default defineContentScript({
 			createApp: () => createApp(h(FooterBadge)),
 		})
 
-		const injections = [notifications, sidebar, activitySparkline, gitHubSidebar, footerBadge]
+		const quickSearch = createInjection({
+			id: 'modrinth-extras-quick-search',
+			isEnabled: () => settings.showQuickSearch,
+			settingsKeys: ['showQuickSearch'],
+			persistent: true,
+			attach(container) {
+				document.body.appendChild(container)
+				return true
+			},
+			createApp: () => createApp(h(QuickSearch)),
+		})
+
+		const injections = [
+			notifications,
+			sidebar,
+			activitySparkline,
+			gitHubSidebar,
+			footerBadge,
+			quickSearch,
+		]
 
 		function markHydrated() {
 			if (hydrated) return

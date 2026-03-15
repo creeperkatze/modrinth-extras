@@ -82,7 +82,7 @@
 </template>
 
 <script setup lang="ts">
-import { ExternalIcon, GithubIcon, IssuesIcon, StarIcon } from '@modrinth/assets'
+import { ExternalIcon, IssuesIcon, StarIcon } from '@modrinth/assets'
 import { onMounted, ref } from 'vue'
 
 import { useBaseFetch } from '../composables/useBaseFetch'
