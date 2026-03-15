@@ -23,26 +23,27 @@
         "@modrinth/ui": "github:modrinth/code#path:packages/ui",
         "@modrinth/utils": "github:modrinth/code#path:packages/utils",
         "floating-vue": "^5.2.2",
-        "vue": "^3.5.13"
+        "vue": "^3.5.30"
     },
     "devDependencies": {
-        "@eslint/js": "^9.39.4",
+        "@eslint/js": "^10.0.1",
         "@modrinth/tooling-config": "github:modrinth/code#path:packages/tooling-config",
+        "@tailwindcss/postcss": "^4.2.1",
         "@types/chrome": "^0.1.37",
-        "@wxt-dev/module-vue": "^1.0.0",
-        "autoprefixer": "^10.4.19",
-        "eslint": "^9.39.4",
+        "@wxt-dev/module-vue": "^1.0.3",
+        "autoprefixer": "^10.4.27",
+        "eslint": "^10.0.3",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-prettier": "^5.5.5",
         "eslint-plugin-simple-import-sort": "^12.1.1",
         "eslint-plugin-vue": "^10.8.0",
-        "tailwindcss": "^3.4.4",
-        "typescript": "^5.7.3",
+        "tailwindcss": "^3.4.19",
+        "typescript": "^5.9.3",
         "typescript-eslint": "^8.57.0",
-        "vite-svg-loader": "^5.1.0",
+        "vite-svg-loader": "^5.1.1",
         "vue-eslint-parser": "^10.4.0",
-        "vue-tsc": "^2.2.0",
-        "wxt": "^0.20.0"
+        "vue-tsc": "^3.2.5",
+        "wxt": "^0.20.19"
     },
     "pnpm": {
         "overrides": {
