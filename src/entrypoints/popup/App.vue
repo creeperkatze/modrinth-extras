@@ -81,7 +81,7 @@
 					id="toggle-quick-search"
 					v-model="settings.showQuickSearch"
 					title="Quick search"
-					description="Opens a search modal with faceted filtering when pressing Ctrl+K or / anywhere on Modrinth."
+					description="Opens a search modal with faceted filtering when pressing Ctrl+K or / anywhere on Modrinth. Inspired by CSFloat."
 				/>
 			</div>
 		</div>

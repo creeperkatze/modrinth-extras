@@ -29,14 +29,14 @@
 					<input
 						ref="inputEl"
 						v-model="query"
-						:placeholder="tags.length ? '' : 'Search Modrinth…'"
+						:placeholder="activePlaceholder"
 						class="min-w-[80px] flex-1 caret-brand !border-0 !bg-transparent p-0 text-[15px] text-primary !shadow-none !outline-none focus:!border-0 focus:!ring-0 focus:!shadow-none [font-family:inherit]"
 						@keydown="onKeydown"
 					/>
 				</div>
 			</div>
 
-			<!-- Suggestions -->
+			<!-- Suggestions (while typing) -->
 			<ul v-if="suggestions.length" class="m-0 max-h-80 list-none overflow-y-auto p-1.5">
 				<li
 					v-for="(s, i) in suggestions"
@@ -62,21 +62,40 @@
 				</li>
 			</ul>
 
-			<!-- Hint row when input is empty -->
-			<div
-				v-else-if="!query"
-				class="flex flex-wrap items-center gap-1.5 px-4 py-3 text-[13px] text-secondary"
-			>
-				<span>Try:</span>
-				<button
-					v-for="hint in HINTS"
-					:key="hint"
-					class="cursor-pointer rounded border border-divider bg-button-bg px-1.5 py-0.5 text-xs text-primary [font-family:inherit] hover:bg-button-bgHover"
-					@click="query = hint"
+			<!-- Examples panel (idle state: no query, no tags) -->
+			<div v-else-if="!query && !tags.length" class="p-1.5">
+				<div
+					v-for="ex in EXAMPLES"
+					:key="ex.label"
+					class="flex cursor-pointer items-center gap-3 rounded-lg px-2.5 py-2 hover:bg-button-bg"
+					@click="applyExample(ex)"
 				>
-					{{ hint }}
-				</button>
-				<span v-if="tags.length" class="ml-auto">Press Enter to search</span>
+					<SearchIcon aria-hidden="true" class="size-4 shrink-0 text-secondary" />
+					<span class="text-sm text-secondary">{{ ex.label }}</span>
+					<div class="ml-auto flex flex-wrap justify-end gap-1">
+						<span
+							v-for="t in ex.tags"
+							:key="`${t.facet}:${t.value}`"
+							class="rounded bg-highlight px-1.5 py-0.5 text-[11px] font-medium text-brand"
+							>{{ t.facet }}:{{ t.value }}</span
+						>
+					</div>
+				</div>
+			</div>
+
+			<!-- Tags-only state: show search prompt -->
+			<div v-else-if="tags.length" class="p-1.5">
+				<div
+					class="flex cursor-pointer items-center gap-2.5 rounded-lg bg-button-bg px-2.5 py-2 text-sm text-primary"
+					@click="executeSearch"
+				>
+					<SearchIcon aria-hidden="true" class="size-4 shrink-0 text-secondary" />
+					<span class="flex-1">Search</span>
+					<kbd
+						class="shrink-0 rounded border border-divider bg-button-bg px-1.5 py-0.5 text-[11px] text-secondary [font-family:inherit]"
+						>↵</kbd
+					>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -98,6 +117,11 @@ interface Suggestion {
 	facet?: string
 	value?: string
 	action: 'add-tag' | 'search'
+}
+
+interface Example {
+	label: string
+	tags: Tag[]
 }
 
 const LOADERS = ['fabric', 'forge', 'neoforge', 'quilt', 'liteloader', 'modloader']
@@ -144,7 +168,46 @@ const VERSIONS = [
 	'1.16.5',
 ]
 
-const HINTS = ['fabric', 'forge', 'optimization', '1.21.4', 'shader', 'modpack']
+const EXAMPLES: Example[] = [
+	{
+		label: 'fabric optimization mods',
+		tags: [
+			{ facet: 'loader', value: 'fabric' },
+			{ facet: 'category', value: 'optimization' },
+			{ facet: 'type', value: 'mod' },
+		],
+	},
+	{
+		label: 'forge technology',
+		tags: [
+			{ facet: 'loader', value: 'forge' },
+			{ facet: 'category', value: 'technology' },
+		],
+	},
+	{
+		label: '1.21.4 shaders',
+		tags: [
+			{ facet: 'version', value: '1.21.4' },
+			{ facet: 'type', value: 'shader' },
+		],
+	},
+	{
+		label: 'neoforge library',
+		tags: [
+			{ facet: 'loader', value: 'neoforge' },
+			{ facet: 'category', value: 'library' },
+		],
+	},
+	{
+		label: 'datapacks food',
+		tags: [
+			{ facet: 'type', value: 'datapack' },
+			{ facet: 'category', value: 'food' },
+		],
+	},
+]
+
+const PLACEHOLDER_EXAMPLES = EXAMPLES.map((e) => e.label)
 
 const TYPE_PATH: Record<string, string> = {
 	mod: '/discover/mods',
@@ -161,6 +224,71 @@ const tags = ref<Tag[]>([])
 const selectedIndex = ref(0)
 const inputEl = ref<HTMLInputElement | null>(null)
 const suggestionEls = ref<(HTMLElement | null)[]>([])
+
+// --- Placeholder animation ---
+const animatedText = ref('')
+let animTimer: ReturnType<typeof setTimeout> | null = null
+
+function stopAnimation() {
+	if (animTimer) clearTimeout(animTimer)
+	animTimer = null
+	animatedText.value = ''
+}
+
+function startAnimation() {
+	let exIdx = 0
+	let charIdx = 0
+	let deleting = false
+
+	function tick() {
+		if (!open.value || query.value || tags.value.length) {
+			animatedText.value = ''
+			return
+		}
+		const target = PLACEHOLDER_EXAMPLES[exIdx]
+		if (!deleting) {
+			charIdx++
+			animatedText.value = target.slice(0, charIdx)
+			if (charIdx === target.length) {
+				deleting = true
+				animTimer = setTimeout(tick, 1400)
+			} else {
+				animTimer = setTimeout(tick, 75)
+			}
+		} else {
+			charIdx--
+			animatedText.value = target.slice(0, charIdx)
+			if (charIdx === 0) {
+				deleting = false
+				exIdx = (exIdx + 1) % PLACEHOLDER_EXAMPLES.length
+				animTimer = setTimeout(tick, 350)
+			} else {
+				animTimer = setTimeout(tick, 38)
+			}
+		}
+	}
+
+	animTimer = setTimeout(tick, 500)
+}
+
+const activePlaceholder = computed(() => {
+	if (tags.value.length) return ''
+	return animatedText.value || 'Search Modrinth\u2026'
+})
+
+watch(open, (val) => {
+	if (val) startAnimation()
+	else stopAnimation()
+})
+
+watch([query, tags], () => {
+	if (query.value || tags.value.length) {
+		stopAnimation()
+	} else if (open.value && !animTimer) {
+		startAnimation()
+	}
+})
+// ---
 
 function hasTag(facet: string, value: string) {
 	return tags.value.some((t) => t.facet === facet && t.value === value)
@@ -230,8 +358,6 @@ const suggestions = computed<Suggestion[]>(() => {
 		}
 
 		results.push({ id: 'search', icon: SearchIcon, label: query.value, action: 'search' })
-	} else if (tags.value.length) {
-		results.push({ id: 'search', icon: SearchIcon, label: 'Search', action: 'search' })
 	}
 
 	return results.slice(0, 8)
@@ -258,6 +384,12 @@ function removeTag(facet: string, value: string) {
 	inputEl.value?.focus()
 }
 
+function applyExample(ex: Example) {
+	tags.value = [...ex.tags]
+	query.value = ''
+	nextTick(() => inputEl.value?.focus())
+}
+
 function selectSuggestion(s: Suggestion) {
 	if (s.action === 'add-tag' && s.facet && s.value) {
 		tags.value.push({ facet: s.facet, value: s.value })
@@ -282,7 +414,7 @@ function executeSearch() {
 		params.append('g', `categories:${t.value}`)
 	}
 	for (const t of versionTags) {
-		params.append('g', t.value)
+		params.append('v', t.value)
 	}
 	for (const t of categoryTags) {
 		params.append('f', `categories:${t.value}`)
@@ -339,5 +471,6 @@ onMounted(() => {
 
 onUnmounted(() => {
 	window.removeEventListener('keydown', onGlobalKeydown)
+	stopAnimation()
 })
 </script>
