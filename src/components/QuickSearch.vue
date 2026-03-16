@@ -1,117 +1,121 @@
 <template>
-	<div
-		v-if="open"
-		class="fixed inset-0 z-[99999] flex items-start justify-center bg-black/50 pt-[12vh] backdrop-blur-sm"
-		@mousedown.self="close"
-	>
+	<Transition name="quick-search-overlay">
 		<div
-			class="w-[min(760px,calc(100vw-32px))] overflow-hidden rounded-2xl border border-solid border-surface-4 bg-surface-3 shadow-[var(--shadow-raised),var(--shadow-inset)]"
+			v-if="open"
+			class="fixed z-[99999] flex items-start justify-center pt-[12vh]"
+			style="
+				inset: -5rem;
+				border-radius: 180px;
+				background: linear-gradient(180deg, #1d302b85 0%, #0e151af2 100%);
+				backdrop-filter: blur(5px);
+			"
+			@mousedown.self="close"
 		>
-			<!-- Input field: tags + real input -->
-			<div class="p-2">
-				<div
-					class="flex min-h-[52px] cursor-text flex-wrap items-center gap-2 rounded-xl border border-solid border-surface-4 bg-surface-4 px-2 py-2.5 focus-within:border-brand"
-					@click="inputEl?.focus()"
-				>
+			<div
+				class="qs-panel w-[min(760px,calc(100vw-32px))] overflow-hidden rounded-2xl border border-solid border-surface-4 bg-surface-3 shadow-[var(--shadow-raised),var(--shadow-inset)]"
+			>
+				<div class="p-2">
 					<div
-						v-for="tag in tags"
-						:key="`${tag.facet}:${tag.value}`"
-						class="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-solid border-highlight bg-highlight px-3 py-2 text-[13px] font-medium text-brand"
+						class="flex min-h-[52px] cursor-text flex-wrap items-center gap-2 rounded-xl border border-solid border-surface-4 bg-surface-4 px-2 py-2.5 focus-within:border-brand"
+						@click="inputEl?.focus()"
 					>
-						<component :is="FACET_ICONS[tag.facet]" aria-hidden="true" class="size-4 shrink-0" />
-						<span>{{ tag.value }}</span>
-						<button
-							class="flex cursor-pointer items-center rounded-full border-0 bg-transparent p-0 text-brand hover:brightness-75"
-							@click.stop="removeTag(tag.facet, tag.value)"
+						<div
+							v-for="tag in tags"
+							:key="`${tag.facet}:${tag.value}`"
+							class="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-solid border-highlight bg-highlight px-3 py-2 text-[13px] font-medium text-brand"
 						>
-							<XIcon class="size-3.5" />
-						</button>
+							<component :is="FACET_ICONS[tag.facet]" aria-hidden="true" class="size-4 shrink-0" />
+							<span>{{ tag.value }}</span>
+							<button
+								class="flex cursor-pointer items-center rounded-full border-0 bg-transparent p-0 text-brand hover:brightness-75"
+								@click.stop="removeTag(tag.facet, tag.value)"
+							>
+								<XIcon class="size-3.5" />
+							</button>
+						</div>
+						<input
+							ref="inputEl"
+							v-model="query"
+							:placeholder="activePlaceholder"
+							class="min-w-[80px] flex-1 caret-brand !border-0 !bg-transparent p-0 text-base text-primary !shadow-none !outline-none focus:!border-0 focus:!ring-0 focus:!shadow-none [font-family:inherit]"
+							@keydown="onKeydown"
+						/>
 					</div>
-					<input
-						ref="inputEl"
-						v-model="query"
-						:placeholder="activePlaceholder"
-						class="min-w-[80px] flex-1 caret-brand !border-0 !bg-transparent p-0 text-base text-primary !shadow-none !outline-none focus:!border-0 focus:!ring-0 focus:!shadow-none [font-family:inherit]"
-						@keydown="onKeydown"
-					/>
 				</div>
-			</div>
 
-			<!-- Suggestions (while typing) -->
-			<ul v-if="suggestions.length" class="m-0 list-none p-2">
-				<li
-					v-for="(s, i) in suggestions"
-					:key="s.id"
-					:ref="(el) => (suggestionEls[i] = el as HTMLElement | null)"
-					:class="[
-						'flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-[15px] text-primary',
-						i === selectedIndex ? 'bg-surface-4' : 'hover:bg-surface-4',
-					]"
-					@click="selectSuggestion(s)"
-					@mouseenter="selectedIndex = i"
-				>
-					<component :is="s.icon" aria-hidden="true" class="size-5 shrink-0 text-secondary" />
-					<span class="min-w-0 flex-1">
-						<template v-if="s.matchStart !== undefined"
-							>{{ s.label.slice(0, s.matchStart)
-							}}<span class="font-semibold text-brand">{{
-								s.label.slice(s.matchStart, s.matchEnd)
-							}}</span
-							>{{ s.label.slice(s.matchEnd) }}</template
-						><template v-else>{{ s.label }}</template>
-					</span>
-					<kbd
+				<ul v-if="suggestions.length" class="m-0 list-none p-2">
+					<li
+						v-for="(s, i) in suggestions"
+						:key="s.id"
+						:ref="(el) => (suggestionEls[i] = el as HTMLElement | null)"
 						:class="[
-							'shrink-0 rounded-md border-2 border-solid border-surface-5 bg-transparent px-2.5 py-1 text-[13px] text-secondary',
-							i !== selectedIndex && 'invisible',
+							'flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-[15px] text-primary',
+							i === selectedIndex ? 'bg-surface-4' : 'hover:bg-surface-4',
 						]"
-						>↵</kbd
+						@click="selectSuggestion(s)"
+						@mouseenter="selectedIndex = i"
 					>
-				</li>
-			</ul>
-
-			<!-- Examples panel (idle state: no query, no tags) -->
-			<div v-else-if="!query && !tags.length" class="p-2">
-				<div
-					v-for="(ex, i) in EXAMPLES"
-					:key="ex.label"
-					:class="[
-						'flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5',
-						i === selectedIndex ? 'bg-surface-4' : 'hover:bg-surface-4',
-					]"
-					@click="applyExample(ex)"
-					@mouseenter="selectedIndex = i"
-				>
-					<SearchIcon aria-hidden="true" class="size-5 shrink-0 text-secondary" />
-					<span class="text-[15px] text-secondary">{{ ex.label }}</span>
-					<div class="ml-auto flex flex-wrap justify-end gap-1.5">
-						<span
-							v-for="t in ex.tags"
-							:key="`${t.facet}:${t.value}`"
-							class="inline-flex items-center gap-1.5 rounded-full border border-solid border-highlight bg-highlight px-3 py-2 text-[13px] font-medium text-brand"
-							><component :is="FACET_ICONS[t.facet]" aria-hidden="true" class="size-4 shrink-0" />
-							{{ t.value }}
+						<component :is="s.icon" aria-hidden="true" class="size-5 shrink-0 text-secondary" />
+						<span class="min-w-0 flex-1">
+							<template v-if="s.matchStart !== undefined"
+								>{{ s.label.slice(0, s.matchStart)
+								}}<span class="font-semibold text-brand">{{
+									s.label.slice(s.matchStart, s.matchEnd)
+								}}</span
+								>{{ s.label.slice(s.matchEnd) }}</template
+							><template v-else>{{ s.label }}</template>
 						</span>
+						<kbd
+							:class="[
+								'shrink-0 rounded-md border-2 border-solid border-surface-5 bg-transparent px-2.5 py-1 text-[13px] text-secondary',
+								i !== selectedIndex && 'invisible',
+							]"
+							>↵</kbd
+						>
+					</li>
+				</ul>
+
+				<div v-else-if="!query && !tags.length" class="p-2">
+					<div
+						v-for="(ex, i) in EXAMPLES"
+						:key="ex.label"
+						:class="[
+							'flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5',
+							i === selectedIndex ? 'bg-surface-4' : 'hover:bg-surface-4',
+						]"
+						@click="applyExample(ex)"
+						@mouseenter="selectedIndex = i"
+					>
+						<SearchIcon aria-hidden="true" class="size-5 shrink-0 text-secondary" />
+						<span class="text-[15px] text-secondary">{{ ex.label }}</span>
+						<div class="ml-auto flex flex-wrap justify-end gap-1.5">
+							<span
+								v-for="t in ex.tags"
+								:key="`${t.facet}:${t.value}`"
+								class="inline-flex items-center gap-1.5 rounded-full border border-solid border-highlight bg-highlight px-3 py-2 text-[13px] font-medium text-brand"
+								><component :is="FACET_ICONS[t.facet]" aria-hidden="true" class="size-4 shrink-0" />
+								{{ t.value }}
+							</span>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<!-- Tags-only state: show search prompt -->
-			<div v-else-if="tags.length" class="p-2">
-				<div
-					class="flex cursor-pointer items-center gap-3 rounded-xl bg-surface-3 px-3 py-2.5 text-[15px] text-primary"
-					@click="executeSearch"
-				>
-					<SearchIcon aria-hidden="true" class="size-5 shrink-0 text-secondary" />
-					<span class="flex-1">Search</span>
-					<kbd
-						class="shrink-0 rounded-md border-2 border-solid border-surface-5 bg-transparent px-2.5 py-1 text-[13px] text-secondary"
-						>↵</kbd
+				<div v-else-if="tags.length" class="p-2">
+					<div
+						class="flex cursor-pointer items-center gap-3 rounded-xl bg-surface-3 px-3 py-2.5 text-[15px] text-primary"
+						@click="executeSearch"
 					>
+						<SearchIcon aria-hidden="true" class="size-5 shrink-0 text-secondary" />
+						<span class="flex-1">Search</span>
+						<kbd
+							class="shrink-0 rounded-md border-2 border-solid border-surface-5 bg-transparent px-2.5 py-1 text-[13px] text-secondary"
+							>↵</kbd
+						>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</Transition>
 </template>
 
 <script setup lang="ts">
@@ -313,14 +317,12 @@ function facetMatch(facet: string, q: string): { facetMatchEnd: number } | undef
 	return { facetMatchEnd: q.length }
 }
 
-// Server mode: explicit type:server tag OR any selected category is server-specific
 const isServerMode = computed(() => {
 	if (tags.value.some((t) => t.facet === 'type' && t.value === 'server')) return true
 	const serverCatSet = new Set(serverCategories.value)
 	return tags.value.some((t) => t.facet === 'category' && serverCatSet.has(t.value))
 })
 
-// Non-server mode: explicit non-server type tag OR any loader tag
 const isNonServerMode = computed(() => {
 	if (tags.value.some((t) => t.facet === 'type' && t.value !== 'server')) return true
 	return tags.value.some((t) => t.facet === 'loader')
@@ -331,7 +333,6 @@ const suggestions = computed<Suggestion[]>(() => {
 	const results: Suggestion[] = []
 
 	if (q) {
-		// Types — only if not yet set; filter to only valid types for the inferred mode
 		if (!hasFacet('type')) {
 			const validTypes = isServerMode.value
 				? ['server']
@@ -354,7 +355,6 @@ const suggestions = computed<Suggestion[]>(() => {
 			}
 		}
 
-		// Loaders, only when not in server mode (neutral or non-server)
 		if (!isServerMode.value) {
 			for (const l of loaders.value) {
 				if (l.includes(q) && !hasTag('loader', l)) {
@@ -372,7 +372,6 @@ const suggestions = computed<Suggestion[]>(() => {
 			}
 		}
 
-		// Regular categories — only when not in server mode
 		if (!isServerMode.value) {
 			for (const c of categories.value) {
 				if (c.includes(q) && !hasTag('category', c)) {
@@ -390,7 +389,6 @@ const suggestions = computed<Suggestion[]>(() => {
 			}
 		}
 
-		// Server categories — only when not in non-server mode
 		if (!isNonServerMode.value) {
 			for (const c of serverCategories.value) {
 				if (c.includes(q) && !hasTag('category', c)) {
@@ -408,7 +406,6 @@ const suggestions = computed<Suggestion[]>(() => {
 			}
 		}
 
-		// Versions — always
 		for (const v of versions.value) {
 			if (v.startsWith(q) && !hasTag('version', v)) {
 				results.push({
@@ -556,7 +553,7 @@ onMounted(async () => {
 			.map((c) => c.name)
 		versions.value = versionsRes.map((v) => v.version)
 	} catch {
-		// silently ignore — suggestions simply won't appear
+		// silently ignore, suggestions simply won't appear
 	}
 })
 
@@ -565,3 +562,25 @@ onUnmounted(() => {
 	stopAnimation()
 })
 </script>
+
+<style scoped>
+.quick-search-overlay-enter-active,
+.quick-search-overlay-leave-active {
+	transition: opacity 0.2s ease;
+}
+.quick-search-overlay-enter-from,
+.quick-search-overlay-leave-to {
+	opacity: 0;
+}
+.quick-search-overlay-enter-active .qs-panel,
+.quick-search-overlay-leave-active .qs-panel {
+	transition:
+		transform 0.2s ease,
+		opacity 0.2s ease;
+}
+.quick-search-overlay-enter-from .qs-panel,
+.quick-search-overlay-leave-to .qs-panel {
+	transform: scale(0.96) translateY(-8px);
+	opacity: 0;
+}
+</style>
