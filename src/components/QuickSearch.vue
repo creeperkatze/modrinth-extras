@@ -22,7 +22,7 @@
 						<div
 							v-for="tag in tags"
 							:key="`${tag.facet}:${tag.value}`"
-							class="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-solid border-highlight bg-highlight px-3 py-2 text-[13px] font-medium text-brand"
+							class="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-solid border-highlight bg-highlight px-3 py-2 text-[13px] font-semibold text-brand"
 						>
 							<component :is="FACET_ICONS[tag.facet]" aria-hidden="true" class="size-4 shrink-0" />
 							<span>{{ tag.value }}</span>
@@ -37,7 +37,7 @@
 							ref="inputEl"
 							v-model="query"
 							:placeholder="activePlaceholder"
-							class="min-w-[80px] flex-1 caret-brand !border-0 !bg-transparent p-0 text-base text-primary !shadow-none !outline-none focus:!border-0 focus:!ring-0 focus:!shadow-none [font-family:inherit]"
+							class="min-w-[80px] flex-1 caret-brand !border-0 !bg-transparent p-0 text-base font-semibold text-primary !shadow-none !outline-none focus:!border-0 focus:!ring-0 focus:!shadow-none [font-family:inherit]"
 							@keydown="onKeydown"
 						/>
 					</div>
@@ -49,7 +49,7 @@
 						:key="s.id"
 						:ref="(el) => (suggestionEls[i] = el as HTMLElement | null)"
 						:class="[
-							'flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-[15px] text-primary',
+							'flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-[15px] font-semibold text-primary',
 							i === selectedIndex ? 'bg-surface-4' : 'hover:bg-surface-4',
 						]"
 						@click="selectSuggestion(s)"
@@ -87,12 +87,12 @@
 						@mouseenter="selectedIndex = i"
 					>
 						<SearchIcon aria-hidden="true" class="size-5 shrink-0 text-secondary" />
-						<span class="text-[15px] text-secondary">{{ ex.label }}</span>
+						<span class="text-[15px] font-semibold text-secondary">{{ ex.label }}</span>
 						<div class="ml-auto flex flex-wrap justify-end gap-1.5">
 							<span
 								v-for="t in ex.tags"
 								:key="`${t.facet}:${t.value}`"
-								class="inline-flex items-center gap-1.5 rounded-full border border-solid border-highlight bg-highlight px-3 py-2 text-[13px] font-medium text-brand"
+								class="inline-flex items-center gap-1.5 rounded-full border border-solid border-highlight bg-highlight px-3 py-2 text-[13px] font-semibold text-brand"
 								><component :is="FACET_ICONS[t.facet]" aria-hidden="true" class="size-4 shrink-0" />
 								{{ t.value }}
 							</span>
