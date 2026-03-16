@@ -10,7 +10,7 @@
 			<!-- Input field: tags + real input -->
 			<div class="p-3">
 				<div
-					class="flex min-h-[52px] cursor-text flex-wrap items-center gap-2 rounded-xl border border-solid border-surface-4 bg-surface-4 px-4 py-2.5 focus-within:border-brand"
+					class="flex min-h-[52px] cursor-text flex-wrap items-center gap-2 rounded-xl border border-solid border-surface-4 bg-surface-4 px-2 py-2.5 focus-within:border-brand"
 					@click="inputEl?.focus()"
 				>
 					<div
@@ -62,7 +62,7 @@
 					</span>
 					<kbd
 						v-if="i === selectedIndex"
-						class="shrink-0 rounded-lg border border-surface-5 px-2 py-1 text-[11px] text-secondary [font-family:inherit]"
+						class="shrink-0 rounded-lg border border-solid border-surface-5 px-2 py-1 text-[11px] text-secondary shadow-none [font-family:inherit]"
 						>↵</kbd
 					>
 				</li>
@@ -71,10 +71,14 @@
 			<!-- Examples panel (idle state: no query, no tags) -->
 			<div v-else-if="!query && !tags.length" class="px-2 pb-2.5">
 				<div
-					v-for="ex in EXAMPLES"
+					v-for="(ex, i) in EXAMPLES"
 					:key="ex.label"
-					class="flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-surface-3"
+					:class="[
+						'flex cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5',
+						i === selectedIndex ? 'bg-surface-4' : 'hover:bg-surface-4',
+					]"
 					@click="applyExample(ex)"
+					@mouseenter="selectedIndex = i"
 				>
 					<SearchIcon aria-hidden="true" class="size-5 shrink-0 text-secondary" />
 					<span class="text-[15px] text-secondary">{{ ex.label }}</span>
@@ -84,9 +88,8 @@
 							:key="`${t.facet}:${t.value}`"
 							class="inline-flex items-center gap-1.5 rounded-full border border-solid border-highlight bg-highlight px-3 py-2 text-[13px] font-medium text-brand"
 							><component :is="FACET_ICONS[t.facet]" aria-hidden="true" class="size-4 shrink-0" />
-								{{ t.value }}
-							</span
-						>
+							{{ t.value }}
+						</span>
 					</div>
 				</div>
 			</div>
@@ -100,7 +103,7 @@
 					<SearchIcon aria-hidden="true" class="size-5 shrink-0 text-secondary" />
 					<span class="flex-1">Search</span>
 					<kbd
-						class="shrink-0 rounded-lg border border-surface-5 px-2 py-1 text-[11px] text-secondary [font-family:inherit]"
+						class="shrink-0 rounded-lg border border-solid border-surface-5 px-2 py-1 text-[11px] text-secondary shadow-none [font-family:inherit]"
 						>↵</kbd
 					>
 				</div>
@@ -486,19 +489,24 @@ function executeSearch() {
 }
 
 function onKeydown(e: KeyboardEvent) {
+	const inExamples = !query.value && !tags.value.length && !suggestions.value.length
+	const listLength = inExamples ? EXAMPLES.length : suggestions.value.length
+
 	if (e.key === 'Escape') {
 		close()
 	} else if (e.key === 'ArrowDown') {
 		e.preventDefault()
-		selectedIndex.value = Math.min(selectedIndex.value + 1, suggestions.value.length - 1)
-		suggestionEls.value[selectedIndex.value]?.scrollIntoView({ block: 'nearest' })
+		selectedIndex.value = Math.min(selectedIndex.value + 1, listLength - 1)
+		if (!inExamples) suggestionEls.value[selectedIndex.value]?.scrollIntoView({ block: 'nearest' })
 	} else if (e.key === 'ArrowUp') {
 		e.preventDefault()
 		selectedIndex.value = Math.max(selectedIndex.value - 1, 0)
-		suggestionEls.value[selectedIndex.value]?.scrollIntoView({ block: 'nearest' })
+		if (!inExamples) suggestionEls.value[selectedIndex.value]?.scrollIntoView({ block: 'nearest' })
 	} else if (e.key === 'Enter') {
 		e.preventDefault()
-		if (suggestions.value.length > 0) {
+		if (inExamples) {
+			applyExample(EXAMPLES[selectedIndex.value])
+		} else if (suggestions.value.length > 0) {
 			selectSuggestion(suggestions.value[selectedIndex.value])
 		} else {
 			executeSearch()
