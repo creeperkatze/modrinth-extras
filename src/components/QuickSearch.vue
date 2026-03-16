@@ -193,10 +193,11 @@ const EXAMPLES: Example[] = [
 		],
 	},
 	{
-		label: 'server skyblock',
+		label: 'skyblock server 1.8.9',
 		tags: [
-			{ facet: 'type', value: 'server' },
 			{ facet: 'category', value: 'skyblock' },
+			{ facet: 'type', value: 'server' },
+			{ facet: 'version', value: '1.8.9' },
 		],
 	},
 ]
@@ -277,15 +278,18 @@ watch(open, (val) => {
 	else stopAnimation()
 })
 
-watch([query, tags], () => {
-	if (query.value || tags.value.length) {
-		stopAnimation()
-	} else if (open.value) {
-		stopAnimation()
-		startAnimation(true)
-	}
-})
-// ---
+watch(
+	[query, tags],
+	() => {
+		if (query.value || tags.value.length) {
+			stopAnimation()
+		} else if (open.value) {
+			stopAnimation()
+			startAnimation(true)
+		}
+	},
+	{ deep: true },
+)
 
 function hasTag(facet: string, value: string) {
 	return tags.value.some((t) => t.facet === facet && t.value === value)
