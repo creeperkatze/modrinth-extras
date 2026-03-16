@@ -1,6 +1,6 @@
 <template>
 	<div v-if="invite && discordUrl" class="card flex-card experimental-styles-within relative">
-		<img :src="invite.iconUrl" alt="" class="size-10 shrink-0 rounded-lg" />
+		<img :src="invite.iconUrl" class="size-10 shrink-0 rounded-lg absolute right-4 top-4" />
 		<h2 class="mb-1">Discord</h2>
 		<div class="details-list">
 			<a
