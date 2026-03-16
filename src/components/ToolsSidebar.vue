@@ -84,7 +84,9 @@ const modfolioUrl = computed(
 const apiUrl = computed(() => {
 	try {
 		const path = new URL(props.pageUrl).pathname
-		const project = path.match(/^\/(mod|plugin|datapack|shader|resourcepack|modpack|server)\/([^/]+)/)
+		const project = path.match(
+			/^\/(mod|plugin|datapack|shader|resourcepack|modpack|server)\/([^/]+)/,
+		)
 		if (project) return `https://api.modrinth.com/v2/project/${project[2]}`
 		const user = path.match(/^\/user\/([^/]+)/)
 		if (user) return `https://api.modrinth.com/v2/user/${user[1]}`

@@ -1,6 +1,7 @@
 <template>
-	<div v-if="invite && discordUrl" class="card flex-card experimental-styles-within">
-		<h2>Discord</h2>
+	<div v-if="invite && discordUrl" class="card flex-card experimental-styles-within relative">
+		<img :src="invite.iconUrl" alt="" class="size-10 shrink-0 rounded-lg" />
+		<h2 class="mb-1">Discord</h2>
 		<div class="details-list">
 			<a
 				:href="discordUrl"
@@ -8,19 +9,27 @@
 				rel="noopener"
 				class="details-list__item hover:underline"
 			>
-				<UsersIcon aria-hidden="true" />
-				{{ formatNum(invite.approximate_member_count) }} members
+				<ServerIcon aria-hidden="true" />
+				{{ invite.name }}
 				<ExternalIcon aria-hidden="true" class="external-icon" />
 			</a>
+			<span v-if="invite.description" class="details-list__item" style="align-items: flex-start">
+				<InfoIcon aria-hidden="true" class="mt-0.5 shrink-0" />
+				{{ invite.description }}
+			</span>
 			<span class="details-list__item">
-				<OnlineIndicatorIcon aria-hidden="true" class="online-dot" />
+				<UsersIcon aria-hidden="true" />
+				{{ formatNum(invite.approximate_member_count) }} members
+			</span>
+			<span class="details-list__item">
+				<OnlineIndicatorIcon aria-hidden="true" class="text-green" />
 				{{ formatNum(invite.approximate_presence_count) }} online
 			</span>
-			<span v-if="invite.partnered" class="details-list__item badge partnered">
+			<span v-if="invite.partnered" class="details-list__item font-semibold text-blue">
 				<AffiliateIcon aria-hidden="true" />
 				Partnered
 			</span>
-			<span v-else-if="invite.verified" class="details-list__item badge verified">
+			<span v-else-if="invite.verified" class="details-list__item font-semibold text-green">
 				<ShieldCheckIcon aria-hidden="true" />
 				Verified
 			</span>
@@ -32,7 +41,9 @@
 import {
 	AffiliateIcon,
 	ExternalIcon,
+	InfoIcon,
 	OnlineIndicatorIcon,
+	ServerIcon,
 	ShieldCheckIcon,
 	UsersIcon,
 } from '@modrinth/assets'
@@ -43,6 +54,9 @@ import { useBaseFetch } from '../composables/useBaseFetch'
 const props = defineProps<{ pageUrl: string }>()
 
 interface DiscordInvite {
+	name: string
+	description: string | null
+	iconUrl: string | null
 	approximate_member_count: number
 	approximate_presence_count: number
 	partnered: boolean
@@ -80,35 +94,29 @@ onMounted(async () => {
 		const data = (await res.json()) as {
 			approximate_member_count: number
 			approximate_presence_count: number
-			guild: { features: string[] }
+			guild: {
+				id: string
+				name: string
+				description: string | null
+				icon: string | null
+				features: string[]
+			}
 		}
-		const features = data.guild?.features ?? []
+		const { guild } = data
+		const features = guild?.features ?? []
 		invite.value = {
+			name: guild.name,
+			description: guild.description ?? null,
+			iconUrl: guild.icon
+				? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.webp?size=64`
+				: null,
 			approximate_member_count: data.approximate_member_count ?? 0,
 			approximate_presence_count: data.approximate_presence_count ?? 0,
 			partnered: features.includes('PARTNERED'),
 			verified: features.includes('VERIFIED'),
 		}
 	} catch {
-		// silently ignore — card simply won't render
+		// silently ignore, card simply won't render
 	}
 })
 </script>
-
-<style scoped>
-.online-dot {
-	color: var(--color-green);
-}
-
-.badge {
-	font-weight: 600;
-}
-
-.badge.partnered {
-	color: var(--color-blue);
-}
-
-.badge.verified {
-	color: var(--color-green);
-}
-</style>

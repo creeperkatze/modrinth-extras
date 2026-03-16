@@ -157,6 +157,12 @@ const NAVIGATION_FEATURES: FeatureDef[] = [
 
 const PROJECT_FEATURES: FeatureDef[] = [
 	{
+		key: 'showActivitySparkline',
+		icon: ChartIcon,
+		title: 'Activity sparkline',
+		description: 'Release activity chart on project pages',
+	},
+	{
 		key: 'showToolsSidebar',
 		icon: WrenchIcon,
 		title: 'Tools sidebar',
@@ -167,12 +173,6 @@ const PROJECT_FEATURES: FeatureDef[] = [
 		icon: BoxIcon,
 		title: 'Dependency sidebar',
 		description: 'Collapsible dependency tree on project pages',
-	},
-	{
-		key: 'showActivitySparkline',
-		icon: ChartIcon,
-		title: 'Activity sparkline',
-		description: 'Release activity chart on project pages',
 	},
 	{
 		key: 'showGitHubSidebar',
