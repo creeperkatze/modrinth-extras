@@ -293,7 +293,9 @@ const notificationsData = ref<PlatformNotification[] | null>(null)
 async function refreshNotifications() {
 	if (!userId.value) return
 	try {
-		const notifs = await useBaseFetch(`user/${userId.value}/notifications`)
+		const notifs = (await useBaseFetch(
+			`user/${userId.value}/notifications`,
+		)) as PlatformNotification[]
 		notificationsData.value = await fetchExtraNotificationData(notifs)
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to fetch notifications:', err)
@@ -306,7 +308,7 @@ function hasAuthCookie(): boolean {
 
 async function tryAuth(): Promise<boolean> {
 	try {
-		const user = await useBaseFetch('user')
+		const user = (await useBaseFetch('user')) as { id: string }
 		userId.value = user.id
 		await refreshNotifications()
 		return true

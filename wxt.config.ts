@@ -25,6 +25,7 @@ export default defineConfig({
 		browser_specific_settings: {
 			gecko: {
 				id: 'contact@creeperkatze.de',
+				// @ts-expect-error -- data_collection_permissions is a Firefox-specific field not yet in WXT types
 				data_collection_permissions: {
 					required: ['none'],
 					optional: [],
@@ -53,6 +54,7 @@ export default defineConfig({
 					],
 				},
 			}),
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		] as any,
 		css: {
 			preprocessorOptions: {
