@@ -62,7 +62,7 @@
 					</span>
 					<kbd
 						:class="[
-							'shrink-0 rounded-md border border-solid border-surface-5 bg-transparent px-2.5 py-1 text-[13px] text-secondary [box-shadow:0_2px_0_var(--color-surface-5)]',
+							'shrink-0 rounded-md border-2 border-solid border-surface-5 bg-transparent px-2.5 py-1 text-[13px] text-secondary',
 							i !== selectedIndex && 'invisible',
 						]"
 						>↵</kbd
@@ -105,7 +105,7 @@
 					<SearchIcon aria-hidden="true" class="size-5 shrink-0 text-secondary" />
 					<span class="flex-1">Search</span>
 					<kbd
-						class="shrink-0 rounded-md border border-solid border-surface-5 bg-transparent px-2.5 py-1 text-[13px] text-secondary [box-shadow:0_2px_0_var(--color-surface-5)]"
+						class="shrink-0 rounded-md border-2 border-solid border-surface-5 bg-transparent px-2.5 py-1 text-[13px] text-secondary"
 						>↵</kbd
 					>
 				</div>

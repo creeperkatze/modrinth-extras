@@ -54,5 +54,21 @@ export default defineConfig({
 				},
 			}),
 		] as any,
+		css: {
+			preprocessorOptions: {
+				scss: {
+					silenceDeprecations: ['import'],
+				},
+			},
+		},
+		build: {
+			chunkSizeWarningLimit: 2000,
+			rolldownOptions: {
+				onwarn(warning, warn) {
+					if (warning.code === 'EMPTY_IMPORT_META') return
+					warn(warning)
+				},
+			},
+		},
 	}),
 })
