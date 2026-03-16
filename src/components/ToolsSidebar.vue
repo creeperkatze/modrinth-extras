@@ -1,5 +1,5 @@
 <template>
-	<div v-if="showTools" class="card flex-card experimental-styles-within">
+	<div class="card flex-card experimental-styles-within">
 		<h2>Tools</h2>
 		<div class="details-list">
 			<div class="details-list__item">
@@ -56,7 +56,6 @@
 			</template>
 		</div>
 	</div>
-	<DependencyTree v-if="showDependencies && projectSlug" :project-slug="projectSlug" />
 </template>
 
 <script setup lang="ts">
@@ -73,12 +72,9 @@ import {
 import { computed, onMounted, ref } from 'vue'
 
 import { useBaseFetch } from '../composables/useBaseFetch'
-import DependencyTree from './DependencyTree.vue'
 
 const props = defineProps<{
 	pageUrl: string
-	showTools: boolean
-	showDependencies: boolean
 }>()
 
 const modfolioUrl = computed(
@@ -88,7 +84,7 @@ const modfolioUrl = computed(
 const apiUrl = computed(() => {
 	try {
 		const path = new URL(props.pageUrl).pathname
-		const project = path.match(/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/([^/]+)/)
+		const project = path.match(/^\/(mod|plugin|datapack|shader|resourcepack|modpack|server)\/([^/]+)/)
 		if (project) return `https://api.modrinth.com/v2/project/${project[2]}`
 		const user = path.match(/^\/user\/([^/]+)/)
 		if (user) return `https://api.modrinth.com/v2/user/${user[1]}`

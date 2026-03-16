@@ -108,7 +108,7 @@ function formatNum(n: number): string {
 onMounted(async () => {
 	try {
 		const slug = new URL(props.pageUrl).pathname.match(
-			/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/([^/]+)/,
+			/^\/(mod|plugin|datapack|shader|resourcepack|modpack|server)\/([^/]+)/,
 		)?.[2]
 		if (!slug) return
 

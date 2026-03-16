@@ -5,6 +5,7 @@ export interface ExtensionSettings {
 	showDependenciesSidebar: boolean
 	showActivitySparkline: boolean
 	showGitHubSidebar: boolean
+	showDiscordSidebar: boolean
 	showQuickSearch: boolean
 }
 
@@ -15,6 +16,7 @@ export const DEFAULTS: ExtensionSettings = {
 	showDependenciesSidebar: true,
 	showActivitySparkline: true,
 	showGitHubSidebar: true,
+	showDiscordSidebar: true,
 	showQuickSearch: true,
 }
 

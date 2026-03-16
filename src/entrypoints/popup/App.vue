@@ -121,6 +121,7 @@ import {
 	ClockIcon,
 	GitGraphIcon,
 	LoaderCircleIcon,
+	MessageIcon,
 	SearchIcon,
 	WrenchIcon,
 } from '@modrinth/assets'
@@ -178,6 +179,12 @@ const PROJECT_FEATURES: FeatureDef[] = [
 		icon: GitGraphIcon,
 		title: 'GitHub sidebar',
 		description: 'GitHub stats in the project sidebar',
+	},
+	{
+		key: 'showDiscordSidebar',
+		icon: MessageIcon,
+		title: 'Discord sidebar',
+		description: 'Discord server info in the project sidebar',
 	},
 ]
 

@@ -6,11 +6,13 @@ import { type App, createApp, h, ref } from 'vue'
 import { browser } from 'wxt/browser'
 
 import ActivitySparkline from '../components/ActivitySparkline.vue'
+import DependencyTree from '../components/DependencyTree.vue'
+import DiscordSidebar from '../components/DiscordSidebar.vue'
 import FooterBadge from '../components/FooterBadge.vue'
 import GitHubSidebar from '../components/GitHubSidebar.vue'
 import NotificationsIndicator from '../components/NotificationsIndicator.vue'
 import QuickSearch from '../components/QuickSearch.vue'
-import Sidebar from '../components/Sidebar.vue'
+import ToolsSidebar from '../components/ToolsSidebar.vue'
 import { DEFAULTS, type ExtensionSettings, loadSettings } from '../helpers/settings'
 
 // Gate injections until Nuxt hydration is complete. The router-bridge
@@ -84,43 +86,41 @@ function createInjection(config: InjectionConfig) {
 	return { unmount, schedule, checkDetached, config }
 }
 
-function findSidebarAnchor(): { after: HTMLElement; fallback?: boolean } | null {
+// Returns the sidebar container to appendChild into, or null if not on a supported page.
+function findSidebarParent(): HTMLElement | null {
 	const path = window.location.pathname
 
-	if (/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/[^/]+\/?$/.test(path)) {
+	if (/^\/(mod|plugin|datapack|shader|resourcepack|modpack|server)\/[^/]+\/?$/.test(path)) {
 		for (const card of document.querySelectorAll<HTMLElement>(
 			'.card.flex-card.experimental-styles-within',
 		)) {
-			if (card.querySelector('h2')?.textContent?.trim() === 'Details') return { after: card }
+			if (card.querySelector('h2')?.textContent?.trim() === 'Details')
+				return card.parentElement as HTMLElement | null
 		}
 		return null
 	}
 
 	if (/^\/user\/[^/]+\/?$/.test(path)) {
-		const sidebar = document.querySelector<HTMLElement>('.normal-page__sidebar')
-		if (!sidebar) return null
-		const cards = sidebar.querySelectorAll<HTMLElement>('.card.flex-card')
-		if (cards.length > 0) return { after: cards[cards.length - 1] }
-		return { after: sidebar, fallback: true }
+		return document.querySelector<HTMLElement>('.normal-page__sidebar')
 	}
 
 	if (/^\/organization\/[^/]+\/?$/.test(path)) {
-		const sidebar = document.querySelector<HTMLElement>('.normal-page__sidebar')
-		if (!sidebar) return null
-		const cards = sidebar.querySelectorAll<HTMLElement>('.card.flex-card')
-		if (cards.length > 0) return { after: cards[cards.length - 1] }
-		return null
+		return document.querySelector<HTMLElement>('.normal-page__sidebar')
 	}
 
 	if (/^\/collection\/[^/]+\/?$/.test(path)) {
-		const sidebar = document.querySelector<HTMLElement>('.ui-normal-page__sidebar')
-		if (!sidebar) return null
-		const cards = sidebar.querySelectorAll<HTMLElement>('.flex.flex-col.gap-3.p-4')
-		if (cards.length > 0) return { after: cards[cards.length - 1] }
-		return null
+		return document.querySelector<HTMLElement>('.ui-normal-page__sidebar')
 	}
 
 	return null
+}
+
+function attachToSidebar(container: HTMLElement): boolean {
+	container.style.display = 'contents'
+	const parent = findSidebarParent()
+	if (!parent) return false
+	parent.appendChild(container)
+	return document.contains(container)
 }
 
 export default defineContentScript({
@@ -175,32 +175,34 @@ export default defineContentScript({
 			},
 		})
 
-		const sidebar = createInjection({
-			id: 'modrinth-extras-sidebar-extra',
-			isEnabled: () => settings.showToolsSidebar || settings.showDependenciesSidebar,
-			settingsKeys: ['showToolsSidebar', 'showDependenciesSidebar'],
+		const toolsSidebar = createInjection({
+			id: 'modrinth-extras-tools-sidebar',
+			isEnabled: () => settings.showToolsSidebar,
+			settingsKeys: ['showToolsSidebar'],
 			persistent: false,
-			attach(container) {
-				const anchor = findSidebarAnchor()
-				if (!anchor) return false
-
-				container.style.display = 'contents'
-				if (anchor.fallback) {
-					anchor.after.appendChild(container)
-				} else {
-					anchor.after.after(container)
-				}
-				return document.contains(container)
-			},
+			attach: attachToSidebar,
 			createApp() {
 				const pageUrl = window.location.href.split('?')[0].split('#')[0]
-				return createApp(
-					h(Sidebar, {
-						pageUrl,
-						showTools: settings.showToolsSidebar,
-						showDependencies: settings.showDependenciesSidebar,
-					}),
-				)
+				return createApp(h(ToolsSidebar, { pageUrl }))
+			},
+		})
+
+		const dependencySidebar = createInjection({
+			id: 'modrinth-extras-dependency-sidebar',
+			isEnabled: () => settings.showDependenciesSidebar,
+			settingsKeys: ['showDependenciesSidebar'],
+			persistent: false,
+			attach(container) {
+				const path = window.location.pathname
+				if (!/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/[^/]+\/?$/.test(path))
+					return false
+				return attachToSidebar(container)
+			},
+			createApp() {
+				const slug = window.location.pathname.match(
+					/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/([^/]+)/,
+				)?.[2]
+				return createApp(h(DependencyTree, { projectSlug: slug ?? '' }))
 			},
 		})
 
@@ -238,32 +240,22 @@ export default defineContentScript({
 			isEnabled: () => settings.showGitHubSidebar,
 			settingsKeys: ['showGitHubSidebar'],
 			persistent: false,
-			attach(container) {
-				container.style.display = 'contents'
-				const sidebarExtra = document.getElementById('modrinth-extras-sidebar-extra')
-				if (sidebarExtra) {
-					const depCard = Array.from(sidebarExtra.children).find(
-						(el) => el.querySelector('h2')?.textContent?.trim() === 'Dependencies',
-					) as HTMLElement | undefined
-					if (depCard) {
-						sidebarExtra.insertBefore(container, depCard)
-					} else {
-						sidebarExtra.appendChild(container)
-					}
-					return document.contains(container)
-				}
-				const anchor = findSidebarAnchor()
-				if (!anchor) return false
-				if (anchor.fallback) {
-					anchor.after.appendChild(container)
-				} else {
-					anchor.after.after(container)
-				}
-				return document.contains(container)
-			},
+			attach: attachToSidebar,
 			createApp() {
 				const pageUrl = window.location.href.split('?')[0].split('#')[0]
 				return createApp(h(GitHubSidebar, { pageUrl }))
+			},
+		})
+
+		const discordSidebar = createInjection({
+			id: 'modrinth-extras-discord-sidebar',
+			isEnabled: () => settings.showDiscordSidebar,
+			settingsKeys: ['showDiscordSidebar'],
+			persistent: false,
+			attach: attachToSidebar,
+			createApp() {
+				const pageUrl = window.location.href.split('?')[0].split('#')[0]
+				return createApp(h(DiscordSidebar, { pageUrl }))
 			},
 		})
 
@@ -304,9 +296,11 @@ export default defineContentScript({
 
 		const injections = [
 			notifications,
-			sidebar,
+			toolsSidebar,
+			dependencySidebar,
 			activitySparkline,
 			gitHubSidebar,
+			discordSidebar,
 			footerBadge,
 			quickSearch,
 		]
