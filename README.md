@@ -1,4 +1,4 @@
-# <img src="src/public/icon.svg" alt="Icon" width="32"> Modrinth Extras
+# <img src=".github/assets/logo.png" alt="Modrinth Extras" height="100">
 
 A browser extension adding unofficial extra features to the [Modrinth](https://modrinth.com) website.
 
@@ -38,7 +38,7 @@ Adds a live bell icon to the Modrinth header showing your unread notification co
 
 Opens a command palette-style search modal with <kbd>Ctrl+K</kbd> or <kbd>/</kbd>. Supports faceted search with inline tags for loader, category, game version, and project type, with highlighted suggestions and pre-configured examples.
 
-<img src=".github/assets/quicksearch.gif">
+<img src=".github/assets/screenshots/quicksearch.gif">
 
 ### Activity Sparkline
 
