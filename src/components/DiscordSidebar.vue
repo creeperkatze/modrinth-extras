@@ -7,13 +7,13 @@
 				:href="discordUrl"
 				target="_blank"
 				rel="noopener"
-				class="details-list__item hover:underline"
+				class="details-list__item !items-start hover:underline"
 			>
-				<ServerIcon aria-hidden="true" />
+				<ServerIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 				{{ invite.name }}
 				<ExternalIcon aria-hidden="true" class="external-icon" />
 			</a>
-			<span v-if="invite.description" class="details-list__item" style="align-items: flex-start">
+			<span v-if="invite.description" class="details-list__item !items-start">
 				<InfoIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 				{{ invite.description }}
 			</span>
