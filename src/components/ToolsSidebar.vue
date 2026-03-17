@@ -27,7 +27,7 @@
 					<LoaderCircleIcon v-if="downloadLoading" class="animate-spin shrink-0 text-secondary" />
 					<button
 						v-else-if="downloadUrl"
-						class="min-w-0 flex-1 cursor-pointer truncate border-0 bg-transparent p-0 text-left text-primary hover:underline font:inherit"
+						class="min-w-0 flex-1 cursor-pointer truncate border-0 bg-transparent p-0 text-left text-primary hover:underline [font:inherit]"
 						:aria-label="downloadCopied ? 'Copied!' : 'Copy download URL'"
 						@click="copyDownloadUrl"
 					>
