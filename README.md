@@ -11,7 +11,7 @@ A browser extension adding unofficial extra features to the [Modrinth](https://m
 
 Install from your browser's extension store:
 
-- **[Chrome Web Store](#)**
+- **[Chrome Web Store](https://chromewebstore.google.com/detail/modrinth-extras/ajmkilipadfpaefpcjfgnkejalmhdlcj)**
 - **[Firefox Add-Ons](#)**
 - **[Edge Add-Ons](#)**
 
