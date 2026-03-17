@@ -10,7 +10,7 @@
 			<div class="relative flex h-5 flex-shrink-0 items-center justify-center">
 				<BellIcon aria-hidden="true" class="h-5 w-5 transform-none" />
 				<div
-					v-if="unreadCount > 0"
+					v-show="unreadCount > 0"
 					class="absolute -top-2 left-3 flex h-4 min-w-4 items-center justify-center rounded-full bg-brand px-1 text-[10px] font-bold text-brand-inverted"
 				>
 					{{ unreadCount }}
