@@ -35,9 +35,13 @@ Adds a live bell icon to the Modrinth header showing your unread notification co
 
 Opens a command palette-style search modal with <kbd>Ctrl+K</kbd> or <kbd>/</kbd>. Supports faceted search with inline tags for loader, category, game version, and project type, with highlighted suggestions and pre-configured examples.
 
+<video src=".github/assets/videos/quicksearch.mp4" controls width="640"></video>
+
 ### Activity Sparkline
 
 Adds an animated SVG chart to project pages showing release activity over the past 60 days, giving a quick visual overview of how actively a project is maintained.
+
+<img src=".github/assets/screenshots/sparkline.png" width="400">
 
 ### Tools Sidebar
 
@@ -61,11 +65,15 @@ On project pages, a dependencies card shows the project's full dependency tree. 
 
 ### GitHub Sidebar
 
-On project pages that link to a GitHub repository, shows a sidebar card with live stats: stars, open issues, open pull requests, and forks — each linking directly to the relevant section on GitHub.
+On project pages that link to a GitHub repository, shows a sidebar card with live stats: stars, open issues, open pull requests, and forks.
+
+<img src=".github/assets/screenshots/github.png" width="400">
 
 ### Discord Sidebar
 
-On project pages that include a Discord invite, shows a sidebar card with the server name, description, member count, online count, and icon, including verified/partnered badges.
+On project pages that include a Discord invite, shows a sidebar card with the server name, description, member count, online count, and icon.
+
+<img src=".github/assets/screenshots/discord.png" width="400">
 
 ### Notification Badge
 
