@@ -29,9 +29,9 @@
 		<HorizontalRule class="shrink-0" />
 
 		<div class="min-h-0 flex-1 overflow-y-auto">
-			<FeatureGroup label="Navigation">
+			<FeatureGroup label="General">
 				<FeatureRow
-					v-for="f in NAVIGATION_FEATURES"
+					v-for="f in GENERAL_FEATURES"
 					:key="f.key"
 					:icon="f.icon"
 					:title="f.title"
@@ -43,9 +43,9 @@
 
 			<HorizontalRule />
 
-			<FeatureGroup label="Pages">
+			<FeatureGroup label="Content Pages">
 				<FeatureRow
-					v-for="f in PROJECT_FEATURES"
+					v-for="f in CONTENT_PAGE_FEATURES"
 					:key="f.key"
 					:icon="f.icon"
 					:title="f.title"
@@ -140,7 +140,7 @@ interface FeatureDef {
 	description: string
 }
 
-const NAVIGATION_FEATURES: FeatureDef[] = [
+const GENERAL_FEATURES: FeatureDef[] = [
 	{
 		key: 'showNotificationsIndicator',
 		icon: BellIcon,
@@ -155,7 +155,7 @@ const NAVIGATION_FEATURES: FeatureDef[] = [
 	},
 ]
 
-const PROJECT_FEATURES: FeatureDef[] = [
+const CONTENT_PAGE_FEATURES: FeatureDef[] = [
 	{
 		key: 'showActivitySparkline',
 		icon: ChartIcon,

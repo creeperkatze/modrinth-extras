@@ -74,7 +74,7 @@
 				</ul>
 
 				<div v-else-if="!query && !tags.length">
-					<p class="ml-1 text-md font-semibold text-primary">Examples</p>
+					<p class="px-2 pt-1 py-0 text-xs font-bold uppercase tracking-wide text-secondary">Examples</p>
 					<div
 						v-for="(ex, i) in EXAMPLES"
 						:key="ex.label"
