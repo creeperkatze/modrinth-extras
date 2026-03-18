@@ -238,7 +238,7 @@ const PRIVACY_FEATURES: FeatureDef[] = [
 	{
 		key: 'analyticsEnabled',
 		icon: ChartIcon,
-		title: 'Analytics',
+		title: 'Telemetry',
 		description:
 			'Help improve the extension by anonymously sharing statistics like the extension version and which features are enabled. No Modrinth data, activity, or personal information is ever collected.',
 	},

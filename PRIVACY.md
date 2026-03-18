@@ -1,6 +1,6 @@
 # Privacy Policy
 
-Modrinth Extras shares anonymous statistics to help improve the extension. These analytics can be disabled at any time in the extension settings.
+Modrinth Extras shares anonymous statistics to help improve the extension. This telemetry can be disabled at any time in the extension settings.
 
 ## What is collected
 
