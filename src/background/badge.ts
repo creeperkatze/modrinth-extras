@@ -1,6 +1,6 @@
 import { browser } from 'wxt/browser'
 
-import { getAuthToken, usePopupFetch } from '../composables/usePopupFetch'
+import { apiFetch, getAuthToken } from '../helpers/apiFetch'
 import { groupNotifications, type PlatformNotification } from '../helpers/platform-notifications'
 import { sendDesktopNotifications } from './desktop-notifications'
 
@@ -66,10 +66,10 @@ export async function updateBadge() {
 			return
 		}
 
-		const user = (await usePopupFetch('user')) as { id?: string } | null
+		const user = (await apiFetch('user')) as { id?: string } | null
 		if (!user?.id) throw new Error('Failed to fetch user')
 
-		const notifs = await usePopupFetch(`user/${user.id}/notifications`)
+		const notifs = await apiFetch(`user/${user.id}/notifications`)
 		if (Array.isArray(notifs)) {
 			await applyNotifications(
 				notifs as PlatformNotification[],

@@ -1,29 +1,28 @@
+import { browser } from 'wxt/browser'
+
 const API_BASE = 'https://api.modrinth.com'
+const USER_AGENT = `creeperkatze/modrinth-extras/${browser.runtime.getManifest().version} (contact@creeperkatze.de)`
 
-let cachedToken: string | null = null
-
-function getToken(): string {
-	if (cachedToken !== null) return cachedToken
-	const cookie = document.cookie.split('; ').find((row) => row.startsWith('auth-token='))
-	cachedToken = cookie ? decodeURIComponent(cookie.split('=').slice(1).join('=')) : ''
-	return cachedToken
+export async function getAuthToken(): Promise<string> {
+	try {
+		const cookie = await browser.cookies.get({ url: 'https://modrinth.com', name: 'auth-token' })
+		return cookie?.value ? decodeURIComponent(cookie.value) : ''
+	} catch {
+		return ''
+	}
 }
 
-export function invalidateTokenCache() {
-	cachedToken = null
-}
-
-// Browser-compatible drop-in for Nuxt's useBaseFetch.
-export async function useBaseFetch(
+export async function apiFetch(
 	url: string,
 	options: RequestInit & { apiVersion?: number } = {},
 ): Promise<unknown> {
 	const { apiVersion = 2, ...fetchOptions } = options as RequestInit & { apiVersion?: number }
-	const token = getToken()
+	const token = await getAuthToken()
 
 	const res = await fetch(`${API_BASE}/v${apiVersion}/${url}`, {
 		...fetchOptions,
 		headers: {
+			'User-Agent': USER_AGENT,
 			...(token ? { Authorization: token } : {}),
 			...((fetchOptions.headers as Record<string, string>) ?? {}),
 		},

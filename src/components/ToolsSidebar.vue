@@ -69,7 +69,7 @@ import {
 } from '@modrinth/assets'
 import { computed, onMounted, ref } from 'vue'
 
-import { useBaseFetch } from '../composables/useBaseFetch'
+import { apiFetch } from '../helpers/apiFetch'
 
 const props = defineProps<{
 	pageUrl: string
@@ -118,7 +118,7 @@ onMounted(async () => {
 	if (!projectSlug.value) return
 	downloadLoading.value = true
 	try {
-		const versions = (await useBaseFetch(`project/${projectSlug.value}/version?limit=1`)) as {
+		const versions = (await apiFetch(`project/${projectSlug.value}/version?limit=1`)) as {
 			files?: { primary?: boolean; url?: string }[]
 		}[]
 		const primaryFile = versions?.[0]?.files?.find((f) => f.primary) ?? versions?.[0]?.files?.[0]

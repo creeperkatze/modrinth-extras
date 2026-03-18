@@ -1,6 +1,6 @@
 import type { Organization, Project, Report, User, Version } from '@modrinth/utils'
 
-import { useBaseFetch } from '../composables/useBaseFetch'
+import { apiFetch } from '../helpers/apiFetch'
 
 type Fetcher = (url: string, options?: RequestInit & { apiVersion?: number }) => Promise<unknown>
 
@@ -70,7 +70,7 @@ async function getBulk<T extends { id: string }>(
 
 export async function fetchExtraNotificationData(
 	notifications: PlatformNotification[],
-	fetcher: Fetcher = useBaseFetch,
+	fetcher: Fetcher = apiFetch,
 ): Promise<PlatformNotification[]> {
 	const bulk = {
 		projects: [] as string[],
@@ -165,6 +165,6 @@ function isSimilar(a: PlatformNotification, b: PlatformNotification | undefined)
 	return !!a?.body?.project_id && a.body!.project_id === b?.body?.project_id
 }
 
-export async function markAsRead(ids: string[], fetcher: Fetcher = useBaseFetch): Promise<void> {
+export async function markAsRead(ids: string[], fetcher: Fetcher = apiFetch): Promise<void> {
 	await fetcher(`notifications?ids=${JSON.stringify([...new Set(ids)])}`, { method: 'PATCH' })
 }

@@ -49,7 +49,7 @@ import {
 } from '@modrinth/assets'
 import { onMounted, ref } from 'vue'
 
-import { useBaseFetch } from '../composables/useBaseFetch'
+import { apiFetch } from '../helpers/apiFetch'
 
 const props = defineProps<{ pageUrl: string }>()
 
@@ -79,7 +79,7 @@ onMounted(async () => {
 		)?.[2]
 		if (!slug) return
 
-		const project = (await useBaseFetch(`project/${slug}`)) as Record<string, unknown>
+		const project = (await apiFetch(`project/${slug}`)) as Record<string, unknown>
 		const url = (project?.discord_url as string) ?? ''
 		if (!url) return
 

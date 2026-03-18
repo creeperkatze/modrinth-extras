@@ -117,7 +117,7 @@
 import { CpuIcon, HashIcon, PackageIcon, SearchIcon, TagIcon, XIcon } from '@modrinth/assets'
 import { type Component, computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
-import { useBaseFetch } from '../composables/useBaseFetch'
+import { apiFetch } from '../helpers/apiFetch'
 import { navigate } from '../helpers/page-router'
 
 const FACET_ICONS: Record<string, Component> = {
@@ -539,11 +539,9 @@ onMounted(async () => {
 
 	try {
 		const [loadersRes, categoriesRes, versionsRes] = await Promise.all([
-			useBaseFetch('tag/loader') as Promise<{ name: string }[]>,
-			useBaseFetch('tag/category') as Promise<
-				{ name: string; project_type: string; header: string }[]
-			>,
-			useBaseFetch('tag/game_version') as Promise<{ version: string }[]>,
+			apiFetch('tag/loader') as Promise<{ name: string }[]>,
+			apiFetch('tag/category') as Promise<{ name: string; project_type: string; header: string }[]>,
+			apiFetch('tag/game_version') as Promise<{ version: string }[]>,
 		])
 		loaders.value = loadersRes.map((l) => l.name)
 		const allCats = categoriesRes.filter((c) => c.project_type !== 'minecraft_java_server')

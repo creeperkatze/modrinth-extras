@@ -1,4 +1,4 @@
-import { useBaseFetch } from '../composables/useBaseFetch'
+import { apiFetch } from '../helpers/apiFetch'
 
 export interface RawDep {
 	project_id: string
@@ -21,7 +21,7 @@ export interface EnrichedDep extends RawDep {
 export async function fetchProjectDependencies(slugOrId: string): Promise<EnrichedDep[]> {
 	let versions: { dependencies?: RawDep[] }[]
 	try {
-		versions = (await useBaseFetch(`project/${slugOrId}/version?limit=1`)) as {
+		versions = (await apiFetch(`project/${slugOrId}/version?limit=1`)) as {
 			dependencies?: RawDep[]
 		}[]
 	} catch {
@@ -43,7 +43,7 @@ export async function fetchProjectDependencies(slugOrId: string): Promise<Enrich
 	const projectIds = [...new Set(relevant.map((d) => d.project_id))]
 	let projects: ProjectInfo[] = []
 	try {
-		projects = (await useBaseFetch(
+		projects = (await apiFetch(
 			`projects?ids=${encodeURIComponent(JSON.stringify(projectIds))}`,
 		)) as ProjectInfo[]
 	} catch {

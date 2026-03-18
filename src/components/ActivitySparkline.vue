@@ -64,7 +64,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
-import { useBaseFetch } from '../composables/useBaseFetch'
+import { apiFetch } from '../helpers/apiFetch'
 
 const props = defineProps<{ projectSlug: string }>()
 
@@ -129,9 +129,7 @@ onMounted(async () => {
 		const now = Date.now()
 		const cutoff = now - DAYS * 24 * 60 * 60 * 1000
 
-		const versions = (await useBaseFetch(
-			`project/${props.projectSlug}/version?limit=100`,
-		)) as Version[]
+		const versions = (await apiFetch(`project/${props.projectSlug}/version?limit=100`)) as Version[]
 		if (!Array.isArray(versions)) return
 
 		const counts = Array(DAYS).fill(0)

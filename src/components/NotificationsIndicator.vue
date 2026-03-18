@@ -241,7 +241,7 @@ import {
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { browser } from 'wxt/browser'
 
-import { invalidateTokenCache, useBaseFetch } from '../composables/useBaseFetch'
+import { apiFetch } from '../helpers/apiFetch'
 import { navigate, resolveLink } from '../helpers/page-router'
 import {
 	fetchExtraNotificationData,
@@ -292,9 +292,7 @@ const notificationsData = ref<PlatformNotification[] | null>(null)
 async function refreshNotifications() {
 	if (!userId.value) return
 	try {
-		const notifs = (await useBaseFetch(
-			`user/${userId.value}/notifications`,
-		)) as PlatformNotification[]
+		const notifs = (await apiFetch(`user/${userId.value}/notifications`)) as PlatformNotification[]
 		browser.runtime
 			.sendMessage({ type: 'notifications-fetched', notifications: notifs })
 			.catch(() => {})
@@ -310,7 +308,7 @@ function hasAuthCookie(): boolean {
 
 async function tryAuth(): Promise<boolean> {
 	try {
-		const user = (await useBaseFetch('user')) as { id: string }
+		const user = (await apiFetch('user')) as { id: string }
 		userId.value = user.id
 		await refreshNotifications()
 		return true
@@ -381,11 +379,9 @@ onMounted(() => {
 	authWatchInterval = setInterval(async () => {
 		const cookie = hasAuthCookie()
 		if (userId.value && !cookie) {
-			invalidateTokenCache()
 			userId.value = false
 			notificationsData.value = null
 		} else if (!userId.value && cookie) {
-			invalidateTokenCache()
 			await tryAuth()
 		}
 	}, 1_000)
