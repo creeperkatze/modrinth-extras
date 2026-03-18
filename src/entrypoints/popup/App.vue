@@ -202,7 +202,7 @@ const EXTENSION_FEATURES: FeatureDef[] = [
 			browser.notifications.create({
 				type: 'basic',
 				iconUrl: browser.runtime.getURL('/icon-128.png'),
-				title: 'Test Notification',
+				title: 'Example Notification',
 				message: 'This is an examples notification from Modrinth Extras!',
 			})
 		},
