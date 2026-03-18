@@ -5,8 +5,10 @@ import { groupNotifications, type PlatformNotification } from '../helpers/platfo
 import { sendDesktopNotifications } from './desktop-notifications'
 
 export async function setBadge(unread: number) {
-	await browser.action.setBadgeBackgroundColor({ color: '#1bd96a' })
-	await browser.action.setBadgeText({ text: unread > 0 ? String(Math.min(unread, 99)) : '' })
+	const action = browser.action ?? browser.browserAction
+
+	await action.setBadgeBackgroundColor({ color: '#1bd96a' })
+	await action.setBadgeText({ text: unread > 0 ? String(Math.min(unread, 99)) : '' })
 }
 
 export async function showCachedBadge() {
@@ -50,14 +52,14 @@ export async function updateBadge() {
 			'notifications',
 		])
 		if (!showBadge) {
-			browser.action?.setBadgeText({ text: '' })
+			await setBadge(0)
 			return
 		}
 
 		const token = await getBackgroundAuthToken()
 		if (!token) {
 			console.log('[Modrinth Extras] Badge: No auth token, clearing badge')
-			browser.action?.setBadgeText({ text: '' })
+			await setBadge(0)
 			await browser.storage.local.set({
 				userId: null,
 				notifications: null,
@@ -79,6 +81,6 @@ export async function updateBadge() {
 		}
 	} catch (err) {
 		console.error('[Modrinth Extras] Badge: Background update failed:', err)
-		browser.action?.setBadgeText({ text: '' })
+		await setBadge(0)
 	}
 }

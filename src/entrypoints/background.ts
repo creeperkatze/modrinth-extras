@@ -1,6 +1,6 @@
 import { browser } from 'wxt/browser'
 
-import { applyNotifications, showCachedBadge, updateBadge } from '../background/badge'
+import { applyNotifications, setBadge, showCachedBadge, updateBadge } from '../background/badge'
 import { handleNotificationClick } from '../background/desktop-notifications'
 import type { PlatformNotification } from '../helpers/platform-notifications'
 import { capture, initBackgroundTelemetry } from '../helpers/telemetry'
@@ -15,7 +15,7 @@ export default defineBackground(() => {
 	browser.storage.onChanged.addListener((changes, area) => {
 		if (area !== 'local' || !('showBadge' in changes)) return
 		if (changes.showBadge.newValue === false) {
-			browser.action?.setBadgeText({ text: '' })
+			void setBadge(0)
 		} else {
 			updateBadge()
 		}
@@ -37,8 +37,7 @@ export default defineBackground(() => {
 		if (message.type === 'badge-count') {
 			const count = message.count as number
 			;(async () => {
-				await browser.action.setBadgeBackgroundColor({ color: '#1bd96a' })
-				await browser.action.setBadgeText({ text: count > 0 ? String(Math.min(count, 99)) : '' })
+				void setBadge(count)
 				sendResponse({ ok: true })
 			})()
 			return true
