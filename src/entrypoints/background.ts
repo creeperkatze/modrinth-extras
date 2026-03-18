@@ -10,7 +10,7 @@ const POLL_INTERVAL_MINUTES = 5
 
 export default defineBackground(() => {
 	void initBackgroundTelemetry()
-	capture('extension_start', { version: browser.runtime.getManifest().version })
+	capture('extension_start', { extension_version: browser.runtime.getManifest().version })
 
 	browser.storage.onChanged.addListener((changes, area) => {
 		if (area !== 'local' || !('showBadge' in changes)) return
