@@ -40,6 +40,12 @@ async function initAnalytics(persistence: 'localStorage' | 'memory'): Promise<vo
 		capture_pageview: false,
 		capture_pageleave: false,
 		disable_session_recording: true,
+		sanitize_properties: (properties) => {
+			for (const key of Object.keys(properties)) {
+				if (key.startsWith('$')) delete properties[key]
+			}
+			return properties
+		},
 	})
 	for (const { event, properties } of queue.splice(0)) {
 		posthog.capture(event, properties)

@@ -56,12 +56,12 @@ export default defineBackground(() => {
 	browser.runtime.onInstalled.addListener((details) => {
 		if (details.reason === 'install') {
 			capture('extension_installed', {
-				version: browser.runtime.getManifest().version,
+				extension_version: browser.runtime.getManifest().version,
 			})
 		} else if (details.reason === 'update') {
 			capture('extension_updated', {
-				from_version: details.previousVersion,
-				version: browser.runtime.getManifest().version,
+				from_extension_version: details.previousVersion,
+				extension_version: browser.runtime.getManifest().version,
 			})
 		}
 	})
