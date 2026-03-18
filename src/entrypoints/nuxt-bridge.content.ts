@@ -19,7 +19,11 @@ export default defineContentScript({
 	main() {
 		const w = window as Window &
 			typeof globalThis & {
-				__nuxt_app?: { $router?: unknown; hook?: (event: string, cb: () => void) => void }
+				__nuxt_app?: {
+					$router?: unknown
+					hook?: (event: string, cb: () => void) => void
+					isHydrating?: boolean
+				}
 			}
 
 		type VueRouter = {
@@ -63,13 +67,7 @@ export default defineContentScript({
 		})
 
 		function dispatchReady() {
-			// Ensures we fire after Vue's synchronous hydration
-			// patching and the subsequent browser paint.
-			requestAnimationFrame(() => {
-				requestAnimationFrame(() => {
-					window.dispatchEvent(new CustomEvent('modrinth-extras:router-ready'))
-				})
-			})
+			window.dispatchEvent(new CustomEvent('modrinth-extras:router-ready'))
 		}
 
 		function hookRouter(): boolean {
@@ -83,7 +81,18 @@ export default defineContentScript({
 				window.dispatchEvent(new CustomEvent('modrinth-extras:after-navigate'))
 			})
 
-			dispatchReady()
+			// The router is available before Nuxt hydration completes.
+			// Injecting into the DOM during hydration causes a mismatch
+			// error, so we must wait until hydration is truly finished.
+			const nuxtApp = w.__nuxt_app
+			if (nuxtApp?.isHydrating === false) {
+				dispatchReady()
+			} else if (nuxtApp?.hook) {
+				nuxtApp.hook('app:suspense:resolve', dispatchReady)
+			} else {
+				requestAnimationFrame(() => requestAnimationFrame(dispatchReady))
+			}
+
 			return true
 		}
 
