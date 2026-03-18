@@ -32,19 +32,19 @@ Prefer to build from source? See [Building from source](#-building-from-source) 
 
 Adds a live bell icon to the Modrinth header showing your unread notification count. Click it to open a dropdown with your recent unread notifications, accept or decline team/organization invites, mark individual notifications as read, or clear them all at once.
 
-<img src=".github/assets/screenshots/notifications.png">
+<img src=".github/assets/screenshots/notifications.png" width="100%">
 
 ### Quick Search
 
 Opens a command palette-style search modal with <kbd>Ctrl+K</kbd> or <kbd>/</kbd>. Supports faceted search with inline tags for loader, category, game version, and project type, with highlighted suggestions and pre-configured examples.
 
-<img src=".github/assets/screenshots/quicksearch.gif">
+<img src=".github/assets/screenshots/quicksearch.gif" width="100%">
 
 ### Activity Sparkline
 
 Adds an animated SVG chart to project pages showing release activity over the past 60 days, giving a quick visual overview of how actively a project is maintained.
 
-<img src=".github/assets/screenshots/sparkline.png">
+<img src=".github/assets/screenshots/sparkline.png" width="100%">
 
 ### Tools Sidebar
 
@@ -58,25 +58,21 @@ On project pages, two additional developer utilities are shown:
 - **Copy download URL:** copies the direct download URL of the project's latest primary file to the clipboard.
 - **Copy packwiz:** copies the `packwiz mr add <slug>` command to the clipboard.
 
-<img src=".github/assets/screenshots/tools.png">
-
 ### Dependency Sidebar
 
 On project pages, a dependencies card shows the project's full dependency tree. Each dependency can be expanded up to two levels deep to inspect transitive dependencies, with lazy loading on expand.
 
-<img src=".github/assets/screenshots/dependencies.png">
+<img src=".github/assets/screenshots/sidebar1.png" width="100%">
 
 ### GitHub Sidebar
 
 On project pages that link to a GitHub repository, shows a sidebar card with live stats: stars, open issues, open pull requests, and forks.
 
-<img src=".github/assets/screenshots/github.png">
-
 ### Discord Sidebar
 
 On project pages that include a Discord invite, shows a sidebar card with the server name, description, member count, online count, and icon.
 
-<img src=".github/assets/screenshots/discord.png">
+<img src=".github/assets/screenshots/sidebar2.png" width="100%">
 
 ### Notification Badge
 
