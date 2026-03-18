@@ -278,16 +278,15 @@ function formatRelativeTime(value: Date | number | string | null | undefined): s
 
 const router = { push: navigate }
 
-// Stable per-instance ID (replaces Nuxt's useId())
+// Stable per-instance ID
 const instanceId = Math.random().toString(36).slice(2)
 const effectiveDropdownId = computed(
 	() => props.dropdownId || `notifications-dropdown-${instanceId}`,
 )
 
-// Auth state: null = loading, false = not signed in, string = signed in
+// Auth state
 const userId = ref<string | null | false>(null)
 
-// Notifications data
 const notificationsData = ref<PlatformNotification[] | null>(null)
 
 async function refreshNotifications() {
@@ -296,6 +295,9 @@ async function refreshNotifications() {
 		const notifs = (await useBaseFetch(
 			`user/${userId.value}/notifications`,
 		)) as PlatformNotification[]
+		browser.runtime
+			.sendMessage({ type: 'notifications-fetched', notifications: notifs })
+			.catch(() => {})
 		notificationsData.value = await fetchExtraNotificationData(notifs)
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to fetch notifications:', err)
@@ -318,12 +320,21 @@ async function tryAuth(): Promise<boolean> {
 }
 
 onMounted(async () => {
+	// Show cached notifications immediately while the fresh fetch is in progress
+	const { userId: cachedUserId, notifications: cachedNotifs } = await browser.storage.local.get([
+		'userId',
+		'notifications',
+	])
+	if (cachedUserId && Array.isArray(cachedNotifs) && cachedNotifs.length > 0) {
+		userId.value = cachedUserId as string
+		notificationsData.value = cachedNotifs as PlatformNotification[]
+	}
+
 	if (!(await tryAuth())) {
 		userId.value = false
 	}
 })
 
-// Computed — unread count and filtered/grouped list
 const unreadCount = computed(() => {
 	if (!notificationsData.value) return 0
 	const grouped = groupNotifications(notificationsData.value.filter((n) => !n.read))
@@ -335,7 +346,6 @@ const recentNotifications = computed(() => {
 	return groupNotifications(notificationsData.value.filter((n) => !n.read))
 })
 
-// Pagination
 const NOTIFICATIONS_PER_PAGE = 20
 const currentPage = ref(1)
 
@@ -394,7 +404,6 @@ function syncBadgeCount() {
 	browser.runtime.sendMessage({ type: 'badge-count', count: unreadCount.value }).catch(() => {})
 }
 
-// Action handlers
 async function handleAcceptInvite(notif: PlatformNotification) {
 	try {
 		if (notificationsData.value) {

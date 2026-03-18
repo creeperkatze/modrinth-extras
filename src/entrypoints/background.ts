@@ -85,6 +85,26 @@ export default defineBackground(() => {
 		}
 	}
 
+	async function applyNotifications(
+		newNotifs: PlatformNotification[],
+		prevNotifs: PlatformNotification[] | null,
+		userId?: string,
+	) {
+		const { showBadge = true } = await browser.storage.local.get('showBadge')
+		const unread = groupNotifications(newNotifs.filter((n) => !n.read)).length
+		console.log(`[Modrinth Extras] Applying ${newNotifs.length} notifications: ${unread} unread`)
+		if (showBadge) {
+			await browser.action.setBadgeBackgroundColor({ color: '#1bd96a' })
+			await browser.action.setBadgeText({ text: unread > 0 ? String(Math.min(unread, 99)) : '' })
+		}
+		await sendDesktopNotifications(newNotifs, prevNotifs)
+		await browser.storage.local.set({
+			...(userId ? { userId } : {}),
+			notifications: newNotifs,
+			lastUpdated: Date.now(),
+		})
+	}
+
 	async function updateBadge() {
 		try {
 			const { showBadge = true, notifications: prevNotifs } = await browser.storage.local.get([
@@ -115,29 +135,15 @@ export default defineBackground(() => {
 				browser.action?.setBadgeText({ text: '' })
 				return
 			}
+
 			const notifs = await usePopupFetch(`user/${user.id}/notifications`)
-			const unread: number = Array.isArray(notifs)
-				? groupNotifications((notifs as PlatformNotification[]).filter((n) => !n.read)).length
-				: 0
-
-			console.log(
-				`[Modrinth Extras] Updated badge: ${unread} unread (${Array.isArray(notifs) ? notifs.length : 0} total)`,
-			)
-			await browser.action.setBadgeBackgroundColor({ color: '#1bd96a' })
-			await browser.action.setBadgeText({ text: unread > 0 ? String(Math.min(unread, 99)) : '' })
-
 			if (Array.isArray(notifs)) {
-				await sendDesktopNotifications(
+				await applyNotifications(
 					notifs as PlatformNotification[],
 					Array.isArray(prevNotifs) ? (prevNotifs as PlatformNotification[]) : null,
+					user.id,
 				)
 			}
-
-			await browser.storage.local.set({
-				userId: user.id,
-				notifications: notifs,
-				lastUpdated: Date.now(),
-			})
 		} catch (err) {
 			console.error('[Modrinth Extras] Background update failed:', err)
 			browser.action?.setBadgeText({ text: '' })
@@ -190,6 +196,16 @@ export default defineBackground(() => {
 				sendResponse({ ok: true })
 			})()
 			return true
+		}
+		if (message.type === 'notifications-fetched') {
+			const newNotifs = message.notifications as PlatformNotification[]
+			;(async () => {
+				const { notifications: prevNotifs } = await browser.storage.local.get('notifications')
+				await applyNotifications(
+					newNotifs,
+					Array.isArray(prevNotifs) ? (prevNotifs as PlatformNotification[]) : null,
+				)
+			})()
 		}
 	})
 
