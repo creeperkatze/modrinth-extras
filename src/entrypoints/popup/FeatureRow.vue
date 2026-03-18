@@ -8,6 +8,11 @@
 			<div class="text-sm font-semibold text-contrast">{{ title }}</div>
 			<div class="text-xs text-secondary">{{ description }}</div>
 		</div>
+		<ButtonStyled v-if="actionLabel" size="small">
+			<button type="button" :disabled="!modelValue" @click.stop="$emit('action')">
+				{{ actionLabel }}
+			</button>
+		</ButtonStyled>
 		<button
 			type="button"
 			role="switch"
@@ -27,6 +32,7 @@
 </template>
 
 <script setup lang="ts">
+import { ButtonStyled } from '@modrinth/ui'
 import type { Component } from 'vue'
 
 defineProps<{
@@ -34,9 +40,11 @@ defineProps<{
 	title: string
 	description: string
 	modelValue: boolean
+	actionLabel?: string
 }>()
 
 defineEmits<{
 	'update:modelValue': [value: boolean]
+	action: []
 }>()
 </script>

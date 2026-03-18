@@ -1,5 +1,6 @@
 export interface ExtensionSettings {
 	showBadge: boolean
+	desktopNotifications: boolean
 	showNotificationsIndicator: boolean
 	showToolsSidebar: boolean
 	showDependenciesSidebar: boolean
@@ -11,6 +12,7 @@ export interface ExtensionSettings {
 
 export const DEFAULTS: ExtensionSettings = {
 	showBadge: true,
+	desktopNotifications: false,
 	showNotificationsIndicator: true,
 	showToolsSidebar: true,
 	showDependenciesSidebar: true,

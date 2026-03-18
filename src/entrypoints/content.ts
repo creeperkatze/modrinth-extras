@@ -13,6 +13,7 @@ import GitHubSidebar from '../components/GitHubSidebar.vue'
 import NotificationsIndicator from '../components/NotificationsIndicator.vue'
 import QuickSearch from '../components/QuickSearch.vue'
 import ToolsSidebar from '../components/ToolsSidebar.vue'
+import { navigate } from '../helpers/page-router'
 import { DEFAULTS, type ExtensionSettings, loadSettings } from '../helpers/settings'
 
 // Gate injections until Nuxt hydration is complete. The router-bridge
@@ -312,6 +313,10 @@ export default defineContentScript({
 		}
 
 		window.addEventListener('modrinth-extras:router-ready', markHydrated, { once: true })
+
+		browser.runtime.onMessage.addListener((message) => {
+			if (message.type === 'navigate') navigate(message.path as string)
+		})
 
 		loadSettings().then((s) => {
 			settings = s

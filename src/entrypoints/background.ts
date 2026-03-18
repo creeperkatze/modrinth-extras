@@ -1,15 +1,18 @@
 import { browser } from 'wxt/browser'
 
 import { getAuthToken, usePopupFetch } from '../composables/usePopupFetch'
-import { groupNotifications, type PlatformNotification } from '../helpers/platform-notifications'
+import {
+	fetchExtraNotificationData,
+	groupNotifications,
+	type PlatformNotification,
+} from '../helpers/platform-notifications'
 
 const ALARM_NAME = 'modrinth-extras-poll'
 const POLL_INTERVAL_MINUTES = 5
 
 export default defineBackground(() => {
-	// Firefox MV2 uses browserAction; Chrome MV3 uses action.
-	const actionAPI =
-		browser.action ?? (browser as unknown as { browserAction: typeof browser.action }).browserAction
+	// Maps notification ID to the relative link so the click handler can open the right page.
+	const notificationLinks = new Map<string, string>()
 
 	async function showCachedBadge() {
 		const { showBadge = true, notifications } = await browser.storage.local.get([
@@ -21,23 +24,83 @@ export default defineBackground(() => {
 			(notifications as PlatformNotification[]).filter((n) => !n.read),
 		).length
 		console.log(`[Modrinth Extras] Restored cached badge: ${unread} unread`)
-		await actionAPI.setBadgeBackgroundColor({ color: '#1bd96a' })
-		await actionAPI.setBadgeText({ text: unread > 0 ? String(Math.min(unread, 99)) : '' })
+		await browser.action.setBadgeBackgroundColor({ color: '#1bd96a' })
+		await browser.action.setBadgeText({ text: unread > 0 ? String(Math.min(unread, 99)) : '' })
+	}
+
+	async function sendDesktopNotifications(
+		newNotifs: PlatformNotification[],
+		prevNotifs: PlatformNotification[] | null,
+	) {
+		const { desktopNotifications = false } = await browser.storage.local.get('desktopNotifications')
+		if (!desktopNotifications) return
+
+		// No prior state means this is the first run, save baseline without notifying
+		if (prevNotifs === null) {
+			console.log(
+				'[Modrinth Extras] Desktop notifications: First run, saving baseline without notifying',
+			)
+			return
+		}
+
+		const prevIds = new Set(prevNotifs.map((n) => n.id))
+		const brandNew = newNotifs.filter((n) => !n.read && !prevIds.has(n.id))
+		if (brandNew.length === 0) {
+			console.log('[Modrinth Extras] Desktop notifications: No new notifications')
+			return
+		}
+
+		console.log(
+			`[Modrinth Extras] Desktop notifications: ${brandNew.length} new, fetching extra data`,
+		)
+		await fetchExtraNotificationData(brandNew, usePopupFetch)
+
+		const grouped = groupNotifications(brandNew)
+		console.log(
+			`[Modrinth Extras] Desktop notifications: Sending ${grouped.length} notification(s) (${brandNew.length} raw, ${grouped.length} grouped)`,
+		)
+
+		for (const notif of grouped) {
+			const groupSize = (notif.grouped_notifs?.length ?? 0) + 1
+			const iconUrl =
+				notif.extra_data?.project?.icon_url ??
+				notif.extra_data?.organization?.icon_url ??
+				notif.extra_data?.user?.avatar_url ??
+				browser.runtime.getURL('/icon-128.png')
+			const title =
+				notif.type === 'project_update' && notif.extra_data?.project
+					? `${notif.extra_data.project.title} has been updated${groupSize > 1 ? ` (${groupSize} new versions)` : ''}`
+					: notif.title
+			const message = notif.text
+			console.log(
+				`[Modrinth Extras] Desktop notification: "${title}" (id: ${notif.id}, group size: ${groupSize})`,
+			)
+			notificationLinks.set(notif.id, notif.link)
+			await browser.notifications.create(notif.id, {
+				type: 'basic',
+				iconUrl,
+				title,
+				message,
+			})
+		}
 	}
 
 	async function updateBadge() {
 		try {
-			const { showBadge = true } = await browser.storage.local.get('showBadge')
+			const { showBadge = true, notifications: prevNotifs } = await browser.storage.local.get([
+				'showBadge',
+				'notifications',
+			])
 			if (!showBadge) {
 				console.log('[Modrinth Extras] Badge disabled, skipping update')
-				actionAPI?.setBadgeText({ text: '' })
+				browser.action?.setBadgeText({ text: '' })
 				return
 			}
 
 			const token = await getAuthToken()
 			if (!token) {
 				console.log('[Modrinth Extras] No auth token, clearing badge')
-				actionAPI?.setBadgeText({ text: '' })
+				browser.action?.setBadgeText({ text: '' })
 				await browser.storage.local.set({
 					userId: null,
 					notifications: null,
@@ -49,7 +112,7 @@ export default defineBackground(() => {
 			const user = (await usePopupFetch('user')) as { id?: string } | null
 			if (!user?.id) {
 				console.log('[Modrinth Extras] Could not fetch user, clearing badge')
-				actionAPI?.setBadgeText({ text: '' })
+				browser.action?.setBadgeText({ text: '' })
 				return
 			}
 			const notifs = await usePopupFetch(`user/${user.id}/notifications`)
@@ -60,8 +123,15 @@ export default defineBackground(() => {
 			console.log(
 				`[Modrinth Extras] Updated badge: ${unread} unread (${Array.isArray(notifs) ? notifs.length : 0} total)`,
 			)
-			await actionAPI.setBadgeBackgroundColor({ color: '#1bd96a' })
-			await actionAPI.setBadgeText({ text: unread > 0 ? String(Math.min(unread, 99)) : '' })
+			await browser.action.setBadgeBackgroundColor({ color: '#1bd96a' })
+			await browser.action.setBadgeText({ text: unread > 0 ? String(Math.min(unread, 99)) : '' })
+
+			if (Array.isArray(notifs)) {
+				await sendDesktopNotifications(
+					notifs as PlatformNotification[],
+					Array.isArray(prevNotifs) ? (prevNotifs as PlatformNotification[]) : null,
+				)
+			}
 
 			await browser.storage.local.set({
 				userId: user.id,
@@ -70,16 +140,34 @@ export default defineBackground(() => {
 			})
 		} catch (err) {
 			console.error('[Modrinth Extras] Background update failed:', err)
-			actionAPI?.setBadgeText({ text: '' })
+			browser.action?.setBadgeText({ text: '' })
 		}
 	}
 
 	browser.storage.onChanged.addListener((changes, area) => {
 		if (area !== 'local' || !('showBadge' in changes)) return
 		if (changes.showBadge.newValue === false) {
-			actionAPI?.setBadgeText({ text: '' })
+			browser.action?.setBadgeText({ text: '' })
 		} else {
 			updateBadge()
+		}
+	})
+
+	browser.notifications.onClicked.addListener(async (notifId) => {
+		const link = notificationLinks.get(notifId)
+		if (!link) return
+		notificationLinks.delete(notifId)
+		await browser.notifications.clear(notifId)
+		const path = link.startsWith('http') ? new URL(link).pathname : link
+		const url = `https://modrinth.com${path}`
+		const [existing] = await browser.tabs.query({ url: 'https://modrinth.com/*' })
+		if (existing?.id != null) {
+			await browser.tabs.sendMessage(existing.id, { type: 'navigate', path })
+			await browser.tabs.update(existing.id, { active: true })
+			if (existing.windowId != null)
+				await browser.windows.update(existing.windowId, { focused: true })
+		} else {
+			await browser.tabs.create({ url })
 		}
 	})
 
@@ -97,8 +185,8 @@ export default defineBackground(() => {
 		if (message.type === 'badge-count') {
 			const count = message.count as number
 			;(async () => {
-				await actionAPI.setBadgeBackgroundColor({ color: '#1bd96a' })
-				await actionAPI.setBadgeText({ text: count > 0 ? String(Math.min(count, 99)) : '' })
+				await browser.action.setBadgeBackgroundColor({ color: '#1bd96a' })
+				await browser.action.setBadgeText({ text: count > 0 ? String(Math.min(count, 99)) : '' })
 				sendResponse({ ok: true })
 			})()
 			return true

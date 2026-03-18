@@ -55,8 +55,10 @@
 					:icon="f.icon"
 					:title="f.title"
 					:description="f.description"
+					:action-label="f.actionLabel"
 					:model-value="(settings as Record<string, boolean>)[f.key]"
 					@update:model-value="updateSetting(f.key, $event)"
+					@action="f.onAction?.()"
 				/>
 			</FeatureGroup>
 		</div>
@@ -113,6 +115,7 @@ import {
 	DiscordIcon,
 	GithubIcon,
 	LoaderCircleIcon,
+	MonitorIcon,
 	SearchIcon,
 	WrenchIcon,
 } from '@modrinth/assets'
@@ -129,6 +132,8 @@ interface FeatureDef {
 	icon: Component
 	title: string
 	description: string
+	actionLabel?: string
+	onAction?: () => void
 }
 
 const GENERAL_FEATURES: FeatureDef[] = [
@@ -185,6 +190,21 @@ const EXTENSION_FEATURES: FeatureDef[] = [
 		icon: BellRingIcon,
 		title: 'Notification badge',
 		description: 'Unread count badge on the extension icon',
+	},
+	{
+		key: 'desktopNotifications',
+		icon: MonitorIcon,
+		title: 'Desktop notifications',
+		description: 'OS notification for each new unread notification',
+		actionLabel: 'Test',
+		onAction: () => {
+			browser.notifications.create({
+				type: 'basic',
+				iconUrl: browser.runtime.getURL('/icon-128.png'),
+				title: 'Test Notification',
+				message: 'This is an examples notification from Modrinth Extras!',
+			})
+		},
 	},
 ]
 
