@@ -28,25 +28,29 @@ Prefer to build from source? See [Building from source](#-building-from-source) 
 
 ## ✨ Features
 
-### Notification Indicator
+All features can be individually toggled from the extension popup.
 
-Adds a live bell icon to the Modrinth header showing your unread notification count. Click it to open a dropdown with your recent unread notifications, accept or decline team/organization invites, mark individual notifications as read, or clear them all at once.
+<img src=".github/assets/screenshots/extension.png" width="100%">
+
+### Notifications
+
+Adds a live bell icon to the Modrinth header showing your unread notification count. Click it to open a dropdown with your recent unread notifications, accept or decline organization invites, mark individual notifications as read, or clear them all at once.
 
 <img src=".github/assets/screenshots/notifications.png" width="100%">
 
-### Quick Search
+### Quick search
 
 Opens a command palette-style search modal with <kbd>Ctrl+K</kbd> or <kbd>/</kbd>. Supports faceted search with inline tags for loader, category, game version, and project type, with highlighted suggestions and pre-configured examples.
 
 <img src=".github/assets/screenshots/quicksearch.gif" width="100%">
 
-### Activity Sparkline
+### Activity sparkline
 
 Adds an animated SVG chart to project pages showing release activity over the past 60 days, giving a quick visual overview of how actively a project is maintained.
 
 <img src=".github/assets/screenshots/sparkline.png" width="100%">
 
-### Tools Sidebar
+### Tools sidebar
 
 Adds a tools card to the sidebar on project, user, organization, and collection pages with the following items:
 
@@ -58,23 +62,23 @@ On project pages, two additional developer utilities are shown:
 - **Copy download URL:** copies the direct download URL of the project's latest primary file to the clipboard.
 - **Copy packwiz:** copies the `packwiz mr add <slug>` command to the clipboard.
 
-### Dependency Sidebar
+### Dependency sidebar
 
 On project pages, a dependencies card shows the project's full dependency tree. Each dependency can be expanded up to two levels deep to inspect transitive dependencies, with lazy loading on expand.
 
 <img src=".github/assets/screenshots/sidebar1.png" width="100%">
 
-### GitHub Sidebar
+### GitHub sidebar
 
 On project pages that link to a GitHub repository, shows a sidebar card with live stats: stars, open issues, open pull requests, and forks.
 
-### Discord Sidebar
+### Discord sidebar
 
 On project pages that include a Discord invite, shows a sidebar card with the server name, description, member count, online count, and icon.
 
 <img src=".github/assets/screenshots/sidebar2.png" width="100%">
 
-### Notification Badge
+### Notification badge
 
 Shows your unread notification count as a badge on the extension icon. The background script polls for updates every 5 minutes and keeps the badge in sync even when the popup is closed.
 
