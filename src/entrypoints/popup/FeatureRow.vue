@@ -8,9 +8,9 @@
 			<div class="text-sm font-semibold text-contrast">{{ title }}</div>
 			<div class="text-xs text-secondary">{{ description }}</div>
 		</div>
-		<ButtonStyled v-if="actionLabel" size="small">
+		<ButtonStyled v-if="actionIcon" size="small">
 			<button type="button" :disabled="!modelValue" @click.stop="$emit('action')">
-				{{ actionLabel }}
+				<component :is="actionIcon" />
 			</button>
 		</ButtonStyled>
 		<button
@@ -40,7 +40,7 @@ defineProps<{
 	title: string
 	description: string
 	modelValue: boolean
-	actionLabel?: string
+	actionIcon?: Component
 }>()
 
 defineEmits<{
