@@ -82,6 +82,14 @@ On project pages that include a Discord invite, shows a sidebar card with the se
 
 Shows your unread notification count as a badge on the extension icon. The background script polls for updates every 5 minutes and keeps the badge in sync even when the popup is closed.
 
+### Desktop notifications
+
+Sends operating system notifications when new Modrinth notifications arrive, even when the browser is in the background.
+
+### CurseForge redirect
+
+When you visit a CurseForge project page, you are automatically redirected to the equivalent Modrinth project, if it exists.
+
 ## 🔒 Building from source
 
 If you don't want to trust the store release, you can build the extension yourself directly from the source code and verify it matches what's in this repository.
