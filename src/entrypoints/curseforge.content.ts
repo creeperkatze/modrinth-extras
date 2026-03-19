@@ -1,5 +1,5 @@
-import { apiFetch } from '../../helpers/apiFetch'
-import { loadSettings } from '../../helpers/settings'
+import { apiFetch } from '../helpers/apiFetch'
+import { loadSettings } from '../helpers/settings'
 
 interface ModrinthProject {
 	slug: string

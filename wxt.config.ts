@@ -20,7 +20,11 @@ export default defineConfig({
 			128: '/icon-128.png',
 		},
 		permissions: ['cookies', 'storage', 'alarms', 'notifications', 'tabs'],
-		host_permissions: ['https://modrinth.com/*', 'https://api.modrinth.com/*'],
+		host_permissions: [
+			'https://modrinth.com/*',
+			'https://api.modrinth.com/*',
+			'https://www.curseforge.com/*',
+		],
 
 		browser_specific_settings: {
 			gecko: {
