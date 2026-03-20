@@ -14,9 +14,10 @@ Install from your browser's extension store:
 > [!NOTE]
 > Store listings may currently be outdated. For the latest version, install manually from the [GitHub releases](https://github.com/creeperkatze/modrinth-extras/releases).
 
-- **[Chrome Web Store](https://chromewebstore.google.com/detail/modrinth-extras/ajmkilipadfpaefpcjfgnkejalmhdlcj)**
-- **[Firefox Add-Ons](https://addons.mozilla.org/firefox/addon/modrinth-extras/)**
-- **[Edge Add-Ons](https://microsoftedge.microsoft.com/addons/detail/modrinth-extras/jkfgnimibfpoohbmaibjdjdmfnjmbjcj)**
+
+<a href="https://chromewebstore.google.com/detail/modrinth-extras/ajmkilipadfpaefpcjfgnkejalmhdlcj" target="_blank"><img src=".github/assets/chrome.svg" width="64"></a>
+<a href="https://addons.mozilla.org/firefox/addon/modrinth-extras/" target="_blank"><img src=".github/assets/firefox.svg" width="64"></a>
+<a href="https://microsoftedge.microsoft.com/addons/detail/modrinth-extras/jkfgnimibfpoohbmaibjdjdmfnjmbjcj" target="_blank"><img src=".github/assets/edge.svg" width="64"></a>
 
 Or install manually from the latest [GitHub release](https://github.com/creeperkatze/modrinth-extras/releases):
 
