@@ -34,13 +34,13 @@ All features can be individually toggled from the extension popup.
 
 ### Notifications
 
-Adds a live bell icon to the Modrinth header showing your unread notification count. Click it to open a dropdown with your recent unread notifications, accept or decline organization invites, mark individual notifications as read, or clear them all at once.
+View, manage, and clear unread notifications right in the header without leaving the current page.
 
 <img src=".github/assets/screenshots/notifications.png" width="100%">
 
 ### Project card actions
 
-Adds action buttons to project cards on discover pages:
+Download, follow, and bookmark projects right from their project cards.
 
 - **Download:** downloads the latest primary file directly.
 - **Follow / Unfollow:** follow or unfollow the project.
@@ -49,19 +49,19 @@ Adds action buttons to project cards on discover pages:
 
 ### Quick search
 
-Opens a command palette-style search modal with <kbd>Ctrl+K</kbd> or <kbd>/</kbd>. Supports faceted search with inline tags for loader, category, game version, and project type, with highlighted suggestions and pre-configured examples.
+Command palette-style search with faceted tags for loader, version, category, and type.
 
 <img src=".github/assets/screenshots/quicksearch.gif" width="100%">
 
 ### Activity sparkline
 
-Adds an animated SVG chart to project pages showing release activity over the past 60 days, giving a quick visual overview of how actively a project is maintained.
+Release activity chart on project pages.
 
 <img src=".github/assets/screenshots/sparkline.png" width="100%">
 
 ### Tools sidebar
 
-Adds a tools card to the sidebar on project, user, organization, and collection pages with the following items:
+Generate embeds, view raw API responses, copy download URLs and packwiz commands.
 
 - **Generate embed:** opens [Modfolio](https://modfolio.creeperkatze.de) pre-loaded with the current page URL to generate an embeddable card or badge.
 - **View API response:** opens the raw Modrinth API JSON for the current page in a new tab.
@@ -73,31 +73,31 @@ On project pages, two additional developer utilities are shown:
 
 ### Dependency sidebar
 
-On project pages, a dependencies card shows the project's full dependency tree. Each dependency can be expanded up to two levels deep to inspect transitive dependencies, with lazy loading on expand.
+Collapsible dependency tree on project pages.
 
 <img src=".github/assets/screenshots/sidebar1.png" width="100%">
 
 ### GitHub sidebar
 
-On project pages that link to a GitHub repository, shows a sidebar card with live stats: stars, open issues, open pull requests, and forks.
+Stars, issues, pull requests, and forks for linked repositories.
 
 ### Discord sidebar
 
-On project pages that include a Discord invite, shows a sidebar card with the server name, description, member count, online count, and icon.
+Server name, description, member count, and online count for linked Discord servers.
 
 <img src=".github/assets/screenshots/sidebar2.png" width="100%">
 
 ### Notification badge
 
-Shows your unread notification count as a badge on the extension icon. The background script polls for updates every 5 minutes and keeps the badge in sync even when the popup is closed.
+Up-to-date unread notification count as a badge on the extension icon.
 
 ### Desktop notifications
 
-Sends operating system notifications when new Modrinth notifications arrive, even when the browser is in the background.
+Operating system notifications for your Modrinth notifications.
 
 ### CurseForge redirect
 
-When you visit a CurseForge project page, you are automatically redirected to the equivalent Modrinth project, if it exists.
+Redirect CurseForge project pages to Modrinth when available.
 
 ## 🔒 Building from source
 

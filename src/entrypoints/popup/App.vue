@@ -145,19 +145,21 @@ const GENERAL_FEATURES: FeatureDef[] = [
 		key: 'showNotificationsIndicator',
 		icon: BellIcon,
 		title: 'Notifications',
-		description: 'Bell indicator in the header with popout',
+		description:
+			'View, manage, and clear unread notifications right in the header without leaving the current page.',
 	},
 	{
 		key: 'showQuickSearch',
 		icon: SearchIcon,
 		title: 'Quick search',
-		description: 'Ctrl+K or / for a command palette style search',
+		description:
+			'Command palette-style search with faceted tags for loader, version, category, and type.',
 	},
 	{
 		key: 'showProjectCardActions',
 		icon: TagCategoryZapIcon,
 		title: 'Project card actions',
-		description: 'Download, follow, and bookmark buttons on project cards',
+		description: 'Download, follow, and bookmark projects right from their project cards.',
 	},
 ]
 
@@ -166,31 +168,33 @@ const CONTENT_PAGE_FEATURES: FeatureDef[] = [
 		key: 'showActivitySparkline',
 		icon: ChartIcon,
 		title: 'Activity sparkline',
-		description: 'Release activity chart on project pages',
+		description: 'Release activity chart on project pages.',
 	},
 	{
 		key: 'showToolsSidebar',
 		icon: WrenchIcon,
 		title: 'Tools sidebar',
-		description: 'Utility tools on project, user, and organization pages',
+		description:
+			'Generate embeds, view raw API responses, copy download URLs and packwiz commands.',
 	},
 	{
 		key: 'showDependenciesSidebar',
 		icon: GitGraphIcon,
 		title: 'Dependency sidebar',
-		description: 'Collapsible dependency tree on project pages',
+		description: 'Collapsible dependency tree on project pages.',
 	},
 	{
 		key: 'showGitHubSidebar',
 		icon: GithubIcon,
 		title: 'GitHub sidebar',
-		description: 'GitHub statistics in the project sidebar',
+		description: 'Stars, issues, pull requests, and forks for linked repositories.',
 	},
 	{
 		key: 'showDiscordSidebar',
 		icon: DiscordIcon,
 		title: 'Discord sidebar',
-		description: 'Discord server info in the project sidebar',
+		description:
+			'Server name, description, member count, and online count for linked Discord servers',
 	},
 ]
 
@@ -199,13 +203,13 @@ const EXTENSION_FEATURES: FeatureDef[] = [
 		key: 'showBadge',
 		icon: BellRingIcon,
 		title: 'Notification badge',
-		description: 'Unread notification count as a badge on the extension icon',
+		description: 'Up-to-date unread notification count as a badge on the extension icon.',
 	},
 	{
 		key: 'desktopNotifications',
 		icon: MonitorIcon,
 		title: 'Desktop notifications',
-		description: 'Operating system notifications for notifications from Modrinth',
+		description: 'Operating system notifications for your Modrinth notifications.',
 		actionIcon: PlayIcon,
 		onAction: () => {
 			browser.notifications.create({
@@ -220,7 +224,7 @@ const EXTENSION_FEATURES: FeatureDef[] = [
 		key: 'curseforgeRedirect',
 		icon: CurseForgeIcon,
 		title: 'CurseForge redirect',
-		description: 'Redirect CurseForge project pages to Modrinth when a match is found',
+		description: 'Redirect CurseForge project pages to Modrinth when available.',
 	},
 	{
 		key: 'telemetryEnabled',
