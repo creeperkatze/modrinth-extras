@@ -11,6 +11,7 @@ const queue: Array<{ event: string; properties?: Record<string, unknown> }> = []
 export function setTelemetryEnabled(value: boolean): void {
 	enabled = value
 	if (!value) posthog?.opt_out_capturing()
+	else posthog?.opt_in_capturing()
 }
 
 async function getSharedDistinctId(): Promise<string> {
@@ -29,6 +30,18 @@ export async function initTelemetry(): Promise<void> {
 	if (stored.telemetryEnabled === false) {
 		enabled = false
 		return
+	}
+
+	// On Firefox, respect the built-in data collection consent experience.
+	// If the browser supports data_collection permissions (Firefox 130+), telemetry
+	// requires the user to have granted the 'technicalAndInteraction' permission.
+	const perms = await browser.permissions.getAll()
+	if ('data_collection' in perms) {
+		const granted = (perms as unknown as { data_collection: string[] }).data_collection
+		if (!granted.includes('technicalAndInteraction')) {
+			enabled = false
+			return
+		}
 	}
 	const distinctId = await getSharedDistinctId()
 	const userAgent = navigator.userAgent

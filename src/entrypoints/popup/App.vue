@@ -56,7 +56,13 @@
 					:title="f.title"
 					:description="f.description"
 					:action-icon="f.actionIcon"
-					:model-value="(settings as Record<string, boolean>)[f.key]"
+					:model-value="
+						(typeof f.disabled === 'function' ? f.disabled() : f.disabled)
+							? false
+							: (settings as Record<string, boolean>)[f.key]
+					"
+					:disabled="typeof f.disabled === 'function' ? f.disabled() : f.disabled"
+					:disabled-tooltip="f.disabledTooltip"
 					@update:model-value="updateSetting(f.key, $event)"
 					@action="f.onAction?.()"
 				/>
@@ -138,6 +144,8 @@ interface FeatureDef {
 	description: string
 	actionIcon?: Component
 	onAction?: () => void
+	disabled?: boolean | (() => boolean)
+	disabledTooltip?: string
 }
 
 const GENERAL_FEATURES: FeatureDef[] = [
@@ -232,6 +240,8 @@ const EXTENSION_FEATURES: FeatureDef[] = [
 		title: 'Telemetry',
 		description:
 			'Help improve the extension by anonymously sharing statistics like the extension version and which features are enabled. No Modrinth data, activity, or personal information is ever collected.',
+		disabled: () => firefoxControlsTelemetry.value,
+		disabledTooltip: 'Controlled by Firefox data collection settings',
 	},
 ]
 
@@ -253,12 +263,19 @@ const version = browser.runtime.getManifest().version
 const latestVersion = ref<string | null>(null)
 const isLatest = ref(false)
 const checking = ref(true)
+const firefoxControlsTelemetry = ref(false)
 
 const settings = reactive({ ...DEFAULTS })
 
 onMounted(async () => {
 	const loaded = await loadSettings()
 	Object.assign(settings, loaded)
+
+	const perms = await browser.permissions.getAll()
+	if ('data_collection' in perms) {
+		const granted = (perms as unknown as { data_collection: string[] }).data_collection
+		firefoxControlsTelemetry.value = !granted.includes('technicalAndInteraction')
+	}
 
 	if (loaded.desktopNotifications) {
 		const granted = await browser.permissions.contains({ permissions: ['notifications'] })

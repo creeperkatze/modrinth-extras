@@ -32,8 +32,8 @@ export default defineConfig({
 				id: 'contact@creeperkatze.de',
 				// @ts-expect-error -- data_collection_permissions is a Firefox-specific field not yet in WXT types
 				data_collection_permissions: {
-					required: ['technicalAndInteraction'],
-					optional: [],
+					required: ['none'],
+					optional: ['technicalAndInteraction'],
 				},
 			},
 		},
