@@ -8,7 +8,7 @@
 			<div class="text-sm font-semibold text-contrast">{{ title }}</div>
 			<div class="text-xs text-secondary">{{ description }}</div>
 		</div>
-		<ButtonStyled v-if="actionIcon" size="small">
+		<ButtonStyled v-if="actionIcon" size="small" type="transparent">
 			<button type="button" :disabled="!modelValue" @click.stop="$emit('action')">
 				<component :is="actionIcon" />
 			</button>
