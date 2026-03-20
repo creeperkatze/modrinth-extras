@@ -270,7 +270,7 @@ onMounted(async () => {
 
 	try {
 		const CACHE_KEY = 'updateCheckCache'
-		const CACHE_TTL = 60 * 60 * 1000 // 1 hour
+		const CACHE_TTL = 10 * 60 * 1000 // 10 minutes
 
 		const cached = await browser.storage.local.get(CACHE_KEY)
 		const entry = cached[CACHE_KEY] as { tag: string; ts: number } | undefined
