@@ -231,10 +231,18 @@ const EXTENSION_FEATURES: FeatureDef[] = [
 	},
 ]
 
-function updateSetting(key: string, value: boolean) {
+async function updateSetting(key: string, value: boolean) {
 	;(settings as Record<string, boolean>)[key] = value
 	browser.storage.local.set({ [key]: value })
 	if (key === 'telemetryEnabled') setTelemetryEnabled(value)
+
+	if (key === 'desktopNotifications' && value) {
+		const granted = await browser.permissions.request({ permissions: ['notifications'] })
+		if (!granted) {
+			;(settings as Record<string, boolean>)[key] = false
+			browser.storage.local.set({ [key]: false })
+		}
+	}
 }
 
 const version = browser.runtime.getManifest().version
@@ -247,6 +255,14 @@ const settings = reactive({ ...DEFAULTS })
 onMounted(async () => {
 	const loaded = await loadSettings()
 	Object.assign(settings, loaded)
+
+	if (loaded.desktopNotifications) {
+		const granted = await browser.permissions.contains({ permissions: ['notifications'] })
+		if (!granted) {
+			settings.desktopNotifications = false
+			browser.storage.local.set({ desktopNotifications: false })
+		}
+	}
 
 	try {
 		const CACHE_KEY = 'updateCheckCache'

@@ -24,7 +24,12 @@ export default defineBackground(() => {
 		}
 	})
 
-	browser.notifications.onClicked.addListener(handleNotificationClick)
+	browser.notifications?.onClicked.addListener(handleNotificationClick)
+	browser.permissions.onAdded.addListener((permissions) => {
+		if (permissions.permissions?.includes('notifications')) {
+			browser.notifications.onClicked.addListener(handleNotificationClick)
+		}
+	})
 
 	browser.alarms.create(ALARM_NAME, { periodInMinutes: POLL_INTERVAL_MINUTES })
 
