@@ -38,6 +38,12 @@ View, manage, and clear unread notifications right in the header without leaving
 
 <img src=".github/assets/screenshots/notifications.png" width="100%">
 
+### Quick search
+
+Command palette-style search with faceted tags for loader, version, category, and type.
+
+<img src=".github/assets/screenshots/quicksearch.gif" width="100%">
+
 ### Project card actions
 
 Download, follow, and bookmark projects right from their project cards.
@@ -46,12 +52,6 @@ Download, follow, and bookmark projects right from their project cards.
 - **Follow / Unfollow:** follow or unfollow the project.
 - **Bookmark:** save or remove the project from your personal bookmarks.
 - **Copy link:** copy the project's link to your clipboard.
-
-### Quick search
-
-Command palette-style search with faceted tags for loader, version, category, and type.
-
-<img src=".github/assets/screenshots/quicksearch.gif" width="100%">
 
 ### Activity sparkline
 
