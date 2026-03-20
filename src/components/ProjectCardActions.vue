@@ -13,7 +13,7 @@
 			@click.stop="handleFollow"
 		>
 			<LoaderCircleIcon v-if="followLoading" class="animate-spin" />
-			<HeartIcon v-else />
+			<HeartIcon v-else :fill="isFollowed ? 'currentColor' : 'none'" />
 		</button>
 	</ButtonStyled>
 	<ButtonStyled circular :color="isSaved ? 'brand' : undefined">
