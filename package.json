@@ -18,17 +18,18 @@
         "release:major": "pnpm version major && git push && git push --tags"
     },
     "dependencies": {
-        "@modrinth/api-client": "github:modrinth/code#path:packages/api-client",
-        "@modrinth/assets": "github:modrinth/code#path:packages/assets",
-        "@modrinth/ui": "github:modrinth/code#path:packages/ui",
-        "@modrinth/utils": "github:modrinth/code#path:packages/utils",
+        "@modrinth/api-client": "workspace:*",
+        "@modrinth/assets": "workspace:*",
+        "@modrinth/ui": "workspace:*",
+        "@modrinth/utils": "workspace:*",
         "floating-vue": "^5.2.2",
         "posthog-js": "^1.360.2",
         "vue": "^3.5.30"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
-        "@modrinth/tooling-config": "github:modrinth/code#path:packages/tooling-config",
+        "@modrinth/tooling-config": "workspace:*",
+        "@tailwindcss/container-queries": "^0.1.1",
         "@tailwindcss/postcss": "^4.2.1",
         "@types/chrome": "^0.1.37",
         "@wxt-dev/module-vue": "^1.0.3",
@@ -47,54 +48,11 @@
     },
     "pnpm": {
         "overrides": {
-            "@modrinth/ui": "github:modrinth/code#path:packages/ui",
-            "@modrinth/api-client": "github:modrinth/code#path:packages/api-client",
-            "@modrinth/utils": "github:modrinth/code#path:packages/utils",
-            "@modrinth/assets": "github:modrinth/code#path:packages/assets",
-            "@modrinth/tooling-config": "github:modrinth/code#path:packages/tooling-config"
-        },
-        "packageExtensions": {
-            "@modrinth/ui@*": {
-                "dependencies": {
-                    "vue-router": "^4",
-                    "@vueuse/core": "^11",
-                    "@stripe/stripe-js": "^7",
-                    "sass-embedded": "*",
-                    "@tailwindcss/container-queries": "*"
-                }
-            },
-            "@modrinth/tooling-config@*": {
-                "dependencies": {
-                    "tailwindcss": "^3",
-                    "autoprefixer": "^10"
-                }
-            },
-            "@modrinth/assets@*": {
-                "dependencies": {
-                    "vue": "^3"
-                }
-            },
-            "@modrinth/api-client@*": {
-                "dependencies": {
-                    "mitt": "^3",
-                    "ofetch": "^1"
-                }
-            },
-            "@modrinth/utils@*": {
-                "dependencies": {
-                    "vue": "^3",
-                    "@codemirror/commands": "^6",
-                    "@codemirror/lang-markdown": "^6",
-                    "@codemirror/language": "^6",
-                    "@codemirror/state": "^6",
-                    "@codemirror/view": "^6",
-                    "highlight.js": "^11",
-                    "markdown-it": "^14",
-                    "three": "^0.172.0",
-                    "dayjs": "^1",
-                    "xss": "^1"
-                }
-            }
+            "@modrinth/ui": "workspace:*",
+            "@modrinth/api-client": "workspace:*",
+            "@modrinth/utils": "workspace:*",
+            "@modrinth/assets": "workspace:*",
+            "@modrinth/tooling-config": "workspace:*"
         }
     }
 }

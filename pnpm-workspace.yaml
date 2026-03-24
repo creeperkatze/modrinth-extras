@@ -1,0 +1,7 @@
+packages:
+  - 'modrinth/packages/ui'
+  - 'modrinth/packages/assets'
+  - 'modrinth/packages/api-client'
+  - 'modrinth/packages/utils'
+  - 'modrinth/packages/tooling-config'
+  - 'modrinth/packages/blog'

@@ -1,0 +1,3 @@
+[submodule "modrinth"]
+	path = modrinth
+	url = https://github.com/modrinth/code
