@@ -46,11 +46,11 @@ Command palette-style search with faceted tags for loader, version, category, an
 
 ### Project card actions
 
-Download, follow, and bookmark projects right from their project cards.
+Download, follow, and save projects right from their project cards.
 
 - **Download:** downloads the latest primary file directly.
 - **Follow / Unfollow:** follow or unfollow the project.
-- **Bookmark:** save or remove the project from your personal bookmarks.
+- **Save:** save or remove the project from your collections.
 - **Copy link:** copy the project's link to your clipboard.
 
 ### Activity sparkline

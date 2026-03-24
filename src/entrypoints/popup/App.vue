@@ -205,7 +205,7 @@ const GENERAL_FEATURES: FeatureDef[] = [
 		key: 'projectCardActions',
 		icon: TagCategoryZapIcon,
 		title: 'Project card actions',
-		description: 'Download, follow, and bookmark projects right from their project cards.',
+		description: 'Download, follow, and save projects right from their project cards.',
 		options: [
 			{
 				key: 'modLoader',
