@@ -6,7 +6,7 @@ import { type App, createApp, h, ref } from 'vue'
 import { browser } from 'wxt/browser'
 
 import ActivitySparkline from '../components/ActivitySparkline.vue'
-import DependencyTree from '../components/DependencyTree.vue'
+import DependenciesSidebar from '../components/DependenciesSidebar.vue'
 import DiscordSidebar from '../components/DiscordSidebar.vue'
 import FooterBadge from '../components/FooterBadge.vue'
 import GitHubSidebar from '../components/GitHubSidebar.vue'
@@ -302,7 +302,7 @@ export default defineContentScript({
 				const slug = window.location.pathname.match(
 					/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/([^/]+)/,
 				)?.[2]
-				return createApp(h(DependencyTree, { projectSlug: slug ?? '' }))
+				return createApp(h(DependenciesSidebar, { projectSlug: slug ?? '' }))
 			},
 		})
 
