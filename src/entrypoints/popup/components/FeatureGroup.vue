@@ -1,6 +1,6 @@
 <template>
-	<div class="flex flex-col gap-1 px-2 py-3">
-		<p class="m-0 px-2 py-1 text-xs font-bold uppercase tracking-wide text-secondary">
+	<div class="flex flex-col gap-1 px-3 pb-2 first:pt-2">
+		<p class="m-0 p-1 text-xs font-bold uppercase tracking-wide text-secondary">
 			<slot name="label">{{ label }}</slot>
 		</p>
 		<slot />

@@ -19,7 +19,10 @@
 
 		<HorizontalRule class="shrink-0" />
 
-		<div v-if="settingsLoaded" class="min-h-0 flex-1 overflow-y-auto">
+		<ScrollablePanel
+			v-if="settingsLoaded"
+			class="min-h-0 flex-1 [&>.scrollable-pane-wrapper]:h-full [&__.scrollable-pane]:max-h-none [&__.scrollable-pane]:!gap-0 [&__.wrapper-wrapper]:overflow-visible"
+		>
 			<FeatureGroup label="General">
 				<FeatureRow
 					v-for="f in GENERAL_FEATURES"
@@ -79,7 +82,7 @@
 					@action="f.onAction?.()"
 				/>
 			</FeatureGroup>
-		</div>
+		</ScrollablePanel>
 
 		<HorizontalRule class="shrink-0" />
 
@@ -140,7 +143,7 @@ import {
 	TagCategoryZapIcon,
 	WrenchIcon,
 } from '@modrinth/assets'
-import { ButtonStyled, HorizontalRule } from '@modrinth/ui'
+import { ButtonStyled, HorizontalRule, ScrollablePanel } from '@modrinth/ui'
 import { type Component, onMounted, reactive, ref } from 'vue'
 import { browser } from 'wxt/browser'
 

@@ -1,7 +1,7 @@
 <template>
 	<div class="text-sm flex items-center gap-2" @click.stop>
-		<span class="text-secondary shrink-0">{{ label }}</span>
-		<div class="dropdown-wrapper min-w-0 flex-1">
+		<span class="text-secondary flex-1">{{ label }}</span>
+		<div class="dropdown-wrapper w-48 shrink-0">
 			<DropdownSelect
 				:options="allItems"
 				:name="`field-${label}`"
