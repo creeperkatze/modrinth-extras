@@ -53,6 +53,8 @@ Download, follow, and save projects right from their project cards.
 - **Save:** save or remove the project from your collections.
 - **Copy link:** copy the project's link to your clipboard.
 
+<img src=".github/assets/screenshots/project_card_actions.png" width="100%">
+
 ### Activity sparkline
 
 Release activity chart on project pages.
@@ -75,8 +77,6 @@ On project pages, two additional developer utilities are shown:
 
 Collapsible dependency tree on project pages.
 
-<img src=".github/assets/screenshots/sidebar1.png" width="100%">
-
 ### GitHub sidebar
 
 Stars, issues, pull requests, and forks for linked repositories.
@@ -85,7 +85,7 @@ Stars, issues, pull requests, and forks for linked repositories.
 
 Server name, description, member count, and online count for linked Discord servers.
 
-<img src=".github/assets/screenshots/sidebar2.png" width="100%">
+<img src=".github/assets/screenshots/sidebar.png" width="100%">
 
 ### Notification badge
 
