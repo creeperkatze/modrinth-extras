@@ -1,5 +1,5 @@
 name: 💡 Feature request
-about: Suggest a feature you would like to see in the extension
+description: Suggest a feature you would like to see in the extension
 type: 'feature'
 body:
   - type: textarea
