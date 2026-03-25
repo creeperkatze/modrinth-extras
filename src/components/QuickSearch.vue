@@ -68,8 +68,17 @@
 				</ul>
 
 				<div v-else-if="!query && !tags.length">
-					<p class="px-2 pt-1 py-0 text-xs font-bold uppercase tracking-wide text-secondary">
-						{{ recentSearches.length ? 'Recent' : 'Examples' }}
+					<p
+						class="flex items-center justify-between px-2 pt-1 py-0 text-xs font-bold uppercase tracking-wide text-secondary"
+					>
+						<span>{{ recentSearches.length ? 'Recent' : 'Examples' }}</span>
+						<button
+							v-if="recentSearches.length"
+							class="flex cursor-pointer items-center border-0 bg-transparent p-0 text-secondary hover:text-primary normal-case tracking-normal"
+							@click="clearRecentSearches"
+						>
+							<TrashIcon class="size-3.5" />
+						</button>
 					</p>
 					<div
 						v-for="(ex, i) in recentSearches.length ? recentSearches : EXAMPLES"
@@ -123,6 +132,7 @@ import {
 	ScaleIcon,
 	SearchIcon,
 	TagIcon,
+	TrashIcon,
 	XIcon,
 } from '@modrinth/assets'
 import { type Component, computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
@@ -190,6 +200,15 @@ async function loadRecentSearches() {
 	} catch (err) {
 		recentSearches.value = []
 		console.error('[Modrinth Extras] Failed to load recent searches:', err)
+	}
+}
+
+async function clearRecentSearches() {
+	recentSearches.value = []
+	try {
+		await browser.storage.local.remove('recentSearches')
+	} catch (err) {
+		console.error('[Modrinth Extras] Failed to clear recent searches:', err)
 	}
 }
 
