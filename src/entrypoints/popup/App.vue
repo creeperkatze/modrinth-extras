@@ -177,7 +177,7 @@ interface FeatureDef {
 }
 
 async function fetchLoadersByType(type: string): Promise<SelectItem[]> {
-	const data = (await apiFetch('tag/loader')) as {
+	const data = (await apiFetch('tag/loader', { apiVersion: 3 })) as {
 		name: string
 		supported_project_types: string[]
 	}[]

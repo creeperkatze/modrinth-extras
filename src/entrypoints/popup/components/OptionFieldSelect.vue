@@ -91,4 +91,9 @@ onMounted(async () => {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
+.option-field :deep(.option) {
+	padding: var(--gap-sm) var(--gap-md);
+	font-size: var(--font-size-sm);
+}
 </style>
