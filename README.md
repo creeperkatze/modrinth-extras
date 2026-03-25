@@ -40,7 +40,7 @@ View, manage, and clear unread notifications right in the header without leaving
 
 ### Quick search
 
-Command palette-style search with faceted tags for loader, version, category, and type.
+Ctrl+K or / for a command palette style search with faceted tags for loaders, versions, categories, and types.
 
 <img src=".github/assets/screenshots/quicksearch.gif" width="100%">
 

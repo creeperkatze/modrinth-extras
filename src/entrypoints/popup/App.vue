@@ -199,7 +199,7 @@ const GENERAL_FEATURES: FeatureDef[] = [
 		icon: SearchIcon,
 		title: 'Quick search',
 		description:
-			'Command palette-style search with faceted tags for loader, version, category, and type.',
+			'Ctrl+K or / for a command palette style search with faceted tags for loaders, versions, categories, and types.',
 	},
 	{
 		key: 'projectCardActions',

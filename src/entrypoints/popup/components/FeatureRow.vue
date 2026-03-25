@@ -41,10 +41,8 @@
 			</button>
 		</div>
 		<Collapsible :collapsed="!(modelValue && hasOptionsSlot)" overflow-visible>
-			<div class="px-2 pb-2">
-				<div class="flex flex-col gap-2 py-1 pl-9">
-					<slot />
-				</div>
+			<div class="flex flex-col gap-2 p-2 pl-11">
+				<slot />
 			</div>
 		</Collapsible>
 	</div>
