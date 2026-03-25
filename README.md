@@ -107,7 +107,7 @@ If you don't want to trust the store release, you can build the extension yourse
 
 ```bash
 # Clone and check out the version you want to verify (e.g. v1.0.11)
-git clone https://github.com/creeperkatze/modrinth-extras.git
+git clone --recurse-submodules https://github.com/creeperkatze/modrinth-extras.git
 cd modrinth-extras
 git checkout v1.0.11
 
@@ -127,7 +127,7 @@ The resulting zips in `.output/` are identical to those attached to the [GitHub 
 ### Setup
 
 ```bash
-git clone https://github.com/creeperkatze/modrinth-extras.git
+git clone --recurse-submodules https://github.com/creeperkatze/modrinth-extras.git
 cd modrinth-extras
 
 pnpm install
