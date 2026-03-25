@@ -114,18 +114,31 @@
 </template>
 
 <script setup lang="ts">
-import { CpuIcon, HashIcon, PackageIcon, SearchIcon, TagIcon, XIcon } from '@modrinth/assets'
+import {
+	ArrowUpDownIcon,
+	CpuIcon,
+	HashIcon,
+	MonitorIcon,
+	PackageIcon,
+	ScaleIcon,
+	SearchIcon,
+	TagIcon,
+	XIcon,
+} from '@modrinth/assets'
 import { type Component, computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
 import { apiFetch } from '../helpers/apiFetch'
 import { navigate } from '../helpers/page-router'
 
-const FACET_ICONS: Record<string, Component> = {
+const FACET_ICONS = {
 	loader: CpuIcon,
 	category: TagIcon,
 	version: HashIcon,
 	type: PackageIcon,
-}
+	sort: ArrowUpDownIcon,
+	license: ScaleIcon,
+	env: MonitorIcon,
+} as Record<string, Component>
 
 interface Tag {
 	facet: string
@@ -134,7 +147,7 @@ interface Tag {
 
 interface Suggestion {
 	id: string
-	icon: Component
+	icon: unknown
 	label: string
 	facet?: string
 	value?: string
@@ -150,6 +163,20 @@ interface Example {
 }
 
 const TYPES = ['mod', 'plugin', 'datapack', 'shader', 'resourcepack', 'modpack', 'server']
+const SORT_OPTIONS = [
+	{ name: 'downloads', display: 'Downloads' },
+	{ name: 'follows', display: 'Followers' },
+	{ name: 'newest', display: 'Date published' },
+	{ name: 'updated', display: 'Date updated' },
+]
+const SERVER_SORT_OPTIONS = [
+	{ name: 'minecraft_java_server.verified_plays_2w', display: 'Verified Plays' },
+	{ name: 'minecraft_java_server.ping.data.players_online', display: 'Players' },
+	{ name: 'follows', display: 'Followers' },
+	{ name: 'date_created', display: 'Date published' },
+	{ name: 'date_modified', display: 'Date updated' },
+]
+const ENV_OPTIONS = ['client', 'server']
 
 const loaders = ref<string[]>([])
 const categories = ref<string[]>([])
@@ -418,6 +445,51 @@ const suggestions = computed<Suggestion[]>(() => {
 			})
 		}
 
+		if (!isServerMode.value && !hasFacet('license') && 'open source'.includes(q)) {
+			results.push({
+				id: 'license:open-source',
+				icon: ScaleIcon,
+				label: 'open source',
+				facet: 'license',
+				value: 'open-source',
+				action: 'add-tag',
+				...matchPos('open source', q),
+			})
+		}
+
+		if (!isServerMode.value) {
+			for (const e of ENV_OPTIONS) {
+				if (e.includes(q) && !hasTag('env', e)) {
+					results.push({
+						id: `env:${e}`,
+						icon: MonitorIcon,
+						label: e,
+						facet: 'env',
+						value: e,
+						action: 'add-tag',
+						...matchPos(e, q),
+					})
+				}
+			}
+		}
+
+		if (!hasFacet('sort')) {
+			const sortOpts = isServerMode.value ? SERVER_SORT_OPTIONS : SORT_OPTIONS
+			for (const s of sortOpts) {
+				if (s.display.toLowerCase().includes(q)) {
+					results.push({
+						id: `sort:${s.name}`,
+						icon: ArrowUpDownIcon,
+						label: s.display,
+						facet: 'sort',
+						value: s.display,
+						action: 'add-tag',
+						...matchPos(s.display, q),
+					})
+				}
+			}
+		}
+
 		results.push({ id: 'search', icon: SearchIcon, label: query.value, action: 'search' })
 	}
 
@@ -453,6 +525,7 @@ function applyExample(ex: Example) {
 
 function selectSuggestion(s: Suggestion) {
 	if (s.action === 'add-tag' && s.facet && s.value) {
+		if (s.facet === 'sort') tags.value = tags.value.filter((t) => t.facet !== 'sort')
 		tags.value.push({ facet: s.facet, value: s.value })
 		query.value = ''
 		nextTick(() => inputEl.value?.focus())
@@ -482,6 +555,15 @@ function executeSearch() {
 		for (const t of categoryTags)
 			params.append(gCategories.value.has(t.value) ? 'g' : 'f', `categories:${t.value}`)
 		for (const t of versionTags) params.append('v', t.value)
+		if (tags.value.some((t) => t.facet === 'license')) params.set('l', 'true')
+		for (const t of tags.value.filter((t) => t.facet === 'env')) params.append('e', t.value)
+	}
+
+	const sortTag = tags.value.find((t) => t.facet === 'sort')
+	if (sortTag) {
+		const allSortOpts = [...SORT_OPTIONS, ...SERVER_SORT_OPTIONS]
+		const apiName = allSortOpts.find((s) => s.display === sortTag.value)?.name ?? sortTag.value
+		params.set(isServerMode.value ? 'ss' : 's', apiName)
 	}
 
 	const qs = params.toString().replaceAll('%3A', ':')
