@@ -23,8 +23,8 @@
         "@modrinth/ui": "workspace:*",
         "@modrinth/utils": "workspace:*",
         "floating-vue": "^5.2.2",
-        "posthog-js": "^1.363.4",
-        "vue": "^3.5.30"
+        "posthog-js": "^1.363.5",
+        "vue": "^3.5.31"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
