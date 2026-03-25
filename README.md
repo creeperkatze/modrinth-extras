@@ -1,6 +1,6 @@
 # <img src=".github/assets/logo.png" alt="Modrinth Extras" height="100">
 
-A browser extension adding unofficial extra features to the [Modrinth](https://modrinth.com) website.
+A browser extension that enhances Modrinth on the website and beyond.
 
 ![GitHub Branch Check Runs](https://img.shields.io/github/check-runs/creeperkatze/modrinth-extras/main?labelColor=0d143c)
 ![GitHub Issues](https://img.shields.io/github/issues/creeperkatze/modrinth-extras?labelColor=0d143c)
