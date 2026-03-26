@@ -22,6 +22,7 @@ import { DEFAULTS, type ExtensionSettings, getSettings } from '../helpers/settin
 // (MAIN world) dispatches "modrinth-extras:router-ready" once it hooks
 // into the Nuxt router, which only becomes available after hydration.
 let hydrated = false
+let navigating = false
 
 interface InjectionConfig {
 	id: string
@@ -73,7 +74,7 @@ function createInjection(config: InjectionConfig) {
 	}
 
 	function schedule() {
-		if (!hydrated) return
+		if (!hydrated || navigating) return
 		inject()
 	}
 
@@ -191,7 +192,7 @@ function attachCardActions(card: HTMLElement): HTMLElement | null {
 function findSidebarParent(): HTMLElement | null {
 	const path = window.location.pathname
 
-	if (/^\/(mod|plugin|datapack|shader|resourcepack|modpack|server)\/[^/]+\/?$/.test(path)) {
+	if (/^\/(mod|plugin|datapack|shader|resourcepack|modpack|server)\/[^/?#]+/.test(path)) {
 		for (const card of document.querySelectorAll<HTMLElement>(
 			'.card.flex-card.experimental-styles-within',
 		)) {
@@ -288,21 +289,22 @@ export default defineContentScript({
 			},
 		})
 
+		const PROJECT_DEP_PATTERN =
+			/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/([^/?#]+)(?:\/version\/([^/?#]+))?/
+
 		const dependencySidebar = createInjection({
 			id: 'modrinth-extras-dependency-sidebar',
 			isEnabled: () => settings.dependenciesSidebar.enabled,
 			settingsKeys: ['dependenciesSidebar'],
 			persistent: false,
 			attach(container) {
-				const path = window.location.pathname
-				if (!/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/[^/]+\/?$/.test(path))
-					return false
+				if (!PROJECT_DEP_PATTERN.test(window.location.pathname)) return false
 				return attachToSidebar(container)
 			},
 			createApp() {
-				const slug = window.location.pathname.match(
-					/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/([^/]+)/,
-				)?.[2]
+				const match = window.location.pathname.match(PROJECT_DEP_PATTERN)
+				const slug = match?.[2] ?? ''
+				const versionNumber = match?.[3]
 				const app = createApp({
 					setup() {
 						provideI18n({
@@ -311,7 +313,7 @@ export default defineContentScript({
 							setLocale: () => {},
 						})
 					},
-					render: () => h(DependenciesSidebar, { projectSlug: slug ?? '' }),
+					render: () => h(DependenciesSidebar, { projectSlug: slug, versionNumber }),
 				})
 				app.use(FloatingVue)
 				return app
@@ -325,7 +327,7 @@ export default defineContentScript({
 			persistent: false,
 			attach(container) {
 				const path = window.location.pathname
-				if (!/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/[^/]+\/?$/.test(path))
+				if (!/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/[^/?#]+/.test(path))
 					return false
 				const header = document.querySelector('.normal-page__header')
 				if (!header) return false
@@ -471,12 +473,14 @@ export default defineContentScript({
 		})
 
 		window.addEventListener('modrinth-extras:before-navigate', () => {
+			navigating = true
 			for (const inj of injections) {
 				if (!inj.config.persistent) inj.unmount()
 			}
 		})
 
 		window.addEventListener('modrinth-extras:after-navigate', () => {
+			navigating = false
 			for (const inj of injections) inj.schedule()
 		})
 

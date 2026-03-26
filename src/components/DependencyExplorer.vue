@@ -75,7 +75,7 @@
 						:key="node.id"
 						class="mre-node-group"
 						:transform="`translate(${node.x},${node.y})`"
-						:style="{ cursor: draggingNode?.id === node.id ? 'grabbing' : 'pointer' }"
+						:style="nodeGroupStyle(node)"
 						@mousedown.stop="onNodeMouseDown($event, node)"
 						@click.stop="onNodeClick(node)"
 					>
@@ -263,6 +263,7 @@ import { apiFetch } from '../helpers/apiFetch'
 import {
 	type EnrichedDep,
 	fetchProjectDependencies,
+	fetchVersionDependencies,
 	type ProjectInfo,
 } from '../helpers/dependencies'
 import { navigate } from '../helpers/page-router'
@@ -304,7 +305,7 @@ const LEGEND = [
 	{ type: 'embedded', color: '#60a5fa', label: 'Embedded', dashed: false },
 ]
 
-const props = defineProps<{ projectSlug: string }>()
+const props = defineProps<{ projectSlug: string; versionNumber?: string }>()
 
 const modal = useTemplateRef<InstanceType<typeof NewModal>>('modal')
 const svgRef = ref<SVGSVGElement | null>(null)
@@ -336,6 +337,10 @@ function nodeR(node: GraphNode): number {
 	return node.isRoot ? 28 : 22
 }
 
+function nodeGroupStyle(node: GraphNode): Record<string, string> {
+	return { cursor: draggingNode?.id === node.id ? 'grabbing' : 'pointer' }
+}
+
 function escId(id: string): string {
 	return id.replace(/[^a-zA-Z0-9]/g, '_')
 }
@@ -363,7 +368,7 @@ function startSimulation() {
 			'link',
 			forceLink<GraphNode, D3Link>(getD3Links())
 				.id((n) => n.id)
-				.distance(100)
+				.distance(10)
 				.strength(0.25),
 		)
 		.force(
@@ -373,7 +378,8 @@ function startSimulation() {
 				.strength(0.9),
 		)
 		.force('center', forceCenter(0, 0).strength(0.02))
-		.alphaDecay(0.015)
+		.alphaDecay(0.04)
+		.velocityDecay(0.8)
 		.on('tick', () => {
 			renderVersion.value++
 		})
@@ -385,11 +391,12 @@ function startSimulation() {
 		})
 }
 
-function kickSimulation() {
+function kickSimulation(hasNewNodes = true) {
 	if (!simulation) return
 	simulation.nodes(nodes.value)
 	simulation.force<ForceLink<GraphNode, D3Link>>('link')?.links(getD3Links())
-	simulation.alpha(Math.max(simulation.alpha(), 0.4)).restart()
+	const kickAlpha = hasNewNodes ? 0.4 : 0.08
+	simulation.alpha(Math.max(simulation.alpha(), kickAlpha)).restart()
 }
 
 function zoomToFit(padding = 80) {
@@ -425,19 +432,38 @@ onUnmounted(() => {
 
 // Graph building
 
-function addDepsToGraph(sourceId: string, deps: EnrichedDep[], depth: number) {
+function addDepsToGraph(
+	sourceId: string,
+	sourceProjectId: string,
+	deps: EnrichedDep[],
+	depth: number,
+): boolean {
 	const existingIds = new Set(nodes.value.map((n) => n.id))
 	const source = nodes.value.find((n) => n.id === sourceId)
 	const sx = source?.x ?? 0
 	const sy = source?.y ?? 0
 
-	const newDeps = deps.filter((d) => !existingIds.has(d.project_id))
-	newDeps.forEach((dep, i) => {
-		const angle = (i / Math.max(newDeps.length, 1)) * 2 * Math.PI
+	// Assign each dep its node ID: self-deps get a fully opaque unique ID so d3 never
+	// deduplicates them, while regular deps use their actual project ID.
+	const withIds = deps.map((d, i) => ({
+		dep: d,
+		nodeId:
+			d.project_id === sourceProjectId
+				? `__selfdep__${Date.now().toString(36)}${i.toString(36)}${Math.random().toString(36).slice(2)}`
+				: d.project_id,
+	}))
+
+	// Self-deps always get a new node; regular deps only if not already in the graph
+	const toCreate = withIds.filter(
+		({ dep, nodeId }) => dep.project_id === sourceProjectId || !existingIds.has(nodeId),
+	)
+
+	toCreate.forEach(({ dep, nodeId }, i) => {
+		const angle = (i / Math.max(toCreate.length, 1)) * 2 * Math.PI
 		const r = 80 + 30 * Math.floor(i / 8)
 		nodes.value.push(
 			markRaw({
-				id: dep.project_id,
+				id: nodeId,
 				x: sx + r * Math.cos(angle),
 				y: sy + r * Math.sin(angle),
 				vx: 0,
@@ -453,15 +479,30 @@ function addDepsToGraph(sourceId: string, deps: EnrichedDep[], depth: number) {
 		)
 	})
 
-	for (const dep of deps) {
-		if (!edges.value.some((e) => e.source === sourceId && e.target === dep.project_id)) {
+	for (const { dep, nodeId } of withIds) {
+		if (!edges.value.some((e) => e.source === sourceId && e.target === nodeId)) {
 			edges.value.push({
 				source: sourceId,
-				target: dep.project_id,
+				target: nodeId,
 				type: dep.dependency_type as 'required' | 'optional' | 'embedded',
 			})
 		}
 	}
+
+	// Self-dep clones share the same dependencies — connect them to sibling deps
+	for (const { dep: selfDep, nodeId: selfId } of withIds) {
+		if (selfDep.project_id !== sourceProjectId) continue
+		for (const { dep: sibling, nodeId: siblingId } of withIds) {
+			if (sibling.project_id === sourceProjectId) continue
+			edges.value.push({
+				source: selfId,
+				target: siblingId,
+				type: sibling.dependency_type as 'required' | 'optional' | 'embedded',
+			})
+		}
+	}
+
+	return toCreate.length > 0
 }
 
 // Graph initialization
@@ -498,9 +539,11 @@ async function initGraph() {
 	)
 
 	try {
-		const deps = await fetchProjectDependencies(props.projectSlug)
+		const deps = props.versionNumber
+			? await fetchVersionDependencies(props.projectSlug, props.versionNumber)
+			: await fetchProjectDependencies(props.projectSlug)
 		if (deps.length > 0) {
-			addDepsToGraph(rootId, deps, 1)
+			addDepsToGraph(rootId, rootId, deps, 1)
 		}
 		nodes.value[0].loaded = true
 	} catch (err) {
@@ -520,10 +563,15 @@ async function expandNode(node: GraphNode) {
 
 	node.loading = true
 	try {
-		const deps = await fetchProjectDependencies(node.project?.slug ?? node.id)
-		addDepsToGraph(node.id, deps, node.depth + 1)
+		const slug = node.project?.slug ?? node.id
+		const isRootProject = node.project?.id === nodes.value[0]?.project?.id
+		const deps =
+			isRootProject && props.versionNumber
+				? await fetchVersionDependencies(slug, props.versionNumber)
+				: await fetchProjectDependencies(slug)
+		const hasNewNodes = addDepsToGraph(node.id, node.project?.id ?? node.id, deps, node.depth + 1)
 		node.loaded = true
-		kickSimulation()
+		kickSimulation(hasNewNodes)
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to expand dependency node:', err)
 	} finally {

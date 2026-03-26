@@ -18,20 +18,7 @@ export interface EnrichedDep extends RawDep {
 	project: ProjectInfo | null
 }
 
-export async function fetchProjectDependencies(slugOrId: string): Promise<EnrichedDep[]> {
-	let versions: { dependencies?: RawDep[] }[]
-	try {
-		versions = (await apiFetch(`project/${slugOrId}/version?limit=1`)) as {
-			dependencies?: RawDep[]
-		}[]
-	} catch (err) {
-		console.error('[Modrinth Extras] Failed to fetch project versions for dependencies:', err)
-		return []
-	}
-
-	if (!versions || versions.length === 0) return []
-
-	const rawDeps: RawDep[] = versions[0].dependencies ?? []
+async function enrichDeps(rawDeps: RawDep[]): Promise<EnrichedDep[]> {
 	const relevant = rawDeps.filter(
 		(d) =>
 			(d.dependency_type === 'required' ||
@@ -56,4 +43,36 @@ export async function fetchProjectDependencies(slugOrId: string): Promise<Enrich
 		...d,
 		project: projectMap.get(d.project_id) ?? null,
 	}))
+}
+
+export async function fetchProjectDependencies(slugOrId: string): Promise<EnrichedDep[]> {
+	let versions: { dependencies?: RawDep[] }[]
+	try {
+		versions = (await apiFetch(`project/${slugOrId}/version?limit=1`)) as {
+			dependencies?: RawDep[]
+		}[]
+	} catch (err) {
+		console.error('[Modrinth Extras] Failed to fetch project versions for dependencies:', err)
+		return []
+	}
+
+	if (!versions || versions.length === 0) return []
+	return enrichDeps(versions[0].dependencies ?? [])
+}
+
+export async function fetchVersionDependencies(
+	projectSlug: string,
+	versionNumber: string,
+): Promise<EnrichedDep[]> {
+	let version: { dependencies?: RawDep[] }
+	try {
+		version = (await apiFetch(
+			`project/${projectSlug}/version/${encodeURIComponent(versionNumber)}`,
+		)) as { dependencies?: RawDep[] }
+	} catch (err) {
+		console.error('[Modrinth Extras] Failed to fetch version for dependencies:', err)
+		return []
+	}
+
+	return enrichDeps(version.dependencies ?? [])
 }

@@ -55,7 +55,11 @@
 			</ScrollablePanel>
 		</div>
 		<div style="position: absolute; width: 0; height: 0; overflow: visible">
-			<DependencyExplorer ref="explorerRef" :project-slug="projectSlug" />
+			<DependencyExplorer
+				ref="explorerRef"
+				:project-slug="projectSlug"
+				:version-number="versionNumber"
+			/>
 		</div>
 	</div>
 </template>
@@ -65,12 +69,17 @@ import { LoaderCircleIcon, XIcon } from '@modrinth/assets'
 import { ScrollablePanel } from '@modrinth/ui'
 import { onMounted, ref } from 'vue'
 
-import { type EnrichedDep, fetchProjectDependencies } from '../helpers/dependencies'
+import {
+	type EnrichedDep,
+	fetchProjectDependencies,
+	fetchVersionDependencies,
+} from '../helpers/dependencies'
 import DependencyExplorer from './DependencyExplorer.vue'
 import DependencyNode from './DependencyNode.vue'
 
 const props = defineProps<{
 	projectSlug: string
+	versionNumber?: string
 }>()
 
 const explorerRef = ref<InstanceType<typeof DependencyExplorer> | null>(null)
@@ -80,7 +89,9 @@ const error = ref(false)
 
 onMounted(async () => {
 	try {
-		roots.value = await fetchProjectDependencies(props.projectSlug)
+		roots.value = props.versionNumber
+			? await fetchVersionDependencies(props.projectSlug, props.versionNumber)
+			: await fetchProjectDependencies(props.projectSlug)
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to fetch dependencies:', err)
 		error.value = true
