@@ -1,0 +1,131 @@
+{
+  "depNode.collapse": {
+    "defaultMessage": "Collapse dependencies"
+  },
+  "depNode.embedded": {
+    "defaultMessage": "Embedded"
+  },
+  "depNode.expand": {
+    "defaultMessage": "Expand dependencies"
+  },
+  "depNode.incompatible": {
+    "defaultMessage": "Incompatible"
+  },
+  "depNode.optional": {
+    "defaultMessage": "Optional"
+  },
+  "depNode.required": {
+    "defaultMessage": "Required"
+  },
+  "deps.loadError": {
+    "defaultMessage": "Failed to load dependencies"
+  },
+  "deps.loading": {
+    "defaultMessage": "Loading"
+  },
+  "deps.none": {
+    "defaultMessage": "No dependencies"
+  },
+  "deps.openGraph": {
+    "defaultMessage": "Open dependency graph"
+  },
+  "deps.title": {
+    "defaultMessage": "Dependencies"
+  },
+  "discord.members": {
+    "defaultMessage": "{count} members"
+  },
+  "discord.online": {
+    "defaultMessage": "{count} online"
+  },
+  "discord.partnered": {
+    "defaultMessage": "Partnered"
+  },
+  "discord.verified": {
+    "defaultMessage": "Verified"
+  },
+  "github.forks": {
+    "defaultMessage": "{count} forks"
+  },
+  "github.openIssues": {
+    "defaultMessage": "{count} open issues"
+  },
+  "github.openPRs": {
+    "defaultMessage": "{count} open pull requests"
+  },
+  "github.stars": {
+    "defaultMessage": "{count} stars"
+  },
+  "notifications.markAllAsRead": {
+    "defaultMessage": "Mark all as read"
+  },
+  "notifications.noUnread": {
+    "defaultMessage": "No unread notifications"
+  },
+  "notifications.projectUpdated": {
+    "defaultMessage": "{title} has been updated"
+  },
+  "notifications.viewAll": {
+    "defaultMessage": "View all"
+  },
+  "notifications.viewHistory": {
+    "defaultMessage": "View history"
+  },
+  "projectCard.copied": {
+    "defaultMessage": "Copied!"
+  },
+  "projectCard.copyLink": {
+    "defaultMessage": "Copy link"
+  },
+  "projectCard.download": {
+    "defaultMessage": "Download"
+  },
+  "projectCard.follow": {
+    "defaultMessage": "Follow"
+  },
+  "projectCard.newCollection": {
+    "defaultMessage": "Create new collection"
+  },
+  "projectCard.noCollections": {
+    "defaultMessage": "No collections found."
+  },
+  "projectCard.save": {
+    "defaultMessage": "Save"
+  },
+  "projectCard.saved": {
+    "defaultMessage": "Saved"
+  },
+  "projectCard.searchPlaceholder": {
+    "defaultMessage": "Search..."
+  },
+  "projectCard.unfollow": {
+    "defaultMessage": "Unfollow"
+  },
+  "quickSearch.examples": {
+    "defaultMessage": "Examples"
+  },
+  "quickSearch.recent": {
+    "defaultMessage": "Recent"
+  },
+  "quickSearch.search": {
+    "defaultMessage": "Search"
+  },
+  "tools.copied": {
+    "defaultMessage": "Copied!"
+  },
+  "tools.copyDownloadUrl": {
+    "defaultMessage": "Copy download URL"
+  },
+  "tools.copyPackwiz": {
+    "defaultMessage": "Copy packwiz"
+  },
+  "tools.generateEmbed": {
+    "defaultMessage": "Generate embed"
+  },
+  "tools.title": {
+    "defaultMessage": "Tools"
+  },
+  "tools.viewApiResponse": {
+    "defaultMessage": "View API response"
+  }
+}

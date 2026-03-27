@@ -19,19 +19,27 @@
 			</span>
 			<span class="details-list__item">
 				<UsersIcon aria-hidden="true" />
-				{{ formatNum(invite.approximate_member_count) }} members
+				{{
+					formatMessage(messages['discord.members'], {
+						count: formatNum(invite.approximate_member_count),
+					})
+				}}
 			</span>
 			<span class="details-list__item">
 				<OnlineIndicatorIcon aria-hidden="true" class="text-green" />
-				{{ formatNum(invite.approximate_presence_count) }} online
+				{{
+					formatMessage(messages['discord.online'], {
+						count: formatNum(invite.approximate_presence_count),
+					})
+				}}
 			</span>
 			<span v-if="invite.partnered" class="details-list__item font-semibold text-blue">
 				<AffiliateIcon aria-hidden="true" />
-				Partnered
+				{{ formatMessage(messages['discord.partnered']) }}
 			</span>
 			<span v-else-if="invite.verified" class="details-list__item font-semibold text-green">
 				<ShieldCheckIcon aria-hidden="true" />
-				Verified
+				{{ formatMessage(messages['discord.verified']) }}
 			</span>
 		</div>
 	</div>
@@ -47,9 +55,18 @@ import {
 	ShieldCheckIcon,
 	UsersIcon,
 } from '@modrinth/assets'
+import { defineMessages, useVIntl } from '@modrinth/ui'
 import { onMounted, ref } from 'vue'
 
 import { apiFetch } from '../helpers/apiFetch'
+
+const { formatMessage } = useVIntl()
+const messages = defineMessages({
+	'discord.members': { id: 'discord.members', defaultMessage: '{count} members' },
+	'discord.online': { id: 'discord.online', defaultMessage: '{count} online' },
+	'discord.partnered': { id: 'discord.partnered', defaultMessage: 'Partnered' },
+	'discord.verified': { id: 'discord.verified', defaultMessage: 'Verified' },
+})
 
 const props = defineProps<{ pageUrl: string }>()
 

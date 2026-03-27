@@ -11,7 +11,7 @@
         "zip": "wxt zip",
         "zip:firefox": "wxt zip -b firefox",
         "postinstall": "wxt prepare",
-        "intl:extract": "formatjs extract \"src/**/*.{vue,ts,tsx,js,jsx}\" --ignore \"src/**/*.d.ts\" --out-file src/locales/en-US/index.json --preserve-whitespace",
+        "intl:extract": "formatjs extract \"src/entrypoints/**/*.{vue,ts}\" --ignore \"src/**/*.d.ts\" --out-file src/locales/en-US/popup.json --preserve-whitespace && formatjs extract \"src/components/**/*.vue\" --ignore \"src/**/*.d.ts\" --out-file src/locales/en-US/components.json --preserve-whitespace",
         "lint": "eslint src/",
         "lint:fix": "eslint src/ --fix",
         "release:patch": "pnpm version patch && git push && git push --tags",

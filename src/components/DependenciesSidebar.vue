@@ -1,10 +1,10 @@
 <template>
 	<div class="card flex-card experimental-styles-within">
 		<div class="flex items-center justify-between gap-2">
-			<h2>Dependencies</h2>
+			<h2>{{ formatMessage(messages['deps.title']) }}</h2>
 			<button
 				v-if="!loading && !error && roots.length > 0"
-				v-tooltip="'Open dependency graph'"
+				v-tooltip="formatMessage(messages['deps.openGraph'])"
 				class="btn btn-transparent p-1"
 				style="height: auto; line-height: 1"
 				@click="explorerRef?.show()"
@@ -32,14 +32,14 @@
 		<div class="details-list">
 			<div v-if="loading" class="details-list__item">
 				<LoaderCircleIcon class="animate-spin" />
-				Loading
+				{{ formatMessage(messages['deps.loading']) }}
 			</div>
 			<div v-else-if="error" class="details-list__item font-normal text-secondary">
-				Failed to load dependencies
+				{{ formatMessage(messages['deps.loadError']) }}
 			</div>
 			<div v-else-if="roots.length === 0" class="details-list__item text-secondary">
 				<XIcon aria-hidden="true" />
-				No dependencies
+				{{ formatMessage(messages['deps.none']) }}
 			</div>
 			<ScrollablePanel v-else class="[&__.scrollable-pane]:max-h-96">
 				<ul class="m-0 flex list-none flex-col gap-3 p-0 pr-2">
@@ -64,7 +64,7 @@
 
 <script setup lang="ts">
 import { LoaderCircleIcon, XIcon } from '@modrinth/assets'
-import { ScrollablePanel } from '@modrinth/ui'
+import { defineMessages, ScrollablePanel, useVIntl } from '@modrinth/ui'
 import { onMounted, ref } from 'vue'
 
 import {
@@ -74,6 +74,15 @@ import {
 } from '../helpers/dependencies'
 import DependencyExplorer from './DependencyExplorer.vue'
 import DependencyNode from './DependencyNode.vue'
+
+const { formatMessage } = useVIntl()
+const messages = defineMessages({
+	'deps.title': { id: 'deps.title', defaultMessage: 'Dependencies' },
+	'deps.openGraph': { id: 'deps.openGraph', defaultMessage: 'Open dependency graph' },
+	'deps.loading': { id: 'deps.loading', defaultMessage: 'Loading' },
+	'deps.loadError': { id: 'deps.loadError', defaultMessage: 'Failed to load dependencies' },
+	'deps.none': { id: 'deps.none', defaultMessage: 'No dependencies' },
+})
 
 const props = defineProps<{
 	projectSlug: string

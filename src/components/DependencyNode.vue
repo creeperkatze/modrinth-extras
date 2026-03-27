@@ -8,7 +8,11 @@
 				v-if="depth < MAX_DEPTH && !(childrenLoaded && children.length === 0)"
 				class="flex size-[1em] shrink-0 cursor-pointer items-center justify-center border-0 bg-transparent p-0 text-secondary hover:text-primary"
 				:aria-expanded="expanded"
-				:aria-label="expanded ? 'Collapse dependencies' : 'Expand dependencies'"
+				:aria-label="
+					expanded
+						? formatMessage(messages['depNode.collapse'])
+						: formatMessage(messages['depNode.expand'])
+				"
 				@click="toggle"
 			>
 				<LoaderCircleIcon v-if="childrenLoading" class="animate-spin" />
@@ -57,12 +61,23 @@
 
 <script setup lang="ts">
 import { BoxIcon, ChevronRightIcon, LoaderCircleIcon } from '@modrinth/assets'
+import { defineMessages, useVIntl } from '@modrinth/ui'
 import { computed, ref } from 'vue'
 
 import { type EnrichedDep, fetchProjectDependencies } from '../helpers/dependencies'
 import { navigate } from '../helpers/page-router'
 
 defineOptions({ name: 'DependencyNode' })
+
+const { formatMessage } = useVIntl()
+const messages = defineMessages({
+	'depNode.collapse': { id: 'depNode.collapse', defaultMessage: 'Collapse dependencies' },
+	'depNode.expand': { id: 'depNode.expand', defaultMessage: 'Expand dependencies' },
+	'depNode.required': { id: 'depNode.required', defaultMessage: 'Required' },
+	'depNode.optional': { id: 'depNode.optional', defaultMessage: 'Optional' },
+	'depNode.incompatible': { id: 'depNode.incompatible', defaultMessage: 'Incompatible' },
+	'depNode.embedded': { id: 'depNode.embedded', defaultMessage: 'Embedded' },
+})
 
 const MAX_DEPTH = 2
 
@@ -84,10 +99,10 @@ const projectHref = computed(() => {
 const typeLabel = computed(
 	() =>
 		({
-			required: 'Required',
-			optional: 'Optional',
-			incompatible: 'Incompatible',
-			embedded: 'Embedded',
+			required: formatMessage(messages['depNode.required']),
+			optional: formatMessage(messages['depNode.optional']),
+			incompatible: formatMessage(messages['depNode.incompatible']),
+			embedded: formatMessage(messages['depNode.embedded']),
 		})[props.dep.dependency_type] ?? props.dep.dependency_type,
 )
 

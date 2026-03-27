@@ -71,7 +71,11 @@
 					<p
 						class="flex items-center justify-between px-2 pt-1 py-0 text-xs font-bold uppercase tracking-wide text-secondary"
 					>
-						<span>{{ recentSearches.length ? 'Recent' : 'Examples' }}</span>
+						<span>{{
+							recentSearches.length
+								? formatMessage(messages['quickSearch.recent'])
+								: formatMessage(messages['quickSearch.examples'])
+						}}</span>
 						<button
 							v-if="recentSearches.length"
 							class="flex cursor-pointer items-center border-0 bg-transparent p-0 text-secondary hover:text-primary normal-case tracking-normal"
@@ -110,7 +114,7 @@
 						@click="executeSearch"
 					>
 						<SearchIcon aria-hidden="true" class="size-5 shrink-0 text-secondary" />
-						<span class="flex-1">Search</span>
+						<span class="flex-1">{{ formatMessage(messages['quickSearch.search']) }}</span>
 						<kbd
 							class="shrink-0 rounded-md border-2 border-solid border-surface-5 bg-transparent px-2.5 py-1 text-[13px] text-secondary"
 							>↵</kbd
@@ -135,10 +139,18 @@ import {
 	TrashIcon,
 	XIcon,
 } from '@modrinth/assets'
+import { defineMessages, useVIntl } from '@modrinth/ui'
 import { type Component, computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
 import { apiFetch } from '../helpers/apiFetch'
 import { navigate } from '../helpers/page-router'
+
+const { formatMessage } = useVIntl()
+const messages = defineMessages({
+	'quickSearch.recent': { id: 'quickSearch.recent', defaultMessage: 'Recent' },
+	'quickSearch.examples': { id: 'quickSearch.examples', defaultMessage: 'Examples' },
+	'quickSearch.search': { id: 'quickSearch.search', defaultMessage: 'Search' },
+})
 
 const FACET_ICONS = {
 	loader: CpuIcon,

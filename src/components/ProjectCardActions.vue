@@ -3,12 +3,16 @@
 		<button :disabled="downloadLoading" @click.stop="handleDownload">
 			<LoaderCircleIcon v-if="downloadLoading" class="animate-spin" />
 			<DownloadIcon v-else />
-			Download
+			{{ formatMessage(messages['projectCard.download']) }}
 		</button>
 	</ButtonStyled>
 	<ButtonStyled circular :color="isFollowed ? 'brand' : undefined">
 		<button
-			v-tooltip="isFollowed ? 'Unfollow' : 'Follow'"
+			v-tooltip="
+				isFollowed
+					? formatMessage(messages['projectCard.unfollow'])
+					: formatMessage(messages['projectCard.follow'])
+			"
 			:disabled="followLoading"
 			@click.stop="handleFollow"
 		>
@@ -17,12 +21,20 @@
 		</button>
 	</ButtonStyled>
 	<ButtonStyled circular :color="isSaved ? 'brand' : undefined">
-		<button v-if="!isLoggedIn" v-tooltip="'Save'" @click.stop="navigate('/auth/sign-in')">
+		<button
+			v-if="!isLoggedIn"
+			v-tooltip="formatMessage(messages['projectCard.save'])"
+			@click.stop="navigate('/auth/sign-in')"
+		>
 			<BookmarkIcon fill="none" aria-hidden="true" />
 		</button>
 		<PopoutMenu
 			v-else
-			:tooltip="isSaved ? 'Saved' : 'Save'"
+			:tooltip="
+				isSaved
+					? formatMessage(messages['projectCard.saved'])
+					: formatMessage(messages['projectCard.save'])
+			"
 			placement="bottom-end"
 			@click.stop="ensureProjectId"
 		>
@@ -36,7 +48,7 @@
 				<template v-else>
 					<StyledInput
 						v-model="collectionsSearch"
-						placeholder="Search..."
+						:placeholder="formatMessage(messages['projectCard.searchPlaceholder'])"
 						wrapper-class="menu-search"
 					/>
 					<div v-if="filteredCollections.length > 0" class="collections-list">
@@ -51,18 +63,25 @@
 						</Checkbox>
 					</div>
 					<div v-else class="menu-text">
-						<p class="popout-text">No collections found.</p>
+						<p class="popout-text">{{ formatMessage(messages['projectCard.noCollections']) }}</p>
 					</div>
 					<button class="btn collection-button" @click.stop="handleNewCollection">
 						<PlusIcon />
-						Create new collection
+						{{ formatMessage(messages['projectCard.newCollection']) }}
 					</button>
 				</template>
 			</template>
 		</PopoutMenu>
 	</ButtonStyled>
 	<ButtonStyled circular type="transparent">
-		<button v-tooltip="copied ? 'Copied!' : 'Copy link'" @click.stop="handleCopyLink">
+		<button
+			v-tooltip="
+				copied
+					? formatMessage(messages['projectCard.copied'])
+					: formatMessage(messages['projectCard.copyLink'])
+			"
+			@click.stop="handleCopyLink"
+		>
 			<CheckIcon v-if="copied" />
 			<LinkIcon v-else />
 		</button>
@@ -79,7 +98,14 @@ import {
 	LoaderCircleIcon,
 	PlusIcon,
 } from '@modrinth/assets'
-import { ButtonStyled, Checkbox, PopoutMenu, StyledInput } from '@modrinth/ui'
+import {
+	ButtonStyled,
+	Checkbox,
+	defineMessages,
+	PopoutMenu,
+	StyledInput,
+	useVIntl,
+} from '@modrinth/ui'
 import { computed, onMounted, ref } from 'vue'
 
 import { apiFetch, getAuthToken } from '../helpers/apiFetch'
@@ -93,6 +119,29 @@ import {
 import { followedSlugs } from '../helpers/followState'
 import { navigate } from '../helpers/page-router'
 import { getSettings } from '../helpers/settings'
+
+const { formatMessage } = useVIntl()
+const messages = defineMessages({
+	'projectCard.download': { id: 'projectCard.download', defaultMessage: 'Download' },
+	'projectCard.follow': { id: 'projectCard.follow', defaultMessage: 'Follow' },
+	'projectCard.unfollow': { id: 'projectCard.unfollow', defaultMessage: 'Unfollow' },
+	'projectCard.save': { id: 'projectCard.save', defaultMessage: 'Save' },
+	'projectCard.saved': { id: 'projectCard.saved', defaultMessage: 'Saved' },
+	'projectCard.searchPlaceholder': {
+		id: 'projectCard.searchPlaceholder',
+		defaultMessage: 'Search...',
+	},
+	'projectCard.noCollections': {
+		id: 'projectCard.noCollections',
+		defaultMessage: 'No collections found.',
+	},
+	'projectCard.newCollection': {
+		id: 'projectCard.newCollection',
+		defaultMessage: 'Create new collection',
+	},
+	'projectCard.copyLink': { id: 'projectCard.copyLink', defaultMessage: 'Copy link' },
+	'projectCard.copied': { id: 'projectCard.copied', defaultMessage: 'Copied!' },
+})
 
 const props = defineProps<{
 	projectSlug: string

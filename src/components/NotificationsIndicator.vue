@@ -22,11 +22,11 @@
 					<div class="flex items-center justify-between gap-2 rounded-lg">
 						<button class="iconified-button" @click="handleViewAllNotifications">
 							<BellIcon aria-hidden="true" />
-							View all
+							{{ formatMessage(messages['notifications.viewAll']) }}
 						</button>
 						<button class="iconified-button" @click="handleViewHistory">
 							<HistoryIcon />
-							View history
+							{{ formatMessage(messages['notifications.viewHistory']) }}
 						</button>
 						<button
 							v-if="unreadCount > 0"
@@ -34,7 +34,7 @@
 							@click="handleMarkAllAsRead"
 						>
 							<CheckCheckIcon />
-							Mark all as read
+							{{ formatMessage(messages['notifications.markAllAsRead']) }}
 						</button>
 					</div>
 					<div class="mt-4 border-t border-divider"></div>
@@ -42,7 +42,7 @@
 						v-if="recentNotifications.length === 0"
 						class="flex items-center justify-center rounded-lg bg-transparent py-4 text-secondary"
 					>
-						No unread notifications
+						{{ formatMessage(messages['notifications.noUnread']) }}
 					</div>
 					<ScrollablePanel style="--_fade-height: 1rem" class="[&__.scrollable-pane]:max-h-[500px]">
 						<div class="flex flex-col gap-2">
@@ -165,7 +165,10 @@
 										<div class="break-words font-semibold text-contrast">
 											{{
 												notif.type === 'project_update' && notif.extra_data?.project
-													? `${(notif.extra_data as PlatformNotificationExtraData).project!.title} has been updated`
+													? formatMessage(messages['notifications.projectUpdated'], {
+															title: (notif.extra_data as PlatformNotificationExtraData).project!
+																.title,
+														})
 													: notif.title
 											}}
 										</div>
@@ -232,11 +235,13 @@ import {
 import {
 	Avatar,
 	ButtonStyled,
+	defineMessages,
 	DoubleIcon,
 	OverflowMenu,
 	Pagination,
 	ScrollablePanel,
 	SmartClickable,
+	useVIntl,
 } from '@modrinth/ui'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { browser } from 'wxt/browser'
@@ -252,6 +257,24 @@ import {
 	type PlatformNotificationExtraData,
 } from '../helpers/platform-notifications'
 import { acceptTeamInvite, removeSelfFromTeam } from '../helpers/teams'
+
+const { formatMessage } = useVIntl()
+const messages = defineMessages({
+	'notifications.viewAll': { id: 'notifications.viewAll', defaultMessage: 'View all' },
+	'notifications.viewHistory': { id: 'notifications.viewHistory', defaultMessage: 'View history' },
+	'notifications.markAllAsRead': {
+		id: 'notifications.markAllAsRead',
+		defaultMessage: 'Mark all as read',
+	},
+	'notifications.noUnread': {
+		id: 'notifications.noUnread',
+		defaultMessage: 'No unread notifications',
+	},
+	'notifications.projectUpdated': {
+		id: 'notifications.projectUpdated',
+		defaultMessage: '{title} has been updated',
+	},
+})
 
 const props = defineProps({
 	dropdownId: {

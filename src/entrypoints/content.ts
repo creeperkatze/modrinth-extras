@@ -1,8 +1,7 @@
 import '../assets/tailwind.css'
 
-import { provideI18n } from '@modrinth/ui'
 import FloatingVue from 'floating-vue'
-import { type App, createApp, h, ref } from 'vue'
+import { type App, createApp, h } from 'vue'
 import { browser } from 'wxt/browser'
 
 import ActivitySparkline from '../components/ActivitySparkline.vue'
@@ -18,6 +17,7 @@ import ToolsSidebar from '../components/ToolsSidebar.vue'
 import { initFollowState } from '../helpers/followState'
 import { navigate } from '../helpers/page-router'
 import { DEFAULTS, type ExtensionSettings, getSettings } from '../helpers/settings'
+import { installI18n, loadSavedLocale } from '../i18n'
 
 // Gate injections until Nuxt hydration is complete. The router-bridge
 // (MAIN world) dispatches "modrinth-extras:router-ready" once it hooks
@@ -232,6 +232,7 @@ export default defineContentScript({
 
 	main() {
 		console.log('[Modrinth Extras] Content script loaded')
+		loadSavedLocale().catch(() => {})
 		let settings: ExtensionSettings = { ...DEFAULTS }
 
 		const notifications = createInjection({
@@ -263,17 +264,9 @@ export default defineContentScript({
 				return true
 			},
 			createApp() {
-				const app = createApp({
-					setup() {
-						provideI18n({
-							locale: ref('en-US'),
-							t: (key: string) => key,
-							setLocale: () => {},
-						})
-					},
-					render: () => h(NotificationsIndicator),
-				})
+				const app = createApp(h(NotificationsIndicator))
 				app.use(FloatingVue)
+				installI18n(app)
 				return app
 			},
 		})
@@ -286,7 +279,9 @@ export default defineContentScript({
 			attach: attachToSidebar,
 			createApp() {
 				const pageUrl = window.location.href.split('?')[0].split('#')[0]
-				return createApp(h(ToolsSidebar, { pageUrl }))
+				const app = createApp(h(ToolsSidebar, { pageUrl }))
+				installI18n(app)
+				return app
 			},
 		})
 
@@ -306,17 +301,9 @@ export default defineContentScript({
 				const match = window.location.pathname.match(PROJECT_DEP_PATTERN)
 				const slug = match?.[2] ?? ''
 				const versionNumber = match?.[3]
-				const app = createApp({
-					setup() {
-						provideI18n({
-							locale: ref('en-US'),
-							t: (key: string) => key,
-							setLocale: () => {},
-						})
-					},
-					render: () => h(DependenciesSidebar, { projectSlug: slug, versionNumber }),
-				})
+				const app = createApp(h(DependenciesSidebar, { projectSlug: slug, versionNumber }))
 				app.use(FloatingVue)
+				installI18n(app)
 				return app
 			},
 		})
@@ -346,7 +333,9 @@ export default defineContentScript({
 				const slug = window.location.pathname.match(
 					/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/([^/]+)/,
 				)?.[2]
-				return createApp(h(ActivitySparkline, { projectSlug: slug ?? '' }))
+				const app = createApp(h(ActivitySparkline, { projectSlug: slug ?? '' }))
+				installI18n(app)
+				return app
 			},
 		})
 
@@ -358,7 +347,9 @@ export default defineContentScript({
 			attach: attachToSidebar,
 			createApp() {
 				const pageUrl = window.location.href.split('?')[0].split('#')[0]
-				return createApp(h(GitHubSidebar, { pageUrl }))
+				const app = createApp(h(GitHubSidebar, { pageUrl }))
+				installI18n(app)
+				return app
 			},
 		})
 
@@ -370,7 +361,9 @@ export default defineContentScript({
 			attach: attachToSidebar,
 			createApp() {
 				const pageUrl = window.location.href.split('?')[0].split('#')[0]
-				return createApp(h(DiscordSidebar, { pageUrl }))
+				const app = createApp(h(DiscordSidebar, { pageUrl }))
+				installI18n(app)
+				return app
 			},
 		})
 
@@ -386,7 +379,11 @@ export default defineContentScript({
 				errorBox.appendChild(container)
 				return true
 			},
-			createApp: () => createApp(h(ErrorNotice)),
+			createApp() {
+				const app = createApp(h(ErrorNotice))
+				installI18n(app)
+				return app
+			},
 		})
 
 		const footerBadge = createInjection({
@@ -409,7 +406,11 @@ export default defineContentScript({
 				flexCol.appendChild(container)
 				return true
 			},
-			createApp: () => createApp(h(FooterBadge)),
+			createApp() {
+				const app = createApp(h(FooterBadge))
+				installI18n(app)
+				return app
+			},
 		})
 
 		const quickSearch = createInjection({
@@ -421,7 +422,11 @@ export default defineContentScript({
 				document.body.appendChild(container)
 				return true
 			},
-			createApp: () => createApp(h(QuickSearch)),
+			createApp() {
+				const app = createApp(h(QuickSearch))
+				installI18n(app)
+				return app
+			},
 		})
 
 		const projectCardActions = createMultiInjection({
@@ -436,13 +441,9 @@ export default defineContentScript({
 					target.parentElement?.querySelector<HTMLAnchorElement>('a[href]')?.getAttribute('href') ??
 					''
 				const [, projectType, projectSlug] = href.match(PROJECT_TYPE_PATTERN) ?? []
-				const app = createApp({
-					setup() {
-						provideI18n({ locale: ref('en-US'), t: (key: string) => key, setLocale: () => {} })
-					},
-					render: () => h(ProjectCardActions, { projectSlug, projectType }),
-				})
+				const app = createApp(h(ProjectCardActions, { projectSlug, projectType }))
 				app.use(FloatingVue)
+				installI18n(app)
 				return app
 			},
 		})

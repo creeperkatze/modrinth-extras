@@ -13,16 +13,18 @@ import { LOCALES } from './locales'
 
 const LOCALE_CODES = new Set(LOCALES.map((l) => l.code))
 
-const localeModules = import.meta.glob<{ default: CrowdinMessages }>('./locales/*/index.json', {
+const localeModules = import.meta.glob<{ default: CrowdinMessages }>('./locales/*/*.json', {
 	eager: true,
 })
 
 function buildMessages(): Record<string, Record<string, string>> {
 	const messages: Record<string, Record<string, string>> = {}
 	for (const [path, module] of Object.entries(localeModules)) {
-		const match = path.match(/\/([^/]+)\/index\.json$/)
+		const match = path.match(/\/([^/]+)\/[^/]+\.json$/)
 		if (match && LOCALE_CODES.has(match[1])) {
-			messages[match[1]] = transformCrowdinMessages(module.default)
+			const locale = match[1]
+			if (!messages[locale]) messages[locale] = {}
+			Object.assign(messages[locale], transformCrowdinMessages(module.default))
 		}
 	}
 	return messages

@@ -1,0 +1,113 @@
+{
+  "feature.activitySparkline.description": {
+    "defaultMessage": "Release activity chart on project pages."
+  },
+  "feature.activitySparkline.title": {
+    "defaultMessage": "Activity sparkline"
+  },
+  "feature.curseforgeRedirect.description": {
+    "defaultMessage": "Redirect CurseForge project pages to Modrinth when available."
+  },
+  "feature.curseforgeRedirect.title": {
+    "defaultMessage": "CurseForge redirect"
+  },
+  "feature.dependenciesSidebar.description": {
+    "defaultMessage": "Collapsible dependency tree on project pages."
+  },
+  "feature.dependenciesSidebar.title": {
+    "defaultMessage": "Dependency sidebar"
+  },
+  "feature.desktopNotifications.description": {
+    "defaultMessage": "Operating system notifications for your Modrinth notifications."
+  },
+  "feature.desktopNotifications.exampleMessage": {
+    "defaultMessage": "This is an example notification from Modrinth Extras!"
+  },
+  "feature.desktopNotifications.exampleTitle": {
+    "defaultMessage": "Example Notification"
+  },
+  "feature.desktopNotifications.title": {
+    "defaultMessage": "Desktop notifications"
+  },
+  "feature.discordSidebar.description": {
+    "defaultMessage": "Server name, description, member count, and online count for linked Discord servers."
+  },
+  "feature.discordSidebar.title": {
+    "defaultMessage": "Discord sidebar"
+  },
+  "feature.githubSidebar.description": {
+    "defaultMessage": "Stars, issues, pull requests, and forks for linked repositories."
+  },
+  "feature.githubSidebar.title": {
+    "defaultMessage": "GitHub sidebar"
+  },
+  "feature.notificationBadge.description": {
+    "defaultMessage": "Up-to-date unread notification count as a badge on the extension icon."
+  },
+  "feature.notificationBadge.title": {
+    "defaultMessage": "Notification badge"
+  },
+  "feature.notifications.description": {
+    "defaultMessage": "View, manage, and clear unread notifications right in the header without leaving the current page."
+  },
+  "feature.notifications.title": {
+    "defaultMessage": "Notifications"
+  },
+  "feature.projectCardActions.description": {
+    "defaultMessage": "Download, follow, and save projects right from their project cards."
+  },
+  "feature.projectCardActions.modLoader": {
+    "defaultMessage": "Mod loader"
+  },
+  "feature.projectCardActions.pluginLoader": {
+    "defaultMessage": "Plugin loader"
+  },
+  "feature.projectCardActions.title": {
+    "defaultMessage": "Project card actions"
+  },
+  "feature.quickSearch.description": {
+    "defaultMessage": "Ctrl+K or / for a command palette style search with faceted tags for loaders, versions, categories, and types."
+  },
+  "feature.quickSearch.title": {
+    "defaultMessage": "Quick search"
+  },
+  "feature.telemetry.description": {
+    "defaultMessage": "Help improve the extension by anonymously sharing statistics like the extension version and which features are enabled. No Modrinth data, activity, or personal information is ever collected."
+  },
+  "feature.telemetry.disabledTooltip": {
+    "defaultMessage": "Controlled by Firefox data collection settings"
+  },
+  "feature.telemetry.title": {
+    "defaultMessage": "Telemetry"
+  },
+  "feature.toolsSidebar.description": {
+    "defaultMessage": "Generate embeds, view raw API responses, copy download URLs and packwiz commands."
+  },
+  "feature.toolsSidebar.title": {
+    "defaultMessage": "Tools sidebar"
+  },
+  "popup.footer.checking": {
+    "defaultMessage": "Checking"
+  },
+  "popup.footer.latestVersion": {
+    "defaultMessage": "Latest version"
+  },
+  "popup.footer.starOnGitHub": {
+    "defaultMessage": "★ On GitHub"
+  },
+  "popup.footer.updateAvailable": {
+    "defaultMessage": "Update available"
+  },
+  "popup.group.contentPages": {
+    "defaultMessage": "Content Pages"
+  },
+  "popup.group.extension": {
+    "defaultMessage": "Extension"
+  },
+  "popup.group.general": {
+    "defaultMessage": "General"
+  },
+  "settings.language": {
+    "defaultMessage": "Language"
+  }
+}

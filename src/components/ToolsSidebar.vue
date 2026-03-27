@@ -1,11 +1,11 @@
 <template>
 	<div class="card flex-card experimental-styles-within">
-		<h2>Tools</h2>
+		<h2>{{ formatMessage(messages['tools.title']) }}</h2>
 		<div class="details-list">
 			<div class="details-list__item">
 				<CodeIcon aria-hidden="true" />
 				<a :href="modfolioUrl" target="_blank" rel="noopener" class="hover:underline">
-					Generate embed
+					{{ formatMessage(messages['tools.generateEmbed']) }}
 					<ExternalIcon aria-hidden="true" class="external-icon" />
 				</a>
 			</div>
@@ -17,7 +17,7 @@
 					rel="noopener"
 					class="min-w-0 flex-1 truncate hover:underline"
 				>
-					View API response
+					{{ formatMessage(messages['tools.viewApiResponse']) }}
 					<ExternalIcon aria-hidden="true" class="external-icon" />
 				</a>
 			</div>
@@ -28,10 +28,18 @@
 					<button
 						v-else-if="downloadUrl"
 						class="min-w-0 flex-1 cursor-pointer truncate border-0 bg-transparent p-0 text-left text-primary hover:underline [font:inherit]"
-						:aria-label="downloadCopied ? 'Copied!' : 'Copy download URL'"
+						:aria-label="
+							downloadCopied
+								? formatMessage(messages['tools.copied'])
+								: formatMessage(messages['tools.copyDownloadUrl'])
+						"
 						@click="copyDownloadUrl"
 					>
-						{{ downloadCopied ? 'Copied!' : 'Copy download URL' }}
+						{{
+							downloadCopied
+								? formatMessage(messages['tools.copied'])
+								: formatMessage(messages['tools.copyDownloadUrl'])
+						}}
 					</button>
 					<ClipboardCopyIcon
 						v-if="!downloadLoading && downloadUrl && !downloadCopied"
@@ -43,10 +51,18 @@
 					<BoxIcon aria-hidden="true" class="shrink-0" />
 					<button
 						class="min-w-0 flex-1 cursor-pointer truncate border-0 bg-transparent p-0 text-left text-primary hover:underline [font:inherit]"
-						:aria-label="packwizCopied ? 'Copied!' : 'Copy packwiz command'"
+						:aria-label="
+							packwizCopied
+								? formatMessage(messages['tools.copied'])
+								: formatMessage(messages['tools.copyPackwiz'])
+						"
 						@click="copyPackwiz"
 					>
-						{{ packwizCopied ? 'Copied!' : 'Copy packwiz' }}
+						{{
+							packwizCopied
+								? formatMessage(messages['tools.copied'])
+								: formatMessage(messages['tools.copyPackwiz'])
+						}}
 					</button>
 					<ClipboardCopyIcon v-if="!packwizCopied" class="shrink-0 text-secondary" />
 					<CheckIcon v-else class="shrink-0 text-brand" />
@@ -67,9 +83,20 @@ import {
 	ExternalIcon,
 	LoaderCircleIcon,
 } from '@modrinth/assets'
+import { defineMessages, useVIntl } from '@modrinth/ui'
 import { computed, onMounted, ref } from 'vue'
 
 import { apiFetch } from '../helpers/apiFetch'
+
+const { formatMessage } = useVIntl()
+const messages = defineMessages({
+	'tools.title': { id: 'tools.title', defaultMessage: 'Tools' },
+	'tools.generateEmbed': { id: 'tools.generateEmbed', defaultMessage: 'Generate embed' },
+	'tools.viewApiResponse': { id: 'tools.viewApiResponse', defaultMessage: 'View API response' },
+	'tools.copyDownloadUrl': { id: 'tools.copyDownloadUrl', defaultMessage: 'Copy download URL' },
+	'tools.copyPackwiz': { id: 'tools.copyPackwiz', defaultMessage: 'Copy packwiz' },
+	'tools.copied': { id: 'tools.copied', defaultMessage: 'Copied!' },
+})
 
 const props = defineProps<{
 	pageUrl: string
