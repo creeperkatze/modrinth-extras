@@ -1,0 +1,81 @@
+{
+  "depNode.embedded": {
+    "defaultMessage": "Eingebettet"
+  },
+  "depNode.expand": {
+    "defaultMessage": "Abhängigkeiten erweitern"
+  },
+  "depNode.incompatible": {
+    "defaultMessage": "Inkompatibel"
+  },
+  "depNode.optional": {
+    "defaultMessage": "Optional"
+  },
+  "depNode.required": {
+    "defaultMessage": "Erforderlich"
+  },
+  "notifications.markAllAsRead": {
+    "defaultMessage": "Alle als gelesen markieren"
+  },
+  "notifications.noUnread": {
+    "defaultMessage": "Keine ungelesenen Benachrichtigungen"
+  },
+  "notifications.projectUpdated": {
+    "defaultMessage": "{title} wurde aktualisiert"
+  },
+  "notifications.viewAll": {
+    "defaultMessage": "Alle anzeigen"
+  },
+  "notifications.viewHistory": {
+    "defaultMessage": "Verlauf anzeigen"
+  },
+  "projectCard.copied": {
+    "defaultMessage": "Kopiert!"
+  },
+  "projectCard.copyLink": {
+    "defaultMessage": "Link kopieren"
+  },
+  "projectCard.download": {
+    "defaultMessage": "Herunterladen"
+  },
+  "projectCard.follow": {
+    "defaultMessage": "Folgen"
+  },
+  "projectCard.save": {
+    "defaultMessage": "Speichern"
+  },
+  "projectCard.saved": {
+    "defaultMessage": "Gespeichert"
+  },
+  "projectCard.searchPlaceholder": {
+    "defaultMessage": "Suchen..."
+  },
+  "projectCard.unfollow": {
+    "defaultMessage": "Entfolgen"
+  },
+  "quickSearch.examples": {
+    "defaultMessage": "Beispiele"
+  },
+  "quickSearch.recent": {
+    "defaultMessage": "Kürzlich"
+  },
+  "quickSearch.search": {
+    "defaultMessage": "Suchen"
+  },
+  "tools.copied": {
+    "defaultMessage": "Kopiert!"
+  },
+  "tools.copyPackwiz": {
+    "defaultMessage": "Packwiz kopieren"
+  },
+  "tools.generateEmbed": {
+    "defaultMessage": "Einbettung generieren"
+  },
+  "tools.title": {
+    "defaultMessage": "Tools"
+  },
+  "tools.viewApiResponse": {
+    "defaultMessage": "API-Antwort anzeigen"
+  }
+}
+
