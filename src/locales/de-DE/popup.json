@@ -1,0 +1,12 @@
+{
+  "popup.group.extension": {
+    "defaultMessage": "Erweiterung"
+  },
+  "popup.group.general": {
+    "defaultMessage": "Allgemein"
+  },
+  "settings.language": {
+    "defaultMessage": "Sprache"
+  }
+}
+
