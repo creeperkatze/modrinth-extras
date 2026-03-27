@@ -33,6 +33,10 @@ All features can be individually toggled from the extension popup.
 
 <img src=".github/assets/screenshots/extension.png" width="100%">
 
+### Language
+
+Help translate on [Crowdin](https://crowdin.com/project/modrinth-extras). Some languages may be incomplete.
+
 ### Notifications
 
 View, manage, and clear unread notifications right in the header without leaving the current page.
@@ -76,7 +80,7 @@ On project pages, two additional developer utilities are shown:
 
 ### Dependency sidebar
 
-Collapsible dependency tree on project pages.
+Collapsible dependency tree on project pages. Includes a dependency explorer to visualize the full dependency graph.
 
 ### GitHub sidebar
 
