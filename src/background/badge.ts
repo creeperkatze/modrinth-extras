@@ -9,7 +9,7 @@ export async function setBadge(unread: number) {
 	const action = browser.action ?? browser.browserAction
 
 	await action.setBadgeBackgroundColor({ color: '#1bd96a' })
-	await action.setBadgeText({ text: unread > 0 ? String(Math.min(unread, 99)) : '' })
+	await action.setBadgeText({ text: unread > 0 ? String(unread) : '' })
 }
 
 export async function showCachedBadge() {
