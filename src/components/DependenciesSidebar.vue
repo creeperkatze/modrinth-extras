@@ -12,8 +12,8 @@
 				<svg
 					aria-hidden="true"
 					xmlns="http://www.w3.org/2000/svg"
-					width="16"
-					height="16"
+					width="24"
+					height="24"
 					viewBox="0 0 24 24"
 					fill="none"
 					stroke="currentColor"
@@ -21,13 +21,11 @@
 					stroke-linecap="round"
 					stroke-linejoin="round"
 				>
-					<path d="m10.586 5.414-5.172 5.172" />
-					<path d="m18.586 13.414-5.172 5.172" />
-					<path d="M6 12h12" />
-					<circle cx="12" cy="20" r="2" />
-					<circle cx="12" cy="4" r="2" />
-					<circle cx="20" cy="12" r="2" />
-					<circle cx="4" cy="12" r="2" />
+					<rect x="16" y="16" width="6" height="6" rx="1" />
+					<rect x="2" y="16" width="6" height="6" rx="1" />
+					<rect x="9" y="2" width="6" height="6" rx="1" />
+					<path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" />
+					<path d="M12 12V8" />
 				</svg>
 			</button>
 		</div>
