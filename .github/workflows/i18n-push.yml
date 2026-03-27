@@ -37,7 +37,7 @@ jobs:
           echo "safe_branch_name=$SAFE_BRANCH_NAME" >> "$GITHUB_OUTPUT"
 
       - name: Upload translations to Crowdin
-        uses: crowdin/github-action@v1
+        uses: crowdin/github-action@v2
         with:
           upload_sources: true
           upload_translations: false
