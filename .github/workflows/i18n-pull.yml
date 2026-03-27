@@ -16,18 +16,14 @@ jobs:
     concurrency:
       group: i18n-pull:${{ github.ref }}
       cancel-in-progress: true
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref }}
-          token: ${{ secrets.GH_PAT }}
-
-      - name: Configure Git author
-        id: git-author
-        uses: MarcoIeni/git-config@v0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
 
       - name: Query branch name
         id: branch-name
@@ -61,8 +57,7 @@ jobs:
         with:
           title: 'New translations from Crowdin (${{ steps.branch-name.outputs.branch_name }})'
           commit-message: 'New translations from Crowdin (${{ steps.branch-name.outputs.branch_name }})'
+          body-path: .github/templates/crowdin-pr.md
           branch: crowdin-pull/${{ steps.branch-name.outputs.branch_name }}
-          author: '${{ steps.git-author.outputs.name }} <${{ steps.git-author.outputs.email }}>'
-          committer: '${{ steps.git-author.outputs.name }} <${{ steps.git-author.outputs.email }}>'
           labels: sync
-          token: ${{ secrets.GH_PAT }}
+          token: ${{ secrets.GITHUB_TOKEN }}
