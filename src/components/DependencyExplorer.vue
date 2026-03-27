@@ -32,6 +32,39 @@
 					>
 						<circle cx="14" cy="14" r="0.7" fill="rgba(255,255,255,0.055)" />
 					</pattern>
+					<marker
+						id="mre-arrow-required"
+						markerWidth="12"
+						markerHeight="10"
+						refX="11"
+						refY="5"
+						orient="auto"
+						markerUnits="userSpaceOnUse"
+					>
+						<path d="M 0 0 L 12 5 L 0 10 Z" fill="#4ade80" />
+					</marker>
+					<marker
+						id="mre-arrow-optional"
+						markerWidth="12"
+						markerHeight="10"
+						refX="11"
+						refY="5"
+						orient="auto"
+						markerUnits="userSpaceOnUse"
+					>
+						<path d="M 0 0 L 12 5 L 0 10 Z" fill="#888" />
+					</marker>
+					<marker
+						id="mre-arrow-embedded"
+						markerWidth="12"
+						markerHeight="10"
+						refX="11"
+						refY="5"
+						orient="auto"
+						markerUnits="userSpaceOnUse"
+					>
+						<path d="M 0 0 L 12 5 L 0 10 Z" fill="#60a5fa" />
+					</marker>
 					<template v-for="node in nodes" :key="`clip-${node.id}`">
 						<clipPath :id="`mre-clip-${escId(node.id)}`">
 							<circle :r="nodeR(node)" />
@@ -54,18 +87,16 @@
 				>
 					<!-- Edges -->
 					<g style="pointer-events: none">
-						<line
-							v-for="edge in edges"
-							:key="`e-${edge.source}-${edge.target}`"
-							:x1="nodePos(edge.source).x"
-							:y1="nodePos(edge.source).y"
-							:x2="nodePos(edge.target).x"
-							:y2="nodePos(edge.target).y"
+						<path
+							v-for="edge in edgesWithCurvature"
+							:key="`e-${edge.source}-${edge.target}-${edge.type}`"
+							:d="edgePath(edge, edge.curvature)"
 							:stroke="EDGE_COLORS[edge.type]"
-							:stroke-dasharray="edge.type === 'optional' ? '5,4' : ''"
 							stroke-width="1.5"
 							stroke-linecap="round"
+							fill="none"
 							opacity="0.6"
+							:marker-end="`url(#mre-arrow-${edge.type})`"
 						/>
 					</g>
 
@@ -223,20 +254,13 @@
 
 			<!-- Legend -->
 			<div
-				class="absolute bottom-3 left-3 flex flex-col gap-1.5 rounded-lg p-2.5"
-				style="background: rgba(20, 20, 20, 0.92); border: 1px solid #2e2e2e; font-size: 11px"
+				class="absolute bottom-3 left-3 flex flex-col gap-2 rounded-lg p-3"
+				style="background: rgba(20, 20, 20, 0.92); border: 1px solid #2e2e2e; font-size: 12px"
 			>
-				<div v-for="item in LEGEND" :key="item.type" class="flex items-center gap-2">
-					<svg width="18" height="4" style="flex-shrink: 0">
-						<line
-							x1="0"
-							y1="2"
-							x2="18"
-							y2="2"
-							:stroke="item.color"
-							stroke-width="2"
-							:stroke-dasharray="item.dashed ? '4,3' : ''"
-						/>
+				<div v-for="item in LEGEND" :key="item.type" class="flex items-center gap-2.5">
+					<svg width="40" height="14" style="flex-shrink: 0">
+						<line x1="1" y1="7" x2="29" y2="7" :stroke="item.color" stroke-width="1.5" />
+						<polygon :points="'22,3 38,7 22,11'" :fill="item.color" />
 					</svg>
 					<span style="color: #777">{{ item.label }}</span>
 				</div>
@@ -257,7 +281,7 @@
 import { NewModal } from '@modrinth/ui'
 import type { ForceLink, Simulation, SimulationLinkDatum } from 'd3-force'
 import { forceCenter, forceCollide, forceLink, forceManyBody, forceSimulation } from 'd3-force'
-import { markRaw, nextTick, onUnmounted, ref, useTemplateRef } from 'vue'
+import { computed, markRaw, nextTick, onUnmounted, ref, useTemplateRef } from 'vue'
 
 import { apiFetch } from '../helpers/apiFetch'
 import {
@@ -295,15 +319,67 @@ type D3Link = SimulationLinkDatum<GraphNode> & { type: GraphEdge['type'] }
 
 const EDGE_COLORS: Record<string, string> = {
 	required: '#4ade80',
-	optional: '#facc15',
+	optional: '#888',
 	embedded: '#60a5fa',
 }
 
 const LEGEND = [
-	{ type: 'required', color: '#4ade80', label: 'Required', dashed: false },
-	{ type: 'optional', color: '#facc15', label: 'Optional', dashed: true },
-	{ type: 'embedded', color: '#60a5fa', label: 'Embedded', dashed: false },
+	{ type: 'required', color: '#4ade80', label: 'Required' },
+	{ type: 'optional', color: '#888', label: 'Optional' },
+	{ type: 'embedded', color: '#60a5fa', label: 'Embedded' },
 ]
+
+const edgesWithCurvature = computed(() => {
+	const counts = new Map<string, number>()
+	for (const edge of edges.value) {
+		const key = [edge.source, edge.target].sort().join('|||')
+		counts.set(key, (counts.get(key) ?? 0) + 1)
+	}
+	const groupIdx = new Map<string, number>()
+	return edges.value.map((edge) => {
+		const key = [edge.source, edge.target].sort().join('|||')
+		const count = counts.get(key) ?? 1
+		const idx = groupIdx.get(key) ?? 0
+		groupIdx.set(key, idx + 1)
+		const curvature = count > 1 ? (idx - (count - 1) / 2) * 28 : 0
+		return { ...edge, curvature }
+	})
+})
+
+function edgePath(edge: GraphEdge, curvature: number): string {
+	const src = nodePos(edge.source)
+	const tgt = nodePos(edge.target)
+	const dx = tgt.x - src.x
+	const dy = tgt.y - src.y
+	const dist = Math.sqrt(dx * dx + dy * dy) || 1
+	const ux = dx / dist
+	const uy = dy / dist
+	const srcNode = nodes.value.find((n) => n.id === edge.source)
+	const tgtNode = nodes.value.find((n) => n.id === edge.target)
+	const r1 = srcNode ? nodeR(srcNode) : 22
+	const r2 = tgtNode ? nodeR(tgtNode) : 22
+	const x1 = src.x + ux * r1
+	const y1 = src.y + uy * r1
+	const x2 = tgt.x - ux * r2
+	const y2 = tgt.y - uy * r2
+	if (Math.abs(curvature) < 0.5) {
+		return `M ${x1} ${y1} L ${x2} ${y2}`
+	}
+	const mx = (x1 + x2) / 2
+	const my = (y1 + y2) / 2
+	// Use a canonical direction (sorted IDs) so that A→B and B→A both measure
+	// their perpendicular offset from the same axis — otherwise the flipped
+	// direction vector cancels the curvature and both curves land on the same side.
+	const [canonA, canonB] = [edge.source, edge.target].sort()
+	const posA = nodePos(canonA)
+	const posB = nodePos(canonB)
+	const cdx = posB.x - posA.x
+	const cdy = posB.y - posA.y
+	const cdist = Math.sqrt(cdx * cdx + cdy * cdy) || 1
+	const cx = mx + (-cdy / cdist) * curvature
+	const cy = my + (cdx / cdist) * curvature
+	return `M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`
+}
 
 const props = defineProps<{ projectSlug: string; versionNumber?: string }>()
 
@@ -480,7 +556,11 @@ function addDepsToGraph(
 	})
 
 	for (const { dep, nodeId } of withIds) {
-		if (!edges.value.some((e) => e.source === sourceId && e.target === nodeId)) {
+		if (
+			!edges.value.some(
+				(e) => e.source === sourceId && e.target === nodeId && e.type === dep.dependency_type,
+			)
+		) {
 			edges.value.push({
 				source: sourceId,
 				target: nodeId,
