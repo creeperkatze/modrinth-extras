@@ -88,7 +88,7 @@ export default defineContentScript({
 			if (nuxtApp?.isHydrating === false) {
 				dispatchReady()
 			} else if (nuxtApp?.hook) {
-				nuxtApp.hook('app:suspense:resolve', dispatchReady)
+				nuxtApp.hook('app:suspense:resolve', () => requestAnimationFrame(dispatchReady))
 			} else {
 				requestAnimationFrame(() => requestAnimationFrame(dispatchReady))
 			}
