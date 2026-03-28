@@ -8,12 +8,12 @@ import {
 import type { App } from 'vue'
 import { createI18n } from 'vue-i18n'
 
-import { getSettings } from './helpers/settings'
 import { LOCALES } from './locales'
+import { getSettings } from './settings'
 
 const LOCALE_CODES = new Set(LOCALES.map((l) => l.code))
 
-const localeModules = import.meta.glob<{ default: CrowdinMessages }>('./locales/*/*.json', {
+const localeModules = import.meta.glob<{ default: CrowdinMessages }>('../locales/*/*.json', {
 	eager: true,
 })
 

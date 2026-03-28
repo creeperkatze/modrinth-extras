@@ -15,9 +15,9 @@ import ProjectCardActions from '../components/ProjectCardActions.vue'
 import QuickSearch from '../components/QuickSearch.vue'
 import ToolsSidebar from '../components/ToolsSidebar.vue'
 import { initFollowState } from '../helpers/followState'
+import { detectBrowserLocale, i18n, installI18n, loadSavedLocale } from '../helpers/i18n'
 import { navigate } from '../helpers/page-router'
 import { DEFAULTS, type ExtensionSettings, getSettings } from '../helpers/settings'
-import { detectBrowserLocale, i18n, installI18n, loadSavedLocale } from '../i18n'
 
 // Gate injections until Nuxt hydration is complete. The router-bridge
 // (MAIN world) dispatches "modrinth-extras:router-ready" once it hooks

@@ -63,7 +63,9 @@
 						</Checkbox>
 					</div>
 					<div v-else class="menu-text">
-						<p class="popout-text">{{ formatMessage(messages['projectCardActions.noCollections']) }}</p>
+						<p class="popout-text">
+							{{ formatMessage(messages['projectCardActions.noCollections']) }}
+						</p>
 					</div>
 					<button class="btn collection-button" @click.stop="handleNewCollection">
 						<PlusIcon />
