@@ -84,7 +84,7 @@
     "defaultMessage": "Generiere Einbettungen, zeige rohe API-Antworten an, kopiere Download-URLs und Packwiz-Befehle."
   },
   "feature.toolsSidebar.title": {
-    "defaultMessage": "Werkzeugleiste"
+    "defaultMessage": "Werkzeug-Seitenleiste"
   },
   "popup.footer.checking": {
     "defaultMessage": "Wird überprüft"

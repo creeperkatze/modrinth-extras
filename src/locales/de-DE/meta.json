@@ -1,0 +1,18 @@
+{
+  "meta.summary": {
+    "defaultMessage": "Eine Browser-Erweiterung, die Modrinth auf der Website und darüber hinaus erweitert."
+  },
+  "meta.description.generalTitle": {
+    "defaultMessage": "Allgemeine Funktionen:"
+  },
+  "meta.description.contentTitle": {
+    "defaultMessage": "Funktionen auf Inhaltsseiten:"
+  },
+  "meta.description.extensionTitle": {
+    "defaultMessage": "Funktionen der Erweiterung:"
+  },
+  "meta.description.footer": {
+    "defaultMessage": "Alle Funktionen sind optional und können einzeln im Popup der Erweiterung ein- und ausgeschaltet werden.\n\nModrinth Extras ist <link>Open Source</link>."
+  }
+}
+
