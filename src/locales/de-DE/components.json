@@ -1,4 +1,13 @@
 {
+  "depExplorer.controls": {
+    "defaultMessage": "scrollen zum zoomen · ziehen zum verschieben · klicken zum expandieren"
+  },
+  "depExplorer.noDependencies": {
+    "defaultMessage": "Dieses Projekt hat keine Abhängigkeiten"
+  },
+  "depExplorer.title": {
+    "defaultMessage": "Abhängigkeitsgraph"
+  },
   "depNode.collapse": {
     "defaultMessage": "Abhängigkeiten einklappen"
   },
@@ -43,6 +52,9 @@
   },
   "discord.verified": {
     "defaultMessage": "Verifiziert"
+  },
+  "errorNotice.message": {
+    "defaultMessage": "Dieser Fehler hängt eventuell mit Modrinth Extras zusammen. Versuche, die Erweiterung zu deaktivieren und die Seite neu zu laden, bevor du dies Modrinth meldest. Falls der Fehler verschwindet, melde ihn bitte <link>hier</link>."
   },
   "github.forks": {
     "defaultMessage": "{count} Forks"

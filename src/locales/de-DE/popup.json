@@ -72,7 +72,7 @@
     "defaultMessage": "Schnellsuche"
   },
   "feature.telemetry.description": {
-    "defaultMessage": "Hilf mit, die Erweiterung zu verbessern, indem du anonym Statistiken wie die Versionsnummer der Erweiterung und die aktivierten Funktionen teilst. Es werden keine Modrinth-Daten, Aktivitäten oder persönliche Informationen erfasst."
+    "defaultMessage": "Hilf dabei, die Erweiterung zu verbessern, indem du anonym Statistiken wie die Version der Erweiterung und die aktivierten Funktionen teilst. Es werden keine Modrinth-Daten, Aktivitäten oder persönliche Informationen erfasst."
   },
   "feature.telemetry.disabledTooltip": {
     "defaultMessage": "Wird durch die Firefox-Einstellungen zur Datenerfassung gesteuert"
@@ -107,11 +107,14 @@
   "popup.group.general": {
     "defaultMessage": "Allgemein"
   },
+  "search.any": {
+    "defaultMessage": "Beliebig"
+  },
   "settings.language": {
     "defaultMessage": "Sprache"
   },
   "settings.language.description": {
-    "defaultMessage": "Hilf bei der Übersetzung auf <link>Crowdin</link>. Einige Sprachen sind möglicherweise noch unvollständig."
+    "defaultMessage": "Hilf bei der Übersetzung auf <link>Crowdin</link>. Einige Sprachen sind eventuell unvollständig."
   }
 }
 
