@@ -1,44 +1,56 @@
 {
-  "depExplorer.controls": {
+  "dependency-explorer.controls": {
     "defaultMessage": "scroll to zoom · drag to pan · click to expand"
   },
-  "depExplorer.noDependencies": {
-    "defaultMessage": "This project has no dependencies"
-  },
-  "depExplorer.title": {
-    "defaultMessage": "Dependency Graph"
-  },
-  "depNode.collapse": {
+  "dependency-explorer.dependency-node.collapse": {
     "defaultMessage": "Collapse dependencies"
   },
-  "depNode.embedded": {
+  "dependency-explorer.dependency-node.embedded": {
     "defaultMessage": "Embedded"
   },
-  "depNode.expand": {
+  "dependency-explorer.dependency-node.expand": {
     "defaultMessage": "Expand dependencies"
   },
-  "depNode.incompatible": {
+  "dependency-explorer.dependency-node.incompatible": {
     "defaultMessage": "Incompatible"
   },
-  "depNode.optional": {
+  "dependency-explorer.dependency-node.optional": {
     "defaultMessage": "Optional"
   },
-  "depNode.required": {
+  "dependency-explorer.dependency-node.required": {
     "defaultMessage": "Required"
   },
-  "deps.loadError": {
-    "defaultMessage": "Failed to load dependencies"
+  "dependency-explorer.embedded": {
+    "defaultMessage": "Embedded"
   },
-  "deps.loading": {
+  "dependency-explorer.loading": {
     "defaultMessage": "Loading"
   },
-  "deps.none": {
+  "dependency-explorer.no-dependencies": {
+    "defaultMessage": "This project has no dependencies"
+  },
+  "dependency-explorer.optional": {
+    "defaultMessage": "Optional"
+  },
+  "dependency-explorer.required": {
+    "defaultMessage": "Required"
+  },
+  "dependency-explorer.title": {
+    "defaultMessage": "Dependency Graph"
+  },
+  "dependency-sidebar.load-error": {
+    "defaultMessage": "Failed to load dependencies"
+  },
+  "dependency-sidebar.loading": {
+    "defaultMessage": "Loading"
+  },
+  "dependency-sidebar.none": {
     "defaultMessage": "No dependencies"
   },
-  "deps.openGraph": {
+  "dependency-sidebar.open-graph": {
     "defaultMessage": "Open dependency graph"
   },
-  "deps.title": {
+  "dependency-sidebar.title": {
     "defaultMessage": "Dependencies"
   },
   "discord.members": {

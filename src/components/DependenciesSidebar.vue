@@ -1,10 +1,10 @@
 <template>
 	<div class="card flex-card experimental-styles-within">
 		<div class="flex items-center justify-between gap-2">
-			<h2>{{ formatMessage(messages['deps.title']) }}</h2>
+			<h2>{{ formatMessage(messages['dependency-sidebar.title']) }}</h2>
 			<button
 				v-if="!loading && !error && roots.length > 0"
-				v-tooltip="formatMessage(messages['deps.openGraph'])"
+				v-tooltip="formatMessage(messages['dependency-sidebar.open-graph'])"
 				class="btn btn-transparent p-1"
 				style="height: auto; line-height: 1"
 				@click="explorerRef?.show()"
@@ -32,14 +32,14 @@
 		<div class="details-list">
 			<div v-if="loading" class="details-list__item">
 				<LoaderCircleIcon class="animate-spin" />
-				{{ formatMessage(messages['deps.loading']) }}
+				{{ formatMessage(messages['dependency-sidebar.loading']) }}
 			</div>
 			<div v-else-if="error" class="details-list__item font-normal text-secondary">
-				{{ formatMessage(messages['deps.loadError']) }}
+				{{ formatMessage(messages['dependency-sidebar.load-error']) }}
 			</div>
 			<div v-else-if="roots.length === 0" class="details-list__item text-secondary">
 				<XIcon aria-hidden="true" />
-				{{ formatMessage(messages['deps.none']) }}
+				{{ formatMessage(messages['dependency-sidebar.none']) }}
 			</div>
 			<ScrollablePanel v-else class="[&__.scrollable-pane]:max-h-96">
 				<ul class="m-0 flex list-none flex-col gap-3 p-0 pr-2">
@@ -77,11 +77,17 @@ import DependencyNode from './DependencyNode.vue'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
-	'deps.title': { id: 'deps.title', defaultMessage: 'Dependencies' },
-	'deps.openGraph': { id: 'deps.openGraph', defaultMessage: 'Open dependency graph' },
-	'deps.loading': { id: 'deps.loading', defaultMessage: 'Loading' },
-	'deps.loadError': { id: 'deps.loadError', defaultMessage: 'Failed to load dependencies' },
-	'deps.none': { id: 'deps.none', defaultMessage: 'No dependencies' },
+	'dependency-sidebar.title': { id: 'dependency-sidebar.title', defaultMessage: 'Dependencies' },
+	'dependency-sidebar.open-graph': {
+		id: 'dependency-sidebar.open-graph',
+		defaultMessage: 'Open dependency graph',
+	},
+	'dependency-sidebar.loading': { id: 'dependency-sidebar.loading', defaultMessage: 'Loading' },
+	'dependency-sidebar.load-error': {
+		id: 'dependency-sidebar.load-error',
+		defaultMessage: 'Failed to load dependencies',
+	},
+	'dependency-sidebar.none': { id: 'dependency-sidebar.none', defaultMessage: 'No dependencies' },
 })
 
 const props = defineProps<{

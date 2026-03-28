@@ -1,7 +1,7 @@
 <template>
 	<NewModal
 		ref="modal"
-		:header="formatMessage(messages['depExplorer.title'])"
+		:header="formatMessage(messages['dependency-explorer.title'])"
 		:closable="true"
 		:no-padding="true"
 		max-width="min(96vw, 1400px)"
@@ -225,7 +225,7 @@
 					fill="#666"
 					font-size="14"
 				>
-					{{ formatMessage(messages['depExplorer.noDependencies']) }}
+					{{ formatMessage(messages['dependency-explorer.no-dependencies']) }}
 				</text>
 			</svg>
 
@@ -249,7 +249,7 @@
 				>
 					<path d="M21 12a9 9 0 1 1-6.219-8.56" />
 				</svg>
-				{{ formatMessage(messages['deps.loading']) }}
+				{{ formatMessage(messages['dependency-explorer.loading']) }}
 			</div>
 
 			<!-- Legend -->
@@ -271,7 +271,7 @@
 				class="absolute bottom-3 right-3"
 				style="font-size: 11px; color: #555; pointer-events: none"
 			>
-				{{ formatMessage(messages['depExplorer.controls']) }}
+				{{ formatMessage(messages['dependency-explorer.controls']) }}
 			</div>
 		</div>
 	</NewModal>
@@ -319,19 +319,34 @@ type D3Link = SimulationLinkDatum<GraphNode> & { type: GraphEdge['type'] }
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
-	'depExplorer.title': { id: 'depExplorer.title', defaultMessage: 'Dependency Graph' },
-	'depExplorer.noDependencies': {
-		id: 'depExplorer.noDependencies',
+	'dependency-explorer.title': {
+		id: 'dependency-explorer.title',
+		defaultMessage: 'Dependency Graph',
+	},
+	'dependency-explorer.no-dependencies': {
+		id: 'dependency-explorer.no-dependencies',
 		defaultMessage: 'This project has no dependencies',
 	},
-	'depExplorer.controls': {
-		id: 'depExplorer.controls',
+	'dependency-explorer.controls': {
+		id: 'dependency-explorer.controls',
 		defaultMessage: 'scroll to zoom · drag to pan · click to expand',
 	},
-	'depNode.required': { id: 'depNode.required', defaultMessage: 'Required' },
-	'depNode.optional': { id: 'depNode.optional', defaultMessage: 'Optional' },
-	'depNode.embedded': { id: 'depNode.embedded', defaultMessage: 'Embedded' },
-	'deps.loading': { id: 'deps.loading', defaultMessage: 'Loading' },
+	'dependency-explorer.required': {
+		id: 'dependency-explorer.required',
+		defaultMessage: 'Required',
+	},
+	'dependency-explorer.optional': {
+		id: 'dependency-explorer.optional',
+		defaultMessage: 'Optional',
+	},
+	'dependency-explorer.embedded': {
+		id: 'dependency-explorer.embedded',
+		defaultMessage: 'Embedded',
+	},
+	'dependency-explorer.loading': {
+		id: 'dependency-explorer.loading',
+		defaultMessage: 'Loading',
+	},
 })
 
 const EDGE_COLORS: Record<string, string> = {
@@ -341,9 +356,21 @@ const EDGE_COLORS: Record<string, string> = {
 }
 
 const LEGEND = computed(() => [
-	{ type: 'required', color: '#4ade80', label: formatMessage(messages['depNode.required']) },
-	{ type: 'optional', color: '#888', label: formatMessage(messages['depNode.optional']) },
-	{ type: 'embedded', color: '#60a5fa', label: formatMessage(messages['depNode.embedded']) },
+	{
+		type: 'required',
+		color: '#4ade80',
+		label: formatMessage(messages['dependency-explorer.required']),
+	},
+	{
+		type: 'optional',
+		color: '#888',
+		label: formatMessage(messages['dependency-explorer.optional']),
+	},
+	{
+		type: 'embedded',
+		color: '#60a5fa',
+		label: formatMessage(messages['dependency-explorer.embedded']),
+	},
 ])
 
 const edgesWithCurvature = computed(() => {

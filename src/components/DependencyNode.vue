@@ -10,8 +10,8 @@
 				:aria-expanded="expanded"
 				:aria-label="
 					expanded
-						? formatMessage(messages['depNode.collapse'])
-						: formatMessage(messages['depNode.expand'])
+						? formatMessage(messages['dependency-explorer.dependency-node.collapse'])
+						: formatMessage(messages['dependency-explorer.dependency-node.expand'])
 				"
 				@click="toggle"
 			>
@@ -71,12 +71,30 @@ defineOptions({ name: 'DependencyNode' })
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
-	'depNode.collapse': { id: 'depNode.collapse', defaultMessage: 'Collapse dependencies' },
-	'depNode.expand': { id: 'depNode.expand', defaultMessage: 'Expand dependencies' },
-	'depNode.required': { id: 'depNode.required', defaultMessage: 'Required' },
-	'depNode.optional': { id: 'depNode.optional', defaultMessage: 'Optional' },
-	'depNode.incompatible': { id: 'depNode.incompatible', defaultMessage: 'Incompatible' },
-	'depNode.embedded': { id: 'depNode.embedded', defaultMessage: 'Embedded' },
+	'dependency-explorer.dependency-node.collapse': {
+		id: 'dependency-explorer.dependency-node.collapse',
+		defaultMessage: 'Collapse dependencies',
+	},
+	'dependency-explorer.dependency-node.expand': {
+		id: 'dependency-explorer.dependency-node.expand',
+		defaultMessage: 'Expand dependencies',
+	},
+	'dependency-explorer.dependency-node.required': {
+		id: 'dependency-explorer.dependency-node.required',
+		defaultMessage: 'Required',
+	},
+	'dependency-explorer.dependency-node.optional': {
+		id: 'dependency-explorer.dependency-node.optional',
+		defaultMessage: 'Optional',
+	},
+	'dependency-explorer.dependency-node.incompatible': {
+		id: 'dependency-explorer.dependency-node.incompatible',
+		defaultMessage: 'Incompatible',
+	},
+	'dependency-explorer.dependency-node.embedded': {
+		id: 'dependency-explorer.dependency-node.embedded',
+		defaultMessage: 'Embedded',
+	},
 })
 
 const MAX_DEPTH = 2
@@ -99,10 +117,10 @@ const projectHref = computed(() => {
 const typeLabel = computed(
 	() =>
 		({
-			required: formatMessage(messages['depNode.required']),
-			optional: formatMessage(messages['depNode.optional']),
-			incompatible: formatMessage(messages['depNode.incompatible']),
-			embedded: formatMessage(messages['depNode.embedded']),
+			required: formatMessage(messages['dependency-explorer.dependency-node.required']),
+			optional: formatMessage(messages['dependency-explorer.dependency-node.optional']),
+			incompatible: formatMessage(messages['dependency-explorer.dependency-node.incompatible']),
+			embedded: formatMessage(messages['dependency-explorer.dependency-node.embedded']),
 		})[props.dep.dependency_type] ?? props.dep.dependency_type,
 )
 
