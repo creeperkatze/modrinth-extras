@@ -57,7 +57,7 @@
     "defaultMessage": "Dieser Fehler hängt eventuell mit Modrinth Extras zusammen. Versuche, die Erweiterung zu deaktivieren und die Seite neu zu laden, bevor du dies Modrinth meldest. Falls der Fehler verschwindet, melde ihn bitte <link>hier</link>."
   },
   "github.forks": {
-    "defaultMessage": "{count} Forks"
+    "defaultMessage": "{count} Forks"
   },
   "github.openIssues": {
     "defaultMessage": "{count} offene Issues"
