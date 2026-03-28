@@ -13,5 +13,8 @@
   },
   "meta.description.footer": {
     "defaultMessage": "All features are optional and can be toggled individually from the extension popup.\n\nModrinth Extras is <link>open source</link>."
+  },
+  "meta.description.disclaimer": {
+    "defaultMessage": "The extension is not associated with or endorsed by Modrinth."
   }
 }

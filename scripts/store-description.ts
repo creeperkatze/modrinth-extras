@@ -72,6 +72,8 @@ const desc = [
 	featureLines(extensionFeatures),
 	'',
 	footer,
+	'',
+	t(meta, 'meta.description.disclaimer'),
 ].join('\n')
 
 console.log(desc)

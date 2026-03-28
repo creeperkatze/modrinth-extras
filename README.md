@@ -8,6 +8,10 @@ A browser extension that enhances Modrinth on the website and beyond.
 ![GitHub Repo stars](https://img.shields.io/github/stars/creeperkatze/modrinth-extras?style=flat&labelColor=0d143c)
 [![Crowdin](https://badges.crowdin.net/modrinth-extras/localized.svg)](https://crowdin.com/project/modrinth-extras)
 
+
+> [!NOTE]
+> The extension is not associated with or endorsed by Modrinth.
+
 ## 🚀 Installation
 
 Install from your browser's extension store:
