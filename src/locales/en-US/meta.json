@@ -12,6 +12,6 @@
     "defaultMessage": "Extension features:"
   },
   "meta.description.footer": {
-    "defaultMessage": "All features are optional and can be toggled individually from the extension popup.\n\nModrinth Extras is open source."
+    "defaultMessage": "All features are optional and can be toggled individually from the extension popup.\n\nModrinth Extras is <link>open source</link>."
   }
 }
