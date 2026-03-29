@@ -46,7 +46,8 @@ function injectStackingStyle() {
 	const el = document.createElement('style')
 	el.id = stackingStyleId
 	el.textContent = `
-		.layout > main {
+		.layout > main,
+		.layout > footer {
 			position: relative;
 			z-index: 2;
 		}
@@ -94,12 +95,6 @@ onMounted(async () => {
 
 <style scoped>
 .gallery-banner-fade {
-	background: linear-gradient(
-		to bottom,
-		color-mix(in srgb, var(--color-bg) 40%, transparent) 0%,
-		color-mix(in srgb, var(--color-bg) 50%, transparent) 30%,
-		color-mix(in srgb, var(--color-bg) 70%, transparent) 50%,
-		var(--color-bg) 70%
-	);
+	background: linear-gradient(to bottom, transparent 60%, var(--color-bg) 80%);
 }
 </style>
