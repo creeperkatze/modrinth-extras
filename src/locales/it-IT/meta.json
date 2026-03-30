@@ -13,6 +13,9 @@
   },
   "meta.description.footer": {
     "defaultMessage": "Tutte le funzionalità sono opzionali e possono essere attivate o disattivate singolarmente dal popup dell'estensione.\n\nModrinth Extras è  <link>open source</link>."
+  },
+  "meta.description.disclaimer": {
+    "defaultMessage": "L'estensione non è associata o approvata da Modrinth."
   }
 }
 
