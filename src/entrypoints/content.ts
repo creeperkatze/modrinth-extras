@@ -365,7 +365,7 @@ export default defineContentScript({
 			projectScoped: true,
 			attach(container) {
 				const path = window.location.pathname
-				if (!/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/[^/?#]+/.test(path))
+				if (!/^\/(mod|plugin|datapack|shader|resourcepack|modpack|server)\/[^/?#]+/.test(path))
 					return false
 				const header = document.querySelector('.normal-page__header')
 				if (!header) return false
@@ -377,7 +377,7 @@ export default defineContentScript({
 			},
 			createApp() {
 				const slug = window.location.pathname.match(
-					/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/([^/]+)/,
+					/^\/(mod|plugin|datapack|shader|resourcepack|modpack|server)\/([^/]+)/,
 				)?.[2]
 				const app = createApp(h(GalleryBackground, { projectSlug: slug ?? '' }))
 				return app
