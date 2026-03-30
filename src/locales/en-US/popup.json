@@ -35,11 +35,11 @@
   "feature.discordSidebar.title": {
     "defaultMessage": "Discord sidebar"
   },
-  "feature.galleryBanner.description": {
+  "feature.galleryBackground.description": {
     "defaultMessage": "Display the featured gallery image as a background banner on project pages."
   },
-  "feature.galleryBanner.title": {
-    "defaultMessage": "Gallery banner"
+  "feature.galleryBackground.title": {
+    "defaultMessage": "Gallery background"
   },
   "feature.githubSidebar.description": {
     "defaultMessage": "Stars, issues, pull requests, and forks for linked repositories."

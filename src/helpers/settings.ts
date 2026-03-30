@@ -35,7 +35,7 @@ export interface ExtensionSettings {
 	dependenciesSidebar: { enabled: boolean }
 	githubSidebar: { enabled: boolean }
 	discordSidebar: { enabled: boolean }
-	galleryBanner: { enabled: boolean }
+	galleryBackground: { enabled: boolean }
 	notificationBadge: { enabled: boolean }
 	desktopNotifications: { enabled: boolean }
 	curseforgeRedirect: { enabled: boolean }
@@ -52,7 +52,7 @@ export const DEFAULTS: ExtensionSettings = {
 	dependenciesSidebar: { enabled: true },
 	githubSidebar: { enabled: true },
 	discordSidebar: { enabled: true },
-	galleryBanner: { enabled: true },
+	galleryBackground: { enabled: true },
 	notificationBadge: { enabled: true },
 	desktopNotifications: { enabled: false },
 	curseforgeRedirect: { enabled: false },
@@ -106,6 +106,7 @@ async function migrateFromFlatStorage(): Promise<ExtensionSettings> {
 		discordSidebar: {
 			enabled: b('showDiscordSidebar', DEFAULTS.discordSidebar.enabled),
 		},
+		galleryBackground: DEFAULTS.galleryBackground,
 		notificationBadge: {
 			enabled: b('showBadge', DEFAULTS.notificationBadge.enabled),
 		},

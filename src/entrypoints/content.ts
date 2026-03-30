@@ -9,7 +9,7 @@ import DependenciesSidebar from '../components/DependenciesSidebar.vue'
 import DiscordSidebar from '../components/DiscordSidebar.vue'
 import ErrorNotice from '../components/ErrorNotice.vue'
 import FooterBadge from '../components/FooterBadge.vue'
-import GalleryBanner from '../components/GalleryBanner.vue'
+import GalleryBackground from '../components/GalleryBackground.vue'
 import GitHubSidebar from '../components/GitHubSidebar.vue'
 import NotificationsIndicator from '../components/NotificationsIndicator.vue'
 import ProjectCardActions from '../components/ProjectCardActions.vue'
@@ -349,26 +349,27 @@ export default defineContentScript({
 			},
 		})
 
-		const galleryBanner = createInjection({
-			id: 'modrinth-extras-gallery-banner',
-			isEnabled: () => settings.galleryBanner.enabled,
-			settingsKeys: ['galleryBanner'],
+		const galleryBackground = createInjection({
+			id: 'modrinth-extras-gallery-background',
+			isEnabled: () => settings.galleryBackground.enabled,
+			settingsKeys: ['galleryBackground'],
 			persistent: false,
 			projectScoped: true,
 			attach(container) {
 				const path = window.location.pathname
 				if (!/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/[^/?#]+/.test(path))
 					return false
-				if (!document.querySelector('.normal-page__header')) return false
+				const header = document.querySelector('.normal-page__header')
+				if (!header) return false
 				container.style.display = 'contents'
-				document.body.appendChild(container)
+				header.appendChild(container)
 				return true
 			},
 			createApp() {
 				const slug = window.location.pathname.match(
 					/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/([^/]+)/,
 				)?.[2]
-				const app = createApp(h(GalleryBanner, { projectSlug: slug ?? '' }))
+				const app = createApp(h(GalleryBackground, { projectSlug: slug ?? '' }))
 				return app
 			},
 		})
@@ -487,7 +488,7 @@ export default defineContentScript({
 			toolsSidebar,
 			dependencySidebar,
 			activitySparkline,
-			galleryBanner,
+			galleryBackground,
 			gitHubSidebar,
 			discordSidebar,
 			errorNotice,

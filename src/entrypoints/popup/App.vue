@@ -289,12 +289,12 @@ const messages = defineMessages({
 		defaultMessage:
 			'Server name, description, member count, and online count for linked Discord servers.',
 	},
-	'feature.galleryBanner.title': {
-		id: 'feature.galleryBanner.title',
-		defaultMessage: 'Gallery banner',
+	'feature.galleryBackground.title': {
+		id: 'feature.galleryBackground.title',
+		defaultMessage: 'Gallery background',
 	},
-	'feature.galleryBanner.description': {
-		id: 'feature.galleryBanner.description',
+	'feature.galleryBackground.description': {
+		id: 'feature.galleryBackground.description',
 		defaultMessage: 'Display the featured gallery image as a background banner on project pages.',
 	},
 	'feature.notificationBadge.title': {
@@ -445,10 +445,10 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 		description: formatMessage(messages['feature.discordSidebar.description']),
 	},
 	{
-		key: 'galleryBanner',
+		key: 'galleryBackground',
 		icon: ImageIcon,
-		title: formatMessage(messages['feature.galleryBanner.title']),
-		description: formatMessage(messages['feature.galleryBanner.description']),
+		title: formatMessage(messages['feature.galleryBackground.title']),
+		description: formatMessage(messages['feature.galleryBackground.description']),
 	},
 ])
 
