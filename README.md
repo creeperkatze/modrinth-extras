@@ -16,9 +16,9 @@ A browser extension that enhances Modrinth on the website and beyond.
 
 Install from your browser's extension store:
 
-- **[Chrome Web Store](https://chromewebstore.google.com/detail/modrinth-extras/ajmkilipadfpaefpcjfgnkejalmhdlcj)** ![Chrome Web Store Version](https://img.shields.io/chrome-web-store/v/ajmkilipadfpaefpcjfgnkejalmhdlcj?label=)
-- **[Firefox Add-Ons](https://addons.mozilla.org/firefox/addon/modrinth-extras/)** ![Mozilla Add-on Version](https://img.shields.io/amo/v/modrinth-extras?label=)
-- **[Edge Add-Ons](https://microsoftedge.microsoft.com/addons/detail/modrinth-extras/jkfgnimibfpoohbmaibjdjdmfnjmbjcj)** ![Edge Addon Version](https://img.shields.io/badge/dynamic/json?label=&prefix=v&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjkfgnimibfpoohbmaibjdjdmfnjmbjcj)
+- **[Chrome Web Store](https://chromewebstore.google.com/detail/modrinth-extras/ajmkilipadfpaefpcjfgnkejalmhdlcj)** ![Chrome Web Store Version](https://img.shields.io/chrome-web-store/v/ajmkilipadfpaefpcjfgnkejalmhdlcj?label=)![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/ajmkilipadfpaefpcjfgnkejalmhdlcj?style=flat&labelColor=0d143c&color=yellow)
+- **[Firefox Add-Ons](https://addons.mozilla.org/firefox/addon/modrinth-extras/)** ![Mozilla Add-on Version](https://img.shields.io/amo/v/modrinth-extras?label=)![Mozilla Add-on Users](https://img.shields.io/amo/users/modrinth-extras?style=flat&labelColor=0d143c&color=yellow)
+- **[Edge Add-Ons](https://microsoftedge.microsoft.com/addons/detail/modrinth-extras/jkfgnimibfpoohbmaibjdjdmfnjmbjcj)** ![Edge Addon Version](https://img.shields.io/badge/dynamic/json?label=&prefix=v&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjkfgnimibfpoohbmaibjdjdmfnjmbjcj)![Edge Addon Users](https://img.shields.io/badge/dynamic/json?label=users&query=%24.activeInstallCount&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjkfgnimibfpoohbmaibjdjdmfnjmbjcj?style=flat&labelColor=0d143c&color=yellow)
 
 Or install manually from the latest [GitHub release](https://github.com/creeperkatze/modrinth-extras/releases):
 
