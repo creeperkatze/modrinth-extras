@@ -1,16 +1,3 @@
-/**
- * MAIN world content script that bridges the Nuxt app to the extension.
- *
- * The primary content script (content.ts) runs in the ISOLATED world and
- * cannot access the page's JavaScript — including `window.__nuxt_app` and
- * the Nuxt router. This tiny MAIN world script acts as a bridge:
- *
- *  - Dispatches `modrinth-extras:router-ready` after Nuxt hydration completes.
- *  - Hooks into the Nuxt router lifecycle (beforeEach / afterEach) and
- *    dispatches CustomEvents so the ISOLATED script can react.
- *  - Listens for `modrinth-extras:navigate` events and calls `router.push()`
- *    for true client-side SPA navigation.
- */
 export default defineContentScript({
 	matches: ['https://modrinth.com/*'],
 	world: 'MAIN',
@@ -55,9 +42,7 @@ export default defineContentScript({
 				return
 			}
 
-			// When the target pathname matches the current one, Vue Router reuses
-			// the keep-alive component and useAsyncData never re-runs. Force a
-			// remount by routing through an intermediate path first.
+			// Same-path navigation needs a remount to re-trigger useAsyncData
 			const targetPathname = path.split('?')[0]
 			if (targetPathname === window.location.pathname) {
 				router.push('/').then(() => router.push(path))
@@ -70,39 +55,74 @@ export default defineContentScript({
 			window.dispatchEvent(new CustomEvent('modrinth-extras:router-ready'))
 		}
 
-		function hookRouter(): boolean {
-			const router = getRouter()!
-			if (!router) return false
-
-			// The router is available before Nuxt hydration completes.
-			// Adding guards or dispatching events during hydration can
-			// break Vue's internal iterator state, so defer everything
-			// until hydration is truly finished.
-			function attach() {
+		function onHydrated() {
+			const router = getRouter()
+			if (router) {
 				router.beforeEach(() => {
 					window.dispatchEvent(new CustomEvent('modrinth-extras:before-navigate'))
 				})
 				router.afterEach(() => {
 					window.dispatchEvent(new CustomEvent('modrinth-extras:after-navigate'))
 				})
-				dispatchReady()
 			}
+			dispatchReady()
+		}
 
+		// Nuxt lifecycle: mount > isHydrating=false > app:suspense:resolve
+		let settling = false
+
+		function waitForNuxtApp() {
 			const nuxtApp = w.__nuxt_app
-			if (nuxtApp?.isHydrating === false) {
-				attach()
-			} else if (nuxtApp?.hook) {
-				nuxtApp.hook('app:suspense:resolve', () => requestAnimationFrame(attach))
-			} else {
-				requestAnimationFrame(() => requestAnimationFrame(attach))
+			if (nuxtApp?.hook) {
+				let resolved = false
+				nuxtApp.hook('app:suspense:resolve', () => {
+					if (resolved) return
+					resolved = true
+					requestAnimationFrame(onHydrated)
+				})
+				if (nuxtApp.isHydrating === false) {
+					requestAnimationFrame(() => {
+						if (!resolved) {
+							resolved = true
+							onHydrated()
+						}
+					})
+				}
+				return true
 			}
+			if (nuxtApp?.isHydrating === false) {
+				onHydrated()
+				return true
+			}
+			return false
+		}
 
+		function checkReady(): boolean {
+			if (waitForNuxtApp()) return true
+
+			// __vue_app__ is observable via MutationObserver, __nuxt_app isn't
+			const nuxtEl = document.getElementById('__nuxt') as
+				| (HTMLElement & { __vue_app__?: object })
+				| null
+			if (!nuxtEl?.__vue_app__ || settling) return false
+
+			settling = true
+			let frames = 0
+			const poll = () => {
+				if (waitForNuxtApp()) return
+				if (++frames < 120) {
+					requestAnimationFrame(poll)
+				} else {
+					onHydrated()
+				}
+			}
+			requestAnimationFrame(poll)
 			return true
 		}
 
-		if (!hookRouter()) {
+		if (!checkReady()) {
 			const observer = new MutationObserver(() => {
-				if (hookRouter()) observer.disconnect()
+				if (checkReady()) observer.disconnect()
 			})
 			observer.observe(document.documentElement, { childList: true, subtree: true })
 		}

@@ -36,7 +36,7 @@ src/
 ### Dual Content Script Worlds
 
 - **ISOLATED world** (`content.ts`): Cannot access page JS. Mounts Vue components, handles settings, listens for browser messages.
-- **MAIN world** (`modrinth-bridge.content.ts`): Runs in page context, hooks into Nuxt router. Dispatches `modrinth-extras:router-ready` when hydrated, and handles `modrinth-extras:navigate` postMessages to call `router.push()`.
+- **MAIN world** (`modrinth-bridge.content.ts`): Runs in page context, hooks into Nuxt router. Dispatches `modrinth-extras:router-ready` after Nuxt suspense resolves (not just hydration — suspense fires after async data loads too). Hooks `beforeEach`/`afterEach` to dispatch navigation CustomEvents. Handles `modrinth-extras:navigate` postMessages to call `router.push()`. Finds the router via `window.__nuxt_app.$router` or `#__nuxt.__vue_app__` (the latter is observable via MutationObserver, the former is not).
 
 ### Injection System
 
