@@ -1,2 +1,147 @@
-{}
+{
+  "dependenciesSidebar.loadError": {
+    "defaultMessage": "Échec du chargement de la dépendance"
+  },
+  "dependenciesSidebar.loading": {
+    "defaultMessage": "Chargement"
+  },
+  "dependenciesSidebar.none": {
+    "defaultMessage": "Aucune dépendance"
+  },
+  "dependenciesSidebar.openGraph": {
+    "defaultMessage": "Ouvrir le graphique des dépendances"
+  },
+  "dependenciesSidebar.title": {
+    "defaultMessage": "Dépendances"
+  },
+  "dependencyExplorer.controls": {
+    "defaultMessage": "faire défiler pour zoomer · faire glisser pour déplacer · cliquer pour agrandir"
+  },
+  "dependencyExplorer.dependencyNode.collapse": {
+    "defaultMessage": "Réduire les dépendances"
+  },
+  "dependencyExplorer.dependencyNode.embedded": {
+    "defaultMessage": "Intégré"
+  },
+  "dependencyExplorer.dependencyNode.expand": {
+    "defaultMessage": "Développer les dépendances"
+  },
+  "dependencyExplorer.dependencyNode.incompatible": {
+    "defaultMessage": "Incompatible"
+  },
+  "dependencyExplorer.dependencyNode.optional": {
+    "defaultMessage": "Facultatif"
+  },
+  "dependencyExplorer.dependencyNode.required": {
+    "defaultMessage": "Requis"
+  },
+  "dependencyExplorer.loading": {
+    "defaultMessage": "Chargement"
+  },
+  "dependencyExplorer.noDependencies": {
+    "defaultMessage": "Ce projet n'a aucune dépendance"
+  },
+  "dependencyExplorer.title": {
+    "defaultMessage": "Graphe des dépendances"
+  },
+  "discordSidebar.members": {
+    "defaultMessage": "{count} membres"
+  },
+  "discordSidebar.online": {
+    "defaultMessage": "{count} en ligne"
+  },
+  "discordSidebar.partnered": {
+    "defaultMessage": "Partenaire"
+  },
+  "discordSidebar.verified": {
+    "defaultMessage": "Vérifié"
+  },
+  "errorNotice.message": {
+    "defaultMessage": "Cette erreur peut être liée à Modrinth Extras. Essayez de désactiver l'extension et de rafraîchir la page avant de la signaler à Modrinth. Si l'erreur disparaît, veuillez la signaler à <link>ici</link>."
+  },
+  "githubSidebar.forks": {
+    "defaultMessage": "{count} forks"
+  },
+  "githubSidebar.openIssues": {
+    "defaultMessage": "{count} tickets ouverts"
+  },
+  "githubSidebar.openPRs": {
+    "defaultMessage": "{count} ouvrir les pull requests"
+  },
+  "githubSidebar.stars": {
+    "defaultMessage": "{count} étoiles"
+  },
+  "notificationsIndicator.markAllAsRead": {
+    "defaultMessage": "Tout marquer comme lu"
+  },
+  "notificationsIndicator.noUnread": {
+    "defaultMessage": "Pas de notifications non lues"
+  },
+  "notificationsIndicator.projectUpdated": {
+    "defaultMessage": "{title} a été mis à jour"
+  },
+  "notificationsIndicator.viewAll": {
+    "defaultMessage": "Voir tout"
+  },
+  "notificationsIndicator.viewHistory": {
+    "defaultMessage": "Voir l'historique"
+  },
+  "projectCardActions.copied": {
+    "defaultMessage": "Copié !"
+  },
+  "projectCardActions.copyLink": {
+    "defaultMessage": "Copier le lien"
+  },
+  "projectCardActions.download": {
+    "defaultMessage": "Télécharger"
+  },
+  "projectCardActions.follow": {
+    "defaultMessage": "Suivre"
+  },
+  "projectCardActions.newCollection": {
+    "defaultMessage": "Créer une nouvelle collection"
+  },
+  "projectCardActions.noCollections": {
+    "defaultMessage": "Aucune collection trouvée."
+  },
+  "projectCardActions.save": {
+    "defaultMessage": "Enregistrer"
+  },
+  "projectCardActions.saved": {
+    "defaultMessage": "Enregistré"
+  },
+  "projectCardActions.searchPlaceholder": {
+    "defaultMessage": "Rechercher..."
+  },
+  "projectCardActions.unfollow": {
+    "defaultMessage": "Ne plus suivre"
+  },
+  "quickSearch.examples": {
+    "defaultMessage": "Exemples"
+  },
+  "quickSearch.recent": {
+    "defaultMessage": "Récent"
+  },
+  "quickSearch.search": {
+    "defaultMessage": "Rechercher"
+  },
+  "toolsSidebar.copied": {
+    "defaultMessage": "Copié !"
+  },
+  "toolsSidebar.copyDownloadUrl": {
+    "defaultMessage": "Copier l'URL de téléchargement"
+  },
+  "toolsSidebar.copyPackwiz": {
+    "defaultMessage": "Copier packwiz"
+  },
+  "toolsSidebar.generateEmbed": {
+    "defaultMessage": "Générer une intégration"
+  },
+  "toolsSidebar.title": {
+    "defaultMessage": "Outils"
+  },
+  "toolsSidebar.viewApiResponse": {
+    "defaultMessage": "Voir la réponse API"
+  }
+}
 
