@@ -171,7 +171,8 @@ New translations are automatically pulled every Monday.
 
 | Language | Translators |
 |----------|------------|
-| Italian | emanuelplaysofficial |
+| Italian | [EmanuelPlaysDev](https://github.com/EmanuelPlays) |
+| French | [maDU59_](https://github.com/maDU59) |
 
 ## 🤝 Contributing
 
