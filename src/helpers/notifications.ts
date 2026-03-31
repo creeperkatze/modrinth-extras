@@ -50,6 +50,7 @@ export type Notification = {
 }
 
 export function groupNotifications(notifications: Notification[]): Notification[] {
+	if (!Array.isArray(notifications)) return []
 	const byProject = new Map<string, Notification>()
 	const result: Notification[] = []
 
@@ -92,13 +93,16 @@ export async function fetchNotifications(
 	userId: string,
 	options?: ApiFetchOptions,
 ): Promise<Notification[]> {
-	return (await apiFetch(`user/${userId}/notifications`, options)) as Notification[]
+	const result = await apiFetch(`user/${userId}/notifications`, options)
+	return Array.isArray(result) ? result : []
 }
 
 export async function fetchExtraNotificationData(
 	notifications: Notification[],
 	options?: ApiFetchOptions,
 ): Promise<Notification[]> {
+	if (!Array.isArray(notifications)) return []
+
 	const bulk = {
 		projects: [] as string[],
 		reports: [] as string[],
