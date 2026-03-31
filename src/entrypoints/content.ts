@@ -127,9 +127,9 @@ function createDynamicInjection(config: DynamicInjectionConfig) {
 			return
 		}
 		config.onSchedule?.()
-		// Remove stale entries whose target left the DOM
+		// Remove stale entries whose target or injected container left the DOM
 		for (const [target, { container, app }] of injected) {
-			if (!document.contains(target)) {
+			if (!document.contains(target) || !document.contains(container)) {
 				app.unmount()
 				container.parentElement?.removeChild(container)
 				injected.delete(target)
@@ -155,7 +155,7 @@ function createDynamicInjection(config: DynamicInjectionConfig) {
 	function checkDetached(): boolean {
 		let any = false
 		for (const [target, { container, app }] of injected) {
-			if (!document.contains(target)) {
+			if (!document.contains(target) || !document.contains(container)) {
 				app.unmount()
 				container.parentElement?.removeChild(container)
 				injected.delete(target)
