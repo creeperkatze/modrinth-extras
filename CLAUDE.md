@@ -38,6 +38,8 @@ src/
 - **ISOLATED world** (`content.ts`): Cannot access page JS. Mounts Vue components, handles settings, listens for browser messages.
 - **MAIN world** (`modrinth-bridge.content.ts`): Runs in page context, hooks into Nuxt router. Dispatches `modrinth-extras:router-ready` after Nuxt suspense resolves (not just hydration — suspense fires after async data loads too). Hooks `beforeEach`/`afterEach` to dispatch navigation CustomEvents. Handles `modrinth-extras:navigate` postMessages to call `router.push()`. Finds the router via `window.__nuxt_app.$router` or `#__nuxt.__vue_app__` (the latter is observable via MutationObserver, the former is not).
 
+**CurseForge** (`curseforge-bridge.content.ts`) is unrelated to the above — it runs on `curseforge.com`, not Modrinth. It patches `history.pushState`/`replaceState` at `document_start` (MAIN world) so it runs before React Router caches the original reference. Dispatches `modrinth-extras:cf-navigated` on navigation.
+
 ### Injection System
 
 - `createInjection`: single instance per page (e.g. notifications indicator, quick search). Handles mount/unmount lifecycle across SPA navigations.

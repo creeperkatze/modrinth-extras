@@ -1,12 +1,3 @@
-/**
- * MAIN world content script that detects SPA navigation on CurseForge.
- *
- * CurseForge uses React Router which captures a reference to history.pushState
- * during initialization. Patching pushState from the ISOLATED world has no
- * effect because React already holds the original reference. This MAIN world
- * script patches pushState/replaceState before React can cache them and
- * dispatches CustomEvents so the ISOLATED world script can react.
- */
 export default defineContentScript({
 	matches: ['https://www.curseforge.com/*'],
 	world: 'MAIN',
