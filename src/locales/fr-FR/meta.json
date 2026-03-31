@@ -1,2 +1,21 @@
-{}
+{
+  "meta.summary": {
+    "defaultMessage": "Une extension de navigateur qui améliore Modrinth sur le site web et au-delà."
+  },
+  "meta.description.generalTitle": {
+    "defaultMessage": "Fonctionnalités générales:"
+  },
+  "meta.description.contentTitle": {
+    "defaultMessage": "Fonctionnalités de la page de contenu:"
+  },
+  "meta.description.extensionTitle": {
+    "defaultMessage": "Fonctionnalités de l'extension:"
+  },
+  "meta.description.footer": {
+    "defaultMessage": "Toutes les fonctionnalités sont facultatives et peuvent être activées ou désactivées individuellement depuis la fenêtre contextuelle de l'extension.\n\nModrinth Extras est <link>open source</link>."
+  },
+  "meta.description.disclaimer": {
+    "defaultMessage": "Cette extension n'est ni associée à Modrinth ni approuvée par Modrinth."
+  }
+}
 

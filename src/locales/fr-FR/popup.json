@@ -1,2 +1,126 @@
-{}
+{
+  "feature.activitySparkline.description": {
+    "defaultMessage": "Graphique d'activité de publications sur les pages de projet."
+  },
+  "feature.activitySparkline.title": {
+    "defaultMessage": "Graphique d'activité"
+  },
+  "feature.curseforgeRedirect.description": {
+    "defaultMessage": "Redirige les pages des projets CurseForge vers Modrinth lorsqu'elles sont disponibles."
+  },
+  "feature.curseforgeRedirect.title": {
+    "defaultMessage": "Redirection de CurseForge"
+  },
+  "feature.dependenciesSidebar.description": {
+    "defaultMessage": "Arborescence des dépendances repliable sur les pages de projet."
+  },
+  "feature.dependenciesSidebar.title": {
+    "defaultMessage": "Barre latérale des dépendances"
+  },
+  "feature.desktopNotifications.description": {
+    "defaultMessage": "Notifications du système d'exploitation pour tes notifications Modrinth."
+  },
+  "feature.desktopNotifications.exampleMessage": {
+    "defaultMessage": "Ceci est un exemple de notification de Modrinth Extras!"
+  },
+  "feature.desktopNotifications.exampleTitle": {
+    "defaultMessage": "Exemple de notification"
+  },
+  "feature.desktopNotifications.title": {
+    "defaultMessage": "Notifications de bureau"
+  },
+  "feature.discordSidebar.description": {
+    "defaultMessage": "Nom du serveur, description, nombre de membres et nombre de personnes en ligne pour les serveurs Discord liés."
+  },
+  "feature.discordSidebar.title": {
+    "defaultMessage": "Barre latérale Discord"
+  },
+  "feature.galleryBackground.description": {
+    "defaultMessage": "Afficher l'image de la galerie en vedette en tant que bannière d'arrière-plan sur les pages de projet."
+  },
+  "feature.galleryBackground.title": {
+    "defaultMessage": "Arrière-plan imagé"
+  },
+  "feature.githubSidebar.description": {
+    "defaultMessage": "Étoiles, tickets, pull requests et forks pour les dépôts liés."
+  },
+  "feature.githubSidebar.title": {
+    "defaultMessage": "Barre latérale GitHub"
+  },
+  "feature.notificationBadge.description": {
+    "defaultMessage": "Nombre de notifications non lues affiché sous forme de badge sur l'icône de l'extension."
+  },
+  "feature.notificationBadge.title": {
+    "defaultMessage": "Badge de notifications"
+  },
+  "feature.notifications.description": {
+    "defaultMessage": "Consulte, gère et efface les notifications non lues directement dans l'en-tête sans quitter la page actuelle."
+  },
+  "feature.notifications.title": {
+    "defaultMessage": "Notifications"
+  },
+  "feature.projectCardActions.description": {
+    "defaultMessage": "Télécharge, suis et enregistre des projets directement depuis leurs fiches de projet."
+  },
+  "feature.projectCardActions.modLoader": {
+    "defaultMessage": "Mod loader"
+  },
+  "feature.projectCardActions.pluginLoader": {
+    "defaultMessage": "Plugin loader"
+  },
+  "feature.projectCardActions.title": {
+    "defaultMessage": "Actions de la fiche de projet"
+  },
+  "feature.quickSearch.description": {
+    "defaultMessage": "Ctrl+K ou / pour une recherche de type palette de commandes avec des filtres par balises pour les loaders, les versions, les catégories et les types."
+  },
+  "feature.quickSearch.title": {
+    "defaultMessage": "Recherche rapide"
+  },
+  "feature.telemetry.description": {
+    "defaultMessage": "Aider à améliorer l'extension en partageant anonymement des statistiques comme la version de l'extension et quelles fonctionnalités sont activées. Aucune donnée, activité ou information personnelle de Modrinth n'est jamais recueillie."
+  },
+  "feature.telemetry.disabledTooltip": {
+    "defaultMessage": "Paramètres de collecte de données gérés par Firefox"
+  },
+  "feature.telemetry.title": {
+    "defaultMessage": "Télémétrie"
+  },
+  "feature.toolsSidebar.description": {
+    "defaultMessage": "Génère des intégrations, affiche les réponses brutes de l'API, copie les URL de téléchargement et les commandes Packwiz."
+  },
+  "feature.toolsSidebar.title": {
+    "defaultMessage": "Barre latérale d'outils"
+  },
+  "popup.footer.checking": {
+    "defaultMessage": "Vérification"
+  },
+  "popup.footer.latestVersion": {
+    "defaultMessage": "Dernière version"
+  },
+  "popup.footer.starOnGitHub": {
+    "defaultMessage": "★ Sur GitHub"
+  },
+  "popup.footer.updateAvailable": {
+    "defaultMessage": "Mise à jour disponible"
+  },
+  "popup.group.contentPages": {
+    "defaultMessage": "Pages de contenu"
+  },
+  "popup.group.extension": {
+    "defaultMessage": "Extension"
+  },
+  "popup.group.general": {
+    "defaultMessage": "Général"
+  },
+  "search.any": {
+    "defaultMessage": "Tous"
+  },
+  "settings.language": {
+    "defaultMessage": "Langue"
+  },
+  "settings.language.description": {
+    "defaultMessage": "Aidez à traduire sur <link>Crowdin</link>. Certaines langues peuvent être incomplètes."
+  }
+}
 
