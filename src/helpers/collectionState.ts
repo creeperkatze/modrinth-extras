@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 
-import { apiFetch } from './apiFetch'
+import { apiFetch } from './api'
 
 export interface Collection {
 	id: string

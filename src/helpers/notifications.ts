@@ -1,7 +1,7 @@
 import type { Organization, Project, Report, User, Version } from '@modrinth/utils'
 import { browser } from 'wxt/browser'
 
-import { apiFetch, type ApiFetchOptions } from './apiFetch'
+import { apiFetch, type ApiFetchOptions } from './api'
 
 export type NotificationAction = {
 	title: string

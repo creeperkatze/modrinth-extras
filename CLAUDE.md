@@ -82,7 +82,7 @@ Rules:
 Prettier config: tabs, single quotes, no semicolons, trailing commas, 100-char lines, LF line endings.
 
 ### API Calls
-Use `apiFetch` from `helpers/apiFetch.ts`. Auth token is read from the `auth-token` cookie automatically. API v2 is default; pass `{ apiVersion: 3 }` for v3 endpoints.
+Use `apiFetch` from `helpers/api.ts`. Auth token is read from the `auth-token` cookie automatically. API v2 is default; pass `{ apiVersion: 3 }` for v3 endpoints.
 
 ### Settings
 Read via `getSettings()`. Settings are deeply merged and cached. Components re-inject when relevant settings keys change (declared in injection config). Never read settings directly from storage in components.

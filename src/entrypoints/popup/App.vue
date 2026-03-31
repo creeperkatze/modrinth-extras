@@ -191,7 +191,7 @@ import {
 import { type Component, computed, onMounted, reactive, ref } from 'vue'
 import { browser } from 'wxt/browser'
 
-import { apiFetch } from '../../helpers/apiFetch'
+import { apiFetch } from '../../helpers/api'
 import { detectBrowserLocale, i18n } from '../../helpers/i18n'
 import { LOCALES } from '../../helpers/locales'
 import { DEFAULTS, type ExtensionSettings, getSettings, saveSettings } from '../../helpers/settings'

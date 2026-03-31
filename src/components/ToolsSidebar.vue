@@ -86,7 +86,7 @@ import {
 import { defineMessages, useVIntl } from '@modrinth/ui'
 import { computed, onMounted, ref } from 'vue'
 
-import { apiFetch } from '../helpers/apiFetch'
+import { apiFetch } from '../helpers/api'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({

@@ -142,7 +142,7 @@ import {
 import { defineMessages, useVIntl } from '@modrinth/ui'
 import { type Component, computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
-import { apiFetch } from '../helpers/apiFetch'
+import { apiFetch } from '../helpers/api'
 import { navigate } from '../helpers/page-router'
 
 const { formatMessage } = useVIntl()

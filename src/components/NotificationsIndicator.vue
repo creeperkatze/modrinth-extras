@@ -238,7 +238,7 @@ import {
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { browser } from 'wxt/browser'
 
-import { apiFetch, invalidateTokenCache } from '../helpers/apiFetch'
+import { apiFetch, invalidateTokenCache } from '../helpers/api'
 import {
 	fetchExtraNotificationData,
 	fetchNotifications,

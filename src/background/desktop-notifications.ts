@@ -1,6 +1,6 @@
 import { browser } from 'wxt/browser'
 
-import { getBackgroundAuthToken } from '../helpers/apiFetch'
+import { getBackgroundAuthToken } from '../helpers/api'
 import {
 	fetchExtraNotificationData,
 	groupNotifications,

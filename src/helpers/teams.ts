@@ -1,4 +1,4 @@
-import { apiFetch } from '../helpers/apiFetch'
+import { apiFetch } from '../helpers/api'
 
 export async function acceptTeamInvite(teamId: string): Promise<void> {
 	await apiFetch(`team/${teamId}/join`, { apiVersion: 3, method: 'POST' })

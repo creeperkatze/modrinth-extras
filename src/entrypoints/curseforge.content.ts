@@ -1,4 +1,4 @@
-import { apiFetch } from '../helpers/apiFetch'
+import { apiFetch } from '../helpers/api'
 import { getSettings } from '../helpers/settings'
 
 interface ModrinthProject {

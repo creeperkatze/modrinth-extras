@@ -64,7 +64,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
-import { apiFetch } from '../helpers/apiFetch'
+import { apiFetch } from '../helpers/api'
 
 const props = defineProps<{ projectSlug: string }>()
 

@@ -1,4 +1,4 @@
-import { apiFetch } from '../helpers/apiFetch'
+import { apiFetch } from '../helpers/api'
 
 export interface RawDep {
 	project_id: string

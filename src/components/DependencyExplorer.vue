@@ -283,7 +283,7 @@ import type { ForceLink, Simulation, SimulationLinkDatum } from 'd3-force'
 import { forceCenter, forceCollide, forceLink, forceManyBody, forceSimulation } from 'd3-force'
 import { computed, markRaw, nextTick, onUnmounted, ref, useTemplateRef } from 'vue'
 
-import { apiFetch } from '../helpers/apiFetch'
+import { apiFetch } from '../helpers/api'
 import {
 	type EnrichedDep,
 	fetchProjectDependencies,

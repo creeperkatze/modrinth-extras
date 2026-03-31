@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 
-import { apiFetch } from './apiFetch'
+import { apiFetch } from './api'
 
 export const followUserId = ref<string | null | undefined>(undefined)
 export const followedSlugs = ref<Set<string> | null>(null)

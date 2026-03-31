@@ -1,6 +1,6 @@
 import { browser } from 'wxt/browser'
 
-import { apiFetch, getBackgroundAuthToken } from '../helpers/apiFetch'
+import { apiFetch, getBackgroundAuthToken } from '../helpers/api'
 import { fetchNotifications, groupNotifications, type Notification } from '../helpers/notifications'
 import { getSettings } from '../helpers/settings'
 import { sendDesktopNotifications } from './desktop-notifications'

@@ -22,7 +22,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 
-import { apiFetch } from '../helpers/apiFetch'
+import { apiFetch } from '../helpers/api'
 
 const props = defineProps<{ projectSlug: string }>()
 

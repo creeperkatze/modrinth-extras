@@ -110,7 +110,7 @@ import {
 } from '@modrinth/ui'
 import { computed, onMounted, ref } from 'vue'
 
-import { apiFetch, getAuthToken } from '../helpers/apiFetch'
+import { apiFetch, getAuthToken } from '../helpers/api'
 import {
 	type Collection,
 	collections,
