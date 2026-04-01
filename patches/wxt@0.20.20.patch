@@ -2,7 +2,7 @@ diff --git a/dist/core/zip.mjs b/dist/core/zip.mjs
 index d9684391e4987718254373c39843c61c525fe7ae..feb88c4affdeb75ed06929cc6c434e0e47ef30e7 100644
 --- a/dist/core/zip.mjs
 +++ b/dist/core/zip.mjs
-@@ -63,12 +63,22 @@ async function zip(config) {
+@@ -63,12 +63,25 @@ async function zip(config) {
  }
  async function zipDir(directory, outputPath, options) {
  	const archive = new JSZip();
@@ -20,6 +20,9 @@ index d9684391e4987718254373c39843c61c525fe7ae..feb88c4affdeb75ed06929cc6c434e0e
 +			encoding: "utf-8"
 +		}).split("\n").filter(Boolean);
 +	} catch {
++		allFiles = [];
++	}
++	if (allFiles.length === 0) {
 +		allFiles = await glob(["**/*", ...options?.include || []], {
 +			cwd: directory,
 +			ignore: ["**/node_modules"],
