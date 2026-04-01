@@ -2,21 +2,23 @@ import { readFileSync } from 'fs'
 import { dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
-const localesDir = resolve(__dirname, '../src/locales')
+const directory = dirname(fileURLToPath(import.meta.url))
+const localesDirectory = resolve(directory, '../src/locales')
 
-const lang =
+const language =
 	process.argv.find(
 		(a) => !a.startsWith('--') && !a.includes('node') && !a.includes('store-desc'),
 	) ?? 'en-US'
+
 const markdown = process.argv.includes('--markdown')
+const summary = process.argv.includes('--summary')
 
 type MessageFile = Record<string, { defaultMessage?: string }>
 type Messages = Record<string, string>
 
 function loadMessages(locale: string, file: string): Messages {
-	const enPath = resolve(localesDir, 'en-US', `${file}.json`)
-	const localePath = resolve(localesDir, locale, `${file}.json`)
+	const enPath = resolve(localesDirectory, 'en-US', `${file}.json`)
+	const localePath = resolve(localesDirectory, locale, `${file}.json`)
 	const en: MessageFile = JSON.parse(readFileSync(enPath, 'utf8'))
 	let local: MessageFile = {}
 	try {
@@ -31,14 +33,13 @@ function loadMessages(locale: string, file: string): Messages {
 	return merged
 }
 
-const meta = loadMessages(lang, 'meta')
-const popup = loadMessages(lang, 'popup')
+const meta = loadMessages(language, 'meta')
+const popup = loadMessages(language, 'popup')
 
 function t(messages: Messages, key: string): string {
 	return messages[key] ?? ''
 }
 
-// Feature order per group, matching popup.json keys
 const generalFeatures = ['notifications', 'quickSearch', 'projectCardActions']
 const contentFeatures = [
 	'activitySparkline',
@@ -46,7 +47,7 @@ const contentFeatures = [
 	'dependenciesSidebar',
 	'githubSidebar',
 	'discordSidebar',
-    'galleryBackground'
+	'galleryBackground',
 ]
 const extensionFeatures = ['notificationBadge', 'desktopNotifications', 'curseforgeRedirect']
 
@@ -62,7 +63,9 @@ const footer = t(meta, 'meta.description.footer').replace(
 	(_, text: string) => (markdown ? `[${text}](${REPO_URL}).` : `${text}: ${REPO_URL}`),
 )
 
-const desc = [
+const description = [
+	summary ? t(meta, 'meta.summary') : null,
+	'',
 	t(meta, 'meta.description.generalTitle'),
 	featureLines(generalFeatures),
 	'',
@@ -77,4 +80,4 @@ const desc = [
 	t(meta, 'meta.description.disclaimer'),
 ].join('\n')
 
-console.log(desc)
+console.log(description)
