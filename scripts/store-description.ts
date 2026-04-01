@@ -46,6 +46,7 @@ const contentFeatures = [
 	'dependenciesSidebar',
 	'githubSidebar',
 	'discordSidebar',
+    'galleryBackground'
 ]
 const extensionFeatures = ['notificationBadge', 'desktopNotifications', 'curseforgeRedirect']
 

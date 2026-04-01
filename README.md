@@ -64,9 +64,7 @@ Download, follow, and save projects right from their project cards.
 ### Activity sparkline
 
 Release activity chart on project pages.
-
 <img src=".github/assets/screenshots/sparkline.png" width="100%">
-
 ### Tools sidebar
 
 Generate embeds, view raw API responses, copy download URLs and packwiz commands.
@@ -92,6 +90,12 @@ Stars, issues, pull requests, and forks for linked repositories.
 Server name, description, member count, and online count for linked Discord servers.
 
 <img src=".github/assets/screenshots/sidebar.png" width="100%">
+
+### Gallery background
+
+Display the featured gallery image as a background banner on project pages.
+
+<img src=".github/assets/screenshots/gallery-background.png" width="100%">
 
 ### Notification badge
 
