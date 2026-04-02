@@ -36,6 +36,6 @@ export const LOCALES: LocaleDefinition[] = [
 	// { code: 'tr-TR', name: 'Türkçe' },
 	// { code: 'uk-UA', name: 'Українська' },
 	// { code: 'vi-VN', name: 'Tiếng Việt' },
-	// { code: 'zh-CN', name: '简体中文' },
+	{ code: 'zh-CN', name: '简体中文' },
 	// { code: 'zh-TW', name: '繁體中文' },
 ]
