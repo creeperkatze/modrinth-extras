@@ -177,6 +177,8 @@ New translations are automatically pulled every Monday.
 |----------|------------|
 | Italian | [EmanuelPlaysDev](https://github.com/EmanuelPlays) |
 | French | [maDU59_](https://github.com/maDU59) |
+| Chinese Simplified | [xinyihl](https://crowdin.com/profile/xinyihl) |
+| Korean | [젠고](https://crowdin.com/profile/minejango2) |
 
 ## 🤝 Contributing
 
