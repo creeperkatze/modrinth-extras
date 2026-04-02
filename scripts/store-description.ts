@@ -59,8 +59,8 @@ function featureLines(keys: string[]): string {
 
 const REPO_URL = 'https://github.com/creeperkatze/modrinth-extras'
 const footer = t(meta, 'meta.description.footer').replace(
-	/<link>(.*?)<\/link>\./,
-	(_, text: string) => (markdown ? `[${text}](${REPO_URL}).` : `${text}: ${REPO_URL}`),
+	/<link>(.*?)<\/link>[。.。]?/,
+	(_, text: string) => (markdown ? `[${text}](${REPO_URL})` : `${text}: ${REPO_URL}`),
 )
 
 const description = [
