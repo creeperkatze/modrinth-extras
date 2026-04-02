@@ -1,2 +1,21 @@
-{}
+{
+  "meta.summary": {
+    "defaultMessage": "一款浏览器扩展程序，旨在增强网站上及网站之外的 Modrinth 功能。"
+  },
+  "meta.description.generalTitle": {
+    "defaultMessage": "基本功能："
+  },
+  "meta.description.contentTitle": {
+    "defaultMessage": "内容页面功能："
+  },
+  "meta.description.extensionTitle": {
+    "defaultMessage": "扩展功能："
+  },
+  "meta.description.footer": {
+    "defaultMessage": "所有功能均为可选，可通过扩展程序弹出窗口单独启用或禁用。\n\nModrinth Extras 是一款<link>开源扩展程序</link>。"
+  },
+  "meta.description.disclaimer": {
+    "defaultMessage": "该扩展程序与 Modrinth 无关联，亦未获得 Modrinth 的认可。"
+  }
+}
 

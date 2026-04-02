@@ -1,2 +1,126 @@
-{}
+{
+  "feature.activitySparkline.description": {
+    "defaultMessage": "在项目页面上展示活动图表。"
+  },
+  "feature.activitySparkline.title": {
+    "defaultMessage": "活动图表"
+  },
+  "feature.curseforgeRedirect.description": {
+    "defaultMessage": "在可用的情况下，将 CurseForge 项目页面重定向至 Modrinth。"
+  },
+  "feature.curseforgeRedirect.title": {
+    "defaultMessage": "CurseForge 重定向"
+  },
+  "feature.dependenciesSidebar.description": {
+    "defaultMessage": "项目页面上的可折叠依赖关系树。"
+  },
+  "feature.dependenciesSidebar.title": {
+    "defaultMessage": "依赖侧边栏"
+  },
+  "feature.desktopNotifications.description": {
+    "defaultMessage": "为您的Modrinth通知提供操作系统通知。"
+  },
+  "feature.desktopNotifications.exampleMessage": {
+    "defaultMessage": "这是来自 Modrinth Extras 的一个通知示例！"
+  },
+  "feature.desktopNotifications.exampleTitle": {
+    "defaultMessage": "示例通知"
+  },
+  "feature.desktopNotifications.title": {
+    "defaultMessage": "桌面通知"
+  },
+  "feature.discordSidebar.description": {
+    "defaultMessage": "已关联 Discord 服务器的名称、描述、成员数量及在线人数。"
+  },
+  "feature.discordSidebar.title": {
+    "defaultMessage": "Discord 侧边栏"
+  },
+  "feature.galleryBackground.description": {
+    "defaultMessage": "在项目页面上将精选图库图片显示为背景横幅。"
+  },
+  "feature.galleryBackground.title": {
+    "defaultMessage": "图库背景"
+  },
+  "feature.githubSidebar.description": {
+    "defaultMessage": "相关仓库的星标、问题、拉取请求和分叉。"
+  },
+  "feature.githubSidebar.title": {
+    "defaultMessage": "GitHub 侧边栏"
+  },
+  "feature.notificationBadge.description": {
+    "defaultMessage": "扩展程序图标上的徽章显示最新的未读通知数量。"
+  },
+  "feature.notificationBadge.title": {
+    "defaultMessage": "通知角标"
+  },
+  "feature.notifications.description": {
+    "defaultMessage": "无需离开当前页面，即可直接在页眉中查看、管理和清除未读通知。"
+  },
+  "feature.notifications.title": {
+    "defaultMessage": "通知"
+  },
+  "feature.projectCardActions.description": {
+    "defaultMessage": "直接从项目卡片下载、关注和保存项目。"
+  },
+  "feature.projectCardActions.modLoader": {
+    "defaultMessage": "模组加载器"
+  },
+  "feature.projectCardActions.pluginLoader": {
+    "defaultMessage": "插件加载器"
+  },
+  "feature.projectCardActions.title": {
+    "defaultMessage": "项目卡片操作"
+  },
+  "feature.quickSearch.description": {
+    "defaultMessage": "按 Ctrl+K 或 / 键，即可使用类似命令面板的搜索功能，支持按加载器、版本、类别和类型进行多维标签搜索。"
+  },
+  "feature.quickSearch.title": {
+    "defaultMessage": "快速搜索"
+  },
+  "feature.telemetry.description": {
+    "defaultMessage": "通过匿名分享扩展程序版本及已启用功能等统计信息，帮助改进该扩展程序。我们绝不会收集任何 Modrinth 数据、活动记录或个人信息。"
+  },
+  "feature.telemetry.disabledTooltip": {
+    "defaultMessage": "由 Firefox 数据收集设置控制"
+  },
+  "feature.telemetry.title": {
+    "defaultMessage": "遥测数据"
+  },
+  "feature.toolsSidebar.description": {
+    "defaultMessage": "生成嵌入代码、查看原始 API 响应、复制下载链接和 Packwiz 命令。"
+  },
+  "feature.toolsSidebar.title": {
+    "defaultMessage": "工具侧边栏"
+  },
+  "popup.footer.checking": {
+    "defaultMessage": "正在检查"
+  },
+  "popup.footer.latestVersion": {
+    "defaultMessage": "最新版本"
+  },
+  "popup.footer.starOnGitHub": {
+    "defaultMessage": "★ 在 GitHub 上"
+  },
+  "popup.footer.updateAvailable": {
+    "defaultMessage": "有可用更新"
+  },
+  "popup.group.contentPages": {
+    "defaultMessage": "内容页"
+  },
+  "popup.group.extension": {
+    "defaultMessage": "扩展"
+  },
+  "popup.group.general": {
+    "defaultMessage": "一般"
+  },
+  "search.any": {
+    "defaultMessage": "任何 "
+  },
+  "settings.language": {
+    "defaultMessage": "语言"
+  },
+  "settings.language.description": {
+    "defaultMessage": "欢迎在<link>Crowdin</link> 上协助翻译。部分语言的翻译可能尚未完成。"
+  }
+}
 

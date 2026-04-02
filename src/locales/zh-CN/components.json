@@ -1,2 +1,147 @@
-{}
+{
+  "dependenciesSidebar.loadError": {
+    "defaultMessage": "加载依赖关系失败"
+  },
+  "dependenciesSidebar.loading": {
+    "defaultMessage": "加载中"
+  },
+  "dependenciesSidebar.none": {
+    "defaultMessage": "无依赖关系"
+  },
+  "dependenciesSidebar.openGraph": {
+    "defaultMessage": "打开依赖关系图"
+  },
+  "dependenciesSidebar.title": {
+    "defaultMessage": "依赖关系"
+  },
+  "dependencyExplorer.controls": {
+    "defaultMessage": "滚动缩放 · 拖动平移 · 点击展开"
+  },
+  "dependencyExplorer.dependencyNode.collapse": {
+    "defaultMessage": "折叠依赖关系"
+  },
+  "dependencyExplorer.dependencyNode.embedded": {
+    "defaultMessage": "嵌入"
+  },
+  "dependencyExplorer.dependencyNode.expand": {
+    "defaultMessage": "展开依赖关系"
+  },
+  "dependencyExplorer.dependencyNode.incompatible": {
+    "defaultMessage": "不兼容"
+  },
+  "dependencyExplorer.dependencyNode.optional": {
+    "defaultMessage": "选填"
+  },
+  "dependencyExplorer.dependencyNode.required": {
+    "defaultMessage": "必填"
+  },
+  "dependencyExplorer.loading": {
+    "defaultMessage": "加载中"
+  },
+  "dependencyExplorer.noDependencies": {
+    "defaultMessage": "此项目没有依赖关系"
+  },
+  "dependencyExplorer.title": {
+    "defaultMessage": "依赖关系图"
+  },
+  "discordSidebar.members": {
+    "defaultMessage": "{count} 位成员"
+  },
+  "discordSidebar.online": {
+    "defaultMessage": "{count} 人在线"
+  },
+  "discordSidebar.partnered": {
+    "defaultMessage": "已配对"
+  },
+  "discordSidebar.verified": {
+    "defaultMessage": "已验证"
+  },
+  "errorNotice.message": {
+    "defaultMessage": "此错误可能与 Modrinth Extras 有关。在向 Modrinth 报告此问题之前，请尝试禁用该扩展并刷新页面。如果错误消失，请<link>在此处</link>报告。"
+  },
+  "githubSidebar.forks": {
+    "defaultMessage": "{count} 个分叉"
+  },
+  "githubSidebar.openIssues": {
+    "defaultMessage": "{count} 个未解决的问题"
+  },
+  "githubSidebar.openPRs": {
+    "defaultMessage": "{count} 个打开的拉取请求"
+  },
+  "githubSidebar.stars": {
+    "defaultMessage": "{count} 个星标"
+  },
+  "notificationsIndicator.markAllAsRead": {
+    "defaultMessage": "全部标记为已读"
+  },
+  "notificationsIndicator.noUnread": {
+    "defaultMessage": "没有未读通知"
+  },
+  "notificationsIndicator.projectUpdated": {
+    "defaultMessage": "{title}更新完成！"
+  },
+  "notificationsIndicator.viewAll": {
+    "defaultMessage": "查看全部"
+  },
+  "notificationsIndicator.viewHistory": {
+    "defaultMessage": "查看历史"
+  },
+  "projectCardActions.copied": {
+    "defaultMessage": "已复制！"
+  },
+  "projectCardActions.copyLink": {
+    "defaultMessage": "复制链接"
+  },
+  "projectCardActions.download": {
+    "defaultMessage": "下载"
+  },
+  "projectCardActions.follow": {
+    "defaultMessage": "关注"
+  },
+  "projectCardActions.newCollection": {
+    "defaultMessage": "创建新收藏"
+  },
+  "projectCardActions.noCollections": {
+    "defaultMessage": "还没有收藏夹。"
+  },
+  "projectCardActions.save": {
+    "defaultMessage": "保存"
+  },
+  "projectCardActions.saved": {
+    "defaultMessage": "已保存"
+  },
+  "projectCardActions.searchPlaceholder": {
+    "defaultMessage": "搜索..."
+  },
+  "projectCardActions.unfollow": {
+    "defaultMessage": "取消关注"
+  },
+  "quickSearch.examples": {
+    "defaultMessage": "示例"
+  },
+  "quickSearch.recent": {
+    "defaultMessage": "最近"
+  },
+  "quickSearch.search": {
+    "defaultMessage": "搜索"
+  },
+  "toolsSidebar.copied": {
+    "defaultMessage": "已复制！"
+  },
+  "toolsSidebar.copyDownloadUrl": {
+    "defaultMessage": "复制下载链接"
+  },
+  "toolsSidebar.copyPackwiz": {
+    "defaultMessage": "复制 packwiz"
+  },
+  "toolsSidebar.generateEmbed": {
+    "defaultMessage": "生成嵌入代码"
+  },
+  "toolsSidebar.title": {
+    "defaultMessage": "工具"
+  },
+  "toolsSidebar.viewApiResponse": {
+    "defaultMessage": "查看 API 响应"
+  }
+}
 

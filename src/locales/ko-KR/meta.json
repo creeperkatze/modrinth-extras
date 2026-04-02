@@ -1,2 +1,21 @@
-{}
+{
+  "meta.summary": {
+    "defaultMessage": "웹사이트는 물론, 그 밖의 환경에서도 Monolith의 기능을 넓혀주는 브라우저 확장 프로그램."
+  },
+  "meta.description.generalTitle": {
+    "defaultMessage": "일반적인 기능:"
+  },
+  "meta.description.contentTitle": {
+    "defaultMessage": "콘텐츠 페이지 기능:"
+  },
+  "meta.description.extensionTitle": {
+    "defaultMessage": "확장 기능:"
+  },
+  "meta.description.footer": {
+    "defaultMessage": "모든 기능은 선택할 수 있으며, 확장 프로그램 팝업에서 전환할 수 있습니다.\n\nModrinth Extras는 <link>오픈 소스</link>입니다."
+  },
+  "meta.description.disclaimer": {
+    "defaultMessage": "이 확장 프로그램은 Modrinth와 관련이 없으며 승인을 받지 않았습니다."
+  }
+}
 
