@@ -61,6 +61,11 @@ export default defineConfig({
 			}),
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		] as any,
+		resolve: {
+			alias: {
+				'@stripe/stripe-js': './src/mocks/stripe-js.ts',
+			},
+		},
 		css: {
 			preprocessorOptions: {
 				scss: {
