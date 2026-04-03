@@ -48,7 +48,7 @@ test.describe('components', () => {
 	})
 
 	test('injects project card actions on browse pages', async ({ page }) => {
-		await page.goto(`${WEBSITE_BASE_URL}/mods`)
+		await page.goto(`${WEBSITE_BASE_URL}/discover/mods`)
 
 		await page.waitForSelector('.project-card-container', { timeout: 20_000 })
 
