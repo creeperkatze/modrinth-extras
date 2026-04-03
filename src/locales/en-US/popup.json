@@ -5,6 +5,12 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "Activity sparkline"
   },
+  "feature.analyticsExporter.description": {
+    "defaultMessage": "Adds a button to download statistics charts as PNG images."
+  },
+  "feature.analyticsExporter.title": {
+    "defaultMessage": "Chart image export"
+  },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "Redirect CurseForge project pages to Modrinth when available."
   },

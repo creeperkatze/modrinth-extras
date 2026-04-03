@@ -176,6 +176,7 @@ import {
 	MonitorIcon,
 	PlayIcon,
 	SearchIcon,
+	TagCategoryCameraIcon,
 	TagCategoryZapIcon,
 	WrenchIcon,
 } from '@modrinth/assets'
@@ -297,6 +298,14 @@ const messages = defineMessages({
 		id: 'feature.galleryBackground.description',
 		defaultMessage: 'Display the featured gallery image as a background banner on project pages.',
 	},
+	'feature.analyticsExporter.title': {
+		id: 'feature.analyticsExporter.title',
+		defaultMessage: 'Chart image export',
+	},
+	'feature.analyticsExporter.description': {
+		id: 'feature.analyticsExporter.description',
+		defaultMessage: 'Adds a button to download statistics charts as PNG images.',
+	},
 	'feature.notificationBadge.title': {
 		id: 'feature.notificationBadge.title',
 		defaultMessage: 'Notification badge',
@@ -410,6 +419,12 @@ const generalFeatures = computed<FeatureDef[]>(() => [
 				fetchItems: () => fetchLoadersByType('plugin'),
 			},
 		],
+	},
+	{
+		key: 'analyticsExporter',
+		icon: TagCategoryCameraIcon,
+		title: formatMessage(messages['feature.analyticsExporter.title']),
+		description: formatMessage(messages['feature.analyticsExporter.description']),
 	},
 ])
 

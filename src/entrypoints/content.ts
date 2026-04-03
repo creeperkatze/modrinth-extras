@@ -5,6 +5,7 @@ import { type App, createApp, h } from 'vue'
 import { browser } from 'wxt/browser'
 
 import ActivitySparkline from '../components/ActivitySparkline.vue'
+import AnalyticsExporter from '../components/AnalyticsExporter.vue'
 import DependenciesSidebar from '../components/DependenciesSidebar.vue'
 import DiscordSidebar from '../components/DiscordSidebar.vue'
 import ErrorNotice from '../components/ErrorNotice.vue'
@@ -476,6 +477,31 @@ export default defineContentScript({
 			},
 		})
 
+		const analyticsExporter = createDynamicInjection({
+			settingsKeys: ['analyticsExporter'],
+			persistent: false,
+			isEnabled: () => settings.analyticsExporter.enabled,
+			targets: '.chart-controls__buttons',
+			attach(target: HTMLElement): HTMLElement | null {
+				// Insert before all Modrinth buttons, leftmost position
+				const container = document.createElement('div')
+				container.style.cssText = 'display:contents'
+				const firstChild = target.firstElementChild
+				if (firstChild) {
+					target.insertBefore(container, firstChild)
+				} else {
+					target.appendChild(container)
+				}
+				return container
+			},
+			createApp(target: HTMLElement) {
+				const app = createApp(h(AnalyticsExporter, { buttonsContainer: target }))
+				app.use(FloatingVue)
+				installI18n(app)
+				return app
+			},
+		})
+
 		const projectCardActions = createDynamicInjection({
 			settingsKeys: ['projectCardActions'],
 			persistent: false,
@@ -506,6 +532,7 @@ export default defineContentScript({
 			errorNotice,
 			footerBadge,
 			quickSearch,
+			analyticsExporter,
 			projectCardActions,
 		]
 
