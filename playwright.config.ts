@@ -6,5 +6,5 @@ export default defineConfig({
 	use: {
 		headless: true,
 	},
-	workers: 1,
+	workers: 2,
 })
