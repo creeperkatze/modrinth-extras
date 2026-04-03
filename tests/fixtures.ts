@@ -3,12 +3,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
-const pathToExtension = path.join(
-	dirname,
-	'..',
-	process.env.VITE_IS_TESTING ? '.output/test' : '.output',
-	'chrome-mv3',
-)
+const pathToExtension = path.join(dirname, '..', '.output', 'test', 'chrome-mv3')
 
 export const test = base.extend<{
 	context: BrowserContext
