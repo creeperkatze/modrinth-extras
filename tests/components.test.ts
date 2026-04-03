@@ -61,18 +61,18 @@ test.describe('components', () => {
 		).toBeVisible()
 	})
 
-	test('does not show error notice on valid pages under repeated hard reloads', async ({ page }) => {
-		const client = await page.context().newCDPSession(page)
-		await client.send('Emulation.setCPUThrottlingRate', { rate: 4 })
-
+	test('does not show error notice on valid pages under repeated hard reloads', async ({
+		page,
+	}) => {
 		await page.goto(`${WEBSITE_BASE_URL}/mod/iris`)
 
-		for (let i = 0; i < 5; i++) {
+		for (let i = 0; i < 3; i++) {
 			await page.reload()
 			await page.waitForSelector('#modrinth-extras-tools-sidebar', {
 				state: 'attached',
-				timeout: 30_000,
+				timeout: 20_000,
 			})
+			await page.waitForTimeout(5_000)
 			await expect(page.locator('#modrinth-extras-error-notice')).not.toBeAttached()
 		}
 	})

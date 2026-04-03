@@ -14,9 +14,12 @@ export const test = base.extend<{
 		const context = await chromium.launchPersistentContext('', {
 			channel: 'chromium',
 			args: [
+				'--disable-blink-features=AutomationControlled',
 				`--disable-extensions-except=${pathToExtension}`,
 				`--load-extension=${pathToExtension}`,
 			],
+			userAgent:
+				'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36',
 		})
 		await use(context)
 		await context.close()
