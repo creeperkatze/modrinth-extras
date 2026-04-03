@@ -8,6 +8,7 @@ const { version } = createRequire(import.meta.url)('./package.json')
 export default defineConfig({
 	srcDir: 'src',
 	publicDir: 'src/public',
+	outDir: process.env.VITE_IS_TESTING ? '.output/test' : '.output',
 	modules: ['@wxt-dev/module-vue'],
 	manifest: {
 		name: 'Modrinth Extras',

@@ -27,15 +27,17 @@ async function getSharedDistinctId(): Promise<string> {
 }
 
 export async function initTelemetry(): Promise<void> {
+	if (import.meta.env.VITE_IS_TESTING) {
+		enabled = false
+		return
+	}
 	const settings = await getSettings()
 	if (!settings.telemetry.enabled) {
 		enabled = false
 		return
 	}
 
-	// On Firefox, respect the built-in data collection consent experience.
-	// If the browser supports data_collection permissions (Firefox 130+), telemetry
-	// requires the user to have granted the 'technicalAndInteraction' permission.
+	// On Firefox, respect the built-in data collection consent experience
 	const perms = await browser.permissions.getAll()
 	if ('data_collection' in perms) {
 		const granted = (perms as unknown as { data_collection: string[] }).data_collection
