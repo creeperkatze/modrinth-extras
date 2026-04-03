@@ -67,14 +67,15 @@ test.describe('components', () => {
 		await page.goto(`${WEBSITE_BASE_URL}/mod/iris`)
 
 		for (let i = 0; i < 3; i++) {
-			await page.reload()
-			await page.waitForSelector('#modrinth-extras-tools-sidebar', {
-				state: 'attached',
-				timeout: 20_000,
-			})
-			await page.waitForTimeout(5_000)
-			await expect(page.locator('#modrinth-extras-error-notice')).not.toBeAttached()
+			await page.reload({ waitUntil: 'commit' })
 		}
+
+		await page.waitForSelector('#modrinth-extras-tools-sidebar', {
+			state: 'attached',
+			timeout: 20_000,
+		})
+		await page.waitForTimeout(5_000)
+		await expect(page.locator('#modrinth-extras-error-notice')).not.toBeAttached()
 	})
 
 	test.describe('project pages', () => {
