@@ -58,7 +58,7 @@ export async function initTelemetry(): Promise<void> {
 		api_host: POSTHOG_HOST,
 		bootstrap: { distinctID: distinctId },
 		disable_external_dependency_loading: true,
-		persistence,
+		persistence: 'localStorage',
 		autocapture: false,
 		capture_pageview: false,
 		capture_pageleave: false,
