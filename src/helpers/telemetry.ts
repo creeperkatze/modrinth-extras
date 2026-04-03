@@ -27,7 +27,6 @@ async function getSharedDistinctId(): Promise<string> {
 }
 
 export async function initTelemetry(): Promise<void> {
-	const persistence = 'memory'
 	const settings = await getSettings()
 	if (!settings.telemetry.enabled) {
 		enabled = false
