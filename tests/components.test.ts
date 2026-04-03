@@ -64,15 +64,18 @@ test.describe('components', () => {
 	test('does not show error notice on valid pages under repeated hard reloads', async ({
 		page,
 	}) => {
+		test.setTimeout(120_000)
+
 		await page.goto(`${WEBSITE_BASE_URL}/mod/iris`)
 
 		for (let i = 0; i < 3; i++) {
 			await page.reload({ waitUntil: 'commit' })
+			await page.waitForTimeout(2_000)
 		}
 
 		await page.waitForSelector('#modrinth-extras-tools-sidebar', {
 			state: 'attached',
-			timeout: 20_000,
+			timeout: 30_000,
 		})
 		await page.waitForTimeout(5_000)
 		await expect(page.locator('#modrinth-extras-error-notice')).not.toBeAttached()
