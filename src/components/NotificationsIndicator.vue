@@ -316,7 +316,7 @@ async function refreshNotifications() {
 		syncToBackground(notifs)
 		notificationsData.value = await fetchExtraNotificationData(notifs)
 	} catch (err) {
-		console.error('[Modrinth Extras] Failed to fetch notifications:', err)
+		console.warn('[Modrinth Extras] Failed to fetch notifications:', err)
 	}
 }
 
@@ -413,10 +413,10 @@ async function handleAcceptInvite(notif: Notification) {
 		syncBadgeCount()
 		await acceptTeamInvite((notif.body as NotificationBody).team_id as string)
 		markNotificationsAsRead([notif.id]).catch((err) =>
-			console.error('[Modrinth Extras] Error marking as read:', err),
+			console.warn('[Modrinth Extras] Error marking as read:', err),
 		)
 	} catch (err) {
-		console.error('[Modrinth Extras] Error accepting invite:', err)
+		console.warn('[Modrinth Extras] Error accepting invite:', err)
 	}
 }
 
@@ -432,10 +432,10 @@ async function handleDeclineInvite(notif: Notification) {
 			userId.value as string,
 		)
 		markNotificationsAsRead([notif.id]).catch((err) =>
-			console.error('[Modrinth Extras] Error marking as read:', err),
+			console.warn('[Modrinth Extras] Error marking as read:', err),
 		)
 	} catch (err) {
-		console.error('[Modrinth Extras] Error declining invite:', err)
+		console.warn('[Modrinth Extras] Error declining invite:', err)
 	}
 }
 
@@ -450,10 +450,10 @@ async function handleMarkAsRead(notif: Notification) {
 		}
 		syncBadgeCount()
 		markNotificationsAsRead(ids).catch((err) =>
-			console.error('[Modrinth Extras] Error marking as read:', err),
+			console.warn('[Modrinth Extras] Error marking as read:', err),
 		)
 	} catch (err) {
-		console.error('[Modrinth Extras] Error marking as read:', err)
+		console.warn('[Modrinth Extras] Error marking as read:', err)
 	}
 }
 
@@ -465,10 +465,10 @@ async function handleMarkAllAsRead() {
 		}
 		syncBadgeCount()
 		markNotificationsAsRead(ids).catch((err) =>
-			console.error('[Modrinth Extras] Error marking all as read:', err),
+			console.warn('[Modrinth Extras] Error marking all as read:', err),
 		)
 	} catch (err) {
-		console.error('[Modrinth Extras] Error marking all as read:', err)
+		console.warn('[Modrinth Extras] Error marking all as read:', err)
 	}
 }
 

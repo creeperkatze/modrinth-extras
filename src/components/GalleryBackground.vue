@@ -56,7 +56,7 @@ onMounted(async () => {
 		const featured = project.gallery.find((img) => img.featured)
 		imageUrl.value = featured?.url ?? project.gallery[0].url
 	} catch (err) {
-		console.error('[Modrinth Extras] Failed to load gallery background:', err)
+		console.warn('[Modrinth Extras] Failed to load gallery background:', err)
 	}
 })
 </script>

@@ -156,7 +156,7 @@ onMounted(async () => {
 		hasAnyData.value = counts.some((c) => c > 0)
 		dataCache.set(props.projectSlug, { counts, hasData: hasAnyData.value })
 	} catch (err) {
-		console.error('[Modrinth Extras] Failed to load activity data:', err)
+		console.warn('[Modrinth Extras] Failed to load activity data:', err)
 	} finally {
 		loaded.value = true
 	}
