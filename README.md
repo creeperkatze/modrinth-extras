@@ -20,12 +20,6 @@ Install from your browser's extension store:
 - **[Firefox Add-Ons](https://addons.mozilla.org/firefox/addon/modrinth-extras/)** ![Mozilla Add-on Version](https://img.shields.io/amo/v/modrinth-extras?label=)![Mozilla Add-on Users](https://img.shields.io/amo/users/modrinth-extras?style=flat&labelColor=0d143c&color=yellow)
 - **[Edge Add-Ons](https://microsoftedge.microsoft.com/addons/detail/modrinth-extras/jkfgnimibfpoohbmaibjdjdmfnjmbjcj)** ![Edge Addon Version](https://img.shields.io/badge/dynamic/json?label=&prefix=v&query=%24.version&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjkfgnimibfpoohbmaibjdjdmfnjmbjcj)![Edge Addon Users](https://img.shields.io/badge/dynamic/json?label=users&query=%24.activeInstallCount&url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Fjkfgnimibfpoohbmaibjdjdmfnjmbjcj?style=flat&labelColor=0d143c&color=yellow)
 
-Or install manually from the latest [GitHub release](https://github.com/creeperkatze/modrinth-extras/releases):
-
-1. Download the zip for your browser from the release assets.
-2. **Chrome / Edge:** go to `chrome://extensions/`, enable **Developer mode**, then drag and drop the zip onto the page.
-3. **Firefox:** go to `about:debugging#/runtime/this-firefox`, click **Load Temporary Add-on**, and select the zip. Note that Firefox removes the extension on browser restart since it is loaded as a temporary add-on.
-
 Prefer to build from source? See [Building from source](#-building-from-source) below.
 
 ## ✨ Features
@@ -60,6 +54,10 @@ Download, follow, and save projects right from their project cards.
 - **Copy link:** copy the project's link to your clipboard.
 
 <img src=".github/assets/screenshots/project-card-actions.png" width="100%">
+
+### Analytics export
+
+Adds a button to download analytics charts as PNG images.
 
 ### Activity sparkline
 
@@ -111,12 +109,12 @@ Redirect CurseForge project pages to Modrinth when available.
 
 ## 🔒 Building from source
 
-If you don't want to trust the store release, you can build the extension yourself directly from the source code and verify it matches what's in this repository.
+If you don't want to trust the store release, you can build the extension yourself directly from the source code and verify it matches what's in the release.
 
 **Prerequisites:** [Node.js](https://nodejs.org) and [pnpm](https://pnpm.io)
 
 ```bash
-# Clone and check out the version you want to verify (e.g. v1.0.11)
+# Clone and check out the version you want to verify (e.g. v1.3.3)
 git clone --recurse-submodules https://github.com/creeperkatze/modrinth-extras.git
 cd modrinth-extras
 git checkout v1.0.11
@@ -130,7 +128,13 @@ pnpm zip
 pnpm zip:firefox
 ```
 
-The resulting zips in `.output/` are identical to those attached to the [GitHub release](https://github.com/creeperkatze/modrinth-extras/releases) for that tag. See the [Installation](#-installation) section for instructions on loading the zip in your browser.
+The resulting zips in `.output/` are identical to those attached to the [GitHub release](https://github.com/creeperkatze/modrinth-extras/releases) for that tag.
+
+To install the extension manually:
+
+- **Chrome / Edge:** go to `chrome://extensions/`, enable **Developer mode**, then drag and drop the zip onto the page.
+- **Firefox:** go to `about:debugging#/runtime/this-firefox`, click **Load Temporary Add-on**, and select the zip. Note that Firefox removes the extension on browser restart since it is loaded as a temporary add-on.
+
 
 ## 👨‍💻 Development
 
