@@ -1,5 +1,5 @@
 {
-  "analyticsExporter.tooltip": {
+  "analyticsExport.tooltip": {
     "defaultMessage": "Export as image"
   },
   "dependenciesSidebar.loadError": {

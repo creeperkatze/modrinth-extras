@@ -1,6 +1,6 @@
 <template>
 	<button
-		v-tooltip="formatMessage(messages['analyticsExporter.tooltip'])"
+		v-tooltip="formatMessage(messages['analyticsExport.tooltip'])"
 		class="btn icon-only color-accent-contrast"
 		:disabled="exporting"
 		@click="exportImage"
@@ -33,8 +33,8 @@ const props = defineProps<{ buttonsContainer: HTMLElement }>()
 const { formatMessage } = useVIntl()
 
 const messages = defineMessages({
-	'analyticsExporter.tooltip': {
-		id: 'analyticsExporter.tooltip',
+	'analyticsExport.tooltip': {
+		id: 'analyticsExport.tooltip',
 		defaultMessage: 'Export as image',
 	},
 })

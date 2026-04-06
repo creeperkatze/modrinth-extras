@@ -5,7 +5,7 @@ import { type App, createApp, h } from 'vue'
 import { browser } from 'wxt/browser'
 
 import ActivitySparkline from '../components/ActivitySparkline.vue'
-import AnalyticsExporter from '../components/AnalyticsExporter.vue'
+import AnalyticsExport from '../components/AnalyticsExport.vue'
 import DependenciesSidebar from '../components/DependenciesSidebar.vue'
 import DiscordSidebar from '../components/DiscordSidebar.vue'
 import ErrorNotice from '../components/ErrorNotice.vue'
@@ -477,10 +477,10 @@ export default defineContentScript({
 			},
 		})
 
-		const analyticsExporter = createDynamicInjection({
-			settingsKeys: ['analyticsExporter'],
+		const analyticsExport = createDynamicInjection({
+			settingsKeys: ['analyticsExport'],
 			persistent: false,
-			isEnabled: () => settings.analyticsExporter.enabled,
+			isEnabled: () => settings.analyticsExport.enabled,
 			targets: '.chart-controls__buttons',
 			attach(target: HTMLElement): HTMLElement | null {
 				// Insert before all Modrinth buttons, leftmost position
@@ -495,7 +495,7 @@ export default defineContentScript({
 				return container
 			},
 			createApp(target: HTMLElement) {
-				const app = createApp(h(AnalyticsExporter, { buttonsContainer: target }))
+				const app = createApp(h(AnalyticsExport, { buttonsContainer: target }))
 				app.use(FloatingVue)
 				installI18n(app)
 				return app
@@ -532,7 +532,7 @@ export default defineContentScript({
 			errorNotice,
 			footerBadge,
 			quickSearch,
-			analyticsExporter,
+			analyticsExport,
 			projectCardActions,
 		]
 
