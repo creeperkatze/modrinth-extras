@@ -300,11 +300,11 @@ const messages = defineMessages({
 	},
 	'feature.analyticsExporter.title': {
 		id: 'feature.analyticsExporter.title',
-		defaultMessage: 'Chart image export',
+		defaultMessage: 'Analytics export',
 	},
 	'feature.analyticsExporter.description': {
 		id: 'feature.analyticsExporter.description',
-		defaultMessage: 'Adds a button to download statistics charts as PNG images.',
+		defaultMessage: 'Adds a button to download analytics charts as PNG images.',
 	},
 	'feature.notificationBadge.title': {
 		id: 'feature.notificationBadge.title',

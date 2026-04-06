@@ -68,6 +68,93 @@ function resolveCssVars(el: Element, style: CSSStyleDeclaration) {
 	for (const child of Array.from(el.children)) resolveCssVars(child, style)
 }
 
+function appendLegend(
+	svgEl: SVGSVGElement,
+	clone: SVGSVGElement,
+	bg: SVGRectElement,
+	width: number,
+	height: number,
+): number {
+	const MARKER_R = 5
+	const ITEM_GAP = 16
+	const ROW_HEIGHT = 22
+
+	const items = Array.from(svgEl.querySelectorAll('.apexcharts-series'))
+		.map((el) => {
+			const label = decodeURIComponent((el.getAttribute('seriesName') ?? '').replace(/\+/g, ' '))
+			const color = el.querySelector('path.apexcharts-line')?.getAttribute('stroke') ?? ''
+			return { label, color }
+		})
+		.filter((item) => item.label && item.color && item.color !== 'none')
+
+	if (items.length <= 1) return height
+
+	const measureCtx = document.createElement('canvas').getContext('2d')!
+	measureCtx.font = '12px Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+	const sized = items.map((item) => ({
+		...item,
+		itemWidth: MARKER_R * 2 + 6 + measureCtx.measureText(item.label).width,
+	}))
+
+	// Wrap items into rows
+	const rows: (typeof sized)[] = []
+	let row: typeof sized = []
+	let rowWidth = 0
+	for (const item of sized) {
+		const needed = row.length === 0 ? item.itemWidth : item.itemWidth + ITEM_GAP
+		if (rowWidth + needed > width - 24 && row.length > 0) {
+			rows.push(row)
+			row = [item]
+			rowWidth = item.itemWidth
+		} else {
+			row.push(item)
+			rowWidth += needed
+		}
+	}
+	if (row.length) rows.push(row)
+
+	const exportHeight = height + rows.length * ROW_HEIGHT + 8
+	clone.setAttribute('height', String(exportHeight))
+	bg.setAttribute('height', String(exportHeight))
+
+	const ns = 'http://www.w3.org/2000/svg'
+	const legendG = document.createElementNS(ns, 'g')
+	for (let r = 0; r < rows.length; r++) {
+		const rowItems = rows[r]
+		const rowTotalWidth = rowItems.reduce(
+			(sum, item, i) => sum + item.itemWidth + (i > 0 ? ITEM_GAP : 0),
+			0,
+		)
+		let x = (width - rowTotalWidth) / 2
+		const y = height + 6 + r * ROW_HEIGHT
+
+		for (const item of rowItems) {
+			const circle = document.createElementNS(ns, 'circle')
+			circle.setAttribute('cx', String(x + MARKER_R))
+			circle.setAttribute('cy', String(y + MARKER_R))
+			circle.setAttribute('r', String(MARKER_R))
+			circle.setAttribute('fill', item.color)
+			legendG.appendChild(circle)
+
+			const text = document.createElementNS(ns, 'text')
+			text.setAttribute('x', String(x + MARKER_R * 2 + 6))
+			text.setAttribute('y', String(y + MARKER_R * 2 - 1))
+			text.setAttribute('font-size', '12px')
+			text.setAttribute(
+				'font-family',
+				'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+			)
+			text.setAttribute('fill', '#333333')
+			text.textContent = item.label
+			legendG.appendChild(text)
+
+			x += item.itemWidth + ITEM_GAP
+		}
+	}
+	clone.appendChild(legendG)
+	return exportHeight
+}
+
 async function exportImage() {
 	if (exporting.value) return
 	exporting.value = true
@@ -83,25 +170,25 @@ async function exportImage() {
 		const width = svgEl.width.baseVal.value || 857
 		const height = svgEl.height.baseVal.value || 532
 
-		const pageStyle = getComputedStyle(document.documentElement)
 		const clone = svgEl.cloneNode(true) as SVGSVGElement
+		for (const el of Array.from(
+			clone.querySelectorAll('foreignObject, .apexcharts-xcrosshairs, .apexcharts-ycrosshairs'),
+		))
+			el.remove()
 
-		// foreignObject with embedded <style> taints the canvas in most browsers
-		for (const fo of Array.from(clone.querySelectorAll('foreignObject'))) fo.remove()
-
-		// White background so the PNG isn't transparent
 		const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect')
 		bg.setAttribute('width', String(width))
 		bg.setAttribute('height', String(height))
 		bg.setAttribute('fill', '#ffffff')
 		clone.insertBefore(bg, clone.firstChild)
 
-		resolveCssVars(clone, pageStyle)
+		resolveCssVars(clone, getComputedStyle(document.documentElement))
+		const exportHeight = appendLegend(svgEl, clone, bg, width, height)
 
-		const svgStr = new XMLSerializer().serializeToString(clone)
-		const blob = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' })
+		const blob = new Blob([new XMLSerializer().serializeToString(clone)], {
+			type: 'image/svg+xml;charset=utf-8',
+		})
 		const url = URL.createObjectURL(blob)
-
 		try {
 			const img = new Image()
 			img.src = url
@@ -112,10 +199,10 @@ async function exportImage() {
 
 			const canvas = document.createElement('canvas')
 			canvas.width = width
-			canvas.height = height
+			canvas.height = exportHeight
 			const ctx = canvas.getContext('2d')!
 			ctx.fillStyle = '#ffffff'
-			ctx.fillRect(0, 0, width, height)
+			ctx.fillRect(0, 0, width, exportHeight)
 			ctx.drawImage(img, 0, 0)
 
 			const title = card?.querySelector('.label__title')?.textContent?.trim() ?? 'chart'

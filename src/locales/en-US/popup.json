@@ -6,10 +6,10 @@
     "defaultMessage": "Activity sparkline"
   },
   "feature.analyticsExporter.description": {
-    "defaultMessage": "Adds a button to download statistics charts as PNG images."
+    "defaultMessage": "Adds a button to download analytics charts as PNG images."
   },
   "feature.analyticsExporter.title": {
-    "defaultMessage": "Chart image export"
+    "defaultMessage": "Analytics export"
   },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "Redirect CurseForge project pages to Modrinth when available."

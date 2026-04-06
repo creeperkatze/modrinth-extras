@@ -28,6 +28,7 @@ export default tseslint.config(
 				HTMLInputElement: 'readonly',
 				HTMLAnchorElement: 'readonly',
 				SVGSVGElement: 'readonly',
+			SVGRectElement: 'readonly',
 				Element: 'readonly',
 				CSSStyleDeclaration: 'readonly',
 				getComputedStyle: 'readonly',
