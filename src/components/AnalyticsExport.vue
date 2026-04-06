@@ -68,6 +68,61 @@ function resolveCssVars(el: Element, style: CSSStyleDeclaration) {
 	for (const child of Array.from(el.children)) resolveCssVars(child, style)
 }
 
+function prependTitle(
+	clone: SVGSVGElement,
+	bg: SVGRectElement,
+	width: number,
+	height: number,
+	title: string,
+	subtitle: string,
+): number {
+	if (!title) return 0
+
+	const ns = 'http://www.w3.org/2000/svg'
+	const TITLE_AREA = subtitle ? 52 : 36
+
+	clone.setAttribute('height', String(height + TITLE_AREA))
+	bg.setAttribute('height', String(height + TITLE_AREA))
+
+	const wrapper = document.createElementNS(ns, 'g')
+	wrapper.setAttribute('transform', `translate(0, ${TITLE_AREA})`)
+	for (const child of Array.from(clone.childNodes)) {
+		if (child !== bg) wrapper.appendChild(child)
+	}
+	clone.appendChild(wrapper)
+
+	const titleEl = document.createElementNS(ns, 'text')
+	titleEl.setAttribute('x', '16')
+	titleEl.setAttribute('y', subtitle ? '20' : '22')
+	titleEl.setAttribute('dominant-baseline', 'middle')
+	titleEl.setAttribute('font-size', '15px')
+	titleEl.setAttribute('font-weight', '600')
+	titleEl.setAttribute(
+		'font-family',
+		'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+	)
+	titleEl.setAttribute('fill', '#111111')
+	titleEl.textContent = title
+	clone.appendChild(titleEl)
+
+	if (subtitle) {
+		const subtitleEl = document.createElementNS(ns, 'text')
+		subtitleEl.setAttribute('x', '16')
+		subtitleEl.setAttribute('y', '38')
+		subtitleEl.setAttribute('dominant-baseline', 'middle')
+		subtitleEl.setAttribute('font-size', '12px')
+		subtitleEl.setAttribute(
+			'font-family',
+			'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+		)
+		subtitleEl.setAttribute('fill', '#666666')
+		subtitleEl.textContent = subtitle
+		clone.appendChild(subtitleEl)
+	}
+
+	return TITLE_AREA
+}
+
 function appendLegend(
 	svgEl: SVGSVGElement,
 	clone: SVGSVGElement,
@@ -183,7 +238,11 @@ async function exportImage() {
 		clone.insertBefore(bg, clone.firstChild)
 
 		resolveCssVars(clone, getComputedStyle(document.documentElement))
-		const exportHeight = appendLegend(svgEl, clone, bg, width, height)
+
+		const title = card?.querySelector('.label__title')?.textContent?.trim() ?? ''
+		const subtitle = card?.querySelector('.label__subtitle')?.textContent?.trim() ?? ''
+		const titleOffset = prependTitle(clone, bg, width, height, title, subtitle)
+		const exportHeight = appendLegend(svgEl, clone, bg, width, height + titleOffset)
 
 		const blob = new Blob([new XMLSerializer().serializeToString(clone)], {
 			type: 'image/svg+xml;charset=utf-8',
@@ -205,10 +264,9 @@ async function exportImage() {
 			ctx.fillRect(0, 0, width, exportHeight)
 			ctx.drawImage(img, 0, 0)
 
-			const title = card?.querySelector('.label__title')?.textContent?.trim() ?? 'chart'
 			const a = document.createElement('a')
 			a.href = canvas.toDataURL('image/png')
-			a.download = `${title.toLowerCase().replace(/\s+/g, '-')}.png`
+			a.download = `${(title || 'chart').toLowerCase().replace(/\s+/g, '-')}.png`
 			document.body.appendChild(a)
 			a.click()
 			document.body.removeChild(a)
