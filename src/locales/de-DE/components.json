@@ -1,4 +1,7 @@
 {
+  "analyticsExporter.tooltip": {
+    "defaultMessage": "Als Bild exportieren"
+  },
   "dependenciesSidebar.loadError": {
     "defaultMessage": "Fehler beim Laden der Abhängigkeiten"
   },
