@@ -183,6 +183,7 @@ New translations are automatically pulled every Monday.
 | French | [maDU59_](https://github.com/maDU59) |
 | Chinese Simplified | [xinyihl](https://crowdin.com/profile/xinyihl) |
 | Korean | [젠고](https://crowdin.com/profile/minejango2) |
+| Vietnamese | [Lê](https://crowdin.com/profile/suri-cutie) |
 
 ## 🤝 Contributing
 
