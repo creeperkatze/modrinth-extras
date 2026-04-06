@@ -117,7 +117,7 @@ If you don't want to trust the store release, you can build the extension yourse
 # Clone and check out the version you want to verify (e.g. v1.3.3)
 git clone --recurse-submodules https://github.com/creeperkatze/modrinth-extras.git
 cd modrinth-extras
-git checkout v1.0.11
+git checkout v1.3.3
 
 pnpm install
 
