@@ -4,7 +4,7 @@ import { browser } from 'wxt/browser'
 import { getSettings } from './settings'
 
 const POSTHOG_TOKEN = 'phc_oWL7DUqxG3kmN20nWBkie7Eu7i3GJMdvGnvKRWBI7hi'
-const POSTHOG_HOST = 'https://hedgehog.creeperkatze.de'
+const POSTHOG_HOST = 'https://hedgehog.creeperkatze.dev'
 
 let posthog: PostHog | null = null
 let enabled = true
