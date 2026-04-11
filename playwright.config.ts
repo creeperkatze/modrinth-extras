@@ -7,7 +7,7 @@ export default defineConfig({
 	use: {
 		headless: true,
 	},
-	workers: 2,
+	workers: 1,
 	webServer: {
 		command: 'pnpm dev',
 		cwd: './modrinth/apps/frontend',
