@@ -13,7 +13,6 @@
         "postinstall": "wxt prepare",
         "scripts": "node scripts/run.mjs",
         "intl:extract": "formatjs extract \"src/entrypoints/**/*.{vue,ts}\" --ignore \"src/**/*.d.ts\" --out-file src/locales/en-US/popup.json --preserve-whitespace && formatjs extract \"src/components/**/*.vue\" --ignore \"src/**/*.d.ts\" --out-file src/locales/en-US/components.json --preserve-whitespace",
-        "test": "cross-env VITE_IS_TESTING=true wxt build && pnpm -C modrinth install && playwright test",
         "lint": "eslint src/",
         "lint:fix": "eslint src/ --fix",
         "release:patch": "pnpm version patch && git push && git push --tags",

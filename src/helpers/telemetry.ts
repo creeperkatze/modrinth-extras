@@ -27,10 +27,6 @@ async function getSharedDistinctId(): Promise<string> {
 }
 
 export async function initTelemetry(): Promise<void> {
-	if (import.meta.env.VITE_IS_TESTING) {
-		enabled = false
-		return
-	}
 	const settings = await getSettings()
 	if (!settings.telemetry.enabled) {
 		enabled = false

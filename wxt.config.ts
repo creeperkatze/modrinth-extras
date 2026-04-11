@@ -8,7 +8,7 @@ const { version } = createRequire(import.meta.url)('./package.json')
 export default defineConfig({
 	srcDir: 'src',
 	publicDir: 'src/public',
-	outDir: process.env.VITE_IS_TESTING ? '.output/test' : '.output',
+	outDir: '.output',
 	modules: ['@wxt-dev/module-vue'],
 	manifest: {
 		name: 'Modrinth Extras',
@@ -26,7 +26,6 @@ export default defineConfig({
 			'https://modrinth.com/*',
 			'https://api.modrinth.com/*',
 			'https://www.curseforge.com/*',
-			...(process.env.VITE_IS_TESTING ? ['http://localhost:3000/*'] : []),
 		],
 
 		browser_specific_settings: {
