@@ -12,7 +12,7 @@ export default defineConfig({
 		command: 'pnpm dev',
 		cwd: './modrinth/apps/frontend',
 		url: 'http://localhost:3000',
-		reuseExistingServer: !process.env.CI,
+		reuseExistingServer: true,
 		timeout: 120_000,
 		env: {
 			BASE_URL: 'https://api.modrinth.com/v2/',
