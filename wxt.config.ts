@@ -26,6 +26,7 @@ export default defineConfig({
 			'https://modrinth.com/*',
 			'https://api.modrinth.com/*',
 			'https://www.curseforge.com/*',
+			...(process.env.VITE_IS_TESTING ? ['http://localhost:3000/*'] : []),
 		],
 
 		browser_specific_settings: {

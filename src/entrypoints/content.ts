@@ -241,7 +241,10 @@ function attachToSidebar(container: HTMLElement): boolean {
 }
 
 export default defineContentScript({
-	matches: ['https://modrinth.com/*'],
+	matches: [
+		'https://modrinth.com/*',
+		...(import.meta.env.VITE_IS_TESTING ? ['http://localhost:3000/*'] : []),
+	],
 	cssInjectionMode: 'manifest',
 
 	main() {

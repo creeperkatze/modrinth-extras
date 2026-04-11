@@ -1,6 +1,6 @@
 import { expect, test } from './fixtures'
 
-const WEBSITE_BASE_URL = 'https://modrinth.com'
+const WEBSITE_BASE_URL = 'http://localhost:3000'
 
 test.describe('components', () => {
 	test('injects error notice on error pages', async ({ page }) => {
