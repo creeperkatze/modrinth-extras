@@ -1,2 +1,15 @@
-{}
+{
+  "meta.description.generalTitle": {
+    "defaultMessage": "Tính năng chung:"
+  },
+  "meta.description.contentTitle": {
+    "defaultMessage": "Các tính năng của trang nội dung:"
+  },
+  "meta.description.extensionTitle": {
+    "defaultMessage": "Tính năng của tiện ích mở rộng:"
+  },
+  "meta.description.disclaimer": {
+    "defaultMessage": "Tiện ích mở rộng này không liên quan đến hoặc được chứng nhận bởi Modrinth."
+  }
+}
 
