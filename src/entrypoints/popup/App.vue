@@ -1,5 +1,5 @@
 <template>
-	<div class="flex h-[500px] w-[360px] flex-col">
+	<div class="flex h-[500px] w-[380px] flex-col">
 		<header class="flex shrink-0 items-center gap-3 px-4 py-3.5">
 			<a
 				href="https://github.com/creeperkatze/modrinth-extras"
