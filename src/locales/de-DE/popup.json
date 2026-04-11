@@ -5,11 +5,11 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "Aktivitäts-Sparkline"
   },
-  "feature.analyticsExporter.description": {
-    "defaultMessage": "Fügt eine Schaltfläche hinzu, um Statistikdiagramme als PNG-Bilder herunterzuladen."
+  "feature.analyticsExport.description": {
+    "defaultMessage": "Fügt einen Button hinzu, um Analysediagramme als PNG-Bilder herunterzuladen."
   },
-  "feature.analyticsExporter.title": {
-    "defaultMessage": "Diagramm als Bild exportieren"
+  "feature.analyticsExport.title": {
+    "defaultMessage": "Analytics-Export"
   },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "Leite CurseForge-Projektseiten zu Modrinth um, falls verfügbar."
@@ -106,6 +106,9 @@
   },
   "popup.footer.starOnGitHub": {
     "defaultMessage": "★ Auf GitHub"
+  },
+  "popup.footer.support": {
+    "defaultMessage": "Unterstützen"
   },
   "popup.footer.updateAvailable": {
     "defaultMessage": "Aktualisierung verfügbar"

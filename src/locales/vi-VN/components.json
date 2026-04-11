@@ -1,2 +1,111 @@
-{}
+{
+  "analyticsExport.tooltip": {
+    "defaultMessage": "Xuất dưới dạng hình ảnh"
+  },
+  "dependenciesSidebar.loading": {
+    "defaultMessage": "Đang tải"
+  },
+  "dependencyExplorer.controls": {
+    "defaultMessage": "cuộn để phóng to · kéo để di chuyển · nhấp để mở rộng"
+  },
+  "dependencyExplorer.dependencyNode.embedded": {
+    "defaultMessage": "Nhúng"
+  },
+  "dependencyExplorer.dependencyNode.incompatible": {
+    "defaultMessage": "Không tương thích"
+  },
+  "dependencyExplorer.dependencyNode.optional": {
+    "defaultMessage": "Tuỳ chọn"
+  },
+  "dependencyExplorer.dependencyNode.required": {
+    "defaultMessage": "Yêu cầu"
+  },
+  "dependencyExplorer.loading": {
+    "defaultMessage": "Đang tải"
+  },
+  "discordSidebar.members": {
+    "defaultMessage": "{count} thành viên"
+  },
+  "discordSidebar.online": {
+    "defaultMessage": "{count} trực tuyến"
+  },
+  "discordSidebar.verified": {
+    "defaultMessage": "Đã xác minh"
+  },
+  "errorNotice.message": {
+    "defaultMessage": "Lỗi này có thể liên quan đến Modrinth Extras. Hãy thử tắt tiện ích mở rộng này và làm mới trang trước khi báo cáo lỗi này cho Modrinth. Nếu lỗi biến mất, vui lòng báo cáo <link>tại đây</link>."
+  },
+  "notificationsIndicator.markAllAsRead": {
+    "defaultMessage": "Đánh dấu tất cả là đã đọc"
+  },
+  "notificationsIndicator.noUnread": {
+    "defaultMessage": "Không có thông báo chưa đọc"
+  },
+  "notificationsIndicator.projectUpdated": {
+    "defaultMessage": "{title} đã được cập nhật"
+  },
+  "notificationsIndicator.viewAll": {
+    "defaultMessage": "Xem tất cả"
+  },
+  "notificationsIndicator.viewHistory": {
+    "defaultMessage": "Xem lịch sử"
+  },
+  "projectCardActions.copied": {
+    "defaultMessage": "Đã sao chép!"
+  },
+  "projectCardActions.copyLink": {
+    "defaultMessage": "Sao chép liên kết"
+  },
+  "projectCardActions.download": {
+    "defaultMessage": "Tải xuống"
+  },
+  "projectCardActions.follow": {
+    "defaultMessage": "Theo dõi"
+  },
+  "projectCardActions.newCollection": {
+    "defaultMessage": "Tạo bộ sưu tập mới"
+  },
+  "projectCardActions.noCollections": {
+    "defaultMessage": "Không tìm thấy bộ sưu tập."
+  },
+  "projectCardActions.save": {
+    "defaultMessage": "Lưu"
+  },
+  "projectCardActions.saved": {
+    "defaultMessage": "Đã lưu"
+  },
+  "projectCardActions.searchPlaceholder": {
+    "defaultMessage": "Tìm kiếm..."
+  },
+  "projectCardActions.unfollow": {
+    "defaultMessage": "Bỏ theo dõi"
+  },
+  "quickSearch.examples": {
+    "defaultMessage": "Ví dụ"
+  },
+  "quickSearch.recent": {
+    "defaultMessage": "Gần đây"
+  },
+  "quickSearch.search": {
+    "defaultMessage": "Tìm kiếm"
+  },
+  "toolsSidebar.copied": {
+    "defaultMessage": "Đã sao chép!"
+  },
+  "toolsSidebar.copyDownloadUrl": {
+    "defaultMessage": "Sao chép URL tải xuống"
+  },
+  "toolsSidebar.copyPackwiz": {
+    "defaultMessage": "Sao chép packwiz"
+  },
+  "toolsSidebar.generateEmbed": {
+    "defaultMessage": "Tạo mã nhúng"
+  },
+  "toolsSidebar.title": {
+    "defaultMessage": "Công cụ"
+  },
+  "toolsSidebar.viewApiResponse": {
+    "defaultMessage": "Xem phản hồi API"
+  }
+}
 
