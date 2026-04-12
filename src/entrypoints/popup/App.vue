@@ -121,36 +121,40 @@
 		<HorizontalRule class="shrink-0" />
 
 		<div class="flex shrink-0 items-center gap-2 px-3 py-1.5">
-			<span class="text-xs text-secondary">v{{ version }}</span>
-			<span v-if="checking" class="flex items-center gap-1 text-xs text-secondary">
-				<LoaderCircleIcon class="size-4 animate-spin" aria-hidden="true" />
-				{{ formatMessage(messages['popup.footer.checking']) }}
-			</span>
-			<a
-				v-else-if="isLatest"
-				href="https://github.com/creeperkatze/modrinth-extras/releases/latest"
-				target="_blank"
-				rel="noopener"
-				class="flex items-center gap-1 text-xs text-brand no-underline transition-colors hover:text-green-300"
-			>
-				<CheckCircleIcon class="size-4" aria-hidden="true" />
-				{{ formatMessage(messages['popup.footer.latestVersion']) }}
-			</a>
-			<a
-				v-else-if="latestVersion"
-				href="https://github.com/creeperkatze/modrinth-extras/releases/latest"
-				target="_blank"
-				rel="noopener"
-				class="flex items-center gap-1 text-xs text-yellow-500 no-underline transition-colors hover:text-yellow-300"
-			>
-				<ClockIcon class="size-4" aria-hidden="true" />
-				{{ formatMessage(messages['popup.footer.updateAvailable']) }}
-			</a>
+			<div class="flex min-w-0 flex-1 items-center gap-2">
+				<span class="shrink-0 text-xs text-secondary">v{{ version }}</span>
+				<span v-if="checking" class="flex min-w-0 items-center gap-1 text-xs text-secondary">
+					<LoaderCircleIcon class="size-4 shrink-0 animate-spin" aria-hidden="true" />
+					<span class="truncate">{{ formatMessage(messages['popup.footer.checking']) }}</span>
+				</span>
+				<a
+					v-else-if="isLatest"
+					href="https://github.com/creeperkatze/modrinth-extras/releases/latest"
+					target="_blank"
+					rel="noopener"
+					class="flex min-w-0 items-center gap-1 text-xs text-brand no-underline transition-colors hover:text-green-300"
+				>
+					<CheckCircleIcon class="size-4 shrink-0" aria-hidden="true" />
+					<span class="truncate">{{ formatMessage(messages['popup.footer.latestVersion']) }}</span>
+				</a>
+				<a
+					v-else-if="latestVersion"
+					href="https://github.com/creeperkatze/modrinth-extras/releases/latest"
+					target="_blank"
+					rel="noopener"
+					class="flex min-w-0 items-center gap-1 text-xs text-yellow-500 no-underline transition-colors hover:text-yellow-300"
+				>
+					<ClockIcon class="size-4 shrink-0" aria-hidden="true" />
+					<span class="truncate">{{
+						formatMessage(messages['popup.footer.updateAvailable'])
+					}}</span>
+				</a>
+			</div>
 			<a
 				href="https://ko-fi.com/creeperkatze"
 				target="_blank"
 				rel="noopener"
-				class="ml-auto flex items-center gap-1 text-xs text-[#FF5E5B] no-underline transition-colors hover:text-[#ff8e8c]"
+				class="flex shrink-0 items-center gap-1 text-xs text-[#FF5E5B] no-underline transition-colors hover:text-[#ff8e8c]"
 			>
 				<KofiIcon class="size-3.5" aria-hidden="true" />
 				{{ formatMessage(messages['popup.footer.support']) }}
@@ -159,7 +163,7 @@
 				href="https://github.com/creeperkatze/modrinth-extras"
 				target="_blank"
 				rel="noopener"
-				class="flex items-center gap-1 text-xs text-yellow-500 no-underline transition-colors hover:text-yellow-300"
+				class="flex shrink-0 items-center gap-1 text-xs text-yellow-500 no-underline transition-colors hover:text-yellow-300"
 			>
 				{{ formatMessage(messages['popup.footer.starOnGitHub']) }}
 			</a>
