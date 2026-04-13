@@ -99,7 +99,7 @@
     "defaultMessage": "最新版本"
   },
   "popup.footer.starOnGitHub": {
-    "defaultMessage": "★ 在 GitHub 上"
+    "defaultMessage": "在 GitHub 上"
   },
   "popup.footer.updateAvailable": {
     "defaultMessage": "有可用更新"

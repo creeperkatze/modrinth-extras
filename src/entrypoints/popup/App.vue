@@ -123,8 +123,8 @@
 		<div class="flex shrink-0 items-center gap-2 px-3 py-1.5">
 			<div class="flex min-w-0 flex-1 items-center gap-2">
 				<span class="shrink-0 text-xs text-secondary">v{{ version }}</span>
-				<span v-if="checking" class="flex min-w-0 items-center gap-1 text-xs text-secondary">
-					<LoaderCircleIcon class="size-4 shrink-0 animate-spin" aria-hidden="true" />
+				<span v-if="checking" class="flex min-w-0 items-center gap-1 text-xs text-muted">
+					<LoaderCircleIcon class="!size-3.5 shrink-0 animate-spin" aria-hidden="true" />
 					<span class="truncate">{{ formatMessage(messages['popup.footer.checking']) }}</span>
 				</span>
 				<a
@@ -132,9 +132,9 @@
 					href="https://github.com/creeperkatze/modrinth-extras/releases/latest"
 					target="_blank"
 					rel="noopener"
-					class="flex min-w-0 items-center gap-1 text-xs text-brand no-underline transition-colors hover:text-green-300"
+					class="flex min-w-0 items-center gap-1 text-xs text-green-500 no-underline transition-colors hover:text-green-400"
 				>
-					<CheckCircleIcon class="size-4 shrink-0" aria-hidden="true" />
+					<CheckCircleIcon class="!size-3.5 shrink-0" aria-hidden="true" />
 					<span class="truncate">{{ formatMessage(messages['popup.footer.latestVersion']) }}</span>
 				</a>
 				<a
@@ -142,9 +142,9 @@
 					href="https://github.com/creeperkatze/modrinth-extras/releases/latest"
 					target="_blank"
 					rel="noopener"
-					class="flex min-w-0 items-center gap-1 text-xs text-yellow-500 no-underline transition-colors hover:text-yellow-300"
+					class="flex min-w-0 items-center gap-1 text-xs text-yellow-500 no-underline transition-colors hover:text-yellow-400"
 				>
-					<ClockIcon class="size-4 shrink-0" aria-hidden="true" />
+					<ClockIcon class="!size-3.5 shrink-0" aria-hidden="true" />
 					<span class="truncate">{{
 						formatMessage(messages['popup.footer.updateAvailable'])
 					}}</span>
@@ -156,22 +156,24 @@
 				rel="noopener"
 				class="flex shrink-0 items-center gap-1 text-xs text-[#FF5E5B] no-underline transition-colors hover:text-[#ff8e8c]"
 			>
-				<KofiIcon class="size-3.5" aria-hidden="true" />
+				<KofiIcon class="!size-3.5" aria-hidden="true" />
 				{{ formatMessage(messages['popup.footer.support']) }}
 			</a>
 			<a
 				href="https://github.com/creeperkatze/modrinth-extras"
 				target="_blank"
 				rel="noopener"
-				class="flex shrink-0 items-center gap-1 text-xs text-yellow-500 no-underline transition-colors hover:text-yellow-300"
+				class="flex shrink-0 items-center gap-1 text-xs text-yellow-500 no-underline transition-colors hover:text-yellow-400"
 			>
-				{{ formatMessage(messages['popup.footer.starOnGitHub']) }}
+				<Star class="!size-3.5 shrink-0" aria-hidden="true" />
+				<span>{{ formatMessage(messages['popup.footer.starOnGitHub']) }}</span>
 			</a>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
+import { Star } from '@lucide/vue'
 import {
 	ArrowUpRightIcon,
 	BellIcon,
@@ -230,7 +232,7 @@ const messages = defineMessages({
 		id: 'popup.footer.updateAvailable',
 		defaultMessage: 'Update available',
 	},
-	'popup.footer.starOnGitHub': { id: 'popup.footer.starOnGitHub', defaultMessage: '★ On GitHub' },
+	'popup.footer.starOnGitHub': { id: 'popup.footer.starOnGitHub', defaultMessage: 'On GitHub' },
 	'popup.footer.support': { id: 'popup.footer.support', defaultMessage: 'Support' },
 	'feature.notifications.title': {
 		id: 'feature.notifications.title',

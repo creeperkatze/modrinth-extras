@@ -20,6 +20,7 @@
         "release:major": "pnpm version major && git push && git push --tags"
     },
     "dependencies": {
+        "@lucide/vue": "^1.8.0",
         "@modrinth/api-client": "workspace:*",
         "@modrinth/assets": "workspace:*",
         "@modrinth/ui": "workspace:*",
