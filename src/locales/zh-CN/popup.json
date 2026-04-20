@@ -5,6 +5,12 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "活动图表"
   },
+  "feature.analyticsExport.description": {
+    "defaultMessage": "添加一个按钮，用于将分析图表下载为 PNG 图片。"
+  },
+  "feature.analyticsExport.title": {
+    "defaultMessage": "分析数据导出"
+  },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "在可用的情况下，将 CurseForge 项目页面重定向至 Modrinth。"
   },
@@ -100,6 +106,9 @@
   },
   "popup.footer.starOnGitHub": {
     "defaultMessage": "在 GitHub 上"
+  },
+  "popup.footer.support": {
+    "defaultMessage": "支持"
   },
   "popup.footer.updateAvailable": {
     "defaultMessage": "有可用更新"
