@@ -185,6 +185,7 @@ New translations are automatically pulled every Monday.
 | Chinese Simplified | [xinyihl](https://crowdin.com/profile/xinyihl) |
 | Korean | [젠고](https://crowdin.com/profile/minejango2) |
 | Vietnamese | [Lê](https://crowdin.com/profile/suri-cutie) |
+| Russian | [vanapro1](https://crowdin.com/profile/vanapro1) |
 
 ## 🤝 Contributing
 
