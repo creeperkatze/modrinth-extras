@@ -1,2 +1,150 @@
-{}
+{
+  "analyticsExport.tooltip": {
+    "defaultMessage": "Экспортировать как изображение"
+  },
+  "dependenciesSidebar.loadError": {
+    "defaultMessage": "Не удалось загрузить зависимости"
+  },
+  "dependenciesSidebar.loading": {
+    "defaultMessage": "Загрузка"
+  },
+  "dependenciesSidebar.none": {
+    "defaultMessage": "Нет зависимостей"
+  },
+  "dependenciesSidebar.openGraph": {
+    "defaultMessage": "Открыть диаграмму зависимостей"
+  },
+  "dependenciesSidebar.title": {
+    "defaultMessage": "Зависимости"
+  },
+  "dependencyExplorer.controls": {
+    "defaultMessage": "прокрутка — для увеличения · перетаскивание — для перемещения · клик — для раскрытия"
+  },
+  "dependencyExplorer.dependencyNode.collapse": {
+    "defaultMessage": "Свернуть зависимости"
+  },
+  "dependencyExplorer.dependencyNode.embedded": {
+    "defaultMessage": "Встроенный"
+  },
+  "dependencyExplorer.dependencyNode.expand": {
+    "defaultMessage": "Развернуть зависимости"
+  },
+  "dependencyExplorer.dependencyNode.incompatible": {
+    "defaultMessage": "Несовместимо"
+  },
+  "dependencyExplorer.dependencyNode.optional": {
+    "defaultMessage": "Необязательно"
+  },
+  "dependencyExplorer.dependencyNode.required": {
+    "defaultMessage": "Требуется"
+  },
+  "dependencyExplorer.loading": {
+    "defaultMessage": "Загрузка"
+  },
+  "dependencyExplorer.noDependencies": {
+    "defaultMessage": "У этого проекта нет зависимостей"
+  },
+  "dependencyExplorer.title": {
+    "defaultMessage": "Диаграмма зависимостей"
+  },
+  "discordSidebar.members": {
+    "defaultMessage": "{count} участников"
+  },
+  "discordSidebar.online": {
+    "defaultMessage": "{count} онлайн"
+  },
+  "discordSidebar.partnered": {
+    "defaultMessage": "Партнёры"
+  },
+  "discordSidebar.verified": {
+    "defaultMessage": "Проверено"
+  },
+  "errorNotice.message": {
+    "defaultMessage": "Ошибка может быть связана с Modrinth Extras. Попробуйте отключить расширение и обновить страницу перед отправкой отчёта в Modrinth. Если ошибка исчезнет, пожалуйста, сообщите об этом <link>здесь</link>."
+  },
+  "githubSidebar.forks": {
+    "defaultMessage": "{count} форков"
+  },
+  "githubSidebar.openIssues": {
+    "defaultMessage": "{count} открытых задач"
+  },
+  "githubSidebar.openPRs": {
+    "defaultMessage": "{count} открытых пул-реквестов"
+  },
+  "githubSidebar.stars": {
+    "defaultMessage": "{count} звезд"
+  },
+  "notificationsIndicator.markAllAsRead": {
+    "defaultMessage": "Отметить всё как прочитанное"
+  },
+  "notificationsIndicator.noUnread": {
+    "defaultMessage": "Нет непрочитанных уведомлений"
+  },
+  "notificationsIndicator.projectUpdated": {
+    "defaultMessage": "Обновление: {title}"
+  },
+  "notificationsIndicator.viewAll": {
+    "defaultMessage": "Просмотреть всё"
+  },
+  "notificationsIndicator.viewHistory": {
+    "defaultMessage": "Посмотреть историю"
+  },
+  "projectCardActions.copied": {
+    "defaultMessage": "Скопировано!"
+  },
+  "projectCardActions.copyLink": {
+    "defaultMessage": "Скопировать ссылку"
+  },
+  "projectCardActions.download": {
+    "defaultMessage": "Скачать"
+  },
+  "projectCardActions.follow": {
+    "defaultMessage": "Подписаться"
+  },
+  "projectCardActions.newCollection": {
+    "defaultMessage": "Создать новую коллекцию"
+  },
+  "projectCardActions.noCollections": {
+    "defaultMessage": "Коллекции не найдены."
+  },
+  "projectCardActions.save": {
+    "defaultMessage": "Сохранить"
+  },
+  "projectCardActions.saved": {
+    "defaultMessage": "Сохранено"
+  },
+  "projectCardActions.searchPlaceholder": {
+    "defaultMessage": "Поиск..."
+  },
+  "projectCardActions.unfollow": {
+    "defaultMessage": "Отписаться"
+  },
+  "quickSearch.examples": {
+    "defaultMessage": "Примеры"
+  },
+  "quickSearch.recent": {
+    "defaultMessage": "Последние"
+  },
+  "quickSearch.search": {
+    "defaultMessage": "Поиск"
+  },
+  "toolsSidebar.copied": {
+    "defaultMessage": "Скопировано!"
+  },
+  "toolsSidebar.copyDownloadUrl": {
+    "defaultMessage": "Скопировать ссылку для скачивания"
+  },
+  "toolsSidebar.copyPackwiz": {
+    "defaultMessage": "Скопировать команду packwiz"
+  },
+  "toolsSidebar.generateEmbed": {
+    "defaultMessage": "Сгенерировать код для встраивания"
+  },
+  "toolsSidebar.title": {
+    "defaultMessage": "Инструменты"
+  },
+  "toolsSidebar.viewApiResponse": {
+    "defaultMessage": "Просмотреть ответ API"
+  }
+}
 
