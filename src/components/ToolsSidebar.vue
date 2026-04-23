@@ -115,7 +115,7 @@ const props = defineProps<{
 }>()
 
 const modfolioUrl = computed(
-	() => `https://modfolio.creeperkatze.de/?url=${encodeURIComponent(props.pageUrl)}`,
+	() => `https://modfolio.creeperkatze.dev/?url=${encodeURIComponent(props.pageUrl)}`,
 )
 
 const apiUrl = computed(() => {
