@@ -1,2 +1,150 @@
-{}
+{
+  "analyticsExport.tooltip": {
+    "defaultMessage": "Експортувати як зображення"
+  },
+  "dependenciesSidebar.loadError": {
+    "defaultMessage": "Не вдалося завантажити залежності"
+  },
+  "dependenciesSidebar.loading": {
+    "defaultMessage": "Завантаження"
+  },
+  "dependenciesSidebar.none": {
+    "defaultMessage": "Немає залежностей"
+  },
+  "dependenciesSidebar.openGraph": {
+    "defaultMessage": "Відкрити діаграму залежностей"
+  },
+  "dependenciesSidebar.title": {
+    "defaultMessage": "Залежності"
+  },
+  "dependencyExplorer.controls": {
+    "defaultMessage": "прокручуйте для масштабування · перетягуйте для переміщення · клацайте для розкриття"
+  },
+  "dependencyExplorer.dependencyNode.collapse": {
+    "defaultMessage": "Згорнути залежності"
+  },
+  "dependencyExplorer.dependencyNode.embedded": {
+    "defaultMessage": "Вбудований"
+  },
+  "dependencyExplorer.dependencyNode.expand": {
+    "defaultMessage": "Розгорнути залежності"
+  },
+  "dependencyExplorer.dependencyNode.incompatible": {
+    "defaultMessage": "Несумісно"
+  },
+  "dependencyExplorer.dependencyNode.optional": {
+    "defaultMessage": "Необов'язково"
+  },
+  "dependencyExplorer.dependencyNode.required": {
+    "defaultMessage": "Необхідно"
+  },
+  "dependencyExplorer.loading": {
+    "defaultMessage": "Завантаження"
+  },
+  "dependencyExplorer.noDependencies": {
+    "defaultMessage": "Цей проєкт не має залежностей"
+  },
+  "dependencyExplorer.title": {
+    "defaultMessage": "Діаграма залежностей"
+  },
+  "discordSidebar.members": {
+    "defaultMessage": "{count} учасників"
+  },
+  "discordSidebar.online": {
+    "defaultMessage": "{count} в мережі"
+  },
+  "discordSidebar.partnered": {
+    "defaultMessage": "Партнери"
+  },
+  "discordSidebar.verified": {
+    "defaultMessage": "Перевірено"
+  },
+  "errorNotice.message": {
+    "defaultMessage": "Ця помилка може бути пов'язана з Modrinth Extras. Спробуйте вимкнути розширення та оновити сторінку, перш ніж повідомляти про це Modrinth. Якщо помилка зникне, повідомте про це <link>тут</link>."
+  },
+  "githubSidebar.forks": {
+    "defaultMessage": "{count} форків"
+  },
+  "githubSidebar.openIssues": {
+    "defaultMessage": "{count} відкритих задач"
+  },
+  "githubSidebar.openPRs": {
+    "defaultMessage": "{count} відкритих запитів на зміни"
+  },
+  "githubSidebar.stars": {
+    "defaultMessage": "{count} зірок"
+  },
+  "notificationsIndicator.markAllAsRead": {
+    "defaultMessage": "Позначити все як прочитане"
+  },
+  "notificationsIndicator.noUnread": {
+    "defaultMessage": "Немає непрочитаних повідомлень"
+  },
+  "notificationsIndicator.projectUpdated": {
+    "defaultMessage": "{title} було оновлено"
+  },
+  "notificationsIndicator.viewAll": {
+    "defaultMessage": "Переглянути все"
+  },
+  "notificationsIndicator.viewHistory": {
+    "defaultMessage": "Переглянути історію"
+  },
+  "projectCardActions.copied": {
+    "defaultMessage": "Скопійовано!"
+  },
+  "projectCardActions.copyLink": {
+    "defaultMessage": "Скопіювати посилання"
+  },
+  "projectCardActions.download": {
+    "defaultMessage": "Завантажити"
+  },
+  "projectCardActions.follow": {
+    "defaultMessage": "Підписатися"
+  },
+  "projectCardActions.newCollection": {
+    "defaultMessage": "Створити нову колекцію"
+  },
+  "projectCardActions.noCollections": {
+    "defaultMessage": "Колекцій не знайдено."
+  },
+  "projectCardActions.save": {
+    "defaultMessage": "Зберегти"
+  },
+  "projectCardActions.saved": {
+    "defaultMessage": "Збережено"
+  },
+  "projectCardActions.searchPlaceholder": {
+    "defaultMessage": "Пошук..."
+  },
+  "projectCardActions.unfollow": {
+    "defaultMessage": "Відписатися"
+  },
+  "quickSearch.examples": {
+    "defaultMessage": "Приклади"
+  },
+  "quickSearch.recent": {
+    "defaultMessage": "Останні"
+  },
+  "quickSearch.search": {
+    "defaultMessage": "Пошук"
+  },
+  "toolsSidebar.copied": {
+    "defaultMessage": "Скопійовано!"
+  },
+  "toolsSidebar.copyDownloadUrl": {
+    "defaultMessage": "Копіювати посилання завантаження"
+  },
+  "toolsSidebar.copyPackwiz": {
+    "defaultMessage": "Скопіювати команду packwiz"
+  },
+  "toolsSidebar.generateEmbed": {
+    "defaultMessage": "Згенерувати код для вбудовування"
+  },
+  "toolsSidebar.title": {
+    "defaultMessage": "Інструменти"
+  },
+  "toolsSidebar.viewApiResponse": {
+    "defaultMessage": "Переглянути відповідь API"
+  }
+}
 
