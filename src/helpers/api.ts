@@ -1,7 +1,7 @@
 import { browser } from 'wxt/browser'
 
 const API_BASE = 'https://api.modrinth.com'
-const USER_AGENT = `creeperkatze/modrinth-extras/${browser.runtime.getManifest().version} (contact@creeperkatze.de)`
+const USER_AGENT = `creeperkatze/modrinth-extras/${browser.runtime.getManifest().version} (contact@creeperkatze.dev)`
 
 export type ApiFetchOptions = RequestInit & { apiVersion?: number; token?: string }
 

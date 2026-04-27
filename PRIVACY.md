@@ -19,4 +19,4 @@ Data is sent to a [PostHog](https://posthog.com) instance operated by the extens
 
 ## Contact
 
-contact@creeperkatze.de
+contact@creeperkatze.dev

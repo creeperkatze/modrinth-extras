@@ -68,7 +68,7 @@ Release activity chart on project pages.
 
 Generate embeds, view raw API responses, copy download URLs and packwiz commands.
 
-- **Generate embed:** opens [Modfolio](https://modfolio.creeperkatze.de) pre-loaded with the current page URL to generate an embeddable card or badge.
+- **Generate embed:** opens [Modfolio](https://modfolio.creeperkatze.dev) pre-loaded with the current page URL to generate an embeddable card or badge.
 - **View API response:** opens the raw Modrinth API JSON for the current page in a new tab.
 
 On project pages, two additional developer utilities are shown:
