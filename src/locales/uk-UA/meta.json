@@ -1,2 +1,21 @@
-{}
+{
+  "meta.summary": {
+    "defaultMessage": "Розширення для браузера, яке покращує досвід взаємодії з Modrinth на сайті та за його межами."
+  },
+  "meta.description.generalTitle": {
+    "defaultMessage": "Загальні функції:"
+  },
+  "meta.description.contentTitle": {
+    "defaultMessage": "Особливості сторінки контенту:"
+  },
+  "meta.description.extensionTitle": {
+    "defaultMessage": "Функції розширення:"
+  },
+  "meta.description.footer": {
+    "defaultMessage": "Усі функції є опціональними та можуть бути увімкнені або вимкнені окремо у спливному вікні розширення.\n\nModrinth Extras має <link>відкритий вихідний код</link>."
+  },
+  "meta.description.disclaimer": {
+    "defaultMessage": "Це розширення не пов'язане з Modrinth і не схвалено їм."
+  }
+}
 

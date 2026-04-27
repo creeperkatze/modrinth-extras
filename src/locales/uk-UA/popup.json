@@ -1,2 +1,135 @@
-{}
+{
+  "feature.activitySparkline.description": {
+    "defaultMessage": "Графік активності релізів на сторінках проєктів."
+  },
+  "feature.activitySparkline.title": {
+    "defaultMessage": "Міні-графік активности"
+  },
+  "feature.analyticsExport.description": {
+    "defaultMessage": "Додає кнопку для завантаження аналітичних графіків у форматі PNG."
+  },
+  "feature.analyticsExport.title": {
+    "defaultMessage": "Експорт аналітики"
+  },
+  "feature.curseforgeRedirect.description": {
+    "defaultMessage": "За можливости перенаправляти сторінки проєктів CurseForge на Modrinth."
+  },
+  "feature.curseforgeRedirect.title": {
+    "defaultMessage": "Перенаправлення CurseForge"
+  },
+  "feature.dependenciesSidebar.description": {
+    "defaultMessage": "Згортуване дерево залежностей на сторінках проєктів."
+  },
+  "feature.dependenciesSidebar.title": {
+    "defaultMessage": "Бічна панель залежностей"
+  },
+  "feature.desktopNotifications.description": {
+    "defaultMessage": "Системні повідомлення для ваших повідомлень Modrinth."
+  },
+  "feature.desktopNotifications.exampleMessage": {
+    "defaultMessage": "Це приклад повідомлення від Modrinth Extras!"
+  },
+  "feature.desktopNotifications.exampleTitle": {
+    "defaultMessage": "Приклад повідомлення"
+  },
+  "feature.desktopNotifications.title": {
+    "defaultMessage": "Повідомлення на робочому столі"
+  },
+  "feature.discordSidebar.description": {
+    "defaultMessage": "Назва сервера, опис, кількість учасників та онлайн, для пов'язаних серверів Discord."
+  },
+  "feature.discordSidebar.title": {
+    "defaultMessage": "Бічна панель Discord"
+  },
+  "feature.galleryBackground.description": {
+    "defaultMessage": "Відображати обране зображення з галереї, як фоновий банер на сторінках проєктів."
+  },
+  "feature.galleryBackground.title": {
+    "defaultMessage": "Фон галереї"
+  },
+  "feature.githubSidebar.description": {
+    "defaultMessage": "Зірки, задачі, запити на зміни та форки для пов'язаних репозиторіїв."
+  },
+  "feature.githubSidebar.title": {
+    "defaultMessage": "Бічна панель GitHub"
+  },
+  "feature.notificationBadge.description": {
+    "defaultMessage": "Актуальна кількість непрочитаних повідомлень на іконці розширення."
+  },
+  "feature.notificationBadge.title": {
+    "defaultMessage": "Значок повідомлень"
+  },
+  "feature.notifications.description": {
+    "defaultMessage": "Переглядайте, керуйте та очищайте непрочитані повідомлення прямо в заголовку, не залишаючи поточну сторінку."
+  },
+  "feature.notifications.title": {
+    "defaultMessage": "Повідомлення"
+  },
+  "feature.projectCardActions.description": {
+    "defaultMessage": "Завантажуйте, підписуйтесь та зберігайте проєкти прямо з їхніх карток."
+  },
+  "feature.projectCardActions.modLoader": {
+    "defaultMessage": "Завантажувач модів"
+  },
+  "feature.projectCardActions.pluginLoader": {
+    "defaultMessage": "Завантажувач плагінів"
+  },
+  "feature.projectCardActions.title": {
+    "defaultMessage": "Дії у картці проєкту"
+  },
+  "feature.quickSearch.description": {
+    "defaultMessage": "Ctrl+K або / для пошуку у стилі палітри команд із фільтрами для завантажувачів, версій, категорій та типів."
+  },
+  "feature.quickSearch.title": {
+    "defaultMessage": "Швидкий пошук"
+  },
+  "feature.telemetry.description": {
+    "defaultMessage": "Допоможіть поліпшити роботу розширення, анонімно надаючи статистичні дані, такі як версія розширення та перелік увімкнених функцій. Дані Modrinth, інформація про активність або особисті дані не збиратимуться."
+  },
+  "feature.telemetry.disabledTooltip": {
+    "defaultMessage": "Керується налаштуваннями збору даних Firefox"
+  },
+  "feature.telemetry.title": {
+    "defaultMessage": "Телеметрія"
+  },
+  "feature.toolsSidebar.description": {
+    "defaultMessage": "Створюйте вбудовані елементи, переглядайте відповіді API, копіюйте посилання для завантаження та команди packwiz."
+  },
+  "feature.toolsSidebar.title": {
+    "defaultMessage": "Бічна панель інструментів"
+  },
+  "popup.footer.checking": {
+    "defaultMessage": "Перевірка"
+  },
+  "popup.footer.latestVersion": {
+    "defaultMessage": "Остання версія"
+  },
+  "popup.footer.starOnGitHub": {
+    "defaultMessage": "На GitHub"
+  },
+  "popup.footer.support": {
+    "defaultMessage": "Підтримка"
+  },
+  "popup.footer.updateAvailable": {
+    "defaultMessage": "Доступне оновлення"
+  },
+  "popup.group.contentPages": {
+    "defaultMessage": "Сторінки контенту"
+  },
+  "popup.group.extension": {
+    "defaultMessage": "Розширення"
+  },
+  "popup.group.general": {
+    "defaultMessage": "Загальні"
+  },
+  "search.any": {
+    "defaultMessage": "Будь-який"
+  },
+  "settings.language": {
+    "defaultMessage": "Мова"
+  },
+  "settings.language.description": {
+    "defaultMessage": "Допомагайте із перекладом на <link>Crowdin</link>. Деякі мови можуть бути неповними."
+  }
+}
 

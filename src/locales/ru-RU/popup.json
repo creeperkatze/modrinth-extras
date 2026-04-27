@@ -1,2 +1,135 @@
-{}
+{
+  "feature.activitySparkline.description": {
+    "defaultMessage": "График активности релизов на страницах проектов."
+  },
+  "feature.activitySparkline.title": {
+    "defaultMessage": "Мини-график активности"
+  },
+  "feature.analyticsExport.description": {
+    "defaultMessage": "Добавляет кнопку для скачивания аналитических графиков в формате PNG."
+  },
+  "feature.analyticsExport.title": {
+    "defaultMessage": "Экспорт аналитики"
+  },
+  "feature.curseforgeRedirect.description": {
+    "defaultMessage": "Перенаправлять страницы проектов CurseForge на Modrinth, когда это возможно."
+  },
+  "feature.curseforgeRedirect.title": {
+    "defaultMessage": "Перенаправление CurseForge"
+  },
+  "feature.dependenciesSidebar.description": {
+    "defaultMessage": "Сворачиваемое дерево зависимостей на страницах проектов."
+  },
+  "feature.dependenciesSidebar.title": {
+    "defaultMessage": "Боковая панель зависимостей"
+  },
+  "feature.desktopNotifications.description": {
+    "defaultMessage": "Системные уведомления для ваших уведомлений Modrinth."
+  },
+  "feature.desktopNotifications.exampleMessage": {
+    "defaultMessage": "Это пример уведомления от Modrinth Extras!"
+  },
+  "feature.desktopNotifications.exampleTitle": {
+    "defaultMessage": "Пример уведомления"
+  },
+  "feature.desktopNotifications.title": {
+    "defaultMessage": "Уведомления на рабочем столе"
+  },
+  "feature.discordSidebar.description": {
+    "defaultMessage": "Название сервера, описание, количество участников и онлайн для связанных серверов Discord."
+  },
+  "feature.discordSidebar.title": {
+    "defaultMessage": "Боковая панель Discord"
+  },
+  "feature.galleryBackground.description": {
+    "defaultMessage": "Отображать изображение из галереи как фоновый баннер на страницах проектов."
+  },
+  "feature.galleryBackground.title": {
+    "defaultMessage": "Фон галереи"
+  },
+  "feature.githubSidebar.description": {
+    "defaultMessage": "Звёзды, задачи, запросы на изменения и форки для связанных репозиториев."
+  },
+  "feature.githubSidebar.title": {
+    "defaultMessage": "Боковая панель GitHub"
+  },
+  "feature.notificationBadge.description": {
+    "defaultMessage": "Актуальное число непрочитанных уведомлений на значке расширения."
+  },
+  "feature.notificationBadge.title": {
+    "defaultMessage": "Значок уведомлений"
+  },
+  "feature.notifications.description": {
+    "defaultMessage": "Просматривайте, управляйте и очищайте непрочитанные уведомления прямо в заголовке, не покидая текущую страницу."
+  },
+  "feature.notifications.title": {
+    "defaultMessage": "Уведомления"
+  },
+  "feature.projectCardActions.description": {
+    "defaultMessage": "Скачивайте, подписывайтесь и сохраняйте проекты прямо из карточек проектов."
+  },
+  "feature.projectCardActions.modLoader": {
+    "defaultMessage": "Загрузчик модов"
+  },
+  "feature.projectCardActions.pluginLoader": {
+    "defaultMessage": "Загрузчик плагинов"
+  },
+  "feature.projectCardActions.title": {
+    "defaultMessage": "Действия в карточке проекта"
+  },
+  "feature.quickSearch.description": {
+    "defaultMessage": "Ctrl+K или / для поиска в стиле командной палитры с фильтрами по загрузчикам, версиям, категориям и типам."
+  },
+  "feature.quickSearch.title": {
+    "defaultMessage": "Быстрый поиск"
+  },
+  "feature.telemetry.description": {
+    "defaultMessage": "Помогите улучшить расширение, анонимно делясь статистикой, такой как версия расширения и включённые функции. Данные Modrinth, активность и личная информация не собираются."
+  },
+  "feature.telemetry.disabledTooltip": {
+    "defaultMessage": "Управляется настройками сбора данных Firefox"
+  },
+  "feature.telemetry.title": {
+    "defaultMessage": "Телеметрия"
+  },
+  "feature.toolsSidebar.description": {
+    "defaultMessage": "Создавайте встроенные элементы, просматривайте ответы API в исходном виде, копируйте ссылки для загрузки и команды packwiz."
+  },
+  "feature.toolsSidebar.title": {
+    "defaultMessage": "Боковая панель инструментов"
+  },
+  "popup.footer.checking": {
+    "defaultMessage": "Проверка"
+  },
+  "popup.footer.latestVersion": {
+    "defaultMessage": "Последняя версия"
+  },
+  "popup.footer.starOnGitHub": {
+    "defaultMessage": "На GitHub"
+  },
+  "popup.footer.support": {
+    "defaultMessage": "Поддержка"
+  },
+  "popup.footer.updateAvailable": {
+    "defaultMessage": "Доступно обновление"
+  },
+  "popup.group.contentPages": {
+    "defaultMessage": "Страницы контента"
+  },
+  "popup.group.extension": {
+    "defaultMessage": "Расширение"
+  },
+  "popup.group.general": {
+    "defaultMessage": "Общие"
+  },
+  "search.any": {
+    "defaultMessage": "Любой"
+  },
+  "settings.language": {
+    "defaultMessage": "Язык"
+  },
+  "settings.language.description": {
+    "defaultMessage": "Помогите с переводом на <link>Crowdin</link>. Некоторые языки могут быть переведены не полностью."
+  }
+}
 
