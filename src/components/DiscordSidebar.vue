@@ -2,44 +2,66 @@
 	<div v-if="invite && discordUrl" class="card flex-card experimental-styles-within relative">
 		<img :src="invite.iconUrl" class="size-10 shrink-0 rounded-lg absolute right-4 top-4" />
 		<h2 class="mb-1">Discord</h2>
-		<div class="details-list">
+		<div class="details-list min-w-0 max-w-full">
 			<a
 				:href="discordUrl"
 				target="_blank"
 				rel="noopener"
-				class="details-list__item !items-start hover:underline"
+				class="details-list__item !w-full min-w-0 max-w-full !items-start hover:underline"
 			>
 				<ServerIcon aria-hidden="true" class="mt-0.5 shrink-0" />
-				{{ invite.name }}
-				<ExternalIcon aria-hidden="true" class="external-icon" />
+				<span class="min-w-0 flex-1 break-words leading-tight">
+					{{ invite.name }}
+					<ExternalIcon
+						aria-hidden="true"
+						class="external-icon ml-1 inline !mb-0 align-[-0.125em]"
+					/>
+				</span>
 			</a>
-			<span v-if="invite.description" class="details-list__item !items-start">
+			<span
+				v-if="invite.description"
+				class="details-list__item !w-full min-w-0 max-w-full !items-start"
+			>
 				<InfoIcon aria-hidden="true" class="mt-0.5 shrink-0" />
-				{{ invite.description }}
+				<span class="min-w-0 flex-1 break-words leading-tight">{{ invite.description }}</span>
 			</span>
-			<span class="details-list__item">
-				<UsersIcon aria-hidden="true" />
-				{{
-					formatMessage(messages['discordSidebar.members'], {
-						count: formatNum(invite.approximate_member_count),
-					})
-				}}
+			<span class="details-list__item !w-full min-w-0 max-w-full !items-start">
+				<UsersIcon aria-hidden="true" class="mt-0.5 shrink-0" />
+				<span class="min-w-0 flex-1 break-words leading-tight">
+					{{
+						formatMessage(messages['discordSidebar.members'], {
+							count: formatNum(invite.approximate_member_count),
+						})
+					}}
+				</span>
 			</span>
-			<span class="details-list__item">
-				<OnlineIndicatorIcon aria-hidden="true" class="text-green" />
-				{{
-					formatMessage(messages['discordSidebar.online'], {
-						count: formatNum(invite.approximate_presence_count),
-					})
-				}}
+			<span class="details-list__item !w-full min-w-0 max-w-full !items-start">
+				<OnlineIndicatorIcon aria-hidden="true" class="mt-0.5 shrink-0 text-green" />
+				<span class="min-w-0 flex-1 break-words leading-tight">
+					{{
+						formatMessage(messages['discordSidebar.online'], {
+							count: formatNum(invite.approximate_presence_count),
+						})
+					}}
+				</span>
 			</span>
-			<span v-if="invite.partnered" class="details-list__item font-semibold text-blue">
-				<AffiliateIcon aria-hidden="true" />
-				{{ formatMessage(messages['discordSidebar.partnered']) }}
+			<span
+				v-if="invite.partnered"
+				class="details-list__item !w-full min-w-0 max-w-full !items-start font-semibold text-blue"
+			>
+				<AffiliateIcon aria-hidden="true" class="mt-0.5 shrink-0" />
+				<span class="min-w-0 flex-1 break-words leading-tight">
+					{{ formatMessage(messages['discordSidebar.partnered']) }}
+				</span>
 			</span>
-			<span v-else-if="invite.verified" class="details-list__item font-semibold text-green">
-				<ShieldCheckIcon aria-hidden="true" />
-				{{ formatMessage(messages['discordSidebar.verified']) }}
+			<span
+				v-else-if="invite.verified"
+				class="details-list__item !w-full min-w-0 max-w-full !items-start font-semibold text-green"
+			>
+				<ShieldCheckIcon aria-hidden="true" class="mt-0.5 shrink-0" />
+				<span class="min-w-0 flex-1 break-words leading-tight">
+					{{ formatMessage(messages['discordSidebar.verified']) }}
+				</span>
 			</span>
 		</div>
 	</div>

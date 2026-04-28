@@ -29,17 +29,29 @@
 				</svg>
 			</button>
 		</div>
-		<div class="details-list">
-			<div v-if="loading" class="details-list__item">
-				<LoaderCircleIcon class="animate-spin" />
-				{{ formatMessage(messages['dependenciesSidebar.loading']) }}
+		<div class="details-list min-w-0 max-w-full">
+			<div v-if="loading" class="details-list__item !w-full min-w-0 max-w-full !items-start">
+				<LoaderCircleIcon class="mt-0.5 shrink-0 animate-spin" />
+				<span class="min-w-0 flex-1 break-words leading-tight">
+					{{ formatMessage(messages['dependenciesSidebar.loading']) }}
+				</span>
 			</div>
-			<div v-else-if="error" class="details-list__item font-normal text-secondary">
-				{{ formatMessage(messages['dependenciesSidebar.loadError']) }}
+			<div
+				v-else-if="error"
+				class="details-list__item !w-full min-w-0 max-w-full !items-start font-normal text-secondary"
+			>
+				<span class="min-w-0 flex-1 break-words leading-tight">
+					{{ formatMessage(messages['dependenciesSidebar.loadError']) }}
+				</span>
 			</div>
-			<div v-else-if="roots.length === 0" class="details-list__item text-secondary">
-				<XIcon aria-hidden="true" />
-				{{ formatMessage(messages['dependenciesSidebar.none']) }}
+			<div
+				v-else-if="roots.length === 0"
+				class="details-list__item !w-full min-w-0 max-w-full !items-start text-secondary"
+			>
+				<XIcon aria-hidden="true" class="mt-0.5 shrink-0" />
+				<span class="min-w-0 flex-1 break-words leading-tight">
+					{{ formatMessage(messages['dependenciesSidebar.none']) }}
+				</span>
 			</div>
 			<ScrollablePanel v-else class="[&__.scrollable-pane]:max-h-96">
 				<ul class="m-0 flex list-none flex-col gap-3 p-0 pr-2">

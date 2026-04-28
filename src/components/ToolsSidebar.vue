@@ -1,33 +1,50 @@
 <template>
 	<div class="card flex-card experimental-styles-within">
 		<h2>{{ formatMessage(messages['toolsSidebar.title']) }}</h2>
-		<div class="details-list">
-			<div class="details-list__item">
-				<CodeIcon aria-hidden="true" />
-				<a :href="modfolioUrl" target="_blank" rel="noopener" class="hover:underline">
+		<div class="details-list min-w-0 max-w-full">
+			<div class="details-list__item !w-full min-w-0 max-w-full !items-start">
+				<CodeIcon aria-hidden="true" class="mt-0.5 shrink-0" />
+				<a
+					:href="modfolioUrl"
+					target="_blank"
+					rel="noopener"
+					class="min-w-0 flex-1 break-words leading-tight hover:underline"
+				>
 					{{ formatMessage(messages['toolsSidebar.generateEmbed']) }}
-					<ExternalIcon aria-hidden="true" class="external-icon" />
+					<ExternalIcon
+						aria-hidden="true"
+						class="external-icon ml-1 inline !mb-0 align-[-0.125em]"
+					/>
 				</a>
 			</div>
-			<div v-if="apiUrl" class="details-list__item">
-				<BracesIcon aria-hidden="true" />
+			<div v-if="apiUrl" class="details-list__item !w-full min-w-0 max-w-full !items-start">
+				<BracesIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 				<a
 					:href="apiUrl"
 					target="_blank"
 					rel="noopener"
-					class="min-w-0 flex-1 truncate hover:underline"
+					class="min-w-0 flex-1 break-words leading-tight hover:underline"
 				>
 					{{ formatMessage(messages['toolsSidebar.viewApiResponse']) }}
-					<ExternalIcon aria-hidden="true" class="external-icon" />
+					<ExternalIcon
+						aria-hidden="true"
+						class="external-icon ml-1 inline !mb-0 align-[-0.125em]"
+					/>
 				</a>
 			</div>
 			<template v-if="projectSlug">
-				<div v-if="downloadLoading || downloadUrl" class="details-list__item">
-					<DownloadIcon aria-hidden="true" class="shrink-0" />
-					<LoaderCircleIcon v-if="downloadLoading" class="animate-spin shrink-0 text-secondary" />
+				<div
+					v-if="downloadLoading || downloadUrl"
+					class="details-list__item !w-full min-w-0 max-w-full !items-start"
+				>
+					<DownloadIcon aria-hidden="true" class="mt-0.5 shrink-0" />
+					<LoaderCircleIcon
+						v-if="downloadLoading"
+						class="mt-0.5 shrink-0 animate-spin text-secondary"
+					/>
 					<button
 						v-else-if="downloadUrl"
-						class="min-w-0 flex-1 cursor-pointer truncate border-0 bg-transparent p-0 text-left text-primary hover:underline [font:inherit]"
+						class="min-w-0 flex-1 cursor-pointer whitespace-normal break-words border-0 bg-transparent p-0 text-left leading-tight text-primary hover:underline [font:inherit]"
 						:aria-label="
 							downloadCopied
 								? formatMessage(messages['toolsSidebar.copied'])
@@ -40,17 +57,22 @@
 								? formatMessage(messages['toolsSidebar.copied'])
 								: formatMessage(messages['toolsSidebar.copyDownloadUrl'])
 						}}
+						<CheckIcon
+							v-if="downloadCopied"
+							aria-hidden="true"
+							class="ml-1 inline size-4 align-[-0.125em] text-brand"
+						/>
+						<CopyIcon
+							v-else
+							aria-hidden="true"
+							class="ml-1 inline size-4 align-[-0.125em] text-secondary"
+						/>
 					</button>
-					<ClipboardCopyIcon
-						v-if="!downloadLoading && downloadUrl && !downloadCopied"
-						class="shrink-0 text-secondary"
-					/>
-					<CheckIcon v-else-if="downloadCopied" class="shrink-0 text-brand" />
 				</div>
-				<div class="details-list__item">
-					<BoxIcon aria-hidden="true" class="shrink-0" />
+				<div class="details-list__item !w-full min-w-0 max-w-full !items-start">
+					<BoxIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 					<button
-						class="min-w-0 flex-1 cursor-pointer truncate border-0 bg-transparent p-0 text-left text-primary hover:underline [font:inherit]"
+						class="min-w-0 flex-1 cursor-pointer whitespace-normal break-words border-0 bg-transparent p-0 text-left leading-tight text-primary hover:underline [font:inherit]"
 						:aria-label="
 							packwizCopied
 								? formatMessage(messages['toolsSidebar.copied'])
@@ -63,9 +85,17 @@
 								? formatMessage(messages['toolsSidebar.copied'])
 								: formatMessage(messages['toolsSidebar.copyPackwiz'])
 						}}
+						<CheckIcon
+							v-if="packwizCopied"
+							aria-hidden="true"
+							class="ml-1 inline size-4 align-[-0.125em] text-brand"
+						/>
+						<CopyIcon
+							v-else
+							aria-hidden="true"
+							class="ml-1 inline size-4 align-[-0.125em] text-secondary"
+						/>
 					</button>
-					<ClipboardCopyIcon v-if="!packwizCopied" class="shrink-0 text-secondary" />
-					<CheckIcon v-else class="shrink-0 text-brand" />
 				</div>
 			</template>
 		</div>
@@ -77,8 +107,8 @@ import {
 	BoxIcon,
 	BracesIcon,
 	CheckIcon,
-	ClipboardCopyIcon,
 	CodeIcon,
+	CopyIcon,
 	DownloadIcon,
 	ExternalIcon,
 	LoaderCircleIcon,

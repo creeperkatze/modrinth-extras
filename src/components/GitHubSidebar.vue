@@ -1,32 +1,42 @@
 <template>
 	<div v-if="stats && repoUrl" class="card flex-card experimental-styles-within">
 		<h2>GitHub</h2>
-		<div class="details-list">
+		<div class="details-list min-w-0 max-w-full">
 			<a
 				:href="repoUrl + '/stargazers'"
 				target="_blank"
 				rel="noopener"
-				class="details-list__item hover:underline"
+				class="details-list__item !w-full min-w-0 max-w-full !items-start hover:underline"
 			>
-				<StarIcon aria-hidden="true" />
-				{{ formatMessage(messages['githubSidebar.stars'], { count: formatNum(stats.stars) }) }}
-				<ExternalIcon aria-hidden="true" class="external-icon" />
+				<StarIcon aria-hidden="true" class="mt-0.5 shrink-0" />
+				<span class="min-w-0 flex-1 break-words leading-tight">
+					{{ formatMessage(messages['githubSidebar.stars'], { count: formatNum(stats.stars) }) }}
+					<ExternalIcon
+						aria-hidden="true"
+						class="external-icon ml-1 inline !mb-0 align-[-0.125em]"
+					/>
+				</span>
 			</a>
 			<a
 				:href="repoUrl + '/issues'"
 				target="_blank"
 				rel="noopener"
-				class="details-list__item hover:underline"
+				class="details-list__item !w-full min-w-0 max-w-full !items-start hover:underline"
 			>
-				<IssuesIcon aria-hidden="true" />
-				{{ formatMessage(messages['githubSidebar.openIssues'], { count: stats.issues }) }}
-				<ExternalIcon aria-hidden="true" class="external-icon" />
+				<IssuesIcon aria-hidden="true" class="mt-0.5 shrink-0" />
+				<span class="min-w-0 flex-1 break-words leading-tight">
+					{{ formatMessage(messages['githubSidebar.openIssues'], { count: stats.issues }) }}
+					<ExternalIcon
+						aria-hidden="true"
+						class="external-icon ml-1 inline !mb-0 align-[-0.125em]"
+					/>
+				</span>
 			</a>
 			<a
 				:href="repoUrl + '/pulls'"
 				target="_blank"
 				rel="noopener"
-				class="details-list__item hover:underline"
+				class="details-list__item !w-full min-w-0 max-w-full !items-start hover:underline"
 			>
 				<!-- lucide git-pull-request -->
 				<svg
@@ -40,20 +50,26 @@
 					stroke-width="2"
 					viewBox="0 0 24 24"
 					aria-hidden="true"
+					class="mt-0.5 shrink-0"
 				>
 					<circle cx="18" cy="18" r="3" />
 					<circle cx="6" cy="6" r="3" />
 					<path d="M13 6h3a2 2 0 0 1 2 2v7" />
 					<line x1="6" y1="9" x2="6" y2="21" />
 				</svg>
-				{{ formatMessage(messages['githubSidebar.openPRs'], { count: stats.prs }) }}
-				<ExternalIcon aria-hidden="true" class="external-icon" />
+				<span class="min-w-0 flex-1 break-words leading-tight">
+					{{ formatMessage(messages['githubSidebar.openPRs'], { count: stats.prs }) }}
+					<ExternalIcon
+						aria-hidden="true"
+						class="external-icon ml-1 inline !mb-0 align-[-0.125em]"
+					/>
+				</span>
 			</a>
 			<a
 				:href="repoUrl + '/network/members'"
 				target="_blank"
 				rel="noopener"
-				class="details-list__item hover:underline"
+				class="details-list__item !w-full min-w-0 max-w-full !items-start hover:underline"
 			>
 				<!-- lucide git-fork -->
 				<svg
@@ -67,6 +83,7 @@
 					stroke-width="2"
 					viewBox="0 0 24 24"
 					aria-hidden="true"
+					class="mt-0.5 shrink-0"
 				>
 					<circle cx="12" cy="18" r="3" />
 					<circle cx="6" cy="6" r="3" />
@@ -74,8 +91,13 @@
 					<path d="M6 9v2a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V9" />
 					<line x1="12" y1="12" x2="12" y2="15" />
 				</svg>
-				{{ formatMessage(messages['githubSidebar.forks'], { count: formatNum(stats.forks) }) }}
-				<ExternalIcon aria-hidden="true" class="external-icon" />
+				<span class="min-w-0 flex-1 break-words leading-tight">
+					{{ formatMessage(messages['githubSidebar.forks'], { count: formatNum(stats.forks) }) }}
+					<ExternalIcon
+						aria-hidden="true"
+						class="external-icon ml-1 inline !mb-0 align-[-0.125em]"
+					/>
+				</span>
 			</a>
 		</div>
 	</div>
