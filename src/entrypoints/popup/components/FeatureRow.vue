@@ -29,7 +29,7 @@
 				class="relative m-0 inline-flex h-5 w-[38px] shrink-0 items-center rounded-full border-0 p-0 transition-colors duration-200"
 				:class="[
 					disabled ? 'cursor-not-allowed' : 'cursor-pointer',
-					modelValue ? 'bg-brand' : 'bg-button-bg',
+					modelValue ? '!bg-brand' : '!bg-button-bg',
 				]"
 				@click.stop="!disabled && $emit('update:modelValue', !modelValue)"
 			>
