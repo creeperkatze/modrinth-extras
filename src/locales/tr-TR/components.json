@@ -1,2 +1,150 @@
-{}
+{
+  "analyticsExport.tooltip": {
+    "defaultMessage": "Resim olarak dışa aktar"
+  },
+  "dependenciesSidebar.loadError": {
+    "defaultMessage": "Bağımlılıklar yüklenemedi"
+  },
+  "dependenciesSidebar.loading": {
+    "defaultMessage": "Yükleniyor"
+  },
+  "dependenciesSidebar.none": {
+    "defaultMessage": "Gerekli bağımlılık yok"
+  },
+  "dependenciesSidebar.openGraph": {
+    "defaultMessage": "Bağımlılık grafiğini aç"
+  },
+  "dependenciesSidebar.title": {
+    "defaultMessage": "Bağımlılıklar"
+  },
+  "dependencyExplorer.controls": {
+    "defaultMessage": "yakınlaştırmak için kaydırın · kaydırmak için sürükleyin · genişletmek için tıklayın"
+  },
+  "dependencyExplorer.dependencyNode.collapse": {
+    "defaultMessage": "Bağımlılıkları daralt"
+  },
+  "dependencyExplorer.dependencyNode.embedded": {
+    "defaultMessage": "Embed edilmiş"
+  },
+  "dependencyExplorer.dependencyNode.expand": {
+    "defaultMessage": "Bileşenleri genişlet"
+  },
+  "dependencyExplorer.dependencyNode.incompatible": {
+    "defaultMessage": "Uyumlu değil"
+  },
+  "dependencyExplorer.dependencyNode.optional": {
+    "defaultMessage": "İsteğe bağlı"
+  },
+  "dependencyExplorer.dependencyNode.required": {
+    "defaultMessage": "Gerekli"
+  },
+  "dependencyExplorer.loading": {
+    "defaultMessage": "Yükleniyor"
+  },
+  "dependencyExplorer.noDependencies": {
+    "defaultMessage": "Bu projenin hiçbir bağımlılığı yok"
+  },
+  "dependencyExplorer.title": {
+    "defaultMessage": "Bağımlılık Grafiği"
+  },
+  "discordSidebar.members": {
+    "defaultMessage": "{count} üye"
+  },
+  "discordSidebar.online": {
+    "defaultMessage": "{count} çevrim içi"
+  },
+  "discordSidebar.partnered": {
+    "defaultMessage": "Partner"
+  },
+  "discordSidebar.verified": {
+    "defaultMessage": "Doğrulanmış"
+  },
+  "errorNotice.message": {
+    "defaultMessage": "Bu hata Modrinth Extras ile ilgili olabilir. Bunu Modrinth’e bildirmeden önce eklentiyi devre dışı bırakıp sayfayı yenilemeyi deneyin. Eğer hata giderse, lütfen <link>buradan</link> bildirin."
+  },
+  "githubSidebar.forks": {
+    "defaultMessage": "{count} forks"
+  },
+  "githubSidebar.openIssues": {
+    "defaultMessage": "{count} açık issue"
+  },
+  "githubSidebar.openPRs": {
+    "defaultMessage": "{count} açık pull requests"
+  },
+  "githubSidebar.stars": {
+    "defaultMessage": "{count} yıldız"
+  },
+  "notificationsIndicator.markAllAsRead": {
+    "defaultMessage": "Tümünü okundu olarak işaretle"
+  },
+  "notificationsIndicator.noUnread": {
+    "defaultMessage": "Okunmamış bildirim yok"
+  },
+  "notificationsIndicator.projectUpdated": {
+    "defaultMessage": "{title} güncellendi"
+  },
+  "notificationsIndicator.viewAll": {
+    "defaultMessage": "Tümünü gör"
+  },
+  "notificationsIndicator.viewHistory": {
+    "defaultMessage": "Geçmişi görüntüle"
+  },
+  "projectCardActions.copied": {
+    "defaultMessage": "Kopyalandı!"
+  },
+  "projectCardActions.copyLink": {
+    "defaultMessage": "Bağlantıyı kopyala"
+  },
+  "projectCardActions.download": {
+    "defaultMessage": "İndir"
+  },
+  "projectCardActions.follow": {
+    "defaultMessage": "Takip et"
+  },
+  "projectCardActions.newCollection": {
+    "defaultMessage": "Yeni koleksiyon oluştur"
+  },
+  "projectCardActions.noCollections": {
+    "defaultMessage": "Hiç koleksiyon bulunmadı."
+  },
+  "projectCardActions.save": {
+    "defaultMessage": "Kaydet"
+  },
+  "projectCardActions.saved": {
+    "defaultMessage": "Kaydedildi"
+  },
+  "projectCardActions.searchPlaceholder": {
+    "defaultMessage": "Ara..."
+  },
+  "projectCardActions.unfollow": {
+    "defaultMessage": "Takibi bırak"
+  },
+  "quickSearch.examples": {
+    "defaultMessage": "Örnekler"
+  },
+  "quickSearch.recent": {
+    "defaultMessage": "Son Arananlar"
+  },
+  "quickSearch.search": {
+    "defaultMessage": "Ara"
+  },
+  "toolsSidebar.copied": {
+    "defaultMessage": "Kopyalandı!"
+  },
+  "toolsSidebar.copyDownloadUrl": {
+    "defaultMessage": "İndirme URL'sini kopyala"
+  },
+  "toolsSidebar.copyPackwiz": {
+    "defaultMessage": "Packwiz'i kopyala"
+  },
+  "toolsSidebar.generateEmbed": {
+    "defaultMessage": "Embed oluştur"
+  },
+  "toolsSidebar.title": {
+    "defaultMessage": "Araçlar"
+  },
+  "toolsSidebar.viewApiResponse": {
+    "defaultMessage": "API yanıtını görüntüle"
+  }
+}
 

@@ -1,2 +1,135 @@
-{}
+{
+  "feature.activitySparkline.description": {
+    "defaultMessage": "Proje sayfalarında sürüm etkinliği grafiği."
+  },
+  "feature.activitySparkline.title": {
+    "defaultMessage": "Etkinlik Grafiği"
+  },
+  "feature.analyticsExport.description": {
+    "defaultMessage": "Analiz grafiklerini PNG resmi olarak indirmek için bir buton ekler."
+  },
+  "feature.analyticsExport.title": {
+    "defaultMessage": "Analizleri dışa aktar"
+  },
+  "feature.curseforgeRedirect.description": {
+    "defaultMessage": "Mevcut olduğunda CurseForge proje sayfalarını Modrinth'e yönlendir."
+  },
+  "feature.curseforgeRedirect.title": {
+    "defaultMessage": "CurseForge yönlendirmesi"
+  },
+  "feature.dependenciesSidebar.description": {
+    "defaultMessage": "Proje sayfalarında daraltılabilir bileşen ağacı."
+  },
+  "feature.dependenciesSidebar.title": {
+    "defaultMessage": "Bağımlılık kenar çubuğu"
+  },
+  "feature.desktopNotifications.description": {
+    "defaultMessage": "Modrinth bildirimleriniz için işletim sistemi bildirimleri."
+  },
+  "feature.desktopNotifications.exampleMessage": {
+    "defaultMessage": "Bu Modrinth Extras'tan bir örnek bildirimdir!"
+  },
+  "feature.desktopNotifications.exampleTitle": {
+    "defaultMessage": "Örnek bildirim"
+  },
+  "feature.desktopNotifications.title": {
+    "defaultMessage": "Masaüstü bildirimleri"
+  },
+  "feature.discordSidebar.description": {
+    "defaultMessage": "Bağlı Discord sunucularının sunucu adı, açıklaması, üye sayısı ve çevrim içi sayısı."
+  },
+  "feature.discordSidebar.title": {
+    "defaultMessage": "Discord kenar çubuğu"
+  },
+  "feature.galleryBackground.description": {
+    "defaultMessage": "Öne çıkan galeri görselini proje sayfalarında arka plan başlığı olarak görüntüleyin."
+  },
+  "feature.galleryBackground.title": {
+    "defaultMessage": "Galeri arka planı"
+  },
+  "feature.githubSidebar.description": {
+    "defaultMessage": "Bağlı repoların yıldız, issue, pull request ve fork sayıları."
+  },
+  "feature.githubSidebar.title": {
+    "defaultMessage": "GitHub kenar çubuğu"
+  },
+  "feature.notificationBadge.description": {
+    "defaultMessage": "Eklenti simgesi üzerindeki bildirim işaretiyle, okunmamış bildirim sayısını güncel olarak takip edin."
+  },
+  "feature.notificationBadge.title": {
+    "defaultMessage": "Bildirim işareti"
+  },
+  "feature.notifications.description": {
+    "defaultMessage": "Mevcut sayfadan ayrılmadan, okunmamış bildirimlerinizi doğrudan başlıktan görüntüleyin, yönetin ve temizleyin."
+  },
+  "feature.notifications.title": {
+    "defaultMessage": "Bildirimler"
+  },
+  "feature.projectCardActions.description": {
+    "defaultMessage": "Projeleri doğrudan proje kartlarından kolayca indirin, takip edin ve kaydedin."
+  },
+  "feature.projectCardActions.modLoader": {
+    "defaultMessage": "Mod yükleyicisi"
+  },
+  "feature.projectCardActions.pluginLoader": {
+    "defaultMessage": "Eklenti yükleyicisi"
+  },
+  "feature.projectCardActions.title": {
+    "defaultMessage": "Proje kartı eylemleri"
+  },
+  "feature.quickSearch.description": {
+    "defaultMessage": "Ctrl+K veya / tuşlarına basarak, yükleyiciler, sürümler, kategoriler ve türler için filtrelenmiş etiketlere sahip komut paleti tarzı bir arama yapabilirsiniz."
+  },
+  "feature.quickSearch.title": {
+    "defaultMessage": "Hızlı Arama"
+  },
+  "feature.telemetry.description": {
+    "defaultMessage": "Eklenti sürümü ve hangi özelliklerin açık olduğu gibi istatistikleri anonim olarak paylaşarak eklentiyi geliştirmeye yardımcı olun. Modrinth verileri, aktiviteler veya kişisel bilgiler asla toplanmaz."
+  },
+  "feature.telemetry.disabledTooltip": {
+    "defaultMessage": "Firefox veri toplama ayarları tarafından kontrol edilir"
+  },
+  "feature.telemetry.title": {
+    "defaultMessage": "Telemetri"
+  },
+  "feature.toolsSidebar.description": {
+    "defaultMessage": "Embedler oluşturun,ham API yanıtlarını görüntüleyin,indirme URL'lerini ve packwiz komutlarını kopyalayın."
+  },
+  "feature.toolsSidebar.title": {
+    "defaultMessage": "Araçlar kenar çubuğu"
+  },
+  "popup.footer.checking": {
+    "defaultMessage": "Kontrol ediliyor"
+  },
+  "popup.footer.latestVersion": {
+    "defaultMessage": "Son sürüm"
+  },
+  "popup.footer.starOnGitHub": {
+    "defaultMessage": "Github'da"
+  },
+  "popup.footer.support": {
+    "defaultMessage": "Yardım"
+  },
+  "popup.footer.updateAvailable": {
+    "defaultMessage": "Güncelleme mevcut"
+  },
+  "popup.group.contentPages": {
+    "defaultMessage": "İçerik Sayfaları"
+  },
+  "popup.group.extension": {
+    "defaultMessage": "Uzantı"
+  },
+  "popup.group.general": {
+    "defaultMessage": "Genel"
+  },
+  "search.any": {
+    "defaultMessage": "Herhangi"
+  },
+  "settings.language": {
+    "defaultMessage": "Dil"
+  },
+  "settings.language.description": {
+    "defaultMessage": "<link>Crowdin</link>'de çeviriye yardımcı olun. Bazı diller eksik olabilir."
+  }
+}
 

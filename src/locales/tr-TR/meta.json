@@ -1,2 +1,21 @@
-{}
+{
+  "meta.summary": {
+    "defaultMessage": "Modrinth'i hem kendi sitesinde hem de ötesinde geliştiren bir tarayıcı uzantısı."
+  },
+  "meta.description.generalTitle": {
+    "defaultMessage": "Genel özellikler:"
+  },
+  "meta.description.contentTitle": {
+    "defaultMessage": "İçerik sayfası özellikleri:"
+  },
+  "meta.description.extensionTitle": {
+    "defaultMessage": "Eklenti özellikleri:"
+  },
+  "meta.description.footer": {
+    "defaultMessage": "Tüm özellikler isteğe bağlıdır ve uzantı penceresinden tek tek etkinleştirilebilir.\n\nModrinth Extras <link>açık kaynaklıdır</link>."
+  },
+  "meta.description.disclaimer": {
+    "defaultMessage": "Bu uzantı Modrinth ile herhangi bir bağı yoktur ve Modrinth tarafından desteklenmemektedir."
+  }
+}
 
