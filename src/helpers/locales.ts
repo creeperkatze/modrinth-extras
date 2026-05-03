@@ -33,7 +33,7 @@ export const LOCALES: LocaleDefinition[] = [
 	// { code: 'sr-CS', name: 'Српски' },
 	// { code: 'sv-SE', name: 'Svenska' },
 	// { code: 'th-TH', name: 'ไทย' },
-	// { code: 'tr-TR', name: 'Türkçe' },
+	{ code: 'tr-TR', name: 'Türkçe' },
 	{ code: 'uk-UA', name: 'Українська' },
 	// { code: 'vi-VN', name: 'Tiếng Việt' },
 	{ code: 'zh-CN', name: '简体中文' },

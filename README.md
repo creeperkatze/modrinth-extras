@@ -187,6 +187,7 @@ New translations are automatically pulled every Monday.
 | Vietnamese | [Lê](https://crowdin.com/profile/suri-cutie) |
 | Russian | [vanapro1](https://crowdin.com/profile/vanapro1) |
 | Ukrainian | [Tenwoc](https://crowdin.com/profile/tenwoc) |
+| Turkish | [penfflewithadot](https://crowdin.com/profile/penfflewithadot) |
 
 ## 🤝 Contributing
 
