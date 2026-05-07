@@ -2,32 +2,14 @@
 	<div class="card flex-card experimental-styles-within">
 		<div class="flex items-center justify-between gap-2">
 			<h2>{{ formatMessage(messages['dependenciesSidebar.title']) }}</h2>
-			<button
-				v-if="!loading && !error && roots.length > 0"
-				v-tooltip="formatMessage(messages['dependenciesSidebar.openGraph'])"
-				class="btn btn-transparent p-1"
-				style="height: auto; line-height: 1"
-				@click="explorerRef?.show()"
-			>
-				<svg
-					aria-hidden="true"
-					xmlns="http://www.w3.org/2000/svg"
-					width="24"
-					height="24"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
+			<ButtonStyled v-if="!loading && !error && roots.length > 0" circular type="transparent">
+				<button
+					v-tooltip="formatMessage(messages['dependenciesSidebar.openGraph'])"
+					@click="explorerRef?.show()"
 				>
-					<rect x="16" y="16" width="6" height="6" rx="1" />
-					<rect x="2" y="16" width="6" height="6" rx="1" />
-					<rect x="9" y="2" width="6" height="6" rx="1" />
-					<path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" />
-					<path d="M12 12V8" />
-				</svg>
-			</button>
+					<ChartNetworkIcon aria-hidden="true" />
+				</button>
+			</ButtonStyled>
 		</div>
 		<div class="details-list min-w-0 max-w-full">
 			<div v-if="loading" class="details-list__item !w-full min-w-0 max-w-full !items-start">
@@ -75,8 +57,9 @@
 </template>
 
 <script setup lang="ts">
+import { ChartNetworkIcon } from '@lucide/vue'
 import { LoaderCircleIcon, XIcon } from '@modrinth/assets'
-import { defineMessages, ScrollablePanel, useVIntl } from '@modrinth/ui'
+import { ButtonStyled, defineMessages, ScrollablePanel, useVIntl } from '@modrinth/ui'
 import { onMounted, ref } from 'vue'
 
 import {

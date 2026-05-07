@@ -20,22 +20,24 @@
 			<template #menu-header>
 				<div class="notifications-dropdown flex flex-col p-2">
 					<div class="flex items-center justify-between gap-2 rounded-lg">
-						<button class="iconified-button" @click="handleViewAllNotifications">
-							<BellIcon aria-hidden="true" />
-							{{ formatMessage(messages['notificationsIndicator.viewAll']) }}
-						</button>
-						<button class="iconified-button" @click="handleViewHistory">
-							<HistoryIcon />
-							{{ formatMessage(messages['notificationsIndicator.viewHistory']) }}
-						</button>
-						<button
-							v-if="unreadCount > 0"
-							class="iconified-button danger-button"
-							@click="handleMarkAllAsRead"
-						>
-							<CheckCheckIcon />
-							{{ formatMessage(messages['notificationsIndicator.markAllAsRead']) }}
-						</button>
+						<ButtonStyled>
+							<button @click="handleViewAllNotifications">
+								<BellIcon aria-hidden="true" />
+								{{ formatMessage(messages['notificationsIndicator.viewAll']) }}
+							</button>
+						</ButtonStyled>
+						<ButtonStyled>
+							<button @click="handleViewHistory">
+								<HistoryIcon />
+								{{ formatMessage(messages['notificationsIndicator.viewHistory']) }}
+							</button>
+						</ButtonStyled>
+						<ButtonStyled v-if="unreadCount > 0" color="red">
+							<button @click="handleMarkAllAsRead">
+								<CheckCheckIcon />
+								{{ formatMessage(messages['notificationsIndicator.markAllAsRead']) }}
+							</button>
+						</ButtonStyled>
 					</div>
 					<div class="mt-4 border-t border-divider"></div>
 					<div
@@ -170,33 +172,33 @@
 										</div>
 									</div>
 									<div class="smart-clickable:allow-pointer-events flex gap-2">
-										<button
+										<ButtonStyled
 											v-if="
 												(notif.type === 'team_invite' || notif.type === 'organization_invite') &&
 												!notif.read
 											"
-											class="iconified-button square-button brand-button [&>svg]:!mr-0"
-											@click.stop.prevent="handleAcceptInvite(notif)"
+											color="brand"
 										>
-											<CheckIcon />
-										</button>
-										<button
+											<button @click.stop.prevent="handleAcceptInvite(notif)">
+												<CheckIcon />
+											</button>
+										</ButtonStyled>
+										<ButtonStyled
 											v-if="
 												(notif.type === 'team_invite' || notif.type === 'organization_invite') &&
 												!notif.read
 											"
-											class="iconified-button square-button danger-button [&>svg]:!mr-0"
-											@click.stop.prevent="handleDeclineInvite(notif)"
+											color="red"
 										>
-											<XIcon />
-										</button>
-										<button
-											v-else-if="!notif.read"
-											class="iconified-button square-button [&>svg]:!mr-0"
-											@click.stop.prevent="handleMarkAsRead(notif)"
-										>
-											<CheckIcon />
-										</button>
+											<button @click.stop.prevent="handleDeclineInvite(notif)">
+												<XIcon />
+											</button>
+										</ButtonStyled>
+										<ButtonStyled v-else-if="!notif.read">
+											<button @click.stop.prevent="handleMarkAsRead(notif)">
+												<CheckIcon />
+											</button>
+										</ButtonStyled>
 									</div>
 								</div>
 							</SmartClickable>

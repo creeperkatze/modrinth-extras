@@ -67,10 +67,14 @@
 							{{ formatMessage(messages['projectCardActions.noCollections']) }}
 						</p>
 					</div>
-					<button class="btn collection-button" @click.stop="handleNewCollection">
-						<PlusIcon />
-						{{ formatMessage(messages['projectCardActions.newCollection']) }}
-					</button>
+					<div class="collection-button">
+						<ButtonStyled>
+							<button @click.stop="handleNewCollection">
+								<PlusIcon />
+								{{ formatMessage(messages['projectCardActions.newCollection']) }}
+							</button>
+						</ButtonStyled>
+					</div>
 				</template>
 			</template>
 		</PopoutMenu>
