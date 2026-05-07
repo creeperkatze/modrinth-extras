@@ -27,7 +27,7 @@
     "defaultMessage": "Embed edilmiş"
   },
   "dependencyExplorer.dependencyNode.expand": {
-    "defaultMessage": "Bileşenleri genişlet"
+    "defaultMessage": "Bağımlılıkları genişlet"
   },
   "dependencyExplorer.dependencyNode.incompatible": {
     "defaultMessage": "Uyumlu değil"
