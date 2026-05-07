@@ -171,7 +171,9 @@
 											{{ formatRelativeTime(notif.created) }}
 										</div>
 									</div>
-									<div class="smart-clickable:allow-pointer-events flex gap-2">
+									<div
+										class="smart-clickable:allow-pointer-events flex items-center gap-2 self-stretch"
+									>
 										<ButtonStyled
 											v-if="
 												(notif.type === 'team_invite' || notif.type === 'organization_invite') &&
