@@ -203,30 +203,29 @@ function attachCardActions(card: HTMLElement): HTMLElement | null {
 	return null
 }
 
-// Returns the sidebar container to appendChild into, or null if not on a supported page.
+function findVisibleElement(...selectors: string[]): HTMLElement | null {
+	for (const selector of selectors) {
+		for (const el of document.querySelectorAll<HTMLElement>(selector)) {
+			if (el.offsetParent !== null || el.getClientRects().length > 0) return el
+		}
+	}
+	return null
+}
+
+// Returns the sidebar container to append into, or null if not on a supported page.
 function findSidebarParent(): HTMLElement | null {
 	const path = window.location.pathname
 
 	if (/^\/(mod|plugin|datapack|shader|resourcepack|modpack|server)\/[^/?#]+/.test(path)) {
-		for (const card of document.querySelectorAll<HTMLElement>(
-			'.card.flex-card.experimental-styles-within',
-		)) {
-			if (card.querySelector('h2')?.textContent?.trim() === 'Details')
-				return card.parentElement as HTMLElement | null
-		}
-		return null
+		return findVisibleElement('.normal-page__sidebar', '.ui-normal-page__sidebar')
 	}
 
-	if (/^\/user\/[^/]+\/?$/.test(path)) {
-		return document.querySelector<HTMLElement>('.normal-page__sidebar')
-	}
-
-	if (/^\/organization\/[^/]+\/?$/.test(path)) {
-		return document.querySelector<HTMLElement>('.normal-page__sidebar')
+	if (/^\/(?:user|organization)\/[^/]+\/?$/.test(path)) {
+		return findVisibleElement('.normal-page__sidebar', '.ui-normal-page__sidebar')
 	}
 
 	if (/^\/collection\/[^/]+\/?$/.test(path)) {
-		return document.querySelector<HTMLElement>('.ui-normal-page__sidebar')
+		return findVisibleElement('.ui-normal-page__sidebar', '.normal-page__sidebar')
 	}
 
 	return null

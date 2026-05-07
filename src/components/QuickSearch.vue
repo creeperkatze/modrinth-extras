@@ -76,13 +76,14 @@
 								? formatMessage(messages['quickSearch.recent'])
 								: formatMessage(messages['quickSearch.examples'])
 						}}</span>
-						<button
-							v-if="recentSearches.length"
-							class="flex cursor-pointer items-center border-0 bg-transparent p-0 text-secondary hover:text-primary normal-case tracking-normal"
-							@click="clearRecentSearches"
-						>
-							<TrashIcon class="size-3.5" />
-						</button>
+						<ButtonStyled v-if="recentSearches.length" circular size="small" type="transparent">
+							<button
+								:aria-label="formatMessage(messages['quickSearch.clearRecent'])"
+								@click="clearRecentSearches"
+							>
+								<TrashIcon />
+							</button>
+						</ButtonStyled>
 					</p>
 					<div
 						v-for="(ex, i) in recentSearches.length ? recentSearches : EXAMPLES"
@@ -139,7 +140,7 @@ import {
 	TrashIcon,
 	XIcon,
 } from '@modrinth/assets'
-import { defineMessages, useVIntl } from '@modrinth/ui'
+import { ButtonStyled, defineMessages, useVIntl } from '@modrinth/ui'
 import { type Component, computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
 import { apiFetch } from '../helpers/api'
@@ -150,6 +151,7 @@ const messages = defineMessages({
 	'quickSearch.recent': { id: 'quickSearch.recent', defaultMessage: 'Recent' },
 	'quickSearch.examples': { id: 'quickSearch.examples', defaultMessage: 'Examples' },
 	'quickSearch.search': { id: 'quickSearch.search', defaultMessage: 'Search' },
+	'quickSearch.clearRecent': { id: 'quickSearch.clearRecent', defaultMessage: 'Clear recent' },
 })
 
 const FACET_ICONS = {
