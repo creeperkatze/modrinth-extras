@@ -7,7 +7,7 @@
 					v-tooltip="formatMessage(messages['dependenciesSidebar.openGraph'])"
 					@click="explorerRef?.show()"
 				>
-					<ChartNetworkIcon aria-hidden="true" />
+					<ScanEye aria-hidden="true" />
 				</button>
 			</ButtonStyled>
 		</div>
@@ -57,7 +57,7 @@
 </template>
 
 <script setup lang="ts">
-import { ChartNetworkIcon } from '@lucide/vue'
+import { ScanEye } from '@lucide/vue'
 import { LoaderCircleIcon, XIcon } from '@modrinth/assets'
 import { ButtonStyled, defineMessages, ScrollablePanel, useVIntl } from '@modrinth/ui'
 import { onMounted, ref } from 'vue'
