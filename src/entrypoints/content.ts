@@ -239,6 +239,19 @@ function attachToSidebar(container: HTMLElement): boolean {
 	return document.contains(container)
 }
 
+function getErrorStatusCode(errorBox: Element): number | null {
+	const details = errorBox.querySelector<HTMLElement>('.error-box__details')
+	const statusText = details?.querySelector('p')?.textContent?.trim() ?? ''
+	const statusCode = Number(statusText.match(/^Error\s+(\d+)$/)?.[1])
+	return Number.isFinite(statusCode) ? statusCode : null
+}
+
+function shouldShowErrorNotice(errorBox: Element): boolean {
+	const statusCode = getErrorStatusCode(errorBox)
+	if (statusCode === null) return false
+	return statusCode === 1000 || statusCode >= 500
+}
+
 export default defineContentScript({
 	matches: ['https://modrinth.com/*'],
 	cssInjectionMode: 'manifest',
@@ -422,6 +435,7 @@ export default defineContentScript({
 			attach(container) {
 				const errorBox = document.querySelector('.error-box')
 				if (!errorBox) return false
+				if (!shouldShowErrorNotice(errorBox)) return false
 
 				errorBox.appendChild(container)
 				return true
