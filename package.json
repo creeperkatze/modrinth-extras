@@ -20,51 +20,41 @@
         "release:major": "pnpm version major && git push && git push --tags"
     },
     "dependencies": {
-        "@lucide/vue": "^1.14.0",
+        "@lucide/vue": "^1.16.0",
         "@modrinth/api-client": "workspace:*",
         "@modrinth/assets": "workspace:*",
         "@modrinth/ui": "workspace:*",
         "@modrinth/utils": "workspace:*",
         "d3-force": "^3.0.0",
         "floating-vue": "^5.2.2",
-        "posthog-js": "^1.372.9",
+        "posthog-js": "^1.376.0",
         "vue": "^3.5.34",
-        "vue-i18n": "^11.4.2"
+        "vue-i18n": "^11.4.4"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
-        "@formatjs/cli": "^6.14.5",
+        "@formatjs/cli": "^6.16.3",
         "@modrinth/tooling-config": "workspace:*",
         "@tailwindcss/container-queries": "^0.1.1",
-        "@tailwindcss/postcss": "^4.2.4",
+        "@tailwindcss/postcss": "^4.3.0",
         "@types/chrome": "^0.1.42",
         "@types/d3-force": "^3.0.10",
-        "@types/node": "^22.19.17",
+        "@types/node": "^25.9.1",
         "@wxt-dev/module-vue": "^1.0.3",
         "autoprefixer": "^10.5.0",
-        "eslint": "^10.3.0",
+        "eslint": "^10.4.0",
         "eslint-plugin-prettier": "^5.5.5",
         "eslint-plugin-simple-import-sort": "^13.0.0",
         "eslint-plugin-vue": "^10.9.1",
+        "sass-embedded": "^1.100.0",
         "tailwindcss": "^3.4.19",
-        "tsx": "^4.21.0",
+        "tsx": "^4.22.3",
         "typescript": "^6.0.3",
-        "typescript-eslint": "^8.59.2",
+        "typescript-eslint": "^8.59.4",
         "vite-svg-loader": "^5.1.1",
         "vue-eslint-parser": "^10.4.0",
-        "vue-tsc": "^3.2.8",
-        "wxt": "^0.20.20"
+        "vue-tsc": "^3.3.1",
+        "wxt": "^0.20.26"
     },
-    "pnpm": {
-        "overrides": {
-            "@modrinth/ui": "workspace:*",
-            "@modrinth/api-client": "workspace:*",
-            "@modrinth/utils": "workspace:*",
-            "@modrinth/assets": "workspace:*",
-            "@modrinth/tooling-config": "workspace:*"
-        },
-        "patchedDependencies": {
-            "wxt@0.20.20": "patches/wxt@0.20.20.patch"
-        }
-    }
+    "packageManager": "pnpm@11.3.0+sha512.2c403d6594527287672b1f7056343a1f7c3634036a67ffabfcc2b3d7595d843768f8787148d1b57cf7956c90606bbd192857c363af19e96d2d0ec9ec5741d215"
 }

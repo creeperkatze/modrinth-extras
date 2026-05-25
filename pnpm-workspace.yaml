@@ -5,3 +5,24 @@ packages:
   - 'modrinth/packages/utils'
   - 'modrinth/packages/tooling-config'
   - 'modrinth/packages/blog'
+
+allowBuilds:
+  '@parcel/watcher': true
+  core-js: false
+  esbuild: true
+  protobufjs: false
+  sharp: false
+  spawn-sync: false
+  unrs-resolver: false
+  vue-demi: false
+  workerd: false
+
+overrides:
+  '@modrinth/ui': 'workspace:*'
+  '@modrinth/api-client': 'workspace:*'
+  '@modrinth/utils': 'workspace:*'
+  '@modrinth/assets': 'workspace:*'
+  '@modrinth/tooling-config': 'workspace:*'
+
+patchedDependencies:
+  wxt@0.20.26: patches/wxt@0.20.26.patch
