@@ -119,6 +119,9 @@
   "projectCardActions.unfollow": {
     "defaultMessage": "Unfollow"
   },
+  "quickSearch.clearRecent": {
+    "defaultMessage": "Clear recent"
+  },
   "quickSearch.examples": {
     "defaultMessage": "Examples"
   },

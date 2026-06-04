@@ -157,7 +157,7 @@
 				class="flex shrink-0 items-center gap-1 text-xs text-[#FF5E5B] no-underline transition-colors hover:text-[#ff8e8c]"
 			>
 				<KofiIcon class="!size-3.5" aria-hidden="true" />
-				{{ formatMessage(messages['popup.footer.support']) }}
+				{{ formatMessage(messages['popup.footer.donate']) }}
 			</a>
 			<a
 				href="https://github.com/creeperkatze/modrinth-extras"
@@ -233,7 +233,7 @@ const messages = defineMessages({
 		defaultMessage: 'Update available',
 	},
 	'popup.footer.starOnGitHub': { id: 'popup.footer.starOnGitHub', defaultMessage: 'On GitHub' },
-	'popup.footer.support': { id: 'popup.footer.support', defaultMessage: 'Support' },
+	'popup.footer.donate': { id: 'popup.footer.donate', defaultMessage: 'Donate' },
 	'feature.notifications.title': {
 		id: 'feature.notifications.title',
 		defaultMessage: 'Notifications',
