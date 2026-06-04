@@ -107,9 +107,6 @@
   "popup.footer.starOnGitHub": {
     "defaultMessage": "在 GitHub 上"
   },
-  "popup.footer.support": {
-    "defaultMessage": "支持"
-  },
   "popup.footer.updateAvailable": {
     "defaultMessage": "有可用更新"
   },

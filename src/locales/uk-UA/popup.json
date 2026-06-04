@@ -107,9 +107,6 @@
   "popup.footer.starOnGitHub": {
     "defaultMessage": "На GitHub"
   },
-  "popup.footer.support": {
-    "defaultMessage": "Підтримка"
-  },
   "popup.footer.updateAvailable": {
     "defaultMessage": "Доступне оновлення"
   },

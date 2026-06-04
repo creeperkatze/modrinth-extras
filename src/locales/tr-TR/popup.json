@@ -107,9 +107,6 @@
   "popup.footer.starOnGitHub": {
     "defaultMessage": "GitHub'da Görüntüle"
   },
-  "popup.footer.support": {
-    "defaultMessage": "Yardım"
-  },
   "popup.footer.updateAvailable": {
     "defaultMessage": "Güncelleme mevcut"
   },
