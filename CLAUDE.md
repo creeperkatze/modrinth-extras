@@ -1,127 +1,73 @@
 # Modrinth Extras
 
-Browser extension that enhances the Modrinth website with extra features. Built with WXT, Vue 3, TypeScript, and Tailwind CSS. Not officially affiliated with Modrinth.
+Browser extension that enhances the Modrinth website with extra features. Built with WXT, Vue 3, TypeScript, and Tailwind CSS.
 
 ## Commands
 
 ```bash
-pnpm dev              # Chrome dev mode (watch)
-pnpm dev:firefox      # Firefox dev mode (watch)
-pnpm build            # Production build (Chrome)
-pnpm build:firefox    # Production build (Firefox)
-pnpm lint             # Check linting
-pnpm lint:fix         # Auto-fix linting issues
-pnpm intl:extract     # Extract i18n messages from source
+pnpm build # Build for Chrome/Edge
+pnpm build:firefox # Build for Firefox
+pnpm zip # Packaged zip for Chrome/Edge
+pnpm zip:firefox # Packaged zip for Firefox
+pnpm lint # Lint
+pnpm lint:fix # Lint and auto-fix fixable issues
 ```
 
-No automated tests, testing is manual in the browser.
+No automated tests; testing is manual in the browser.
 
-## Project Structure
+## Locales
 
+**Never edit locale JSON files by hand.** They are generated from `defineMessages` calls in source files.
+
+After adding or changing any `defineMessages` entry, regenerate:
+
+```bash
+pnpm intl:extract
 ```
-src/
-  entrypoints/        # Extension entry points
-    background.ts     # Service worker (badge, desktop notifications, polling)
-    content.ts        # Main content script (ISOLATED world) — mounts all Vue components
-    modrinth-bridge.content.ts  # MAIN world bridge — hooks Nuxt router for SPA navigation
-    popup/            # Extension settings popup
-  components/         # Vue components injected into Modrinth pages
-  helpers/            # Shared utilities (apiFetch, settings, notifications, etc.)
-  background/         # Code used only by the service worker
-  locales/            # i18n translation files
-```
+
+UI strings use Vue I18n via `@modrinth/ui`'s `defineMessages` + `useVIntl`. Other languages are managed via Crowdin.
 
 ## Architecture
 
-### Dual Content Script Worlds
+- `src/entrypoints/background.ts`: service worker (badge, desktop notifications, polling)
+- `src/entrypoints/content.ts`: main content script (ISOLATED world) — mounts all Vue components
+- `src/entrypoints/modrinth-bridge.content.ts`: MAIN world bridge — hooks Nuxt router for SPA navigation
+- `src/entrypoints/curseforge-bridge.content.ts`: patches `history.pushState`/`replaceState` on curseforge.com for SPA navigation
+- `src/entrypoints/popup/`: extension settings popup
+- `src/components/`: Vue components injected into Modrinth pages
+- `src/helpers/`: shared utilities (apiFetch, settings, notifications, etc.)
+- `src/background/`: code used only by the service worker
+- `src/locales/`: i18n translation files
 
-- **ISOLATED world** (`content.ts`): Cannot access page JS. Mounts Vue components, handles settings, listens for browser messages.
-- **MAIN world** (`modrinth-bridge.content.ts`): Runs in page context, hooks into Nuxt router. Dispatches `modrinth-extras:router-ready` after Nuxt suspense resolves (not just hydration — suspense fires after async data loads too). Hooks `beforeEach`/`afterEach` to dispatch navigation CustomEvents. Handles `modrinth-extras:navigate` postMessages to call `router.push()`. Finds the router via `window.__nuxt_app.$router` or `#__nuxt.__vue_app__` (the latter is observable via MutationObserver, the former is not).
+### Dual content script worlds
 
-**CurseForge** (`curseforge-bridge.content.ts`) is unrelated to the above — it runs on `curseforge.com`, not Modrinth. It patches `history.pushState`/`replaceState` at `document_start` (MAIN world) so it runs before React Router caches the original reference. Dispatches `modrinth-extras:cf-navigated` on navigation.
+`content.ts` (ISOLATED world) cannot access page JS; it mounts Vue components, handles settings, and listens for browser messages. `modrinth-bridge.content.ts` (MAIN world) runs in page context and hooks the Nuxt router — dispatches `modrinth-extras:router-ready` after Nuxt suspense resolves, and `beforeEach`/`afterEach` navigation CustomEvents. Finds the router via `window.__nuxt_app.$router` or `#__nuxt.__vue_app__`.
 
-### Injection System
+### Injection helpers
 
-- `createInjection`: single instance per page (e.g. notifications indicator, quick search). Handles mount/unmount lifecycle across SPA navigations.
-- `createDynamicInjection`: multiple instances targeting specific DOM elements (e.g. project card action buttons). Uses MutationObserver for dynamic content.
+- `createInjection`: single instance per page (e.g. notifications indicator). Handles mount/unmount across SPA navigations.
+- `createDynamicInjection`: multiple instances targeting specific DOM elements (e.g. project card buttons). Uses MutationObserver for dynamic content.
 
-### Notifications Flow
+## Key conventions
 
-1. Background polls every 5 minutes via alarms
-2. `NotificationsIndicator.vue` fetches on mount and every 60 seconds
-3. Optimistic updates: mutate `notificationsData.value` in place → Vue re-renders immediately → fire-and-forget API PATCH
-4. `syncToBackground` is only called after a real fetch (in `refreshNotifications`), not after optimistic updates
+- **API calls**: use `apiFetch` from `helpers/api.ts`; auth token is read from the `auth-token` cookie automatically. Pass `{ apiVersion: 3 }` for v3 endpoints.
+- **Settings**: read via `getSettings()`; never read directly from storage in components.
+- **Style**: Prettier — tabs, single quotes, no semicolons, trailing commas, 100-char lines, LF line endings.
+- **Logging**: prefix all messages with `[Modrinth Extras]`; add a subsystem sub-prefix where relevant (e.g. `[Modrinth Extras] Badge:`). Use `console.error` for problems — always pass the error value as the last argument (`console.error('... Failed to fetch:', err)`). Use `console.log` for informational messages in past tense ("Loaded", "Injected"). No `console.warn`.
 
-### Logging
+## Modrinth packages
 
-All log messages must be prefixed with `[Modrinth Extras]`. Use a sub-prefix for context when the message comes from a specific subsystem.
+`@modrinth/ui`, `@modrinth/assets`, `@modrinth/utils`, and `@modrinth/api-client` come from the **`modrinth/`** git submodule (the [modrinth/code](https://github.com/modrinth/code) monorepo), consumed as local workspace packages.
 
-```ts
-// General errors: "Failed to <verb> <subject>:"
-console.error('[Modrinth Extras] Failed to fetch notifications:', err)
-console.error('[Modrinth Extras] Failed to load saved locale:', err)
-console.error(`[Modrinth Extras] Failed to fetch project ID for ${slug}:`, err)
-
-// Subsystem errors: "[Modrinth Extras] <Subsystem>: <message>"
-console.error('[Modrinth Extras] Badge: Background update failed:', err)
-console.error(`[Modrinth Extras] CurseForge redirect: API request failed for "${path}":`, err)
-
-// Info logs: describe what happened, not what will happen
-console.log('[Modrinth Extras] Content script loaded')
-console.log(`[Modrinth Extras] Injected ${config.id}`)
-console.log('[Modrinth Extras] Badge: No auth token, clearing badge')
-console.log('[Modrinth Extras] Settings loaded:', JSON.stringify(s))
-```
-
-Rules:
-- Errors always end with `: err` (the error value as the last argument, not stringified)
-- Info logs use past tense ("Loaded", "Injected", "Detached") not future ("Loading", "Injecting")
-- No `console.warn` for errors, use `console.error` for problems, `console.log` for informational
-
-### Style
-Prettier config: tabs, single quotes, no semicolons, trailing commas, 100-char lines, LF line endings.
-
-### API Calls
-Use `apiFetch` from `helpers/api.ts`. Auth token is read from the `auth-token` cookie automatically. API v2 is default; pass `{ apiVersion: 3 }` for v3 endpoints.
-
-### Settings
-Read via `getSettings()`. Settings are deeply merged and cached. Components re-inject when relevant settings keys change (declared in injection config). Never read settings directly from storage in components.
-
-## i18n
-
-UI strings use Vue I18n via `@modrinth/ui`'s `defineMessages` + `useVIntl`. Run `pnpm intl:extract` after adding or changing message IDs. Translation files live in `src/locales/`.
-
-## Modrinth Packages
-
-`@modrinth/ui`, `@modrinth/assets`, `@modrinth/utils`, and `@modrinth/api-client` come from the **`modrinth/`** git submodule, which points to the [modrinth/code](https://github.com/modrinth/code) monorepo. They are consumed as local workspace packages via `pnpm-workspace.yaml`.
-
-When investigating components, icons, or types, read the source directly from `modrinth/` at the project root:
+When investigating components, icons, or types, read the source directly:
 
 - Components: `modrinth/packages/ui/src/`
 - Icons: `modrinth/packages/assets/`
 - Types: `modrinth/packages/utils/`
 
-Don't rely on memory for props, exports, or type names, they shift between submodule versions. Just read the source.
-
-**Never import directly from the `modrinth/` path.** Always import via the package name:
+Don't rely on memory for props, exports, or type names — they shift between submodule versions. **Never import directly from the `modrinth/` path**; always use the package name:
 
 ```ts
-// correct
 import { ButtonStyled } from '@modrinth/ui'
 import { BellIcon } from '@modrinth/assets'
-
-// wrong
-import { ButtonStyled } from '../../modrinth/packages/ui/src/...'
 ```
-
-## Key Dependencies
-
-| Package | Purpose |
-|---------|---------|
-| `wxt` | Extension build framework |
-| `@modrinth/ui` | Modrinth's shared component library (from submodule) |
-| `@modrinth/assets` | Modrinth's icon set (from submodule) |
-| `@modrinth/utils` | Shared type definitions (from submodule) |
-| `wxt/browser` | Cross-browser `chrome`/`browser` API polyfill |
-| `floating-vue` | Tooltips and dropdowns |
-| `d3-force` | Dependency explorer graph layout |
