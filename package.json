@@ -12,6 +12,7 @@
         "zip:firefox": "wxt zip -b firefox",
         "postinstall": "wxt prepare",
         "scripts": "node scripts/run.mjs",
+        "intl:generate": "node scripts/run.mjs generate-locales",
         "intl:extract": "formatjs extract \"src/entrypoints/**/*.{vue,ts}\" --ignore \"src/**/*.d.ts\" --out-file src/locales/en-US/popup.json --preserve-whitespace && formatjs extract \"src/components/**/*.vue\" --ignore \"src/**/*.d.ts\" --out-file src/locales/en-US/components.json --preserve-whitespace",
         "lint": "eslint src/",
         "lint:fix": "eslint src/ --fix",

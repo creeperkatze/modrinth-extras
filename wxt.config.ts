@@ -11,8 +11,9 @@ export default defineConfig({
 	outDir: '.output',
 	modules: ['@wxt-dev/module-vue'],
 	manifest: {
-		name: 'Modrinth Extras',
-		description: 'A browser extension that enhances Modrinth on the website and beyond.',
+		name: '__MSG_extName__',
+		description: '__MSG_extDescription__',
+		default_locale: 'en_US',
 		version,
 		icons: {
 			16: '/icon-16.png',
