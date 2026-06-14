@@ -129,6 +129,7 @@ import {
 } from '../helpers/collectionState'
 import { followedSlugs } from '../helpers/followState'
 import { navigate } from '../helpers/page-router'
+import { getQuickDownloadUrl, type QuickDownloadSettings } from '../helpers/quickDownload'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
@@ -169,19 +170,6 @@ const messages = defineMessages({
 		defaultMessage: 'No download is available for the selected loader and game version.',
 	},
 })
-
-interface ProjectVersion {
-	game_versions: string[]
-	loaders: string[]
-	files: { url: string; primary: boolean }[]
-}
-
-interface QuickDownloadSettings {
-	modLoader: string
-	pluginLoader: string
-	shaderLoader: string
-	gameVersion: string
-}
 
 const props = defineProps<{
 	projectSlug: string
@@ -274,46 +262,16 @@ async function refreshDownloadAvailability() {
 	downloadFileUrl.value = null
 
 	try {
-		const versions = await fetchDownloadVersions()
-		const file = versions[0]?.files.find((f) => f.primary) ?? versions[0]?.files[0]
-		downloadFileUrl.value = file?.url ?? null
+		downloadFileUrl.value = await getQuickDownloadUrl(
+			props.projectSlug,
+			props.projectType,
+			props.downloadSettings,
+		)
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to check download availability:', err)
 	} finally {
 		downloadAvailabilityChecked.value = true
 		downloadAvailabilityLoading.value = false
-	}
-}
-
-async function fetchDownloadVersions() {
-	const preferredLoader = getPreferredLoader(props.downloadSettings)
-	const params = new URLSearchParams({ limit: '1' })
-
-	if (preferredLoader) {
-		params.set('loaders', JSON.stringify([preferredLoader]))
-	}
-	if (props.downloadSettings.gameVersion) {
-		params.set('game_versions', JSON.stringify([props.downloadSettings.gameVersion]))
-	}
-
-	return (await apiFetch(
-		`project/${props.projectSlug}/version?${params.toString()}`,
-	)) as ProjectVersion[]
-}
-
-function getPreferredLoader(settings: QuickDownloadSettings): string {
-	switch (props.projectType) {
-		case 'plugin':
-			return settings.pluginLoader
-		case 'shader':
-			return settings.shaderLoader
-		case 'mod':
-		case 'modpack':
-			return settings.modLoader
-		case 'datapack':
-		case 'resourcepack':
-		default:
-			return ''
 	}
 }
 
