@@ -48,12 +48,10 @@
 							</div>
 						</div>
 						<div class="language-dropdown">
-							<DropdownSelect
+							<CompactCombobox
 								:options="localeItems"
-								name="language"
-								:model-value="selectedLocaleItem"
-								:display-name="(item: SelectItem) => item.label"
-								@update:model-value="(item: SelectItem) => updateLocale(item.value)"
+								:model-value="selectedLocale"
+								@update:model-value="updateLocale"
 							/>
 						</div>
 					</div>
@@ -75,6 +73,7 @@
 							:model-value="(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''"
 							:items="opt.items"
 							:fetch-items="opt.fetchItems"
+							:searchable="opt.searchable"
 							@update:model-value="updateOption(f.key, opt.key, $event)"
 						/>
 					</template>
@@ -198,7 +197,6 @@ import {
 import {
 	ButtonStyled,
 	defineMessages,
-	DropdownSelect,
 	HorizontalRule,
 	IntlFormatted,
 	ScrollablePanel,
@@ -208,6 +206,7 @@ import { type Component, computed, onMounted, reactive, ref } from 'vue'
 import { browser } from 'wxt/browser'
 
 import KofiIcon from '../../assets/kofi.svg?component'
+import CompactCombobox from '../../components/ui/CompactCombobox.vue'
 import { apiFetch } from '../../helpers/api'
 import { detectBrowserLocale, i18n } from '../../helpers/i18n'
 import { LOCALES } from '../../helpers/locales'
@@ -264,6 +263,14 @@ const messages = defineMessages({
 	'feature.projectCardActions.pluginLoader': {
 		id: 'feature.projectCardActions.pluginLoader',
 		defaultMessage: 'Plugin loader',
+	},
+	'feature.projectCardActions.shaderLoader': {
+		id: 'feature.projectCardActions.shaderLoader',
+		defaultMessage: 'Shader loader',
+	},
+	'feature.projectCardActions.gameVersion': {
+		id: 'feature.projectCardActions.gameVersion',
+		defaultMessage: 'Game version',
 	},
 	'feature.activitySparkline.title': {
 		id: 'feature.activitySparkline.title',
@@ -380,6 +387,7 @@ interface FeatureOption {
 	label: string
 	items?: SelectItem[]
 	fetchItems?: () => Promise<SelectItem[]>
+	searchable?: boolean
 }
 
 interface FeatureDef {
@@ -394,14 +402,19 @@ interface FeatureDef {
 	options?: FeatureOption[]
 }
 
-async function fetchLoadersByType(type: string): Promise<SelectItem[]> {
+async function fetchLoadersByType(...types: string[]): Promise<SelectItem[]> {
 	const data = (await apiFetch('tag/loader', { apiVersion: 3 })) as {
 		name: string
 		supported_project_types: string[]
 	}[]
 	return data
-		.filter((l) => l.supported_project_types.includes(type))
+		.filter((l) => types.some((type) => l.supported_project_types.includes(type)))
 		.map((l) => ({ label: l.name.charAt(0).toUpperCase() + l.name.slice(1), value: l.name }))
+}
+
+async function fetchGameVersions(): Promise<SelectItem[]> {
+	const data = (await apiFetch('tag/game_version')) as { version: string }[]
+	return data.map((v) => ({ label: v.version, value: v.version }))
 }
 
 const generalFeatures = computed<FeatureDef[]>(() => [
@@ -427,13 +440,26 @@ const generalFeatures = computed<FeatureDef[]>(() => [
 				key: 'modLoader',
 				type: 'select',
 				label: formatMessage(messages['feature.projectCardActions.modLoader']),
-				fetchItems: () => fetchLoadersByType('mod'),
+				fetchItems: () => fetchLoadersByType('mod', 'modpack'),
 			},
 			{
 				key: 'pluginLoader',
 				type: 'select',
 				label: formatMessage(messages['feature.projectCardActions.pluginLoader']),
 				fetchItems: () => fetchLoadersByType('plugin'),
+			},
+			{
+				key: 'shaderLoader',
+				type: 'select',
+				label: formatMessage(messages['feature.projectCardActions.shaderLoader']),
+				fetchItems: () => fetchLoadersByType('shader'),
+			},
+			{
+				key: 'gameVersion',
+				type: 'select',
+				label: formatMessage(messages['feature.projectCardActions.gameVersion']),
+				fetchItems: fetchGameVersions,
+				searchable: true,
 			},
 		],
 	},
@@ -544,9 +570,9 @@ const localeItems = computed<SelectItem[]>(() =>
 	LOCALES.map((l) => ({ label: l.name, value: l.code })),
 )
 
-const selectedLocaleItem = computed<SelectItem>(() => {
+const selectedLocale = computed(() => {
 	const val = settings.locale.value || detectBrowserLocale()
-	return localeItems.value.find((i) => i.value === val) ?? localeItems.value[0]
+	return localeItems.value.some((i) => i.value === val) ? val : localeItems.value[0].value
 })
 
 async function updateLocale(value: string) {
@@ -615,21 +641,7 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.language-dropdown :deep(.animated-dropdown) {
-	width: 100%;
-	height: 2rem;
-}
-
-.language-dropdown :deep(.selected) {
-	padding: 0 var(--gap-md);
-	font-size: var(--font-size-sm);
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-.language-dropdown :deep(.option) {
-	padding: var(--gap-sm) var(--gap-md);
-	font-size: var(--font-size-sm);
+.language-dropdown {
+	width: 10rem;
 }
 </style>

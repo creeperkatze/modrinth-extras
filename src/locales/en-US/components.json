@@ -89,6 +89,9 @@
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "View history"
   },
+  "projectCardActions.checkingDownload": {
+    "defaultMessage": "Checking available version..."
+  },
   "projectCardActions.copied": {
     "defaultMessage": "Copied!"
   },
@@ -97,6 +100,9 @@
   },
   "projectCardActions.download": {
     "defaultMessage": "Download"
+  },
+  "projectCardActions.downloadUnavailable": {
+    "defaultMessage": "No download is available for the selected loader and game version."
   },
   "projectCardActions.follow": {
     "defaultMessage": "Follow"

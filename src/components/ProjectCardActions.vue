@@ -1,11 +1,16 @@
 <template>
-	<ButtonStyled color="brand">
-		<button :disabled="downloadLoading" @click.stop="handleDownload">
-			<LoaderCircleIcon v-if="downloadLoading" class="animate-spin" />
-			<DownloadIcon v-else />
-			{{ formatMessage(messages['projectCardActions.download']) }}
-		</button>
-	</ButtonStyled>
+	<span v-tooltip="downloadTooltip" class="download-action">
+		<ButtonStyled color="brand">
+			<button :disabled="downloadDisabled" @click.stop="handleDownload">
+				<LoaderCircleIcon
+					v-if="downloadLoading || downloadAvailabilityLoading"
+					class="animate-spin"
+				/>
+				<DownloadIcon v-else />
+				{{ formatMessage(messages['projectCardActions.download']) }}
+			</button>
+		</ButtonStyled>
+	</span>
 	<ButtonStyled circular :color="isFollowed ? 'brand' : undefined">
 		<button
 			v-tooltip="
@@ -112,7 +117,7 @@ import {
 	StyledInput,
 	useVIntl,
 } from '@modrinth/ui'
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 
 import { apiFetch, getAuthToken } from '../helpers/api'
 import {
@@ -124,7 +129,6 @@ import {
 } from '../helpers/collectionState'
 import { followedSlugs } from '../helpers/followState'
 import { navigate } from '../helpers/page-router'
-import { getSettings } from '../helpers/settings'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
@@ -156,11 +160,33 @@ const messages = defineMessages({
 		defaultMessage: 'Copy link',
 	},
 	'projectCardActions.copied': { id: 'projectCardActions.copied', defaultMessage: 'Copied!' },
+	'projectCardActions.checkingDownload': {
+		id: 'projectCardActions.checkingDownload',
+		defaultMessage: 'Checking available version...',
+	},
+	'projectCardActions.downloadUnavailable': {
+		id: 'projectCardActions.downloadUnavailable',
+		defaultMessage: 'No download is available for the selected loader and game version.',
+	},
 })
+
+interface ProjectVersion {
+	game_versions: string[]
+	loaders: string[]
+	files: { url: string; primary: boolean }[]
+}
+
+interface QuickDownloadSettings {
+	modLoader: string
+	pluginLoader: string
+	shaderLoader: string
+	gameVersion: string
+}
 
 const props = defineProps<{
 	projectSlug: string
 	projectType: string
+	downloadSettings: QuickDownloadSettings
 }>()
 
 const isLoggedIn = !!getAuthToken()
@@ -173,9 +199,29 @@ const isSaved = computed(
 
 const projectId = ref<string | null>(null)
 const downloadLoading = ref(false)
+const downloadAvailabilityLoading = ref(false)
+const downloadFileUrl = ref<string | null>(null)
+const downloadAvailabilityChecked = ref(false)
 const followLoading = ref(false)
 const copied = ref(false)
 const collectionsSearch = ref('')
+
+const downloadDisabled = computed(
+	() =>
+		downloadLoading.value ||
+		downloadAvailabilityLoading.value ||
+		(downloadAvailabilityChecked.value && !downloadFileUrl.value),
+)
+
+const downloadTooltip = computed(() => {
+	if (downloadAvailabilityLoading.value) {
+		return formatMessage(messages['projectCardActions.checkingDownload'])
+	}
+	if (downloadAvailabilityChecked.value && !downloadFileUrl.value) {
+		return formatMessage(messages['projectCardActions.downloadUnavailable'])
+	}
+	return undefined
+})
 
 const filteredCollections = computed(() => {
 	if (!collections.value) return []
@@ -187,7 +233,22 @@ const filteredCollections = computed(() => {
 
 onMounted(() => {
 	if (isLoggedIn) initCollections()
+	void refreshDownloadAvailability()
 })
+
+watch(
+	() => [
+		props.projectSlug,
+		props.projectType,
+		props.downloadSettings.modLoader,
+		props.downloadSettings.pluginLoader,
+		props.downloadSettings.shaderLoader,
+		props.downloadSettings.gameVersion,
+	],
+	() => {
+		void refreshDownloadAvailability()
+	},
+)
 
 async function ensureProjectId() {
 	if (projectId.value) return
@@ -195,31 +256,64 @@ async function ensureProjectId() {
 }
 
 async function handleDownload() {
-	if (downloadLoading.value) return
+	if (downloadDisabled.value) return
 	downloadLoading.value = true
 	try {
-		const { projectCardActions } = await getSettings()
-		const preferredLoader =
-			props.projectType === 'plugin'
-				? projectCardActions.pluginLoader
-				: projectCardActions.modLoader
-
-		const fetchVersions = async (loader: string) => {
-			const qs = loader ? `?loaders=${encodeURIComponent(JSON.stringify([loader]))}` : ''
-			return (await apiFetch(`project/${props.projectSlug}/version${qs}`)) as {
-				files: { url: string; primary: boolean }[]
-			}[]
-		}
-
-		let versions = await fetchVersions(preferredLoader)
-		if (preferredLoader && versions.length === 0) versions = await fetchVersions('')
-
-		const file = versions[0]?.files.find((f) => f.primary) ?? versions[0]?.files[0]
-		if (file?.url) window.open(file.url, '_blank')
+		if (!downloadFileUrl.value) await refreshDownloadAvailability()
+		if (downloadFileUrl.value) window.open(downloadFileUrl.value, '_blank')
 	} catch (err) {
 		console.error('[Modrinth Extras] Download failed:', err)
 	} finally {
 		downloadLoading.value = false
+	}
+}
+
+async function refreshDownloadAvailability() {
+	downloadAvailabilityLoading.value = true
+	downloadAvailabilityChecked.value = false
+	downloadFileUrl.value = null
+
+	try {
+		const versions = await fetchDownloadVersions()
+		const file = versions[0]?.files.find((f) => f.primary) ?? versions[0]?.files[0]
+		downloadFileUrl.value = file?.url ?? null
+	} catch (err) {
+		console.error('[Modrinth Extras] Failed to check download availability:', err)
+	} finally {
+		downloadAvailabilityChecked.value = true
+		downloadAvailabilityLoading.value = false
+	}
+}
+
+async function fetchDownloadVersions() {
+	const preferredLoader = getPreferredLoader(props.downloadSettings)
+	const params = new URLSearchParams({ limit: '1' })
+
+	if (preferredLoader) {
+		params.set('loaders', JSON.stringify([preferredLoader]))
+	}
+	if (props.downloadSettings.gameVersion) {
+		params.set('game_versions', JSON.stringify([props.downloadSettings.gameVersion]))
+	}
+
+	return (await apiFetch(
+		`project/${props.projectSlug}/version?${params.toString()}`,
+	)) as ProjectVersion[]
+}
+
+function getPreferredLoader(settings: QuickDownloadSettings): string {
+	switch (props.projectType) {
+		case 'plugin':
+			return settings.pluginLoader
+		case 'shader':
+			return settings.shaderLoader
+		case 'mod':
+		case 'modpack':
+			return settings.modLoader
+		case 'datapack':
+		case 'resourcepack':
+		default:
+			return ''
 	}
 }
 
@@ -318,5 +412,9 @@ async function handleCopyLink() {
 .collection-button {
 	margin: var(--gap-sm) var(--gap-md);
 	white-space: nowrap;
+}
+
+.download-action {
+	display: inline-flex;
 }
 </style>

@@ -527,7 +527,14 @@ export default defineContentScript({
 					target.parentElement?.querySelector<HTMLAnchorElement>('a[href]')?.getAttribute('href') ??
 					''
 				const [, projectType, projectSlug] = href.match(PROJECT_TYPE_PATTERN) ?? []
-				const app = createApp(h(ProjectCardActions, { projectSlug, projectType }))
+				const { modLoader, pluginLoader, shaderLoader, gameVersion } = settings.projectCardActions
+				const app = createApp(
+					h(ProjectCardActions, {
+						projectSlug,
+						projectType,
+						downloadSettings: { modLoader, pluginLoader, shaderLoader, gameVersion },
+					}),
+				)
 				app.use(FloatingVue)
 				installI18n(app)
 				return app
@@ -564,7 +571,10 @@ export default defineContentScript({
 		getSettings().then((s) => {
 			settings = s
 			console.log('[Modrinth Extras] Settings loaded:', JSON.stringify(s))
-			for (const inj of injections) inj.schedule()
+			for (const inj of injections) {
+				if (inj.config.settingsKeys.length > 0) inj.unmount()
+				inj.schedule()
+			}
 		})
 
 		browser.storage.onChanged.addListener((changes: Record<string, { newValue?: unknown }>) => {

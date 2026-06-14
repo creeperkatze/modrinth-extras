@@ -29,7 +29,13 @@ export interface ExtensionSettings {
 	locale: { value: string }
 	notificationsIndicator: { enabled: boolean }
 	quickSearch: { enabled: boolean }
-	projectCardActions: { enabled: boolean; modLoader: string; pluginLoader: string }
+	projectCardActions: {
+		enabled: boolean
+		modLoader: string
+		pluginLoader: string
+		shaderLoader: string
+		gameVersion: string
+	}
 	activitySparkline: { enabled: boolean }
 	toolsSidebar: { enabled: boolean }
 	dependenciesSidebar: { enabled: boolean }
@@ -47,7 +53,13 @@ export const DEFAULTS: ExtensionSettings = {
 	locale: { value: '' },
 	notificationsIndicator: { enabled: true },
 	quickSearch: { enabled: true },
-	projectCardActions: { enabled: true, modLoader: '', pluginLoader: '' },
+	projectCardActions: {
+		enabled: true,
+		modLoader: '',
+		pluginLoader: '',
+		shaderLoader: '',
+		gameVersion: '',
+	},
 	activitySparkline: { enabled: true },
 	toolsSidebar: { enabled: true },
 	dependenciesSidebar: { enabled: true },
@@ -76,6 +88,8 @@ async function migrateFromFlatStorage(): Promise<ExtensionSettings> {
 		'showProjectCardActions',
 		'projectCardActionsModLoader',
 		'projectCardActionsPluginLoader',
+		'projectCardActionsShaderLoader',
+		'projectCardActionsGameVersion',
 		'telemetryEnabled',
 	])
 	const b = (key: string, def: boolean) => (old[key] as boolean | undefined) ?? def
@@ -92,6 +106,8 @@ async function migrateFromFlatStorage(): Promise<ExtensionSettings> {
 			enabled: b('showProjectCardActions', DEFAULTS.projectCardActions.enabled),
 			modLoader: s('projectCardActionsModLoader', DEFAULTS.projectCardActions.modLoader),
 			pluginLoader: s('projectCardActionsPluginLoader', DEFAULTS.projectCardActions.pluginLoader),
+			shaderLoader: s('projectCardActionsShaderLoader', DEFAULTS.projectCardActions.shaderLoader),
+			gameVersion: s('projectCardActionsGameVersion', DEFAULTS.projectCardActions.gameVersion),
 		},
 		activitySparkline: {
 			enabled: b('showActivitySparkline', DEFAULTS.activitySparkline.enabled),

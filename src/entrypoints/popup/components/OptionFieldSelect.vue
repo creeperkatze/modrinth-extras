@@ -2,21 +2,27 @@
 	<div class="option-field relative flex items-center gap-2" @click.stop>
 		<span class="text-sm text-secondary flex-1">{{ label }}</span>
 		<div :class="dropdownClass ?? 'w-40'">
-			<DropdownSelect
+			<CompactCombobox
 				:options="allItems"
-				:name="`field-${label}`"
-				:model-value="selectedItem"
-				:display-name="(item: SelectItem) => item.label"
+				:model-value="modelValue"
+				:placeholder="formatMessage(messages['search.any'])"
+				:search-placeholder="formatMessage(messages['search.placeholder'])"
 				:disabled="loading"
-				@update:model-value="(item: SelectItem) => $emit('update:modelValue', item.value)"
+				:searchable="searchable"
+				:show-search-icon="searchable"
+				:select-search-text-on-focus="searchable"
+				:max-height="240"
+				@update:model-value="$emit('update:modelValue', $event)"
 			/>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { defineMessages, DropdownSelect, useVIntl } from '@modrinth/ui'
+import { defineMessages, useVIntl } from '@modrinth/ui'
 import { computed, onMounted, ref } from 'vue'
+
+import CompactCombobox from '../../../components/ui/CompactCombobox.vue'
 
 export interface SelectItem {
 	label: string
@@ -26,6 +32,7 @@ export interface SelectItem {
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
 	'search.any': { id: 'search.any', defaultMessage: 'Any' },
+	'search.placeholder': { id: 'search.placeholder', defaultMessage: 'Search...' },
 })
 const anyItem = computed<SelectItem>(() => ({
 	label: formatMessage(messages['search.any']),
@@ -39,6 +46,7 @@ const props = defineProps<{
 	fetchItems?: () => Promise<SelectItem[]>
 	includeAny?: boolean
 	dropdownClass?: string
+	searchable?: boolean
 }>()
 
 defineEmits<{
@@ -52,15 +60,13 @@ const allItems = computed<SelectItem[]>(() =>
 	props.includeAny !== false ? [anyItem.value, ...resolvedItems.value] : resolvedItems.value,
 )
 
-const selectedItem = computed<SelectItem>(
-	() => allItems.value.find((i) => i.value === props.modelValue) ?? anyItem.value,
-)
-
 onMounted(async () => {
 	if (props.fetchItems) {
 		loading.value = true
 		try {
 			resolvedItems.value = await props.fetchItems()
+		} catch (err) {
+			console.error('[Modrinth Extras] Failed to fetch popup select options:', err)
 		} finally {
 			loading.value = false
 		}
@@ -88,23 +94,5 @@ onMounted(async () => {
 	top: 50%;
 	bottom: -0.5rem;
 	border-left: 2px solid var(--surface-5);
-}
-
-.option-field :deep(.animated-dropdown) {
-	width: 100%;
-	height: 2rem;
-}
-
-.option-field :deep(.selected) {
-	padding: 0 var(--gap-md);
-	font-size: var(--font-size-sm);
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-.option-field :deep(.option) {
-	padding: var(--gap-sm) var(--gap-md);
-	font-size: var(--font-size-sm);
 }
 </style>

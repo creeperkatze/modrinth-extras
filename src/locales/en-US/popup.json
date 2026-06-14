@@ -68,11 +68,17 @@
   "feature.projectCardActions.description": {
     "defaultMessage": "Download, follow, and save projects right from their project cards."
   },
+  "feature.projectCardActions.gameVersion": {
+    "defaultMessage": "Game version"
+  },
   "feature.projectCardActions.modLoader": {
     "defaultMessage": "Mod loader"
   },
   "feature.projectCardActions.pluginLoader": {
     "defaultMessage": "Plugin loader"
+  },
+  "feature.projectCardActions.shaderLoader": {
+    "defaultMessage": "Shader loader"
   },
   "feature.projectCardActions.title": {
     "defaultMessage": "Project card actions"
@@ -124,6 +130,9 @@
   },
   "search.any": {
     "defaultMessage": "Any"
+  },
+  "search.placeholder": {
+    "defaultMessage": "Search..."
   },
   "settings.language": {
     "defaultMessage": "Language"
