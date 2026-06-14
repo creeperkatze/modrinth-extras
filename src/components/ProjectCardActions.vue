@@ -41,7 +41,7 @@
 					: formatMessage(messages['projectCardActions.save'])
 			"
 			placement="bottom-end"
-			@click.stop="ensureProjectId"
+			@click.stop
 		>
 			<BookmarkIcon :fill="isSaved ? 'currentColor' : 'none'" aria-hidden="true" />
 			<template #menu>
@@ -123,13 +123,12 @@ import { getAuthToken, modrinthClient } from '../helpers/api'
 import {
 	type Collection,
 	collections,
-	getProjectId,
 	initCollections,
 	toggleProjectInCollection,
 } from '../helpers/collectionState'
 import { followedSlugs } from '../helpers/followState'
 import { navigate } from '../helpers/page-router'
-import { getQuickDownloadUrl, type QuickDownloadSettings } from '../helpers/quickDownload'
+import { getQuickDownload, type QuickDownloadSettings } from '../helpers/projectCardState'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
@@ -238,11 +237,6 @@ watch(
 	},
 )
 
-async function ensureProjectId() {
-	if (projectId.value) return
-	projectId.value = await getProjectId(props.projectSlug)
-}
-
 async function handleDownload() {
 	if (downloadDisabled.value) return
 	downloadLoading.value = true
@@ -262,11 +256,13 @@ async function refreshDownloadAvailability() {
 	downloadFileUrl.value = null
 
 	try {
-		downloadFileUrl.value = await getQuickDownloadUrl(
+		const result = await getQuickDownload(
 			props.projectSlug,
 			props.projectType,
 			props.downloadSettings,
 		)
+		projectId.value = result.projectId
+		downloadFileUrl.value = result.downloadUrl
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to check download availability:', err)
 	} finally {

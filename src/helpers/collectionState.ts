@@ -7,8 +7,6 @@ export type Collection = Labrinth.Collections.Collection
 
 export const collections = ref<Collection[] | null>(null)
 
-const projectIdCache = new Map<string, string>()
-
 let initPromise: Promise<void> | null = null
 
 export async function initCollections(): Promise<void> {
@@ -32,18 +30,6 @@ export async function initCollections(): Promise<void> {
 		}
 	})()
 	return initPromise
-}
-
-export async function getProjectId(slug: string): Promise<string | null> {
-	if (projectIdCache.has(slug)) return projectIdCache.get(slug)!
-	try {
-		const project = await modrinthClient.labrinth.projects_v3.get(slug)
-		projectIdCache.set(slug, project.id)
-		return project.id
-	} catch (err) {
-		console.error(`[Modrinth Extras] Failed to fetch project ID for ${slug}:`, err)
-		return null
-	}
 }
 
 export async function toggleProjectInCollection(

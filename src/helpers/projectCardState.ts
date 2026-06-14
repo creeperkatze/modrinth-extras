@@ -9,11 +9,16 @@ export interface QuickDownloadSettings {
 	gameVersion: string
 }
 
+export interface QuickDownloadResult {
+	projectId: string
+	downloadUrl: string | null
+}
+
 interface DownloadRequest {
 	projectSlug: string
 	projectType: string
 	settings: QuickDownloadSettings
-	resolve: (url: string | null) => void
+	resolve: (result: QuickDownloadResult) => void
 	reject: (error: unknown) => void
 }
 
@@ -24,11 +29,11 @@ const MAX_ENCODED_IDS_LENGTH = 6_000
 let flushScheduled = false
 let flushing = false
 
-export function getQuickDownloadUrl(
+export function getQuickDownload(
 	projectSlug: string,
 	projectType: string,
 	settings: QuickDownloadSettings,
-): Promise<string | null> {
+): Promise<QuickDownloadResult> {
 	return new Promise((resolve, reject) => {
 		pending.push({ projectSlug, projectType, settings, resolve, reject })
 		scheduleFlush()
@@ -93,7 +98,14 @@ async function flush() {
 			for (const version of fetchedVersions) versions.set(version.id, version)
 		}
 
-		for (const request of requests) request.resolve(findDownloadUrl(request))
+		for (const request of requests) {
+			const project = projects.get(request.projectSlug)
+			if (!project) throw new Error(`Project not found: ${request.projectSlug}`)
+			request.resolve({
+				projectId: project.id,
+				downloadUrl: findDownloadUrl(request),
+			})
+		}
 	} catch (err) {
 		for (const request of requests) request.reject(err)
 	} finally {
