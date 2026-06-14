@@ -1,6 +1,11 @@
 <template>
 	<div v-if="invite && discordUrl" class="card flex-card experimental-styles-within relative">
-		<img :src="invite.iconUrl" class="size-10 shrink-0 rounded-lg absolute right-4 top-4" />
+		<img
+			v-if="invite.iconUrl"
+			:src="invite.iconUrl"
+			alt=""
+			class="size-10 shrink-0 rounded-lg absolute right-4 top-4"
+		/>
 		<h2 class="mb-1">Discord</h2>
 		<div class="details-list min-w-0 max-w-full">
 			<a
@@ -80,7 +85,7 @@ import {
 import { defineMessages, useVIntl } from '@modrinth/ui'
 import { onMounted, ref } from 'vue'
 
-import { apiFetch } from '../helpers/api'
+import { modrinthClient } from '../helpers/api'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
@@ -124,8 +129,8 @@ onMounted(async () => {
 		)?.[2]
 		if (!slug) return
 
-		const project = (await apiFetch(`project/${slug}`)) as Record<string, unknown>
-		const url = (project?.discord_url as string) ?? ''
+		const project = await modrinthClient.labrinth.projects_v3.get(slug)
+		const url = project.link_urls.discord?.url ?? ''
 		if (!url) return
 
 		const code = url.match(/discord\.(?:gg|com\/invite)\/([A-Za-z0-9-]+)/)?.[1]

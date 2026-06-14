@@ -1,14 +1,13 @@
+import { type AuthConfig, AuthFeature, GenericModrinthClient } from '@modrinth/api-client'
 import { browser } from 'wxt/browser'
 
-const API_BASE = 'https://api.modrinth.com'
 const USER_AGENT = `creeperkatze/modrinth-extras/${browser.runtime.getManifest().version} (contact@creeperkatze.dev)`
-
-export type ApiFetchOptions = RequestInit & { apiVersion?: number; token?: string }
 
 let cachedToken: string | null = null
 
 export function getAuthToken(): string {
 	if (cachedToken !== null) return cachedToken
+	if (typeof document === 'undefined') return ''
 	const cookie = document.cookie.split('; ').find((row) => row.startsWith('auth-token='))
 	cachedToken = cookie ? decodeURIComponent(cookie.split('=').slice(1).join('=')) : ''
 	return cachedToken
@@ -18,6 +17,17 @@ export function invalidateTokenCache() {
 	cachedToken = null
 }
 
+export const modrinthClient = new GenericModrinthClient({
+	userAgent: USER_AGENT,
+	features: [
+		new AuthFeature({
+			token: async () =>
+				typeof document === 'undefined' ? getBackgroundAuthToken() : getAuthToken(),
+			tokenPrefix: '',
+		} as AuthConfig),
+	],
+})
+
 // Uses the cookies API since document is unavailable in service workers
 export async function getBackgroundAuthToken(): Promise<string> {
 	try {
@@ -26,21 +36,4 @@ export async function getBackgroundAuthToken(): Promise<string> {
 	} catch {
 		return ''
 	}
-}
-
-export async function apiFetch(url: string, options: ApiFetchOptions = {}): Promise<unknown> {
-	const { apiVersion = 2, token = getAuthToken(), ...fetchOptions } = options
-
-	const res = await fetch(`${API_BASE}/v${apiVersion}/${url}`, {
-		...fetchOptions,
-		headers: {
-			'User-Agent': USER_AGENT,
-			...(token ? { Authorization: token } : {}),
-			...((fetchOptions.headers as Record<string, string>) ?? {}),
-		},
-	})
-
-	if (res.status === 204 || res.headers.get('content-length') === '0') return null
-	if (!res.ok) throw new Error(`Modrinth API ${res.status}: ${url}`)
-	return res.json()
 }

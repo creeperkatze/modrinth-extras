@@ -119,7 +119,7 @@ import {
 } from '@modrinth/ui'
 import { computed, onMounted, ref, watch } from 'vue'
 
-import { apiFetch, getAuthToken } from '../helpers/api'
+import { getAuthToken, modrinthClient } from '../helpers/api'
 import {
 	type Collection,
 	collections,
@@ -281,10 +281,18 @@ async function handleFollow() {
 	followLoading.value = true
 	try {
 		if (isFollowed.value) {
-			await apiFetch(`project/${props.projectSlug}/follow`, { method: 'DELETE' })
+			await modrinthClient.request(`/project/${props.projectSlug}/follow`, {
+				api: 'labrinth',
+				version: 2,
+				method: 'DELETE',
+			})
 			followedSlugs.value?.delete(props.projectSlug)
 		} else {
-			await apiFetch(`project/${props.projectSlug}/follow`, { method: 'POST' })
+			await modrinthClient.request(`/project/${props.projectSlug}/follow`, {
+				api: 'labrinth',
+				version: 2,
+				method: 'POST',
+			})
 			followedSlugs.value?.add(props.projectSlug)
 		}
 	} catch (err) {

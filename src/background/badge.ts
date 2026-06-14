@@ -1,6 +1,6 @@
 import { browser } from 'wxt/browser'
 
-import { apiFetch, getBackgroundAuthToken } from '../helpers/api'
+import { getBackgroundAuthToken, modrinthClient } from '../helpers/api'
 import { fetchNotifications, groupNotifications, type Notification } from '../helpers/notifications'
 import { getSettings } from '../helpers/settings'
 import { sendDesktopNotifications } from './desktop-notifications'
@@ -67,10 +67,13 @@ export async function updateBadge() {
 			return
 		}
 
-		const user = (await apiFetch('user', { token })) as { id?: string } | null
+		const user = await modrinthClient.request<{ id?: string }>('/user', {
+			api: 'labrinth',
+			version: 2,
+		})
 		if (!user?.id) throw new Error('Failed to fetch user')
 
-		const notifs = await fetchNotifications(user.id, { token })
+		const notifs = await fetchNotifications(user.id)
 		await applyNotifications(
 			notifs,
 			Array.isArray(prevNotifs) ? (prevNotifs as Notification[]) : null,

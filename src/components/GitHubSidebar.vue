@@ -72,7 +72,7 @@ import { ExternalIcon, IssuesIcon, StarIcon } from '@modrinth/assets'
 import { defineMessages, useVIntl } from '@modrinth/ui'
 import { onMounted, ref } from 'vue'
 
-import { apiFetch } from '../helpers/api'
+import { modrinthClient } from '../helpers/api'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
@@ -113,8 +113,8 @@ onMounted(async () => {
 		)?.[2]
 		if (!slug) return
 
-		const project = (await apiFetch(`project/${slug}`)) as Record<string, unknown>
-		const sourceUrl = (project?.source_url as string) ?? ''
+		const project = await modrinthClient.labrinth.projects_v3.get(slug)
+		const sourceUrl = project.link_urls.source?.url ?? ''
 
 		const ghMatch = sourceUrl.match(
 			/^https?:\/\/github\.com\/([A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+?)(?:\.git)?\/?$/,

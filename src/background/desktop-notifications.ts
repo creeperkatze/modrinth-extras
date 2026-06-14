@@ -1,6 +1,5 @@
 import { browser } from 'wxt/browser'
 
-import { getBackgroundAuthToken } from '../helpers/api'
 import {
 	fetchExtraNotificationData,
 	groupNotifications,
@@ -36,8 +35,7 @@ export async function sendDesktopNotifications(
 	console.log(
 		`[Modrinth Extras] Desktop notifications: ${brandNew.length} new, fetching extra data`,
 	)
-	const token = await getBackgroundAuthToken()
-	await fetchExtraNotificationData(brandNew, { token })
+	await fetchExtraNotificationData(brandNew)
 
 	const grouped = groupNotifications(brandNew)
 	console.log(

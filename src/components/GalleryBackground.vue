@@ -22,22 +22,9 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 
-import { apiFetch } from '../helpers/api'
+import { modrinthClient } from '../helpers/api'
 
 const props = defineProps<{ projectSlug: string }>()
-
-interface GalleryImage {
-	url: string
-	featured: boolean
-	title?: string
-	description?: string
-	created: string
-	ordering: number
-}
-
-interface Project {
-	gallery: GalleryImage[]
-}
 
 const imageUrl = ref<string | null>(null)
 const animated = ref(false)
@@ -50,7 +37,7 @@ function onLoad() {
 
 onMounted(async () => {
 	try {
-		const project = (await apiFetch(`project/${props.projectSlug}`)) as Project
+		const project = await modrinthClient.labrinth.projects_v3.get(props.projectSlug)
 		if (!Array.isArray(project.gallery) || project.gallery.length === 0) return
 
 		const featured = project.gallery.find((img) => img.featured)

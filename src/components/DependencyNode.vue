@@ -28,7 +28,7 @@
 				v-if="dep.project?.icon_url"
 				:src="dep.project.icon_url"
 				class="size-[1em] shrink-0 rounded-[2px] object-cover"
-				:alt="dep.project.title"
+				:alt="dep.project.name"
 			/>
 			<BoxIcon v-else />
 
@@ -37,7 +37,7 @@
 				class="min-w-0 flex-1 truncate text-primary no-underline hover:underline"
 				@click.prevent="navigateToProject"
 			>
-				{{ dep.project?.title ?? dep.project_id }}
+				{{ dep.project?.name ?? dep.project_id }}
 			</a>
 
 			<span
@@ -111,7 +111,8 @@ const childrenLoaded = ref(false)
 
 const projectHref = computed(() => {
 	if (!props.dep.project) return '#'
-	return `/${props.dep.project.project_type}/${props.dep.project.slug}`
+	const projectType = props.dep.project.project_types[0]
+	return projectType && props.dep.project.slug ? `/${projectType}/${props.dep.project.slug}` : '#'
 })
 
 const typeLabel = computed(
@@ -135,9 +136,9 @@ const badgeClass = computed(
 )
 
 function navigateToProject() {
-	if (props.dep.project) {
-		navigate(`/${props.dep.project.project_type}/${props.dep.project.slug}`)
-	}
+	const projectType = props.dep.project?.project_types[0]
+	const slug = props.dep.project?.slug
+	if (projectType && slug) navigate(`/${projectType}/${slug}`)
 }
 
 async function toggle() {

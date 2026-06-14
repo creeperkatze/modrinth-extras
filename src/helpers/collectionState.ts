@@ -1,12 +1,9 @@
+import type { Labrinth } from '@modrinth/api-client'
 import { ref } from 'vue'
 
-import { apiFetch } from './api'
+import { modrinthClient } from './api'
 
-export interface Collection {
-	id: string
-	name: string
-	projects: string[]
-}
+export type Collection = Labrinth.Collections.Collection
 
 export const collections = ref<Collection[] | null>(null)
 
@@ -19,14 +16,15 @@ export async function initCollections(): Promise<void> {
 	if (initPromise) return initPromise
 	initPromise = (async () => {
 		try {
-			const user = (await apiFetch('user')) as { id: string } | null
+			const user = await modrinthClient.request<{ id: string }>('/user', {
+				api: 'labrinth',
+				version: 2,
+			})
 			if (!user?.id) {
 				collections.value = []
 				return
 			}
-			const cols = (await apiFetch(`user/${user.id}/collections`, {
-				apiVersion: 3,
-			})) as Collection[]
+			const cols = await modrinthClient.labrinth.users_v2.getCollections(user.id)
 			collections.value = cols ?? []
 		} catch (err) {
 			console.error('[Modrinth Extras] Failed to fetch collections:', err)
@@ -39,7 +37,7 @@ export async function initCollections(): Promise<void> {
 export async function getProjectId(slug: string): Promise<string | null> {
 	if (projectIdCache.has(slug)) return projectIdCache.get(slug)!
 	try {
-		const project = (await apiFetch(`project/${slug}`)) as { id: string }
+		const project = await modrinthClient.labrinth.projects_v3.get(slug)
 		projectIdCache.set(slug, project.id)
 		return project.id
 	} catch (err) {
@@ -61,11 +59,8 @@ export async function toggleProjectInCollection(
 	collection.projects = newProjects
 
 	try {
-		await apiFetch(`collection/${collection.id}`, {
-			method: 'PATCH',
-			apiVersion: 3,
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ new_projects: newProjects }),
+		await modrinthClient.labrinth.collections.edit(collection.id, {
+			new_projects: newProjects,
 		})
 	} catch (err) {
 		collection.projects = original

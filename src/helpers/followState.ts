@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 
-import { apiFetch } from './api'
+import { modrinthClient } from './api'
 
 export const followUserId = ref<string | null | undefined>(undefined)
 export const followedSlugs = ref<Set<string> | null>(null)
@@ -12,7 +12,10 @@ export async function initFollowState(): Promise<void> {
 	if (initPromise) return initPromise
 	initPromise = (async () => {
 		try {
-			const user = (await apiFetch('user')) as { id: string } | null
+			const user = await modrinthClient.request<{ id: string }>('/user', {
+				api: 'labrinth',
+				version: 2,
+			})
 			followUserId.value = user?.id ?? null
 			if (!followUserId.value) return
 		} catch (err) {
@@ -21,9 +24,7 @@ export async function initFollowState(): Promise<void> {
 			return
 		}
 		try {
-			const follows = (await apiFetch(`user/${followUserId.value}/follows`)) as {
-				slug: string
-			}[]
+			const follows = await modrinthClient.labrinth.users_v2.getFollowedProjects(followUserId.value)
 			followedSlugs.value = new Set(follows.map((p) => p.slug))
 		} catch (err) {
 			console.error('[Modrinth Extras] Failed to fetch followed projects:', err)

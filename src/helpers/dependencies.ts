@@ -1,21 +1,15 @@
-import { apiFetch } from '../helpers/api'
+import type { Labrinth } from '@modrinth/api-client'
+
+import { modrinthClient } from '../helpers/api'
 
 export interface RawDep {
 	project_id: string
-	version_id: string | null
+	version_id?: string
 	dependency_type: 'required' | 'optional' | 'incompatible' | 'embedded'
 }
 
-export interface ProjectInfo {
-	id: string
-	slug: string
-	title: string
-	icon_url: string | null
-	project_type: string
-}
-
 export interface EnrichedDep extends RawDep {
-	project: ProjectInfo | null
+	project: Labrinth.Projects.v3.Project | null
 }
 
 async function enrichDeps(rawDeps: RawDep[]): Promise<EnrichedDep[]> {
@@ -29,11 +23,9 @@ async function enrichDeps(rawDeps: RawDep[]): Promise<EnrichedDep[]> {
 	if (relevant.length === 0) return []
 
 	const projectIds = [...new Set(relevant.map((d) => d.project_id))]
-	let projects: ProjectInfo[] = []
+	let projects: Labrinth.Projects.v3.Project[] = []
 	try {
-		projects = (await apiFetch(
-			`projects?ids=${encodeURIComponent(JSON.stringify(projectIds))}`,
-		)) as ProjectInfo[]
+		projects = await modrinthClient.labrinth.projects_v3.getMultiple(projectIds)
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to fetch dependency project info:', err)
 	}
@@ -45,34 +37,50 @@ async function enrichDeps(rawDeps: RawDep[]): Promise<EnrichedDep[]> {
 	}))
 }
 
+function normalizeDeps(dependencies: Labrinth.Versions.v2.Dependency[]): RawDep[] {
+	return dependencies.flatMap((dependency) =>
+		'project_id' in dependency && dependency.project_id
+			? [
+					{
+						project_id: dependency.project_id,
+						version_id: 'version_id' in dependency ? dependency.version_id : undefined,
+						dependency_type: dependency.dependency_type,
+					},
+				]
+			: [],
+	)
+}
+
 export async function fetchProjectDependencies(slugOrId: string): Promise<EnrichedDep[]> {
-	let versions: { dependencies?: RawDep[] }[]
+	let versions: Labrinth.Versions.v2.Version[]
 	try {
-		versions = (await apiFetch(`project/${slugOrId}/version?limit=1`)) as {
-			dependencies?: RawDep[]
-		}[]
+		versions = await modrinthClient.labrinth.versions_v2.getProjectVersions(slugOrId, {
+			limit: 1,
+			include_changelog: false,
+		})
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to fetch project versions for dependencies:', err)
 		return []
 	}
 
 	if (!versions || versions.length === 0) return []
-	return enrichDeps(versions[0].dependencies ?? [])
+	return enrichDeps(normalizeDeps(versions[0].dependencies ?? []))
 }
 
 export async function fetchVersionDependencies(
 	projectSlug: string,
 	versionNumber: string,
 ): Promise<EnrichedDep[]> {
-	let version: { dependencies?: RawDep[] }
+	let version: Labrinth.Versions.v2.Version
 	try {
-		version = (await apiFetch(
-			`project/${projectSlug}/version/${encodeURIComponent(versionNumber)}`,
-		)) as { dependencies?: RawDep[] }
+		version = await modrinthClient.labrinth.versions_v2.getVersionFromIdOrNumber(
+			projectSlug,
+			versionNumber,
+		)
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to fetch version for dependencies:', err)
 		return []
 	}
 
-	return enrichDeps(version.dependencies ?? [])
+	return enrichDeps(normalizeDeps(version.dependencies ?? []))
 }

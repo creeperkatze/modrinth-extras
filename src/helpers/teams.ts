@@ -1,9 +1,17 @@
-import { apiFetch } from '../helpers/api'
+import { modrinthClient } from '../helpers/api'
 
 export async function acceptTeamInvite(teamId: string): Promise<void> {
-	await apiFetch(`team/${teamId}/join`, { apiVersion: 3, method: 'POST' })
+	await modrinthClient.request(`/team/${teamId}/join`, {
+		api: 'labrinth',
+		version: 3,
+		method: 'POST',
+	})
 }
 
 export async function removeSelfFromTeam(teamId: string, userId: string): Promise<void> {
-	await apiFetch(`team/${teamId}/members/${userId}`, { apiVersion: 3, method: 'DELETE' })
+	await modrinthClient.request(`/team/${teamId}/members/${userId}`, {
+		api: 'labrinth',
+		version: 3,
+		method: 'DELETE',
+	})
 }

@@ -1,25 +1,12 @@
-import { apiFetch } from './api'
+import type { Labrinth } from '@modrinth/api-client'
+
+import { modrinthClient } from './api'
 
 export interface QuickDownloadSettings {
 	modLoader: string
 	pluginLoader: string
 	shaderLoader: string
 	gameVersion: string
-}
-
-interface Project {
-	id: string
-	slug: string
-	versions: string[]
-}
-
-interface ProjectVersion {
-	id: string
-	project_id: string
-	game_versions: string[]
-	loaders: string[]
-	date_published: string
-	files: { url: string; primary: boolean }[]
 }
 
 interface DownloadRequest {
@@ -30,8 +17,8 @@ interface DownloadRequest {
 	reject: (error: unknown) => void
 }
 
-const projects = new Map<string, Project>()
-const versions = new Map<string, ProjectVersion>()
+const projects = new Map<string, Labrinth.Projects.v3.Project>()
+const versions = new Map<string, Labrinth.Versions.v2.Version>()
 const pending: DownloadRequest[] = []
 let flushScheduled = false
 let flushing = false
@@ -69,12 +56,15 @@ async function flush() {
 		]
 
 		if (missingProjectSlugs.length > 0) {
-			const fetchedProjects = (await apiFetch(
-				`projects?ids=${encodeURIComponent(JSON.stringify(missingProjectSlugs))}`,
-			)) as Project[]
+			const fetchedProjects =
+				await modrinthClient.labrinth.projects_v3.getMultiple(missingProjectSlugs)
 			for (const project of fetchedProjects) {
-				projects.set(project.slug, project)
+				if (project.slug) projects.set(project.slug, project)
 				projects.set(project.id, project)
+			}
+			for (const slug of missingProjectSlugs) {
+				const project = fetchedProjects.find((item) => item.slug === slug || item.id === slug)
+				if (project) projects.set(slug, project)
 			}
 		}
 
@@ -87,9 +77,8 @@ async function flush() {
 		]
 
 		if (missingVersionIds.length > 0) {
-			const fetchedVersions = (await apiFetch(
-				`versions?ids=${encodeURIComponent(JSON.stringify(missingVersionIds))}`,
-			)) as ProjectVersion[]
+			const fetchedVersions =
+				await modrinthClient.labrinth.versions_v2.getVersions(missingVersionIds)
 			for (const version of fetchedVersions) versions.set(version.id, version)
 		}
 
@@ -109,7 +98,7 @@ function findDownloadUrl(request: DownloadRequest): string | null {
 	const preferredLoader = getPreferredLoader(request.projectType, request.settings)
 	const matchingVersions = project.versions
 		.map((id) => versions.get(id))
-		.filter((version): version is ProjectVersion => {
+		.filter((version): version is Labrinth.Versions.v2.Version => {
 			if (!version) return false
 			if (preferredLoader && !version.loaders.includes(preferredLoader)) return false
 			if (

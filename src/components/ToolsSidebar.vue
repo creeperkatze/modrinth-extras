@@ -116,7 +116,7 @@ import {
 import { defineMessages, useVIntl } from '@modrinth/ui'
 import { computed, onMounted, ref } from 'vue'
 
-import { apiFetch } from '../helpers/api'
+import { modrinthClient } from '../helpers/api'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
@@ -187,9 +187,10 @@ onMounted(async () => {
 	if (!projectSlug.value) return
 	downloadLoading.value = true
 	try {
-		const versions = (await apiFetch(`project/${projectSlug.value}/version?limit=1`)) as {
-			files?: { primary?: boolean; url?: string }[]
-		}[]
+		const versions = await modrinthClient.labrinth.versions_v2.getProjectVersions(
+			projectSlug.value,
+			{ limit: 1, include_changelog: false },
+		)
 		const primaryFile = versions?.[0]?.files?.find((f) => f.primary) ?? versions?.[0]?.files?.[0]
 		downloadUrl.value = primaryFile?.url ?? null
 	} catch (err) {

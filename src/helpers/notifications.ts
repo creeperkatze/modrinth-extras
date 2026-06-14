@@ -1,7 +1,7 @@
 import type { Organization, Project, Report, User, Version } from '@modrinth/utils'
 import { browser } from 'wxt/browser'
 
-import { apiFetch, type ApiFetchOptions } from './api'
+import { modrinthClient } from './api'
 
 export type NotificationAction = {
 	title: string
@@ -76,28 +76,29 @@ async function getBulk<T extends { id: string }>(
 	type: string,
 	ids: string[],
 	apiVersion = 2,
-	options?: ApiFetchOptions,
 ): Promise<T[]> {
 	if (!ids || ids.length === 0) return []
-	const url = `${type}?ids=${encodeURIComponent(JSON.stringify([...new Set(ids)]))}`
 	try {
-		const res = await apiFetch(url, { apiVersion, ...options })
+		const res = await modrinthClient.request<T[]>(`/${type}`, {
+			api: 'labrinth',
+			version: apiVersion,
+			params: { ids: JSON.stringify([...new Set(ids)]) },
+		})
 		return Array.isArray(res) ? res : []
 	} catch {
 		return []
 	}
 }
 
-export async function fetchNotifications(
-	userId: string,
-	options?: ApiFetchOptions,
-): Promise<Notification[]> {
-	return (await apiFetch(`user/${userId}/notifications`, options)) as Notification[]
+export async function fetchNotifications(userId: string): Promise<Notification[]> {
+	return modrinthClient.request<Notification[]>(`/user/${userId}/notifications`, {
+		api: 'labrinth',
+		version: 2,
+	})
 }
 
 export async function fetchExtraNotificationData(
 	notifications: Notification[],
-	options?: ApiFetchOptions,
 ): Promise<Notification[]> {
 	const bulk = {
 		projects: [] as string[],
@@ -120,7 +121,7 @@ export async function fetchExtraNotificationData(
 		}
 	}
 
-	const reports = (await getBulk<Report>('reports', bulk.reports, 2, options)).filter(Boolean)
+	const reports = (await getBulk<Report>('reports', bulk.reports)).filter(Boolean)
 	for (const r of reports) {
 		if (!r?.item_type) continue
 		if (r.item_type === 'project') bulk.projects.push(r.item_id)
@@ -128,14 +129,14 @@ export async function fetchExtraNotificationData(
 		else if (r.item_type === 'version') bulk.versions.push(r.item_id)
 	}
 
-	const versions = (await getBulk<Version>('versions', bulk.versions, 2, options)).filter(Boolean)
+	const versions = (await getBulk<Version>('versions', bulk.versions)).filter(Boolean)
 	for (const v of versions) bulk.projects.push(v.project_id)
 
 	const [projects, threads, users, organizations] = await Promise.all([
-		getBulk<Project>('projects', bulk.projects, 2, options),
-		getBulk<{ id: string }>('threads', bulk.threads, 2, options),
-		getBulk<User>('users', bulk.users, 2, options),
-		getBulk<Organization>('organizations', bulk.organizations, 3, options),
+		getBulk<Project>('projects', bulk.projects),
+		getBulk<{ id: string }>('threads', bulk.threads),
+		getBulk<User>('users', bulk.users),
+		getBulk<Organization>('organizations', bulk.organizations, 3),
 	])
 
 	for (const n of notifications) {
@@ -167,15 +168,17 @@ export async function fetchExtraNotificationData(
 	return notifications
 }
 
-export async function markNotificationsAsRead(
-	ids: string[],
-	options?: ApiFetchOptions,
-): Promise<void> {
+export async function markNotificationsAsRead(ids: string[]): Promise<void> {
 	const unique = [...new Set(ids)]
 	const BATCH_SIZE = 50
 	for (let i = 0; i < unique.length; i += BATCH_SIZE) {
 		const batch = unique.slice(i, i + BATCH_SIZE)
-		await apiFetch(`notifications?ids=${JSON.stringify(batch)}`, { method: 'PATCH', ...options })
+		await modrinthClient.request('/notifications', {
+			api: 'labrinth',
+			version: 2,
+			method: 'PATCH',
+			params: { ids: JSON.stringify(batch) },
+		})
 	}
 }
 

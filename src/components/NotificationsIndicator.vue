@@ -242,7 +242,7 @@ import {
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { browser } from 'wxt/browser'
 
-import { apiFetch, invalidateTokenCache } from '../helpers/api'
+import { invalidateTokenCache, modrinthClient } from '../helpers/api'
 import {
 	fetchExtraNotificationData,
 	fetchNotifications,
@@ -330,7 +330,10 @@ function hasAuthCookie(): boolean {
 
 async function tryAuth(): Promise<boolean> {
 	try {
-		const user = (await apiFetch('user')) as { id: string }
+		const user = await modrinthClient.request<{ id: string }>('/user', {
+			api: 'labrinth',
+			version: 2,
+		})
 		userId.value = user.id
 		await refreshNotifications()
 		return true

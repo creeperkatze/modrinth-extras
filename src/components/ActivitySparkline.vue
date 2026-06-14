@@ -64,7 +64,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
-import { apiFetch } from '../helpers/api'
+import { modrinthClient } from '../helpers/api'
 
 const props = defineProps<{ projectSlug: string }>()
 
@@ -72,10 +72,6 @@ const DAYS = 60
 const PAD_TOP = 10
 const PAD_BOTTOM = 10
 const SMOOTH_SIGMA = 0.8
-
-interface Version {
-	date_published: string
-}
 
 const dataCache = new Map<string, { counts: number[]; hasData: boolean }>()
 
@@ -141,7 +137,10 @@ onMounted(async () => {
 		const now = Date.now()
 		const cutoff = now - DAYS * 24 * 60 * 60 * 1000
 
-		const versions = (await apiFetch(`project/${props.projectSlug}/version?limit=100`)) as Version[]
+		const versions = await modrinthClient.labrinth.versions_v2.getProjectVersions(
+			props.projectSlug,
+			{ limit: 100, include_changelog: false },
+		)
 		if (!Array.isArray(versions)) return
 
 		const counts = Array(DAYS).fill(0)

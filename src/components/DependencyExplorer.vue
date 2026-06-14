@@ -148,7 +148,7 @@
 							:fill="node.isRoot ? '#fff' : '#888'"
 							style="pointer-events: none; user-select: none"
 						>
-							{{ (node.project?.title ?? node.id)[0].toUpperCase() }}
+							{{ (node.project?.name ?? node.id)[0].toUpperCase() }}
 						</text>
 
 						<!-- Project icon -->
@@ -210,7 +210,7 @@
 							:class="node.loaded && node.project && !node.isRoot ? 'mre-nav-label' : ''"
 							style="pointer-events: none; user-select: none"
 						>
-							{{ clamp(node.project?.title ?? node.id, 22) }}
+							{{ clamp(node.project?.name ?? node.id, 22) }}
 						</text>
 					</g>
 				</g>
@@ -265,18 +265,18 @@
 </template>
 
 <script setup lang="ts">
+import type { Labrinth } from '@modrinth/api-client'
 import { LoaderCircleIcon } from '@modrinth/assets'
 import { defineMessages, NewModal, useVIntl } from '@modrinth/ui'
 import type { ForceLink, Simulation, SimulationLinkDatum } from 'd3-force'
 import { forceCenter, forceCollide, forceLink, forceManyBody, forceSimulation } from 'd3-force'
 import { computed, markRaw, nextTick, onUnmounted, ref, useTemplateRef } from 'vue'
 
-import { apiFetch } from '../helpers/api'
+import { modrinthClient } from '../helpers/api'
 import {
 	type EnrichedDep,
 	fetchProjectDependencies,
 	fetchVersionDependencies,
-	type ProjectInfo,
 } from '../helpers/dependencies'
 import { navigate } from '../helpers/page-router'
 
@@ -288,7 +288,7 @@ interface GraphNode {
 	vy: number
 	fx: number | null
 	fy: number | null
-	project: ProjectInfo | null
+	project: Labrinth.Projects.v3.Project | null
 	loaded: boolean
 	loading: boolean
 	isRoot: boolean
@@ -625,9 +625,9 @@ async function initGraph() {
 	initialLoading.value = true
 	zoom.value = 1
 
-	let rootProject: ProjectInfo | null = null
+	let rootProject: Labrinth.Projects.v3.Project | null = null
 	try {
-		rootProject = (await apiFetch(`project/${props.projectSlug}`)) as ProjectInfo
+		rootProject = await modrinthClient.labrinth.projects_v3.get(props.projectSlug)
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to fetch root project info:', err)
 	}
@@ -743,7 +743,7 @@ function onNodeClick(node: GraphNode) {
 		expandNode(node)
 	} else if (node.project && !node.isRoot) {
 		modal.value?.hide()
-		navigate(`/${node.project.project_type}/${node.project.slug}`)
+		navigate(`/${node.project.project_types[0]}/${node.project.slug}`)
 	}
 }
 

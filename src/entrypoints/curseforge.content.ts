@@ -1,26 +1,16 @@
-import { apiFetch } from '../helpers/api'
+import type { Labrinth } from '@modrinth/api-client'
+
+import { modrinthClient } from '../helpers/api'
 import { getSettings } from '../helpers/settings'
 
-interface ModrinthProject {
-	slug: string
-	project_type: string
-}
-
-interface ModrinthSearchHit {
-	slug: string
-	project_type: string
-	author: string
-}
-
-interface ModrinthSearchResult {
-	hits: ModrinthSearchHit[]
-}
-
-async function apiGet<T>(path: string): Promise<T | null> {
+async function apiGet<T>(request: () => Promise<T>, description: string): Promise<T | null> {
 	try {
-		return (await apiFetch(path)) as T
+		return await request()
 	} catch (err) {
-		console.error(`[Modrinth Extras] CurseForge redirect: API request failed for "${path}":`, err)
+		console.error(
+			`[Modrinth Extras] CurseForge redirect: API request failed for "${description}":`,
+			err,
+		)
 		return null
 	}
 }
@@ -111,12 +101,17 @@ async function tryRedirect(waitForDom = false): Promise<void> {
 	console.log(`[Modrinth Extras] CurseForge redirect: trying slug "${slug}"`)
 
 	// Try the CurseForge slug directly on Modrinth (no DOM needed)
-	const direct = await apiGet<ModrinthProject>(`project/${slug}`)
+	const direct = await apiGet(
+		() => modrinthClient.labrinth.projects_v3.get(slug),
+		`project/${slug}`,
+	)
 	if (direct) {
+		const projectType = direct.project_types[0]
+		if (!projectType || !direct.slug) return
 		console.log(
-			`[Modrinth Extras] CurseForge redirect: direct slug match, redirecting to ${direct.project_type}/${direct.slug}`,
+			`[Modrinth Extras] CurseForge redirect: direct slug match, redirecting to ${projectType}/${direct.slug}`,
 		)
-		window.location.href = `https://modrinth.com/${direct.project_type}/${direct.slug}`
+		window.location.href = `https://modrinth.com/${projectType}/${direct.slug}`
 		return
 	}
 
@@ -139,7 +134,8 @@ async function tryRedirect(waitForDom = false): Promise<void> {
 		return
 	}
 
-	const searchResult = await apiGet<ModrinthSearchResult>(
+	const searchResult = await apiGet<Labrinth.Projects.v2.SearchResult>(
+		() => modrinthClient.labrinth.projects_v2.search({ query: title, limit: 5 }),
 		`search?query=${encodeURIComponent(title)}&limit=5`,
 	)
 	if (!searchResult?.hits?.length) {

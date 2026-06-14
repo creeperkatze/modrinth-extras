@@ -173,6 +173,7 @@
 
 <script setup lang="ts">
 import { Star } from '@lucide/vue'
+import type { Labrinth } from '@modrinth/api-client'
 import {
 	ArrowUpRightIcon,
 	BellIcon,
@@ -207,7 +208,7 @@ import { browser } from 'wxt/browser'
 
 import KofiIcon from '../../assets/kofi.svg?component'
 import CompactCombobox from '../../components/ui/CompactCombobox.vue'
-import { apiFetch } from '../../helpers/api'
+import { modrinthClient } from '../../helpers/api'
 import { detectBrowserLocale, i18n } from '../../helpers/i18n'
 import { LOCALES } from '../../helpers/locales'
 import { DEFAULTS, type ExtensionSettings, getSettings, saveSettings } from '../../helpers/settings'
@@ -379,7 +380,7 @@ const messages = defineMessages({
 	},
 })
 
-type FeatureKey = keyof ExtensionSettings
+type FeatureKey = Exclude<keyof ExtensionSettings, 'locale'>
 
 interface FeatureOption {
 	key: string
@@ -403,17 +404,20 @@ interface FeatureDef {
 }
 
 async function fetchLoadersByType(...types: string[]): Promise<SelectItem[]> {
-	const data = (await apiFetch('tag/loader', { apiVersion: 3 })) as {
-		name: string
-		supported_project_types: string[]
-	}[]
+	const data = await modrinthClient.request<Labrinth.Tags.v2.Loader[]>('/tag/loader', {
+		api: 'labrinth',
+		version: 3,
+	})
 	return data
 		.filter((l) => types.some((type) => l.supported_project_types.includes(type)))
 		.map((l) => ({ label: l.name.charAt(0).toUpperCase() + l.name.slice(1), value: l.name }))
 }
 
 async function fetchGameVersions(): Promise<SelectItem[]> {
-	const data = (await apiFetch('tag/game_version')) as { version: string }[]
+	const data = await modrinthClient.request<Labrinth.Tags.v2.GameVersion[]>('/tag/game_version', {
+		api: 'labrinth',
+		version: 2,
+	})
 	return data.map((v) => ({ label: v.version, value: v.version }))
 }
 
@@ -548,7 +552,7 @@ const extensionFeatures = computed<FeatureDef[]>(() => [
 	},
 ])
 
-async function updateEnabled(key: keyof ExtensionSettings, enabled: boolean) {
+async function updateEnabled(key: FeatureKey, enabled: boolean) {
 	settings[key].enabled = enabled
 	await saveSettings(settings as ExtensionSettings)
 	if (key === 'telemetry') setTelemetryEnabled(enabled)
