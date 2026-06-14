@@ -216,6 +216,7 @@
 </template>
 
 <script setup lang="ts">
+import type { Labrinth } from '@modrinth/api-client'
 import {
 	BellIcon,
 	CalendarIcon,
@@ -330,7 +331,7 @@ function hasAuthCookie(): boolean {
 
 async function tryAuth(): Promise<boolean> {
 	try {
-		const user = await modrinthClient.request<{ id: string }>('/user', {
+		const user = await modrinthClient.request<Labrinth.Users.v2.User>('/user', {
 			api: 'labrinth',
 			version: 2,
 		})

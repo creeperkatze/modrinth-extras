@@ -1,3 +1,4 @@
+import type { Labrinth } from '@modrinth/api-client'
 import { ref } from 'vue'
 
 import { modrinthClient } from './api'
@@ -12,7 +13,7 @@ export async function initFollowState(): Promise<void> {
 	if (initPromise) return initPromise
 	initPromise = (async () => {
 		try {
-			const user = await modrinthClient.request<{ id: string }>('/user', {
+			const user = await modrinthClient.request<Labrinth.Users.v2.User>('/user', {
 				api: 'labrinth',
 				version: 2,
 			})

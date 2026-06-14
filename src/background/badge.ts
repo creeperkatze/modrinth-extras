@@ -1,3 +1,4 @@
+import type { Labrinth } from '@modrinth/api-client'
 import { browser } from 'wxt/browser'
 
 import { getBackgroundAuthToken, modrinthClient } from '../helpers/api'
@@ -67,7 +68,7 @@ export async function updateBadge() {
 			return
 		}
 
-		const user = await modrinthClient.request<{ id?: string }>('/user', {
+		const user = await modrinthClient.request<Labrinth.Users.v2.User>('/user', {
 			api: 'labrinth',
 			version: 2,
 		})
