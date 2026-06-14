@@ -18,8 +18,9 @@ interface DownloadRequest {
 }
 
 const projects = new Map<string, Labrinth.Projects.v3.Project>()
-const versions = new Map<string, Labrinth.Versions.v2.Version>()
+const versions = new Map<string, Labrinth.Versions.v3.Version>()
 const pending: DownloadRequest[] = []
+const MAX_ENCODED_IDS_LENGTH = 6_000
 let flushScheduled = false
 let flushing = false
 
@@ -56,8 +57,13 @@ async function flush() {
 		]
 
 		if (missingProjectSlugs.length > 0) {
-			const fetchedProjects =
-				await modrinthClient.labrinth.projects_v3.getMultiple(missingProjectSlugs)
+			const fetchedProjects = (
+				await Promise.all(
+					chunkIdsForQuery(missingProjectSlugs).map((ids) =>
+						modrinthClient.labrinth.projects_v3.getMultiple(ids),
+					),
+				)
+			).flat()
 			for (const project of fetchedProjects) {
 				if (project.slug) projects.set(project.slug, project)
 				projects.set(project.id, project)
@@ -77,8 +83,13 @@ async function flush() {
 		]
 
 		if (missingVersionIds.length > 0) {
-			const fetchedVersions =
-				await modrinthClient.labrinth.versions_v2.getVersions(missingVersionIds)
+			const fetchedVersions = (
+				await Promise.all(
+					chunkIdsForQuery(missingVersionIds).map((ids) =>
+						modrinthClient.labrinth.versions_v3.getVersions(ids),
+					),
+				)
+			).flat()
 			for (const version of fetchedVersions) versions.set(version.id, version)
 		}
 
@@ -98,7 +109,7 @@ function findDownloadUrl(request: DownloadRequest): string | null {
 	const preferredLoader = getPreferredLoader(request.projectType, request.settings)
 	const matchingVersions = project.versions
 		.map((id) => versions.get(id))
-		.filter((version): version is Labrinth.Versions.v2.Version => {
+		.filter((version): version is Labrinth.Versions.v3.Version => {
 			if (!version) return false
 			if (preferredLoader && !version.loaders.includes(preferredLoader)) return false
 			if (
@@ -114,6 +125,27 @@ function findDownloadUrl(request: DownloadRequest): string | null {
 	const file =
 		matchingVersions[0]?.files.find((item) => item.primary) ?? matchingVersions[0]?.files[0]
 	return file?.url ?? null
+}
+
+function chunkIdsForQuery(ids: string[]): string[][] {
+	const chunks: string[][] = []
+	let chunk: string[] = []
+	let encodedLength = 6 // Encoded JSON brackets: %5B and %5D
+
+	for (const id of ids) {
+		const idLength = encodeURIComponent(JSON.stringify(id)).length
+		const separatorLength = chunk.length > 0 ? 3 : 0 // Encoded comma: %2C
+		if (chunk.length > 0 && encodedLength + separatorLength + idLength > MAX_ENCODED_IDS_LENGTH) {
+			chunks.push(chunk)
+			chunk = []
+			encodedLength = 6
+		}
+		chunk.push(id)
+		encodedLength += (chunk.length > 1 ? 3 : 0) + idLength
+	}
+
+	if (chunk.length > 0) chunks.push(chunk)
+	return chunks
 }
 
 function getPreferredLoader(projectType: string, settings: QuickDownloadSettings): string {
