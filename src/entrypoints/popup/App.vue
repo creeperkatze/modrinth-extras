@@ -441,6 +441,13 @@ const generalFeatures = computed<FeatureDef[]>(() => [
 		description: formatMessage(messages['feature.projectCardActions.description']),
 		options: [
 			{
+				key: 'gameVersion',
+				type: 'select',
+				label: formatMessage(messages['feature.projectCardActions.gameVersion']),
+				fetchItems: fetchGameVersions,
+				searchable: true,
+			},
+			{
 				key: 'modLoader',
 				type: 'select',
 				label: formatMessage(messages['feature.projectCardActions.modLoader']),
@@ -457,13 +464,6 @@ const generalFeatures = computed<FeatureDef[]>(() => [
 				type: 'select',
 				label: formatMessage(messages['feature.projectCardActions.shaderLoader']),
 				fetchItems: () => fetchLoadersByType('shader'),
-			},
-			{
-				key: 'gameVersion',
-				type: 'select',
-				label: formatMessage(messages['feature.projectCardActions.gameVersion']),
-				fetchItems: fetchGameVersions,
-				searchable: true,
 			},
 		],
 	},
