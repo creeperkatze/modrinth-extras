@@ -102,7 +102,7 @@
     "defaultMessage": "Download"
   },
   "projectCardActions.downloadUnavailable": {
-    "defaultMessage": "No download is available for the selected loader and game version."
+    "defaultMessage": "{loader, select, none {No version is available for {version}} other {No version is available for {loader} {version}}}"
   },
   "projectCardActions.follow": {
     "defaultMessage": "Follow"

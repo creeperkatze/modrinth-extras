@@ -166,7 +166,8 @@ const messages = defineMessages({
 	},
 	'projectCardActions.downloadUnavailable': {
 		id: 'projectCardActions.downloadUnavailable',
-		defaultMessage: 'No download is available for the selected loader and game version.',
+		defaultMessage:
+			'{loader, select, none {No version is available for {version}} other {No version is available for {loader} {version}}}',
 	},
 })
 
@@ -205,10 +206,28 @@ const downloadTooltip = computed(() => {
 		return formatMessage(messages['projectCardActions.checkingDownload'])
 	}
 	if (downloadAvailabilityChecked.value && !downloadFileUrl.value) {
-		return formatMessage(messages['projectCardActions.downloadUnavailable'])
+		const loader = getSelectedLoader()
+		return formatMessage(messages['projectCardActions.downloadUnavailable'], {
+			loader: loader ? loader.charAt(0).toUpperCase() + loader.slice(1) : 'none',
+			version: props.downloadSettings.gameVersion,
+		})
 	}
 	return undefined
 })
+
+function getSelectedLoader(): string {
+	switch (props.projectType) {
+		case 'mod':
+		case 'modpack':
+			return props.downloadSettings.modLoader
+		case 'plugin':
+			return props.downloadSettings.pluginLoader
+		case 'shader':
+			return props.downloadSettings.shaderLoader
+		default:
+			return ''
+	}
+}
 
 const filteredCollections = computed(() => {
 	if (!collections.value) return []

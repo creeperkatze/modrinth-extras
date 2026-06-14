@@ -1,0 +1,10 @@
+{
+    "i18n-ally.localesPaths": [
+        "src/locales",
+        "modrinth/apps/app-frontend/src/locales",
+        "modrinth/apps/frontend/src/locales",
+        "modrinth/packages/moderation/src/locales",
+        "modrinth/packages/ui/src/locales",
+        "modrinth/packages/moderation/src/data/messages"
+    ]
+}
