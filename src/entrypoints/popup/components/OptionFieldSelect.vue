@@ -39,15 +39,23 @@ const anyItem = computed<SelectItem>(() => ({
 	value: '',
 }))
 
-const props = defineProps<{
-	label: string
-	modelValue: string
-	items?: SelectItem[]
-	fetchItems?: () => Promise<SelectItem[]>
-	includeAny?: boolean
-	dropdownClass?: string
-	searchable?: boolean
-}>()
+const props = withDefaults(
+	defineProps<{
+		label: string
+		modelValue: string
+		items?: SelectItem[]
+		fetchItems?: () => Promise<SelectItem[]>
+		includeAny?: boolean
+		dropdownClass?: string
+		searchable?: boolean
+	}>(),
+	{
+		items: undefined,
+		fetchItems: undefined,
+		includeAny: true,
+		dropdownClass: undefined,
+	},
+)
 
 defineEmits<{
 	'update:modelValue': [value: string]
@@ -57,7 +65,7 @@ const resolvedItems = ref<SelectItem[]>(props.items ?? [])
 const loading = ref(false)
 
 const allItems = computed<SelectItem[]>(() =>
-	props.includeAny !== false ? [anyItem.value, ...resolvedItems.value] : resolvedItems.value,
+	props.includeAny ? [anyItem.value, ...resolvedItems.value] : resolvedItems.value,
 )
 
 onMounted(async () => {
