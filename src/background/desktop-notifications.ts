@@ -51,7 +51,7 @@ export async function sendDesktopNotifications(
 			browser.runtime.getURL('/icon-128.png')
 		const title =
 			notif.type === 'project_update' && notif.extra_data?.project
-				? `${notif.extra_data.project.title} has been updated${groupSize > 1 ? ` (${groupSize} new versions)` : ''}`
+				? `${notif.extra_data.project.name} has been updated${groupSize > 1 ? ` (${groupSize} new versions)` : ''}`
 				: notif.title
 		const message = notif.text
 		console.log(

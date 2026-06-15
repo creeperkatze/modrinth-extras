@@ -161,7 +161,7 @@
 											{{
 												notif.type === 'project_update' && notif.extra_data?.project
 													? formatMessage(messages['notificationsIndicator.projectUpdated'], {
-															title: (notif.extra_data as NotificationExtraData).project!.title,
+															title: (notif.extra_data as NotificationExtraData).project!.name,
 														})
 													: notif.title
 											}}
