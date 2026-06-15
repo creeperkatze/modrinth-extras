@@ -646,6 +646,6 @@ onMounted(async () => {
 
 <style scoped>
 .language-dropdown {
-	width: 10rem;
+	width: 8rem;
 }
 </style>
