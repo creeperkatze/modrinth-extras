@@ -35,7 +35,7 @@ UI strings use Vue I18n via `@modrinth/ui`'s `defineMessages` + `useVIntl`. Othe
 - `src/entrypoints/curseforge-bridge.content.ts`: patches `history.pushState`/`replaceState` on curseforge.com for SPA navigation
 - `src/entrypoints/popup/`: extension settings popup
 - `src/components/`: Vue components injected into Modrinth pages
-- `src/helpers/`: shared utilities (apiFetch, settings, notifications, etc.)
+- `src/utils/`: shared utilities (apiFetch, settings, notifications, etc.)
 - `src/background/`: code used only by the service worker
 - `src/locales/`: i18n translation files
 
@@ -50,7 +50,7 @@ UI strings use Vue I18n via `@modrinth/ui`'s `defineMessages` + `useVIntl`. Othe
 
 ## Key conventions
 
-- **API calls**: use `apiFetch` from `helpers/api.ts`; auth token is read from the `auth-token` cookie automatically. Pass `{ apiVersion: 3 }` for v3 endpoints.
+- **API calls**: use `apiFetch` from `utils/api.ts`; auth token is read from the `auth-token` cookie automatically. Pass `{ apiVersion: 3 }` for v3 endpoints.
 - **Settings**: read via `getSettings()`; never read directly from storage in components.
 - **Style**: Prettier — tabs, single quotes, no semicolons, trailing commas, 100-char lines, LF line endings.
 - **Logging**: prefix all messages with `[Modrinth Extras]`; add a subsystem sub-prefix where relevant (e.g. `[Modrinth Extras] Badge:`). Use `console.error` for problems — always pass the error value as the last argument (`console.error('... Failed to fetch:', err)`). Use `console.log` for informational messages in past tense ("Loaded", "Injected"). No `console.warn`.

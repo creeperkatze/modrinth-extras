@@ -1,9 +1,9 @@
 import type { Labrinth } from '@modrinth/api-client'
 import { browser } from 'wxt/browser'
 
-import { getBackgroundAuthToken, modrinthClient } from '../helpers/api'
-import { fetchNotifications, groupNotifications, type Notification } from '../helpers/notifications'
-import { getSettings } from '../helpers/settings'
+import { getBackgroundAuthToken, modrinthClient } from '../utils/api'
+import { fetchNotifications, groupNotifications, type Notification } from '../utils/notifications'
+import { getSettings } from '../utils/settings'
 import { sendDesktopNotifications } from './desktop-notifications'
 
 export async function setBadge(unread: number) {

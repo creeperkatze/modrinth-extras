@@ -1,7 +1,7 @@
 import { type Labrinth, ModrinthApiError } from '@modrinth/api-client'
 
-import { modrinthClient } from '../helpers/api'
-import { getSettings } from '../helpers/settings'
+import { modrinthClient } from '../utils/api'
+import { getSettings } from '../utils/settings'
 
 async function getProjectBySlug(slug: string): Promise<Labrinth.Projects.v3.Project | null> {
 	try {

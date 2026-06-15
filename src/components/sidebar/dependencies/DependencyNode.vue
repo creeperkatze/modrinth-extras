@@ -64,8 +64,8 @@ import { BoxIcon, ChevronRightIcon, LoaderCircleIcon } from '@modrinth/assets'
 import { defineMessages, useVIntl } from '@modrinth/ui'
 import { computed, ref } from 'vue'
 
-import { type EnrichedDep, fetchProjectDependencies } from '../../../helpers/dependencies'
-import { navigate } from '../../../helpers/page-router'
+import { type EnrichedDep, fetchProjectDependencies } from '../../../utils/dependencies'
+import { navigate } from '../../../utils/page-router'
 
 defineOptions({ name: 'DependencyNode' })
 

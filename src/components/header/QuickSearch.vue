@@ -144,8 +144,8 @@ import {
 import { ButtonStyled, defineMessages, useVIntl } from '@modrinth/ui'
 import { type Component, computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
-import { modrinthClient } from '../../helpers/api'
-import { navigate } from '../../helpers/page-router'
+import { modrinthClient } from '../../utils/api'
+import { navigate } from '../../utils/page-router'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({

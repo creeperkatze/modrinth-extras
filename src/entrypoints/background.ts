@@ -2,9 +2,9 @@ import { browser } from 'wxt/browser'
 
 import { applyNotifications, setBadge, showCachedBadge, updateBadge } from '../background/badge'
 import { handleNotificationClick } from '../background/desktop-notifications'
-import type { Notification } from '../helpers/notifications'
-import { getSettings } from '../helpers/settings'
-import { capture, initTelemetry } from '../helpers/telemetry'
+import type { Notification } from '../utils/notifications'
+import { getSettings } from '../utils/settings'
+import { capture, initTelemetry } from '../utils/telemetry'
 
 const ALARM_NAME = 'modrinth-extras-poll'
 const POLL_INTERVAL_MINUTES = 5

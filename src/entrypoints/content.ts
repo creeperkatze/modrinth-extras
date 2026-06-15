@@ -16,10 +16,10 @@ import GitHubSidebar from '../components/sidebar/GitHubSidebar.vue'
 import ToolsSidebar from '../components/sidebar/ToolsSidebar.vue'
 import ErrorNotice from '../components/site/ErrorNotice.vue'
 import FooterBadge from '../components/site/FooterBadge.vue'
-import { initFollowState } from '../helpers/followState'
-import { detectBrowserLocale, i18n, installI18n, loadSavedLocale } from '../helpers/i18n'
-import { navigate } from '../helpers/page-router'
-import { DEFAULTS, type ExtensionSettings, getSettings } from '../helpers/settings'
+import { initFollowState } from '../utils/follow-state'
+import { detectBrowserLocale, i18n, installI18n, loadSavedLocale } from '../utils/i18n'
+import { navigate } from '../utils/page-router'
+import { DEFAULTS, type ExtensionSettings, getSettings } from '../utils/settings'
 
 // Gate injections until Nuxt hydration is complete. The router-bridge
 // (MAIN world) dispatches "modrinth-extras:router-ready" once it hooks

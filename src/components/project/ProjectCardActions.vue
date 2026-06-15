@@ -120,15 +120,15 @@ import {
 } from '@modrinth/ui'
 import { computed, onMounted, ref, watch } from 'vue'
 
-import { getAuthToken, modrinthClient } from '../../helpers/api'
+import { getAuthToken, modrinthClient } from '../../utils/api'
 import {
 	collections,
 	initCollections,
 	toggleProjectInCollection,
-} from '../../helpers/collectionState'
-import { followedSlugs } from '../../helpers/followState'
-import { navigate } from '../../helpers/page-router'
-import { getQuickDownload, type QuickDownloadSettings } from '../../helpers/projectCardState'
+} from '../../utils/collection-state'
+import { followedSlugs } from '../../utils/follow-state'
+import { navigate } from '../../utils/page-router'
+import { getQuickDownload, type QuickDownloadSettings } from '../../utils/project-card-state'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({

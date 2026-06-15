@@ -1,4 +1,4 @@
-import { modrinthClient } from '../helpers/api'
+import { modrinthClient } from './api'
 
 export async function acceptTeamInvite(teamId: string): Promise<void> {
 	await modrinthClient.request(`/team/${teamId}/join`, {

@@ -4,8 +4,8 @@ import {
 	fetchExtraNotificationData,
 	groupNotifications,
 	type Notification,
-} from '../helpers/notifications'
-import { getSettings } from '../helpers/settings'
+} from '../utils/notifications'
+import { getSettings } from '../utils/settings'
 
 // Maps notification ID to the relative link so the click handler can open the right page
 export const notificationLinks = new Map<string, string>()

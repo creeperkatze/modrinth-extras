@@ -1,6 +1,6 @@
 import type { Labrinth } from '@modrinth/api-client'
 
-import { modrinthClient } from '../helpers/api'
+import { modrinthClient } from './api'
 
 export interface RawDep {
 	project_id: string
