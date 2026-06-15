@@ -123,7 +123,7 @@ function findDownloadUrl(request: DownloadRequest): string | null {
 		.map((id) => versions.get(id))
 		.filter((version): version is Labrinth.Versions.v3.Version => {
 			if (!version) return false
-			if (preferredLoader && !version.loaders.includes(preferredLoader)) return false
+			if (!matchesPreferredLoader(version, request.projectType, preferredLoader)) return false
 			if (
 				request.settings.gameVersion &&
 				!version.game_versions.includes(request.settings.gameVersion)
@@ -137,6 +137,39 @@ function findDownloadUrl(request: DownloadRequest): string | null {
 	const file =
 		matchingVersions[0]?.files.find((item) => item.primary) ?? matchingVersions[0]?.files[0]
 	return file?.url ?? null
+}
+
+function matchesPreferredLoader(
+	version: Labrinth.Versions.v3.Version,
+	projectType: string,
+	preferredLoader: string,
+): boolean {
+	if (!preferredLoader) return true
+	const loaders = getVersionLoaders(version, projectType)
+
+	if (
+		projectType === 'modpack' &&
+		(loaders.length === 0 || loaders.every((loader) => loader === 'mrpack'))
+	) {
+		return true
+	}
+
+	return loaders.includes(preferredLoader)
+}
+
+function getVersionLoaders(version: Labrinth.Versions.v3.Version, projectType: string): string[] {
+	const loaders = Array.isArray(version.loaders) ? version.loaders : []
+
+	if (projectType !== 'modpack') {
+		return loaders
+	}
+
+	const mrpackLoaders = 'mrpack_loaders' in version ? version.mrpack_loaders : undefined
+	if (Array.isArray(mrpackLoaders) && mrpackLoaders.length > 0) {
+		return mrpackLoaders
+	}
+
+	return loaders.filter((loader) => loader !== 'mrpack')
 }
 
 function chunkIdsForQuery(ids: string[]): string[][] {
