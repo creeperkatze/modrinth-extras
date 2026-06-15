@@ -1,16 +1,23 @@
-import type { Labrinth } from '@modrinth/api-client'
+import { type Labrinth, ModrinthApiError } from '@modrinth/api-client'
 
 import { modrinthClient } from '../helpers/api'
 import { getSettings } from '../helpers/settings'
 
-async function apiGet<T>(request: () => Promise<T>, description: string): Promise<T | null> {
+async function getProjectBySlug(slug: string): Promise<Labrinth.Projects.v3.Project | null> {
 	try {
-		return await request()
+		return await modrinthClient.labrinth.projects_v3.get(slug)
 	} catch (err) {
-		console.error(
-			`[Modrinth Extras] CurseForge redirect: API request failed for "${description}":`,
-			err,
-		)
+		if (err instanceof ModrinthApiError && err.statusCode === 404) return null
+		console.error(`[Modrinth Extras] CurseForge redirect: Failed to fetch project "${slug}":`, err)
+		return null
+	}
+}
+
+async function searchProjects(title: string): Promise<Labrinth.Projects.v2.SearchResult | null> {
+	try {
+		return await modrinthClient.labrinth.projects_v2.search({ query: title, limit: 5 })
+	} catch (err) {
+		console.error(`[Modrinth Extras] CurseForge redirect: Failed to search for "${title}":`, err)
 		return null
 	}
 }
@@ -27,7 +34,7 @@ function roughlyMatches(a: string, b: string): boolean {
 }
 
 function getCurseForgeAuthor(): string {
-	// Try JSON-LD structured data first
+	// Prefer structured metadata before falling back to CurseForge's rendered markup
 	for (const script of document.querySelectorAll<HTMLScriptElement>(
 		'script[type="application/ld+json"]',
 	)) {
@@ -37,11 +44,10 @@ function getCurseForgeAuthor(): string {
 			if (Array.isArray(data.author) && typeof data.author[0]?.name === 'string')
 				return data.author[0].name
 		} catch {
-			// continue
+			continue
 		}
 	}
 
-	// Fallback, try common DOM selectors for CurseForge author
 	const selectors = [
 		'a.author-name',
 		'.author-name',
@@ -84,7 +90,6 @@ function waitForTitleChange(oldTitle: string): Promise<void> {
 }
 
 async function tryRedirect(waitForDom = false): Promise<void> {
-	// Capture title immediately so we can detect when SPA has rendered the new page
 	const titleAtNavigation = document.title
 
 	const settings = await getSettings()
@@ -98,48 +103,39 @@ async function tryRedirect(waitForDom = false): Promise<void> {
 	if (!match) return
 
 	const slug = match[1]
-	console.log(`[Modrinth Extras] CurseForge redirect: trying slug "${slug}"`)
+	console.log(`[Modrinth Extras] CurseForge redirect: Trying slug "${slug}"`)
 
-	// Try the CurseForge slug directly on Modrinth (no DOM needed)
-	const direct = await apiGet(
-		() => modrinthClient.labrinth.projects_v3.get(slug),
-		`project/${slug}`,
-	)
+	const direct = await getProjectBySlug(slug)
 	if (direct) {
 		const projectType = direct.project_types[0]
 		if (!projectType || !direct.slug) return
 		console.log(
-			`[Modrinth Extras] CurseForge redirect: direct slug match, redirecting to ${projectType}/${direct.slug}`,
+			`[Modrinth Extras] CurseForge redirect: Direct slug match, redirecting to ${projectType}/${direct.slug}`,
 		)
 		window.location.href = `https://modrinth.com/${projectType}/${direct.slug}`
 		return
 	}
 
-	console.log('[Modrinth Extras] CurseForge redirect: no direct slug match, falling back to search')
+	console.log('[Modrinth Extras] CurseForge redirect: No direct slug match, falling back to search')
 
-	// For SPA navigation, wait for React to render the new page before reading the DOM
+	// Wait for CurseForge's SPA navigation to finish before reading the new page metadata
 	if (waitForDom) {
 		await waitForTitleChange(titleAtNavigation)
 	}
 
-	// Search by project title, verify author to avoid false redirects
 	const title = getCurseForgeTitle()
 	const cfAuthor = getCurseForgeAuthor()
 
-	// Skip if we cant verify the author
 	if (!cfAuthor) {
 		console.log(
-			'[Modrinth Extras] CurseForge redirect: could not determine author, aborting to avoid false redirect',
+			'[Modrinth Extras] CurseForge redirect: Could not determine author, aborting to avoid false redirect',
 		)
 		return
 	}
 
-	const searchResult = await apiGet<Labrinth.Projects.v2.SearchResult>(
-		() => modrinthClient.labrinth.projects_v2.search({ query: title, limit: 5 }),
-		`search?query=${encodeURIComponent(title)}&limit=5`,
-	)
+	const searchResult = await searchProjects(title)
 	if (!searchResult?.hits?.length) {
-		console.log(`[Modrinth Extras] CurseForge redirect: no search results for "${title}"`)
+		console.log(`[Modrinth Extras] CurseForge redirect: No search results for "${title}"`)
 		return
 	}
 
@@ -149,14 +145,14 @@ async function tryRedirect(waitForDom = false): Promise<void> {
 	for (const hit of searchResult.hits) {
 		if (roughlyMatches(cfAuthor, hit.author)) {
 			console.log(
-				`[Modrinth Extras] CurseForge redirect: author match CF "${cfAuthor}" ~ Modrinth "${hit.author}", redirecting to ${hit.project_type}/${hit.slug}`,
+				`[Modrinth Extras] CurseForge redirect: Author match for CurseForge author "${cfAuthor}": "${hit.author}", redirecting to ${hit.project_type}/${hit.slug}`,
 			)
 			window.location.href = `https://modrinth.com/${hit.project_type}/${hit.slug}`
 			return
 		}
 	}
 
-	console.log('[Modrinth Extras] CurseForge redirect: no author match found, not redirecting')
+	console.log('[Modrinth Extras] CurseForge redirect: No author match found, not redirecting')
 }
 
 export default defineContentScript({
@@ -166,7 +162,6 @@ export default defineContentScript({
 	main() {
 		console.log('[Modrinth Extras] CurseForge redirect: content script loaded')
 
-		// The curseforge bridge patches dispatches this event on navigation
 		window.addEventListener('modrinth-extras:cf-navigated', () => {
 			console.log(
 				`[Modrinth Extras] CurseForge redirect: SPA navigation detected to ${window.location.pathname}`,
@@ -174,7 +169,6 @@ export default defineContentScript({
 			tryRedirect(true)
 		})
 
-		// Initial page load
 		tryRedirect()
 	},
 })
