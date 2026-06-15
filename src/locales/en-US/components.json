@@ -102,7 +102,7 @@
     "defaultMessage": "Download"
   },
   "projectCardActions.downloadUnavailable": {
-    "defaultMessage": "{loader, select, none {No version is available for {version}} other {No version is available for {loader} {version}}}"
+    "defaultMessage": "{loader, select, none {No version available for {version}} other {No version available for {loader} {version}}}"
   },
   "projectCardActions.follow": {
     "defaultMessage": "Follow"

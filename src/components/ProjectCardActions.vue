@@ -167,7 +167,7 @@ const messages = defineMessages({
 	'projectCardActions.downloadUnavailable': {
 		id: 'projectCardActions.downloadUnavailable',
 		defaultMessage:
-			'{loader, select, none {No version is available for {version}} other {No version is available for {loader} {version}}}',
+			'{loader, select, none {No version available for {version}} other {No version available for {loader} {version}}}',
 	},
 })
 
