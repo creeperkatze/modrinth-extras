@@ -7,7 +7,6 @@ import { browser } from 'wxt/browser'
 import NotificationsIndicator from '../components/header/NotificationsIndicator.vue'
 import QuickSearch from '../components/header/QuickSearch.vue'
 import ActivitySparkline from '../components/project/ActivitySparkline.vue'
-import AnalyticsExport from '../components/project/AnalyticsExport.vue'
 import GalleryBackground from '../components/project/GalleryBackground.vue'
 import ProjectCardActions from '../components/project/ProjectCardActions.vue'
 import DependenciesSidebar from '../components/sidebar/dependencies/DependenciesSidebar.vue'
@@ -490,31 +489,6 @@ export default defineContentScript({
 			},
 		})
 
-		const analyticsExport = createDynamicInjection({
-			settingsKeys: ['analyticsExport'],
-			persistent: false,
-			isEnabled: () => settings.analyticsExport.enabled,
-			targets: '.chart-controls__buttons',
-			attach(target: HTMLElement): HTMLElement | null {
-				// Insert before all Modrinth buttons, leftmost position
-				const container = document.createElement('div')
-				container.style.cssText = 'display:contents'
-				const firstChild = target.firstElementChild
-				if (firstChild) {
-					target.insertBefore(container, firstChild)
-				} else {
-					target.appendChild(container)
-				}
-				return container
-			},
-			createApp(target: HTMLElement) {
-				const app = createApp(h(AnalyticsExport, { buttonsContainer: target }))
-				app.use(FloatingVue)
-				installI18n(app)
-				return app
-			},
-		})
-
 		const projectCardActions = createDynamicInjection({
 			settingsKeys: ['projectCardActions'],
 			persistent: false,
@@ -552,7 +526,6 @@ export default defineContentScript({
 			errorNotice,
 			footerBadge,
 			quickSearch,
-			analyticsExport,
 			projectCardActions,
 		]
 

@@ -1,7 +1,4 @@
 {
-  "analyticsExport.tooltip": {
-    "defaultMessage": "Export as image"
-  },
   "dependenciesSidebar.loadError": {
     "defaultMessage": "Failed to load dependencies"
   },
