@@ -187,9 +187,9 @@ onMounted(async () => {
 	if (!projectSlug.value) return
 	downloadLoading.value = true
 	try {
-		const versions = await modrinthClient.labrinth.versions_v2.getProjectVersions(
+		const versions = await modrinthClient.labrinth.versions_v3.getProjectVersions(
 			projectSlug.value,
-			{ limit: 1, include_changelog: false },
+			{ limit: 1, include_changelog: false, apiVersion: 3 },
 		)
 		const primaryFile = versions?.[0]?.files?.find((f) => f.primary) ?? versions?.[0]?.files?.[0]
 		downloadUrl.value = primaryFile?.url ?? null

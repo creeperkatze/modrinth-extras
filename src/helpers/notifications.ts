@@ -1,50 +1,19 @@
-import type { Organization, Project, Report, User, Version } from '@modrinth/utils'
+import type { Labrinth } from '@modrinth/api-client'
 import { browser } from 'wxt/browser'
 
 import { modrinthClient } from './api'
 
-export type NotificationAction = {
-	title: string
-	action_route: [string, string]
-}
-
-export type NotificationBody = {
-	type?: string
-	project_id?: string
-	version_id?: string
-	report_id?: string
-	thread_id?: string
-	invited_by?: string
-	organization_id?: string
-	team_id?: string
-}
-
 export type NotificationExtraData = {
-	project?: Project
-	organization?: Organization
-	user?: User
-	report?: Report
-	version?: Version
-	thread?: { id: string }
-	invited_by?: User
+	project?: Labrinth.Projects.v3.Project
+	organization?: Labrinth.Organizations.v3.Organization
+	user?: Labrinth.Users.v2.User
+	report?: Labrinth.Reports.v3.Report
+	version?: Labrinth.Versions.v3.Version
+	thread?: Labrinth.Threads.v3.Thread
+	invited_by?: Labrinth.Users.v2.User
 }
 
-export type Notification = {
-	id: string
-	user_id: string
-	type:
-		| 'project_update'
-		| 'team_invite'
-		| 'organization_invite'
-		| 'status_change'
-		| 'moderator_message'
-	title: string
-	text: string
-	link: string
-	read: boolean
-	created: string
-	actions: NotificationAction[]
-	body?: NotificationBody
+export type Notification = Labrinth.Notifications.v2.Notification & {
 	extra_data?: NotificationExtraData
 	grouped_notifs?: Notification[]
 }
@@ -72,29 +41,18 @@ export function groupNotifications(notifications: Notification[]): Notification[
 	return result
 }
 
-async function getBulk<T extends { id: string }>(
-	type: string,
-	ids: string[],
-	apiVersion = 2,
-): Promise<T[]> {
-	if (!ids || ids.length === 0) return []
+async function getBulk<T>(ids: string[], get: (uniqueIds: string[]) => Promise<T[]>): Promise<T[]> {
+	const uniqueIds = [...new Set(ids)]
+	if (uniqueIds.length === 0) return []
 	try {
-		const res = await modrinthClient.request<T[]>(`/${type}`, {
-			api: 'labrinth',
-			version: apiVersion,
-			params: { ids: JSON.stringify([...new Set(ids)]) },
-		})
-		return Array.isArray(res) ? res : []
+		return await get(uniqueIds)
 	} catch {
 		return []
 	}
 }
 
 export async function fetchNotifications(userId: string): Promise<Notification[]> {
-	return modrinthClient.request<Notification[]>(`/user/${userId}/notifications`, {
-		api: 'labrinth',
-		version: 2,
-	})
+	return modrinthClient.labrinth.notifications_v2.getUserNotifications(userId)
 }
 
 export async function fetchExtraNotificationData(
@@ -121,7 +79,9 @@ export async function fetchExtraNotificationData(
 		}
 	}
 
-	const reports = (await getBulk<Report>('reports', bulk.reports)).filter(Boolean)
+	const reports = await getBulk(bulk.reports, (ids) =>
+		modrinthClient.labrinth.reports_v3.getMultiple(ids),
+	)
 	for (const r of reports) {
 		if (!r?.item_type) continue
 		if (r.item_type === 'project') bulk.projects.push(r.item_id)
@@ -129,14 +89,16 @@ export async function fetchExtraNotificationData(
 		else if (r.item_type === 'version') bulk.versions.push(r.item_id)
 	}
 
-	const versions = (await getBulk<Version>('versions', bulk.versions)).filter(Boolean)
+	const versions = await getBulk(bulk.versions, (ids) =>
+		modrinthClient.labrinth.versions_v3.getVersions(ids),
+	)
 	for (const v of versions) bulk.projects.push(v.project_id)
 
 	const [projects, threads, users, organizations] = await Promise.all([
-		getBulk<Project>('projects', bulk.projects),
-		getBulk<{ id: string }>('threads', bulk.threads),
-		getBulk<User>('users', bulk.users),
-		getBulk<Organization>('organizations', bulk.organizations, 3),
+		getBulk(bulk.projects, (ids) => modrinthClient.labrinth.projects_v3.getMultiple(ids)),
+		getBulk(bulk.threads, (ids) => modrinthClient.labrinth.threads_v3.getMultiple(ids)),
+		getBulk(bulk.users, (ids) => modrinthClient.labrinth.users_v2.getMultiple(ids)),
+		getBulk(bulk.organizations, (ids) => modrinthClient.labrinth.organizations_v3.getMultiple(ids)),
 	])
 
 	for (const n of notifications) {
@@ -173,12 +135,7 @@ export async function markNotificationsAsRead(ids: string[]): Promise<void> {
 	const BATCH_SIZE = 50
 	for (let i = 0; i < unique.length; i += BATCH_SIZE) {
 		const batch = unique.slice(i, i + BATCH_SIZE)
-		await modrinthClient.request('/notifications', {
-			api: 'labrinth',
-			version: 2,
-			method: 'PATCH',
-			params: { ids: JSON.stringify(batch) },
-		})
+		await modrinthClient.labrinth.notifications_v2.markMultipleAsRead(batch)
 	}
 }
 

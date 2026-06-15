@@ -137,9 +137,9 @@ onMounted(async () => {
 		const now = Date.now()
 		const cutoff = now - DAYS * 24 * 60 * 60 * 1000
 
-		const versions = await modrinthClient.labrinth.versions_v2.getProjectVersions(
+		const versions = await modrinthClient.labrinth.versions_v3.getProjectVersions(
 			props.projectSlug,
-			{ limit: 100, include_changelog: false },
+			{ limit: 100, include_changelog: false, apiVersion: 3 },
 		)
 		if (!Array.isArray(versions)) return
 

@@ -100,6 +100,7 @@
 </template>
 
 <script setup lang="ts">
+import type { Labrinth } from '@modrinth/api-client'
 import {
 	BookmarkIcon,
 	CheckIcon,
@@ -120,12 +121,7 @@ import {
 import { computed, onMounted, ref, watch } from 'vue'
 
 import { getAuthToken, modrinthClient } from '../helpers/api'
-import {
-	type Collection,
-	collections,
-	initCollections,
-	toggleProjectInCollection,
-} from '../helpers/collectionState'
+import { collections, initCollections, toggleProjectInCollection } from '../helpers/collectionState'
 import { followedSlugs } from '../helpers/followState'
 import { navigate } from '../helpers/page-router'
 import { getQuickDownload, type QuickDownloadSettings } from '../helpers/projectCardState'
@@ -317,7 +313,7 @@ async function handleFollow() {
 	}
 }
 
-async function handleToggleCollection(col: Collection) {
+async function handleToggleCollection(col: Labrinth.Collections.Collection) {
 	if (!projectId.value) return
 	try {
 		await toggleProjectInCollection(col, projectId.value)

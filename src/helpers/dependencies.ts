@@ -37,7 +37,7 @@ async function enrichDeps(rawDeps: RawDep[]): Promise<EnrichedDep[]> {
 	}))
 }
 
-function normalizeDeps(dependencies: Labrinth.Versions.v2.Dependency[]): RawDep[] {
+function normalizeDeps(dependencies: Labrinth.Versions.v3.Dependency[]): RawDep[] {
 	return dependencies.flatMap((dependency) =>
 		'project_id' in dependency && dependency.project_id
 			? [
@@ -52,11 +52,12 @@ function normalizeDeps(dependencies: Labrinth.Versions.v2.Dependency[]): RawDep[
 }
 
 export async function fetchProjectDependencies(slugOrId: string): Promise<EnrichedDep[]> {
-	let versions: Labrinth.Versions.v2.Version[]
+	let versions: Labrinth.Versions.v3.Version[]
 	try {
-		versions = await modrinthClient.labrinth.versions_v2.getProjectVersions(slugOrId, {
+		versions = await modrinthClient.labrinth.versions_v3.getProjectVersions(slugOrId, {
 			limit: 1,
 			include_changelog: false,
+			apiVersion: 3,
 		})
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to fetch project versions for dependencies:', err)
@@ -71,9 +72,9 @@ export async function fetchVersionDependencies(
 	projectSlug: string,
 	versionNumber: string,
 ): Promise<EnrichedDep[]> {
-	let version: Labrinth.Versions.v2.Version
+	let version: Labrinth.Versions.v3.Version
 	try {
-		version = await modrinthClient.labrinth.versions_v2.getVersionFromIdOrNumber(
+		version = await modrinthClient.labrinth.versions_v3.getVersionFromIdOrNumber(
 			projectSlug,
 			versionNumber,
 		)

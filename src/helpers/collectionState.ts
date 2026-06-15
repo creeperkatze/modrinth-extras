@@ -3,9 +3,7 @@ import { ref } from 'vue'
 
 import { modrinthClient } from './api'
 
-export type Collection = Labrinth.Collections.Collection
-
-export const collections = ref<Collection[] | null>(null)
+export const collections = ref<Labrinth.Collections.Collection[] | null>(null)
 
 let initPromise: Promise<void> | null = null
 
@@ -33,7 +31,7 @@ export async function initCollections(): Promise<void> {
 }
 
 export async function toggleProjectInCollection(
-	collection: Collection,
+	collection: Labrinth.Collections.Collection,
 	projectId: string,
 ): Promise<void> {
 	const has = collection.projects.includes(projectId)

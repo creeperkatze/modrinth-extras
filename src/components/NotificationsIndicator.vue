@@ -250,7 +250,6 @@ import {
 	groupNotifications,
 	markNotificationsAsRead,
 	type Notification,
-	type NotificationBody,
 	type NotificationExtraData,
 	syncToBackground,
 } from '../helpers/notifications'
@@ -419,7 +418,7 @@ async function handleAcceptInvite(notif: Notification) {
 			if (n) n.read = true
 		}
 		syncBadgeCount()
-		await acceptTeamInvite((notif.body as NotificationBody).team_id as string)
+		await acceptTeamInvite(notif.body.team_id as string)
 		markNotificationsAsRead([notif.id]).catch((err) =>
 			console.warn('[Modrinth Extras] Error marking as read:', err),
 		)
@@ -435,10 +434,7 @@ async function handleDeclineInvite(notif: Notification) {
 			if (n) n.read = true
 		}
 		syncBadgeCount()
-		await removeSelfFromTeam(
-			(notif.body as NotificationBody).team_id as string,
-			userId.value as string,
-		)
+		await removeSelfFromTeam(notif.body.team_id as string, userId.value as string)
 		markNotificationsAsRead([notif.id]).catch((err) =>
 			console.warn('[Modrinth Extras] Error marking as read:', err),
 		)
