@@ -1,4 +1,5 @@
 import { createRequire } from 'node:module'
+import { fileURLToPath } from 'node:url'
 
 import svgLoader from 'vite-svg-loader'
 import { defineConfig } from 'wxt'
@@ -65,7 +66,7 @@ export default defineConfig({
 		] as any,
 		resolve: {
 			alias: {
-				'@stripe/stripe-js': './src/mocks/stripe-js.ts',
+				'@stripe/stripe-js': fileURLToPath(new URL('./src/mocks/stripe-js.ts', import.meta.url)),
 			},
 		},
 		css: {
@@ -78,9 +79,13 @@ export default defineConfig({
 		build: {
 			chunkSizeWarningLimit: 2000,
 			rolldownOptions: {
+				checks: {
+					pluginTimings: false,
+				},
 				external: (id: string) => id.startsWith('@xterm/'),
 				onwarn(warning, warn) {
 					if (warning.code === 'EMPTY_IMPORT_META') return
+					if (warning.code === 'EVAL' && warning.id?.includes('ace-builds')) return
 					warn(warning)
 				},
 			},
