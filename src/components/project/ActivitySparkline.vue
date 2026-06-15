@@ -64,7 +64,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
-import { modrinthClient } from '../helpers/api'
+import { modrinthClient } from '../../helpers/api'
 
 const props = defineProps<{ projectSlug: string }>()
 

@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import ExtLogo from '../public/icon.svg'
+import ExtLogo from '../../public/icon.svg'
 
 const version = browser.runtime.getManifest().version
 </script>

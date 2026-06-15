@@ -66,7 +66,7 @@ import {
 	type EnrichedDep,
 	fetchProjectDependencies,
 	fetchVersionDependencies,
-} from '../helpers/dependencies'
+} from '../../../helpers/dependencies'
 import DependencyExplorer from './DependencyExplorer.vue'
 import DependencyNode from './DependencyNode.vue'
 

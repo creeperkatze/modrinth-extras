@@ -272,13 +272,13 @@ import type { ForceLink, Simulation, SimulationLinkDatum } from 'd3-force'
 import { forceCenter, forceCollide, forceLink, forceManyBody, forceSimulation } from 'd3-force'
 import { computed, markRaw, nextTick, onUnmounted, ref, useTemplateRef } from 'vue'
 
-import { modrinthClient } from '../helpers/api'
+import { modrinthClient } from '../../../helpers/api'
 import {
 	type EnrichedDep,
 	fetchProjectDependencies,
 	fetchVersionDependencies,
-} from '../helpers/dependencies'
-import { navigate } from '../helpers/page-router'
+} from '../../../helpers/dependencies'
+import { navigate } from '../../../helpers/page-router'
 
 interface GraphNode {
 	id: string
