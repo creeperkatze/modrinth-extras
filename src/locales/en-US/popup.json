@@ -98,6 +98,15 @@
   "feature.toolsSidebar.title": {
     "defaultMessage": "Tools sidebar"
   },
+  "popup.donatePrompt.dismiss": {
+    "defaultMessage": "Dismiss"
+  },
+  "popup.donatePrompt.message": {
+    "defaultMessage": "Modrinth Extras will always be free, open source, and ad-free. If you find it useful, consider supporting its development with a small donation."
+  },
+  "popup.donatePrompt.title": {
+    "defaultMessage": "Support the extension"
+  },
   "popup.footer.checking": {
     "defaultMessage": "Checking"
   },
