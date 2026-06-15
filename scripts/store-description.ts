@@ -40,7 +40,7 @@ function t(messages: Messages, key: string): string {
 	return messages[key] ?? ''
 }
 
-const generalFeatures = ['notifications', 'quickSearch', 'projectCardActions', 'analyticsExport']
+const generalFeatures = ['notifications', 'quickSearch', 'projectCardActions']
 const contentFeatures = [
 	'activitySparkline',
 	'toolsSidebar',

@@ -56,10 +56,6 @@ Download, follow, and save projects right from their project cards.
 
 <img src=".github/assets/screenshots/project-card-actions.png" width="100%">
 
-### Analytics export
-
-Adds a button to download analytics charts as PNG images.
-
 ### Activity sparkline
 
 Release activity chart on project pages.
