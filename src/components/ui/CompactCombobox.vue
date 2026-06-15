@@ -10,6 +10,8 @@
 		:show-search-icon="showSearchIcon"
 		:select-search-text-on-focus="selectSearchTextOnFocus"
 		:max-height="maxHeight"
+		trigger-class="compact-combobox-trigger"
+		dropdown-class="compact-combobox-dropdown"
 		@update:model-value="$emit('update:modelValue', $event)"
 	/>
 </template>
@@ -61,18 +63,31 @@ const compactOptions = computed<CompactComboboxEntry[]>(() =>
 </script>
 
 <style lang="scss">
-.compact-combobox > span[role='button'] {
+.compact-combobox-trigger {
 	min-height: 2rem;
 	padding: 0.375rem 0.75rem;
+	gap: 0.5rem;
+}
+
+.compact-combobox-trigger > div,
+.compact-combobox-trigger > div > div {
+	gap: 0.5rem;
+}
+
+.compact-combobox-trigger span,
+.compact-combobox input,
+.compact-combobox-dropdown .compact-combobox-option {
 	font-size: var(--font-size-sm);
 }
 
 .compact-combobox input {
 	height: 2rem;
-	font-size: var(--font-size-sm);
+	padding-top: 0.375rem;
+	padding-bottom: 0.375rem;
 }
 
-.compact-combobox svg.size-5 {
+.compact-combobox svg.size-5,
+.compact-combobox-dropdown .compact-combobox-option svg {
 	width: 1rem;
 	height: 1rem;
 }
@@ -93,19 +108,14 @@ const compactOptions = computed<CompactComboboxEntry[]>(() =>
 	transform: translateY(-50%) rotate(-90deg) !important;
 }
 
-#teleports [role='listbox']:has(.compact-combobox-option) > div {
-	gap: 0.25rem;
-	padding: 0.5rem;
-}
-
-#teleports .compact-combobox-option {
+.compact-combobox-dropdown .compact-combobox-option {
 	gap: 0.5rem;
 	padding: 0.5rem 0.75rem;
-	font-size: var(--font-size-sm);
 }
 
-#teleports .compact-combobox-option svg {
-	width: 1rem;
-	height: 1rem;
+.compact-combobox-dropdown .compact-combobox-option > div,
+.compact-combobox-dropdown .compact-combobox-option > div > div,
+.compact-combobox-dropdown .compact-combobox-option > div > div > div {
+	gap: 0.5rem;
 }
 </style>
