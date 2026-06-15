@@ -101,6 +101,9 @@
   "popup.footer.checking": {
     "defaultMessage": "Перевірка"
   },
+  "popup.footer.donate": {
+    "defaultMessage": "Підтримка"
+  },
   "popup.footer.latestVersion": {
     "defaultMessage": "Остання версія"
   },

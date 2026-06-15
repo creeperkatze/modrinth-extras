@@ -119,6 +119,9 @@
   "projectCardActions.unfollow": {
     "defaultMessage": "Відписатися"
   },
+  "quickSearch.clearRecent": {
+    "defaultMessage": "Очистити останнє"
+  },
   "quickSearch.examples": {
     "defaultMessage": "Приклади"
   },

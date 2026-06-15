@@ -89,6 +89,9 @@
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "Verlauf anzeigen"
   },
+  "projectCardActions.checkingDownload": {
+    "defaultMessage": "Überprüfe auf verfügbare Version..."
+  },
   "projectCardActions.copied": {
     "defaultMessage": "Kopiert!"
   },
@@ -97,6 +100,9 @@
   },
   "projectCardActions.download": {
     "defaultMessage": "Herunterladen"
+  },
+  "projectCardActions.downloadUnavailable": {
+    "defaultMessage": "{loader, select, none {Keine Version verfügbar für {version}} other {Keine Version verfügbar für {loader} {version}}}"
   },
   "projectCardActions.follow": {
     "defaultMessage": "Folgen"
