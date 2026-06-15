@@ -1,7 +1,4 @@
 {
-  "analyticsExport.tooltip": {
-    "defaultMessage": "이미지로 내보내기"
-  },
   "dependenciesSidebar.loadError": {
     "defaultMessage": "의존 요소를 불러오는 데 실패했습니다"
   },

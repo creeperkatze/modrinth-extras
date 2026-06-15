@@ -5,12 +5,6 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "Graphique d'activité"
   },
-  "feature.analyticsExport.description": {
-    "defaultMessage": "Ajoute un bouton permettant de télécharger les graphiques d'analyse au format PNG."
-  },
-  "feature.analyticsExport.title": {
-    "defaultMessage": "Exportation des données analytiques"
-  },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "Redirige les pages des projets CurseForge vers Modrinth lorsqu'elles sont disponibles."
   },

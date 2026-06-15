@@ -1,7 +1,4 @@
 {
-  "analyticsExport.tooltip": {
-    "defaultMessage": "Resim olarak dışa aktar"
-  },
   "dependenciesSidebar.loadError": {
     "defaultMessage": "Bağımlılıklar yüklenemedi"
   },

@@ -1,7 +1,4 @@
 {
-  "analyticsExport.tooltip": {
-    "defaultMessage": "Експортувати як зображення"
-  },
   "dependenciesSidebar.loadError": {
     "defaultMessage": "Не вдалося завантажити залежності"
   },
