@@ -2,6 +2,7 @@ import { browser } from 'wxt/browser'
 
 import { applyNotifications, setBadge, showCachedBadge, updateBadge } from '../background/badge'
 import { handleNotificationClick } from '../background/desktop-notifications'
+import { detectBrowserLocale } from '../utils/i18n'
 import type { Notification } from '../utils/notifications'
 import { getSettings } from '../utils/settings'
 import { capture, initTelemetry } from '../utils/telemetry'
@@ -10,10 +11,14 @@ const ALARM_NAME = 'modrinth-extras-poll'
 const POLL_INTERVAL_MINUTES = 5
 
 export default defineBackground(() => {
-	void initTelemetry()
-	void getSettings().then((settings) => {
-		capture('extension_started', { ...settings })
-	})
+	void (async () => {
+		await initTelemetry()
+		const settings = await getSettings()
+		capture('extension_started', {
+			...settings,
+			locale: settings.locale.value || detectBrowserLocale(),
+		})
+	})()
 
 	browser.storage.onChanged.addListener((changes, area) => {
 		if (area !== 'local' || !('settings' in changes)) return
