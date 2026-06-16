@@ -177,13 +177,13 @@ New translations are automatically pulled every Monday.
 | Language | Translators |
 |----------|------------|
 | Italian | [EmanuelPlaysDev](https://github.com/EmanuelPlays) |
-| French | [maDU59_](https://github.com/maDU59) |
+| French | [maDU59_](https://github.com/maDU59), [Sertra](https://crowdin.com/profile/sertrafurr) |
 | Chinese Simplified | [xinyihl](https://crowdin.com/profile/xinyihl) |
 | Korean | [젠고](https://crowdin.com/profile/minejango2) |
 | Vietnamese | [Lê](https://crowdin.com/profile/suri-cutie) |
 | Russian | [vanapro1](https://crowdin.com/profile/vanapro1) |
 | Ukrainian | [Tenwoc](https://crowdin.com/profile/tenwoc) |
-| Turkish | [penfflewithadot](https://crowdin.com/profile/penfflewithadot) |
+| Turkish | [penfflewithadot](https://crowdin.com/profile/penfflewithadot), [ErenTr4210](https://crowdin.com/profile/erentr4210) |
 
 ## 🤝 Contributing
 
