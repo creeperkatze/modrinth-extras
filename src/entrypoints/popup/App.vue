@@ -627,11 +627,11 @@ const firefoxControlsTelemetry = ref(false)
 const settings = reactive({ ...DEFAULTS })
 const settingsLoaded = ref(false)
 
-const DONATE_OPEN_THRESHOLD = 10
 const DONATE_PROMPT_KEY = 'donatePrompt'
+const DONATE_PROMPT_DELAY_MS = 5 * 7 * 24 * 60 * 60 * 1000 // 5 days
 
 interface DonatePromptState {
-	opens: number
+	installedAt: number
 	dismissed: boolean
 }
 
@@ -639,29 +639,29 @@ const donateVisible = ref(false)
 
 async function conditionallyShowDonate(): Promise<void> {
 	const stored = await browser.storage.local.get(DONATE_PROMPT_KEY)
-	const state = (stored[DONATE_PROMPT_KEY] as DonatePromptState | undefined) ?? {
-		opens: 0,
-		dismissed: false,
+	const existing = stored[DONATE_PROMPT_KEY] as DonatePromptState | undefined
+	if (existing?.dismissed) return
+
+	const state: DonatePromptState = existing ?? { installedAt: Date.now(), dismissed: false }
+	if (!existing) {
+		await browser.storage.local.set({ [DONATE_PROMPT_KEY]: state })
 	}
-	if (state.dismissed) return
 
-	const opens = state.opens + 1
-	await browser.storage.local.set({
-		[DONATE_PROMPT_KEY]: { opens, dismissed: false } satisfies DonatePromptState,
-	})
-
-	if (opens >= DONATE_OPEN_THRESHOLD) donateVisible.value = true
+	if (Date.now() - state.installedAt >= DONATE_PROMPT_DELAY_MS) donateVisible.value = true
 }
 
 async function dismissDonate(): Promise<void> {
 	donateVisible.value = false
 	const stored = await browser.storage.local.get(DONATE_PROMPT_KEY)
 	const state = (stored[DONATE_PROMPT_KEY] as DonatePromptState | undefined) ?? {
-		opens: 0,
+		installedAt: Date.now(),
 		dismissed: false,
 	}
 	await browser.storage.local.set({
-		[DONATE_PROMPT_KEY]: { opens: state.opens, dismissed: true } satisfies DonatePromptState,
+		[DONATE_PROMPT_KEY]: {
+			installedAt: state.installedAt,
+			dismissed: true,
+		} satisfies DonatePromptState,
 	})
 }
 
