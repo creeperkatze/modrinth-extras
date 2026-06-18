@@ -628,7 +628,7 @@ const settings = reactive({ ...DEFAULTS })
 const settingsLoaded = ref(false)
 
 const DONATE_PROMPT_KEY = 'donatePrompt'
-const DONATE_PROMPT_DELAY_MS = 5 * 7 * 24 * 60 * 60 * 1000 // 5 days
+const DONATE_PROMPT_DELAY_MS = 5 * 24 * 60 * 60 * 1000 // 5 days
 
 interface DonatePromptState {
 	installedAt: number
