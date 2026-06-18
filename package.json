@@ -26,6 +26,7 @@
         "@modrinth/assets": "workspace:*",
         "@modrinth/ui": "workspace:*",
         "@modrinth/utils": "workspace:*",
+        "@wxt-dev/storage": "^1.2.8",
         "d3-force": "^3.0.0",
         "floating-vue": "^5.2.2",
         "posthog-js": "^1.386.6",

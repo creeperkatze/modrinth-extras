@@ -237,6 +237,7 @@ import {
 	ScrollablePanel,
 	useVIntl,
 } from '@modrinth/ui'
+import { storage } from '@wxt-dev/storage'
 import { type Component, computed, onMounted, reactive, ref } from 'vue'
 import { browser } from 'wxt/browser'
 
@@ -627,7 +628,6 @@ const firefoxControlsTelemetry = ref(false)
 const settings = reactive({ ...DEFAULTS })
 const settingsLoaded = ref(false)
 
-const DONATE_PROMPT_KEY = 'donatePrompt'
 const DONATE_PROMPT_DELAY_MS = 5 * 24 * 60 * 60 * 1000 // 5 days
 
 interface DonatePromptState {
@@ -635,33 +635,26 @@ interface DonatePromptState {
 	dismissed: boolean
 }
 
+const donatePromptItem = storage.defineItem<DonatePromptState>('local:donatePrompt')
+
 const donateVisible = ref(false)
 
 async function conditionallyShowDonate(): Promise<void> {
-	const stored = await browser.storage.local.get(DONATE_PROMPT_KEY)
-	const existing = stored[DONATE_PROMPT_KEY] as DonatePromptState | undefined
+	const existing = await donatePromptItem.getValue()
 	if (existing?.dismissed) return
 
-	const state: DonatePromptState = existing ?? { installedAt: Date.now(), dismissed: false }
-	if (!existing) {
-		await browser.storage.local.set({ [DONATE_PROMPT_KEY]: state })
-	}
+	const state = existing ?? { installedAt: Date.now(), dismissed: false }
+	if (!existing) await donatePromptItem.setValue(state)
 
 	if (Date.now() - state.installedAt >= DONATE_PROMPT_DELAY_MS) donateVisible.value = true
 }
 
 async function dismissDonate(): Promise<void> {
 	donateVisible.value = false
-	const stored = await browser.storage.local.get(DONATE_PROMPT_KEY)
-	const state = (stored[DONATE_PROMPT_KEY] as DonatePromptState | undefined) ?? {
-		installedAt: Date.now(),
-		dismissed: false,
-	}
-	await browser.storage.local.set({
-		[DONATE_PROMPT_KEY]: {
-			installedAt: state.installedAt,
-			dismissed: true,
-		} satisfies DonatePromptState,
+	const existing = await donatePromptItem.getValue()
+	await donatePromptItem.setValue({
+		installedAt: existing?.installedAt ?? Date.now(),
+		dismissed: true,
 	})
 }
 
