@@ -5,8 +5,8 @@ A browser extension that enhances Modrinth on the website and beyond.
 ![GitHub Branch Check Runs](https://img.shields.io/github/check-runs/creeperkatze/modrinth-extras/main)
 ![GitHub Issues](https://img.shields.io/github/issues/creeperkatze/modrinth-extras)
 ![GitHub Pull Requests](https://img.shields.io/github/issues-pr/creeperkatze/modrinth-extras)
-![GitHub Repo stars](https://img.shields.io/github/stars/creeperkatze/modrinth-extras?style=flat)
 [![Crowdin](https://badges.crowdin.net/modrinth-extras/localized.svg)](https://crowdin.com/project/modrinth-extras)
+![GitHub Repo stars](https://img.shields.io/github/stars/creeperkatze/modrinth-extras?style=flat)
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/creeperkatze)
 
