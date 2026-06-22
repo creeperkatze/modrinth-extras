@@ -62,11 +62,17 @@
   "feature.projectCardActions.description": {
     "defaultMessage": "Projeleri doğrudan proje kartlarından kolayca indirin, takip edin ve kaydedin."
   },
+  "feature.projectCardActions.gameVersion": {
+    "defaultMessage": "Oyun sürümü"
+  },
   "feature.projectCardActions.modLoader": {
     "defaultMessage": "Mod yükleyicisi"
   },
   "feature.projectCardActions.pluginLoader": {
     "defaultMessage": "Eklenti yükleyicisi"
+  },
+  "feature.projectCardActions.shaderLoader": {
+    "defaultMessage": "Shader yükleyici"
   },
   "feature.projectCardActions.title": {
     "defaultMessage": "Proje kartı eylemleri"
@@ -92,8 +98,20 @@
   "feature.toolsSidebar.title": {
     "defaultMessage": "Araçlar kenar çubuğu"
   },
+  "popup.donatePrompt.dismiss": {
+    "defaultMessage": "Vazgeç"
+  },
+  "popup.donatePrompt.message": {
+    "defaultMessage": "Modrinth Extras her zaman ücretsiz, açık kaynaklı ve reklamsız olacaktır. Eğer bu uygulamayı faydalı bulursanız, küçük bir bağışla geliştirilmesine destek olmayı düşünün."
+  },
+  "popup.donatePrompt.title": {
+    "defaultMessage": "Bu uzantıyı destekleyin"
+  },
   "popup.footer.checking": {
     "defaultMessage": "Kontrol ediliyor"
+  },
+  "popup.footer.donate": {
+    "defaultMessage": "Bağış"
   },
   "popup.footer.latestVersion": {
     "defaultMessage": "Son sürüm"
@@ -115,6 +133,9 @@
   },
   "search.any": {
     "defaultMessage": "Herhangi"
+  },
+  "search.placeholder": {
+    "defaultMessage": "Ara..."
   },
   "settings.language": {
     "defaultMessage": "Dil"

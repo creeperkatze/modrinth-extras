@@ -63,13 +63,13 @@
     "defaultMessage": "{count} forks"
   },
   "githubSidebar.openIssues": {
-    "defaultMessage": "{count} açık issue"
+    "defaultMessage": "{count} açık sorunlar"
   },
   "githubSidebar.openPRs": {
     "defaultMessage": "{count} açık pull requests"
   },
   "githubSidebar.stars": {
-    "defaultMessage": "{count} yıldız"
+    "defaultMessage": "{count} yıldızlar"
   },
   "notificationsIndicator.markAllAsRead": {
     "defaultMessage": "Tümünü okundu olarak işaretle"
@@ -86,6 +86,9 @@
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "Geçmişi görüntüle"
   },
+  "projectCardActions.checkingDownload": {
+    "defaultMessage": "Mevcut sürüm kontrol ediliyor..."
+  },
   "projectCardActions.copied": {
     "defaultMessage": "Kopyalandı!"
   },
@@ -94,6 +97,9 @@
   },
   "projectCardActions.download": {
     "defaultMessage": "İndir"
+  },
+  "projectCardActions.downloadUnavailable": {
+    "defaultMessage": "{loader, select, none {{version} için uygun sürüm yok} other {{loader} {version} için uygun sürüm yok}}"
   },
   "projectCardActions.follow": {
     "defaultMessage": "Takip et"
@@ -115,6 +121,9 @@
   },
   "projectCardActions.unfollow": {
     "defaultMessage": "Takibi bırak"
+  },
+  "quickSearch.clearRecent": {
+    "defaultMessage": "Son ögeleri temizle"
   },
   "quickSearch.examples": {
     "defaultMessage": "Örnekler"

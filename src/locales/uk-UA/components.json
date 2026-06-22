@@ -15,7 +15,7 @@
     "defaultMessage": "Залежності"
   },
   "dependencyExplorer.controls": {
-    "defaultMessage": "прокручуйте для масштабування · перетягуйте для переміщення · клацайте для розкриття"
+    "defaultMessage": "прокрутіть до збільшення · перетягування до панорами · натисніть, щоб розгорнути"
   },
   "dependencyExplorer.dependencyNode.collapse": {
     "defaultMessage": "Згорнути залежності"
@@ -86,6 +86,9 @@
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "Переглянути історію"
   },
+  "projectCardActions.checkingDownload": {
+    "defaultMessage": "Перевірка доступної версії..."
+  },
   "projectCardActions.copied": {
     "defaultMessage": "Скопійовано!"
   },
@@ -94,6 +97,9 @@
   },
   "projectCardActions.download": {
     "defaultMessage": "Завантажити"
+  },
+  "projectCardActions.downloadUnavailable": {
+    "defaultMessage": "{loader, select, none {Версія недоступна для {version}} other {Версія недоступна для {loader} {version}}}"
   },
   "projectCardActions.follow": {
     "defaultMessage": "Підписатися"
