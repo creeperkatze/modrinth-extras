@@ -64,7 +64,11 @@ import { BoxIcon, ChevronRightIcon, LoaderCircleIcon } from '@modrinth/assets'
 import { defineMessages, useVIntl } from '@modrinth/ui'
 import { computed, ref } from 'vue'
 
-import { type EnrichedDep, fetchProjectDependencies } from '../../../utils/dependencies'
+import {
+	type EnrichedDep,
+	fetchProjectDependencies,
+	fetchVersionDependencies,
+} from '../../../utils/dependencies'
 import { navigate } from '../../../utils/page-router'
 
 defineOptions({ name: 'DependencyNode' })
@@ -145,9 +149,10 @@ async function toggle() {
 	if (!expanded.value && !childrenLoaded.value) {
 		childrenLoading.value = true
 		try {
-			children.value = await fetchProjectDependencies(
-				props.dep.project?.slug ?? props.dep.project_id,
-			)
+			const projectSlug = props.dep.project?.slug ?? props.dep.project_id
+			children.value = props.dep.version_id
+				? await fetchVersionDependencies(projectSlug, props.dep.version_id)
+				: await fetchProjectDependencies(projectSlug)
 		} finally {
 			childrenLoading.value = false
 			childrenLoaded.value = true

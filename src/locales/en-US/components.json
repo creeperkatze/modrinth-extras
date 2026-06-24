@@ -15,7 +15,7 @@
     "defaultMessage": "Dependencies"
   },
   "dependencyExplorer.controls": {
-    "defaultMessage": "scroll to zoom · drag to pan · click to expand"
+    "defaultMessage": "scroll to zoom · drag to pan · click a project to open"
   },
   "dependencyExplorer.dependencyNode.collapse": {
     "defaultMessage": "Collapse dependencies"

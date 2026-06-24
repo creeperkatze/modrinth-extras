@@ -78,11 +78,7 @@
 					@mousedown="onBgMouseDown"
 				/>
 
-				<g
-					v-if="!initialLoading"
-					:data-ns="nodeStateVersion"
-					:transform="`translate(${pan.x},${pan.y}) scale(${zoom})`"
-				>
+				<g v-if="!initialLoading" :transform="`translate(${pan.x},${pan.y}) scale(${zoom})`">
 					<g class="pointer-events-none">
 						<path
 							v-for="edge in edges"
@@ -117,7 +113,6 @@
 						/>
 
 						<circle
-							v-if="!node.loading"
 							:r="nodeR(node) + 5"
 							class="fill-none stroke-primary [stroke-width:1.5] opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-in-out pointer-events-none"
 						/>
@@ -150,42 +145,13 @@
 							class="pointer-events-none"
 						/>
 
-						<circle
-							v-if="node.loading"
-							:r="nodeR(node) + 4"
-							class="fill-none stroke-green pointer-events-none mre-spinner"
-							stroke-width="2"
-							stroke-linecap="round"
-							:stroke-dasharray="`${(nodeR(node) + 4) * Math.PI * 0.5} ${(nodeR(node) + 4) * Math.PI * 1.5}`"
-						/>
-
-						<g v-if="!node.isRoot && !node.loaded && !node.loading" class="pointer-events-none">
-							<circle
-								:cx="nodeR(node) - 5"
-								:cy="-(nodeR(node) - 5)"
-								r="8"
-								class="fill-surface-2 stroke-green [stroke-width:1.5]"
-							/>
-							<text
-								:x="nodeR(node) - 5"
-								:y="-(nodeR(node) - 5)"
-								text-anchor="middle"
-								dominant-baseline="central"
-								font-size="11"
-								font-weight="bold"
-								class="fill-green select-none"
-							>
-								+
-							</text>
-						</g>
-
 						<text
 							:y="nodeR(node) + 14"
 							text-anchor="middle"
 							:font-size="node.isRoot ? '12' : '10'"
 							:font-weight="node.isRoot ? '600' : '400'"
 							class="fill-primary pointer-events-none select-none"
-							:class="{ 'group-hover:underline': node.loaded && node.project && !node.isRoot }"
+							:class="{ 'group-hover:underline': node.project && !node.isRoot }"
 						>
 							{{ clamp(node.project?.name ?? node.id, 22) }}
 						</text>
@@ -238,11 +204,12 @@ import { defineMessages, NewModal, useVIntl } from '@modrinth/ui'
 import { computed, nextTick, ref, useTemplateRef } from 'vue'
 
 import { type GraphEdge, type GraphNode, useForceGraph } from '../../../composables/useForceGraph'
-import { modrinthClient } from '../../../utils/api'
 import {
+	buildEnrichedDeps,
 	type EnrichedDep,
-	fetchProjectDependencies,
-	fetchVersionDependencies,
+	fetchDependencyGraphLayer,
+	fetchDependencyGraphRoot,
+	isGraphDependency,
 } from '../../../utils/dependencies'
 import { navigate } from '../../../utils/page-router'
 
@@ -258,7 +225,7 @@ const messages = defineMessages({
 	},
 	'dependencyExplorer.controls': {
 		id: 'dependencyExplorer.controls',
-		defaultMessage: 'scroll to zoom · drag to pan · click to expand',
+		defaultMessage: 'scroll to zoom · drag to pan · click a project to open',
 	},
 	'dependencyExplorer.dependencyNode.required': {
 		id: 'dependencyExplorer.dependencyNode.required',
@@ -301,7 +268,6 @@ const props = defineProps<{ projectSlug: string; versionNumber?: string }>()
 const modal = useTemplateRef<InstanceType<typeof NewModal>>('modal')
 const svgRef = ref<SVGSVGElement | null>(null)
 const initialLoading = ref(false)
-const nodeStateVersion = ref(0)
 
 const {
 	nodes,
@@ -319,7 +285,6 @@ const {
 	setEdgeEl,
 	recomputeCurvatures,
 	startSimulation,
-	kickSimulation,
 	setFitOnSettle,
 	reset,
 	addNode,
@@ -338,10 +303,6 @@ function escId(id: string): string {
 
 function clamp(s: string, max: number): string {
 	return s.length > max ? s.slice(0, max - 1) + '…' : s
-}
-
-function bumpNodeState() {
-	nodeStateVersion.value++
 }
 
 function addDepsToGraph(
@@ -381,8 +342,6 @@ function addDepsToGraph(
 			fx: null,
 			fy: null,
 			project: dep.project,
-			loaded: false,
-			loading: false,
 			isRoot: false,
 			depth,
 		})
@@ -423,69 +382,72 @@ async function initGraph() {
 	initialLoading.value = true
 	zoom.value = 1
 
-	const [rootProject, deps] = await Promise.all([
-		modrinthClient.labrinth.projects_v3.get(props.projectSlug).catch((err) => {
-			console.error('[Modrinth Extras] Failed to fetch root project info:', err)
-			return null
-		}),
-		props.versionNumber
-			? fetchVersionDependencies(props.projectSlug, props.versionNumber)
-			: fetchProjectDependencies(props.projectSlug),
-	])
-
-	initialLoading.value = false
-
-	const rootId = rootProject?.id ?? props.projectSlug
-	addNode({
-		id: rootId,
-		x: 0,
-		y: 0,
-		vx: 0,
-		vy: 0,
-		fx: null,
-		fy: null,
-		project: rootProject,
-		loaded: true,
-		loading: false,
-		isRoot: true,
-		depth: 0,
-	})
-
-	if (deps.length > 0) {
-		addDepsToGraph(rootId, rootId, deps, 1)
-	}
-
-	setFitOnSettle(true)
-	startSimulation()
-}
-
-async function expandNode(node: GraphNode) {
-	if (node.loaded || node.loading) return
-	node.loading = true
-	bumpNodeState()
 	try {
-		const slug = node.project?.slug ?? node.id
-		const isRootProject = node.project?.id === nodes.value[0]?.project?.id
-		const deps =
-			isRootProject && props.versionNumber
-				? await fetchVersionDependencies(slug, props.versionNumber)
-				: await fetchProjectDependencies(slug)
-		const hasNewNodes = addDepsToGraph(node.id, node.project?.id ?? node.id, deps, node.depth + 1)
-		node.loaded = true
-		kickSimulation(hasNewNodes)
+		const { project: rootProject, dependencies: rootDependencies } = await fetchDependencyGraphRoot(
+			props.projectSlug,
+			props.versionNumber,
+		)
+		const rootId = rootProject.id
+		addNode({
+			id: rootId,
+			x: 0,
+			y: 0,
+			vx: 0,
+			vy: 0,
+			fx: null,
+			fy: null,
+			project: rootProject,
+			isRoot: true,
+			depth: 0,
+		})
+
+		const expandedProjectIds = new Set([rootId])
+		let frontier = [{ sourceId: rootId, sourceProjectId: rootId, dependencies: rootDependencies }]
+
+		while (frontier.length > 0) {
+			const dependencyTargets = frontier.flatMap(({ dependencies }) =>
+				dependencies.filter(isGraphDependency),
+			)
+			const unexpandedDependencies = dependencyTargets.filter(
+				(dependency) => !expandedProjectIds.has(dependency.project_id),
+			)
+			const { projects, dependenciesByProjectId } =
+				await fetchDependencyGraphLayer(unexpandedDependencies)
+			const projectsById = new Map(projects.map((project) => [project.id, project]))
+			projectsById.set(rootId, rootProject)
+
+			for (const { sourceId, sourceProjectId, dependencies } of frontier) {
+				const source = nodeById.get(sourceId)
+				addDepsToGraph(
+					sourceId,
+					sourceProjectId,
+					buildEnrichedDeps(dependencies, [...projectsById.values()]),
+					(source?.depth ?? 0) + 1,
+				)
+			}
+
+			for (const dependency of unexpandedDependencies) {
+				expandedProjectIds.add(dependency.project_id)
+			}
+			frontier = projects.map((project) => ({
+				sourceId: project.id,
+				sourceProjectId: project.id,
+				dependencies: dependenciesByProjectId.get(project.id) ?? [],
+			}))
+		}
+
+		setFitOnSettle(true)
+		startSimulation()
 	} catch (err) {
-		console.error('[Modrinth Extras] Failed to expand dependency node:', err)
+		console.error('[Modrinth Extras] Failed to load dependency graph:', err)
 	} finally {
-		node.loading = false
-		bumpNodeState()
+		initialLoading.value = false
 	}
 }
 
 function onNodeClick(node: GraphNode) {
 	if (getDragMoved()) return
-	if (!node.loaded && !node.loading) {
-		expandNode(node)
-	} else if (node.project && !node.isRoot) {
+	if (node.project && !node.isRoot) {
 		modal.value?.hide()
 		navigate(`/${node.project.project_types[0]}/${node.project.slug}`)
 	}
@@ -504,21 +466,6 @@ defineExpose({ show })
 </script>
 
 <style scoped>
-.mre-spinner {
-	animation: mre-spin 0.8s linear infinite;
-	transform-origin: center;
-	transform-box: fill-box;
-}
-
-@keyframes mre-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
-}
-
 .mre-explorer-pulse {
 	animation: mre-explorer-pulse 2.4s ease-in-out infinite;
 	transform-origin: center;

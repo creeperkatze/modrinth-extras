@@ -12,8 +12,6 @@ export interface GraphNode {
 	fx: number | null
 	fy: number | null
 	project: Labrinth.Projects.v3.Project | null
-	loaded: boolean
-	loading: boolean
 	isRoot: boolean
 	depth: number
 	index?: number
