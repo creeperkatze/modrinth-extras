@@ -104,57 +104,53 @@
 						:transform="`translate(${node.x},${node.y})`"
 						:class="[draggingNodeId === node.id ? 'cursor-grabbing' : 'cursor-pointer', 'group']"
 						@mousedown.stop="onNodeMouseDown($event, node)"
-						@click.stop="onNodeClick(node)"
 					>
-						<circle
-							v-if="node.isRoot"
-							:r="nodeR(node) + 9"
-							class="fill-none stroke-green [stroke-width:1.5] mre-explorer-pulse"
-						/>
+						<a :href="nodeHref(node)" @click="onNodeLinkClick($event, node)">
+							<circle
+								v-if="!node.isRoot"
+								:r="nodeR(node) + 5"
+								class="fill-none stroke-primary [stroke-width:1.5] opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-in-out pointer-events-none"
+							/>
 
-						<circle
-							:r="nodeR(node) + 5"
-							class="fill-none stroke-primary [stroke-width:1.5] opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-in-out pointer-events-none"
-						/>
+							<circle
+								:r="nodeR(node)"
+								class="[stroke-width:1.5]"
+								:class="node.isRoot ? 'fill-green stroke-green' : 'fill-surface-4 stroke-surface-5'"
+							/>
 
-						<circle
-							:r="nodeR(node)"
-							class="[stroke-width:1.5]"
-							:class="node.isRoot ? 'fill-green stroke-green' : 'fill-surface-4 stroke-surface-5'"
-						/>
+							<text
+								text-anchor="middle"
+								dominant-baseline="central"
+								:font-size="node.isRoot ? '17' : '13'"
+								font-weight="bold"
+								class="pointer-events-none select-none"
+								:class="node.isRoot ? 'fill-white' : 'fill-secondary'"
+							>
+								{{ (node.project?.name ?? node.id)[0].toUpperCase() }}
+							</text>
 
-						<text
-							text-anchor="middle"
-							dominant-baseline="central"
-							:font-size="node.isRoot ? '17' : '13'"
-							font-weight="bold"
-							class="pointer-events-none select-none"
-							:class="node.isRoot ? 'fill-white' : 'fill-secondary'"
-						>
-							{{ (node.project?.name ?? node.id)[0].toUpperCase() }}
-						</text>
+							<image
+								v-if="node.project?.icon_url"
+								:href="node.project.icon_url"
+								:x="-nodeR(node)"
+								:y="-nodeR(node)"
+								:width="nodeR(node) * 2"
+								:height="nodeR(node) * 2"
+								:clip-path="`url(#mre-clip-${escId(node.id)})`"
+								class="pointer-events-none"
+							/>
 
-						<image
-							v-if="node.project?.icon_url"
-							:href="node.project.icon_url"
-							:x="-nodeR(node)"
-							:y="-nodeR(node)"
-							:width="nodeR(node) * 2"
-							:height="nodeR(node) * 2"
-							:clip-path="`url(#mre-clip-${escId(node.id)})`"
-							class="pointer-events-none"
-						/>
-
-						<text
-							:y="nodeR(node) + 14"
-							text-anchor="middle"
-							:font-size="node.isRoot ? '12' : '10'"
-							:font-weight="node.isRoot ? '600' : '400'"
-							class="fill-primary pointer-events-none select-none"
-							:class="{ 'group-hover:underline': node.project && !node.isRoot }"
-						>
-							{{ clamp(node.project?.name ?? node.id, 22) }}
-						</text>
+							<text
+								:y="nodeR(node) + 14"
+								text-anchor="middle"
+								:font-size="node.isRoot ? '12' : '10'"
+								:font-weight="node.isRoot ? '600' : '400'"
+								class="fill-primary pointer-events-none select-none"
+								:class="{ 'group-hover:underline': node.project && !node.isRoot }"
+							>
+								{{ clamp(node.project?.name ?? node.id, 22) }}
+							</text>
+						</a>
 					</g>
 				</g>
 
@@ -233,7 +229,7 @@ import {
 	fetchDependencyGraphRoot,
 	isGraphDependency,
 } from '../../../utils/dependencies'
-import { navigate } from '../../../utils/page-router'
+import { navigate, resolveLink } from '../../../utils/page-router'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
@@ -483,12 +479,20 @@ async function initGraph() {
 	}
 }
 
-function onNodeClick(node: GraphNode) {
-	if (getDragMoved()) return
-	if (node.project && !node.isRoot) {
-		modal.value?.hide()
-		navigate(`/${node.project.project_types[0]}/${node.project.slug}`)
+function nodeHref(node: GraphNode): string | undefined {
+	if (!node.project || node.isRoot) return undefined
+	return resolveLink(`/${node.project.project_types[0]}/${node.project.slug}`)
+}
+
+function onNodeLinkClick(event: MouseEvent, node: GraphNode) {
+	// Let the browser handle natively
+	if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) {
+		return
 	}
+	event.preventDefault()
+	if (getDragMoved() || !node.project || node.isRoot) return
+	modal.value?.hide()
+	navigate(`/${node.project.project_types[0]}/${node.project.slug}`)
 }
 
 async function show() {
@@ -502,23 +506,3 @@ async function show() {
 
 defineExpose({ show })
 </script>
-
-<style scoped>
-.mre-explorer-pulse {
-	animation: mre-explorer-pulse 2.4s ease-in-out infinite;
-	transform-origin: center;
-	transform-box: fill-box;
-}
-
-@keyframes mre-explorer-pulse {
-	0%,
-	100% {
-		opacity: 0.18;
-		transform: scale(1);
-	}
-	50% {
-		opacity: 0.45;
-		transform: scale(1.08);
-	}
-}
-</style>

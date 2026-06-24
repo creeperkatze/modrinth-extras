@@ -194,7 +194,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 			// Lay nodes in concentric rings by depth so the tree radiates outward.
 			.force(
 				'radial',
-				forceRadial<GraphNode>((n) => n.depth * 260, 0, 0).strength((n) =>
+				forceRadial<GraphNode>((n) => n.depth * 180, 0, 0).strength((n) =>
 					n.isRoot || maxDepth === 0 ? 0 : 0.45,
 				),
 			)
@@ -270,6 +270,9 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 	}
 
 	function onNodeMouseDown(event: MouseEvent, node: GraphNode) {
+		if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) {
+			return
+		}
 		event.preventDefault()
 		draggingNode = node
 		draggingNodeId.value = node.id
@@ -305,12 +308,8 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 
 	function onMouseUp() {
 		if (draggingNode) {
-			if (draggingNode.isRoot) {
-				draggingNode.x = 0
-				draggingNode.y = 0
-				draggingNode.fx = 0
-				draggingNode.fy = 0
-			} else {
+			// The root stays pinned wherever it's dropped; other nodes rejoin the sim.
+			if (!draggingNode.isRoot) {
 				draggingNode.fx = null
 				draggingNode.fy = null
 			}
