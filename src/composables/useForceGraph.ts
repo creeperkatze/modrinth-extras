@@ -1,6 +1,13 @@
 import type { Labrinth } from '@modrinth/api-client'
 import type { ForceLink, Simulation, SimulationLinkDatum } from 'd3-force'
-import { forceCenter, forceCollide, forceLink, forceManyBody, forceSimulation } from 'd3-force'
+import {
+	forceCenter,
+	forceCollide,
+	forceLink,
+	forceManyBody,
+	forceRadial,
+	forceSimulation,
+} from 'd3-force'
 import { markRaw, onUnmounted, ref } from 'vue'
 
 export interface GraphNode {
@@ -133,24 +140,57 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 
 	function startSimulation() {
 		simulation?.stop()
+
+		// Incident-edge count per node; hubs have a high degree and get more room.
+		const degree = new Map<string, number>()
+		for (const edge of edges.value) {
+			degree.set(edge.source, (degree.get(edge.source) ?? 0) + 1)
+			degree.set(edge.target, (degree.get(edge.target) ?? 0) + 1)
+		}
+		const deg = (node: GraphNode) => degree.get(node.id) ?? 0
+		const maxDepth = nodes.value.reduce((max, n) => Math.max(max, n.depth), 0)
+
 		simulation = forceSimulation<GraphNode>(nodes.value)
-			.force('charge', forceManyBody<GraphNode>().strength(-1200))
+			.force(
+				'charge',
+				forceManyBody<GraphNode>()
+					// Hubs repel harder so their dependents fan out instead of clumping.
+					.strength((n) => (n.isRoot ? -2000 : -350 - deg(n) * 140))
+					.distanceMax(1200),
+			)
 			.force(
 				'link',
 				forceLink<GraphNode, D3Link>(getD3Links())
 					.id((n) => n.id)
-					.distance(10)
-					.strength(0.25),
+					// Busy endpoints sit further apart, leaving room for satellites.
+					.distance((l) => {
+						const s = l.source as GraphNode
+						const t = l.target as GraphNode
+						return 70 + Math.max(deg(s), deg(t)) * 6
+					})
+					// Weak pull on hubs so they don't drag the graph into one knot.
+					.strength((l) => {
+						const s = l.source as GraphNode
+						const t = l.target as GraphNode
+						return 1 / Math.min(deg(s) || 1, deg(t) || 1)
+					}),
 			)
 			.force(
 				'collide',
 				forceCollide<GraphNode>()
-					.radius((n) => nodeR(n) + 14)
-					.strength(0.9),
+					.radius((n) => nodeR(n) + 16)
+					.strength(1),
 			)
-			.force('center', forceCenter(0, 0).strength(0.02))
-			.alphaDecay(0.04)
-			.velocityDecay(0.8)
+			// Lay nodes in concentric rings by depth so the tree radiates outward.
+			.force(
+				'radial',
+				forceRadial<GraphNode>((n) => n.depth * 260, 0, 0).strength((n) =>
+					n.isRoot || maxDepth === 0 ? 0 : 0.45,
+				),
+			)
+			.force('center', forceCenter(0, 0).strength(0.03))
+			.alphaDecay(0.0228)
+			.velocityDecay(0.45)
 			.on('tick', updateImperative)
 			.on('end', () => {
 				if (fitOnSettle) {
