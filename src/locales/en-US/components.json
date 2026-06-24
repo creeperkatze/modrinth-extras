@@ -14,8 +14,8 @@
   "dependenciesSidebar.title": {
     "defaultMessage": "Dependencies"
   },
-  "dependencyExplorer.controls": {
-    "defaultMessage": "scroll to zoom · drag to pan · click a project to open"
+  "dependencyExplorer.centerView": {
+    "defaultMessage": "Center view"
   },
   "dependencyExplorer.dependencyNode.collapse": {
     "defaultMessage": "Collapse dependencies"
@@ -40,6 +40,9 @@
   },
   "dependencyExplorer.noDependencies": {
     "defaultMessage": "This project has no dependencies"
+  },
+  "dependencyExplorer.reset": {
+    "defaultMessage": "Reset"
   },
   "dependencyExplorer.title": {
     "defaultMessage": "Dependency Graph"

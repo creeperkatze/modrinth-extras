@@ -173,34 +173,56 @@
 
 			<div
 				v-if="initialLoading"
-				class="absolute inset-0 flex items-center justify-center gap-2 text-sm text-secondary pointer-events-none"
+				class="absolute inset-0 flex items-center justify-center pointer-events-none"
 			>
-				<LoaderCircleIcon class="size-4 animate-spin" />
-				{{ formatMessage(messages['dependencyExplorer.loading']) }}
+				<div class="flex w-64 max-w-[70%] flex-col gap-2">
+					<div class="flex items-center justify-between text-sm text-secondary">
+						<span>{{ formatMessage(messages['dependencyExplorer.loading']) }}</span>
+						<span>{{ Math.round(loadingProgress) }}%</span>
+					</div>
+					<div class="h-1.5 w-full overflow-hidden rounded-full bg-surface-5">
+						<div
+							class="h-full rounded-full bg-brand transition-[width] duration-300 ease-out"
+							:style="{ width: `${loadingProgress}%` }"
+						/>
+					</div>
+				</div>
 			</div>
 
 			<div
-				class="absolute bottom-3 left-3 flex flex-col gap-2 rounded-lg border border-surface-5 bg-surface-4 p-3 text-xs"
+				class="absolute bottom-3 left-3 flex flex-col gap-1.5 rounded-xl border border-solid border-surface-5 bg-surface-3 p-3 text-sm shadow-xl"
 			>
-				<div v-for="item in LEGEND" :key="item.type" class="flex items-center gap-2.5">
-					<svg width="40" height="14" class="shrink-0">
-						<line x1="1" y1="7" x2="29" y2="7" :stroke="item.color" stroke-width="1.5" />
-						<polygon points="22,3 38,7 22,11" :fill="item.color" />
-					</svg>
+				<div v-for="item in LEGEND" :key="item.type" class="flex items-center gap-2">
+					<span class="size-2.5 shrink-0 rounded-full" :style="{ backgroundColor: item.color }" />
 					<span class="text-secondary">{{ item.label }}</span>
 				</div>
 			</div>
 
-			<div class="absolute bottom-3 right-3 text-xs text-secondary pointer-events-none">
-				{{ formatMessage(messages['dependencyExplorer.controls']) }}
+			<div class="absolute bottom-3 right-3 flex items-center gap-1.5">
+				<ButtonStyled circular>
+					<button
+						v-tooltip="formatMessage(messages['dependencyExplorer.centerView'])"
+						@click="zoomToFit()"
+					>
+						<ExpandIcon aria-hidden="true" />
+					</button>
+				</ButtonStyled>
+				<ButtonStyled circular>
+					<button
+						v-tooltip="formatMessage(messages['dependencyExplorer.reset'])"
+						@click="initGraph()"
+					>
+						<UpdatedIcon aria-hidden="true" />
+					</button>
+				</ButtonStyled>
 			</div>
 		</div>
 	</NewModal>
 </template>
 
 <script setup lang="ts">
-import { LoaderCircleIcon } from '@modrinth/assets'
-import { defineMessages, NewModal, useVIntl } from '@modrinth/ui'
+import { ExpandIcon, UpdatedIcon } from '@modrinth/assets'
+import { ButtonStyled, defineMessages, NewModal, useVIntl } from '@modrinth/ui'
 import { computed, nextTick, ref, useTemplateRef } from 'vue'
 
 import { type GraphEdge, type GraphNode, useForceGraph } from '../../../composables/useForceGraph'
@@ -223,9 +245,13 @@ const messages = defineMessages({
 		id: 'dependencyExplorer.noDependencies',
 		defaultMessage: 'This project has no dependencies',
 	},
-	'dependencyExplorer.controls': {
-		id: 'dependencyExplorer.controls',
-		defaultMessage: 'scroll to zoom · drag to pan · click a project to open',
+	'dependencyExplorer.centerView': {
+		id: 'dependencyExplorer.centerView',
+		defaultMessage: 'Center view',
+	},
+	'dependencyExplorer.reset': {
+		id: 'dependencyExplorer.reset',
+		defaultMessage: 'Reset',
 	},
 	'dependencyExplorer.dependencyNode.required': {
 		id: 'dependencyExplorer.dependencyNode.required',
@@ -268,6 +294,7 @@ const props = defineProps<{ projectSlug: string; versionNumber?: string }>()
 const modal = useTemplateRef<InstanceType<typeof NewModal>>('modal')
 const svgRef = ref<SVGSVGElement | null>(null)
 const initialLoading = ref(false)
+const loadingProgress = ref(0)
 
 const {
 	nodes,
@@ -285,6 +312,7 @@ const {
 	setEdgeEl,
 	recomputeCurvatures,
 	startSimulation,
+	zoomToFit,
 	setFitOnSettle,
 	reset,
 	addNode,
@@ -380,6 +408,7 @@ function addDepsToGraph(
 async function initGraph() {
 	reset()
 	initialLoading.value = true
+	loadingProgress.value = 0
 	zoom.value = 1
 
 	try {
@@ -411,6 +440,15 @@ async function initGraph() {
 			const unexpandedDependencies = dependencyTargets.filter(
 				(dependency) => !expandedProjectIds.has(dependency.project_id),
 			)
+
+			// Ratio of projects already expanded to all known so far; rises as the
+			// frontier shrinks. Clamped so the bar never visibly regresses.
+			const discovered = expandedProjectIds.size + unexpandedDependencies.length
+			loadingProgress.value = Math.max(
+				loadingProgress.value,
+				discovered > 0 ? (expandedProjectIds.size / discovered) * 100 : 100,
+			)
+
 			const { projects, dependenciesByProjectId } =
 				await fetchDependencyGraphLayer(unexpandedDependencies)
 			const projectsById = new Map(projects.map((project) => [project.id, project]))
