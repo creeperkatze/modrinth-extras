@@ -354,18 +354,20 @@ function addDepsToGraph(
 	const sx = source?.x ?? 0
 	const sy = source?.y ?? 0
 
-	const withIds = deps.map((d, i) => ({
-		dep: d,
+	const withIds = deps.map((dep, i) => ({
+		dep,
 		nodeId:
-			d.project_id === sourceProjectId
+			dep.project_id === sourceProjectId
 				? `__selfdep__${Date.now().toString(36)}${i.toString(36)}${Math.random().toString(36).slice(2)}`
-				: d.project_id,
+				: dep.project_id,
 	}))
 
 	const existingIds = new Set(nodes.value.map((n) => n.id))
-	const toCreate = withIds.filter(
-		({ dep, nodeId }) => dep.project_id === sourceProjectId || !existingIds.has(nodeId),
-	)
+	const toCreate = withIds.filter(({ nodeId }) => {
+		if (existingIds.has(nodeId)) return false
+		existingIds.add(nodeId)
+		return true
+	})
 
 	toCreate.forEach(({ dep, nodeId }, i) => {
 		const angle = (i / Math.max(toCreate.length, 1)) * 2 * Math.PI
