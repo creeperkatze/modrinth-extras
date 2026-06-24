@@ -233,7 +233,6 @@
 </template>
 
 <script setup lang="ts">
-import type { Labrinth } from '@modrinth/api-client'
 import { LoaderCircleIcon } from '@modrinth/assets'
 import { defineMessages, NewModal, useVIntl } from '@modrinth/ui'
 import { computed, nextTick, ref, useTemplateRef } from 'vue'
