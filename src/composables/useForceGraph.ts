@@ -150,12 +150,22 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		const deg = (node: GraphNode) => degree.get(node.id) ?? 0
 		const maxDepth = nodes.value.reduce((max, n) => Math.max(max, n.depth), 0)
 
+		// Pin the root at the centre so the tree radiates from a fixed point.
+		for (const node of nodes.value) {
+			if (node.isRoot) {
+				node.x = 0
+				node.y = 0
+				node.fx = 0
+				node.fy = 0
+			}
+		}
+
 		simulation = forceSimulation<GraphNode>(nodes.value)
 			.force(
 				'charge',
 				forceManyBody<GraphNode>()
 					// Hubs repel harder so their dependents fan out instead of clumping.
-					.strength((n) => (n.isRoot ? -2000 : -350 - deg(n) * 140))
+					.strength((n) => (n.isRoot ? -800 : -350 - deg(n) * 140))
 					.distanceMax(1200),
 			)
 			.force(
@@ -295,8 +305,15 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 
 	function onMouseUp() {
 		if (draggingNode) {
-			draggingNode.fx = null
-			draggingNode.fy = null
+			if (draggingNode.isRoot) {
+				draggingNode.x = 0
+				draggingNode.y = 0
+				draggingNode.fx = 0
+				draggingNode.fy = 0
+			} else {
+				draggingNode.fx = null
+				draggingNode.fy = null
+			}
 			simulation?.alphaTarget(0)
 			draggingNode = null
 			draggingNodeId.value = null
