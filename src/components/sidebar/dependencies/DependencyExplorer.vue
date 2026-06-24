@@ -8,7 +8,8 @@
 		width="min(92vw, 1300px)"
 	>
 		<div
-			class="relative h-[580px] overflow-hidden bg-surface-1"
+			class="relative overflow-hidden bg-surface-2"
+			style="height: 640px"
 			@mousemove="onMouseMove"
 			@mouseup="onMouseUp"
 			@mouseleave="onMouseUp"
@@ -421,12 +422,17 @@ async function initGraph() {
 	initialLoading.value = true
 	zoom.value = 1
 
-	let rootProject: Labrinth.Projects.v3.Project | null = null
-	try {
-		rootProject = await modrinthClient.labrinth.projects_v3.get(props.projectSlug)
-	} catch (err) {
-		console.error('[Modrinth Extras] Failed to fetch root project info:', err)
-	}
+	const [rootProject, deps] = await Promise.all([
+		modrinthClient.labrinth.projects_v3.get(props.projectSlug).catch((err) => {
+			console.error('[Modrinth Extras] Failed to fetch root project info:', err)
+			return null
+		}),
+		props.versionNumber
+			? fetchVersionDependencies(props.projectSlug, props.versionNumber)
+			: fetchProjectDependencies(props.projectSlug),
+	])
+
+	initialLoading.value = false
 
 	const rootId = rootProject?.id ?? props.projectSlug
 	addNode({
@@ -438,24 +444,14 @@ async function initGraph() {
 		fx: null,
 		fy: null,
 		project: rootProject,
-		loaded: false,
+		loaded: true,
 		loading: false,
 		isRoot: true,
 		depth: 0,
 	})
 
-	try {
-		const deps = props.versionNumber
-			? await fetchVersionDependencies(props.projectSlug, props.versionNumber)
-			: await fetchProjectDependencies(props.projectSlug)
-		if (deps.length > 0) {
-			addDepsToGraph(rootId, rootId, deps, 1)
-		}
-		nodes.value[0].loaded = true
-	} catch (err) {
-		console.error('[Modrinth Extras] Failed to fetch dependencies for graph:', err)
-	} finally {
-		initialLoading.value = false
+	if (deps.length > 0) {
+		addDepsToGraph(rootId, rootId, deps, 1)
 	}
 
 	setFitOnSettle(true)
