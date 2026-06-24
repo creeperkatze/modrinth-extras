@@ -13,7 +13,7 @@ export function resolveLink(link: string): string {
 
 // Navigate using the page router (SPA) via the MAIN world bridge.
 // Uses postMessage instead of CustomEvent because Firefox's Xray
-// wrappers strip event.detail when crossing the ISOLATED → MAIN boundary.
+// wrappers strip event.detail when crossing the ISOLATED > MAIN boundary.
 export function navigate(path: string): void {
 	if (path.startsWith('http')) {
 		try {
