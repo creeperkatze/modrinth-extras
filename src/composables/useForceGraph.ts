@@ -2,7 +2,6 @@ import 'd3-transition'
 
 import type { Labrinth } from '@modrinth/api-client'
 import {
-	forceCenter,
 	forceCollide,
 	type ForceLink,
 	forceLink,
@@ -171,7 +170,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 	function startSimulation() {
 		simulation?.stop()
 
-		// Incident-edge count per node; hubs have a high degree and get more room.
+		// Incident-edge count per node, busier deps get a wider ring
 		const degree = new Map<string, number>()
 		for (const edge of activeEdges()) {
 			degree.set(edge.source, (degree.get(edge.source) ?? 0) + 1)
@@ -191,29 +190,19 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		}
 
 		simulation = forceSimulation<GraphNode>(activeNodes())
-			.force(
-				'charge',
-				forceManyBody<GraphNode>()
-					// Hubs repel harder so their dependents fan out instead of clumping.
-					.strength((n) => (n.isRoot ? -800 : -350 - deg(n) * 140))
-					.distanceMax(1200),
-			)
+			// Local, degree-independent repulsion so re-heating can't fling rings out
+			.force('charge', forceManyBody<GraphNode>().strength(-280).distanceMax(450))
 			.force(
 				'link',
 				forceLink<GraphNode, D3Link>(getD3Links())
 					.id((n) => n.id)
-					// Busy endpoints sit further apart, leaving room for satellites.
+					// Fixed gap per edge; busier endpoints get a roomier ring (bubble)
 					.distance((l) => {
 						const s = l.source as GraphNode
 						const t = l.target as GraphNode
-						return 70 + Math.max(deg(s), deg(t)) * 6
-					})
-					// Weak pull on hubs so they don't drag the graph into one knot.
-					.strength((l) => {
-						const s = l.source as GraphNode
-						const t = l.target as GraphNode
-						return 1 / Math.min(deg(s) || 1, deg(t) || 1)
+						return getNodeRadius(s) + getNodeRadius(t) + 40 + Math.max(deg(s), deg(t)) * 5
 					}),
+				// d3's default link strength (1 / min degree) keeps hubs from collapsing together
 			)
 			.force(
 				'collide',
@@ -221,16 +210,15 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 					.radius((n) => getNodeRadius(n) + 16)
 					.strength(1),
 			)
-			// Lay nodes in concentric rings by depth so the tree radiates outward.
+			// Concentric rings by depth; the pinned root anchors the graph, so no centring force
 			.force(
 				'radial',
-				forceRadial<GraphNode>((n) => n.depth * 180, 0, 0).strength((n) =>
-					n.isRoot || maxDepth === 0 ? 0 : 0.45,
+				forceRadial<GraphNode>((n) => n.depth * 190, 0, 0).strength((n) =>
+					n.isRoot || maxDepth === 0 ? 0 : 0.3,
 				),
 			)
-			.force('center', forceCenter(0, 0).strength(0.03))
-			.alphaDecay(0.0228)
-			.velocityDecay(0.45)
+			.alphaDecay(0.1)
+			.velocityDecay(0.6)
 			.on('tick', updateImperative)
 			.on('end', () => {
 				if (fitOnSettle) {
@@ -343,7 +331,6 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		dragMoved = false
 		node.fx = node.x
 		node.fy = node.y
-		simulation?.alphaTarget(0.3).restart()
 	}
 
 	function onMouseMove(event: MouseEvent) {
@@ -354,7 +341,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 			draggingNode.fx = dragStartNode.x + dx / zoom.value
 			draggingNode.fy = dragStartNode.y + dy / zoom.value
 			draggingNode.x = draggingNode.fx
-			draggingNode.y = draggingNode.fy
+			simulation?.alpha(0.1).restart()
 		}
 	}
 
