@@ -191,7 +191,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 
 		simulation = forceSimulation<GraphNode>(activeNodes())
 			// Local, degree-independent repulsion so re-heating can't fling rings out
-			.force('charge', forceManyBody<GraphNode>().strength(-280).distanceMax(450))
+			.force('charge', forceManyBody<GraphNode>().strength(-450).distanceMax(600))
 			.force(
 				'link',
 				forceLink<GraphNode, D3Link>(getD3Links())

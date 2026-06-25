@@ -438,13 +438,9 @@ function addDepsToGraph(
 	const sx = source?.x ?? 0
 	const sy = source?.y ?? 0
 
-	const withIds = deps.map((dep, i) => ({
-		dep,
-		nodeId:
-			dep.project_id === sourceProjectId
-				? `__selfdep__${Date.now().toString(36)}${i.toString(36)}${Math.random().toString(36).slice(2)}`
-				: dep.project_id,
-	}))
+	const withIds = deps
+		.filter((dep) => dep.project_id !== sourceProjectId)
+		.map((dep) => ({ dep, nodeId: dep.project_id }))
 
 	const existingIds = new Set(nodes.value.map((n) => n.id))
 	const toCreate = withIds.filter(({ nodeId }) => {
@@ -480,18 +476,6 @@ function addDepsToGraph(
 				source: sourceId,
 				target: nodeId,
 				type: dep.dependency_type as GraphEdge['type'],
-			})
-		}
-	}
-
-	for (const { dep: selfDep, nodeId: selfId } of withIds) {
-		if (selfDep.project_id !== sourceProjectId) continue
-		for (const { dep: sibling, nodeId: siblingId } of withIds) {
-			if (sibling.project_id === sourceProjectId) continue
-			addEdge({
-				source: selfId,
-				target: siblingId,
-				type: sibling.dependency_type as GraphEdge['type'],
 			})
 		}
 	}
