@@ -58,8 +58,8 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		return `${edge.source}|||${edge.target}|||${edge.type}`
 	}
 
-	function nodeR(node: GraphNode): number {
-		return node.isRoot ? 28 : 22
+	function getNodeRadius(node: GraphNode): number {
+		return node.isRoot ? 34 : 22
 	}
 
 	function setNodeEl(id: string, el: Element | null) {
@@ -82,8 +82,8 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		const uy = dy / dist
 		const srcNode = nodeById.get(edge.source)
 		const tgtNode = nodeById.get(edge.target)
-		const r1 = srcNode ? nodeR(srcNode) : 22
-		const r2 = tgtNode ? nodeR(tgtNode) : 22
+		const r1 = srcNode ? getNodeRadius(srcNode) : 22
+		const r2 = tgtNode ? getNodeRadius(tgtNode) : 22
 		const x1 = src.x + ux * r1
 		const y1 = src.y + uy * r1
 		const x2 = tgt.x - ux * r2
@@ -188,7 +188,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 			.force(
 				'collide',
 				forceCollide<GraphNode>()
-					.radius((n) => nodeR(n) + 16)
+					.radius((n) => getNodeRadius(n) + 16)
 					.strength(1),
 			)
 			// Lay nodes in concentric rings by depth so the tree radiates outward.
@@ -228,7 +228,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 			minY = Infinity,
 			maxY = -Infinity
 		for (const node of nodes.value) {
-			const r = nodeR(node) + 14
+			const r = getNodeRadius(node) + 14
 			minX = Math.min(minX, node.x - r)
 			maxX = Math.max(maxX, node.x + r)
 			minY = Math.min(minY, node.y - r)
@@ -354,7 +354,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		draggingNodeId,
 		nodeById,
 		edgeCurvatures,
-		nodeR,
+		getNodeRadius,
 		edgeKey,
 		computeEdgePath,
 		setNodeEl,

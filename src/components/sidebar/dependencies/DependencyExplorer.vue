@@ -8,7 +8,7 @@
 		width="min(92vw, 1300px)"
 	>
 		<div
-			class="relative overflow-hidden bg-surface-2"
+			class="relative overflow-hidden"
 			style="height: 640px"
 			@mousemove="onMouseMove"
 			@mouseup="onMouseUp"
@@ -66,7 +66,7 @@
 					</marker>
 					<template v-for="node in nodes" :key="`clip-${node.id}`">
 						<clipPath :id="`mre-clip-${escId(node.id)}`">
-							<circle :r="nodeR(node)" />
+							<circle :r="getNodeRadius(node)" />
 						</clipPath>
 					</template>
 				</defs>
@@ -108,14 +108,13 @@
 						<a :href="nodeHref(node)" @click="onNodeLinkClick($event, node)">
 							<circle
 								v-if="!node.isRoot"
-								:r="nodeR(node) + 5"
+								:r="getNodeRadius(node) + 5"
 								class="fill-none stroke-primary [stroke-width:1.5] opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-in-out pointer-events-none"
 							/>
 
 							<circle
-								:r="nodeR(node)"
-								class="[stroke-width:1.5]"
-								:class="node.isRoot ? 'fill-green stroke-green' : 'fill-surface-4 stroke-surface-5'"
+								:r="getNodeRadius(node)"
+								class="fill-surface-4 stroke-surface-5 [stroke-width:1.5]"
 							/>
 
 							<text
@@ -123,8 +122,7 @@
 								dominant-baseline="central"
 								:font-size="node.isRoot ? '17' : '13'"
 								font-weight="bold"
-								class="pointer-events-none select-none"
-								:class="node.isRoot ? 'fill-white' : 'fill-secondary'"
+								class="fill-secondary pointer-events-none select-none"
 							>
 								{{ (node.project?.name ?? node.id)[0].toUpperCase() }}
 							</text>
@@ -132,16 +130,16 @@
 							<image
 								v-if="node.project?.icon_url"
 								:href="node.project.icon_url"
-								:x="-nodeR(node)"
-								:y="-nodeR(node)"
-								:width="nodeR(node) * 2"
-								:height="nodeR(node) * 2"
+								:x="-getNodeRadius(node)"
+								:y="-getNodeRadius(node)"
+								:width="getNodeRadius(node) * 2"
+								:height="getNodeRadius(node) * 2"
 								:clip-path="`url(#mre-clip-${escId(node.id)})`"
 								class="pointer-events-none"
 							/>
 
 							<text
-								:y="nodeR(node) + 14"
+								:y="getNodeRadius(node) + 14"
 								text-anchor="middle"
 								:font-size="node.isRoot ? '12' : '10'"
 								:font-weight="node.isRoot ? '600' : '400'"
@@ -301,7 +299,7 @@ const {
 	draggingNodeId,
 	nodeById,
 	edgeCurvatures,
-	nodeR,
+	getNodeRadius,
 	edgeKey,
 	computeEdgePath,
 	setNodeEl,
