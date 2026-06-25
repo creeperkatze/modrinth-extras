@@ -356,7 +356,7 @@ const {
 	getDragMoved,
 } = useForceGraph(() => svgRef.value)
 
-// Deepest generation present in the graph, and how many the slider currently shows.
+// Deepest depth in the graph, and how many levels the slider currently shows.
 const maxDepth = computed(() => nodes.value.reduce((max, node) => Math.max(max, node.depth), 0))
 const depthLimit = ref(0)
 
@@ -383,8 +383,7 @@ const typeVisibleEdges = computed(() =>
 	edges.value.filter((edge) => !hiddenTypes.value.has(edge.type)),
 )
 
-// Nodes reachable from the root through edges of currently-visible types, within the
-// generation limit; toggling a type off or lowering the slider prunes the rest.
+// Nodes reachable from the root through visible-type edges, within the depth limit.
 const visibleNodeIds = computed(() => {
 	const reachable = new Set<string>()
 	const root = nodes.value.find((node) => node.isRoot)
@@ -416,8 +415,7 @@ const visibleNodeIds = computed(() => {
 
 const visibleNodes = computed(() => nodes.value.filter((node) => visibleNodeIds.value.has(node.id)))
 
-// Only edges whose endpoints both survived the prune, so the simulation never links
-// to a node that isn't in the active set and no orphan edges render.
+// Edges whose endpoints both survived the prune, so no orphan edges render.
 const visibleEdges = computed(() =>
 	typeVisibleEdges.value.filter(
 		(edge) => visibleNodeIds.value.has(edge.source) && visibleNodeIds.value.has(edge.target),
@@ -546,8 +544,7 @@ async function initGraph() {
 				(dependency) => !expandedProjectIds.has(dependency.project_id),
 			)
 
-			// Ratio of projects already expanded to all known so far; rises as the
-			// frontier shrinks. Clamped so the bar never visibly regresses.
+			// Ratio of expanded projects to all known so far; clamped so the bar never regresses.
 			const discovered = expandedProjectIds.size + unexpandedDependencies.length
 			loadingProgress.value = Math.max(
 				loadingProgress.value,

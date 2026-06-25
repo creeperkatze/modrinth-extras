@@ -54,9 +54,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 	let panStart = { mx: 0, my: 0, px: 0, py: 0 }
 	let fitOnSettle = false
 
-	// The subset of nodes/edges the simulation and view should act on. Defaults to
-	// everything; the consumer can narrow it (e.g. when dependency types are toggled
-	// off) so the layout actually reorganizes around what's visible.
+	// Subset of nodes/edges the simulation and view act on; the consumer can narrow it.
 	let activeNodes: () => GraphNode[] = () => nodes.value
 	let activeEdges: () => GraphEdge[] = () => edges.value
 
