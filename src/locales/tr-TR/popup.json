@@ -11,12 +11,6 @@
   "feature.curseforgeRedirect.title": {
     "defaultMessage": "CurseForge yönlendirmesi"
   },
-  "feature.dependencySidebar.description": {
-    "defaultMessage": "Proje sayfalarında daraltılabilir bileşen ağacı."
-  },
-  "feature.dependencySidebar.title": {
-    "defaultMessage": "Bağımlılık kenar çubuğu"
-  },
   "feature.desktopNotifications.description": {
     "defaultMessage": "Modrinth bildirimleriniz için işletim sistemi bildirimleri."
   },

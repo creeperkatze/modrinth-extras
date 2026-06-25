@@ -1,37 +1,4 @@
 {
-  "dependencySidebar.loadError": {
-    "defaultMessage": "Не вдалося завантажити залежності"
-  },
-  "dependencySidebar.loading": {
-    "defaultMessage": "Завантаження"
-  },
-  "dependencySidebar.none": {
-    "defaultMessage": "Немає залежностей"
-  },
-  "dependencySidebar.title": {
-    "defaultMessage": "Залежності"
-  },
-  "dependencyExplorer.controls": {
-    "defaultMessage": "прокрутіть до збільшення · перетягування до панорами · натисніть, щоб розгорнути"
-  },
-  "dependencyNode.collapse": {
-    "defaultMessage": "Згорнути залежності"
-  },
-  "dependencyNode.embedded": {
-    "defaultMessage": "Вбудований"
-  },
-  "dependencyNode.expand": {
-    "defaultMessage": "Розгорнути залежності"
-  },
-  "dependencyNode.incompatible": {
-    "defaultMessage": "Несумісно"
-  },
-  "dependencyNode.optional": {
-    "defaultMessage": "Необов'язково"
-  },
-  "dependencyNode.required": {
-    "defaultMessage": "Необхідно"
-  },
   "dependencyExplorer.loading": {
     "defaultMessage": "Завантаження"
   },
@@ -147,3 +114,4 @@
     "defaultMessage": "Переглянути відповідь API"
   }
 }
+

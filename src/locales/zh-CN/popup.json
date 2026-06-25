@@ -11,12 +11,6 @@
   "feature.curseforgeRedirect.title": {
     "defaultMessage": "CurseForge 重定向"
   },
-  "feature.dependencySidebar.description": {
-    "defaultMessage": "项目页面上的可折叠依赖关系树。"
-  },
-  "feature.dependencySidebar.title": {
-    "defaultMessage": "依赖侧边栏"
-  },
   "feature.desktopNotifications.description": {
     "defaultMessage": "为您的Modrinth通知提供操作系统通知。"
   },

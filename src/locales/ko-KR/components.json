@@ -1,13 +1,4 @@
 {
-  "dependencySidebar.loadError": {
-    "defaultMessage": "의존 요소를 불러오는 데 실패했습니다"
-  },
-  "dependencySidebar.loading": {
-    "defaultMessage": "불러오는 중"
-  },
-  "dependencySidebar.none": {
-    "defaultMessage": "의존 요소 없음"
-  },
   "notificationsIndicator.viewAll": {
     "defaultMessage": "모두 보기"
   }

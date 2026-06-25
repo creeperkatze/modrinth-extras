@@ -1,37 +1,4 @@
 {
-  "dependencySidebar.loadError": {
-    "defaultMessage": "Не удалось загрузить зависимости"
-  },
-  "dependencySidebar.loading": {
-    "defaultMessage": "Загрузка"
-  },
-  "dependencySidebar.none": {
-    "defaultMessage": "Нет зависимостей"
-  },
-  "dependencySidebar.title": {
-    "defaultMessage": "Зависимости"
-  },
-  "dependencyExplorer.controls": {
-    "defaultMessage": "прокрутка — для увеличения · перетаскивание — для перемещения · клик — для раскрытия"
-  },
-  "dependencyNode.collapse": {
-    "defaultMessage": "Свернуть зависимости"
-  },
-  "dependencyNode.embedded": {
-    "defaultMessage": "Встроенный"
-  },
-  "dependencyNode.expand": {
-    "defaultMessage": "Развернуть зависимости"
-  },
-  "dependencyNode.incompatible": {
-    "defaultMessage": "Несовместимо"
-  },
-  "dependencyNode.optional": {
-    "defaultMessage": "Необязательно"
-  },
-  "dependencyNode.required": {
-    "defaultMessage": "Требуется"
-  },
   "dependencyExplorer.loading": {
     "defaultMessage": "Загрузка"
   },
@@ -138,3 +105,4 @@
     "defaultMessage": "Просмотреть ответ API"
   }
 }
+

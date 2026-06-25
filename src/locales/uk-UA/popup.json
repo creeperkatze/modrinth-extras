@@ -11,12 +11,6 @@
   "feature.curseforgeRedirect.title": {
     "defaultMessage": "Перенаправлення CurseForge"
   },
-  "feature.dependencySidebar.description": {
-    "defaultMessage": "Згортуване дерево залежностей на сторінках проєктів."
-  },
-  "feature.dependencySidebar.title": {
-    "defaultMessage": "Бічна панель залежностей"
-  },
   "feature.desktopNotifications.description": {
     "defaultMessage": "Системні повідомлення для ваших повідомлень Modrinth."
   },
