@@ -8,9 +8,6 @@
   "dependencySidebar.none": {
     "defaultMessage": "Aucune dépendance"
   },
-  "dependencySidebar.openExplorer": {
-    "defaultMessage": "Ouvrir le graphique des dépendances"
-  },
   "dependencySidebar.title": {
     "defaultMessage": "Dépendances"
   },
@@ -144,4 +141,3 @@
     "defaultMessage": "Voir la réponse API"
   }
 }
-

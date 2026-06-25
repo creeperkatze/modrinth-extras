@@ -8,9 +8,6 @@
   "dependencySidebar.none": {
     "defaultMessage": "Немає залежностей"
   },
-  "dependencySidebar.openExplorer": {
-    "defaultMessage": "Відкрити діаграму залежностей"
-  },
   "dependencySidebar.title": {
     "defaultMessage": "Залежності"
   },
@@ -153,4 +150,3 @@
     "defaultMessage": "Переглянути відповідь API"
   }
 }
-

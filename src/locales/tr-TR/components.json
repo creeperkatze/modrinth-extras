@@ -8,9 +8,6 @@
   "dependencySidebar.none": {
     "defaultMessage": "Gerekli bağımlılık yok"
   },
-  "dependencySidebar.openExplorer": {
-    "defaultMessage": "Bağımlılık grafiğini aç"
-  },
   "dependencySidebar.title": {
     "defaultMessage": "Bağımlılıklar"
   },
@@ -153,4 +150,3 @@
     "defaultMessage": "API yanıtını görüntüle"
   }
 }
-

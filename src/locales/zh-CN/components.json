@@ -8,9 +8,6 @@
   "dependencySidebar.none": {
     "defaultMessage": "无依赖关系"
   },
-  "dependencySidebar.openExplorer": {
-    "defaultMessage": "打开依赖关系图"
-  },
   "dependencySidebar.title": {
     "defaultMessage": "依赖关系"
   },
@@ -144,4 +141,3 @@
     "defaultMessage": "查看 API 响应"
   }
 }
-
