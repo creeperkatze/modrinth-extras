@@ -1,6 +1,4 @@
-import { browser } from 'wxt/browser'
-
-const STORAGE_KEY = 'settings'
+import { storage } from '@wxt-dev/storage'
 
 type DeepPartial<T> = {
 	[P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P]
@@ -73,19 +71,18 @@ export const DEFAULTS: ExtensionSettings = {
 	telemetry: { enabled: true },
 }
 
+const settingsItem = storage.defineItem<DeepPartial<ExtensionSettings>>('local:settings')
+
 let cache: ExtensionSettings = structuredClone(DEFAULTS)
 let init: Promise<void> | null = null
 
 function startInit(): Promise<void> {
 	if (init) return init
 	init = (async () => {
-		const stored = await browser.storage.local.get(STORAGE_KEY)
-		const data = stored[STORAGE_KEY] as DeepPartial<ExtensionSettings> | undefined
+		const data = await settingsItem.getValue()
 		cache = deepMerge(DEFAULTS, data ?? {})
-		browser.storage.onChanged.addListener((changes) => {
-			if ('settings' in changes && changes.settings?.newValue) {
-				cache = deepMerge(DEFAULTS, changes.settings.newValue as DeepPartial<ExtensionSettings>)
-			}
+		settingsItem.watch((newValue) => {
+			if (newValue) cache = deepMerge(DEFAULTS, newValue)
 		})
 	})()
 	return init
@@ -97,10 +94,8 @@ export async function getSettings(): Promise<ExtensionSettings> {
 }
 
 export async function saveSettings(settings: ExtensionSettings): Promise<void> {
-	// Serialize to a plain object before storing. Firefox's structured clone
-	// implementation does not support Proxy objects (e.g. Vue reactive proxies),
-	// so passing one directly causes the write to silently fail.
+	// Firefox's structured clone doesn't support Vue reactive proxies, serialize first.
 	const plain = JSON.parse(JSON.stringify(settings)) as ExtensionSettings
 	cache = plain
-	await browser.storage.local.set({ [STORAGE_KEY]: plain })
+	await settingsItem.setValue(plain)
 }
