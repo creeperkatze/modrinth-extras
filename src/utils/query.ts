@@ -1,4 +1,4 @@
-const MAX_ENCODED_IDS_LENGTH = 6_000
+const MAX_ENCODED_IDS_LENGTH = 50_000
 
 export function chunkIdsForQuery(ids: string[]): string[][] {
 	const chunks: string[][] = []
@@ -18,5 +18,13 @@ export function chunkIdsForQuery(ids: string[]): string[][] {
 	}
 
 	if (chunk.length > 0) chunks.push(chunk)
+	if (chunks.length > 1) {
+		console.debug('[Modrinth Extras] Query: Chunked ids for query:', {
+			inputCount: ids.length,
+			chunkCount: chunks.length,
+			chunkSizes: chunks.map((chunk) => chunk.length),
+			maxEncodedIdsLength: MAX_ENCODED_IDS_LENGTH,
+		})
+	}
 	return chunks
 }
