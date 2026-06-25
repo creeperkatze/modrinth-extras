@@ -1,3 +1,5 @@
+import 'd3-transition'
+
 import type { Labrinth } from '@modrinth/api-client'
 import {
 	forceCenter,
@@ -41,6 +43,14 @@ export interface GraphEdge {
 }
 
 type D3Link = SimulationLinkDatum<GraphNode> & { type: GraphEdge['type'] }
+
+interface ViewportOptions {
+	animate?: boolean
+	duration?: number
+}
+
+const VIEWPORT_TRANSITION_NAME = 'mre-viewport'
+const VIEWPORT_TRANSITION_MS = 450
 
 export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 	const nodes = ref<GraphNode[]>([])
@@ -241,17 +251,29 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		zoom.value = transform.k
 	}
 
-	function setZoomTransform(transform: ZoomTransform) {
+	function setZoomTransform(transform: ZoomTransform, options: ViewportOptions = {}) {
 		const svgEl = svgRef()
 		if (!svgEl || !zoomBehavior) {
 			applyZoomTransform(transform)
 			return
 		}
-		select(svgEl).call(zoomBehavior.transform, transform)
+
+		const selection = select(svgEl)
+		selection.interrupt(VIEWPORT_TRANSITION_NAME)
+
+		if (!options.animate) {
+			selection.call(zoomBehavior.transform, transform)
+			return
+		}
+
+		selection
+			.transition(VIEWPORT_TRANSITION_NAME)
+			.duration(options.duration ?? VIEWPORT_TRANSITION_MS)
+			.call(zoomBehavior.transform, transform)
 	}
 
-	function setViewport(x: number, y: number, scale = zoom.value) {
-		setZoomTransform(zoomIdentity.translate(x, y).scale(scale))
+	function setViewport(x: number, y: number, scale = zoom.value, options: ViewportOptions = {}) {
+		setZoomTransform(zoomIdentity.translate(x, y).scale(scale), options)
 	}
 
 	function zoomToFit(padding = 80) {
@@ -279,6 +301,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 			(w - graphW * scale) / 2 - minX * scale,
 			(h - graphH * scale) / 2 - minY * scale,
 			scale,
+			{ animate: true },
 		)
 	}
 
@@ -304,7 +327,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		draggingNode = null
 		draggingNodeId.value = null
 		panning.value = false
-		setViewport(pan.value.x, pan.value.y, 1)
+		setViewport(pan.value.x, pan.value.y, 1, { animate: false })
 	}
 
 	function onNodeMouseDown(event: MouseEvent, node: GraphNode) {
@@ -364,7 +387,9 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 			zoomBehavior = d3Zoom<SVGSVGElement, unknown>()
 				.scaleExtent([0.15, 4])
 				.on('start', (event: D3ZoomEvent<SVGSVGElement, unknown>) => {
-					if (event.sourceEvent?.type !== 'wheel') panning.value = true
+					if (!event.sourceEvent) return
+					select(svgEl).interrupt(VIEWPORT_TRANSITION_NAME)
+					if (event.sourceEvent.type !== 'wheel') panning.value = true
 				})
 				.on('zoom', (event: D3ZoomEvent<SVGSVGElement, unknown>) => {
 					applyZoomTransform(event.transform)
@@ -380,6 +405,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 			)
 
 			onCleanup(() => {
+				selection.interrupt(VIEWPORT_TRANSITION_NAME)
 				selection.on('.zoom', null)
 				zoomBehavior = null
 				panning.value = false
