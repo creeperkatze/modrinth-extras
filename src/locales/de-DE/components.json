@@ -17,6 +17,24 @@
   "dependencyExplorer.title": {
     "defaultMessage": "Abhängigkeits-Explorer"
   },
+  "dependencyNode.collapse": {
+    "defaultMessage": "Abhängigkeiten einklappen"
+  },
+  "dependencyNode.embedded": {
+    "defaultMessage": "Eingebettet"
+  },
+  "dependencyNode.expand": {
+    "defaultMessage": "Abhängigkeiten erweitern"
+  },
+  "dependencyNode.incompatible": {
+    "defaultMessage": "Inkompatibel"
+  },
+  "dependencyNode.optional": {
+    "defaultMessage": "Optional"
+  },
+  "dependencyNode.required": {
+    "defaultMessage": "Erforderlich"
+  },
   "dependencySidebar.loadError": {
     "defaultMessage": "Fehler beim Laden der Abhängigkeiten"
   },
