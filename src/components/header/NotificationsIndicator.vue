@@ -318,7 +318,7 @@ async function refreshNotifications() {
 	try {
 		const notifs = await fetchNotifications(userId.value)
 		syncToBackground(notifs)
-		notificationsData.value = await fetchExtraNotificationData(notifs)
+		notificationsData.value = await fetchExtraNotificationData(notifs.filter((n) => !n.read))
 	} catch (err) {
 		console.warn('[Modrinth Extras] Failed to fetch notifications:', err)
 	}

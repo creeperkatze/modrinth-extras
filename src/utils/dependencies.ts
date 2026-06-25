@@ -1,6 +1,7 @@
 import type { Labrinth } from '@modrinth/api-client'
 
 import { modrinthClient } from './api'
+import { chunkIdsForQuery } from './query'
 
 export interface RawDep {
 	project_id: string
@@ -11,9 +12,6 @@ export interface RawDep {
 export interface EnrichedDep extends RawDep {
 	project: Labrinth.Projects.v3.Project | null
 }
-
-const MAX_ENCODED_IDS_LENGTH = 6_000
-const MAX_IDS_PER_QUERY = 100
 
 export function isGraphDependency(dependency: RawDep): boolean {
 	return (
@@ -97,31 +95,6 @@ export async function fetchDependencyGraphLayer(dependencies: RawDep[]): Promise
 			]),
 		),
 	}
-}
-
-function chunkIdsForQuery(ids: string[]): string[][] {
-	const chunks: string[][] = []
-	let chunk: string[] = []
-	let encodedLength = 6
-
-	for (const id of ids) {
-		const idLength = encodeURIComponent(JSON.stringify(id)).length
-		const separatorLength = chunk.length > 0 ? 3 : 0
-		if (
-			chunk.length > 0 &&
-			(chunk.length === MAX_IDS_PER_QUERY ||
-				encodedLength + separatorLength + idLength > MAX_ENCODED_IDS_LENGTH)
-		) {
-			chunks.push(chunk)
-			chunk = []
-			encodedLength = 6
-		}
-		chunk.push(id)
-		encodedLength += (chunk.length > 1 ? 3 : 0) + idLength
-	}
-
-	if (chunk.length > 0) chunks.push(chunk)
-	return chunks
 }
 
 async function fetchProjects(ids: string[]): Promise<Labrinth.Projects.v3.Project[]> {

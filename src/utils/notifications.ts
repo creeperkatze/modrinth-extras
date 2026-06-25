@@ -2,6 +2,7 @@ import type { Labrinth } from '@modrinth/api-client'
 import { browser } from 'wxt/browser'
 
 import { modrinthClient } from './api'
+import { chunkIdsForQuery } from './query'
 
 export type NotificationExtraData = {
 	project?: Labrinth.Projects.v3.Project
@@ -44,11 +45,17 @@ export function groupNotifications(notifications: Notification[]): Notification[
 async function getBulk<T>(ids: string[], get: (uniqueIds: string[]) => Promise<T[]>): Promise<T[]> {
 	const uniqueIds = [...new Set(ids)]
 	if (uniqueIds.length === 0) return []
-	try {
-		return await get(uniqueIds)
-	} catch {
-		return []
+
+	const result: T[] = []
+	for (const batch of chunkIdsForQuery(uniqueIds)) {
+		try {
+			result.push(...(await get(batch)))
+		} catch (err) {
+			console.error('[Modrinth Extras] Notifications: Failed to fetch extra data:', err)
+		}
 	}
+
+	return result
 }
 
 export async function fetchNotifications(userId: string): Promise<Notification[]> {
