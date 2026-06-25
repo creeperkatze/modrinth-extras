@@ -39,6 +39,7 @@ export interface ExtensionSettings {
 	activitySparkline: { enabled: boolean }
 	toolsSidebar: { enabled: boolean }
 	dependenciesSidebar: { enabled: boolean }
+	dependencyExplorer: { enabled: boolean }
 	githubSidebar: { enabled: boolean }
 	discordSidebar: { enabled: boolean }
 	galleryBackground: { enabled: boolean }
@@ -62,6 +63,7 @@ export const DEFAULTS: ExtensionSettings = {
 	activitySparkline: { enabled: true },
 	toolsSidebar: { enabled: true },
 	dependenciesSidebar: { enabled: true },
+	dependencyExplorer: { enabled: true },
 	githubSidebar: { enabled: true },
 	discordSidebar: { enabled: true },
 	galleryBackground: { enabled: true },

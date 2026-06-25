@@ -317,7 +317,7 @@ export default defineContentScript({
 		const dependencySidebar = createInjection({
 			id: 'modrinth-extras-dependency-sidebar',
 			isEnabled: () => settings.dependenciesSidebar.enabled,
-			settingsKeys: ['dependenciesSidebar'],
+			settingsKeys: ['dependenciesSidebar', 'dependencyExplorer'],
 			persistent: false,
 			projectScoped: true,
 			scopeKey: () =>
@@ -330,7 +330,13 @@ export default defineContentScript({
 				const match = window.location.pathname.match(PROJECT_DEP_PATTERN)
 				const slug = match?.[2] ?? ''
 				const versionNumber = match?.[3]
-				const app = createApp(h(DependenciesSidebar, { projectSlug: slug, versionNumber }))
+				const app = createApp(
+					h(DependenciesSidebar, {
+						projectSlug: slug,
+						versionNumber,
+						showExplorer: settings.dependencyExplorer.enabled,
+					}),
+				)
 				app.use(FloatingVue)
 				installI18n(app)
 				return app

@@ -17,6 +17,15 @@
   "feature.dependenciesSidebar.title": {
     "defaultMessage": "Dependency sidebar"
   },
+  "feature.dependencyExplorer.description": {
+    "defaultMessage": "Interactive graph for exploring the full dependency tree."
+  },
+  "feature.dependencyExplorer.disabledTooltip": {
+    "defaultMessage": "Requires the dependency sidebar to be enabled"
+  },
+  "feature.dependencyExplorer.title": {
+    "defaultMessage": "Dependency explorer"
+  },
   "feature.desktopNotifications.description": {
     "defaultMessage": "Operating system notifications for your Modrinth notifications."
   },

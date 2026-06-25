@@ -122,7 +122,13 @@
 					:icon="f.icon"
 					:title="f.title"
 					:description="f.description"
-					:model-value="settings[f.key].enabled"
+					:model-value="
+						(typeof f.disabled === 'function' ? f.disabled() : f.disabled)
+							? false
+							: settings[f.key].enabled
+					"
+					:disabled="typeof f.disabled === 'function' ? f.disabled() : f.disabled"
+					:disabled-tooltip="f.disabledTooltip"
 					@update:model-value="updateEnabled(f.key, $event)"
 				/>
 			</FeatureGroup>
@@ -205,7 +211,7 @@
 </template>
 
 <script setup lang="ts">
-import { Star } from '@lucide/vue'
+import { Network, Star } from '@lucide/vue'
 import type { Labrinth } from '@modrinth/api-client'
 import {
 	ArrowUpRightIcon,
@@ -345,6 +351,18 @@ const messages = defineMessages({
 	'feature.dependenciesSidebar.description': {
 		id: 'feature.dependenciesSidebar.description',
 		defaultMessage: 'Collapsible dependency tree on project pages.',
+	},
+	'feature.dependencyExplorer.title': {
+		id: 'feature.dependencyExplorer.title',
+		defaultMessage: 'Dependency explorer',
+	},
+	'feature.dependencyExplorer.description': {
+		id: 'feature.dependencyExplorer.description',
+		defaultMessage: 'Interactive graph for exploring the full dependency tree.',
+	},
+	'feature.dependencyExplorer.disabledTooltip': {
+		id: 'feature.dependencyExplorer.disabledTooltip',
+		defaultMessage: 'Requires the dependency sidebar to be enabled',
 	},
 	'feature.githubSidebar.title': {
 		id: 'feature.githubSidebar.title',
@@ -527,6 +545,14 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 		icon: GitGraphIcon,
 		title: formatMessage(messages['feature.dependenciesSidebar.title']),
 		description: formatMessage(messages['feature.dependenciesSidebar.description']),
+	},
+	{
+		key: 'dependencyExplorer',
+		icon: Network,
+		title: formatMessage(messages['feature.dependencyExplorer.title']),
+		description: formatMessage(messages['feature.dependencyExplorer.description']),
+		disabled: () => !settings.dependenciesSidebar.enabled,
+		disabledTooltip: formatMessage(messages['feature.dependencyExplorer.disabledTooltip']),
 	},
 	{
 		key: 'githubSidebar',

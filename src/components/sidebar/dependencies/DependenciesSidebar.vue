@@ -2,7 +2,11 @@
 	<div class="card flex-card experimental-styles-within">
 		<div class="flex items-center justify-between gap-2">
 			<h2>{{ formatMessage(messages['dependenciesSidebar.title']) }}</h2>
-			<ButtonStyled v-if="!loading && !error && roots.length > 0" circular type="transparent">
+			<ButtonStyled
+				v-if="showExplorer && !loading && !error && roots.length > 0"
+				circular
+				type="transparent"
+			>
 				<button
 					v-tooltip="formatMessage(messages['dependenciesSidebar.openGraph'])"
 					@click="explorerRef?.show()"
@@ -88,6 +92,7 @@ const messages = defineMessages({
 const props = defineProps<{
 	projectSlug: string
 	versionNumber?: string
+	showExplorer?: boolean
 }>()
 
 const explorerRef = ref<InstanceType<typeof DependencyExplorer> | null>(null)
