@@ -54,6 +54,17 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 	let panStart = { mx: 0, my: 0, px: 0, py: 0 }
 	let fitOnSettle = false
 
+	// The subset of nodes/edges the simulation and view should act on. Defaults to
+	// everything; the consumer can narrow it (e.g. when dependency types are toggled
+	// off) so the layout actually reorganizes around what's visible.
+	let activeNodes: () => GraphNode[] = () => nodes.value
+	let activeEdges: () => GraphEdge[] = () => edges.value
+
+	function setActiveAccessors(getNodes: () => GraphNode[], getEdges: () => GraphEdge[]) {
+		activeNodes = getNodes
+		activeEdges = getEdges
+	}
+
 	function edgeKey(edge: GraphEdge): string {
 		return `${edge.source}|||${edge.target}|||${edge.type}`
 	}
@@ -135,7 +146,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 	}
 
 	function getD3Links(): D3Link[] {
-		return edges.value.map((e) => ({ source: e.source, target: e.target, type: e.type }))
+		return activeEdges().map((e) => ({ source: e.source, target: e.target, type: e.type }))
 	}
 
 	function startSimulation() {
@@ -143,15 +154,15 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 
 		// Incident-edge count per node; hubs have a high degree and get more room.
 		const degree = new Map<string, number>()
-		for (const edge of edges.value) {
+		for (const edge of activeEdges()) {
 			degree.set(edge.source, (degree.get(edge.source) ?? 0) + 1)
 			degree.set(edge.target, (degree.get(edge.target) ?? 0) + 1)
 		}
 		const deg = (node: GraphNode) => degree.get(node.id) ?? 0
-		const maxDepth = nodes.value.reduce((max, n) => Math.max(max, n.depth), 0)
+		const maxDepth = activeNodes().reduce((max, n) => Math.max(max, n.depth), 0)
 
 		// Pin the root at the centre so the tree radiates from a fixed point.
-		for (const node of nodes.value) {
+		for (const node of activeNodes()) {
 			if (node.isRoot) {
 				node.x = 0
 				node.y = 0
@@ -160,7 +171,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 			}
 		}
 
-		simulation = forceSimulation<GraphNode>(nodes.value)
+		simulation = forceSimulation<GraphNode>(activeNodes())
 			.force(
 				'charge',
 				forceManyBody<GraphNode>()
@@ -212,13 +223,14 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 
 	function kickSimulation(hasNewNodes = true) {
 		if (!simulation) return
-		simulation.nodes(nodes.value)
+		simulation.nodes(activeNodes())
 		simulation.force<ForceLink<GraphNode, D3Link>>('link')?.links(getD3Links())
 		simulation.alpha(Math.max(simulation.alpha(), hasNewNodes ? 0.4 : 0.08)).restart()
 	}
 
 	function zoomToFit(padding = 80) {
-		if (nodes.value.length === 0) return
+		const fitNodes = activeNodes()
+		if (fitNodes.length === 0) return
 		const svgEl = svgRef()
 		if (!svgEl) return
 		const w = svgEl.clientWidth
@@ -227,7 +239,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 			maxX = -Infinity,
 			minY = Infinity,
 			maxY = -Infinity
-		for (const node of nodes.value) {
+		for (const node of fitNodes) {
 			const r = getNodeRadius(node) + 14
 			minX = Math.min(minX, node.x - r)
 			maxX = Math.max(maxX, node.x + r)
@@ -362,6 +374,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		recomputeCurvatures,
 		startSimulation,
 		kickSimulation,
+		setActiveAccessors,
 		zoomToFit,
 		setFitOnSettle,
 		reset,

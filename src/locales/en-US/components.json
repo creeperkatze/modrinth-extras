@@ -35,6 +35,9 @@
   "dependencyExplorer.dependencyNode.required": {
     "defaultMessage": "Required"
   },
+  "dependencyExplorer.depth": {
+    "defaultMessage": "Depth"
+  },
   "dependencyExplorer.loading": {
     "defaultMessage": "Loading"
   },

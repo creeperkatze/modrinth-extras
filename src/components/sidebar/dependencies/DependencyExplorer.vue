@@ -81,7 +81,7 @@
 				<g v-if="!initialLoading" :transform="`translate(${pan.x},${pan.y}) scale(${zoom})`">
 					<g class="pointer-events-none">
 						<path
-							v-for="edge in edges"
+							v-for="edge in visibleEdges"
 							:key="edgeKey(edge)"
 							:ref="(el) => setEdgeEl(edgeKey(edge), el as Element | null)"
 							:d="computeEdgePath(edge, edgeCurvatures.get(edgeKey(edge)) ?? 0)"
@@ -98,7 +98,7 @@
 					</g>
 
 					<g
-						v-for="node in nodes"
+						v-for="node in visibleNodes"
 						:key="node.id"
 						:ref="(el) => setNodeEl(node.id, el as Element | null)"
 						:transform="`translate(${node.x},${node.y})`"
@@ -184,12 +184,46 @@
 			</div>
 
 			<div
-				class="absolute bottom-3 left-3 flex flex-col gap-1.5 rounded-xl border border-solid border-surface-5 bg-surface-3 p-3 text-sm shadow-xl"
+				v-if="!initialLoading && maxDepth > 0"
+				class="absolute left-3 top-3 flex w-72 flex-col gap-2 rounded-xl border border-solid border-surface-5 bg-surface-3 px-3 py-2.5 text-sm shadow-xl"
 			>
-				<div v-for="item in LEGEND" :key="item.type" class="flex items-center gap-2">
-					<span class="size-2.5 shrink-0 rounded-full" :style="{ backgroundColor: item.color }" />
-					<span class="text-secondary">{{ item.label }}</span>
-				</div>
+				<span class="text-secondary">
+					{{ formatMessage(messages['dependencyExplorer.depth']) }}
+				</span>
+				<Slider
+					:model-value="depthLimit"
+					:min="0"
+					:max="maxDepth"
+					:step="1"
+					@update:model-value="setDepthLimit"
+				/>
+			</div>
+
+			<div
+				class="absolute bottom-3 left-3 flex flex-col gap-0.5 rounded-xl border border-solid border-surface-5 bg-surface-3 p-1.5 text-sm shadow-xl"
+			>
+				<button
+					v-for="item in LEGEND"
+					:key="item.type"
+					type="button"
+					class="flex items-center gap-2 rounded-lg px-2 py-1 transition-[background-color,opacity] duration-150 hover:bg-surface-4"
+					:class="hiddenTypes.has(item.type) ? 'opacity-45' : 'opacity-100'"
+					@click="toggleType(item.type)"
+				>
+					<span
+						class="size-2.5 shrink-0 rounded-full border-2 border-solid transition-colors duration-150"
+						:style="{
+							borderColor: item.color,
+							backgroundColor: hiddenTypes.has(item.type) ? 'transparent' : item.color,
+						}"
+					/>
+					<span
+						class="text-secondary transition-colors"
+						:class="{ 'line-through': hiddenTypes.has(item.type) }"
+					>
+						{{ item.label }}
+					</span>
+				</button>
 			</div>
 
 			<div class="absolute bottom-3 right-3 flex items-center gap-1.5">
@@ -216,7 +250,7 @@
 
 <script setup lang="ts">
 import { ExpandIcon, UpdatedIcon } from '@modrinth/assets'
-import { ButtonStyled, defineMessages, NewModal, useVIntl } from '@modrinth/ui'
+import { ButtonStyled, defineMessages, NewModal, Slider, useVIntl } from '@modrinth/ui'
 import { computed, nextTick, ref, useTemplateRef } from 'vue'
 
 import { type GraphEdge, type GraphNode, useForceGraph } from '../../../composables/useForceGraph'
@@ -247,6 +281,10 @@ const messages = defineMessages({
 		id: 'dependencyExplorer.reset',
 		defaultMessage: 'Reset',
 	},
+	'dependencyExplorer.depth': {
+		id: 'dependencyExplorer.depth',
+		defaultMessage: 'Depth',
+	},
 	'dependencyExplorer.dependencyNode.required': {
 		id: 'dependencyExplorer.dependencyNode.required',
 		defaultMessage: 'Required',
@@ -265,7 +303,9 @@ const messages = defineMessages({
 	},
 })
 
-const LEGEND = computed(() => [
+type DepType = GraphEdge['type']
+
+const LEGEND = computed<{ type: DepType; color: string; label: string }[]>(() => [
 	{
 		type: 'required',
 		color: 'var(--color-brand)',
@@ -282,6 +322,8 @@ const LEGEND = computed(() => [
 		label: formatMessage(messages['dependencyExplorer.dependencyNode.embedded']),
 	},
 ])
+
+const hiddenTypes = ref(new Set<DepType>())
 
 const props = defineProps<{ projectSlug: string; versionNumber?: string }>()
 
@@ -306,6 +348,8 @@ const {
 	setEdgeEl,
 	recomputeCurvatures,
 	startSimulation,
+	kickSimulation,
+	setActiveAccessors,
 	zoomToFit,
 	setFitOnSettle,
 	reset,
@@ -318,6 +362,79 @@ const {
 	onWheel,
 	getDragMoved,
 } = useForceGraph(() => svgRef.value)
+
+// Deepest generation present in the graph, and how many the slider currently shows.
+const maxDepth = computed(() => nodes.value.reduce((max, node) => Math.max(max, node.depth), 0))
+const depthLimit = ref(0)
+
+// Re-feed the simulation with the current active set so the layout reorganizes.
+function refreshSimulation() {
+	setFitOnSettle(true)
+	kickSimulation(true)
+}
+
+function toggleType(type: DepType) {
+	const next = new Set(hiddenTypes.value)
+	if (next.has(type)) next.delete(type)
+	else next.add(type)
+	hiddenTypes.value = next
+	refreshSimulation()
+}
+
+function setDepthLimit(value: number) {
+	depthLimit.value = value
+	refreshSimulation()
+}
+
+const typeVisibleEdges = computed(() =>
+	edges.value.filter((edge) => !hiddenTypes.value.has(edge.type)),
+)
+
+// Nodes reachable from the root through edges of currently-visible types, within the
+// generation limit; toggling a type off or lowering the slider prunes the rest.
+const visibleNodeIds = computed(() => {
+	const reachable = new Set<string>()
+	const root = nodes.value.find((node) => node.isRoot)
+	if (!root) return reachable
+
+	const adjacency = new Map<string, string[]>()
+	for (const edge of typeVisibleEdges.value) {
+		;(adjacency.get(edge.source) ?? adjacency.set(edge.source, []).get(edge.source)!).push(
+			edge.target,
+		)
+		;(adjacency.get(edge.target) ?? adjacency.set(edge.target, []).get(edge.target)!).push(
+			edge.source,
+		)
+	}
+
+	const queue = [root.id]
+	reachable.add(root.id)
+	while (queue.length > 0) {
+		const id = queue.shift()!
+		for (const neighbour of adjacency.get(id) ?? []) {
+			if (reachable.has(neighbour)) continue
+			if ((nodeById.get(neighbour)?.depth ?? 0) > depthLimit.value) continue
+			reachable.add(neighbour)
+			queue.push(neighbour)
+		}
+	}
+	return reachable
+})
+
+const visibleNodes = computed(() => nodes.value.filter((node) => visibleNodeIds.value.has(node.id)))
+
+// Only edges whose endpoints both survived the prune, so the simulation never links
+// to a node that isn't in the active set and no orphan edges render.
+const visibleEdges = computed(() =>
+	typeVisibleEdges.value.filter(
+		(edge) => visibleNodeIds.value.has(edge.source) && visibleNodeIds.value.has(edge.target),
+	),
+)
+
+setActiveAccessors(
+	() => visibleNodes.value,
+	() => visibleEdges.value,
+)
 
 function escId(id: string): string {
 	return id.replace(/[^a-zA-Z0-9]/g, '_')
@@ -401,6 +518,7 @@ function addDepsToGraph(
 
 async function initGraph() {
 	reset()
+	hiddenTypes.value = new Set()
 	initialLoading.value = true
 	loadingProgress.value = 0
 	zoom.value = 1
@@ -468,6 +586,7 @@ async function initGraph() {
 			}))
 		}
 
+		depthLimit.value = maxDepth.value
 		setFitOnSettle(true)
 		startSimulation()
 	} catch (err) {
