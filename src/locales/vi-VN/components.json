@@ -1,22 +1,4 @@
 {
-  "dependencySidebar.loading": {
-    "defaultMessage": "Đang tải"
-  },
-  "dependencyExplorer.controls": {
-    "defaultMessage": "cuộn để phóng to · kéo để di chuyển · nhấp để mở rộng"
-  },
-  "dependencyNode.embedded": {
-    "defaultMessage": "Nhúng"
-  },
-  "dependencyNode.incompatible": {
-    "defaultMessage": "Không tương thích"
-  },
-  "dependencyNode.optional": {
-    "defaultMessage": "Tuỳ chọn"
-  },
-  "dependencyNode.required": {
-    "defaultMessage": "Yêu cầu"
-  },
   "dependencyExplorer.loading": {
     "defaultMessage": "Đang tải"
   },

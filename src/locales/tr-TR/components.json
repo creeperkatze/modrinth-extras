@@ -1,37 +1,4 @@
 {
-  "dependencySidebar.loadError": {
-    "defaultMessage": "Bağımlılıklar yüklenemedi"
-  },
-  "dependencySidebar.loading": {
-    "defaultMessage": "Yükleniyor"
-  },
-  "dependencySidebar.none": {
-    "defaultMessage": "Gerekli bağımlılık yok"
-  },
-  "dependencySidebar.title": {
-    "defaultMessage": "Bağımlılıklar"
-  },
-  "dependencyExplorer.controls": {
-    "defaultMessage": "yakınlaştırmak için kaydırın · kaydırmak için sürükleyin · genişletmek için tıklayın"
-  },
-  "dependencyNode.collapse": {
-    "defaultMessage": "Bağımlılıkları daralt"
-  },
-  "dependencyNode.embedded": {
-    "defaultMessage": "Embed edilmiş"
-  },
-  "dependencyNode.expand": {
-    "defaultMessage": "Bağımlılıkları genişlet"
-  },
-  "dependencyNode.incompatible": {
-    "defaultMessage": "Uyumlu değil"
-  },
-  "dependencyNode.optional": {
-    "defaultMessage": "İsteğe bağlı"
-  },
-  "dependencyNode.required": {
-    "defaultMessage": "Gerekli"
-  },
   "dependencyExplorer.loading": {
     "defaultMessage": "Yükleniyor"
   },
@@ -147,3 +114,4 @@
     "defaultMessage": "API yanıtını görüntüle"
   }
 }
+

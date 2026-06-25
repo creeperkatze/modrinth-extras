@@ -11,12 +11,6 @@
   "feature.curseforgeRedirect.title": {
     "defaultMessage": "Reindirizzamento CurseForge"
   },
-  "feature.dependencySidebar.description": {
-    "defaultMessage": "Riduci l'albero delle dipendenze sulle pagine del progetto."
-  },
-  "feature.dependencySidebar.title": {
-    "defaultMessage": "Barra laterale delle dipendenze"
-  },
   "feature.desktopNotifications.description": {
     "defaultMessage": "Notifiche del sistema operativo per le tue notifiche Modrinth."
   },

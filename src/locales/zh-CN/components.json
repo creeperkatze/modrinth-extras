@@ -1,37 +1,4 @@
 {
-  "dependencySidebar.loadError": {
-    "defaultMessage": "加载依赖关系失败"
-  },
-  "dependencySidebar.loading": {
-    "defaultMessage": "加载中"
-  },
-  "dependencySidebar.none": {
-    "defaultMessage": "无依赖关系"
-  },
-  "dependencySidebar.title": {
-    "defaultMessage": "依赖关系"
-  },
-  "dependencyExplorer.controls": {
-    "defaultMessage": "滚动缩放 · 拖动平移 · 点击展开"
-  },
-  "dependencyNode.collapse": {
-    "defaultMessage": "折叠依赖关系"
-  },
-  "dependencyNode.embedded": {
-    "defaultMessage": "嵌入"
-  },
-  "dependencyNode.expand": {
-    "defaultMessage": "展开依赖关系"
-  },
-  "dependencyNode.incompatible": {
-    "defaultMessage": "不兼容"
-  },
-  "dependencyNode.optional": {
-    "defaultMessage": "选填"
-  },
-  "dependencyNode.required": {
-    "defaultMessage": "必填"
-  },
   "dependencyExplorer.loading": {
     "defaultMessage": "加载中"
   },
@@ -138,3 +105,4 @@
     "defaultMessage": "查看 API 响应"
   }
 }
+

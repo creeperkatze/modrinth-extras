@@ -1,4 +1,22 @@
 {
+  "dependencyExplorer.centerView": {
+    "defaultMessage": "Ansicht zentrieren"
+  },
+  "dependencyExplorer.depth": {
+    "defaultMessage": "Tiefe"
+  },
+  "dependencyExplorer.loading": {
+    "defaultMessage": "Wird geladen"
+  },
+  "dependencyExplorer.noDependencies": {
+    "defaultMessage": "Dieses Projekt hat keine Abhängigkeiten"
+  },
+  "dependencyExplorer.reset": {
+    "defaultMessage": "Zurücksetzen"
+  },
+  "dependencyExplorer.title": {
+    "defaultMessage": "Abhängigkeits-Explorer"
+  },
   "dependencySidebar.loadError": {
     "defaultMessage": "Fehler beim Laden der Abhängigkeiten"
   },
@@ -8,35 +26,11 @@
   "dependencySidebar.none": {
     "defaultMessage": "Keine Abhängigkeiten"
   },
+  "dependencySidebar.openExplorer": {
+    "defaultMessage": "Abhängigkeits-Explorer öffnen"
+  },
   "dependencySidebar.title": {
     "defaultMessage": "Abhängigkeiten"
-  },
-  "dependencyExplorer.controls": {
-    "defaultMessage": "scrollen zum zoomen · ziehen zum verschieben · klicken zum expandieren"
-  },
-  "dependencyNode.collapse": {
-    "defaultMessage": "Abhängigkeiten einklappen"
-  },
-  "dependencyNode.embedded": {
-    "defaultMessage": "Eingebettet"
-  },
-  "dependencyNode.expand": {
-    "defaultMessage": "Abhängigkeiten erweitern"
-  },
-  "dependencyNode.incompatible": {
-    "defaultMessage": "Inkompatibel"
-  },
-  "dependencyNode.optional": {
-    "defaultMessage": "Optional"
-  },
-  "dependencyNode.required": {
-    "defaultMessage": "Erforderlich"
-  },
-  "dependencyExplorer.loading": {
-    "defaultMessage": "Wird geladen"
-  },
-  "dependencyExplorer.noDependencies": {
-    "defaultMessage": "Dieses Projekt hat keine Abhängigkeiten"
   },
   "discordSidebar.members": {
     "defaultMessage": "{count} Mitglieder"
@@ -147,3 +141,4 @@
     "defaultMessage": "API-Antwort anzeigen"
   }
 }
+

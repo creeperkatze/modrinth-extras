@@ -1,37 +1,4 @@
 {
-  "dependencySidebar.loadError": {
-    "defaultMessage": "Échec du chargement de la dépendance"
-  },
-  "dependencySidebar.loading": {
-    "defaultMessage": "Chargement"
-  },
-  "dependencySidebar.none": {
-    "defaultMessage": "Aucune dépendance"
-  },
-  "dependencySidebar.title": {
-    "defaultMessage": "Dépendances"
-  },
-  "dependencyExplorer.controls": {
-    "defaultMessage": "faire défiler pour zoomer · faire glisser pour déplacer · cliquer pour agrandir"
-  },
-  "dependencyNode.collapse": {
-    "defaultMessage": "Réduire les dépendances"
-  },
-  "dependencyNode.embedded": {
-    "defaultMessage": "Intégré"
-  },
-  "dependencyNode.expand": {
-    "defaultMessage": "Développer les dépendances"
-  },
-  "dependencyNode.incompatible": {
-    "defaultMessage": "Incompatible"
-  },
-  "dependencyNode.optional": {
-    "defaultMessage": "Facultatif"
-  },
-  "dependencyNode.required": {
-    "defaultMessage": "Requis"
-  },
   "dependencyExplorer.loading": {
     "defaultMessage": "Chargement"
   },
@@ -138,3 +105,4 @@
     "defaultMessage": "Voir la réponse API"
   }
 }
+

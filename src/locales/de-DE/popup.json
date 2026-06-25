@@ -11,6 +11,15 @@
   "feature.curseforgeRedirect.title": {
     "defaultMessage": "CurseForge-Weiterleitung"
   },
+  "feature.dependencyExplorer.description": {
+    "defaultMessage": "Interaktiver Graph, um den vollständigen Abhängigkeitsbaum zu erkunden."
+  },
+  "feature.dependencyExplorer.disabledTooltip": {
+    "defaultMessage": "Erfordert die Aktivierung der Abhängigkeits-Sidebar"
+  },
+  "feature.dependencyExplorer.title": {
+    "defaultMessage": "Abhängigkeits-Explorer"
+  },
   "feature.dependencySidebar.description": {
     "defaultMessage": "Klappbarer Abhängigkeitsbaum auf Projektseiten."
   },

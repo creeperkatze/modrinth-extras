@@ -1,37 +1,4 @@
 {
-  "dependencySidebar.loadError": {
-    "defaultMessage": "Impossibile caricare le dipendenze"
-  },
-  "dependencySidebar.loading": {
-    "defaultMessage": "Caricamento in corso"
-  },
-  "dependencySidebar.none": {
-    "defaultMessage": "Nessuna dipendenza"
-  },
-  "dependencySidebar.title": {
-    "defaultMessage": "Dipendenze"
-  },
-  "dependencyExplorer.controls": {
-    "defaultMessage": "Scorri per ingrandire · trascina per spostarti · clicca per espandere"
-  },
-  "dependencyNode.collapse": {
-    "defaultMessage": "Comprimi le dipendenze"
-  },
-  "dependencyNode.embedded": {
-    "defaultMessage": "Incorporato"
-  },
-  "dependencyNode.expand": {
-    "defaultMessage": "Espandi le dipendenze"
-  },
-  "dependencyNode.incompatible": {
-    "defaultMessage": "incompatibile"
-  },
-  "dependencyNode.optional": {
-    "defaultMessage": "Facoltativo"
-  },
-  "dependencyNode.required": {
-    "defaultMessage": "Obbligatorio"
-  },
   "dependencyExplorer.loading": {
     "defaultMessage": "Caricamento in corso"
   },
@@ -138,3 +105,4 @@
     "defaultMessage": "Visualizza risposta API"
   }
 }
+
