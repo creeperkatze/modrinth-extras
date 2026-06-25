@@ -1,17 +1,17 @@
 {
-  "dependenciesSidebar.loadError": {
+  "dependencySidebar.loadError": {
     "defaultMessage": "Fehler beim Laden der Abhängigkeiten"
   },
-  "dependenciesSidebar.loading": {
+  "dependencySidebar.loading": {
     "defaultMessage": "Wird geladen"
   },
-  "dependenciesSidebar.none": {
+  "dependencySidebar.none": {
     "defaultMessage": "Keine Abhängigkeiten"
   },
-  "dependenciesSidebar.openGraph": {
+  "dependencySidebar.openGraph": {
     "defaultMessage": "Abhängigkeitsgraph öffnen"
   },
-  "dependenciesSidebar.title": {
+  "dependencySidebar.title": {
     "defaultMessage": "Abhängigkeiten"
   },
   "dependencyExplorer.controls": {

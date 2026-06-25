@@ -38,7 +38,7 @@ export interface ExtensionSettings {
 	}
 	activitySparkline: { enabled: boolean }
 	toolsSidebar: { enabled: boolean }
-	dependenciesSidebar: { enabled: boolean }
+	dependencySidebar: { enabled: boolean }
 	dependencyExplorer: { enabled: boolean }
 	githubSidebar: { enabled: boolean }
 	discordSidebar: { enabled: boolean }
@@ -62,7 +62,7 @@ export const DEFAULTS: ExtensionSettings = {
 	},
 	activitySparkline: { enabled: true },
 	toolsSidebar: { enabled: true },
-	dependenciesSidebar: { enabled: true },
+	dependencySidebar: { enabled: true },
 	dependencyExplorer: { enabled: true },
 	githubSidebar: { enabled: true },
 	discordSidebar: { enabled: true },
@@ -73,73 +73,6 @@ export const DEFAULTS: ExtensionSettings = {
 	telemetry: { enabled: true },
 }
 
-async function migrateFromFlatStorage(): Promise<ExtensionSettings> {
-	const old = await browser.storage.local.get([
-		'showBadge',
-		'desktopNotifications',
-		'showNotificationsIndicator',
-		'showToolsSidebar',
-		'showDependenciesSidebar',
-		'showActivitySparkline',
-		'showGitHubSidebar',
-		'showDiscordSidebar',
-		'showQuickSearch',
-		'curseforgeRedirect',
-		'showProjectCardActions',
-		'projectCardActionsModLoader',
-		'projectCardActionsPluginLoader',
-		'projectCardActionsShaderLoader',
-		'projectCardActionsGameVersion',
-		'telemetryEnabled',
-	])
-	const b = (key: string, def: boolean) => (old[key] as boolean | undefined) ?? def
-	const s = (key: string, def: string) => (old[key] as string | undefined) ?? def
-	return {
-		locale: DEFAULTS.locale,
-		notificationsIndicator: {
-			enabled: b('showNotificationsIndicator', DEFAULTS.notificationsIndicator.enabled),
-		},
-		quickSearch: {
-			enabled: b('showQuickSearch', DEFAULTS.quickSearch.enabled),
-		},
-		projectCardActions: {
-			enabled: b('showProjectCardActions', DEFAULTS.projectCardActions.enabled),
-			modLoader: s('projectCardActionsModLoader', DEFAULTS.projectCardActions.modLoader),
-			pluginLoader: s('projectCardActionsPluginLoader', DEFAULTS.projectCardActions.pluginLoader),
-			shaderLoader: s('projectCardActionsShaderLoader', DEFAULTS.projectCardActions.shaderLoader),
-			gameVersion: s('projectCardActionsGameVersion', DEFAULTS.projectCardActions.gameVersion),
-		},
-		activitySparkline: {
-			enabled: b('showActivitySparkline', DEFAULTS.activitySparkline.enabled),
-		},
-		toolsSidebar: {
-			enabled: b('showToolsSidebar', DEFAULTS.toolsSidebar.enabled),
-		},
-		dependenciesSidebar: {
-			enabled: b('showDependenciesSidebar', DEFAULTS.dependenciesSidebar.enabled),
-		},
-		githubSidebar: {
-			enabled: b('showGitHubSidebar', DEFAULTS.githubSidebar.enabled),
-		},
-		discordSidebar: {
-			enabled: b('showDiscordSidebar', DEFAULTS.discordSidebar.enabled),
-		},
-		galleryBackground: DEFAULTS.galleryBackground,
-		notificationBadge: {
-			enabled: b('showBadge', DEFAULTS.notificationBadge.enabled),
-		},
-		desktopNotifications: {
-			enabled: b('desktopNotifications', DEFAULTS.desktopNotifications.enabled),
-		},
-		curseforgeRedirect: {
-			enabled: b('curseforgeRedirect', DEFAULTS.curseforgeRedirect.enabled),
-		},
-		telemetry: {
-			enabled: b('telemetryEnabled', DEFAULTS.telemetry.enabled),
-		},
-	}
-}
-
 let cache: ExtensionSettings = structuredClone(DEFAULTS)
 let init: Promise<void> | null = null
 
@@ -148,7 +81,7 @@ function startInit(): Promise<void> {
 	init = (async () => {
 		const stored = await browser.storage.local.get(STORAGE_KEY)
 		const data = stored[STORAGE_KEY] as DeepPartial<ExtensionSettings> | undefined
-		cache = data ? deepMerge(DEFAULTS, data) : await migrateFromFlatStorage()
+		cache = deepMerge(DEFAULTS, data ?? {})
 		browser.storage.onChanged.addListener((changes) => {
 			if ('settings' in changes && changes.settings?.newValue) {
 				cache = deepMerge(DEFAULTS, changes.settings.newValue as DeepPartial<ExtensionSettings>)

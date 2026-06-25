@@ -1,17 +1,17 @@
 {
-  "dependenciesSidebar.loadError": {
+  "dependencySidebar.loadError": {
     "defaultMessage": "Bağımlılıklar yüklenemedi"
   },
-  "dependenciesSidebar.loading": {
+  "dependencySidebar.loading": {
     "defaultMessage": "Yükleniyor"
   },
-  "dependenciesSidebar.none": {
+  "dependencySidebar.none": {
     "defaultMessage": "Gerekli bağımlılık yok"
   },
-  "dependenciesSidebar.openGraph": {
+  "dependencySidebar.openGraph": {
     "defaultMessage": "Bağımlılık grafiğini aç"
   },
-  "dependenciesSidebar.title": {
+  "dependencySidebar.title": {
     "defaultMessage": "Bağımlılıklar"
   },
   "dependencyExplorer.controls": {

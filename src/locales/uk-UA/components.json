@@ -1,17 +1,17 @@
 {
-  "dependenciesSidebar.loadError": {
+  "dependencySidebar.loadError": {
     "defaultMessage": "Не вдалося завантажити залежності"
   },
-  "dependenciesSidebar.loading": {
+  "dependencySidebar.loading": {
     "defaultMessage": "Завантаження"
   },
-  "dependenciesSidebar.none": {
+  "dependencySidebar.none": {
     "defaultMessage": "Немає залежностей"
   },
-  "dependenciesSidebar.openGraph": {
+  "dependencySidebar.openGraph": {
     "defaultMessage": "Відкрити діаграму залежностей"
   },
-  "dependenciesSidebar.title": {
+  "dependencySidebar.title": {
     "defaultMessage": "Залежності"
   },
   "dependencyExplorer.controls": {

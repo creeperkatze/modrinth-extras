@@ -1,17 +1,17 @@
 {
-  "dependenciesSidebar.loadError": {
+  "dependencySidebar.loadError": {
     "defaultMessage": "Не удалось загрузить зависимости"
   },
-  "dependenciesSidebar.loading": {
+  "dependencySidebar.loading": {
     "defaultMessage": "Загрузка"
   },
-  "dependenciesSidebar.none": {
+  "dependencySidebar.none": {
     "defaultMessage": "Нет зависимостей"
   },
-  "dependenciesSidebar.openGraph": {
+  "dependencySidebar.openGraph": {
     "defaultMessage": "Открыть диаграмму зависимостей"
   },
-  "dependenciesSidebar.title": {
+  "dependencySidebar.title": {
     "defaultMessage": "Зависимости"
   },
   "dependencyExplorer.controls": {

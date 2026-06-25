@@ -11,10 +11,10 @@
   "feature.curseforgeRedirect.title": {
     "defaultMessage": "CurseForge 重定向"
   },
-  "feature.dependenciesSidebar.description": {
+  "feature.dependencySidebar.description": {
     "defaultMessage": "项目页面上的可折叠依赖关系树。"
   },
-  "feature.dependenciesSidebar.title": {
+  "feature.dependencySidebar.title": {
     "defaultMessage": "依赖侧边栏"
   },
   "feature.desktopNotifications.description": {

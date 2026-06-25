@@ -9,7 +9,7 @@ import QuickSearch from '../components/header/QuickSearch.vue'
 import ActivitySparkline from '../components/project/ActivitySparkline.vue'
 import GalleryBackground from '../components/project/GalleryBackground.vue'
 import ProjectCardActions from '../components/project/ProjectCardActions.vue'
-import DependenciesSidebar from '../components/sidebar/dependencies/DependenciesSidebar.vue'
+import DependencySidebar from '../components/sidebar/dependencies/DependencySidebar.vue'
 import DiscordSidebar from '../components/sidebar/DiscordSidebar.vue'
 import GitHubSidebar from '../components/sidebar/GitHubSidebar.vue'
 import ToolsSidebar from '../components/sidebar/ToolsSidebar.vue'
@@ -316,8 +316,8 @@ export default defineContentScript({
 
 		const dependencySidebar = createInjection({
 			id: 'modrinth-extras-dependency-sidebar',
-			isEnabled: () => settings.dependenciesSidebar.enabled,
-			settingsKeys: ['dependenciesSidebar', 'dependencyExplorer'],
+			isEnabled: () => settings.dependencySidebar.enabled,
+			settingsKeys: ['dependencySidebar', 'dependencyExplorer'],
 			persistent: false,
 			projectScoped: true,
 			scopeKey: () =>
@@ -331,7 +331,7 @@ export default defineContentScript({
 				const slug = match?.[2] ?? ''
 				const versionNumber = match?.[3]
 				const app = createApp(
-					h(DependenciesSidebar, {
+					h(DependencySidebar, {
 						projectSlug: slug,
 						versionNumber,
 						showExplorer: settings.dependencyExplorer.enabled,

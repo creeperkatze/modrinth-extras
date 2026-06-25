@@ -11,10 +11,10 @@
   "feature.curseforgeRedirect.title": {
     "defaultMessage": "Reindirizzamento CurseForge"
   },
-  "feature.dependenciesSidebar.description": {
+  "feature.dependencySidebar.description": {
     "defaultMessage": "Riduci l'albero delle dipendenze sulle pagine del progetto."
   },
-  "feature.dependenciesSidebar.title": {
+  "feature.dependencySidebar.title": {
     "defaultMessage": "Barra laterale delle dipendenze"
   },
   "feature.desktopNotifications.description": {

@@ -1,17 +1,17 @@
 {
-  "dependenciesSidebar.loadError": {
+  "dependencySidebar.loadError": {
     "defaultMessage": "Échec du chargement de la dépendance"
   },
-  "dependenciesSidebar.loading": {
+  "dependencySidebar.loading": {
     "defaultMessage": "Chargement"
   },
-  "dependenciesSidebar.none": {
+  "dependencySidebar.none": {
     "defaultMessage": "Aucune dépendance"
   },
-  "dependenciesSidebar.openGraph": {
+  "dependencySidebar.openGraph": {
     "defaultMessage": "Ouvrir le graphique des dépendances"
   },
-  "dependenciesSidebar.title": {
+  "dependencySidebar.title": {
     "defaultMessage": "Dépendances"
   },
   "dependencyExplorer.controls": {

@@ -11,10 +11,10 @@
   "feature.curseforgeRedirect.title": {
     "defaultMessage": "Перенаправлення CurseForge"
   },
-  "feature.dependenciesSidebar.description": {
+  "feature.dependencySidebar.description": {
     "defaultMessage": "Згортуване дерево залежностей на сторінках проєктів."
   },
-  "feature.dependenciesSidebar.title": {
+  "feature.dependencySidebar.title": {
     "defaultMessage": "Бічна панель залежностей"
   },
   "feature.desktopNotifications.description": {

@@ -11,10 +11,10 @@
   "feature.curseforgeRedirect.title": {
     "defaultMessage": "CurseForge yönlendirmesi"
   },
-  "feature.dependenciesSidebar.description": {
+  "feature.dependencySidebar.description": {
     "defaultMessage": "Proje sayfalarında daraltılabilir bileşen ağacı."
   },
-  "feature.dependenciesSidebar.title": {
+  "feature.dependencySidebar.title": {
     "defaultMessage": "Bağımlılık kenar çubuğu"
   },
   "feature.desktopNotifications.description": {

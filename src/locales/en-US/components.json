@@ -1,19 +1,4 @@
 {
-  "dependenciesSidebar.loadError": {
-    "defaultMessage": "Failed to load dependencies"
-  },
-  "dependenciesSidebar.loading": {
-    "defaultMessage": "Loading"
-  },
-  "dependenciesSidebar.none": {
-    "defaultMessage": "No dependencies"
-  },
-  "dependenciesSidebar.openGraph": {
-    "defaultMessage": "Open dependency graph"
-  },
-  "dependenciesSidebar.title": {
-    "defaultMessage": "Dependencies"
-  },
   "dependencyExplorer.centerView": {
     "defaultMessage": "Center view"
   },
@@ -49,6 +34,21 @@
   },
   "dependencyExplorer.title": {
     "defaultMessage": "Dependency Graph"
+  },
+  "dependencySidebar.loadError": {
+    "defaultMessage": "Failed to load dependencies"
+  },
+  "dependencySidebar.loading": {
+    "defaultMessage": "Loading"
+  },
+  "dependencySidebar.none": {
+    "defaultMessage": "No dependencies"
+  },
+  "dependencySidebar.openGraph": {
+    "defaultMessage": "Open dependency graph"
+  },
+  "dependencySidebar.title": {
+    "defaultMessage": "Dependencies"
   },
   "discordSidebar.members": {
     "defaultMessage": "{count} members"

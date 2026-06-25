@@ -344,12 +344,12 @@ const messages = defineMessages({
 		defaultMessage:
 			'Generate embeds, view raw API responses, copy download URLs and packwiz commands.',
 	},
-	'feature.dependenciesSidebar.title': {
-		id: 'feature.dependenciesSidebar.title',
+	'feature.dependencySidebar.title': {
+		id: 'feature.dependencySidebar.title',
 		defaultMessage: 'Dependency sidebar',
 	},
-	'feature.dependenciesSidebar.description': {
-		id: 'feature.dependenciesSidebar.description',
+	'feature.dependencySidebar.description': {
+		id: 'feature.dependencySidebar.description',
 		defaultMessage: 'Collapsible dependency tree on project pages.',
 	},
 	'feature.dependencyExplorer.title': {
@@ -541,17 +541,17 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 		description: formatMessage(messages['feature.toolsSidebar.description']),
 	},
 	{
-		key: 'dependenciesSidebar',
+		key: 'dependencySidebar',
 		icon: GitGraphIcon,
-		title: formatMessage(messages['feature.dependenciesSidebar.title']),
-		description: formatMessage(messages['feature.dependenciesSidebar.description']),
+		title: formatMessage(messages['feature.dependencySidebar.title']),
+		description: formatMessage(messages['feature.dependencySidebar.description']),
 	},
 	{
 		key: 'dependencyExplorer',
 		icon: Network,
 		title: formatMessage(messages['feature.dependencyExplorer.title']),
 		description: formatMessage(messages['feature.dependencyExplorer.description']),
-		disabled: () => !settings.dependenciesSidebar.enabled,
+		disabled: () => !settings.dependencySidebar.enabled,
 		disabledTooltip: formatMessage(messages['feature.dependencyExplorer.disabledTooltip']),
 	},
 	{

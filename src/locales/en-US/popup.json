@@ -11,12 +11,6 @@
   "feature.curseforgeRedirect.title": {
     "defaultMessage": "CurseForge redirect"
   },
-  "feature.dependenciesSidebar.description": {
-    "defaultMessage": "Collapsible dependency tree on project pages."
-  },
-  "feature.dependenciesSidebar.title": {
-    "defaultMessage": "Dependency sidebar"
-  },
   "feature.dependencyExplorer.description": {
     "defaultMessage": "Interactive graph for exploring the full dependency tree."
   },
@@ -25,6 +19,12 @@
   },
   "feature.dependencyExplorer.title": {
     "defaultMessage": "Dependency explorer"
+  },
+  "feature.dependencySidebar.description": {
+    "defaultMessage": "Collapsible dependency tree on project pages."
+  },
+  "feature.dependencySidebar.title": {
+    "defaultMessage": "Dependency sidebar"
   },
   "feature.desktopNotifications.description": {
     "defaultMessage": "Operating system notifications for your Modrinth notifications."
