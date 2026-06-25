@@ -1,14 +1,14 @@
 <template>
 	<div class="card flex-card experimental-styles-within">
 		<div class="flex items-center justify-between gap-2">
-			<h2>{{ formatMessage(messages['dependenciesSidebar.title']) }}</h2>
+			<h2>{{ formatMessage(messages['dependencySidebar.title']) }}</h2>
 			<ButtonStyled
 				v-if="showExplorer && !loading && !error && roots.length > 0"
 				circular
 				type="transparent"
 			>
 				<button
-					v-tooltip="formatMessage(messages['dependenciesSidebar.openGraph'])"
+					v-tooltip="formatMessage(messages['dependencySidebar.openExplorer'])"
 					@click="explorerRef?.show()"
 				>
 					<Network aria-hidden="true" />
@@ -19,7 +19,7 @@
 			<div v-if="loading" class="details-list__item !w-full min-w-0 max-w-full !items-start">
 				<LoaderCircleIcon class="mt-0.5 shrink-0 animate-spin" />
 				<span class="min-w-0 flex-1 break-words leading-tight">
-					{{ formatMessage(messages['dependenciesSidebar.loading']) }}
+					{{ formatMessage(messages['dependencySidebar.loading']) }}
 				</span>
 			</div>
 			<div
@@ -27,7 +27,7 @@
 				class="details-list__item !w-full min-w-0 max-w-full !items-start font-normal text-secondary"
 			>
 				<span class="min-w-0 flex-1 break-words leading-tight">
-					{{ formatMessage(messages['dependenciesSidebar.loadError']) }}
+					{{ formatMessage(messages['dependencySidebar.loadError']) }}
 				</span>
 			</div>
 			<div
@@ -36,7 +36,7 @@
 			>
 				<XIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 				<span class="min-w-0 flex-1 break-words leading-tight">
-					{{ formatMessage(messages['dependenciesSidebar.none']) }}
+					{{ formatMessage(messages['dependencySidebar.none']) }}
 				</span>
 			</div>
 			<ScrollablePanel v-else class="[&__.scrollable-pane]:max-h-96">
@@ -76,17 +76,17 @@ import DependencyNode from './DependencyNode.vue'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
-	'dependenciesSidebar.title': { id: 'dependenciesSidebar.title', defaultMessage: 'Dependencies' },
-	'dependenciesSidebar.openGraph': {
-		id: 'dependenciesSidebar.openGraph',
-		defaultMessage: 'Open dependency graph',
+	'dependencySidebar.title': { id: 'dependencySidebar.title', defaultMessage: 'Dependencies' },
+	'dependencySidebar.openExplorer': {
+		id: 'dependencySidebar.openExplorer',
+		defaultMessage: 'Open dependency explorer',
 	},
-	'dependenciesSidebar.loading': { id: 'dependenciesSidebar.loading', defaultMessage: 'Loading' },
-	'dependenciesSidebar.loadError': {
-		id: 'dependenciesSidebar.loadError',
+	'dependencySidebar.loading': { id: 'dependencySidebar.loading', defaultMessage: 'Loading' },
+	'dependencySidebar.loadError': {
+		id: 'dependencySidebar.loadError',
 		defaultMessage: 'Failed to load dependencies',
 	},
-	'dependenciesSidebar.none': { id: 'dependenciesSidebar.none', defaultMessage: 'No dependencies' },
+	'dependencySidebar.none': { id: 'dependencySidebar.none', defaultMessage: 'No dependencies' },
 })
 
 const props = defineProps<{

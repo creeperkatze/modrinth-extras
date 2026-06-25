@@ -260,7 +260,7 @@ const { formatMessage } = useVIntl()
 const messages = defineMessages({
 	'dependencyExplorer.title': {
 		id: 'dependencyExplorer.title',
-		defaultMessage: 'Dependency Graph',
+		defaultMessage: 'Dependency Explorer',
 	},
 	'dependencyExplorer.noDependencies': {
 		id: 'dependencyExplorer.noDependencies',

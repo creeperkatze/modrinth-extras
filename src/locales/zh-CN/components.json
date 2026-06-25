@@ -8,7 +8,7 @@
   "dependencySidebar.none": {
     "defaultMessage": "无依赖关系"
   },
-  "dependencySidebar.openGraph": {
+  "dependencySidebar.openExplorer": {
     "defaultMessage": "打开依赖关系图"
   },
   "dependencySidebar.title": {

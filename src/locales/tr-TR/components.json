@@ -8,7 +8,7 @@
   "dependencySidebar.none": {
     "defaultMessage": "Gerekli bağımlılık yok"
   },
-  "dependencySidebar.openGraph": {
+  "dependencySidebar.openExplorer": {
     "defaultMessage": "Bağımlılık grafiğini aç"
   },
   "dependencySidebar.title": {

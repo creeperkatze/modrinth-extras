@@ -8,7 +8,7 @@
   "dependencySidebar.none": {
     "defaultMessage": "Nessuna dipendenza"
   },
-  "dependencySidebar.openGraph": {
+  "dependencySidebar.openExplorer": {
     "defaultMessage": "Apri il grafico delle dipendenze"
   },
   "dependencySidebar.title": {

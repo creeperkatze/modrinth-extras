@@ -33,7 +33,7 @@
     "defaultMessage": "Reset"
   },
   "dependencyExplorer.title": {
-    "defaultMessage": "Dependency Graph"
+    "defaultMessage": "Dependency Explorer"
   },
   "dependencySidebar.loadError": {
     "defaultMessage": "Failed to load dependencies"
@@ -44,8 +44,8 @@
   "dependencySidebar.none": {
     "defaultMessage": "No dependencies"
   },
-  "dependencySidebar.openGraph": {
-    "defaultMessage": "Open dependency graph"
+  "dependencySidebar.openExplorer": {
+    "defaultMessage": "Open dependency explorer"
   },
   "dependencySidebar.title": {
     "defaultMessage": "Dependencies"
