@@ -651,6 +651,10 @@ const isLatest = ref(false)
 const checking = ref(true)
 const firefoxControlsTelemetry = ref(false)
 
+const updateCheckCacheItem = storage.defineItem<{ tag: string; ts: number }>(
+	'local:updateCheckCache',
+)
+
 const settings = reactive({ ...DEFAULTS })
 const settingsLoaded = ref(false)
 
@@ -706,11 +710,9 @@ onMounted(async () => {
 	}
 
 	try {
-		const CACHE_KEY = 'updateCheckCache'
 		const CACHE_TTL = 10 * 60 * 1000 // 10 minutes
 
-		const cached = await browser.storage.local.get(CACHE_KEY)
-		const entry = cached[CACHE_KEY] as { tag: string; ts: number } | undefined
+		const entry = await updateCheckCacheItem.getValue()
 		let tag: string
 
 		if (entry && Date.now() - entry.ts < CACHE_TTL) {
@@ -722,7 +724,7 @@ onMounted(async () => {
 			if (!res.ok) throw new Error(`HTTP ${res.status}`)
 			const data = await res.json()
 			tag = data.tag_name?.replace(/^v/, '') ?? ''
-			await browser.storage.local.set({ [CACHE_KEY]: { tag, ts: Date.now() } })
+			await updateCheckCacheItem.setValue({ tag, ts: Date.now() })
 		}
 
 		if (tag && tag !== version) latestVersion.value = tag

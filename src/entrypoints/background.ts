@@ -1,6 +1,12 @@
 import { browser } from 'wxt/browser'
 
-import { applyNotifications, setBadge, showCachedBadge, updateBadge } from '../background/badge'
+import {
+	applyNotifications,
+	notificationsItem,
+	setBadge,
+	showCachedBadge,
+	updateBadge,
+} from '../background/badge'
 import { handleNotificationClick } from '../background/desktop-notifications'
 import { detectBrowserLocale } from '../utils/i18n'
 import type { Notification } from '../utils/notifications'
@@ -63,11 +69,8 @@ export default defineBackground(() => {
 		if (message.type === 'notifications-fetched') {
 			const newNotifs = message.notifications as Notification[]
 			;(async () => {
-				const { notifications: prevNotifs } = await browser.storage.local.get('notifications')
-				await applyNotifications(
-					newNotifs,
-					Array.isArray(prevNotifs) ? (prevNotifs as Notification[]) : null,
-				)
+				const prevNotifs = await notificationsItem.getValue()
+				await applyNotifications(newNotifs, prevNotifs)
 			})()
 		}
 	})

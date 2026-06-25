@@ -1,3 +1,4 @@
+import { storage } from '@wxt-dev/storage'
 import { PostHog } from 'posthog-js/dist/module.no-external'
 import { browser } from 'wxt/browser'
 
@@ -5,6 +6,8 @@ import { getSettings } from './settings'
 
 const POSTHOG_TOKEN = 'phc_oWL7DUqxG3kmN20nWBkie7Eu7i3GJMdvGnvKRWBI7hi'
 const POSTHOG_HOST = 'https://hedgehog.creeperkatze.dev'
+
+const distinctIdItem = storage.defineItem<string>('local:posthog_distinct_id')
 
 let posthog: PostHog | null = null
 let enabled = true
@@ -17,12 +20,10 @@ export function setTelemetryEnabled(value: boolean): void {
 }
 
 async function getSharedDistinctId(): Promise<string> {
-	const stored = await browser.storage.local.get(['posthog_distinct_id'])
-	if (stored.posthog_distinct_id) {
-		return stored.posthog_distinct_id as string
-	}
+	const stored = await distinctIdItem.getValue()
+	if (stored) return stored
 	const distinctId = crypto.randomUUID()
-	await browser.storage.local.set({ posthog_distinct_id: distinctId })
+	await distinctIdItem.setValue(distinctId)
 	return distinctId
 }
 

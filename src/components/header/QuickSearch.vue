@@ -142,6 +142,7 @@ import {
 	XIcon,
 } from '@modrinth/assets'
 import { ButtonStyled, defineMessages, useVIntl } from '@modrinth/ui'
+import { storage } from '@wxt-dev/storage'
 import { type Component, computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
 import { modrinthClient } from '../../utils/api'
@@ -206,12 +207,15 @@ const ENV_OPTIONS = ['client', 'server']
 
 const MAX_RECENT_SEARCHES = 6
 
+const recentSearchesItem = storage.defineItem<Example[]>('local:recentSearches', {
+	defaultValue: [],
+})
+
 const recentSearches = ref<Example[]>([])
 
 async function loadRecentSearches() {
 	try {
-		const result = await browser.storage.local.get('recentSearches')
-		recentSearches.value = (result.recentSearches as Example[]) ?? []
+		recentSearches.value = await recentSearchesItem.getValue()
 	} catch (err) {
 		recentSearches.value = []
 		console.error('[Modrinth Extras] Failed to load recent searches:', err)
@@ -221,7 +225,7 @@ async function loadRecentSearches() {
 async function clearRecentSearches() {
 	recentSearches.value = []
 	try {
-		await browser.storage.local.remove('recentSearches')
+		await recentSearchesItem.removeValue()
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to clear recent searches:', err)
 	}
@@ -234,7 +238,7 @@ async function saveRecentSearch(entry: Example) {
 	)
 	recentSearches.value = updated
 	try {
-		await browser.storage.local.set({ recentSearches: updated })
+		await recentSearchesItem.setValue(updated)
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to save recent searches:', err)
 	}
