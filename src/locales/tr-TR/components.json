@@ -38,9 +38,6 @@
   "dependencyExplorer.noDependencies": {
     "defaultMessage": "Bu projenin hiçbir bağımlılığı yok"
   },
-  "dependencyExplorer.title": {
-    "defaultMessage": "Bağımlılık Grafiği"
-  },
   "discordSidebar.members": {
     "defaultMessage": "{count} üye"
   },

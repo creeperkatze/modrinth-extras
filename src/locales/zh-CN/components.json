@@ -38,9 +38,6 @@
   "dependencyExplorer.noDependencies": {
     "defaultMessage": "此项目没有依赖关系"
   },
-  "dependencyExplorer.title": {
-    "defaultMessage": "依赖关系图"
-  },
   "discordSidebar.members": {
     "defaultMessage": "{count} 位成员"
   },

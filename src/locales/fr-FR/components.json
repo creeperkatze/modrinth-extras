@@ -38,9 +38,6 @@
   "dependencyExplorer.noDependencies": {
     "defaultMessage": "Ce projet n'a aucune dépendance"
   },
-  "dependencyExplorer.title": {
-    "defaultMessage": "Graphe des dépendances"
-  },
   "discordSidebar.members": {
     "defaultMessage": "{count} membres"
   },
