@@ -1,14 +1,24 @@
 import type { Labrinth } from '@modrinth/api-client'
-import type { ForceLink, Simulation, SimulationLinkDatum } from 'd3-force'
 import {
 	forceCenter,
 	forceCollide,
+	type ForceLink,
 	forceLink,
 	forceManyBody,
 	forceRadial,
 	forceSimulation,
+	type Simulation,
+	type SimulationLinkDatum,
 } from 'd3-force'
-import { markRaw, onUnmounted, ref } from 'vue'
+import { select } from 'd3-selection'
+import {
+	type D3ZoomEvent,
+	zoom as d3Zoom,
+	type ZoomBehavior,
+	zoomIdentity,
+	type ZoomTransform,
+} from 'd3-zoom'
+import { markRaw, onUnmounted, ref, watch } from 'vue'
 
 export interface GraphNode {
 	id: string
@@ -51,8 +61,8 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 	let dragStartMouse = { x: 0, y: 0 }
 	let dragStartNode = { x: 0, y: 0 }
 	let dragMoved = false
-	let panStart = { mx: 0, my: 0, px: 0, py: 0 }
 	let fitOnSettle = false
+	let zoomBehavior: ZoomBehavior<SVGSVGElement, unknown> | null = null
 
 	// Subset of nodes/edges the simulation and view act on; the consumer can narrow it.
 	let activeNodes: () => GraphNode[] = () => nodes.value
@@ -226,6 +236,24 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		simulation.alpha(Math.max(simulation.alpha(), hasNewNodes ? 0.4 : 0.08)).restart()
 	}
 
+	function applyZoomTransform(transform: ZoomTransform) {
+		pan.value = { x: transform.x, y: transform.y }
+		zoom.value = transform.k
+	}
+
+	function setZoomTransform(transform: ZoomTransform) {
+		const svgEl = svgRef()
+		if (!svgEl || !zoomBehavior) {
+			applyZoomTransform(transform)
+			return
+		}
+		select(svgEl).call(zoomBehavior.transform, transform)
+	}
+
+	function setViewport(x: number, y: number, scale = zoom.value) {
+		setZoomTransform(zoomIdentity.translate(x, y).scale(scale))
+	}
+
 	function zoomToFit(padding = 80) {
 		const fitNodes = activeNodes()
 		if (fitNodes.length === 0) return
@@ -247,11 +275,11 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		const graphW = maxX - minX || 1
 		const graphH = maxY - minY || 1
 		const scale = Math.min((w - padding * 2) / graphW, (h - padding * 2) / graphH, 1.2)
-		zoom.value = scale
-		pan.value = {
-			x: (w - graphW * scale) / 2 - minX * scale,
-			y: (h - graphH * scale) / 2 - minY * scale,
-		}
+		setViewport(
+			(w - graphW * scale) / 2 - minX * scale,
+			(h - graphH * scale) / 2 - minY * scale,
+			scale,
+		)
 	}
 
 	function addNode(node: GraphNode) {
@@ -276,7 +304,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		draggingNode = null
 		draggingNodeId.value = null
 		panning.value = false
-		zoom.value = 1
+		setViewport(pan.value.x, pan.value.y, 1)
 	}
 
 	function onNodeMouseDown(event: MouseEvent, node: GraphNode) {
@@ -294,11 +322,6 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		simulation?.alphaTarget(0.3).restart()
 	}
 
-	function onBgMouseDown(event: MouseEvent) {
-		panning.value = true
-		panStart = { mx: event.clientX, my: event.clientY, px: pan.value.x, py: pan.value.y }
-	}
-
 	function onMouseMove(event: MouseEvent) {
 		if (draggingNode) {
 			const dx = event.clientX - dragStartMouse.x
@@ -308,11 +331,6 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 			draggingNode.fy = dragStartNode.y + dy / zoom.value
 			draggingNode.x = draggingNode.fx
 			draggingNode.y = draggingNode.fy
-		} else if (panning.value) {
-			pan.value = {
-				x: panStart.px + (event.clientX - panStart.mx),
-				y: panStart.py + (event.clientY - panStart.my),
-			}
 		}
 	}
 
@@ -330,21 +348,6 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		panning.value = false
 	}
 
-	function onWheel(event: WheelEvent) {
-		const svgEl = svgRef()
-		if (!svgEl) return
-		const rect = svgEl.getBoundingClientRect()
-		const mx = event.clientX - rect.left
-		const my = event.clientY - rect.top
-		const factor = event.deltaY > 0 ? 0.85 : 1 / 0.85
-		const newZoom = Math.max(0.15, Math.min(4, zoom.value * factor))
-		pan.value = {
-			x: mx - (mx - pan.value.x) * (newZoom / zoom.value),
-			y: my - (my - pan.value.y) * (newZoom / zoom.value),
-		}
-		zoom.value = newZoom
-	}
-
 	function getDragMoved() {
 		return dragMoved
 	}
@@ -353,7 +356,42 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		fitOnSettle = v
 	}
 
-	onUnmounted(() => simulation?.stop())
+	const stopZoomWatch = watch(
+		svgRef,
+		(svgEl, _oldSvgEl, onCleanup) => {
+			if (!svgEl) return
+
+			zoomBehavior = d3Zoom<SVGSVGElement, unknown>()
+				.scaleExtent([0.15, 4])
+				.on('start', (event: D3ZoomEvent<SVGSVGElement, unknown>) => {
+					if (event.sourceEvent?.type !== 'wheel') panning.value = true
+				})
+				.on('zoom', (event: D3ZoomEvent<SVGSVGElement, unknown>) => {
+					applyZoomTransform(event.transform)
+				})
+				.on('end', () => {
+					panning.value = false
+				})
+
+			const selection = select(svgEl).call(zoomBehavior)
+			selection.call(
+				zoomBehavior.transform,
+				zoomIdentity.translate(pan.value.x, pan.value.y).scale(zoom.value),
+			)
+
+			onCleanup(() => {
+				selection.on('.zoom', null)
+				zoomBehavior = null
+				panning.value = false
+			})
+		},
+		{ flush: 'post' },
+	)
+
+	onUnmounted(() => {
+		stopZoomWatch()
+		simulation?.stop()
+	})
 
 	return {
 		nodes,
@@ -374,15 +412,14 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		kickSimulation,
 		setActiveAccessors,
 		zoomToFit,
+		setViewport,
 		setFitOnSettle,
 		reset,
 		addNode,
 		addEdge,
 		onNodeMouseDown,
-		onBgMouseDown,
 		onMouseMove,
 		onMouseUp,
-		onWheel,
 		getDragMoved,
 	}
 }

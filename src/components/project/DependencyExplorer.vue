@@ -18,7 +18,6 @@
 				ref="svgRef"
 				class="block h-full w-full"
 				:class="panning ? 'cursor-grabbing' : 'cursor-grab'"
-				@wheel.prevent="onWheel"
 			>
 				<defs>
 					<pattern
@@ -71,12 +70,7 @@
 					</template>
 				</defs>
 
-				<rect
-					width="100%"
-					height="100%"
-					fill="url(#mre-explorer-grid)"
-					@mousedown="onBgMouseDown"
-				/>
+				<rect width="100%" height="100%" fill="url(#mre-explorer-grid)" />
 
 				<g v-if="!initialLoading" :transform="`translate(${pan.x},${pan.y}) scale(${zoom})`">
 					<g class="pointer-events-none">
@@ -344,15 +338,14 @@ const {
 	kickSimulation,
 	setActiveAccessors,
 	zoomToFit,
+	setViewport,
 	setFitOnSettle,
 	reset,
 	addNode,
 	addEdge,
 	onNodeMouseDown,
-	onBgMouseDown,
 	onMouseMove,
 	onMouseUp,
-	onWheel,
 	getDragMoved,
 } = useForceGraph(() => svgRef.value)
 
@@ -512,7 +505,6 @@ async function initGraph() {
 	hiddenTypes.value = new Set()
 	initialLoading.value = true
 	loadingProgress.value = 0
-	zoom.value = 1
 
 	try {
 		const { project: rootProject, dependencies: rootDependencies } = await fetchDependencyGraphRoot(
@@ -607,7 +599,7 @@ async function show() {
 	await nextTick()
 	const w = svgRef.value?.clientWidth ?? 960
 	const h = svgRef.value?.clientHeight ?? 580
-	pan.value = { x: w / 2, y: h / 2 }
+	setViewport(w / 2, h / 2, 1)
 	initGraph()
 }
 
