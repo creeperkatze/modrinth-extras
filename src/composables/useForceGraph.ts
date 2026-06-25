@@ -51,6 +51,7 @@ interface ViewportOptions {
 
 const VIEWPORT_TRANSITION_NAME = 'mre-viewport'
 const VIEWPORT_TRANSITION_MS = 450
+const WHEEL_ZOOM_SPEED = 0.0012
 
 export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 	const nodes = ref<GraphNode[]>([])
@@ -386,6 +387,12 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 
 			zoomBehavior = d3Zoom<SVGSVGElement, unknown>()
 				.scaleExtent([0.15, 4])
+				.duration(300)
+				.wheelDelta((event) => {
+					const modeMultiplier = event.deltaMode === 1 ? 25 : event.deltaMode ? 500 : 1
+					const pinchMultiplier = event.ctrlKey ? 8 : 1
+					return -event.deltaY * modeMultiplier * WHEEL_ZOOM_SPEED * pinchMultiplier
+				})
 				.on('start', (event: D3ZoomEvent<SVGSVGElement, unknown>) => {
 					if (!event.sourceEvent) return
 					select(svgEl).interrupt(VIEWPORT_TRANSITION_NAME)
