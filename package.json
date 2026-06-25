@@ -21,7 +21,7 @@
         "release:major": "pnpm version major && git push && git push --tags"
     },
     "dependencies": {
-        "@lucide/vue": "^1.18.0",
+        "@lucide/vue": "^1.21.0",
         "@modrinth/api-client": "workspace:*",
         "@modrinth/assets": "workspace:*",
         "@modrinth/ui": "workspace:*",
@@ -29,9 +29,9 @@
         "@wxt-dev/storage": "^1.2.8",
         "d3-force": "^3.0.0",
         "floating-vue": "^5.2.2",
-        "posthog-js": "^1.386.6",
+        "posthog-js": "^1.393.4",
         "vue": "^3.5.38",
-        "vue-i18n": "^11.4.5"
+        "vue-i18n": "^11.4.6"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
@@ -41,9 +41,9 @@
         "@tailwindcss/postcss": "^4.3.1",
         "@types/chrome": "^0.1.43",
         "@types/d3-force": "^3.0.10",
-        "@types/node": "^25.9.3",
+        "@types/node": "^25.9.4",
         "@wxt-dev/module-vue": "^1.0.3",
-        "autoprefixer": "^10.5.0",
+        "autoprefixer": "^10.5.1",
         "eslint": "^10.5.0",
         "eslint-plugin-prettier": "^5.5.6",
         "eslint-plugin-simple-import-sort": "^13.0.0",
@@ -52,7 +52,7 @@
         "tailwindcss": "^3.4.19",
         "tsx": "^4.22.4",
         "typescript": "^6.0.3",
-        "typescript-eslint": "^8.61.0",
+        "typescript-eslint": "^8.62.0",
         "vite-svg-loader": "^5.1.1",
         "vue-eslint-parser": "^10.4.1",
         "vue-tsc": "^3.3.5",
