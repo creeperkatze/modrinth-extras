@@ -185,7 +185,7 @@
 
 			<div
 				v-if="!initialLoading && maxDepth > 0"
-				class="absolute left-3 top-3 flex w-72 flex-col gap-2 rounded-xl border border-solid border-surface-5 bg-surface-3 px-3 py-2.5 text-sm shadow-xl"
+				class="absolute left-3 top-3 flex w-72 flex-col gap-2 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-3 text-sm shadow-xl"
 			>
 				<span class="text-secondary">
 					{{ formatMessage(messages['dependencyExplorer.depth']) }}
@@ -200,7 +200,7 @@
 			</div>
 
 			<div
-				class="absolute bottom-3 left-3 flex flex-col gap-2 rounded-xl border border-solid border-surface-5 bg-surface-3 px-3 py-2.5 text-sm shadow-xl"
+				class="absolute bottom-3 left-3 flex flex-col gap-2 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-3 text-sm shadow-xl"
 			>
 				<div
 					v-for="item in LEGEND"
