@@ -200,30 +200,23 @@
 			</div>
 
 			<div
-				class="absolute bottom-3 left-3 flex flex-col gap-0.5 rounded-xl border border-solid border-surface-5 bg-surface-3 p-1.5 text-sm shadow-xl"
+				class="absolute bottom-3 left-3 flex flex-col gap-2 rounded-xl border border-solid border-surface-5 bg-surface-3 px-3 py-2.5 text-sm shadow-xl"
 			>
-				<button
+				<div
 					v-for="item in LEGEND"
 					:key="item.type"
-					type="button"
-					class="flex items-center gap-2 rounded-lg px-2 py-1 transition-[background-color,opacity] duration-150 hover:bg-surface-4"
-					:class="hiddenTypes.has(item.type) ? 'opacity-45' : 'opacity-100'"
-					@click="toggleType(item.type)"
+					class="flex items-center justify-between gap-5"
 				>
-					<span
-						class="size-2.5 shrink-0 rounded-full border-2 border-solid transition-colors duration-150"
-						:style="{
-							borderColor: item.color,
-							backgroundColor: hiddenTypes.has(item.type) ? 'transparent' : item.color,
-						}"
-					/>
-					<span
-						class="text-secondary transition-colors"
-						:class="{ 'line-through': hiddenTypes.has(item.type) }"
-					>
-						{{ item.label }}
+					<span class="flex items-center gap-2">
+						<span class="size-2.5 shrink-0 rounded-full" :style="{ backgroundColor: item.color }" />
+						<span class="text-secondary">{{ item.label }}</span>
 					</span>
-				</button>
+					<Toggle
+						:model-value="!hiddenTypes.has(item.type)"
+						small
+						@update:model-value="toggleType(item.type)"
+					/>
+				</div>
 			</div>
 
 			<div class="absolute bottom-3 right-3 flex items-center gap-1.5">
@@ -250,7 +243,7 @@
 
 <script setup lang="ts">
 import { ExpandIcon, UpdatedIcon } from '@modrinth/assets'
-import { ButtonStyled, defineMessages, NewModal, Slider, useVIntl } from '@modrinth/ui'
+import { ButtonStyled, defineMessages, NewModal, Slider, Toggle, useVIntl } from '@modrinth/ui'
 import { computed, nextTick, ref, useTemplateRef } from 'vue'
 
 import { type GraphEdge, type GraphNode, useForceGraph } from '../../../composables/useForceGraph'
