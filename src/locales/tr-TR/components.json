@@ -14,22 +14,22 @@
   "dependencyExplorer.controls": {
     "defaultMessage": "yakınlaştırmak için kaydırın · kaydırmak için sürükleyin · genişletmek için tıklayın"
   },
-  "dependencyExplorer.dependencyNode.collapse": {
+  "dependencyNode.collapse": {
     "defaultMessage": "Bağımlılıkları daralt"
   },
-  "dependencyExplorer.dependencyNode.embedded": {
+  "dependencyNode.embedded": {
     "defaultMessage": "Embed edilmiş"
   },
-  "dependencyExplorer.dependencyNode.expand": {
+  "dependencyNode.expand": {
     "defaultMessage": "Bağımlılıkları genişlet"
   },
-  "dependencyExplorer.dependencyNode.incompatible": {
+  "dependencyNode.incompatible": {
     "defaultMessage": "Uyumlu değil"
   },
-  "dependencyExplorer.dependencyNode.optional": {
+  "dependencyNode.optional": {
     "defaultMessage": "İsteğe bağlı"
   },
-  "dependencyExplorer.dependencyNode.required": {
+  "dependencyNode.required": {
     "defaultMessage": "Gerekli"
   },
   "dependencyExplorer.loading": {

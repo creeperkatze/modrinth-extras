@@ -5,16 +5,16 @@
   "dependencyExplorer.controls": {
     "defaultMessage": "cuộn để phóng to · kéo để di chuyển · nhấp để mở rộng"
   },
-  "dependencyExplorer.dependencyNode.embedded": {
+  "dependencyNode.embedded": {
     "defaultMessage": "Nhúng"
   },
-  "dependencyExplorer.dependencyNode.incompatible": {
+  "dependencyNode.incompatible": {
     "defaultMessage": "Không tương thích"
   },
-  "dependencyExplorer.dependencyNode.optional": {
+  "dependencyNode.optional": {
     "defaultMessage": "Tuỳ chọn"
   },
-  "dependencyExplorer.dependencyNode.required": {
+  "dependencyNode.required": {
     "defaultMessage": "Yêu cầu"
   },
   "dependencyExplorer.loading": {

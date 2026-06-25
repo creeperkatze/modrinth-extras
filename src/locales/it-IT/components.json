@@ -14,22 +14,22 @@
   "dependencyExplorer.controls": {
     "defaultMessage": "Scorri per ingrandire · trascina per spostarti · clicca per espandere"
   },
-  "dependencyExplorer.dependencyNode.collapse": {
+  "dependencyNode.collapse": {
     "defaultMessage": "Comprimi le dipendenze"
   },
-  "dependencyExplorer.dependencyNode.embedded": {
+  "dependencyNode.embedded": {
     "defaultMessage": "Incorporato"
   },
-  "dependencyExplorer.dependencyNode.expand": {
+  "dependencyNode.expand": {
     "defaultMessage": "Espandi le dipendenze"
   },
-  "dependencyExplorer.dependencyNode.incompatible": {
+  "dependencyNode.incompatible": {
     "defaultMessage": "incompatibile"
   },
-  "dependencyExplorer.dependencyNode.optional": {
+  "dependencyNode.optional": {
     "defaultMessage": "Facoltativo"
   },
-  "dependencyExplorer.dependencyNode.required": {
+  "dependencyNode.required": {
     "defaultMessage": "Obbligatorio"
   },
   "dependencyExplorer.loading": {

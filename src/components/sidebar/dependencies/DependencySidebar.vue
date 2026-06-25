@@ -71,7 +71,7 @@ import {
 	fetchProjectDependencies,
 	fetchVersionDependencies,
 } from '../../../utils/dependencies'
-import DependencyExplorer from './DependencyExplorer.vue'
+import DependencyExplorer from '../../project/DependencyExplorer.vue'
 import DependencyNode from './DependencyNode.vue'
 
 const { formatMessage } = useVIntl()

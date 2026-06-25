@@ -2,24 +2,6 @@
   "dependencyExplorer.centerView": {
     "defaultMessage": "Center view"
   },
-  "dependencyExplorer.dependencyNode.collapse": {
-    "defaultMessage": "Collapse dependencies"
-  },
-  "dependencyExplorer.dependencyNode.embedded": {
-    "defaultMessage": "Embedded"
-  },
-  "dependencyExplorer.dependencyNode.expand": {
-    "defaultMessage": "Expand dependencies"
-  },
-  "dependencyExplorer.dependencyNode.incompatible": {
-    "defaultMessage": "Incompatible"
-  },
-  "dependencyExplorer.dependencyNode.optional": {
-    "defaultMessage": "Optional"
-  },
-  "dependencyExplorer.dependencyNode.required": {
-    "defaultMessage": "Required"
-  },
   "dependencyExplorer.depth": {
     "defaultMessage": "Depth"
   },
@@ -34,6 +16,24 @@
   },
   "dependencyExplorer.title": {
     "defaultMessage": "Dependency Explorer"
+  },
+  "dependencyNode.collapse": {
+    "defaultMessage": "Collapse dependencies"
+  },
+  "dependencyNode.embedded": {
+    "defaultMessage": "Embedded"
+  },
+  "dependencyNode.expand": {
+    "defaultMessage": "Expand dependencies"
+  },
+  "dependencyNode.incompatible": {
+    "defaultMessage": "Incompatible"
+  },
+  "dependencyNode.optional": {
+    "defaultMessage": "Optional"
+  },
+  "dependencyNode.required": {
+    "defaultMessage": "Required"
   },
   "dependencySidebar.loadError": {
     "defaultMessage": "Failed to load dependencies"

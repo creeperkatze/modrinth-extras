@@ -14,22 +14,22 @@
   "dependencyExplorer.controls": {
     "defaultMessage": "滚动缩放 · 拖动平移 · 点击展开"
   },
-  "dependencyExplorer.dependencyNode.collapse": {
+  "dependencyNode.collapse": {
     "defaultMessage": "折叠依赖关系"
   },
-  "dependencyExplorer.dependencyNode.embedded": {
+  "dependencyNode.embedded": {
     "defaultMessage": "嵌入"
   },
-  "dependencyExplorer.dependencyNode.expand": {
+  "dependencyNode.expand": {
     "defaultMessage": "展开依赖关系"
   },
-  "dependencyExplorer.dependencyNode.incompatible": {
+  "dependencyNode.incompatible": {
     "defaultMessage": "不兼容"
   },
-  "dependencyExplorer.dependencyNode.optional": {
+  "dependencyNode.optional": {
     "defaultMessage": "选填"
   },
-  "dependencyExplorer.dependencyNode.required": {
+  "dependencyNode.required": {
     "defaultMessage": "必填"
   },
   "dependencyExplorer.loading": {

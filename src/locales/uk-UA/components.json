@@ -14,22 +14,22 @@
   "dependencyExplorer.controls": {
     "defaultMessage": "прокрутіть до збільшення · перетягування до панорами · натисніть, щоб розгорнути"
   },
-  "dependencyExplorer.dependencyNode.collapse": {
+  "dependencyNode.collapse": {
     "defaultMessage": "Згорнути залежності"
   },
-  "dependencyExplorer.dependencyNode.embedded": {
+  "dependencyNode.embedded": {
     "defaultMessage": "Вбудований"
   },
-  "dependencyExplorer.dependencyNode.expand": {
+  "dependencyNode.expand": {
     "defaultMessage": "Розгорнути залежності"
   },
-  "dependencyExplorer.dependencyNode.incompatible": {
+  "dependencyNode.incompatible": {
     "defaultMessage": "Несумісно"
   },
-  "dependencyExplorer.dependencyNode.optional": {
+  "dependencyNode.optional": {
     "defaultMessage": "Необов'язково"
   },
-  "dependencyExplorer.dependencyNode.required": {
+  "dependencyNode.required": {
     "defaultMessage": "Необхідно"
   },
   "dependencyExplorer.loading": {

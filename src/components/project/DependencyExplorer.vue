@@ -246,15 +246,15 @@ import { ExpandIcon, UpdatedIcon } from '@modrinth/assets'
 import { ButtonStyled, defineMessages, NewModal, Slider, Toggle, useVIntl } from '@modrinth/ui'
 import { computed, nextTick, ref, useTemplateRef } from 'vue'
 
-import { type GraphEdge, type GraphNode, useForceGraph } from '../../../composables/useForceGraph'
+import { type GraphEdge, type GraphNode, useForceGraph } from '../../composables/useForceGraph'
 import {
 	buildEnrichedDeps,
 	type EnrichedDep,
 	fetchDependencyGraphLayer,
 	fetchDependencyGraphRoot,
 	isGraphDependency,
-} from '../../../utils/dependencies'
-import { navigate, resolveLink } from '../../../utils/page-router'
+} from '../../utils/dependencies'
+import { navigate, resolveLink } from '../../utils/page-router'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
@@ -278,16 +278,16 @@ const messages = defineMessages({
 		id: 'dependencyExplorer.depth',
 		defaultMessage: 'Depth',
 	},
-	'dependencyExplorer.dependencyNode.required': {
-		id: 'dependencyExplorer.dependencyNode.required',
+	'dependencyNode.required': {
+		id: 'dependencyNode.required',
 		defaultMessage: 'Required',
 	},
-	'dependencyExplorer.dependencyNode.optional': {
-		id: 'dependencyExplorer.dependencyNode.optional',
+	'dependencyNode.optional': {
+		id: 'dependencyNode.optional',
 		defaultMessage: 'Optional',
 	},
-	'dependencyExplorer.dependencyNode.embedded': {
-		id: 'dependencyExplorer.dependencyNode.embedded',
+	'dependencyNode.embedded': {
+		id: 'dependencyNode.embedded',
 		defaultMessage: 'Embedded',
 	},
 	'dependencyExplorer.loading': {
@@ -302,17 +302,17 @@ const LEGEND = computed<{ type: DepType; color: string; label: string }[]>(() =>
 	{
 		type: 'required',
 		color: 'var(--color-brand)',
-		label: formatMessage(messages['dependencyExplorer.dependencyNode.required']),
+		label: formatMessage(messages['dependencyNode.required']),
 	},
 	{
 		type: 'optional',
 		color: 'var(--color-secondary)',
-		label: formatMessage(messages['dependencyExplorer.dependencyNode.optional']),
+		label: formatMessage(messages['dependencyNode.optional']),
 	},
 	{
 		type: 'embedded',
 		color: 'var(--color-blue)',
-		label: formatMessage(messages['dependencyExplorer.dependencyNode.embedded']),
+		label: formatMessage(messages['dependencyNode.embedded']),
 	},
 ])
 
