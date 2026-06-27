@@ -44,7 +44,8 @@ const generalFeatures = ['notifications', 'quickSearch', 'projectCardActions']
 const contentFeatures = [
 	'activitySparkline',
 	'toolsSidebar',
-	'dependenciesSidebar',
+	'dependencySidebar',
+	'dependencyExplorer',
 	'githubSidebar',
 	'discordSidebar',
 	'galleryBackground',
