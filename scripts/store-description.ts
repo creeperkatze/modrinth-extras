@@ -1,4 +1,7 @@
-import { readFileSync } from 'fs'
+import { execSync } from 'child_process'
+import { readFileSync, unlinkSync, writeFileSync } from 'fs'
+import { tmpdir } from 'os'
+import { join } from 'path'
 import { dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
 
@@ -66,7 +69,7 @@ const footer = t(meta, 'meta.description.footer').replace(
 
 const description = [
 	summary ? t(meta, 'meta.summary') : null,
-	'',
+	summary ? '' : null,
 	t(meta, 'meta.description.generalTitle'),
 	featureLines(generalFeatures),
 	'',
@@ -79,6 +82,29 @@ const description = [
 	footer,
 	'',
 	t(meta, 'meta.description.disclaimer'),
-].join('\n')
+]
+	.filter((line) => line !== null)
+	.join('\n')
 
 console.log(description)
+try {
+	const platform = process.platform
+	if (platform === 'win32') {
+		const tmp = join(tmpdir(), `store-description-${Date.now()}.txt`)
+		writeFileSync(tmp, description, 'utf8')
+		try {
+			execSync(
+				`powershell -NoProfile -Command "Get-Content -Encoding UTF8 -Raw -Path '${tmp}' | Set-Clipboard"`,
+			)
+		} finally {
+			unlinkSync(tmp)
+		}
+	} else if (platform === 'darwin') {
+		execSync('pbcopy', { input: description })
+	} else {
+		execSync('xclip -selection clipboard || xsel --clipboard --input', { input: description, shell: true })
+	}
+	console.error('Copied to clipboard.')
+} catch {
+	console.error('Could not copy to clipboard.')
+}
