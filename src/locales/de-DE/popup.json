@@ -15,7 +15,7 @@
     "defaultMessage": "Interaktiver Graph, um den vollständigen Abhängigkeitsbaum zu erkunden."
   },
   "feature.dependencyExplorer.disabledTooltip": {
-    "defaultMessage": "Erfordert die Aktivierung der Abhängigkeits-Sidebar"
+    "defaultMessage": "Erfordert die Aktivierung der Abhängigkeits-Seitenleiste"
   },
   "feature.dependencyExplorer.title": {
     "defaultMessage": "Abhängigkeits-Explorer"
