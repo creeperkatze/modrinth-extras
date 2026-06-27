@@ -59,7 +59,9 @@ Download, follow, and save projects right from their project cards.
 ### Activity sparkline
 
 Release activity chart on project pages.
+
 <img src=".github/assets/screenshots/sparkline.png" width="100%">
+
 ### Tools sidebar
 
 Generate embeds, view raw API responses, copy download URLs and packwiz commands.
@@ -74,7 +76,13 @@ On project pages, two additional developer utilities are shown:
 
 ### Dependency sidebar
 
-Collapsible dependency tree on project pages. Includes a dependency explorer to visualize the full dependency graph.
+Collapsible dependency tree on project pages.
+
+### Dependency explorer
+
+Interactive graph for exploring the full dependency tree.
+
+<img src=".github/assets/screenshots/dependency-explorer.png" width="100%">
 
 ### GitHub sidebar
 
