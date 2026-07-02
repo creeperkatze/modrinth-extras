@@ -492,7 +492,7 @@ interface FeatureDef {
 	options?: FeatureOption[]
 }
 
-const DAY_RANGE_VALUES = [30, 60, 90, 180]
+const DAY_RANGE_VALUES = [30, 60, 90, 180, 365]
 
 const DAY_RANGE_ITEMS = computed<SelectItem[]>(() =>
 	DAY_RANGE_VALUES.map((days) => ({

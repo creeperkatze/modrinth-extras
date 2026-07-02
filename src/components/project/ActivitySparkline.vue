@@ -140,7 +140,7 @@ onMounted(async () => {
 
 		const versions = await modrinthClient.labrinth.versions_v3.getProjectVersions(
 			props.projectSlug,
-			{ limit: 100, include_changelog: false, apiVersion: 3 },
+			{ include_changelog: false, apiVersion: 3 },
 		)
 		if (!Array.isArray(versions)) return
 
