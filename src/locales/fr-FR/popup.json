@@ -80,9 +80,6 @@
   "feature.telemetry.title": {
     "defaultMessage": "Télémétrie"
   },
-  "feature.toolsSidebar.description": {
-    "defaultMessage": "Génère des intégrations, affiche les réponses brutes de l'API, copie les URL de téléchargement et les commandes Packwiz."
-  },
   "feature.toolsSidebar.title": {
     "defaultMessage": "Barre latérale d'outils"
   },

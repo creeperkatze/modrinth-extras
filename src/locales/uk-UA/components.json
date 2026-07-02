@@ -98,20 +98,11 @@
   "toolsSidebar.copied": {
     "defaultMessage": "Скопійовано!"
   },
-  "toolsSidebar.copyDownloadUrl": {
-    "defaultMessage": "Копіювати посилання завантаження"
-  },
-  "toolsSidebar.copyPackwiz": {
-    "defaultMessage": "Скопіювати команду packwiz"
-  },
   "toolsSidebar.generateEmbed": {
     "defaultMessage": "Згенерувати код для вбудовування"
   },
   "toolsSidebar.title": {
     "defaultMessage": "Інструменти"
-  },
-  "toolsSidebar.viewApiResponse": {
-    "defaultMessage": "Переглянути відповідь API"
   }
 }
 

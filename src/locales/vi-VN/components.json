@@ -71,20 +71,11 @@
   "toolsSidebar.copied": {
     "defaultMessage": "Đã sao chép!"
   },
-  "toolsSidebar.copyDownloadUrl": {
-    "defaultMessage": "Sao chép URL tải xuống"
-  },
-  "toolsSidebar.copyPackwiz": {
-    "defaultMessage": "Sao chép packwiz"
-  },
   "toolsSidebar.generateEmbed": {
     "defaultMessage": "Tạo mã nhúng"
   },
   "toolsSidebar.title": {
     "defaultMessage": "Công cụ"
-  },
-  "toolsSidebar.viewApiResponse": {
-    "defaultMessage": "Xem phản hồi API"
   }
 }
 

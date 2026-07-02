@@ -80,9 +80,6 @@
   "feature.telemetry.title": {
     "defaultMessage": "Телеметрия"
   },
-  "feature.toolsSidebar.description": {
-    "defaultMessage": "Создавайте встроенные элементы, просматривайте ответы API в исходном виде, копируйте ссылки для загрузки и команды packwiz."
-  },
   "feature.toolsSidebar.title": {
     "defaultMessage": "Боковая панель инструментов"
   },

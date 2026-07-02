@@ -89,20 +89,11 @@
   "toolsSidebar.copied": {
     "defaultMessage": "Скопировано!"
   },
-  "toolsSidebar.copyDownloadUrl": {
-    "defaultMessage": "Скопировать ссылку для скачивания"
-  },
-  "toolsSidebar.copyPackwiz": {
-    "defaultMessage": "Скопировать команду packwiz"
-  },
   "toolsSidebar.generateEmbed": {
     "defaultMessage": "Сгенерировать код для встраивания"
   },
   "toolsSidebar.title": {
     "defaultMessage": "Инструменты"
-  },
-  "toolsSidebar.viewApiResponse": {
-    "defaultMessage": "Просмотреть ответ API"
   }
 }
 

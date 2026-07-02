@@ -89,20 +89,11 @@
   "toolsSidebar.copied": {
     "defaultMessage": "已复制！"
   },
-  "toolsSidebar.copyDownloadUrl": {
-    "defaultMessage": "复制下载链接"
-  },
-  "toolsSidebar.copyPackwiz": {
-    "defaultMessage": "复制 packwiz"
-  },
   "toolsSidebar.generateEmbed": {
     "defaultMessage": "生成嵌入代码"
   },
   "toolsSidebar.title": {
     "defaultMessage": "工具"
-  },
-  "toolsSidebar.viewApiResponse": {
-    "defaultMessage": "查看 API 响应"
   }
 }
 

@@ -89,20 +89,11 @@
   "toolsSidebar.copied": {
     "defaultMessage": "Copié !"
   },
-  "toolsSidebar.copyDownloadUrl": {
-    "defaultMessage": "Copier l'URL de téléchargement"
-  },
-  "toolsSidebar.copyPackwiz": {
-    "defaultMessage": "Copier packwiz"
-  },
   "toolsSidebar.generateEmbed": {
     "defaultMessage": "Générer une intégration"
   },
   "toolsSidebar.title": {
     "defaultMessage": "Outils"
-  },
-  "toolsSidebar.viewApiResponse": {
-    "defaultMessage": "Voir la réponse API"
   }
 }
 

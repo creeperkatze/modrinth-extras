@@ -1,6 +1,12 @@
 {
+  "feature.activitySparkline.days": {
+    "defaultMessage": "{count} Tage"
+  },
   "feature.activitySparkline.description": {
     "defaultMessage": "Graph zur Veröffentlichungsaktivität auf Projektseiten."
+  },
+  "feature.activitySparkline.timeRange": {
+    "defaultMessage": "Zeitraum"
   },
   "feature.activitySparkline.title": {
     "defaultMessage": "Aktivitäts-Sparkline"
@@ -102,7 +108,10 @@
     "defaultMessage": "Telemetrie"
   },
   "feature.toolsSidebar.description": {
-    "defaultMessage": "Generiere Einbettungen, zeige rohe API-Antworten an, kopiere Download-URLs und Packwiz-Befehle."
+    "defaultMessage": "Generiere Einbettungen und kopiere Installationsbefehle für Mod-Manager."
+  },
+  "feature.toolsSidebar.modManager": {
+    "defaultMessage": "Mod-Manager"
   },
   "feature.toolsSidebar.title": {
     "defaultMessage": "Werkzeug-Seitenleiste"

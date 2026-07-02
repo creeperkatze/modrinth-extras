@@ -86,9 +86,6 @@
   "feature.telemetry.title": {
     "defaultMessage": "Telemetri"
   },
-  "feature.toolsSidebar.description": {
-    "defaultMessage": "Embedler oluşturun,ham API yanıtlarını görüntüleyin,indirme URL'lerini ve packwiz komutlarını kopyalayın."
-  },
   "feature.toolsSidebar.title": {
     "defaultMessage": "Araçlar kenar çubuğu"
   },

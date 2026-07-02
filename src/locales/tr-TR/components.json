@@ -98,20 +98,11 @@
   "toolsSidebar.copied": {
     "defaultMessage": "Kopyalandı!"
   },
-  "toolsSidebar.copyDownloadUrl": {
-    "defaultMessage": "İndirme URL'sini kopyala"
-  },
-  "toolsSidebar.copyPackwiz": {
-    "defaultMessage": "Packwiz'i kopyala"
-  },
   "toolsSidebar.generateEmbed": {
     "defaultMessage": "Embed oluştur"
   },
   "toolsSidebar.title": {
     "defaultMessage": "Araçlar"
-  },
-  "toolsSidebar.viewApiResponse": {
-    "defaultMessage": "API yanıtını görüntüle"
   }
 }
 

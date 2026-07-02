@@ -74,9 +74,6 @@
   "feature.telemetry.title": {
     "defaultMessage": "Telemetria"
   },
-  "feature.toolsSidebar.description": {
-    "defaultMessage": "Genera contenuti incorporati, visualizza le risposte API grezze, copia gli URL di download e i comandi Packwiz."
-  },
   "feature.toolsSidebar.title": {
     "defaultMessage": "Barra laterale degli strumenti"
   },
