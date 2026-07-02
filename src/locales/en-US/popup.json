@@ -108,7 +108,7 @@
     "defaultMessage": "Telemetry"
   },
   "feature.toolsSidebar.description": {
-    "defaultMessage": "Generate embeds, copy package manager install commands."
+    "defaultMessage": "Generate embeds and copy package manager install commands."
   },
   "feature.toolsSidebar.packageManager": {
     "defaultMessage": "Package manager"

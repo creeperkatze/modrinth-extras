@@ -64,15 +64,13 @@ Release activity chart on project pages.
 
 ### Tools sidebar
 
-Generate embeds, view raw API responses, copy download URLs and packwiz commands.
+Generate embeds and copy package manager install commands.
 
 - **Generate embed:** opens [Modfolio](https://modfolio.creeperkatze.dev) pre-loaded with the current page URL to generate an embeddable card or badge.
-- **View API response:** opens the raw Modrinth API JSON for the current page in a new tab.
 
-On project pages, two additional developer utilities are shown:
+On project pages, an additional developer utility is shown:
 
-- **Copy download URL:** copies the direct download URL of the project's latest primary file to the clipboard.
-- **Copy packwiz:** copies the `packwiz mr add <slug>` command to the clipboard.
+- **Copy install command:** copies an install command for the configured package manager (packwiz or ferium) to the clipboard.
 
 ### Dependency sidebar
 

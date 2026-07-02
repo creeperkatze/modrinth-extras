@@ -363,7 +363,7 @@ const messages = defineMessages({
 	},
 	'feature.toolsSidebar.description': {
 		id: 'feature.toolsSidebar.description',
-		defaultMessage: 'Generate embeds, copy package manager install commands.',
+		defaultMessage: 'Generate embeds and copy package manager install commands.',
 	},
 	'feature.toolsSidebar.packageManager': {
 		id: 'feature.toolsSidebar.packageManager',
