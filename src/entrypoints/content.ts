@@ -371,7 +371,12 @@ export default defineContentScript({
 				const slug = window.location.pathname.match(
 					/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/([^/]+)/,
 				)?.[2]
-				const app = createApp(h(ActivitySparkline, { projectSlug: slug ?? '' }))
+				const app = createApp(
+					h(ActivitySparkline, {
+						projectSlug: slug ?? '',
+						days: Number(settings.activitySparkline.days),
+					}),
+				)
 				installI18n(app)
 				return app
 			},

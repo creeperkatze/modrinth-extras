@@ -66,9 +66,9 @@ import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
 import { modrinthClient } from '../../utils/api'
 
-const props = defineProps<{ projectSlug: string }>()
+const props = defineProps<{ projectSlug: string; days: number }>()
 
-const DAYS = 60
+const DAYS = props.days
 const PAD_TOP = 10
 const PAD_BOTTOM = 10
 const SMOOTH_SIGMA = 0.8
@@ -123,7 +123,8 @@ onMounted(async () => {
 		resizeObserver.observe(wrapperEl.value)
 	}
 
-	const cached = dataCache.get(props.projectSlug)
+	const cacheKey = `${props.projectSlug}:${DAYS}`
+	const cached = dataCache.get(cacheKey)
 	if (cached) {
 		dailyCounts.value = cached.counts
 		hasAnyData.value = cached.hasData
@@ -153,7 +154,7 @@ onMounted(async () => {
 
 		dailyCounts.value = counts
 		hasAnyData.value = counts.some((c) => c > 0)
-		dataCache.set(props.projectSlug, { counts, hasData: hasAnyData.value })
+		dataCache.set(cacheKey, { counts, hasData: hasAnyData.value })
 	} catch (err) {
 		console.warn('[Modrinth Extras] Failed to load activity data:', err)
 	} finally {

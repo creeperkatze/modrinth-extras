@@ -1,6 +1,12 @@
 {
+  "feature.activitySparkline.days": {
+    "defaultMessage": "{count} days"
+  },
   "feature.activitySparkline.description": {
     "defaultMessage": "Release activity chart on project pages."
+  },
+  "feature.activitySparkline.timeRange": {
+    "defaultMessage": "Time range"
   },
   "feature.activitySparkline.title": {
     "defaultMessage": "Activity sparkline"

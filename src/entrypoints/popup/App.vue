@@ -349,6 +349,14 @@ const messages = defineMessages({
 		id: 'feature.activitySparkline.description',
 		defaultMessage: 'Release activity chart on project pages.',
 	},
+	'feature.activitySparkline.timeRange': {
+		id: 'feature.activitySparkline.timeRange',
+		defaultMessage: 'Time range',
+	},
+	'feature.activitySparkline.days': {
+		id: 'feature.activitySparkline.days',
+		defaultMessage: '{count} days',
+	},
 	'feature.toolsSidebar.title': {
 		id: 'feature.toolsSidebar.title',
 		defaultMessage: 'Tools sidebar',
@@ -468,8 +476,8 @@ interface FeatureOption {
 }
 
 const PACKAGE_MANAGER_ITEMS: SelectItem[] = [
-	{ label: 'packwiz', value: 'packwiz' },
-	{ label: 'ferium', value: 'ferium' },
+	{ label: 'Packwiz', value: 'packwiz' },
+	{ label: 'Ferium', value: 'ferium' },
 ]
 
 interface FeatureDef {
@@ -483,6 +491,15 @@ interface FeatureDef {
 	disabledTooltip?: string
 	options?: FeatureOption[]
 }
+
+const DAY_RANGE_VALUES = [30, 60, 90, 180]
+
+const DAY_RANGE_ITEMS = computed<SelectItem[]>(() =>
+	DAY_RANGE_VALUES.map((days) => ({
+		label: formatMessage(messages['feature.activitySparkline.days'], { count: days }),
+		value: String(days),
+	})),
+)
 
 async function fetchLoadersByType(...types: string[]): Promise<SelectItem[]> {
 	const data = await modrinthClient.request<Labrinth.Tags.v2.Loader[]>('/tag/loader', {
@@ -556,6 +573,15 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 		icon: ChartIcon,
 		title: formatMessage(messages['feature.activitySparkline.title']),
 		description: formatMessage(messages['feature.activitySparkline.description']),
+		options: [
+			{
+				key: 'days',
+				type: 'select',
+				label: formatMessage(messages['feature.activitySparkline.timeRange']),
+				items: DAY_RANGE_ITEMS.value,
+				includeAny: false,
+			},
+		],
 	},
 	{
 		key: 'toolsSidebar',

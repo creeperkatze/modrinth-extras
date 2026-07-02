@@ -34,7 +34,7 @@ export interface ExtensionSettings {
 		shaderLoader: string
 		gameVersion: string
 	}
-	activitySparkline: { enabled: boolean }
+	activitySparkline: { enabled: boolean; days: string }
 	toolsSidebar: { enabled: boolean; packageManager: string }
 	dependencySidebar: { enabled: boolean }
 	dependencyExplorer: { enabled: boolean }
@@ -58,7 +58,7 @@ export const DEFAULTS: ExtensionSettings = {
 		shaderLoader: '',
 		gameVersion: '',
 	},
-	activitySparkline: { enabled: true },
+	activitySparkline: { enabled: true, days: '60' },
 	toolsSidebar: { enabled: true, packageManager: 'packwiz' },
 	dependencySidebar: { enabled: true },
 	dependencyExplorer: { enabled: true },
