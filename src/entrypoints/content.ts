@@ -305,7 +305,9 @@ export default defineContentScript({
 			attach: attachToSidebar,
 			createApp() {
 				const pageUrl = window.location.href.split('?')[0].split('#')[0]
-				const app = createApp(h(ToolsSidebar, { pageUrl }))
+				const app = createApp(
+					h(ToolsSidebar, { pageUrl, packageManager: settings.toolsSidebar.packageManager }),
+				)
 				installI18n(app)
 				return app
 			},

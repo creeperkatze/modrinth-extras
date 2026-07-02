@@ -102,7 +102,10 @@
     "defaultMessage": "Telemetry"
   },
   "feature.toolsSidebar.description": {
-    "defaultMessage": "Generate embeds, view raw API responses, copy download URLs and packwiz commands."
+    "defaultMessage": "Generate embeds, copy package manager install commands."
+  },
+  "feature.toolsSidebar.packageManager": {
+    "defaultMessage": "Package manager"
   },
   "feature.toolsSidebar.title": {
     "defaultMessage": "Tools sidebar"

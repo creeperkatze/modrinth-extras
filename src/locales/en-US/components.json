@@ -143,19 +143,13 @@
   "toolsSidebar.copied": {
     "defaultMessage": "Copied!"
   },
-  "toolsSidebar.copyDownloadUrl": {
-    "defaultMessage": "Copy download URL"
-  },
-  "toolsSidebar.copyPackwiz": {
-    "defaultMessage": "Copy packwiz"
+  "toolsSidebar.copyInstallCommand": {
+    "defaultMessage": "Copy {manager} command"
   },
   "toolsSidebar.generateEmbed": {
     "defaultMessage": "Generate embed"
   },
   "toolsSidebar.title": {
     "defaultMessage": "Tools"
-  },
-  "toolsSidebar.viewApiResponse": {
-    "defaultMessage": "View API response"
   }
 }

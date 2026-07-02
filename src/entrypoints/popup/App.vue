@@ -130,7 +130,21 @@
 					:disabled="typeof f.disabled === 'function' ? f.disabled() : f.disabled"
 					:disabled-tooltip="f.disabledTooltip"
 					@update:model-value="updateEnabled(f.key, $event)"
-				/>
+				>
+					<template v-if="f.options">
+						<OptionFieldSelect
+							v-for="opt in f.options"
+							:key="opt.key"
+							:label="opt.label"
+							:model-value="(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''"
+							:items="opt.items"
+							:fetch-items="opt.fetchItems"
+							:searchable="opt.searchable"
+							:include-any="opt.includeAny ?? true"
+							@update:model-value="updateOption(f.key, opt.key, $event)"
+						/>
+					</template>
+				</FeatureRow>
 			</FeatureGroup>
 
 			<HorizontalRule />
@@ -341,8 +355,11 @@ const messages = defineMessages({
 	},
 	'feature.toolsSidebar.description': {
 		id: 'feature.toolsSidebar.description',
-		defaultMessage:
-			'Generate embeds, view raw API responses, copy download URLs and packwiz commands.',
+		defaultMessage: 'Generate embeds, copy package manager install commands.',
+	},
+	'feature.toolsSidebar.packageManager': {
+		id: 'feature.toolsSidebar.packageManager',
+		defaultMessage: 'Package manager',
 	},
 	'feature.dependencySidebar.title': {
 		id: 'feature.dependencySidebar.title',
@@ -447,7 +464,13 @@ interface FeatureOption {
 	items?: SelectItem[]
 	fetchItems?: () => Promise<SelectItem[]>
 	searchable?: boolean
+	includeAny?: boolean
 }
+
+const PACKAGE_MANAGER_ITEMS: SelectItem[] = [
+	{ label: 'packwiz', value: 'packwiz' },
+	{ label: 'ferium', value: 'ferium' },
+]
 
 interface FeatureDef {
 	key: FeatureKey
@@ -539,6 +562,15 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 		icon: WrenchIcon,
 		title: formatMessage(messages['feature.toolsSidebar.title']),
 		description: formatMessage(messages['feature.toolsSidebar.description']),
+		options: [
+			{
+				key: 'packageManager',
+				type: 'select',
+				label: formatMessage(messages['feature.toolsSidebar.packageManager']),
+				items: PACKAGE_MANAGER_ITEMS,
+				includeAny: false,
+			},
+		],
 	},
 	{
 		key: 'dependencySidebar',
