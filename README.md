@@ -64,13 +64,13 @@ Release activity chart on project pages.
 
 ### Tools sidebar
 
-Generate embeds and copy package manager install commands.
+Generate embeds and copy mod manager install commands.
 
 - **Generate embed:** opens [Modfolio](https://modfolio.creeperkatze.dev) pre-loaded with the current page URL to generate an embeddable card or badge.
 
 On project pages, an additional developer utility is shown:
 
-- **Copy install command:** copies an install command for the configured package manager (packwiz or ferium) to the clipboard.
+- **Copy install command:** copies an install command for the configured mod manager (packwiz or ferium) to the clipboard.
 
 ### Dependency sidebar
 

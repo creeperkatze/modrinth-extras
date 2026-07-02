@@ -363,11 +363,11 @@ const messages = defineMessages({
 	},
 	'feature.toolsSidebar.description': {
 		id: 'feature.toolsSidebar.description',
-		defaultMessage: 'Generate embeds and copy package manager install commands.',
+		defaultMessage: 'Generate embeds and copy mod manager install commands.',
 	},
-	'feature.toolsSidebar.packageManager': {
-		id: 'feature.toolsSidebar.packageManager',
-		defaultMessage: 'Package manager',
+	'feature.toolsSidebar.modManager': {
+		id: 'feature.toolsSidebar.modManager',
+		defaultMessage: 'Mod manager',
 	},
 	'feature.dependencySidebar.title': {
 		id: 'feature.dependencySidebar.title',
@@ -592,7 +592,7 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 			{
 				key: 'packageManager',
 				type: 'select',
-				label: formatMessage(messages['feature.toolsSidebar.packageManager']),
+				label: formatMessage(messages['feature.toolsSidebar.modManager']),
 				items: PACKAGE_MANAGER_ITEMS,
 				includeAny: false,
 			},

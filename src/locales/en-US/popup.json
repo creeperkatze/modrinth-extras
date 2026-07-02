@@ -108,10 +108,10 @@
     "defaultMessage": "Telemetry"
   },
   "feature.toolsSidebar.description": {
-    "defaultMessage": "Generate embeds and copy package manager install commands."
+    "defaultMessage": "Generate embeds and copy mod manager install commands."
   },
-  "feature.toolsSidebar.packageManager": {
-    "defaultMessage": "Package manager"
+  "feature.toolsSidebar.modManager": {
+    "defaultMessage": "Mod manager"
   },
   "feature.toolsSidebar.title": {
     "defaultMessage": "Tools sidebar"
