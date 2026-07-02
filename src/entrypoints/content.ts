@@ -306,7 +306,7 @@ export default defineContentScript({
 			createApp() {
 				const pageUrl = window.location.href.split('?')[0].split('#')[0]
 				const app = createApp(
-					h(ToolsSidebar, { pageUrl, packageManager: settings.toolsSidebar.packageManager }),
+					h(ToolsSidebar, { pageUrl, modManager: settings.toolsSidebar.modManager }),
 				)
 				installI18n(app)
 				return app

@@ -475,7 +475,7 @@ interface FeatureOption {
 	includeAny?: boolean
 }
 
-const PACKAGE_MANAGER_ITEMS: SelectItem[] = [
+const MOD_MANAGER_ITEMS: SelectItem[] = [
 	{ label: 'Packwiz', value: 'packwiz' },
 	{ label: 'Ferium', value: 'ferium' },
 ]
@@ -590,10 +590,10 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 		description: formatMessage(messages['feature.toolsSidebar.description']),
 		options: [
 			{
-				key: 'packageManager',
+				key: 'modManager',
 				type: 'select',
 				label: formatMessage(messages['feature.toolsSidebar.modManager']),
-				items: PACKAGE_MANAGER_ITEMS,
+				items: MOD_MANAGER_ITEMS,
 				includeAny: false,
 			},
 		],

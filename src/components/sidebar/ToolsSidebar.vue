@@ -25,7 +25,7 @@
 						installCommandCopied
 							? formatMessage(messages['toolsSidebar.copied'])
 							: formatMessage(messages['toolsSidebar.copyInstallCommand'], {
-									manager: packageManagerLabel,
+									manager: modManagerLabel,
 								})
 					"
 					@click="copyInstallCommand"
@@ -34,7 +34,7 @@
 						installCommandCopied
 							? formatMessage(messages['toolsSidebar.copied'])
 							: formatMessage(messages['toolsSidebar.copyInstallCommand'], {
-									manager: packageManagerLabel,
+									manager: modManagerLabel,
 								})
 					}}
 					<CheckIcon
@@ -74,19 +74,19 @@ const messages = defineMessages({
 
 const props = defineProps<{
 	pageUrl: string
-	packageManager: string
+	modManager: string
 }>()
 
-const PACKAGE_MANAGERS: Record<
+const MOD_MANAGERS: Record<
 	string,
 	{ label: string; command: (slug: string, type: string) => string }
 > = {
 	packwiz: {
-		label: 'packwiz',
+		label: 'Packwiz',
 		command: (slug) => `packwiz mr add ${slug}`,
 	},
 	ferium: {
-		label: 'ferium',
+		label: 'Ferium',
 		command: (slug, type) =>
 			type === 'modpack' ? `ferium modpack add ${slug}` : `ferium add ${slug}`,
 	},
@@ -109,17 +109,15 @@ const projectMatch = computed(() => {
 
 const projectSlug = computed(() => projectMatch.value?.slug ?? null)
 
-const packageManager = computed(
-	() => PACKAGE_MANAGERS[props.packageManager] ?? PACKAGE_MANAGERS.packwiz,
-)
-const packageManagerLabel = computed(() => packageManager.value.label)
+const modManager = computed(() => MOD_MANAGERS[props.modManager] ?? MOD_MANAGERS.packwiz)
+const modManagerLabel = computed(() => modManager.value.label)
 
 const installCommandCopied = ref(false)
 
 async function copyInstallCommand() {
 	if (!projectMatch.value) return
 	const { slug, type } = projectMatch.value
-	await navigator.clipboard.writeText(packageManager.value.command(slug, type))
+	await navigator.clipboard.writeText(modManager.value.command(slug, type))
 	installCommandCopied.value = true
 	setTimeout(() => {
 		installCommandCopied.value = false

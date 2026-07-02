@@ -35,7 +35,7 @@ export interface ExtensionSettings {
 		gameVersion: string
 	}
 	activitySparkline: { enabled: boolean; days: string }
-	toolsSidebar: { enabled: boolean; packageManager: string }
+	toolsSidebar: { enabled: boolean; modManager: string }
 	dependencySidebar: { enabled: boolean }
 	dependencyExplorer: { enabled: boolean }
 	githubSidebar: { enabled: boolean }
@@ -59,7 +59,7 @@ export const DEFAULTS: ExtensionSettings = {
 		gameVersion: '',
 	},
 	activitySparkline: { enabled: true, days: '60' },
-	toolsSidebar: { enabled: true, packageManager: 'packwiz' },
+	toolsSidebar: { enabled: true, modManager: 'packwiz' },
 	dependencySidebar: { enabled: true },
 	dependencyExplorer: { enabled: true },
 	githubSidebar: { enabled: true },
