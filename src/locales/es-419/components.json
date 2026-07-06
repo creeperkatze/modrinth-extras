@@ -1,2 +1,156 @@
-{}
+{
+  "dependencyExplorer.centerView": {
+    "defaultMessage": "Vista central"
+  },
+  "dependencyExplorer.depth": {
+    "defaultMessage": "Profundidad"
+  },
+  "dependencyExplorer.loading": {
+    "defaultMessage": "Cargando"
+  },
+  "dependencyExplorer.noDependencies": {
+    "defaultMessage": "Este proyecto no tiene dependencias"
+  },
+  "dependencyExplorer.reset": {
+    "defaultMessage": "Restablecer"
+  },
+  "dependencyExplorer.title": {
+    "defaultMessage": "Explorador de dependencias"
+  },
+  "dependencyNode.collapse": {
+    "defaultMessage": "Contraer dependencias"
+  },
+  "dependencyNode.embedded": {
+    "defaultMessage": "Incrustado"
+  },
+  "dependencyNode.expand": {
+    "defaultMessage": "Expandir dependencias"
+  },
+  "dependencyNode.incompatible": {
+    "defaultMessage": "Incompatible"
+  },
+  "dependencyNode.optional": {
+    "defaultMessage": "Opcional"
+  },
+  "dependencyNode.required": {
+    "defaultMessage": "Requerido"
+  },
+  "dependencySidebar.loadError": {
+    "defaultMessage": "Error al cargar las dependencias"
+  },
+  "dependencySidebar.loading": {
+    "defaultMessage": "Cargando"
+  },
+  "dependencySidebar.none": {
+    "defaultMessage": "Sin dependencias"
+  },
+  "dependencySidebar.openExplorer": {
+    "defaultMessage": "Abrir el explorador de dependencias"
+  },
+  "dependencySidebar.title": {
+    "defaultMessage": "Dependencias"
+  },
+  "discordSidebar.members": {
+    "defaultMessage": "{count} miembros"
+  },
+  "discordSidebar.online": {
+    "defaultMessage": "{count} en línea"
+  },
+  "discordSidebar.partnered": {
+    "defaultMessage": "Asociado"
+  },
+  "discordSidebar.verified": {
+    "defaultMessage": "Verificado"
+  },
+  "errorNotice.message": {
+    "defaultMessage": "Este error podría estar relacionado con Modrinth Extras. Intenta desactivar la extensión y actualizar la página antes de reportarlo a Modrinth. Si el error desaparece, por favor, reporta el problema <link>aquí</link>."
+  },
+  "githubSidebar.forks": {
+    "defaultMessage": "{count} bifurcaciones"
+  },
+  "githubSidebar.openIssues": {
+    "defaultMessage": "{count} problemas abiertos"
+  },
+  "githubSidebar.openPRs": {
+    "defaultMessage": "{count} Abrir solicitudes de extracción"
+  },
+  "githubSidebar.stars": {
+    "defaultMessage": "{count} estrellas"
+  },
+  "notificationsIndicator.markAllAsRead": {
+    "defaultMessage": "Marcar todo como leído"
+  },
+  "notificationsIndicator.noUnread": {
+    "defaultMessage": "No hay notificaciones no leídas"
+  },
+  "notificationsIndicator.projectUpdated": {
+    "defaultMessage": "{title} se ha actualizado"
+  },
+  "notificationsIndicator.viewAll": {
+    "defaultMessage": "Ver todo"
+  },
+  "notificationsIndicator.viewHistory": {
+    "defaultMessage": "Ver historial"
+  },
+  "projectCardActions.checkingDownload": {
+    "defaultMessage": "Verificando la versión disponible..."
+  },
+  "projectCardActions.copied": {
+    "defaultMessage": "¡Copiado!"
+  },
+  "projectCardActions.copyLink": {
+    "defaultMessage": "Copiar enlace"
+  },
+  "projectCardActions.download": {
+    "defaultMessage": "Descargar"
+  },
+  "projectCardActions.downloadUnavailable": {
+    "defaultMessage": "{loader, select, none {No hay versión disponible para {version}} other {No hay versión disponible para {loader} {version}}}"
+  },
+  "projectCardActions.follow": {
+    "defaultMessage": "Seguir"
+  },
+  "projectCardActions.newCollection": {
+    "defaultMessage": "Crear nueva colección"
+  },
+  "projectCardActions.noCollections": {
+    "defaultMessage": "No se encontraron colecciones."
+  },
+  "projectCardActions.save": {
+    "defaultMessage": "Guardar"
+  },
+  "projectCardActions.saved": {
+    "defaultMessage": "Guardado"
+  },
+  "projectCardActions.searchPlaceholder": {
+    "defaultMessage": "Buscar..."
+  },
+  "projectCardActions.unfollow": {
+    "defaultMessage": "Dejar de seguir"
+  },
+  "quickSearch.clearRecent": {
+    "defaultMessage": "Borrar los resultados recientes"
+  },
+  "quickSearch.examples": {
+    "defaultMessage": "Ejemplos"
+  },
+  "quickSearch.recent": {
+    "defaultMessage": "Recientes"
+  },
+  "quickSearch.search": {
+    "defaultMessage": "Buscar"
+  },
+  "toolsSidebar.copied": {
+    "defaultMessage": "¡Copiado!"
+  },
+  "toolsSidebar.copyInstallCommand": {
+    "defaultMessage": "Copiar comando {manager}"
+  },
+  "toolsSidebar.generateEmbed": {
+    "defaultMessage": "Generar código para incrustar"
+  },
+  "toolsSidebar.title": {
+    "defaultMessage": "Herramientas"
+  }
+}
 

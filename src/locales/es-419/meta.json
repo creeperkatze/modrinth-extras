@@ -1,2 +1,21 @@
-{}
+{
+  "meta.summary": {
+    "defaultMessage": "Una extensión de navegador que mejora la experiencia con Modrinth en el sitio web y más allá."
+  },
+  "meta.description.generalTitle": {
+    "defaultMessage": "Características generales:"
+  },
+  "meta.description.contentTitle": {
+    "defaultMessage": "Características de la página de contenido:"
+  },
+  "meta.description.extensionTitle": {
+    "defaultMessage": "Características de la extensión:"
+  },
+  "meta.description.footer": {
+    "defaultMessage": "Todas las funciones son opcionales y se pueden activar o desactivar individualmente desde la ventana emergente de la extensión.\n\nModrinth Extras es <link>de código abierto</link>."
+  },
+  "meta.description.disclaimer": {
+    "defaultMessage": "La extensión no está asociada ni cuenta con el respaldo de Modrinth."
+  }
+}
 

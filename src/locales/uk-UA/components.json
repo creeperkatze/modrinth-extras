@@ -1,9 +1,54 @@
 {
+  "dependencyExplorer.centerView": {
+    "defaultMessage": "Центрувати перегляд"
+  },
+  "dependencyExplorer.depth": {
+    "defaultMessage": "Глибина"
+  },
   "dependencyExplorer.loading": {
     "defaultMessage": "Завантаження"
   },
   "dependencyExplorer.noDependencies": {
     "defaultMessage": "Цей проєкт не має залежностей"
+  },
+  "dependencyExplorer.reset": {
+    "defaultMessage": "Скинути"
+  },
+  "dependencyExplorer.title": {
+    "defaultMessage": "Оглядач залежностей"
+  },
+  "dependencyNode.collapse": {
+    "defaultMessage": "Згорнути залежності"
+  },
+  "dependencyNode.embedded": {
+    "defaultMessage": "Вбудовано"
+  },
+  "dependencyNode.expand": {
+    "defaultMessage": "Розгорнути залежності"
+  },
+  "dependencyNode.incompatible": {
+    "defaultMessage": "Несумісно"
+  },
+  "dependencyNode.optional": {
+    "defaultMessage": "Необов'язково"
+  },
+  "dependencyNode.required": {
+    "defaultMessage": "Необхідно"
+  },
+  "dependencySidebar.loadError": {
+    "defaultMessage": "Не вдалося завантажити залежності"
+  },
+  "dependencySidebar.loading": {
+    "defaultMessage": "Завантаження"
+  },
+  "dependencySidebar.none": {
+    "defaultMessage": "Немає залежностей"
+  },
+  "dependencySidebar.openExplorer": {
+    "defaultMessage": "Відкрити оглядач залежностей"
+  },
+  "dependencySidebar.title": {
+    "defaultMessage": "Залежності"
   },
   "discordSidebar.members": {
     "defaultMessage": "{count} учасників"
@@ -97,6 +142,9 @@
   },
   "toolsSidebar.copied": {
     "defaultMessage": "Скопійовано!"
+  },
+  "toolsSidebar.copyInstallCommand": {
+    "defaultMessage": "Скопіювати команду {manager}"
   },
   "toolsSidebar.generateEmbed": {
     "defaultMessage": "Згенерувати код для вбудовування"

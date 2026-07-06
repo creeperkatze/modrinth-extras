@@ -1,2 +1,156 @@
-{}
+{
+  "dependencyExplorer.centerView": {
+    "defaultMessage": "عرض فى المركز"
+  },
+  "dependencyExplorer.depth": {
+    "defaultMessage": "العمق"
+  },
+  "dependencyExplorer.loading": {
+    "defaultMessage": "جاري التحميل"
+  },
+  "dependencyExplorer.noDependencies": {
+    "defaultMessage": "هذا المشروع ليس له توابع"
+  },
+  "dependencyExplorer.reset": {
+    "defaultMessage": "إعادة الضبط"
+  },
+  "dependencyExplorer.title": {
+    "defaultMessage": "مستكشف التوابع"
+  },
+  "dependencyNode.collapse": {
+    "defaultMessage": "طي التوابع"
+  },
+  "dependencyNode.embedded": {
+    "defaultMessage": "مضمن"
+  },
+  "dependencyNode.expand": {
+    "defaultMessage": "توسيع التوابع"
+  },
+  "dependencyNode.incompatible": {
+    "defaultMessage": "غير متوافق"
+  },
+  "dependencyNode.optional": {
+    "defaultMessage": "اختياري"
+  },
+  "dependencyNode.required": {
+    "defaultMessage": "إلزامي"
+  },
+  "dependencySidebar.loadError": {
+    "defaultMessage": "فشل تحميل التوابع"
+  },
+  "dependencySidebar.loading": {
+    "defaultMessage": "جاري التحميل"
+  },
+  "dependencySidebar.none": {
+    "defaultMessage": "لا توجد توابع"
+  },
+  "dependencySidebar.openExplorer": {
+    "defaultMessage": "فتح مستكشف التوابع"
+  },
+  "dependencySidebar.title": {
+    "defaultMessage": "التوابع"
+  },
+  "discordSidebar.members": {
+    "defaultMessage": "{count} عضو"
+  },
+  "discordSidebar.online": {
+    "defaultMessage": "{count} عبر الإنترنت"
+  },
+  "discordSidebar.partnered": {
+    "defaultMessage": "شريك"
+  },
+  "discordSidebar.verified": {
+    "defaultMessage": "Verified"
+  },
+  "errorNotice.message": {
+    "defaultMessage": "قد يكون هذا الخطأ مرتبطًا بـ Modrinth Extras. حاول تعطيل الملحق وتحديث الصفحة قبل الإبلاغ عن هذا الخطأ إلى Modrinth. إذا اختفى الخطأ، يرجى الإبلاغ عنه <link>هنا</link>."
+  },
+  "githubSidebar.forks": {
+    "defaultMessage": "{count} تفرع"
+  },
+  "githubSidebar.openIssues": {
+    "defaultMessage": "{count} مشكلات مفتوحة"
+  },
+  "githubSidebar.openPRs": {
+    "defaultMessage": "{count} طلبات السحب المفتوحة"
+  },
+  "githubSidebar.stars": {
+    "defaultMessage": "{count} نجوم"
+  },
+  "notificationsIndicator.markAllAsRead": {
+    "defaultMessage": "علّم الكل كمقروء"
+  },
+  "notificationsIndicator.noUnread": {
+    "defaultMessage": "لا توجد إشعارات غير مقروءة"
+  },
+  "notificationsIndicator.projectUpdated": {
+    "defaultMessage": "{title} تم تحديثه"
+  },
+  "notificationsIndicator.viewAll": {
+    "defaultMessage": "عرض الكل"
+  },
+  "notificationsIndicator.viewHistory": {
+    "defaultMessage": "عرض السجل"
+  },
+  "projectCardActions.checkingDownload": {
+    "defaultMessage": "جار التحقق من الإصدار المتاح..."
+  },
+  "projectCardActions.copied": {
+    "defaultMessage": "تم النسخ!"
+  },
+  "projectCardActions.copyLink": {
+    "defaultMessage": "نسخ الرابط"
+  },
+  "projectCardActions.download": {
+    "defaultMessage": "تنزيل"
+  },
+  "projectCardActions.downloadUnavailable": {
+    "defaultMessage": "{loader, select, none {لا توجد نسخة متاحة لـ {version}} other {لا توجد نسخة متاحة لـ {loader} {version}}}"
+  },
+  "projectCardActions.follow": {
+    "defaultMessage": "متابعة"
+  },
+  "projectCardActions.newCollection": {
+    "defaultMessage": "إنشاء مجموعة جديدة"
+  },
+  "projectCardActions.noCollections": {
+    "defaultMessage": "لم يتم العثور على أية مجموعة."
+  },
+  "projectCardActions.save": {
+    "defaultMessage": "حفظ"
+  },
+  "projectCardActions.saved": {
+    "defaultMessage": "محفوظ"
+  },
+  "projectCardActions.searchPlaceholder": {
+    "defaultMessage": "بحث..."
+  },
+  "projectCardActions.unfollow": {
+    "defaultMessage": "إلغاء المتابعة"
+  },
+  "quickSearch.clearRecent": {
+    "defaultMessage": "مسح عمليات البحث الأخيرة"
+  },
+  "quickSearch.examples": {
+    "defaultMessage": "أمثلة"
+  },
+  "quickSearch.recent": {
+    "defaultMessage": "الأحدث"
+  },
+  "quickSearch.search": {
+    "defaultMessage": "بحث"
+  },
+  "toolsSidebar.copied": {
+    "defaultMessage": "تم النسخ!"
+  },
+  "toolsSidebar.copyInstallCommand": {
+    "defaultMessage": "نسخ الأمر {manager}"
+  },
+  "toolsSidebar.generateEmbed": {
+    "defaultMessage": "إنشاء تضمين"
+  },
+  "toolsSidebar.title": {
+    "defaultMessage": "أدوات"
+  }
+}
 
