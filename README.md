@@ -190,6 +190,8 @@ New translations are automatically pulled every Monday.
 | Russian | [vanapro1](https://crowdin.com/profile/vanapro1) |
 | Ukrainian | [Tenwoc](https://crowdin.com/profile/tenwoc), [CreativeTragern](https://crowdin.com/profile/creativetragern) |
 | Turkish | [penfflewithadot](https://crowdin.com/profile/penfflewithadot), [ErenTr4210](https://crowdin.com/profile/erentr4210) |
+| Spanish, Latin America | [Dante Li Tao](https://crowdin.com/profile/heroxp) |
+| Arabic | [Hamad Alsayed](https://crowdin.com/profile/hamad_sayed) |
 
 ## 🤝 Contributing
 
