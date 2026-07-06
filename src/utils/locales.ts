@@ -6,12 +6,12 @@ export interface LocaleDefinition {
 
 export const LOCALES: LocaleDefinition[] = [
 	{ code: 'en-US', name: 'English' },
-	// { code: 'ar-SA', name: 'العربية', dir: 'rtl' },
+	{ code: 'ar-SA', name: 'العربية', dir: 'rtl' },
 	// { code: 'cs-CZ', name: 'Čeština' },
 	// { code: 'da-DK', name: 'Dansk' },
 	// { code: 'de-CH', name: 'Schweizerdeutsch' },
 	{ code: 'de-DE', name: 'Deutsch' },
-	// { code: 'es-419', name: 'Español (Latinoamérica)' },
+	{ code: 'es-419', name: 'Español (Latinoamérica)' },
 	// { code: 'es-ES', name: 'Español' },
 	// { code: 'fi-FI', name: 'Suomi' },
 	// { code: 'fil-PH', name: 'Filipino' },
