@@ -1,2 +1,165 @@
-{}
+{
+  "feature.activitySparkline.days": {
+    "defaultMessage": "{count} days"
+  },
+  "feature.activitySparkline.description": {
+    "defaultMessage": "Publica el gráfico de actividades en las páginas del proyecto."
+  },
+  "feature.activitySparkline.timeRange": {
+    "defaultMessage": "Intervalo de tiempo"
+  },
+  "feature.activitySparkline.title": {
+    "defaultMessage": "Gráfico de tendencia de actividad"
+  },
+  "feature.curseforgeRedirect.description": {
+    "defaultMessage": "Redirige las páginas de proyectos de CurseForge a Modrinth cuando esté disponible."
+  },
+  "feature.curseforgeRedirect.title": {
+    "defaultMessage": "Redirección de CurseForge"
+  },
+  "feature.dependencyExplorer.description": {
+    "defaultMessage": "Gráfico interactivo para explorar el árbol completo de dependencias."
+  },
+  "feature.dependencyExplorer.disabledTooltip": {
+    "defaultMessage": "Requiere que la barra lateral de dependencias esté habilitada"
+  },
+  "feature.dependencyExplorer.title": {
+    "defaultMessage": "Explorador de dependencias"
+  },
+  "feature.dependencySidebar.description": {
+    "defaultMessage": "Árbol de dependencias plegable en las páginas de los proyectos."
+  },
+  "feature.dependencySidebar.title": {
+    "defaultMessage": "Barra lateral de dependencias"
+  },
+  "feature.desktopNotifications.description": {
+    "defaultMessage": "Notificaciones del sistema operativo para tus notificaciones de Modrinth."
+  },
+  "feature.desktopNotifications.exampleMessage": {
+    "defaultMessage": "¡Este es un ejemplo de notificación de Modrinth Extras!"
+  },
+  "feature.desktopNotifications.exampleTitle": {
+    "defaultMessage": "Ejemplo de notificación"
+  },
+  "feature.desktopNotifications.title": {
+    "defaultMessage": "Notificaciones de escritorio"
+  },
+  "feature.discordSidebar.description": {
+    "defaultMessage": "Nombre del servidor, descripción, número de miembros y número de usuarios en línea de los servidores de Discord vinculados."
+  },
+  "feature.discordSidebar.title": {
+    "defaultMessage": "Barra lateral de Discord"
+  },
+  "feature.galleryBackground.description": {
+    "defaultMessage": "Muestra la imagen destacada de la galería como un banner de fondo en las páginas de los proyectos."
+  },
+  "feature.galleryBackground.title": {
+    "defaultMessage": "Galería de fondo"
+  },
+  "feature.githubSidebar.description": {
+    "defaultMessage": "Estrellas, incidencias, solicitudes de incorporación de cambios y bifurcaciones de los repositorios vinculados."
+  },
+  "feature.githubSidebar.title": {
+    "defaultMessage": "Barra lateral de GitHub"
+  },
+  "feature.notificationBadge.description": {
+    "defaultMessage": "Recuento actualizado de notificaciones no leídas que aparece como una insignia en el ícono de la extensión."
+  },
+  "feature.notificationBadge.title": {
+    "defaultMessage": "Insignia de notificación"
+  },
+  "feature.notifications.description": {
+    "defaultMessage": "Ve, administra y borra las notificaciones no leídas directamente desde el encabezado sin salir de la página actual."
+  },
+  "feature.notifications.title": {
+    "defaultMessage": "Notificaciones"
+  },
+  "feature.projectCardActions.description": {
+    "defaultMessage": "Descarga, sigue y guarda proyectos directamente desde sus fichas de proyecto."
+  },
+  "feature.projectCardActions.gameVersion": {
+    "defaultMessage": "Versión del juego"
+  },
+  "feature.projectCardActions.modLoader": {
+    "defaultMessage": "Cargador de mods"
+  },
+  "feature.projectCardActions.pluginLoader": {
+    "defaultMessage": "Cargador de plugins"
+  },
+  "feature.projectCardActions.shaderLoader": {
+    "defaultMessage": "Cargador de sombreadores"
+  },
+  "feature.projectCardActions.title": {
+    "defaultMessage": "Acciones de la ficha del proyecto"
+  },
+  "feature.quickSearch.description": {
+    "defaultMessage": "Ctrl+K o / para realizar una búsqueda al estilo de la paleta de comandos con etiquetas facetadas para cargadores, versiones, categorías y tipos."
+  },
+  "feature.quickSearch.title": {
+    "defaultMessage": "Búsqueda rápida"
+  },
+  "feature.telemetry.description": {
+    "defaultMessage": "Ayuda a mejorar la extensión compartiendo de forma anónima estadísticas como la versión de la extensión y qué funciones están habilitadas. Nunca se recopilan datos de Modrinth, actividad ni información personal."
+  },
+  "feature.telemetry.disabledTooltip": {
+    "defaultMessage": "Depende de la configuración de recopilación de datos de Firefox"
+  },
+  "feature.telemetry.title": {
+    "defaultMessage": "Telemetría"
+  },
+  "feature.toolsSidebar.description": {
+    "defaultMessage": "Genera códigos para insertar y copia los comandos de instalación del administrador de mod."
+  },
+  "feature.toolsSidebar.modManager": {
+    "defaultMessage": "Administrador de mods"
+  },
+  "feature.toolsSidebar.title": {
+    "defaultMessage": "Barra lateral"
+  },
+  "popup.donatePrompt.dismiss": {
+    "defaultMessage": "Cerrar"
+  },
+  "popup.donatePrompt.message": {
+    "defaultMessage": "Modrinth Extras siempre será gratuito, de código abierto y sin anuncios. Si te resulta útil, considera apoyar su desarrollo con una pequeña donación."
+  },
+  "popup.donatePrompt.title": {
+    "defaultMessage": "Apoya la extensión"
+  },
+  "popup.footer.checking": {
+    "defaultMessage": "Verificando"
+  },
+  "popup.footer.donate": {
+    "defaultMessage": "Donar"
+  },
+  "popup.footer.latestVersion": {
+    "defaultMessage": "Última versión"
+  },
+  "popup.footer.starOnGitHub": {
+    "defaultMessage": "En GitHub"
+  },
+  "popup.footer.updateAvailable": {
+    "defaultMessage": "Hay una actualización disponible"
+  },
+  "popup.group.contentPages": {
+    "defaultMessage": "Páginas de contenido"
+  },
+  "popup.group.extension": {
+    "defaultMessage": "Extensión"
+  },
+  "popup.group.general": {
+    "defaultMessage": "General"
+  },
+  "search.any": {
+    "defaultMessage": "Cualquiera"
+  },
+  "search.placeholder": {
+    "defaultMessage": "Buscar..."
+  },
+  "settings.language": {
+    "defaultMessage": "Idioma"
+  },
+  "settings.language.description": {
+    "defaultMessage": "Ayuda a traducir en <link>Crowdin</link>. Es posible que algunos idiomas estén incompletos."
+  }
+}
 

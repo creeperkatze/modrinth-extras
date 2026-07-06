@@ -1,2 +1,165 @@
-{}
+{
+  "feature.activitySparkline.days": {
+    "defaultMessage": "{count} يوم"
+  },
+  "feature.activitySparkline.description": {
+    "defaultMessage": "جدول نشاط الإصدار في صفحات المشاريع."
+  },
+  "feature.activitySparkline.timeRange": {
+    "defaultMessage": "النطاق الزمني"
+  },
+  "feature.activitySparkline.title": {
+    "defaultMessage": "خط شرارة النشاط"
+  },
+  "feature.curseforgeRedirect.description": {
+    "defaultMessage": "إعادة توجيه صفحات مشروع CurseForge إلى Modrinth عندما تكون متاحة."
+  },
+  "feature.curseforgeRedirect.title": {
+    "defaultMessage": "إعادة التوجيه إلى CurseForge"
+  },
+  "feature.dependencyExplorer.description": {
+    "defaultMessage": "رسم بياني تفاعلي لاستكشاف شجرة التوابع الكاملة."
+  },
+  "feature.dependencyExplorer.disabledTooltip": {
+    "defaultMessage": "يتطلب تمكين الشريط الجانبي للتوابع"
+  },
+  "feature.dependencyExplorer.title": {
+    "defaultMessage": "مستكشف التوابع"
+  },
+  "feature.dependencySidebar.description": {
+    "defaultMessage": "شجرة التوابع القابلة للطي في صفحات المشروع."
+  },
+  "feature.dependencySidebar.title": {
+    "defaultMessage": "الشريط الجانبي للملحقات"
+  },
+  "feature.desktopNotifications.description": {
+    "defaultMessage": "إشعارات نظام التشغيل لإشعارات Modrinth الخاصة بك."
+  },
+  "feature.desktopNotifications.exampleMessage": {
+    "defaultMessage": "هذا مثال على إشعار من Modrinth Extras!"
+  },
+  "feature.desktopNotifications.exampleTitle": {
+    "defaultMessage": "مثال لإشعار"
+  },
+  "feature.desktopNotifications.title": {
+    "defaultMessage": "إشعارات سطح المكتب"
+  },
+  "feature.discordSidebar.description": {
+    "defaultMessage": "اسم الخادم، الوصف، عدد الأعضاء، والعد عبر الإنترنت لخوادم Discord المرتبطة."
+  },
+  "feature.discordSidebar.title": {
+    "defaultMessage": "الشريط الجانبي لDiscord"
+  },
+  "feature.galleryBackground.description": {
+    "defaultMessage": "عرض صورة معرض الصور المميزة كلافتة خلفية على صفحات المشروع."
+  },
+  "feature.galleryBackground.title": {
+    "defaultMessage": "خلفية المعرض"
+  },
+  "feature.githubSidebar.description": {
+    "defaultMessage": "النجوم, المشاكل, طلبات السحب والتفرعات للمستودعات المرتبطة."
+  },
+  "feature.githubSidebar.title": {
+    "defaultMessage": "الشريط الجانبي لـ GitHub"
+  },
+  "feature.notificationBadge.description": {
+    "defaultMessage": "عدد الإشعارات غير المقروءة المحدّث يظهر على شكل شارة على أيقونة الملحق."
+  },
+  "feature.notificationBadge.title": {
+    "defaultMessage": "شارات الإشعارات"
+  },
+  "feature.notifications.description": {
+    "defaultMessage": "عرض الإشعارات الغير مقروءة وإدارتها ومسحها مباشرة في رأس الصفحة دون ترك الصفحة الحالية."
+  },
+  "feature.notifications.title": {
+    "defaultMessage": "الإشعارات"
+  },
+  "feature.projectCardActions.description": {
+    "defaultMessage": "قم بتنزيل المشاريع ومتابعتها وحفظها مباشرةً من بطاقات المشاريع الخاصة بها."
+  },
+  "feature.projectCardActions.gameVersion": {
+    "defaultMessage": "إصدار اللعبة"
+  },
+  "feature.projectCardActions.modLoader": {
+    "defaultMessage": "محمل التعديلات"
+  },
+  "feature.projectCardActions.pluginLoader": {
+    "defaultMessage": "محمل المكونات الإضافية"
+  },
+  "feature.projectCardActions.shaderLoader": {
+    "defaultMessage": "محمل الـshaders"
+  },
+  "feature.projectCardActions.title": {
+    "defaultMessage": "إجراءات بطاقة المشروع"
+  },
+  "feature.quickSearch.description": {
+    "defaultMessage": "استخدم Ctrl+K أو / لإجراء بحث على غرار لوحة الأوامر باستخدام علامات تصنيفية للمعالجات, الإصدارات, الفئات والأنواع."
+  },
+  "feature.quickSearch.title": {
+    "defaultMessage": "البحث السريع"
+  },
+  "feature.telemetry.description": {
+    "defaultMessage": "ساعد في تحسين الملحق من خلال مشاركة إحصائيات بشكل مجهول، مثل إصدار الملحق والميزات التي تم تمكينها. لا يتم جمع أي بيانات Modrinth أو أنشطة أو معلومات شخصية على الإطلاق."
+  },
+  "feature.telemetry.disabledTooltip": {
+    "defaultMessage": "يتم التحكم فيه من خلال إعدادات جمع البيانات في Firefox"
+  },
+  "feature.telemetry.title": {
+    "defaultMessage": "بيانات تتبع الاستخدام"
+  },
+  "feature.toolsSidebar.description": {
+    "defaultMessage": "إنشاء عناصر مضمنة ونسخ أوامر تثبيت مدير التعديل."
+  },
+  "feature.toolsSidebar.modManager": {
+    "defaultMessage": "مدير التعديلات"
+  },
+  "feature.toolsSidebar.title": {
+    "defaultMessage": "شريط الأدوات الجانبي"
+  },
+  "popup.donatePrompt.dismiss": {
+    "defaultMessage": "تجاهل"
+  },
+  "popup.donatePrompt.message": {
+    "defaultMessage": "سيظل Modrinth Extras دائمًا مجانيًا ومفتوح المصدر وخاليًا من الإعلانات. إذا وجدته مفيداً، فيُرجى اعتبار دعم تطويره بتبرع بسيط."
+  },
+  "popup.donatePrompt.title": {
+    "defaultMessage": "ادعم الملحق"
+  },
+  "popup.footer.checking": {
+    "defaultMessage": "جار الفحص"
+  },
+  "popup.footer.donate": {
+    "defaultMessage": "تبرع"
+  },
+  "popup.footer.latestVersion": {
+    "defaultMessage": "أحدث إصدار"
+  },
+  "popup.footer.starOnGitHub": {
+    "defaultMessage": "على GitHub"
+  },
+  "popup.footer.updateAvailable": {
+    "defaultMessage": "يوجد تحديث متوفر"
+  },
+  "popup.group.contentPages": {
+    "defaultMessage": "صفحات المحتوى"
+  },
+  "popup.group.extension": {
+    "defaultMessage": "ملحق"
+  },
+  "popup.group.general": {
+    "defaultMessage": "عام"
+  },
+  "search.any": {
+    "defaultMessage": "أي"
+  },
+  "search.placeholder": {
+    "defaultMessage": "بحث..."
+  },
+  "settings.language": {
+    "defaultMessage": "اللغة"
+  },
+  "settings.language.description": {
+    "defaultMessage": "ساعد في الترجمة على <link>Crowdin</link>. قد تكون بعض اللغات غير مكتملة."
+  }
+}
 

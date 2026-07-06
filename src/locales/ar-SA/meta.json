@@ -1,2 +1,21 @@
-{}
+{
+  "meta.summary": {
+    "defaultMessage": "ملحق متصفح يعزز تجربة استخدام Modrinth على الموقع الإلكتروني وخارجه."
+  },
+  "meta.description.generalTitle": {
+    "defaultMessage": "الميزات العامة:"
+  },
+  "meta.description.contentTitle": {
+    "defaultMessage": "ميزات صفحة المحتوى:"
+  },
+  "meta.description.extensionTitle": {
+    "defaultMessage": "ميزات الملحق:"
+  },
+  "meta.description.footer": {
+    "defaultMessage": "جميع الميزات اختيارية ويمكن تشغيلها أو إيقافها بشكل فردي من النافذة المنبثقة للملحق.\n\nModrinth Extras هو <link>برنامج مفتوح المصدر</link>."
+  },
+  "meta.description.disclaimer": {
+    "defaultMessage": "هذا الملحق غير مرتبط بـ Modrinth ولا يحظى بتأييدها."
+  }
+}
 

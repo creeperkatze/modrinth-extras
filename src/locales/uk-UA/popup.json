@@ -1,15 +1,36 @@
 {
+  "feature.activitySparkline.days": {
+    "defaultMessage": "{count} дні(в)"
+  },
   "feature.activitySparkline.description": {
     "defaultMessage": "Графік активності релізів на сторінках проєктів."
+  },
+  "feature.activitySparkline.timeRange": {
+    "defaultMessage": "Проміжок часу"
   },
   "feature.activitySparkline.title": {
     "defaultMessage": "Міні-графік активности"
   },
   "feature.curseforgeRedirect.description": {
-    "defaultMessage": "За можливости перенаправляти сторінки проєктів CurseForge на Modrinth."
+    "defaultMessage": "За можливості перенаправляти сторінки проєктів CurseForge на Modrinth."
   },
   "feature.curseforgeRedirect.title": {
     "defaultMessage": "Перенаправлення CurseForge"
+  },
+  "feature.dependencyExplorer.description": {
+    "defaultMessage": "Інтерактивний граф для дослідження повного дерева залежностей."
+  },
+  "feature.dependencyExplorer.disabledTooltip": {
+    "defaultMessage": "Потрібна увімкнена бічна панель залежностей"
+  },
+  "feature.dependencyExplorer.title": {
+    "defaultMessage": "Оглядач залежностей"
+  },
+  "feature.dependencySidebar.description": {
+    "defaultMessage": "Згортуване дерево залежностей на сторінках проєктів."
+  },
+  "feature.dependencySidebar.title": {
+    "defaultMessage": "Бічна панель залежностей"
   },
   "feature.desktopNotifications.description": {
     "defaultMessage": "Системні повідомлення для ваших повідомлень Modrinth."
@@ -56,11 +77,17 @@
   "feature.projectCardActions.description": {
     "defaultMessage": "Завантажуйте, підписуйтесь та зберігайте проєкти прямо з їхніх карток."
   },
+  "feature.projectCardActions.gameVersion": {
+    "defaultMessage": "Версія гри"
+  },
   "feature.projectCardActions.modLoader": {
     "defaultMessage": "Завантажувач модів"
   },
   "feature.projectCardActions.pluginLoader": {
     "defaultMessage": "Завантажувач плагінів"
+  },
+  "feature.projectCardActions.shaderLoader": {
+    "defaultMessage": "Завантажувач шейдерів"
   },
   "feature.projectCardActions.title": {
     "defaultMessage": "Дії у картці проєкту"
@@ -80,8 +107,23 @@
   "feature.telemetry.title": {
     "defaultMessage": "Телеметрія"
   },
+  "feature.toolsSidebar.description": {
+    "defaultMessage": "Створити вбудовані коди та скопіювати команди встановлення менеджера модифікацій."
+  },
+  "feature.toolsSidebar.modManager": {
+    "defaultMessage": "Менеджер модів"
+  },
   "feature.toolsSidebar.title": {
     "defaultMessage": "Бічна панель інструментів"
+  },
+  "popup.donatePrompt.dismiss": {
+    "defaultMessage": "Відхилити"
+  },
+  "popup.donatePrompt.message": {
+    "defaultMessage": "Modrinth Extras завжди буде безплатним, з відкритим кодом та без реклами. Якщо ви вважаєте його корисним, розгляньте можливість підтримати його розробку невеликим пожертвуванням."
+  },
+  "popup.donatePrompt.title": {
+    "defaultMessage": "Підтримати розширення"
   },
   "popup.footer.checking": {
     "defaultMessage": "Перевірка"
@@ -109,6 +151,9 @@
   },
   "search.any": {
     "defaultMessage": "Будь-який"
+  },
+  "search.placeholder": {
+    "defaultMessage": "Пошук..."
   },
   "settings.language": {
     "defaultMessage": "Мова"
