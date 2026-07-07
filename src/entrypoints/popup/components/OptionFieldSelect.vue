@@ -64,9 +64,10 @@ defineEmits<{
 const resolvedItems = ref<SelectItem[]>(props.items ?? [])
 const loading = ref(false)
 
-const allItems = computed<SelectItem[]>(() =>
-	props.includeAny ? [anyItem.value, ...resolvedItems.value] : resolvedItems.value,
-)
+const allItems = computed<SelectItem[]>(() => {
+	const items = props.items ?? resolvedItems.value
+	return props.includeAny ? [anyItem.value, ...items] : items
+})
 
 onMounted(async () => {
 	if (props.fetchItems) {
