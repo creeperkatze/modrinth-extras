@@ -184,7 +184,7 @@ New translations are automatically pulled every Monday.
 |----------|------------|
 | Italian | [EmanuelPlaysDev](https://github.com/EmanuelPlays) |
 | French | [maDU59_](https://github.com/maDU59), [Sertra](https://crowdin.com/profile/sertrafurr) |
-| Chinese Simplified | [xinyihl](https://crowdin.com/profile/xinyihl) |
+| Chinese Simplified | [xinyihl](https://crowdin.com/profile/xinyihl), [AlexYang](https://crowdin.com/profile/A012pyshjs210) |
 | Korean | [젠고](https://crowdin.com/profile/minejango2) |
 | Vietnamese | [Lê](https://crowdin.com/profile/suri-cutie) |
 | Russian | [vanapro1](https://crowdin.com/profile/vanapro1) |
