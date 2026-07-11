@@ -7,22 +7,39 @@
 					<div class="text-sm font-semibold text-contrast">
 						{{ activeSurvey.questions[0].question }}
 					</div>
-					<StyledInput
-						v-model="response"
-						multiline
-						:rows="3"
-						resize="vertical"
-						class="mt-2 w-full"
-						input-class="!text-xs !border !border-solid !border-surface-5"
+
+					<OpenQuestion
+						v-if="activeSurvey.questions[0].type === 'open'"
 						:placeholder="placeholder"
+						:submit-text="submitText"
+						@submit="handleSubmit"
 					/>
-					<div class="mt-2 flex justify-end">
-						<ButtonStyled color="brand" size="small">
-							<button type="button" :disabled="!response.trim()" @click="submit">
-								{{ submitText }}
-							</button>
-						</ButtonStyled>
-					</div>
+					<LinkQuestion
+						v-else-if="activeSurvey.questions[0].type === 'link'"
+						:question="activeSurvey.questions[0]"
+						:submit-text="submitText"
+						@submit="handleSubmit"
+					/>
+					<RatingQuestion
+						v-else-if="activeSurvey.questions[0].type === 'rating'"
+						:question="activeSurvey.questions[0]"
+						:submit-text="submitText"
+						@submit="handleSubmit"
+					/>
+					<SingleChoiceQuestion
+						v-else-if="activeSurvey.questions[0].type === 'single_choice'"
+						:question="activeSurvey.questions[0]"
+						:placeholder="placeholder"
+						:submit-text="submitText"
+						@submit="handleSubmit"
+					/>
+					<MultipleChoiceQuestion
+						v-else-if="activeSurvey.questions[0].type === 'multiple_choice'"
+						:question="activeSurvey.questions[0]"
+						:placeholder="placeholder"
+						:submit-text="submitText"
+						@submit="handleSubmit"
+					/>
 				</div>
 			</div>
 			<ButtonStyled type="transparent" circular size="small">
@@ -42,9 +59,9 @@
 
 <script setup lang="ts">
 import { MessagesSquareIcon, XIcon } from '@modrinth/assets'
-import { ButtonStyled, Card, defineMessages, StyledInput, useVIntl } from '@modrinth/ui'
+import { ButtonStyled, Card, defineMessages, useVIntl } from '@modrinth/ui'
 import { storage } from '@wxt-dev/storage'
-import type { Survey } from 'posthog-js/dist/module.no-external'
+import type { Survey, SurveyResponseValue } from 'posthog-js/dist/module.no-external'
 import { computed, onMounted, ref } from 'vue'
 
 import {
@@ -54,6 +71,11 @@ import {
 	getActiveSurvey,
 	initTelemetry,
 } from '../../../utils/telemetry'
+import LinkQuestion from './survey-questions/LinkQuestion.vue'
+import MultipleChoiceQuestion from './survey-questions/MultipleChoiceQuestion.vue'
+import OpenQuestion from './survey-questions/OpenQuestion.vue'
+import RatingQuestion from './survey-questions/RatingQuestion.vue'
+import SingleChoiceQuestion from './survey-questions/SingleChoiceQuestion.vue'
 
 const { formatMessage } = useVIntl()
 
@@ -75,7 +97,6 @@ const messages = defineMessages({
 const seenSurveyIdsItem = storage.defineItem<string[]>('local:seenSurveyIds', { fallback: [] })
 
 const activeSurvey = ref<Survey | null>(null)
-const response = ref('')
 
 const placeholder = computed(
 	() =>
@@ -96,10 +117,9 @@ async function markSeen(): Promise<void> {
 	await seenSurveyIdsItem.setValue([...seenIds, activeSurvey.value.id])
 }
 
-async function submit(): Promise<void> {
-	const trimmed = response.value.trim()
-	if (!trimmed || !activeSurvey.value) return
-	captureSurveyResponse(activeSurvey.value, trimmed)
+async function handleSubmit(value: SurveyResponseValue): Promise<void> {
+	if (!activeSurvey.value) return
+	captureSurveyResponse(activeSurvey.value, value)
 	await markSeen()
 	activeSurvey.value = null
 }

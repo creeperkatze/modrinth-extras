@@ -1,7 +1,7 @@
 import 'posthog-js/dist/surveys'
 
 import { storage } from '@wxt-dev/storage'
-import { PostHog, type Survey } from 'posthog-js/dist/module.no-external'
+import { PostHog, type Survey, type SurveyResponseValue } from 'posthog-js/dist/module.no-external'
 import { browser } from 'wxt/browser'
 
 import { getSettings } from './settings'
@@ -118,7 +118,7 @@ export function captureSurveyShown(survey: Survey): void {
 	capture('survey shown', { $survey_id: survey.id, $survey_name: survey.name })
 }
 
-export function captureSurveyResponse(survey: Survey, response: string): void {
+export function captureSurveyResponse(survey: Survey, response: SurveyResponseValue): void {
 	capture('survey sent', {
 		$survey_id: survey.id,
 		$survey_name: survey.name,
