@@ -1,7 +1,7 @@
 <template>
 	<div v-if="activeSurvey" class="px-3 pt-4">
 		<Card class="survey-card relative !p-0">
-			<div class="flex items-start gap-3 px-2 py-2 pr-10">
+			<div class="flex items-center gap-3 px-2 py-2 pr-10">
 				<MessagesSquareIcon class="!size-6 shrink-0 text-yellow-500" aria-hidden="true" />
 				<div class="min-w-0 flex-1">
 					<div class="text-sm font-semibold text-contrast">
