@@ -149,6 +149,15 @@
   "popup.group.general": {
     "defaultMessage": "General"
   },
+  "popup.surveyPrompt.dismiss": {
+    "defaultMessage": "Dismiss"
+  },
+  "popup.surveyPrompt.placeholder": {
+    "defaultMessage": "Type your answer..."
+  },
+  "popup.surveyPrompt.submit": {
+    "defaultMessage": "Send"
+  },
   "search.any": {
     "defaultMessage": "Any"
   },

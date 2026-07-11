@@ -1,5 +1,7 @@
+import 'posthog-js/dist/surveys'
+
 import { storage } from '@wxt-dev/storage'
-import { PostHog } from 'posthog-js/dist/module.no-external'
+import { PostHog, type Survey } from 'posthog-js/dist/module.no-external'
 import { browser } from 'wxt/browser'
 
 import { getSettings } from './settings'
@@ -63,7 +65,9 @@ export async function initTelemetry(): Promise<void> {
 		disable_session_recording: true,
 		sanitize_properties: (properties) => {
 			for (const key of Object.keys(properties)) {
-				if (key.startsWith('$')) delete properties[key]
+				if (key.startsWith('$') && key !== '$set' && !key.startsWith('$survey')) {
+					delete properties[key]
+				}
 			}
 			return properties
 		},
@@ -83,4 +87,50 @@ export function capture(event: string, properties?: Record<string, unknown>): vo
 	} else {
 		queue.push({ event, properties })
 	}
+}
+
+export function getActiveSurvey(): Promise<Survey | null> {
+	return new Promise((resolve) => {
+		if (!enabled || !posthog) {
+			resolve(null)
+			return
+		}
+		const ph = posthog
+
+		ph.onSurveysLoaded((_surveys, context) => {
+			if (context?.error) {
+				console.error('[Modrinth Extras] Survey: Failed to load surveys:', context.error)
+				resolve(null)
+				return
+			}
+			ph.getActiveMatchingSurveys((surveys) => {
+				console.log(
+					`[Modrinth Extras] Survey: Loaded ${surveys.length} matching survey(s).`,
+					surveys,
+				)
+				resolve(surveys[0] ?? null)
+			})
+		})
+	})
+}
+
+export function captureSurveyShown(survey: Survey): void {
+	capture('survey shown', { $survey_id: survey.id, $survey_name: survey.name })
+}
+
+export function captureSurveyResponse(survey: Survey, response: string): void {
+	capture('survey sent', {
+		$survey_id: survey.id,
+		$survey_name: survey.name,
+		$survey_response: response,
+		$set: { [`$survey_responded/${survey.id}`]: true },
+	})
+}
+
+export function captureSurveyDismissed(survey: Survey): void {
+	capture('survey dismissed', {
+		$survey_id: survey.id,
+		$survey_name: survey.name,
+		$set: { [`$survey_dismissed/${survey.id}`]: true },
+	})
 }
