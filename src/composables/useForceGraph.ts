@@ -154,7 +154,8 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 	function updateImperative() {
 		for (const node of nodes.value) {
 			const el = nodeElements.get(node.id)
-			if (el) el.setAttribute('transform', `translate(${node.x},${node.y})`)
+			// CSS transform avoids the style/layout recalc the SVG attribute triggers.
+			if (el) el.style.transform = `translate(${node.x}px, ${node.y}px)`
 		}
 		for (const edge of edges.value) {
 			const key = edgeKey(edge)
@@ -191,7 +192,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 
 		simulation = forceSimulation<GraphNode>(activeNodes())
 			// Local, degree-independent repulsion so re-heating can't fling rings out
-			.force('charge', forceManyBody<GraphNode>().strength(-450).distanceMax(600))
+			.force('charge', forceManyBody<GraphNode>().strength(-650).distanceMax(700))
 			.force(
 				'link',
 				forceLink<GraphNode, D3Link>(getD3Links())
@@ -200,20 +201,20 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 					.distance((l) => {
 						const s = l.source as GraphNode
 						const t = l.target as GraphNode
-						return getNodeRadius(s) + getNodeRadius(t) + 40 + Math.max(deg(s), deg(t)) * 5
+						return getNodeRadius(s) + getNodeRadius(t) + 70 + Math.max(deg(s), deg(t)) * 6
 					}),
 				// d3's default link strength (1 / min degree) keeps hubs from collapsing together
 			)
 			.force(
 				'collide',
 				forceCollide<GraphNode>()
-					.radius((n) => getNodeRadius(n) + 16)
+					.radius((n) => getNodeRadius(n) + 26)
 					.strength(1),
 			)
 			// Concentric rings by depth; the pinned root anchors the graph, so no centring force
 			.force(
 				'radial',
-				forceRadial<GraphNode>((n) => n.depth * 190, 0, 0).strength((n) =>
+				forceRadial<GraphNode>((n) => n.depth * 250, 0, 0).strength((n) =>
 					n.isRoot || maxDepth === 0 ? 0 : 0.3,
 				),
 			)
@@ -421,6 +422,8 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		panning,
 		draggingNodeId,
 		nodeById,
+		nodeElements,
+		edgeElements,
 		edgeCurvatures,
 		getNodeRadius,
 		edgeKey,

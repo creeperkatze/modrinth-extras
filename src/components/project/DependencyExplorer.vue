@@ -12,7 +12,7 @@
 			style="height: 640px"
 			@mousemove="onMouseMove"
 			@mouseup="onMouseUp"
-			@mouseleave="onMouseUp"
+			@mouseleave="onCanvasMouseLeave"
 		>
 			<svg
 				ref="svgRef"
@@ -32,36 +32,36 @@
 					</pattern>
 					<marker
 						id="mre-arrow-required"
-						markerWidth="12"
-						markerHeight="10"
-						refX="11"
-						refY="5"
+						markerWidth="8"
+						markerHeight="7"
+						refX="7"
+						refY="3.5"
 						orient="auto"
 						markerUnits="userSpaceOnUse"
 					>
-						<path d="M 0 0 L 12 5 L 0 10 Z" class="fill-green" />
+						<path d="M 0 0 L 8 3.5 L 0 7 Z" class="fill-green" />
 					</marker>
 					<marker
 						id="mre-arrow-optional"
-						markerWidth="12"
-						markerHeight="10"
-						refX="11"
-						refY="5"
+						markerWidth="8"
+						markerHeight="7"
+						refX="7"
+						refY="3.5"
 						orient="auto"
 						markerUnits="userSpaceOnUse"
 					>
-						<path d="M 0 0 L 12 5 L 0 10 Z" class="fill-secondary" />
+						<path d="M 0 0 L 8 3.5 L 0 7 Z" class="fill-orange" />
 					</marker>
 					<marker
 						id="mre-arrow-embedded"
-						markerWidth="12"
-						markerHeight="10"
-						refX="11"
-						refY="5"
+						markerWidth="8"
+						markerHeight="7"
+						refX="7"
+						refY="3.5"
 						orient="auto"
 						markerUnits="userSpaceOnUse"
 					>
-						<path d="M 0 0 L 12 5 L 0 10 Z" class="fill-blue" />
+						<path d="M 0 0 L 8 3.5 L 0 7 Z" class="fill-blue" />
 					</marker>
 					<template v-for="node in nodes" :key="`clip-${node.id}`">
 						<clipPath :id="`mre-clip-${escId(node.id)}`">
@@ -72,20 +72,24 @@
 
 				<rect width="100%" height="100%" fill="url(#mre-explorer-grid)" />
 
-				<g v-if="!initialLoading" :transform="`translate(${pan.x},${pan.y}) scale(${zoom})`">
+				<g
+					v-if="!initialLoading"
+					:style="{ transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})` }"
+				>
 					<g class="pointer-events-none">
 						<path
 							v-for="edge in visibleEdges"
 							:key="edgeKey(edge)"
 							:ref="(el) => setEdgeEl(edgeKey(edge), el as Element | null)"
 							:d="computeEdgePath(edge, edgeCurvatures.get(edgeKey(edge)) ?? 0)"
-							class="fill-none opacity-60"
+							class="fill-none transition-opacity duration-150 ease-in-out"
 							:class="{
 								'stroke-green': edge.type === 'required',
-								'stroke-secondary': edge.type === 'optional',
+								'stroke-orange': edge.type === 'optional',
 								'stroke-blue': edge.type === 'embedded',
 							}"
-							stroke-width="1.5"
+							stroke-width="1"
+							:stroke-dasharray="edge.type === 'optional' ? '4 3' : undefined"
 							stroke-linecap="round"
 							:marker-end="`url(#mre-arrow-${edge.type})`"
 						/>
@@ -95,9 +99,11 @@
 						v-for="node in visibleNodes"
 						:key="node.id"
 						:ref="(el) => setNodeEl(node.id, el as Element | null)"
-						:transform="`translate(${node.x},${node.y})`"
+						:style="{ transform: `translate(${node.x}px, ${node.y}px)` }"
 						:class="[draggingNodeId === node.id ? 'cursor-grabbing' : 'cursor-pointer', 'group']"
 						@mousedown.stop="onNodeMouseDown($event, node)"
+						@mouseenter="hoveredNodeId = node.id"
+						@mouseleave="onNodeMouseLeave(node)"
 					>
 						<a :href="nodeHref(node)" @click="onNodeLinkClick($event, node)">
 							<circle
@@ -132,13 +138,17 @@
 								class="pointer-events-none"
 							/>
 
+							<circle
+								:r="getNodeRadius(node)"
+								class="mre-dim-overlay fill-surface-1 pointer-events-none opacity-0 transition-opacity duration-150 ease-in-out"
+							/>
+
 							<text
 								:y="getNodeRadius(node) + 14"
 								text-anchor="middle"
 								:font-size="node.isRoot ? '12' : '10'"
 								:font-weight="node.isRoot ? '600' : '400'"
 								class="fill-primary pointer-events-none select-none"
-								:class="{ 'group-hover:underline': node.project && !node.isRoot }"
 							>
 								{{ clamp(node.project?.name ?? node.id, 22) }}
 							</text>
@@ -238,7 +248,7 @@
 <script setup lang="ts">
 import { ExpandIcon, UpdatedIcon } from '@modrinth/assets'
 import { ButtonStyled, defineMessages, NewModal, Slider, Toggle, useVIntl } from '@modrinth/ui'
-import { computed, nextTick, ref, useTemplateRef } from 'vue'
+import { computed, nextTick, onUnmounted, ref, useTemplateRef, watch } from 'vue'
 
 import { type GraphEdge, type GraphNode, useForceGraph } from '../../composables/useForceGraph'
 import {
@@ -300,7 +310,7 @@ const LEGEND = computed<{ type: DepType; color: string; label: string }[]>(() =>
 	},
 	{
 		type: 'optional',
-		color: 'var(--color-secondary)',
+		color: 'var(--color-orange)',
 		label: formatMessage(messages['dependencyNode.optional']),
 	},
 	{
@@ -327,6 +337,8 @@ const {
 	panning,
 	draggingNodeId,
 	nodeById,
+	nodeElements,
+	edgeElements,
 	edgeCurvatures,
 	getNodeRadius,
 	edgeKey,
@@ -349,11 +361,11 @@ const {
 	getDragMoved,
 } = useForceGraph(() => svgRef.value)
 
-// Deepest depth in the graph, and how many levels the slider currently shows.
+// Deepest depth in the graph; how many levels the slider shows.
 const maxDepth = computed(() => nodes.value.reduce((max, node) => Math.max(max, node.depth), 0))
 const depthLimit = ref(0)
 
-// Re-feed the simulation with the current active set so the layout reorganizes.
+// Re-feed the simulation so the layout reorganizes.
 function refreshSimulation() {
 	setFitOnSettle(true)
 	kickSimulation(true)
@@ -376,7 +388,7 @@ const typeVisibleEdges = computed(() =>
 	edges.value.filter((edge) => !hiddenTypes.value.has(edge.type)),
 )
 
-// Nodes reachable from the root through visible-type edges, within the depth limit.
+// Nodes reachable from the root within the depth limit.
 const visibleNodeIds = computed(() => {
 	const reachable = new Set<string>()
 	const root = nodes.value.find((node) => node.isRoot)
@@ -408,7 +420,7 @@ const visibleNodeIds = computed(() => {
 
 const visibleNodes = computed(() => nodes.value.filter((node) => visibleNodeIds.value.has(node.id)))
 
-// Edges whose endpoints both survived the prune, so no orphan edges render.
+// Edges whose endpoints both survived the prune.
 const visibleEdges = computed(() =>
 	typeVisibleEdges.value.filter(
 		(edge) => visibleNodeIds.value.has(edge.source) && visibleNodeIds.value.has(edge.target),
@@ -419,6 +431,92 @@ setActiveAccessors(
 	() => visibleNodes.value,
 	() => visibleEdges.value,
 )
+
+// Not read in the template; applyHoverState below updates DOM classes directly to avoid
+// re-rendering every node/edge on each hover.
+const hoveredNodeId = ref<string | null>(null)
+
+let appliedDimmedNodeIds = new Set<string>()
+let appliedHighlightedEdgeKeys = new Set<string>()
+let appliedDimmedEdgeKeys = new Set<string>()
+let hoverFrame: number | null = null
+
+function diffClass<E extends Element>(
+	prev: Set<string>,
+	next: Set<string>,
+	elements: Map<string, E>,
+	className: string,
+) {
+	for (const key of prev) if (!next.has(key)) elements.get(key)?.classList.remove(className)
+	for (const key of next) if (!prev.has(key)) elements.get(key)?.classList.add(className)
+}
+
+function applyHoverState() {
+	const nodeId = hoveredNodeId.value
+
+	// Itself plus anything it points to via a visible edge.
+	const highlighted = nodeId ? new Set<string>([nodeId]) : null
+	if (highlighted) {
+		for (const edge of visibleEdges.value) {
+			if (edge.source === nodeId) highlighted.add(edge.target)
+		}
+	}
+
+	const nextDimmedNodes = new Set<string>()
+	if (highlighted) {
+		for (const node of visibleNodes.value) {
+			if (!highlighted.has(node.id)) nextDimmedNodes.add(node.id)
+		}
+	}
+	diffClass(appliedDimmedNodeIds, nextDimmedNodes, nodeElements, 'mre-node-dimmed')
+	appliedDimmedNodeIds = nextDimmedNodes
+
+	const nextHighlightedEdges = new Set<string>()
+	const nextDimmedEdges = new Set<string>()
+	if (nodeId) {
+		for (const edge of visibleEdges.value) {
+			const key = edgeKey(edge)
+			if (edge.source === nodeId) nextHighlightedEdges.add(key)
+			else nextDimmedEdges.add(key)
+		}
+	}
+	diffClass(appliedHighlightedEdgeKeys, nextHighlightedEdges, edgeElements, 'mre-edge-highlighted')
+	diffClass(appliedDimmedEdgeKeys, nextDimmedEdges, edgeElements, 'mre-edge-dimmed')
+	appliedHighlightedEdgeKeys = nextHighlightedEdges
+	appliedDimmedEdgeKeys = nextDimmedEdges
+}
+
+// Batches hover updates onto a single frame.
+function scheduleHoverUpdate() {
+	if (hoverFrame !== null) return
+	hoverFrame = window.requestAnimationFrame(() => {
+		hoverFrame = null
+		applyHoverState()
+	})
+}
+
+function onNodeMouseLeave(node: GraphNode) {
+	if (hoveredNodeId.value === node.id) hoveredNodeId.value = null
+}
+
+function onCanvasMouseLeave() {
+	onMouseUp()
+	hoveredNodeId.value = null
+}
+
+watch(hoveredNodeId, scheduleHoverUpdate)
+
+// Clear the hover if its node left view, and re-apply on structural changes.
+watch([visibleNodeIds, visibleEdges], () => {
+	if (hoveredNodeId.value && !visibleNodeIds.value.has(hoveredNodeId.value)) {
+		hoveredNodeId.value = null
+	}
+	scheduleHoverUpdate()
+})
+
+onUnmounted(() => {
+	if (hoverFrame !== null) window.cancelAnimationFrame(hoverFrame)
+})
 
 function escId(id: string): string {
 	return id.replace(/[^a-zA-Z0-9]/g, '_')
@@ -486,6 +584,10 @@ function addDepsToGraph(
 
 async function initGraph() {
 	reset()
+	hoveredNodeId.value = null
+	appliedDimmedNodeIds = new Set()
+	appliedHighlightedEdgeKeys = new Set()
+	appliedDimmedEdgeKeys = new Set()
 	hiddenTypes.value = new Set()
 	initialLoading.value = true
 	loadingProgress.value = 0
@@ -520,7 +622,7 @@ async function initGraph() {
 				(dependency) => !expandedProjectIds.has(dependency.project_id),
 			)
 
-			// Ratio of expanded projects to all known so far; clamped so the bar never regresses.
+			// Clamped so the bar never regresses.
 			const discovered = expandedProjectIds.size + unexpandedDependencies.length
 			loadingProgress.value = Math.max(
 				loadingProgress.value,
@@ -589,3 +691,18 @@ async function show() {
 
 defineExpose({ show })
 </script>
+
+<style scoped>
+/* Applied imperatively via classList in applyHoverState, not Vue `:class` bindings. */
+.mre-node-dimmed .mre-dim-overlay {
+	opacity: 0.6;
+}
+
+.mre-edge-dimmed {
+	opacity: 0.25;
+}
+
+.mre-edge-highlighted {
+	stroke-width: 1.5;
+}
+</style>
