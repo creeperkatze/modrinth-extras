@@ -149,6 +149,15 @@
   "popup.group.general": {
     "defaultMessage": "Загальні"
   },
+  "popup.surveyPrompt.dismiss": {
+    "defaultMessage": "Відхилити"
+  },
+  "popup.surveyPrompt.placeholder": {
+    "defaultMessage": "Напишіть свою відповідь..."
+  },
+  "popup.surveyPrompt.submit": {
+    "defaultMessage": "Надіслати"
+  },
   "search.any": {
     "defaultMessage": "Будь-який"
   },

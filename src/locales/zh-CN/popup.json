@@ -1,6 +1,12 @@
 {
+  "feature.activitySparkline.days": {
+    "defaultMessage": "{count} 天"
+  },
   "feature.activitySparkline.description": {
     "defaultMessage": "在项目页面上展示活动图表。"
+  },
+  "feature.activitySparkline.timeRange": {
+    "defaultMessage": "时间范围"
   },
   "feature.activitySparkline.title": {
     "defaultMessage": "活动图表"
@@ -10,6 +16,21 @@
   },
   "feature.curseforgeRedirect.title": {
     "defaultMessage": "CurseForge 重定向"
+  },
+  "feature.dependencyExplorer.description": {
+    "defaultMessage": "用于探查完整依赖树的交互式图表。"
+  },
+  "feature.dependencyExplorer.disabledTooltip": {
+    "defaultMessage": "需要先启用依赖侧边栏"
+  },
+  "feature.dependencyExplorer.title": {
+    "defaultMessage": "依赖关系浏览器"
+  },
+  "feature.dependencySidebar.description": {
+    "defaultMessage": "项目页面上的可折叠依赖树。"
+  },
+  "feature.dependencySidebar.title": {
+    "defaultMessage": "依赖关系侧边栏"
   },
   "feature.desktopNotifications.description": {
     "defaultMessage": "为您的Modrinth通知提供操作系统通知。"
@@ -56,11 +77,17 @@
   "feature.projectCardActions.description": {
     "defaultMessage": "直接从项目卡片下载、关注和保存项目。"
   },
+  "feature.projectCardActions.gameVersion": {
+    "defaultMessage": "游戏版本"
+  },
   "feature.projectCardActions.modLoader": {
     "defaultMessage": "模组加载器"
   },
   "feature.projectCardActions.pluginLoader": {
     "defaultMessage": "插件加载器"
+  },
+  "feature.projectCardActions.shaderLoader": {
+    "defaultMessage": "光影包加载器"
   },
   "feature.projectCardActions.title": {
     "defaultMessage": "项目卡片操作"
@@ -80,11 +107,29 @@
   "feature.telemetry.title": {
     "defaultMessage": "遥测数据"
   },
+  "feature.toolsSidebar.description": {
+    "defaultMessage": "生成嵌入代码并复制模组管理器安装命令。"
+  },
+  "feature.toolsSidebar.modManager": {
+    "defaultMessage": "模组管理器"
+  },
   "feature.toolsSidebar.title": {
     "defaultMessage": "工具侧边栏"
   },
+  "popup.donatePrompt.dismiss": {
+    "defaultMessage": "忽略"
+  },
+  "popup.donatePrompt.message": {
+    "defaultMessage": "Modrinth Extras 将永远保持免费、开源且无广告。如果你觉得它对你有帮助，可以考虑通过小额赞助来支持其后续开发。"
+  },
+  "popup.donatePrompt.title": {
+    "defaultMessage": "支持此扩展程序"
+  },
   "popup.footer.checking": {
     "defaultMessage": "正在检查"
+  },
+  "popup.footer.donate": {
+    "defaultMessage": "捐赠"
   },
   "popup.footer.latestVersion": {
     "defaultMessage": "最新版本"
@@ -105,7 +150,10 @@
     "defaultMessage": "一般"
   },
   "search.any": {
-    "defaultMessage": "任何 "
+    "defaultMessage": "任何"
+  },
+  "search.placeholder": {
+    "defaultMessage": "搜索……"
   },
   "settings.language": {
     "defaultMessage": "语言"

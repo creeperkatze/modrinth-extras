@@ -1,9 +1,54 @@
 {
+  "dependencyExplorer.centerView": {
+    "defaultMessage": "居中视图"
+  },
+  "dependencyExplorer.depth": {
+    "defaultMessage": "依赖关系解析深度"
+  },
   "dependencyExplorer.loading": {
     "defaultMessage": "加载中"
   },
   "dependencyExplorer.noDependencies": {
     "defaultMessage": "此项目没有依赖关系"
+  },
+  "dependencyExplorer.reset": {
+    "defaultMessage": "重置"
+  },
+  "dependencyExplorer.title": {
+    "defaultMessage": "依赖关系浏览器"
+  },
+  "dependencyNode.collapse": {
+    "defaultMessage": "收起依赖树"
+  },
+  "dependencyNode.embedded": {
+    "defaultMessage": "内置的"
+  },
+  "dependencyNode.expand": {
+    "defaultMessage": "展开依赖关系"
+  },
+  "dependencyNode.incompatible": {
+    "defaultMessage": "不兼容"
+  },
+  "dependencyNode.optional": {
+    "defaultMessage": "可选的"
+  },
+  "dependencyNode.required": {
+    "defaultMessage": "仅显示必需依赖项"
+  },
+  "dependencySidebar.loadError": {
+    "defaultMessage": "无法加载依赖关系"
+  },
+  "dependencySidebar.loading": {
+    "defaultMessage": "加载中"
+  },
+  "dependencySidebar.none": {
+    "defaultMessage": "无依赖项"
+  },
+  "dependencySidebar.openExplorer": {
+    "defaultMessage": "打开依赖关系浏览器"
+  },
+  "dependencySidebar.title": {
+    "defaultMessage": "依赖项"
   },
   "discordSidebar.members": {
     "defaultMessage": "{count} 位成员"
@@ -39,13 +84,16 @@
     "defaultMessage": "没有未读通知"
   },
   "notificationsIndicator.projectUpdated": {
-    "defaultMessage": "{title}更新完成！"
+    "defaultMessage": "{title}更新完成"
   },
   "notificationsIndicator.viewAll": {
     "defaultMessage": "查看全部"
   },
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "查看历史"
+  },
+  "projectCardActions.checkingDownload": {
+    "defaultMessage": "正在检查可用版本……"
   },
   "projectCardActions.copied": {
     "defaultMessage": "已复制！"
@@ -55,6 +103,9 @@
   },
   "projectCardActions.download": {
     "defaultMessage": "下载"
+  },
+  "projectCardActions.downloadUnavailable": {
+    "defaultMessage": "{loader, select, none {未找到适用于 {version} 的版本} other {未找到适用于 {loader} {version} 的版本}}"
   },
   "projectCardActions.follow": {
     "defaultMessage": "关注"
@@ -77,6 +128,9 @@
   "projectCardActions.unfollow": {
     "defaultMessage": "取消关注"
   },
+  "quickSearch.clearRecent": {
+    "defaultMessage": "清除最近搜索"
+  },
   "quickSearch.examples": {
     "defaultMessage": "示例"
   },
@@ -88,6 +142,9 @@
   },
   "toolsSidebar.copied": {
     "defaultMessage": "已复制！"
+  },
+  "toolsSidebar.copyInstallCommand": {
+    "defaultMessage": "复制 {manager} 命令"
   },
   "toolsSidebar.generateEmbed": {
     "defaultMessage": "生成嵌入代码"
