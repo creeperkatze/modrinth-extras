@@ -51,6 +51,7 @@ interface ViewportOptions {
 const VIEWPORT_TRANSITION_NAME = 'mre-viewport'
 const VIEWPORT_TRANSITION_MS = 450
 const WHEEL_ZOOM_SPEED = 0.0012
+const EDGE_TARGET_GAP = 4
 
 export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 	const nodes = ref<GraphNode[]>([])
@@ -115,8 +116,8 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		const r2 = tgtNode ? getNodeRadius(tgtNode) : 22
 		const x1 = src.x + ux * r1
 		const y1 = src.y + uy * r1
-		const x2 = tgt.x - ux * r2
-		const y2 = tgt.y - uy * r2
+		const x2 = tgt.x - ux * (r2 + EDGE_TARGET_GAP)
+		const y2 = tgt.y - uy * (r2 + EDGE_TARGET_GAP)
 		if (Math.abs(curvature) < 0.5) {
 			return `M ${x1} ${y1} L ${x2} ${y2}`
 		}
