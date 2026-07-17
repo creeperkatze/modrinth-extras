@@ -107,7 +107,6 @@
 					>
 						<a :href="nodeHref(node)" @click="onNodeLinkClick($event, node)">
 							<circle
-								v-if="!node.isRoot"
 								:r="getNodeRadius(node) + 5"
 								class="fill-none stroke-primary [stroke-width:1.5] opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-in-out pointer-events-none"
 							/>
@@ -665,7 +664,7 @@ async function initGraph() {
 }
 
 function nodeHref(node: GraphNode): string | undefined {
-	if (!node.project || node.isRoot) return undefined
+	if (!node.project) return undefined
 	return resolveLink(`/${node.project.project_types[0]}/${node.project.slug}`)
 }
 
@@ -675,7 +674,7 @@ function onNodeLinkClick(event: MouseEvent, node: GraphNode) {
 		return
 	}
 	event.preventDefault()
-	if (getDragMoved() || !node.project || node.isRoot) return
+	if (getDragMoved() || !node.project) return
 	modal.value?.hide()
 	navigate(`/${node.project.project_types[0]}/${node.project.slug}`)
 }
