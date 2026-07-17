@@ -37,14 +37,18 @@ export function normalizeDeps(dependencies: Labrinth.Versions.v3.Dependency[]): 
 
 export function buildEnrichedDeps(
 	rawDeps: RawDep[],
-	projects: Labrinth.Projects.v3.Project[],
+	projectsById: ReadonlyMap<string, Labrinth.Projects.v3.Project>,
 ): EnrichedDep[] {
-	const relevant = rawDeps.filter(isGraphDependency)
-	const projectMap = new Map(projects.map((p) => [p.id, p]))
-	return relevant.map((d) => ({
+	return rawDeps.filter(isGraphDependency).map((d) => ({
 		...d,
-		project: projectMap.get(d.project_id) ?? null,
+		project: projectsById.get(d.project_id) ?? null,
 	}))
+}
+
+function projectsById(
+	projects: Labrinth.Projects.v3.Project[],
+): Map<string, Labrinth.Projects.v3.Project> {
+	return new Map(projects.map((p) => [p.id, p]))
 }
 
 export async function fetchDependencyGraphRoot(
@@ -125,7 +129,10 @@ export async function fetchProjectDependencies(slugOrId: string): Promise<Enrich
 		])
 
 		if (!versions || versions.length === 0) return []
-		return buildEnrichedDeps(normalizeDeps(versions[0].dependencies ?? []), depsData.projects)
+		return buildEnrichedDeps(
+			normalizeDeps(versions[0].dependencies ?? []),
+			projectsById(depsData.projects),
+		)
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to fetch project dependencies:', err)
 		return []
@@ -142,7 +149,10 @@ export async function fetchVersionDependencies(
 			modrinthClient.labrinth.projects_v3.getDependencies(projectSlug),
 		])
 
-		return buildEnrichedDeps(normalizeDeps(version.dependencies ?? []), depsData.projects)
+		return buildEnrichedDeps(
+			normalizeDeps(version.dependencies ?? []),
+			projectsById(depsData.projects),
+		)
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to fetch version dependencies:', err)
 		return []

@@ -63,11 +63,12 @@
 					>
 						<path d="M 0 0 L 8 3.5 L 0 7 Z" class="fill-blue" />
 					</marker>
-					<template v-for="node in nodes" :key="`clip-${node.id}`">
-						<clipPath :id="`mre-clip-${escId(node.id)}`">
-							<circle :r="getNodeRadius(node)" />
-						</clipPath>
-					</template>
+					<clipPath id="mre-clip-root">
+						<circle :r="ROOT_NODE_RADIUS" />
+					</clipPath>
+					<clipPath id="mre-clip-node">
+						<circle :r="NODE_RADIUS" />
+					</clipPath>
 				</defs>
 
 				<rect width="100%" height="100%" fill="url(#mre-explorer-grid)" />
@@ -133,7 +134,7 @@
 								:y="-getNodeRadius(node)"
 								:width="getNodeRadius(node) * 2"
 								:height="getNodeRadius(node) * 2"
-								:clip-path="`url(#mre-clip-${escId(node.id)})`"
+								:clip-path="node.isRoot ? 'url(#mre-clip-root)' : 'url(#mre-clip-node)'"
 								class="pointer-events-none"
 							/>
 
@@ -249,7 +250,13 @@ import { ExpandIcon, UpdatedIcon } from '@modrinth/assets'
 import { ButtonStyled, defineMessages, NewModal, Slider, Toggle, useVIntl } from '@modrinth/ui'
 import { computed, nextTick, onUnmounted, ref, useTemplateRef, watch } from 'vue'
 
-import { type GraphEdge, type GraphNode, useForceGraph } from '../../composables/useForceGraph'
+import {
+	type GraphEdge,
+	type GraphNode,
+	NODE_RADIUS,
+	ROOT_NODE_RADIUS,
+	useForceGraph,
+} from '../../composables/useForceGraph'
 import {
 	buildEnrichedDeps,
 	type EnrichedDep,
@@ -346,11 +353,10 @@ const {
 	setEdgeEl,
 	recomputeCurvatures,
 	startSimulation,
-	kickSimulation,
 	setActiveAccessors,
 	zoomToFit,
 	setViewport,
-	setFitOnSettle,
+	setAutoFit,
 	reset,
 	addNode,
 	addEdge,
@@ -364,10 +370,10 @@ const {
 const maxDepth = computed(() => nodes.value.reduce((max, node) => Math.max(max, node.depth), 0))
 const depthLimit = ref(0)
 
-// Re-feed the simulation so the layout reorganizes.
+// Rebuild the simulation over the current visible set so the layout reorganizes.
 function refreshSimulation() {
-	setFitOnSettle(true)
-	kickSimulation(true)
+	setAutoFit(true)
+	startSimulation(0.4)
 }
 
 function toggleType(type: DepType) {
@@ -394,20 +400,20 @@ const visibleNodeIds = computed(() => {
 	if (!root) return reachable
 
 	const adjacency = new Map<string, string[]>()
+	const addNeighbour = (from: string, to: string) => {
+		const list = adjacency.get(from)
+		if (list) list.push(to)
+		else adjacency.set(from, [to])
+	}
 	for (const edge of typeVisibleEdges.value) {
-		;(adjacency.get(edge.source) ?? adjacency.set(edge.source, []).get(edge.source)!).push(
-			edge.target,
-		)
-		;(adjacency.get(edge.target) ?? adjacency.set(edge.target, []).get(edge.target)!).push(
-			edge.source,
-		)
+		addNeighbour(edge.source, edge.target)
+		addNeighbour(edge.target, edge.source)
 	}
 
 	const queue = [root.id]
 	reachable.add(root.id)
-	while (queue.length > 0) {
-		const id = queue.shift()!
-		for (const neighbour of adjacency.get(id) ?? []) {
+	for (let i = 0; i < queue.length; i++) {
+		for (const neighbour of adjacency.get(queue[i]) ?? []) {
 			if (reachable.has(neighbour)) continue
 			if ((nodeById.get(neighbour)?.depth ?? 0) > depthLimit.value) continue
 			reachable.add(neighbour)
@@ -522,40 +528,30 @@ onUnmounted(() => {
 	if (hoverFrame !== null) window.cancelAnimationFrame(hoverFrame)
 })
 
-function escId(id: string): string {
-	return id.replace(/[^a-zA-Z0-9]/g, '_')
-}
-
 function clamp(s: string, max: number): string {
 	return s.length > max ? s.slice(0, max - 1) + '…' : s
 }
 
-function addDepsToGraph(
-	sourceId: string,
-	sourceProjectId: string,
-	deps: EnrichedDep[],
-	depth: number,
-): boolean {
+// Node ids are project ids, so `sourceId` doubles as the source's project id.
+function addDepsToGraph(sourceId: string, deps: EnrichedDep[], depth: number) {
 	const source = nodeById.get(sourceId)
 	const sx = source?.x ?? 0
 	const sy = source?.y ?? 0
 
-	const withIds = deps
-		.filter((dep) => dep.project_id !== sourceProjectId)
-		.map((dep) => ({ dep, nodeId: dep.project_id }))
-
-	const existingIds = new Set(nodes.value.map((n) => n.id))
-	const toCreate = withIds.filter(({ nodeId }) => {
-		if (existingIds.has(nodeId)) return false
-		existingIds.add(nodeId)
+	const seen = new Set<string>()
+	const toCreate = deps.filter((dep) => {
+		if (dep.project_id === sourceId || nodeById.has(dep.project_id) || seen.has(dep.project_id)) {
+			return false
+		}
+		seen.add(dep.project_id)
 		return true
 	})
 
-	toCreate.forEach(({ dep, nodeId }, i) => {
+	toCreate.forEach((dep, i) => {
 		const angle = (i / Math.max(toCreate.length, 1)) * 2 * Math.PI
 		const r = 80 + 30 * Math.floor(i / 8)
 		addNode({
-			id: nodeId,
+			id: dep.project_id,
 			x: sx + r * Math.cos(angle),
 			y: sy + r * Math.sin(angle),
 			vx: 0,
@@ -568,22 +564,14 @@ function addDepsToGraph(
 		})
 	})
 
-	for (const { dep, nodeId } of withIds) {
-		if (
-			!edges.value.some(
-				(e) => e.source === sourceId && e.target === nodeId && e.type === dep.dependency_type,
-			)
-		) {
-			addEdge({
-				source: sourceId,
-				target: nodeId,
-				type: dep.dependency_type as GraphEdge['type'],
-			})
-		}
+	for (const dep of deps) {
+		if (dep.project_id === sourceId) continue
+		addEdge({
+			source: sourceId,
+			target: dep.project_id,
+			type: dep.dependency_type as GraphEdge['type'],
+		})
 	}
-
-	recomputeCurvatures()
-	return toCreate.length > 0
 }
 
 async function initGraph() {
@@ -615,7 +603,7 @@ async function initGraph() {
 		})
 
 		const expandedProjectIds = new Set([rootId])
-		let frontier = [{ sourceId: rootId, sourceProjectId: rootId, dependencies: rootDependencies }]
+		let frontier = [{ sourceId: rootId, dependencies: rootDependencies }]
 
 		while (frontier.length > 0) {
 			const dependencyTargets = frontier.flatMap(({ dependencies }) =>
@@ -637,12 +625,11 @@ async function initGraph() {
 			const projectsById = new Map(projects.map((project) => [project.id, project]))
 			projectsById.set(rootId, rootProject)
 
-			for (const { sourceId, sourceProjectId, dependencies } of frontier) {
+			for (const { sourceId, dependencies } of frontier) {
 				const source = nodeById.get(sourceId)
 				addDepsToGraph(
 					sourceId,
-					sourceProjectId,
-					buildEnrichedDeps(dependencies, [...projectsById.values()]),
+					buildEnrichedDeps(dependencies, projectsById),
 					(source?.depth ?? 0) + 1,
 				)
 			}
@@ -652,13 +639,13 @@ async function initGraph() {
 			}
 			frontier = projects.map((project) => ({
 				sourceId: project.id,
-				sourceProjectId: project.id,
 				dependencies: dependenciesByProjectId.get(project.id) ?? [],
 			}))
 		}
 
 		depthLimit.value = maxDepth.value
-		setFitOnSettle(true)
+		recomputeCurvatures()
+		setAutoFit(true)
 		startSimulation()
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to load dependency graph:', err)
