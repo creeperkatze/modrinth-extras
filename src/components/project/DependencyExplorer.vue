@@ -436,7 +436,6 @@ setActiveAccessors(
 const hoveredNodeId = ref<string | null>(null)
 
 let appliedDimmedNodeIds = new Set<string>()
-let appliedHighlightedEdgeKeys = new Set<string>()
 let appliedDimmedEdgeKeys = new Set<string>()
 let hoverFrame: number | null = null
 
@@ -470,18 +469,13 @@ function applyHoverState() {
 	diffClass(appliedDimmedNodeIds, nextDimmedNodes, nodeElements, 'mre-node-dimmed')
 	appliedDimmedNodeIds = nextDimmedNodes
 
-	const nextHighlightedEdges = new Set<string>()
 	const nextDimmedEdges = new Set<string>()
 	if (nodeId) {
 		for (const edge of visibleEdges.value) {
-			const key = edgeKey(edge)
-			if (edge.source === nodeId) nextHighlightedEdges.add(key)
-			else nextDimmedEdges.add(key)
+			if (edge.source !== nodeId) nextDimmedEdges.add(edgeKey(edge))
 		}
 	}
-	diffClass(appliedHighlightedEdgeKeys, nextHighlightedEdges, edgeElements, 'mre-edge-highlighted')
 	diffClass(appliedDimmedEdgeKeys, nextDimmedEdges, edgeElements, 'mre-edge-dimmed')
-	appliedHighlightedEdgeKeys = nextHighlightedEdges
 	appliedDimmedEdgeKeys = nextDimmedEdges
 }
 
@@ -596,7 +590,6 @@ async function initGraph() {
 	reset()
 	hoveredNodeId.value = null
 	appliedDimmedNodeIds = new Set()
-	appliedHighlightedEdgeKeys = new Set()
 	appliedDimmedEdgeKeys = new Set()
 	hiddenTypes.value = new Set()
 	initialLoading.value = true
@@ -710,9 +703,5 @@ defineExpose({ show })
 
 .mre-edge-dimmed {
 	opacity: 0.25;
-}
-
-.mre-edge-highlighted {
-	stroke-width: 1.5;
 }
 </style>
