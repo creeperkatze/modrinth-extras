@@ -50,7 +50,7 @@
 						orient="auto"
 						markerUnits="userSpaceOnUse"
 					>
-						<path d="M 0 0 L 8 3.5 L 0 7 Z" class="fill-orange" />
+						<path d="M 0 0 L 8 3.5 L 0 7 Z" class="fill-secondary" />
 					</marker>
 					<marker
 						id="mre-arrow-embedded"
@@ -85,7 +85,7 @@
 							class="fill-none transition-opacity duration-150 ease-in-out"
 							:class="{
 								'stroke-green': edge.type === 'required',
-								'stroke-orange': edge.type === 'optional',
+								'stroke-secondary': edge.type === 'optional',
 								'stroke-blue': edge.type === 'embedded',
 							}"
 							stroke-width="1"
@@ -310,7 +310,7 @@ const LEGEND = computed<{ type: DepType; color: string; label: string }[]>(() =>
 	},
 	{
 		type: 'optional',
-		color: 'var(--color-orange)',
+		color: 'var(--color-secondary)',
 		label: formatMessage(messages['dependencyNode.optional']),
 	},
 	{
