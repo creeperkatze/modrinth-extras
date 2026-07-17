@@ -101,8 +101,8 @@
 						:ref="(el) => setNodeEl(node.id, el as Element | null)"
 						:style="{ transform: `translate(${node.x}px, ${node.y}px)` }"
 						:class="[draggingNodeId === node.id ? 'cursor-grabbing' : 'cursor-pointer', 'group']"
-						@mousedown.stop="onNodeMouseDown($event, node)"
-						@mouseenter="hoveredNodeId = node.id"
+						@mousedown.stop="onNodeDragStart($event, node)"
+						@mouseenter="onNodeMouseEnter(node)"
 						@mouseleave="onNodeMouseLeave(node)"
 					>
 						<a :href="nodeHref(node)" @click="onNodeLinkClick($event, node)">
@@ -494,7 +494,18 @@ function scheduleHoverUpdate() {
 	})
 }
 
+function onNodeDragStart(event: MouseEvent, node: GraphNode) {
+	onNodeMouseDown(event, node)
+	hoveredNodeId.value = node.id
+}
+
+function onNodeMouseEnter(node: GraphNode) {
+	if (draggingNodeId.value && draggingNodeId.value !== node.id) return
+	hoveredNodeId.value = node.id
+}
+
 function onNodeMouseLeave(node: GraphNode) {
+	if (draggingNodeId.value === node.id) return
 	if (hoveredNodeId.value === node.id) hoveredNodeId.value = null
 }
 
