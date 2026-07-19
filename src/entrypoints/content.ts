@@ -182,6 +182,16 @@ function attachCardActions(card: HTMLElement): HTMLElement | null {
 
 	const listCardDiv = card.querySelector<HTMLElement>('.grid-project-card-list')
 	if (listCardDiv) {
+		const existingActions = listCardDiv.querySelector<HTMLElement>(
+			'.grid-project-card-list__actions',
+		)
+		if (existingActions) {
+			const container = document.createElement('div')
+			container.style.cssText = 'display:contents;pointer-events:auto'
+			existingActions.appendChild(container)
+			return container
+		}
+
 		listCardDiv.classList.add('has-actions')
 		const el = document.createElement('div')
 		el.style.cssText =
