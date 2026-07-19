@@ -502,18 +502,17 @@ function diffClass<E extends Element>(
 
 function applyHoverState() {
 	const searching = searchQuery.value.trim().length > 0
+	const nodeId = hoveredNodeId.value
+	const searchMatchIds = searching ? new Set(searchMatches.value.map((node) => node.id)) : null
 
-	// While searching, highlight matches and dim everything else (all nodes if there are none).
-	let highlighted: Set<string> | null
-	if (searching) {
-		highlighted = new Set(searchMatches.value.map((node) => node.id))
-	} else {
-		const nodeId = hoveredNodeId.value
-		highlighted = nodeId ? new Set<string>([nodeId]) : null
-		if (highlighted) {
-			for (const edge of visibleEdges.value) {
-				if (edge.source === nodeId) highlighted.add(edge.target)
-			}
+	// Highlighted means search matches, plus the hovered node and whatever it points to, so
+	// hovering still works normally while searching, without sticking once the hover ends.
+	let highlighted: Set<string> | null = searchMatchIds ? new Set(searchMatchIds) : null
+	if (nodeId) {
+		highlighted ??= new Set()
+		highlighted.add(nodeId)
+		for (const edge of visibleEdges.value) {
+			if (edge.source === nodeId) highlighted.add(edge.target)
 		}
 	}
 
@@ -527,16 +526,12 @@ function applyHoverState() {
 	appliedDimmedNodeIds = nextDimmedNodes
 
 	const nextDimmedEdges = new Set<string>()
-	if (searching) {
-		const matchedIds = highlighted!
+	if (highlighted) {
 		for (const edge of visibleEdges.value) {
-			if (!matchedIds.has(edge.source) && !matchedIds.has(edge.target)) {
-				nextDimmedEdges.add(edgeKey(edge))
-			}
-		}
-	} else if (hoveredNodeId.value) {
-		for (const edge of visibleEdges.value) {
-			if (edge.source !== hoveredNodeId.value) nextDimmedEdges.add(edgeKey(edge))
+			const bySearch =
+				!!searchMatchIds && (searchMatchIds.has(edge.source) || searchMatchIds.has(edge.target))
+			const byHover = edge.source === nodeId
+			if (!bySearch && !byHover) nextDimmedEdges.add(edgeKey(edge))
 		}
 	}
 	diffClass(appliedDimmedEdgeKeys, nextDimmedEdges, edgeElements, 'mre-dimmed')
