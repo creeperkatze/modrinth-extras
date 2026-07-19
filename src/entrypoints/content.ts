@@ -8,6 +8,7 @@ import NotificationsIndicator from '../components/header/NotificationsIndicator.
 import QuickSearch from '../components/header/QuickSearch.vue'
 import ActivitySparkline from '../components/project/ActivitySparkline.vue'
 import GalleryBackground from '../components/project/GalleryBackground.vue'
+import MonetizationBadge from '../components/project/MonetizationBadge.vue'
 import ProjectCardActions from '../components/project/ProjectCardActions.vue'
 import DependencySidebar from '../components/sidebar/dependencies/DependencySidebar.vue'
 import DiscordSidebar from '../components/sidebar/DiscordSidebar.vue'
@@ -419,6 +420,33 @@ export default defineContentScript({
 			},
 		})
 
+		const monetizationBadge = createInjection({
+			id: 'modrinth-extras-monetization-badge',
+			isEnabled: () => settings.monetizationBadge.enabled,
+			settingsKeys: ['monetizationBadge'],
+			persistent: false,
+			projectScoped: true,
+			attach(container) {
+				const path = window.location.pathname
+				if (!/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/[^/?#]+/.test(path))
+					return false
+				const list = document.querySelector<HTMLElement>('.normal-page__sidebar .details-list')
+				if (!list) return false
+				container.style.display = 'contents'
+				list.appendChild(container)
+				return document.contains(container)
+			},
+			createApp() {
+				const slug = window.location.pathname.match(
+					/^\/(mod|plugin|datapack|shader|resourcepack|modpack|server)\/([^/]+)/,
+				)?.[2]
+				const app = createApp(h(MonetizationBadge, { projectSlug: slug ?? '' }))
+				app.use(FloatingVue)
+				installI18n(app)
+				return app
+			},
+		})
+
 		const gitHubSidebar = createInjection({
 			id: 'modrinth-extras-github-sidebar',
 			isEnabled: () => settings.githubSidebar.enabled,
@@ -544,6 +572,7 @@ export default defineContentScript({
 			dependencySidebar,
 			activitySparkline,
 			galleryBackground,
+			monetizationBadge,
 			gitHubSidebar,
 			discordSidebar,
 			errorNotice,

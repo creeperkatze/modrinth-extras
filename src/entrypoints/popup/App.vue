@@ -205,6 +205,7 @@ import {
 	ChartIcon,
 	CheckCircleIcon,
 	ClockIcon,
+	CurrencyIcon,
 	CurseForgeIcon,
 	DiscordIcon,
 	GitGraphIcon,
@@ -371,6 +372,14 @@ const messages = defineMessages({
 	'feature.galleryBackground.description': {
 		id: 'feature.galleryBackground.description',
 		defaultMessage: 'Display the featured gallery image as a background banner on project pages.',
+	},
+	'feature.monetizationBadge.title': {
+		id: 'feature.monetizationBadge.title',
+		defaultMessage: 'Monetization badge',
+	},
+	'feature.monetizationBadge.description': {
+		id: 'feature.monetizationBadge.description',
+		defaultMessage: 'Show the monetization status of a project in the sidebar.',
 	},
 	'feature.notificationBadge.title': {
 		id: 'feature.notificationBadge.title',
@@ -587,6 +596,12 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 		icon: ImageIcon,
 		title: formatMessage(messages['feature.galleryBackground.title']),
 		description: formatMessage(messages['feature.galleryBackground.description']),
+	},
+	{
+		key: 'monetizationBadge',
+		icon: CurrencyIcon,
+		title: formatMessage(messages['feature.monetizationBadge.title']),
+		description: formatMessage(messages['feature.monetizationBadge.description']),
 	},
 ])
 

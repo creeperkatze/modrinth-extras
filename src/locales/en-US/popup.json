@@ -62,6 +62,12 @@
   "feature.githubSidebar.title": {
     "defaultMessage": "GitHub sidebar"
   },
+  "feature.monetizationBadge.description": {
+    "defaultMessage": "Show the monetization status of a project in the sidebar."
+  },
+  "feature.monetizationBadge.title": {
+    "defaultMessage": "Monetization badge"
+  },
   "feature.notificationBadge.description": {
     "defaultMessage": "Up-to-date unread notification count as a badge on the extension icon."
   },

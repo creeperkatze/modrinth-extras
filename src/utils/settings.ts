@@ -41,6 +41,7 @@ export interface ExtensionSettings {
 	githubSidebar: { enabled: boolean }
 	discordSidebar: { enabled: boolean }
 	galleryBackground: { enabled: boolean }
+	monetizationBadge: { enabled: boolean }
 	notificationBadge: { enabled: boolean }
 	desktopNotifications: { enabled: boolean }
 	curseforgeRedirect: { enabled: boolean }
@@ -65,6 +66,7 @@ export const DEFAULTS: ExtensionSettings = {
 	githubSidebar: { enabled: true },
 	discordSidebar: { enabled: true },
 	galleryBackground: { enabled: true },
+	monetizationBadge: { enabled: true },
 	notificationBadge: { enabled: true },
 	desktopNotifications: { enabled: false },
 	curseforgeRedirect: { enabled: false },
