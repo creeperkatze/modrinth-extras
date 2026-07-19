@@ -51,6 +51,7 @@ const VIEWPORT_TRANSITION_NAME = 'mre-viewport'
 const VIEWPORT_TRANSITION_MS = 450
 const WHEEL_ZOOM_SPEED = 0.0012
 const EDGE_TARGET_GAP = 4
+const EDGE_PARALLEL_SPACING = 10
 
 export const ROOT_NODE_RADIUS = 34
 export const NODE_RADIUS = 22
@@ -68,7 +69,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 	const edgeKeys = new Set<string>()
 	const nodeElements = new Map<string, SVGGElement>()
 	const edgeElements = new Map<string, SVGPathElement>()
-	const edgeCurvatures = new Map<string, number>()
+	const edgeOffsets = new Map<string, number>()
 
 	let simulation: Simulation<GraphNode, D3Link> | null = null
 	let draggingNode: GraphNode | null = null
@@ -107,7 +108,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		else edgeElements.delete(key)
 	}
 
-	function computeEdgePath(edge: GraphEdge, curvature: number): string {
+	function computeEdgePath(edge: GraphEdge, offset: number): string {
 		const src = nodeById.get(edge.source)
 		const tgt = nodeById.get(edge.target)
 		if (!src || !tgt) return ''
@@ -116,18 +117,19 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		const dist = Math.sqrt(dx * dx + dy * dy) || 1
 		const ux = dx / dist
 		const uy = dy / dist
-		const x1 = src.x + ux * getNodeRadius(src)
-		const y1 = src.y + uy * getNodeRadius(src)
-		const x2 = tgt.x - ux * (getNodeRadius(tgt) + EDGE_TARGET_GAP)
-		const y2 = tgt.y - uy * (getNodeRadius(tgt) + EDGE_TARGET_GAP)
-		if (Math.abs(curvature) < 0.5) {
-			return `M ${x1} ${y1} L ${x2} ${y2}`
+		let px = 0
+		let py = 0
+		if (offset !== 0) {
+			// Perpendicular to a canonical direction
+			const flip = edge.source < edge.target ? 1 : -1
+			px = -uy * flip * offset
+			py = ux * flip * offset
 		}
-		// Bend perpendicular to a canonical direction so A>B and B>A curvatures don't cancel out
-		const flip = edge.source < edge.target ? 1 : -1
-		const cx = (x1 + x2) / 2 - uy * curvature * flip
-		const cy = (y1 + y2) / 2 + ux * curvature * flip
-		return `M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`
+		const x1 = src.x + ux * getNodeRadius(src) + px
+		const y1 = src.y + uy * getNodeRadius(src) + py
+		const x2 = tgt.x - ux * (getNodeRadius(tgt) + EDGE_TARGET_GAP) + px
+		const y2 = tgt.y - uy * (getNodeRadius(tgt) + EDGE_TARGET_GAP) + py
+		return `M ${x1} ${y1} L ${x2} ${y2}`
 	}
 
 	// Direction-independent key for an edge's node pair
@@ -137,19 +139,22 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 			: `${edge.target}|||${edge.source}`
 	}
 
-	function recomputeCurvatures() {
+	function recomputeEdgeOffsets() {
 		const counts = new Map<string, number>()
 		for (const edge of edges.value) {
 			counts.set(pairKey(edge), (counts.get(pairKey(edge)) ?? 0) + 1)
 		}
 		const groupIdx = new Map<string, number>()
-		edgeCurvatures.clear()
+		edgeOffsets.clear()
 		for (const edge of edges.value) {
 			const key = pairKey(edge)
 			const count = counts.get(key) ?? 1
 			const idx = groupIdx.get(key) ?? 0
 			groupIdx.set(key, idx + 1)
-			edgeCurvatures.set(edgeKey(edge), count > 1 ? (idx - (count - 1) / 2) * 28 : 0)
+			edgeOffsets.set(
+				edgeKey(edge),
+				count > 1 ? (idx - (count - 1) / 2) * EDGE_PARALLEL_SPACING : 0,
+			)
 		}
 	}
 
@@ -162,7 +167,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		for (const edge of activeEdges()) {
 			const key = edgeKey(edge)
 			const el = edgeElements.get(key)
-			if (el) el.setAttribute('d', computeEdgePath(edge, edgeCurvatures.get(key) ?? 0))
+			if (el) el.setAttribute('d', computeEdgePath(edge, edgeOffsets.get(key) ?? 0))
 		}
 	}
 
@@ -312,7 +317,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		edgeKeys.clear()
 		nodeElements.clear()
 		edgeElements.clear()
-		edgeCurvatures.clear()
+		edgeOffsets.clear()
 		draggingNode = null
 		draggingNodeId.value = null
 		panning.value = false
@@ -427,13 +432,13 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		nodeById,
 		nodeElements,
 		edgeElements,
-		edgeCurvatures,
+		edgeOffsets,
 		getNodeRadius,
 		edgeKey,
 		computeEdgePath,
 		setNodeEl,
 		setEdgeEl,
-		recomputeCurvatures,
+		recomputeEdgeOffsets,
 		startSimulation,
 		setActiveAccessors,
 		zoomToFit,

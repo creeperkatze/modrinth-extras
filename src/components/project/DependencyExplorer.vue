@@ -82,7 +82,7 @@
 							v-for="edge in visibleEdges"
 							:key="edgeKey(edge)"
 							:ref="(el) => setEdgeEl(edgeKey(edge), el as Element | null)"
-							:d="computeEdgePath(edge, edgeCurvatures.get(edgeKey(edge)) ?? 0)"
+							:d="computeEdgePath(edge, edgeOffsets.get(edgeKey(edge)) ?? 0)"
 							class="fill-none transition-opacity duration-150 ease-in-out"
 							:class="{
 								'stroke-green': edge.type === 'required',
@@ -148,7 +148,7 @@
 								text-anchor="middle"
 								:font-size="node.isRoot ? '12' : '10'"
 								:font-weight="node.isRoot ? '600' : '400'"
-								class="fill-primary pointer-events-none select-none"
+								class="mre-node-label fill-primary pointer-events-none select-none transition-opacity duration-150 ease-in-out"
 							>
 								{{ clamp(node.project?.name ?? node.id, 22) }}
 							</text>
@@ -345,13 +345,13 @@ const {
 	nodeById,
 	nodeElements,
 	edgeElements,
-	edgeCurvatures,
+	edgeOffsets,
 	getNodeRadius,
 	edgeKey,
 	computeEdgePath,
 	setNodeEl,
 	setEdgeEl,
-	recomputeCurvatures,
+	recomputeEdgeOffsets,
 	startSimulation,
 	setActiveAccessors,
 	zoomToFit,
@@ -644,7 +644,7 @@ async function initGraph() {
 		}
 
 		depthLimit.value = maxDepth.value
-		recomputeCurvatures()
+		recomputeEdgeOffsets()
 		setAutoFit(true)
 		startSimulation()
 	} catch (err) {
@@ -683,9 +683,12 @@ defineExpose({ show })
 </script>
 
 <style scoped>
-/* Applied imperatively via classList in applyHoverState, not Vue `:class` bindings. */
 .mre-node-dimmed .mre-dim-overlay {
 	opacity: 0.6;
+}
+
+.mre-node-dimmed .mre-node-label {
+	opacity: 0.4;
 }
 
 .mre-edge-dimmed {
