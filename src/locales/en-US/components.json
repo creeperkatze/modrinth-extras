@@ -14,6 +14,9 @@
   "dependencyExplorer.reset": {
     "defaultMessage": "Reset"
   },
+  "dependencyExplorer.search": {
+    "defaultMessage": "Search dependencies"
+  },
   "dependencyExplorer.title": {
     "defaultMessage": "Dependency Explorer"
   },

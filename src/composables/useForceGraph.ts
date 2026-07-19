@@ -266,8 +266,8 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		setZoomTransform(zoomIdentity.translate(x, y).scale(scale), options)
 	}
 
-	function zoomToFit(animate = true, padding = 80) {
-		const fitNodes = activeNodes()
+	function zoomToFit(animate = true, padding = 80, nodesOverride?: GraphNode[]) {
+		const fitNodes = nodesOverride ?? activeNodes()
 		if (fitNodes.length === 0) return
 		const svgEl = svgRef()
 		if (!svgEl) return

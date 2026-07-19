@@ -106,10 +106,14 @@
 						@mouseenter="onNodeMouseEnter(node)"
 						@mouseleave="onNodeMouseLeave(node)"
 					>
-						<a :href="nodeHref(node)" @click="onNodeLinkClick($event, node)">
+						<a
+							:ref="(el) => setDimEl(node.id, el as Element | null)"
+							:href="nodeHref(node)"
+							@click="onNodeLinkClick($event, node)"
+						>
 							<circle
 								:r="getNodeRadius(node) + 5"
-								class="fill-none stroke-primary [stroke-width:1.5] opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-in-out pointer-events-none"
+								class="mre-hover-ring fill-none stroke-primary [stroke-width:1.5] opacity-0 group-hover:opacity-100 transition-opacity duration-150 ease-in-out pointer-events-none"
 							/>
 
 							<circle
@@ -187,6 +191,16 @@
 				</div>
 			</div>
 
+			<div v-if="!initialLoading" class="absolute right-3 top-3 w-64">
+				<StyledInput
+					v-model="searchQuery"
+					type="text"
+					:icon="searchIcon"
+					:placeholder="formatMessage(messages['dependencyExplorer.search'])"
+					clearable
+				/>
+			</div>
+
 			<div
 				v-if="!initialLoading && maxDepth > 0"
 				class="absolute left-3 top-3 flex w-72 flex-col gap-2 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-3 text-sm shadow-xl"
@@ -246,8 +260,16 @@
 </template>
 
 <script setup lang="ts">
-import { ExpandIcon, UpdatedIcon } from '@modrinth/assets'
-import { ButtonStyled, defineMessages, NewModal, Slider, Toggle, useVIntl } from '@modrinth/ui'
+import { ExpandIcon, SearchIcon, UpdatedIcon } from '@modrinth/assets'
+import {
+	ButtonStyled,
+	defineMessages,
+	NewModal,
+	Slider,
+	StyledInput,
+	Toggle,
+	useVIntl,
+} from '@modrinth/ui'
 import { computed, nextTick, onUnmounted, ref, useTemplateRef, watch } from 'vue'
 
 import {
@@ -265,6 +287,10 @@ import {
 	isGraphDependency,
 } from '../../utils/dependencies'
 import { navigate, resolveLink } from '../../utils/page-router'
+
+// Cast: duplicate `vue` instances under pnpm make `@modrinth/assets`/`@modrinth/ui` `Component` types nominally unrelated.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const searchIcon = SearchIcon as any
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
@@ -303,6 +329,10 @@ const messages = defineMessages({
 	'dependencyExplorer.loading': {
 		id: 'dependencyExplorer.loading',
 		defaultMessage: 'Loading',
+	},
+	'dependencyExplorer.search': {
+		id: 'dependencyExplorer.search',
+		defaultMessage: 'Search dependencies',
 	},
 })
 
@@ -343,7 +373,6 @@ const {
 	panning,
 	draggingNodeId,
 	nodeById,
-	nodeElements,
 	edgeElements,
 	edgeOffsets,
 	getNodeRadius,
@@ -437,9 +466,25 @@ setActiveAccessors(
 	() => visibleEdges.value,
 )
 
-// Not read in the template; applyHoverState below updates DOM classes directly to avoid
-// re-rendering every node/edge on each hover.
+// Not read in the template; applyHoverState updates DOM classes directly to avoid re-rendering.
 const hoveredNodeId = ref<string | null>(null)
+const searchQuery = ref('')
+
+// Visible nodes whose name matches the search query; empty while the query has no matches.
+const searchMatches = computed(() => {
+	const query = searchQuery.value.trim().toLowerCase()
+	if (!query) return []
+	return visibleNodes.value.filter((node) =>
+		(node.project?.name ?? node.id).toLowerCase().includes(query),
+	)
+})
+
+// Separate from `nodeElements` so Vue's reactive `:class` on the `<g>` can't wipe our classList.
+const dimElements = new Map<string, Element>()
+function setDimEl(id: string, el: Element | null) {
+	if (el) dimElements.set(id, el)
+	else dimElements.delete(id)
+}
 
 let appliedDimmedNodeIds = new Set<string>()
 let appliedDimmedEdgeKeys = new Set<string>()
@@ -456,13 +501,19 @@ function diffClass<E extends Element>(
 }
 
 function applyHoverState() {
-	const nodeId = hoveredNodeId.value
+	const searching = searchQuery.value.trim().length > 0
 
-	// Itself plus anything it points to via a visible edge.
-	const highlighted = nodeId ? new Set<string>([nodeId]) : null
-	if (highlighted) {
-		for (const edge of visibleEdges.value) {
-			if (edge.source === nodeId) highlighted.add(edge.target)
+	// While searching, highlight matches and dim everything else (all nodes if there are none).
+	let highlighted: Set<string> | null
+	if (searching) {
+		highlighted = new Set(searchMatches.value.map((node) => node.id))
+	} else {
+		const nodeId = hoveredNodeId.value
+		highlighted = nodeId ? new Set<string>([nodeId]) : null
+		if (highlighted) {
+			for (const edge of visibleEdges.value) {
+				if (edge.source === nodeId) highlighted.add(edge.target)
+			}
 		}
 	}
 
@@ -472,13 +523,20 @@ function applyHoverState() {
 			if (!highlighted.has(node.id)) nextDimmedNodes.add(node.id)
 		}
 	}
-	diffClass(appliedDimmedNodeIds, nextDimmedNodes, nodeElements, 'mre-dimmed')
+	diffClass(appliedDimmedNodeIds, nextDimmedNodes, dimElements, 'mre-dimmed')
 	appliedDimmedNodeIds = nextDimmedNodes
 
 	const nextDimmedEdges = new Set<string>()
-	if (nodeId) {
+	if (searching) {
+		const matchedIds = highlighted!
 		for (const edge of visibleEdges.value) {
-			if (edge.source !== nodeId) nextDimmedEdges.add(edgeKey(edge))
+			if (!matchedIds.has(edge.source) && !matchedIds.has(edge.target)) {
+				nextDimmedEdges.add(edgeKey(edge))
+			}
+		}
+	} else if (hoveredNodeId.value) {
+		for (const edge of visibleEdges.value) {
+			if (edge.source !== hoveredNodeId.value) nextDimmedEdges.add(edgeKey(edge))
 		}
 	}
 	diffClass(appliedDimmedEdgeKeys, nextDimmedEdges, edgeElements, 'mre-dimmed')
@@ -493,6 +551,18 @@ function scheduleHoverUpdate() {
 		applyHoverState()
 	})
 }
+
+// Debounced so the view doesn't jump around while the user is still typing.
+let searchZoomTimer: ReturnType<typeof setTimeout> | null = null
+watch(searchQuery, () => {
+	scheduleHoverUpdate()
+	if (searchZoomTimer !== null) clearTimeout(searchZoomTimer)
+	searchZoomTimer = setTimeout(() => {
+		searchZoomTimer = null
+		const matches = searchMatches.value
+		if (matches.length > 0) zoomToFit(true, 100, matches)
+	}, 400)
+})
 
 function onNodeDragStart(event: MouseEvent, node: GraphNode) {
 	onNodeMouseDown(event, node)
@@ -526,6 +596,7 @@ watch([visibleNodeIds, visibleEdges], () => {
 
 onUnmounted(() => {
 	if (hoverFrame !== null) window.cancelAnimationFrame(hoverFrame)
+	if (searchZoomTimer !== null) clearTimeout(searchZoomTimer)
 })
 
 function clamp(s: string, max: number): string {
@@ -577,6 +648,7 @@ function addDepsToGraph(sourceId: string, deps: EnrichedDep[], depth: number) {
 async function initGraph() {
 	reset()
 	hoveredNodeId.value = null
+	searchQuery.value = ''
 	appliedDimmedNodeIds = new Set()
 	appliedDimmedEdgeKeys = new Set()
 	hiddenTypes.value = new Set()
@@ -690,5 +762,9 @@ path.mre-dimmed {
 
 .mre-dimmed .mre-dim-overlay {
 	opacity: 0.6;
+}
+
+.mre-dimmed .mre-hover-ring {
+	opacity: 0 !important;
 }
 </style>
