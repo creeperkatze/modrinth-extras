@@ -148,7 +148,7 @@
 								text-anchor="middle"
 								:font-size="node.isRoot ? '12' : '10'"
 								:font-weight="node.isRoot ? '600' : '400'"
-								class="mre-node-label fill-primary pointer-events-none select-none transition-opacity duration-150 ease-in-out"
+								class="mre-dim-target fill-primary pointer-events-none select-none transition-opacity duration-150 ease-in-out"
 							>
 								{{ clamp(node.project?.name ?? node.id, 22) }}
 							</text>
@@ -472,7 +472,7 @@ function applyHoverState() {
 			if (!highlighted.has(node.id)) nextDimmedNodes.add(node.id)
 		}
 	}
-	diffClass(appliedDimmedNodeIds, nextDimmedNodes, nodeElements, 'mre-node-dimmed')
+	diffClass(appliedDimmedNodeIds, nextDimmedNodes, nodeElements, 'mre-dimmed')
 	appliedDimmedNodeIds = nextDimmedNodes
 
 	const nextDimmedEdges = new Set<string>()
@@ -481,7 +481,7 @@ function applyHoverState() {
 			if (edge.source !== nodeId) nextDimmedEdges.add(edgeKey(edge))
 		}
 	}
-	diffClass(appliedDimmedEdgeKeys, nextDimmedEdges, edgeElements, 'mre-edge-dimmed')
+	diffClass(appliedDimmedEdgeKeys, nextDimmedEdges, edgeElements, 'mre-dimmed')
 	appliedDimmedEdgeKeys = nextDimmedEdges
 }
 
@@ -683,15 +683,12 @@ defineExpose({ show })
 </script>
 
 <style scoped>
-.mre-node-dimmed .mre-dim-overlay {
+.mre-dimmed .mre-dim-target,
+path.mre-dimmed {
+	opacity: 0.2;
+}
+
+.mre-dimmed .mre-dim-overlay {
 	opacity: 0.6;
-}
-
-.mre-node-dimmed .mre-node-label {
-	opacity: 0.4;
-}
-
-.mre-edge-dimmed {
-	opacity: 0.25;
 }
 </style>
