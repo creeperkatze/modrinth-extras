@@ -14,6 +14,9 @@
   "dependencyExplorer.reset": {
     "defaultMessage": "Zurücksetzen"
   },
+  "dependencyExplorer.search": {
+    "defaultMessage": "Abhängigkeiten durchsuchen"
+  },
   "dependencyExplorer.title": {
     "defaultMessage": "Abhängigkeits-Explorer"
   },
