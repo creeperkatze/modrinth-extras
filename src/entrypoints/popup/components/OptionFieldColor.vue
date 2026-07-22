@@ -1,11 +1,11 @@
 <template>
 	<div class="option-field relative flex items-center gap-2" @click.stop>
 		<span class="text-sm text-secondary flex-1">{{ label }}</span>
-		<div class="flex items-center gap-2">
+		<div class="flex items-center gap-1">
 			<input
 				type="color"
 				:value="modelValue"
-				class="size-7 shrink-0 cursor-pointer appearance-none rounded border-0 bg-transparent p-0 [&::-webkit-color-swatch]:rounded [&::-webkit-color-swatch]:border [&::-webkit-color-swatch]:border-surface-5 [&::-webkit-color-swatch-wrapper]:p-0"
+				class="size-8 shrink-0 cursor-pointer appearance-none rounded-xl border-0 bg-transparent p-0 [&::-webkit-color-swatch]:rounded-xl [&::-webkit-color-swatch]:border [&::-webkit-color-swatch]:border-surface-5 [&::-webkit-color-swatch-wrapper]:p-0"
 				@input="onColorInput"
 			/>
 			<StyledInput v-model="text" size="small" wrapper-class="w-24" :placeholder="defaultColor" />
