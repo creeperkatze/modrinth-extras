@@ -56,6 +56,10 @@ Download, follow, and save projects right from their project cards.
 
 <img src=".github/assets/screenshots/project-card-actions.png" width="100%">
 
+### Accent color
+
+Replace the Modrinth green with a custom accent color.
+
 ### Activity sparkline
 
 Release activity chart on project pages.
@@ -97,6 +101,10 @@ Server name, description, member count, and online count for linked Discord serv
 Display the featured gallery image as a background banner on project pages.
 
 <img src=".github/assets/screenshots/gallery-background.png" width="100%">
+
+### Monetization badge
+
+Show the monetization status of a project in the sidebar.
 
 ### Notification badge
 
