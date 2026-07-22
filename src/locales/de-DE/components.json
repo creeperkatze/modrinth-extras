@@ -80,6 +80,18 @@
   "githubSidebar.stars": {
     "defaultMessage": "{count} Sterne"
   },
+  "monetizationBadge.demonetized": {
+    "defaultMessage": "Nicht monetarisiert"
+  },
+  "monetizationBadge.forceDemonetized": {
+    "defaultMessage": "Monetarisierung deaktiviert"
+  },
+  "monetizationBadge.forceDemonetizedTitle": {
+    "defaultMessage": "Die Monetarisierung dieses Projekts wurde von Modrinth-Mitarbeitern deaktiviert"
+  },
+  "monetizationBadge.monetized": {
+    "defaultMessage": "Monetarisiert"
+  },
   "notificationsIndicator.markAllAsRead": {
     "defaultMessage": "Alle als gelesen markieren"
   },

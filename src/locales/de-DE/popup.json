@@ -1,4 +1,13 @@
 {
+  "feature.accentColor.color": {
+    "defaultMessage": "Farbe"
+  },
+  "feature.accentColor.description": {
+    "defaultMessage": "Ersetze das Modrinth-Grün durch eine eigene Akzentfarbe."
+  },
+  "feature.accentColor.title": {
+    "defaultMessage": "Akzentfarbe"
+  },
   "feature.activitySparkline.days": {
     "defaultMessage": "{count} Tage"
   },
@@ -61,6 +70,12 @@
   },
   "feature.githubSidebar.title": {
     "defaultMessage": "GitHub-Seitenleiste"
+  },
+  "feature.monetizationBadge.description": {
+    "defaultMessage": "Zeigt den Monetarisierungsstatus eines Projekts in der Seitenleiste an."
+  },
+  "feature.monetizationBadge.title": {
+    "defaultMessage": "Monetarisierungs-Abzeichen"
   },
   "feature.notificationBadge.description": {
     "defaultMessage": "Aktuelle Anzahl ungelesener Benachrichtigungen als Abzeichen auf dem Erweiterungssymbol."
