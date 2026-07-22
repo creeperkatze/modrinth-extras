@@ -7,7 +7,7 @@
 				rel="noopener"
 				class="flex min-w-0 flex-1 items-center gap-3 no-underline"
 			>
-				<img :src="browser.runtime.getURL('/logo.svg')" alt="Modrinth Extras" class="h-10" />
+				<Logo role="img" aria-label="Modrinth Extras" class="!h-10 !w-auto text-brand" />
 			</a>
 			<ButtonStyled color="brand" size="standard">
 				<a href="https://modrinth.com" target="_blank" rel="noopener" class="no-underline">
@@ -70,16 +70,24 @@
 					@update:model-value="updateEnabled(f.key, $event)"
 				>
 					<template v-if="f.options">
-						<OptionFieldSelect
-							v-for="opt in f.options"
-							:key="opt.key"
-							:label="opt.label"
-							:model-value="(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''"
-							:items="opt.items"
-							:fetch-items="opt.fetchItems"
-							:searchable="opt.searchable"
-							@update:model-value="updateOption(f.key, opt.key, $event)"
-						/>
+						<template v-for="opt in f.options" :key="opt.key">
+							<OptionFieldColor
+								v-if="opt.type === 'color'"
+								:label="opt.label"
+								:model-value="(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''"
+								:default-color="opt.defaultColor"
+								@update:model-value="updateOption(f.key, opt.key, $event)"
+							/>
+							<OptionFieldSelect
+								v-else
+								:label="opt.label"
+								:model-value="(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''"
+								:items="opt.items"
+								:fetch-items="opt.fetchItems"
+								:searchable="opt.searchable"
+								@update:model-value="updateOption(f.key, opt.key, $event)"
+							/>
+						</template>
 					</template>
 				</FeatureRow>
 			</FeatureGroup>
@@ -103,17 +111,25 @@
 					@update:model-value="updateEnabled(f.key, $event)"
 				>
 					<template v-if="f.options">
-						<OptionFieldSelect
-							v-for="opt in f.options"
-							:key="opt.key"
-							:label="opt.label"
-							:model-value="(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''"
-							:items="opt.items"
-							:fetch-items="opt.fetchItems"
-							:searchable="opt.searchable"
-							:include-any="opt.includeAny ?? true"
-							@update:model-value="updateOption(f.key, opt.key, $event)"
-						/>
+						<template v-for="opt in f.options" :key="opt.key">
+							<OptionFieldColor
+								v-if="opt.type === 'color'"
+								:label="opt.label"
+								:model-value="(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''"
+								:default-color="opt.defaultColor"
+								@update:model-value="updateOption(f.key, opt.key, $event)"
+							/>
+							<OptionFieldSelect
+								v-else
+								:label="opt.label"
+								:model-value="(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''"
+								:items="opt.items"
+								:fetch-items="opt.fetchItems"
+								:searchable="opt.searchable"
+								:include-any="opt.includeAny ?? true"
+								@update:model-value="updateOption(f.key, opt.key, $event)"
+							/>
+						</template>
 					</template>
 				</FeatureRow>
 			</FeatureGroup>
@@ -214,6 +230,7 @@ import {
 	LanguagesIcon,
 	LoaderCircleIcon,
 	MonitorIcon,
+	PaletteIcon,
 	PlayIcon,
 	SearchIcon,
 	TagCategoryZapIcon,
@@ -228,11 +245,13 @@ import {
 	useVIntl,
 } from '@modrinth/ui'
 import { storage } from '@wxt-dev/storage'
-import { type Component, computed, onMounted, reactive, ref } from 'vue'
+import { type Component, computed, onMounted, reactive, ref, watch } from 'vue'
 import { browser } from 'wxt/browser'
 
 import KofiIcon from '../../assets/kofi.svg?component'
 import CompactCombobox from '../../components/ui/CompactCombobox.vue'
+import Logo from '../../public/logo.svg?component'
+import { applyAccentColor } from '../../utils/accent-color'
 import { modrinthClient } from '../../utils/api'
 import { detectBrowserLocale, i18n } from '../../utils/i18n'
 import { LOCALES } from '../../utils/locales'
@@ -241,6 +260,7 @@ import { setTelemetryEnabled } from '../../utils/telemetry'
 import DonateCard from './components/DonateCard.vue'
 import FeatureGroup from './components/FeatureGroup.vue'
 import FeatureRow from './components/FeatureRow.vue'
+import OptionFieldColor from './components/OptionFieldColor.vue'
 import OptionFieldSelect, { type SelectItem } from './components/OptionFieldSelect.vue'
 import SurveyCard from './components/SurveyCard.vue'
 
@@ -299,6 +319,18 @@ const messages = defineMessages({
 	'feature.projectCardActions.gameVersion': {
 		id: 'feature.projectCardActions.gameVersion',
 		defaultMessage: 'Game version',
+	},
+	'feature.accentColor.title': {
+		id: 'feature.accentColor.title',
+		defaultMessage: 'Accent color',
+	},
+	'feature.accentColor.description': {
+		id: 'feature.accentColor.description',
+		defaultMessage: 'Replace the Modrinth green with a custom accent color.',
+	},
+	'feature.accentColor.color': {
+		id: 'feature.accentColor.color',
+		defaultMessage: 'Color',
 	},
 	'feature.activitySparkline.title': {
 		id: 'feature.activitySparkline.title',
@@ -434,12 +466,13 @@ type FeatureKey = Exclude<keyof ExtensionSettings, 'locale'>
 
 interface FeatureOption {
 	key: string
-	type: 'select'
+	type: 'select' | 'color'
 	label: string
 	items?: SelectItem[]
 	fetchItems?: () => Promise<SelectItem[]>
 	searchable?: boolean
 	includeAny?: boolean
+	defaultColor?: string
 }
 
 const MOD_MANAGER_ITEMS: SelectItem[] = [
@@ -529,6 +562,20 @@ const generalFeatures = computed<FeatureDef[]>(() => [
 				type: 'select',
 				label: formatMessage(messages['feature.projectCardActions.shaderLoader']),
 				fetchItems: () => fetchLoadersByType('shader'),
+			},
+		],
+	},
+	{
+		key: 'accentColor',
+		icon: PaletteIcon,
+		title: formatMessage(messages['feature.accentColor.title']),
+		description: formatMessage(messages['feature.accentColor.description']),
+		options: [
+			{
+				key: 'color',
+				type: 'color',
+				label: formatMessage(messages['feature.accentColor.color']),
+				defaultColor: DEFAULTS.accentColor.color,
 			},
 		],
 	},
@@ -688,6 +735,12 @@ const updateCheckCacheItem = storage.defineItem<{ tag: string; ts: number }>(
 
 const settings = reactive({ ...DEFAULTS })
 const settingsLoaded = ref(false)
+
+watch(
+	() => settings.accentColor,
+	() => applyAccentColor(settings),
+	{ deep: true, immediate: true },
+)
 
 onMounted(async () => {
 	const loaded = await getSettings()

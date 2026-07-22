@@ -1,4 +1,13 @@
 {
+  "feature.accentColor.color": {
+    "defaultMessage": "Color"
+  },
+  "feature.accentColor.description": {
+    "defaultMessage": "Replace the Modrinth green with a custom accent color."
+  },
+  "feature.accentColor.title": {
+    "defaultMessage": "Accent color"
+  },
   "feature.activitySparkline.days": {
     "defaultMessage": "{count} days"
   },

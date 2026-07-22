@@ -6,13 +6,13 @@
 		rel="noopener"
 		class="mt-2 flex items-center gap-1 no-underline hover:underline"
 	>
-		<ExtLogo aria-hidden="true" class="h-4 w-4" />
+		<ExtLogo aria-hidden="true" class="h-4 w-4 text-brand" />
 		Modrinth Extras {{ version }}
 	</a>
 </template>
 
 <script setup lang="ts">
-import ExtLogo from '../../public/icon.svg'
+import ExtLogo from '../../public/icon.svg?component'
 
 const version = browser.runtime.getManifest().version
 </script>

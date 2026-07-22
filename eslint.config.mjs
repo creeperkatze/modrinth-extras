@@ -35,6 +35,7 @@ export default tseslint.config(
 				XMLSerializer: 'readonly',
 				Blob: 'readonly',
 				Image: 'readonly',
+				Event: 'readonly',
 				KeyboardEvent: 'readonly',
 				MouseEvent: 'readonly',
 				WheelEvent: 'readonly',

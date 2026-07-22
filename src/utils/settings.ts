@@ -45,6 +45,7 @@ export interface ExtensionSettings {
 	notificationBadge: { enabled: boolean }
 	desktopNotifications: { enabled: boolean }
 	curseforgeRedirect: { enabled: boolean }
+	accentColor: { enabled: boolean; color: string }
 	telemetry: { enabled: boolean }
 }
 
@@ -70,6 +71,7 @@ export const DEFAULTS: ExtensionSettings = {
 	notificationBadge: { enabled: true },
 	desktopNotifications: { enabled: false },
 	curseforgeRedirect: { enabled: false },
+	accentColor: { enabled: false, color: '#00af5c' },
 	telemetry: { enabled: true },
 }
 

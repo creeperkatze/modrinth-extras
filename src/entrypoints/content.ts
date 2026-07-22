@@ -16,6 +16,7 @@ import GitHubSidebar from '../components/sidebar/GitHubSidebar.vue'
 import ToolsSidebar from '../components/sidebar/ToolsSidebar.vue'
 import ErrorNotice from '../components/site/ErrorNotice.vue'
 import FooterBadge from '../components/site/FooterBadge.vue'
+import { applyAccentColor } from '../utils/accent-color'
 import { initFollowState } from '../utils/follow-state'
 import { detectBrowserLocale, i18n, installI18n, loadSavedLocale } from '../utils/i18n'
 import { navigate } from '../utils/page-router'
@@ -596,6 +597,7 @@ export default defineContentScript({
 		getSettings().then((s) => {
 			settings = s
 			console.log('[Modrinth Extras] Settings loaded:', JSON.stringify(s))
+			applyAccentColor(settings)
 			for (const inj of injections) {
 				if (inj.config.settingsKeys.length > 0) inj.unmount()
 				inj.schedule()
@@ -608,6 +610,7 @@ export default defineContentScript({
 			Object.assign(settings, newSettings ?? {})
 			const newLocale = newSettings?.locale?.value
 			i18n.global.locale.value = newLocale || detectBrowserLocale()
+			applyAccentColor(settings)
 			for (const inj of injections) {
 				if (inj.config.settingsKeys.length > 0) {
 					inj.unmount()
