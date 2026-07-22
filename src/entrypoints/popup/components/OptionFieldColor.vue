@@ -1,8 +1,5 @@
 <template>
-	<div
-		class="relative flex items-center gap-2 before:absolute before:-left-7 before:top-0 before:h-1/2 before:w-2 before:rounded-bl-sm before:border-b-2 before:border-l-2 before:border-surface-5 before:content-[''] after:absolute after:-bottom-2 after:-left-7 after:top-1/2 after:border-l-2 after:border-surface-5 after:content-[''] last:after:hidden"
-		@click.stop
-	>
+	<div class="option-field relative flex items-center gap-2" @click.stop>
 		<span class="text-sm text-secondary flex-1">{{ label }}</span>
 		<div class="flex items-center gap-2">
 			<input
@@ -57,3 +54,26 @@ function onColorInput(event: Event) {
 	emit('update:modelValue', value)
 }
 </script>
+
+<style scoped>
+.option-field::before {
+	content: '';
+	position: absolute;
+	left: -1.75rem;
+	top: 0;
+	height: 50%;
+	width: 0.5rem;
+	border-left: 2px solid var(--surface-5);
+	border-bottom: 2px solid var(--surface-5);
+	border-bottom-left-radius: 2px;
+}
+
+.option-field:not(:last-child)::after {
+	content: '';
+	position: absolute;
+	left: -1.75rem;
+	top: 50%;
+	bottom: -0.5rem;
+	border-left: 2px solid var(--surface-5);
+}
+</style>
