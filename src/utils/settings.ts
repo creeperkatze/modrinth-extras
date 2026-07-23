@@ -71,7 +71,7 @@ export const DEFAULTS: ExtensionSettings = {
 	notificationBadge: { enabled: true },
 	desktopNotifications: { enabled: false },
 	curseforgeRedirect: { enabled: false },
-	accentColor: { enabled: false, color: '#00af5c' },
+	accentColor: { enabled: false, color: '#1bd96a' },
 	telemetry: { enabled: true },
 }
 
