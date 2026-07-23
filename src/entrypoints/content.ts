@@ -170,6 +170,25 @@ function createDynamicInjection(config: DynamicInjectionConfig) {
 	return { unmount, schedule, checkDetached, config }
 }
 
+type Injection = ReturnType<typeof createInjection> | ReturnType<typeof createDynamicInjection>
+
+function remountForChangedSettings(
+	injections: Injection[],
+	oldSettings: ExtensionSettings | undefined,
+	newSettings: ExtensionSettings | undefined,
+) {
+	for (const inj of injections) {
+		if (inj.config.settingsKeys.length === 0) continue
+		const changed = inj.config.settingsKeys.some(
+			(key) => JSON.stringify(oldSettings?.[key]) !== JSON.stringify(newSettings?.[key]),
+		)
+		if (changed) {
+			inj.unmount()
+			inj.schedule()
+		}
+	}
+}
+
 const PROJECT_TYPE_PATTERN = /^\/(mod|plugin|datapack|shader|resourcepack|modpack|map)\/([^/?#]+)/
 
 function getProjectSlug(): string | null {
@@ -604,20 +623,18 @@ export default defineContentScript({
 			}
 		})
 
-		browser.storage.onChanged.addListener((changes: Record<string, { newValue?: unknown }>) => {
-			if (!('settings' in changes)) return
-			const newSettings = changes['settings']?.newValue as ExtensionSettings | undefined
-			Object.assign(settings, newSettings ?? {})
-			const newLocale = newSettings?.locale?.value
-			i18n.global.locale.value = newLocale || detectBrowserLocale()
-			applyAccentColor(settings)
-			for (const inj of injections) {
-				if (inj.config.settingsKeys.length > 0) {
-					inj.unmount()
-					inj.schedule()
-				}
-			}
-		})
+		browser.storage.onChanged.addListener(
+			(changes: Record<string, { oldValue?: unknown; newValue?: unknown }>) => {
+				if (!('settings' in changes)) return
+				const oldSettings = changes['settings']?.oldValue as ExtensionSettings | undefined
+				const newSettings = changes['settings']?.newValue as ExtensionSettings | undefined
+				Object.assign(settings, newSettings ?? {})
+				const newLocale = newSettings?.locale?.value
+				i18n.global.locale.value = newLocale || detectBrowserLocale()
+				applyAccentColor(settings)
+				remountForChangedSettings(injections, oldSettings, newSettings)
+			},
+		)
 
 		let prevProjectSlug: string | null = null
 		const prevScopeKeys = new Map<string, string>()
