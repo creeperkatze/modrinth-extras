@@ -136,6 +136,20 @@
 
 			<HorizontalRule />
 
+			<FeatureGroup :label="formatMessage(messages['popup.group.flags'])">
+				<FeatureRow
+					v-for="f in flagFeatures"
+					:key="f.key"
+					:icon="f.icon"
+					:title="f.title"
+					:description="f.description"
+					:model-value="modrinthFlags[f.key]"
+					@update:model-value="updateModrinthFlag(f.key, $event)"
+				/>
+			</FeatureGroup>
+
+			<HorizontalRule />
+
 			<FeatureGroup :label="formatMessage(messages['popup.group.extension'])">
 				<FeatureRow
 					v-for="f in extensionFeatures"
@@ -221,6 +235,7 @@ import {
 	ChartIcon,
 	CheckCircleIcon,
 	ClockIcon,
+	CompassIcon,
 	CurrencyIcon,
 	CurseForgeIcon,
 	DiscordIcon,
@@ -228,6 +243,7 @@ import {
 	GithubIcon,
 	ImageIcon,
 	LanguagesIcon,
+	LayoutTemplateIcon,
 	LoaderCircleIcon,
 	MonitorIcon,
 	PaletteIcon,
@@ -255,6 +271,12 @@ import { applyAccentColor } from '../../utils/accent-color'
 import { modrinthClient } from '../../utils/api'
 import { detectBrowserLocale, i18n } from '../../utils/i18n'
 import { LOCALES } from '../../utils/locales'
+import {
+	getModrinthFlags,
+	MODRINTH_FLAG_DEFAULTS,
+	type ModrinthFlagKey,
+	setModrinthFlag,
+} from '../../utils/modrinth-flags'
 import { DEFAULTS, type ExtensionSettings, getSettings, saveSettings } from '../../utils/settings'
 import { setTelemetryEnabled } from '../../utils/telemetry'
 import DonateCard from './components/DonateCard.vue'
@@ -269,6 +291,7 @@ const { formatMessage } = useVIntl()
 const messages = defineMessages({
 	'popup.group.general': { id: 'popup.group.general', defaultMessage: 'General' },
 	'popup.group.contentPages': { id: 'popup.group.contentPages', defaultMessage: 'Content Pages' },
+	'popup.group.flags': { id: 'popup.group.flags', defaultMessage: 'Flags' },
 	'popup.group.extension': { id: 'popup.group.extension', defaultMessage: 'Extension' },
 	'popup.footer.checking': { id: 'popup.footer.checking', defaultMessage: 'Checking' },
 	'popup.footer.latestVersion': {
@@ -408,6 +431,23 @@ const messages = defineMessages({
 	'feature.monetizationBadge.title': {
 		id: 'feature.monetizationBadge.title',
 		defaultMessage: 'Monetization badge',
+	},
+	'feature.searchBackground.title': {
+		id: 'feature.searchBackground.title',
+		defaultMessage: 'Search background',
+	},
+	'feature.searchBackground.description': {
+		id: 'feature.searchBackground.description',
+		defaultMessage: 'Show a banner background on the search and discover pages.',
+	},
+	'feature.projectTypesPrimaryNav.title': {
+		id: 'feature.projectTypesPrimaryNav.title',
+		defaultMessage: 'Project types in navigation',
+	},
+	'feature.projectTypesPrimaryNav.description': {
+		id: 'feature.projectTypesPrimaryNav.description',
+		defaultMessage:
+			'Move mods, plugins, resource packs, and other project types into the main navigation bar.',
 	},
 	'feature.monetizationBadge.description': {
 		id: 'feature.monetizationBadge.description',
@@ -652,6 +692,28 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 	},
 ])
 
+interface FlagDef {
+	key: ModrinthFlagKey
+	icon: Component
+	title: string
+	description: string
+}
+
+const flagFeatures = computed<FlagDef[]>(() => [
+	{
+		key: 'searchBackground',
+		icon: LayoutTemplateIcon,
+		title: formatMessage(messages['feature.searchBackground.title']),
+		description: formatMessage(messages['feature.searchBackground.description']),
+	},
+	{
+		key: 'projectTypesPrimaryNav',
+		icon: CompassIcon,
+		title: formatMessage(messages['feature.projectTypesPrimaryNav.title']),
+		description: formatMessage(messages['feature.projectTypesPrimaryNav.description']),
+	},
+])
+
 const extensionFeatures = computed<FeatureDef[]>(() => [
 	{
 		key: 'notificationBadge',
@@ -708,6 +770,13 @@ async function updateOption(featureKey: keyof ExtensionSettings, optionKey: stri
 	await saveSettings(settings as ExtensionSettings)
 }
 
+const modrinthFlags = reactive({ ...MODRINTH_FLAG_DEFAULTS })
+
+async function updateModrinthFlag(key: ModrinthFlagKey, value: boolean) {
+	modrinthFlags[key] = value
+	await setModrinthFlag(key, value)
+}
+
 const localeItems = computed<SelectItem[]>(() =>
 	LOCALES.map((l) => ({ label: l.name, value: l.code })),
 )
@@ -747,6 +816,8 @@ onMounted(async () => {
 	Object.assign(settings, loaded)
 	i18n.global.locale.value = loaded.locale?.value || detectBrowserLocale()
 	settingsLoaded.value = true
+
+	Object.assign(modrinthFlags, await getModrinthFlags())
 
 	const perms = await browser.permissions.getAll()
 	if ('data_collection' in perms) {
