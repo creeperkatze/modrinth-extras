@@ -147,7 +147,7 @@
     "defaultMessage": "On-device translation of a project's description into your language, when it differs."
   },
   "feature.translateDescription.disabledTooltip": {
-    "defaultMessage": "Requires Chrome's built-in AI, unsupported in this browser"
+    "defaultMessage": "Requires APIs not supported in this browser"
   },
   "feature.translateDescription.title": {
     "defaultMessage": "Translate description"

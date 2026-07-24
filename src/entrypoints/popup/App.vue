@@ -465,7 +465,7 @@ const messages = defineMessages({
 	},
 	'feature.translateDescription.disabledTooltip': {
 		id: 'feature.translateDescription.disabledTooltip',
-		defaultMessage: "Requires Chrome's built-in AI, unsupported in this browser",
+		defaultMessage: 'Requires APIs not supported in this browser',
 	},
 	'feature.notificationBadge.title': {
 		id: 'feature.notificationBadge.title',
