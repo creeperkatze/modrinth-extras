@@ -438,11 +438,11 @@ const messages = defineMessages({
 	},
 	'feature.searchBackground.description': {
 		id: 'feature.searchBackground.description',
-		defaultMessage: 'Show a banner background on the search and discover pages.',
+		defaultMessage: 'Show a banner background on the discover pages.',
 	},
 	'feature.projectTypesPrimaryNav.title': {
 		id: 'feature.projectTypesPrimaryNav.title',
-		defaultMessage: 'Project types in navigation',
+		defaultMessage: 'Project type navigation',
 	},
 	'feature.projectTypesPrimaryNav.description': {
 		id: 'feature.projectTypesPrimaryNav.description',

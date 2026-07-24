@@ -111,7 +111,7 @@
     "defaultMessage": "Move mods, plugins, resource packs, and other project types into the main navigation bar."
   },
   "feature.projectTypesPrimaryNav.title": {
-    "defaultMessage": "Project types in navigation"
+    "defaultMessage": "Project type navigation"
   },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K or / for a command palette style search with faceted tags for loaders, versions, categories, and types."
@@ -120,7 +120,7 @@
     "defaultMessage": "Quick search"
   },
   "feature.searchBackground.description": {
-    "defaultMessage": "Show a banner background on the search and discover pages."
+    "defaultMessage": "Show a banner background on the discover pages."
   },
   "feature.searchBackground.title": {
     "defaultMessage": "Search background"
