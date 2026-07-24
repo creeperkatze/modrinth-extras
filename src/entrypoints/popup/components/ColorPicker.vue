@@ -32,7 +32,7 @@
 				min="0"
 				max="360"
 				step="1"
-				class="m-0 h-2 min-h-0 w-full cursor-pointer touch-none appearance-none rounded-full p-0 [&::-moz-range-thumb]:h-[0.9rem] [&::-moz-range-thumb]:w-[0.9rem] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-black/40 [&::-moz-range-thumb]:bg-white [&::-webkit-slider-thumb]:-mt-[0.2rem] [&::-webkit-slider-thumb]:h-[0.9rem] [&::-webkit-slider-thumb]:w-[0.9rem] [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-black/40 [&::-webkit-slider-thumb]:bg-white"
+				class="m-0 h-2 min-h-0 w-full cursor-pointer touch-none appearance-none rounded-full p-0 [&::-moz-range-thumb]:h-[0.9rem] [&::-moz-range-thumb]:w-[0.9rem] [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-solid [&::-moz-range-thumb]:border-black/40 [&::-moz-range-thumb]:bg-white [&::-webkit-slider-thumb]:-mt-[0.2rem] [&::-webkit-slider-thumb]:h-[0.9rem] [&::-webkit-slider-thumb]:w-[0.9rem] [&::-webkit-slider-thumb]:[-webkit-appearance:none] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-solid [&::-webkit-slider-thumb]:border-black/40 [&::-webkit-slider-thumb]:bg-white"
 				style="
 					background: linear-gradient(
 						to right,
