@@ -143,6 +143,15 @@
   "feature.toolsSidebar.title": {
     "defaultMessage": "Tools sidebar"
   },
+  "feature.translateDescription.description": {
+    "defaultMessage": "On-device translation of a project's description into your language, when it differs."
+  },
+  "feature.translateDescription.disabledTooltip": {
+    "defaultMessage": "Requires Chrome's built-in AI, unsupported in this browser"
+  },
+  "feature.translateDescription.title": {
+    "defaultMessage": "Translate description"
+  },
   "popup.donatePrompt.dismiss": {
     "defaultMessage": "Dismiss"
   },

@@ -166,5 +166,14 @@
   },
   "toolsSidebar.title": {
     "defaultMessage": "Tools"
+  },
+  "translateDescription.showOriginal": {
+    "defaultMessage": "Show original"
+  },
+  "translateDescription.translate": {
+    "defaultMessage": "Translate description"
+  },
+  "translateDescription.translating": {
+    "defaultMessage": "Translating…"
   }
 }

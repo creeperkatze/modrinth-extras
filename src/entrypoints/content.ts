@@ -10,6 +10,7 @@ import ActivitySparkline from '../components/project/ActivitySparkline.vue'
 import GalleryBackground from '../components/project/GalleryBackground.vue'
 import MonetizationBadge from '../components/project/MonetizationBadge.vue'
 import ProjectCardActions from '../components/project/ProjectCardActions.vue'
+import TranslateDescription from '../components/project/TranslateDescription.vue'
 import DependencySidebar from '../components/sidebar/dependencies/DependencySidebar.vue'
 import DiscordSidebar from '../components/sidebar/DiscordSidebar.vue'
 import GitHubSidebar from '../components/sidebar/GitHubSidebar.vue'
@@ -21,6 +22,7 @@ import { initFollowState } from '../utils/follow-state'
 import { detectBrowserLocale, i18n, installI18n, loadSavedLocale } from '../utils/i18n'
 import { navigate } from '../utils/page-router'
 import { DEFAULTS, type ExtensionSettings, getSettings } from '../utils/settings'
+import { isTranslationSupported } from '../utils/translate-description'
 
 // Gate injections until Nuxt hydration is complete. The router-bridge
 // (MAIN world) dispatches "modrinth-extras:router-ready" once it hooks
@@ -467,6 +469,32 @@ export default defineContentScript({
 			},
 		})
 
+		const translateDescription = createInjection({
+			id: 'modrinth-extras-translate-description',
+			isEnabled: () => settings.translateDescription.enabled && isTranslationSupported(),
+			settingsKeys: ['translateDescription'],
+			persistent: false,
+			projectScoped: true,
+			attach(container) {
+				const path = window.location.pathname
+				if (!/^\/(mod|plugin|datapack|shader|resourcepack|modpack|server)\/[^/?#]+/.test(path))
+					return false
+				const descriptionCard = document.querySelector<HTMLElement>('.normal-page__content .card')
+				if (!descriptionCard) return false
+				container.style.display = 'contents'
+				descriptionCard.parentElement?.insertBefore(container, descriptionCard)
+				return document.contains(container)
+			},
+			createApp() {
+				const slug = window.location.pathname.match(
+					/^\/(mod|plugin|datapack|shader|resourcepack|modpack|server)\/([^/]+)/,
+				)?.[2]
+				const app = createApp(h(TranslateDescription, { projectSlug: slug ?? '' }))
+				installI18n(app)
+				return app
+			},
+		})
+
 		const gitHubSidebar = createInjection({
 			id: 'modrinth-extras-github-sidebar',
 			isEnabled: () => settings.githubSidebar.enabled,
@@ -593,6 +621,7 @@ export default defineContentScript({
 			activitySparkline,
 			galleryBackground,
 			monetizationBadge,
+			translateDescription,
 			gitHubSidebar,
 			discordSidebar,
 			errorNotice,

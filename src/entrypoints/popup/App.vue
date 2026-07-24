@@ -279,6 +279,7 @@ import {
 } from '../../utils/modrinth-flags'
 import { DEFAULTS, type ExtensionSettings, getSettings, saveSettings } from '../../utils/settings'
 import { setTelemetryEnabled } from '../../utils/telemetry'
+import { isTranslationSupported } from '../../utils/translate-description'
 import DonateCard from './components/DonateCard.vue'
 import FeatureGroup from './components/FeatureGroup.vue'
 import FeatureRow from './components/FeatureRow.vue'
@@ -452,6 +453,19 @@ const messages = defineMessages({
 	'feature.monetizationBadge.description': {
 		id: 'feature.monetizationBadge.description',
 		defaultMessage: 'Show the monetization status of a project in the sidebar.',
+	},
+	'feature.translateDescription.title': {
+		id: 'feature.translateDescription.title',
+		defaultMessage: 'Translate description',
+	},
+	'feature.translateDescription.description': {
+		id: 'feature.translateDescription.description',
+		defaultMessage:
+			"On-device translation of a project's description into your language, when it differs.",
+	},
+	'feature.translateDescription.disabledTooltip': {
+		id: 'feature.translateDescription.disabledTooltip',
+		defaultMessage: "Requires Chrome's built-in AI, unsupported in this browser",
 	},
 	'feature.notificationBadge.title': {
 		id: 'feature.notificationBadge.title',
@@ -690,6 +704,14 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 		title: formatMessage(messages['feature.monetizationBadge.title']),
 		description: formatMessage(messages['feature.monetizationBadge.description']),
 	},
+	{
+		key: 'translateDescription',
+		icon: LanguagesIcon,
+		title: formatMessage(messages['feature.translateDescription.title']),
+		description: formatMessage(messages['feature.translateDescription.description']),
+		disabled: () => !translationSupported,
+		disabledTooltip: formatMessage(messages['feature.translateDescription.disabledTooltip']),
+	},
 ])
 
 interface FlagDef {
@@ -797,6 +819,7 @@ const latestVersion = ref<string | null>(null)
 const isLatest = ref(false)
 const checking = ref(true)
 const firefoxControlsTelemetry = ref(false)
+const translationSupported = isTranslationSupported()
 
 const updateCheckCacheItem = storage.defineItem<{ tag: string; ts: number }>(
 	'local:updateCheckCache',

@@ -42,6 +42,7 @@ export interface ExtensionSettings {
 	discordSidebar: { enabled: boolean }
 	galleryBackground: { enabled: boolean }
 	monetizationBadge: { enabled: boolean }
+	translateDescription: { enabled: boolean }
 	notificationBadge: { enabled: boolean }
 	desktopNotifications: { enabled: boolean }
 	curseforgeRedirect: { enabled: boolean }
@@ -68,6 +69,7 @@ export const DEFAULTS: ExtensionSettings = {
 	discordSidebar: { enabled: true },
 	galleryBackground: { enabled: true },
 	monetizationBadge: { enabled: true },
+	translateDescription: { enabled: false },
 	notificationBadge: { enabled: true },
 	desktopNotifications: { enabled: false },
 	curseforgeRedirect: { enabled: false },
