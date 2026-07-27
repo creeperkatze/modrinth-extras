@@ -14,6 +14,9 @@
   "dependencyExplorer.reset": {
     "defaultMessage": "Скинути"
   },
+  "dependencyExplorer.search": {
+    "defaultMessage": "Шукати серед залежностей"
+  },
   "dependencyExplorer.title": {
     "defaultMessage": "Оглядач залежностей"
   },
@@ -76,6 +79,18 @@
   },
   "githubSidebar.stars": {
     "defaultMessage": "{count} зірок"
+  },
+  "monetizationBadge.demonetized": {
+    "defaultMessage": "Не монетизовано"
+  },
+  "monetizationBadge.forceDemonetized": {
+    "defaultMessage": "Монетизація вимкнена"
+  },
+  "monetizationBadge.forceDemonetizedTitle": {
+    "defaultMessage": "Монетизація цього проєкту була вимкнена представниками Modrinth"
+  },
+  "monetizationBadge.monetized": {
+    "defaultMessage": "Монетизовано"
   },
   "notificationsIndicator.markAllAsRead": {
     "defaultMessage": "Позначити все як прочитане"

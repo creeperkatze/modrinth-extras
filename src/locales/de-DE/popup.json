@@ -107,11 +107,23 @@
   "feature.projectCardActions.title": {
     "defaultMessage": "Projektkarten-Aktionen"
   },
+  "feature.projectTypesPrimaryNav.description": {
+    "defaultMessage": "Verschiebe Mods, Plugins, Ressourcenpakete und andere Projekttypen in die Hauptnavigationsleiste."
+  },
+  "feature.projectTypesPrimaryNav.title": {
+    "defaultMessage": "Projekttyp-Navigation"
+  },
   "feature.quickSearch.description": {
     "defaultMessage": "Strg+K oder / für eine Suche im Stil einer Befehlspalette mit gefilterten Tags für Loader, Versionen, Kategorien und Typen."
   },
   "feature.quickSearch.title": {
     "defaultMessage": "Schnellsuche"
+  },
+  "feature.searchBackground.description": {
+    "defaultMessage": "Zeige auf den Entdeckungsseiten einen Banner-Hintergrund an."
+  },
+  "feature.searchBackground.title": {
+    "defaultMessage": "Suchhintergrund"
   },
   "feature.telemetry.description": {
     "defaultMessage": "Hilf dabei, die Erweiterung zu verbessern, indem du anonym Statistiken wie die Version der Erweiterung und die aktivierten Funktionen teilst. Es werden keine Modrinth-Daten, Aktivitäten oder persönliche Informationen erfasst."
@@ -130,6 +142,15 @@
   },
   "feature.toolsSidebar.title": {
     "defaultMessage": "Werkzeug-Seitenleiste"
+  },
+  "feature.translateDescription.description": {
+    "defaultMessage": "Die Übersetzung der Projektbeschreibung direkt auf dem Gerät in deine Sprache, falls diese abweicht."
+  },
+  "feature.translateDescription.disabledTooltip": {
+    "defaultMessage": "Benötigt APIs, die in diesem Browser nicht unterstützt werden"
+  },
+  "feature.translateDescription.title": {
+    "defaultMessage": "Beschreibung übersetzen"
   },
   "popup.donatePrompt.dismiss": {
     "defaultMessage": "Schließen"
@@ -160,6 +181,9 @@
   },
   "popup.group.extension": {
     "defaultMessage": "Erweiterung"
+  },
+  "popup.group.flags": {
+    "defaultMessage": "Flags"
   },
   "popup.group.general": {
     "defaultMessage": "Allgemein"

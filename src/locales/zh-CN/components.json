@@ -14,6 +14,9 @@
   "dependencyExplorer.reset": {
     "defaultMessage": "重置"
   },
+  "dependencyExplorer.search": {
+    "defaultMessage": "搜索依赖项"
+  },
   "dependencyExplorer.title": {
     "defaultMessage": "依赖关系浏览器"
   },
@@ -76,6 +79,18 @@
   },
   "githubSidebar.stars": {
     "defaultMessage": "{count} 个星标"
+  },
+  "monetizationBadge.demonetized": {
+    "defaultMessage": "未开启盈利"
+  },
+  "monetizationBadge.forceDemonetized": {
+    "defaultMessage": "盈利已被禁用"
+  },
+  "monetizationBadge.forceDemonetizedTitle": {
+    "defaultMessage": "该项目的盈利功能已被 Modrinth 停用"
+  },
+  "monetizationBadge.monetized": {
+    "defaultMessage": "已开启盈利"
   },
   "notificationsIndicator.markAllAsRead": {
     "defaultMessage": "全部标记为已读"
@@ -151,6 +166,15 @@
   },
   "toolsSidebar.title": {
     "defaultMessage": "工具"
+  },
+  "translateDescription.showOriginal": {
+    "defaultMessage": "显示原文"
+  },
+  "translateDescription.translate": {
+    "defaultMessage": "翻译项目简介"
+  },
+  "translateDescription.translating": {
+    "defaultMessage": "正在翻译…"
   }
 }
 

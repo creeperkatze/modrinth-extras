@@ -1,4 +1,13 @@
 {
+  "feature.accentColor.color": {
+    "defaultMessage": "强调色"
+  },
+  "feature.accentColor.description": {
+    "defaultMessage": "将 Modrinth 的标志性绿色替换为自定义强调色。"
+  },
+  "feature.accentColor.title": {
+    "defaultMessage": "强调色"
+  },
   "feature.activitySparkline.days": {
     "defaultMessage": "{count} 天"
   },
@@ -62,6 +71,12 @@
   "feature.githubSidebar.title": {
     "defaultMessage": "GitHub 侧边栏"
   },
+  "feature.monetizationBadge.description": {
+    "defaultMessage": "在侧边栏中显示项目的盈利状态。"
+  },
+  "feature.monetizationBadge.title": {
+    "defaultMessage": "盈利状态标识"
+  },
   "feature.notificationBadge.description": {
     "defaultMessage": "扩展程序图标上的徽章显示最新的未读通知数量。"
   },
@@ -92,11 +107,23 @@
   "feature.projectCardActions.title": {
     "defaultMessage": "项目卡片操作"
   },
+  "feature.projectTypesPrimaryNav.description": {
+    "defaultMessage": "将模组、插件、资源包等项目类型移至主导航栏。"
+  },
+  "feature.projectTypesPrimaryNav.title": {
+    "defaultMessage": "在主导航栏中显示项目类型"
+  },
   "feature.quickSearch.description": {
     "defaultMessage": "按 Ctrl+K 或 / 键，即可使用类似命令面板的搜索功能，支持按加载器、版本、类别和类型进行多维标签搜索。"
   },
   "feature.quickSearch.title": {
     "defaultMessage": "快速搜索"
+  },
+  "feature.searchBackground.description": {
+    "defaultMessage": "在发现页面上显示横幅背景。"
+  },
+  "feature.searchBackground.title": {
+    "defaultMessage": "搜索背景"
   },
   "feature.telemetry.description": {
     "defaultMessage": "通过匿名分享扩展程序版本及已启用功能等统计信息，帮助改进该扩展程序。我们绝不会收集任何 Modrinth 数据、活动记录或个人信息。"
@@ -115,6 +142,15 @@
   },
   "feature.toolsSidebar.title": {
     "defaultMessage": "工具侧边栏"
+  },
+  "feature.translateDescription.description": {
+    "defaultMessage": "当项目简介语言与你的语言不同时，在本地设备上将其翻译为你的语言。"
+  },
+  "feature.translateDescription.disabledTooltip": {
+    "defaultMessage": "需要此浏览器不支持的 API"
+  },
+  "feature.translateDescription.title": {
+    "defaultMessage": "翻译项目简介"
   },
   "popup.donatePrompt.dismiss": {
     "defaultMessage": "忽略"
@@ -146,8 +182,20 @@
   "popup.group.extension": {
     "defaultMessage": "扩展"
   },
+  "popup.group.flags": {
+    "defaultMessage": "实验性开关"
+  },
   "popup.group.general": {
     "defaultMessage": "一般"
+  },
+  "popup.surveyPrompt.dismiss": {
+    "defaultMessage": "忽略"
+  },
+  "popup.surveyPrompt.placeholder": {
+    "defaultMessage": "请输入你的回答……"
+  },
+  "popup.surveyPrompt.submit": {
+    "defaultMessage": "发送"
   },
   "search.any": {
     "defaultMessage": "任何"

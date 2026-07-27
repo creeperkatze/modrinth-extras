@@ -1,4 +1,13 @@
 {
+  "feature.accentColor.color": {
+    "defaultMessage": "Колір"
+  },
+  "feature.accentColor.description": {
+    "defaultMessage": "Замініть зелений колір Modrinth на власний акцентний колір."
+  },
+  "feature.accentColor.title": {
+    "defaultMessage": "Акцентний колір"
+  },
   "feature.activitySparkline.days": {
     "defaultMessage": "{count} дні(в)"
   },
@@ -62,6 +71,12 @@
   "feature.githubSidebar.title": {
     "defaultMessage": "Бічна панель GitHub"
   },
+  "feature.monetizationBadge.description": {
+    "defaultMessage": "Відобразити стан монетизації проєкту на бічній панелі."
+  },
+  "feature.monetizationBadge.title": {
+    "defaultMessage": "Значок монетизації"
+  },
   "feature.notificationBadge.description": {
     "defaultMessage": "Актуальна кількість непрочитаних повідомлень на іконці розширення."
   },
@@ -92,11 +107,17 @@
   "feature.projectCardActions.title": {
     "defaultMessage": "Дії у картці проєкту"
   },
+  "feature.projectTypesPrimaryNav.description": {
+    "defaultMessage": "Перемістити модифікації, плагіни, набори ресурсів та інші типи проєктів у головну панель навігації."
+  },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K або / для пошуку у стилі палітри команд із фільтрами для завантажувачів, версій, категорій та типів."
   },
   "feature.quickSearch.title": {
     "defaultMessage": "Швидкий пошук"
+  },
+  "feature.searchBackground.title": {
+    "defaultMessage": "Фон у пошуку"
   },
   "feature.telemetry.description": {
     "defaultMessage": "Допоможіть поліпшити роботу розширення, надаючи анонімні статистичні дані, такі як версія розширення та перелік увімкнених функцій. Дані Modrinth, інформація про активність або особисті дані не збиратимуться."
@@ -145,6 +166,9 @@
   },
   "popup.group.extension": {
     "defaultMessage": "Розширення"
+  },
+  "popup.group.flags": {
+    "defaultMessage": "Прапори"
   },
   "popup.group.general": {
     "defaultMessage": "Загальні"

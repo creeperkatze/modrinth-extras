@@ -166,6 +166,15 @@
   },
   "toolsSidebar.title": {
     "defaultMessage": "Werkzeuge"
+  },
+  "translateDescription.showOriginal": {
+    "defaultMessage": "Original anzeigen"
+  },
+  "translateDescription.translate": {
+    "defaultMessage": "Beschreibung übersetzen"
+  },
+  "translateDescription.translating": {
+    "defaultMessage": "Wird übersetzt…"
   }
 }
 
