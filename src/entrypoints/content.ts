@@ -14,6 +14,7 @@ import TranslateDescription from '../components/project/TranslateDescription.vue
 import DependencySidebar from '../components/sidebar/dependencies/DependencySidebar.vue'
 import DiscordSidebar from '../components/sidebar/DiscordSidebar.vue'
 import GitHubSidebar from '../components/sidebar/GitHubSidebar.vue'
+import ModpacksSidebar from '../components/sidebar/ModpacksSidebar.vue'
 import ToolsSidebar from '../components/sidebar/ToolsSidebar.vue'
 import ErrorNotice from '../components/site/ErrorNotice.vue'
 import FooterBadge from '../components/site/FooterBadge.vue'
@@ -525,6 +526,21 @@ export default defineContentScript({
 			},
 		})
 
+		const modpacksSidebar = createInjection({
+			id: 'modrinth-extras-modpacks-sidebar',
+			isEnabled: () => settings.modpacksSidebar.enabled,
+			settingsKeys: ['modpacksSidebar'],
+			persistent: false,
+			projectScoped: true,
+			attach: attachToSidebar,
+			createApp() {
+				const pageUrl = window.location.href.split('?')[0].split('#')[0]
+				const app = createApp(h(ModpacksSidebar, { pageUrl }))
+				installI18n(app)
+				return app
+			},
+		})
+
 		const errorNotice = createInjection({
 			id: 'modrinth-extras-error-notice',
 			isEnabled: () => true,
@@ -618,6 +634,7 @@ export default defineContentScript({
 			notifications,
 			toolsSidebar,
 			dependencySidebar,
+			modpacksSidebar,
 			activitySparkline,
 			galleryBackground,
 			monetizationBadge,
