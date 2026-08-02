@@ -23,6 +23,8 @@
 			v-if="settingsLoaded"
 			class="min-h-0 flex-1 [&>.scrollable-pane-wrapper]:h-full [&__.scrollable-pane]:max-h-none [&__.scrollable-pane]:!gap-0 [&__.wrapper-wrapper]:overflow-visible"
 		>
+			<DiscordCard />
+
 			<DonateCard />
 
 			<SurveyCard />
@@ -280,6 +282,7 @@ import {
 import { DEFAULTS, type ExtensionSettings, getSettings, saveSettings } from '../../utils/settings'
 import { setTelemetryEnabled } from '../../utils/telemetry'
 import { isTranslationSupported } from '../../utils/translate-description'
+import DiscordCard from './components/DiscordCard.vue'
 import DonateCard from './components/DonateCard.vue'
 import FeatureGroup from './components/FeatureGroup.vue'
 import FeatureRow from './components/FeatureRow.vue'
