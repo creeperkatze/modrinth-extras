@@ -12,7 +12,7 @@ export const LOCALES: LocaleDefinition[] = [
 	// { code: 'de-CH', name: 'Schweizerdeutsch' },
 	{ code: 'de-DE', name: 'Deutsch' },
 	{ code: 'es-419', name: 'Español (Latinoamérica)' },
-	// { code: 'es-ES', name: 'Español' },
+	{ code: 'es-ES', name: 'Español' },
 	// { code: 'fi-FI', name: 'Suomi' },
 	// { code: 'fil-PH', name: 'Filipino' },
 	{ code: 'fr-FR', name: 'Français' },
