@@ -110,11 +110,17 @@
   "feature.projectTypesPrimaryNav.description": {
     "defaultMessage": "Перемістити модифікації, плагіни, набори ресурсів та інші типи проєктів у головну панель навігації."
   },
+  "feature.projectTypesPrimaryNav.title": {
+    "defaultMessage": "Навігація за типами проєктів"
+  },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K або / для пошуку у стилі палітри команд із фільтрами для завантажувачів, версій, категорій та типів."
   },
   "feature.quickSearch.title": {
     "defaultMessage": "Швидкий пошук"
+  },
+  "feature.searchBackground.description": {
+    "defaultMessage": "Відображати фоновий банер на сторінках перегляду."
   },
   "feature.searchBackground.title": {
     "defaultMessage": "Фон у пошуку"
@@ -136,6 +142,24 @@
   },
   "feature.toolsSidebar.title": {
     "defaultMessage": "Бічна панель інструментів"
+  },
+  "feature.translateDescription.description": {
+    "defaultMessage": "Переклад опису проєкту на вашу мову безпосередньо на пристрої, якщо він відрізняється."
+  },
+  "feature.translateDescription.disabledTooltip": {
+    "defaultMessage": "Для цього потрібні API, які не підтримуються цим браузером"
+  },
+  "feature.translateDescription.title": {
+    "defaultMessage": "Перекласти опис"
+  },
+  "popup.discordPrompt.dismiss": {
+    "defaultMessage": "Відхилити"
+  },
+  "popup.discordPrompt.message": {
+    "defaultMessage": "Отримуйте допомогу, діліться відгуками та стежте за оновленнями на сервері Discord."
+  },
+  "popup.discordPrompt.title": {
+    "defaultMessage": "Приєднайтеся до Discord"
   },
   "popup.donatePrompt.dismiss": {
     "defaultMessage": "Відхилити"

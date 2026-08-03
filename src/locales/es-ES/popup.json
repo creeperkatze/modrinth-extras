@@ -1,2 +1,222 @@
-{}
+{
+  "feature.accentColor.color": {
+    "defaultMessage": "Color"
+  },
+  "feature.accentColor.description": {
+    "defaultMessage": "Remplaza el Modrinth verde con color de acento personalizado."
+  },
+  "feature.accentColor.title": {
+    "defaultMessage": "Color de acento"
+  },
+  "feature.activitySparkline.days": {
+    "defaultMessage": "{count} días"
+  },
+  "feature.activitySparkline.description": {
+    "defaultMessage": "Gráfica de actividad de publicaciones en las páginas del proyecto."
+  },
+  "feature.activitySparkline.timeRange": {
+    "defaultMessage": "Intervalo de tiempo"
+  },
+  "feature.activitySparkline.title": {
+    "defaultMessage": "Gráfica de actividad"
+  },
+  "feature.curseforgeRedirect.description": {
+    "defaultMessage": "Redirigir páginas de CurseForge a las de Modrinth si existen."
+  },
+  "feature.curseforgeRedirect.title": {
+    "defaultMessage": "Redirección de CurseForge"
+  },
+  "feature.dependencyExplorer.description": {
+    "defaultMessage": "Gráfico interactivo para explorar el árbol de dependencias."
+  },
+  "feature.dependencyExplorer.disabledTooltip": {
+    "defaultMessage": "Requiere la barra lateral de dependencias que esté activado"
+  },
+  "feature.dependencyExplorer.title": {
+    "defaultMessage": "Explorador de dependencias"
+  },
+  "feature.dependencySidebar.description": {
+    "defaultMessage": "Árbol desplegable en las páginas de proyecto."
+  },
+  "feature.dependencySidebar.title": {
+    "defaultMessage": "Barra lateral de dependencias"
+  },
+  "feature.desktopNotifications.description": {
+    "defaultMessage": "Notificaciones del sistema operativo para tus notificaciones de Modrinth."
+  },
+  "feature.desktopNotifications.exampleMessage": {
+    "defaultMessage": "¡Este es un ejemplo de una notificación de Modrinth Extras!"
+  },
+  "feature.desktopNotifications.exampleTitle": {
+    "defaultMessage": "Ejemplo de notificación"
+  },
+  "feature.desktopNotifications.title": {
+    "defaultMessage": "Notificaciones del escritorio"
+  },
+  "feature.discordSidebar.description": {
+    "defaultMessage": "Nombre del servidor, descripción, número de miembros, y el cuento online para servidores de Discord vinculados."
+  },
+  "feature.discordSidebar.title": {
+    "defaultMessage": "Barra lateral de Discord"
+  },
+  "feature.galleryBackground.description": {
+    "defaultMessage": "Mostrar la imagen destacada como un fondo en las páginas de proyectos."
+  },
+  "feature.galleryBackground.title": {
+    "defaultMessage": "Fondo de Galería"
+  },
+  "feature.githubSidebar.description": {
+    "defaultMessage": "Estrellas, problemas, solicitudes de cambios, y copias para repositorios vinculados."
+  },
+  "feature.githubSidebar.title": {
+    "defaultMessage": "Barra lateral de GitHub"
+  },
+  "feature.monetizationBadge.description": {
+    "defaultMessage": "Ver el estado de monetización de un proyecto en la barra lateral."
+  },
+  "feature.monetizationBadge.title": {
+    "defaultMessage": "Insignia de monetización"
+  },
+  "feature.notificationBadge.description": {
+    "defaultMessage": "Recuento actualizado de notificaciones no leídas apareciendo como una insignia en el icono de extensión."
+  },
+  "feature.notificationBadge.title": {
+    "defaultMessage": "Icono de notificación"
+  },
+  "feature.notifications.description": {
+    "defaultMessage": "Ver, Gestionar, y leer notificaciones sin leer en el encabezado sin salir de la página actual."
+  },
+  "feature.notifications.title": {
+    "defaultMessage": "Notificaciones"
+  },
+  "feature.projectCardActions.description": {
+    "defaultMessage": "Descargar, seguir, y guardar proyectos directamente de sus fichas."
+  },
+  "feature.projectCardActions.gameVersion": {
+    "defaultMessage": "Versión del juego"
+  },
+  "feature.projectCardActions.modLoader": {
+    "defaultMessage": "Plataformas del mod"
+  },
+  "feature.projectCardActions.pluginLoader": {
+    "defaultMessage": "Plataformas del plugin"
+  },
+  "feature.projectCardActions.shaderLoader": {
+    "defaultMessage": "Plataformas del shader"
+  },
+  "feature.projectCardActions.title": {
+    "defaultMessage": "Acciones de la ficha el proyecto"
+  },
+  "feature.projectTypesPrimaryNav.description": {
+    "defaultMessage": "Mover mods, plugins, paquetes de recursos y otros tipos de proyectos a la barra principal."
+  },
+  "feature.projectTypesPrimaryNav.title": {
+    "defaultMessage": "Navegación de tipos de proyectos"
+  },
+  "feature.quickSearch.description": {
+    "defaultMessage": "Ctrl+K o / para buscar el estilo de la paleta de comandos con etiquetas de versiones, categorías y tipos."
+  },
+  "feature.quickSearch.title": {
+    "defaultMessage": "Búsqueda rápida"
+  },
+  "feature.searchBackground.description": {
+    "defaultMessage": "Mostrar un fondo de banner en las páginas para descubrir."
+  },
+  "feature.searchBackground.title": {
+    "defaultMessage": "Fondo de búsqueda"
+  },
+  "feature.telemetry.description": {
+    "defaultMessage": "Ayudamos a mejorar la extensión si comparte de forma anónima datos como la versión de la extensión y las funciones activadas. Nunca se cogerá tus datos de Modrinth, ni información sobre su actividad ni datos personales."
+  },
+  "feature.telemetry.disabledTooltip": {
+    "defaultMessage": "Controlado por la configuración de colección de datos de Firefox"
+  },
+  "feature.telemetry.title": {
+    "defaultMessage": "Telemetría"
+  },
+  "feature.toolsSidebar.description": {
+    "defaultMessage": "Genera contenido incrustado para copiar comandos de instalación del gestor de mods."
+  },
+  "feature.toolsSidebar.modManager": {
+    "defaultMessage": "Gestor de mods"
+  },
+  "feature.toolsSidebar.title": {
+    "defaultMessage": "Barra lateral de herramientas"
+  },
+  "feature.translateDescription.description": {
+    "defaultMessage": "Traducción en tu dispositivo de una descripción de proyecto a tu idioma, cuando sea diferente."
+  },
+  "feature.translateDescription.disabledTooltip": {
+    "defaultMessage": "Requieren de APIs no compatibles en tu navegador"
+  },
+  "feature.translateDescription.title": {
+    "defaultMessage": "Traducir descripción"
+  },
+  "popup.discordPrompt.dismiss": {
+    "defaultMessage": "Descartar"
+  },
+  "popup.discordPrompt.message": {
+    "defaultMessage": "Obtén ayuda, comparte comentarios, y sigue actualizaciones en el servidor de Discord."
+  },
+  "popup.discordPrompt.title": {
+    "defaultMessage": "Unir al Discord"
+  },
+  "popup.donatePrompt.dismiss": {
+    "defaultMessage": "Descartar"
+  },
+  "popup.donatePrompt.message": {
+    "defaultMessage": "Modrinth Extras siempre será gratis, de código abierto, y sin anuncios. Si lo encontraste útil, puedes apoyar el desarrollo con una pequeña donación."
+  },
+  "popup.donatePrompt.title": {
+    "defaultMessage": "Apoya la extensión"
+  },
+  "popup.footer.checking": {
+    "defaultMessage": "Comprobando"
+  },
+  "popup.footer.donate": {
+    "defaultMessage": "Donar"
+  },
+  "popup.footer.latestVersion": {
+    "defaultMessage": "Última Versión"
+  },
+  "popup.footer.starOnGitHub": {
+    "defaultMessage": "En GitHub"
+  },
+  "popup.footer.updateAvailable": {
+    "defaultMessage": "Actualización disponible"
+  },
+  "popup.group.contentPages": {
+    "defaultMessage": "Páginas de contenido"
+  },
+  "popup.group.extension": {
+    "defaultMessage": "Extensión"
+  },
+  "popup.group.flags": {
+    "defaultMessage": "Funciones experimentales"
+  },
+  "popup.group.general": {
+    "defaultMessage": "General"
+  },
+  "popup.surveyPrompt.dismiss": {
+    "defaultMessage": "Descartar"
+  },
+  "popup.surveyPrompt.placeholder": {
+    "defaultMessage": "Escribe tu respuesta..."
+  },
+  "popup.surveyPrompt.submit": {
+    "defaultMessage": "Enviar"
+  },
+  "search.any": {
+    "defaultMessage": "Cualquiera"
+  },
+  "search.placeholder": {
+    "defaultMessage": "Buscar..."
+  },
+  "settings.language": {
+    "defaultMessage": "Idioma"
+  },
+  "settings.language.description": {
+    "defaultMessage": "Ayúdanos a traducir en <link>Crowdin</link>. Algunos idiomas pueden ser incompletos."
+  }
+}
 

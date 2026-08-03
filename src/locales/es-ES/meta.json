@@ -1,2 +1,21 @@
-{}
+{
+  "meta.summary": {
+    "defaultMessage": "Una extensión que mejora la experiencia de Modrinth tanto dentro que fuera."
+  },
+  "meta.description.generalTitle": {
+    "defaultMessage": "Características generales:"
+  },
+  "meta.description.contentTitle": {
+    "defaultMessage": "Características de páginas de contenido:"
+  },
+  "meta.description.extensionTitle": {
+    "defaultMessage": "Características de la extensión:"
+  },
+  "meta.description.footer": {
+    "defaultMessage": "Todas las funciones son opcionales y se pueden activar individualmente en la ventana de la extensión.\n\nModrinth Extras es de <link>Código Abierto</link>."
+  },
+  "meta.description.disclaimer": {
+    "defaultMessage": "La extensión no está asociada ni es respaldada por Modrinth."
+  }
+}
 

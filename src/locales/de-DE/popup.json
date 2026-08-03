@@ -152,6 +152,15 @@
   "feature.translateDescription.title": {
     "defaultMessage": "Beschreibung übersetzen"
   },
+  "popup.discordPrompt.dismiss": {
+    "defaultMessage": "Schließen"
+  },
+  "popup.discordPrompt.message": {
+    "defaultMessage": "Erhalte Hilfe, teile Feedback und folge Updates auf dem Discord-Server."
+  },
+  "popup.discordPrompt.title": {
+    "defaultMessage": "Tritt dem Discord bei"
+  },
   "popup.donatePrompt.dismiss": {
     "defaultMessage": "Schließen"
   },

@@ -1,2 +1,180 @@
-{}
+{
+  "dependencyExplorer.centerView": {
+    "defaultMessage": "Centrar vista"
+  },
+  "dependencyExplorer.depth": {
+    "defaultMessage": "Profundidad"
+  },
+  "dependencyExplorer.loading": {
+    "defaultMessage": "Cargando"
+  },
+  "dependencyExplorer.noDependencies": {
+    "defaultMessage": "El proyecto no tiene dependencias"
+  },
+  "dependencyExplorer.reset": {
+    "defaultMessage": "Restablecer"
+  },
+  "dependencyExplorer.search": {
+    "defaultMessage": "Buscar dependencias"
+  },
+  "dependencyExplorer.title": {
+    "defaultMessage": "Explorador de dependencias"
+  },
+  "dependencyNode.collapse": {
+    "defaultMessage": "Esconder dependencias"
+  },
+  "dependencyNode.embedded": {
+    "defaultMessage": "Incorporado"
+  },
+  "dependencyNode.expand": {
+    "defaultMessage": "Expandir dependencias"
+  },
+  "dependencyNode.incompatible": {
+    "defaultMessage": "Incompatible"
+  },
+  "dependencyNode.optional": {
+    "defaultMessage": "Opcional"
+  },
+  "dependencyNode.required": {
+    "defaultMessage": "Requerido"
+  },
+  "dependencySidebar.loadError": {
+    "defaultMessage": "Error al cargar las dependencias"
+  },
+  "dependencySidebar.loading": {
+    "defaultMessage": "Cargando"
+  },
+  "dependencySidebar.none": {
+    "defaultMessage": "No dependencias"
+  },
+  "dependencySidebar.openExplorer": {
+    "defaultMessage": "Abrir explorador de dependencias"
+  },
+  "dependencySidebar.title": {
+    "defaultMessage": "Dependencias"
+  },
+  "discordSidebar.members": {
+    "defaultMessage": "{count} miembros"
+  },
+  "discordSidebar.online": {
+    "defaultMessage": "{count} en línea"
+  },
+  "discordSidebar.partnered": {
+    "defaultMessage": "Participaron"
+  },
+  "discordSidebar.verified": {
+    "defaultMessage": "Verificado"
+  },
+  "errorNotice.message": {
+    "defaultMessage": "El error puede ser relacionado con Modrinth Extras. Intenta desactivar la extensión y recargar la página antes de reportar esto a Modrinth. Si este error desaparece, repórtalo <link>Aqui</link>."
+  },
+  "githubSidebar.forks": {
+    "defaultMessage": "{count} copias"
+  },
+  "githubSidebar.openIssues": {
+    "defaultMessage": "{count} problemas abiertos"
+  },
+  "githubSidebar.openPRs": {
+    "defaultMessage": "{count} Solicitudes de cambios abiertos"
+  },
+  "githubSidebar.stars": {
+    "defaultMessage": "{count} estrellas"
+  },
+  "monetizationBadge.demonetized": {
+    "defaultMessage": "No monetizado"
+  },
+  "monetizationBadge.forceDemonetized": {
+    "defaultMessage": "Monetizado desactivado"
+  },
+  "monetizationBadge.forceDemonetizedTitle": {
+    "defaultMessage": "La monetización fue desactivada por el equipo de Modrinth"
+  },
+  "monetizationBadge.monetized": {
+    "defaultMessage": "Monetizado"
+  },
+  "notificationsIndicator.markAllAsRead": {
+    "defaultMessage": "Marcar todos como leídos"
+  },
+  "notificationsIndicator.noUnread": {
+    "defaultMessage": "No hay notificaciones sin leer"
+  },
+  "notificationsIndicator.projectUpdated": {
+    "defaultMessage": "{title} fue actualizado"
+  },
+  "notificationsIndicator.viewAll": {
+    "defaultMessage": "Ver todos"
+  },
+  "notificationsIndicator.viewHistory": {
+    "defaultMessage": "Ver Historial"
+  },
+  "projectCardActions.checkingDownload": {
+    "defaultMessage": "Comprobando la versión disponible..."
+  },
+  "projectCardActions.copied": {
+    "defaultMessage": "¡Copiado!"
+  },
+  "projectCardActions.copyLink": {
+    "defaultMessage": "Copiar link"
+  },
+  "projectCardActions.download": {
+    "defaultMessage": "Descargar"
+  },
+  "projectCardActions.downloadUnavailable": {
+    "defaultMessage": "{loader, select, none {No hay una versión disponible para {version}} other {No versión disponible para {loader} {version}}}"
+  },
+  "projectCardActions.follow": {
+    "defaultMessage": "Seguir"
+  },
+  "projectCardActions.newCollection": {
+    "defaultMessage": "Crear nueva colección"
+  },
+  "projectCardActions.noCollections": {
+    "defaultMessage": "No se encontraron colecciones."
+  },
+  "projectCardActions.save": {
+    "defaultMessage": "Guardar"
+  },
+  "projectCardActions.saved": {
+    "defaultMessage": "Guardado"
+  },
+  "projectCardActions.searchPlaceholder": {
+    "defaultMessage": "Buscar..."
+  },
+  "projectCardActions.unfollow": {
+    "defaultMessage": "Dejar de seguir"
+  },
+  "quickSearch.clearRecent": {
+    "defaultMessage": "Borrar reciente"
+  },
+  "quickSearch.examples": {
+    "defaultMessage": "Ejemplos"
+  },
+  "quickSearch.recent": {
+    "defaultMessage": "Reciente"
+  },
+  "quickSearch.search": {
+    "defaultMessage": "Buscar"
+  },
+  "toolsSidebar.copied": {
+    "defaultMessage": "¡Copiado!"
+  },
+  "toolsSidebar.copyInstallCommand": {
+    "defaultMessage": "Copiar {manager} comando"
+  },
+  "toolsSidebar.generateEmbed": {
+    "defaultMessage": "Generar incrustación"
+  },
+  "toolsSidebar.title": {
+    "defaultMessage": "Herramientas"
+  },
+  "translateDescription.showOriginal": {
+    "defaultMessage": "Mostrar original"
+  },
+  "translateDescription.translate": {
+    "defaultMessage": "Traducir descripción"
+  },
+  "translateDescription.translating": {
+    "defaultMessage": "Traduciendo…"
+  }
+}
 
