@@ -1,11 +1,6 @@
-export interface GitHubStats {
-	stars: number
-	issues: number
-	prs: number
-	forks: number
-}
+import type { RepositoryStats } from './repository'
 
-export async function fetchGitHubStats(repo: string): Promise<GitHubStats> {
+export async function fetchGitHubStats(repo: string): Promise<RepositoryStats> {
 	const [repoRes, prRes] = await Promise.all([
 		fetch(`https://api.github.com/repos/${repo}`),
 		fetch(`https://api.github.com/repos/${repo}/pulls?state=open&per_page=1`),

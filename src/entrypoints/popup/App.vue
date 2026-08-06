@@ -233,7 +233,7 @@
 </template>
 
 <script setup lang="ts">
-import { Network, Star } from '@lucide/vue'
+import { GitBranch, Network, Star } from '@lucide/vue'
 import type { Labrinth } from '@modrinth/api-client'
 import {
 	ArrowUpRightIcon,
@@ -247,7 +247,6 @@ import {
 	CurseForgeIcon,
 	DiscordIcon,
 	GitGraphIcon,
-	GithubIcon,
 	ImageIcon,
 	LanguagesIcon,
 	LayoutTemplateIcon,
@@ -415,11 +414,12 @@ const messages = defineMessages({
 	},
 	'feature.githubSidebar.title': {
 		id: 'feature.githubSidebar.title',
-		defaultMessage: 'GitHub sidebar',
+		defaultMessage: 'Repository sidebar',
 	},
 	'feature.githubSidebar.description': {
 		id: 'feature.githubSidebar.description',
-		defaultMessage: 'Stars, issues, pull requests, and forks for linked repositories.',
+		defaultMessage:
+			'Stars, issues, pull requests, and forks for linked GitHub, GitLab, Codeberg, and Bitbucket repositories.',
 	},
 	'feature.discordSidebar.title': {
 		id: 'feature.discordSidebar.title',
@@ -704,7 +704,7 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 	},
 	{
 		key: 'githubSidebar',
-		icon: GithubIcon,
+		icon: GitBranch,
 		title: formatMessage(messages['feature.githubSidebar.title']),
 		description: formatMessage(messages['feature.githubSidebar.description']),
 	},

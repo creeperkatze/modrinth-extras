@@ -86,9 +86,9 @@ Interactive graph for exploring the full dependency tree.
 
 <img src=".github/assets/screenshots/dependency-explorer.png" width="100%">
 
-### GitHub sidebar
+### Repository sidebar
 
-Stars, issues, pull requests, and forks for linked repositories.
+Stars, issues, pull requests, and forks for linked GitHub, GitLab, Codeberg, and Bitbucket repositories.
 
 ### Discord sidebar
 

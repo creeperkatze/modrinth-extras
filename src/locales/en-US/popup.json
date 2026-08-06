@@ -69,10 +69,10 @@
     "defaultMessage": "Gallery background"
   },
   "feature.githubSidebar.description": {
-    "defaultMessage": "Stars, issues, pull requests, and forks for linked repositories."
+    "defaultMessage": "Stars, issues, pull requests, and forks for linked GitHub, GitLab, Codeberg, and Bitbucket repositories."
   },
   "feature.githubSidebar.title": {
-    "defaultMessage": "GitHub sidebar"
+    "defaultMessage": "Repository sidebar"
   },
   "feature.modpacksSidebar.description": {
     "defaultMessage": "Show all the modpacks the mod is featured in."

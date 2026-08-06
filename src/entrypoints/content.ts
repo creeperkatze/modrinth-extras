@@ -13,8 +13,8 @@ import ProjectCardActions from '../components/project/ProjectCardActions.vue'
 import TranslateDescription from '../components/project/TranslateDescription.vue'
 import DependencySidebar from '../components/sidebar/dependencies/DependencySidebar.vue'
 import DiscordSidebar from '../components/sidebar/DiscordSidebar.vue'
-import GitHubSidebar from '../components/sidebar/GitHubSidebar.vue'
 import ModpacksSidebar from '../components/sidebar/ModpacksSidebar.vue'
+import RepositorySidebar from '../components/sidebar/RepositorySidebar.vue'
 import ToolsSidebar from '../components/sidebar/ToolsSidebar.vue'
 import ErrorNotice from '../components/site/ErrorNotice.vue'
 import FooterBadge from '../components/site/FooterBadge.vue'
@@ -498,8 +498,8 @@ export default defineContentScript({
 			},
 		})
 
-		const gitHubSidebar = createInjection({
-			id: 'modrinth-extras-github-sidebar',
+		const repositorySidebar = createInjection({
+			id: 'modrinth-extras-repository-sidebar',
 			isEnabled: () => settings.githubSidebar.enabled,
 			settingsKeys: ['githubSidebar'],
 			persistent: false,
@@ -507,7 +507,7 @@ export default defineContentScript({
 			attach: attachToSidebar,
 			createApp() {
 				const pageUrl = window.location.href.split('?')[0].split('#')[0]
-				const app = createApp(h(GitHubSidebar, { pageUrl }))
+				const app = createApp(h(RepositorySidebar, { pageUrl }))
 				installI18n(app)
 				return app
 			},
@@ -641,7 +641,7 @@ export default defineContentScript({
 			galleryBackground,
 			monetizationBadge,
 			translateDescription,
-			gitHubSidebar,
+			repositorySidebar,
 			discordSidebar,
 			errorNotice,
 			footerBadge,

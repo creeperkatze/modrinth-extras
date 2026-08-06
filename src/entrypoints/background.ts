@@ -9,9 +9,10 @@ import {
 } from '../background/badge'
 import { handleNotificationClick } from '../background/desktop-notifications'
 import { fetchDiscordInvite } from '../background/external/discord'
-import { fetchGitHubStats } from '../background/external/github'
+import { fetchRepositoryStats } from '../background/external/repository'
 import { detectBrowserLocale } from '../utils/i18n'
 import type { Notification } from '../utils/notifications'
+import type { RepositoryPlatform } from '../utils/repository-links'
 import { getSettings } from '../utils/settings'
 import { capture, initTelemetry } from '../utils/telemetry'
 
@@ -75,12 +76,13 @@ export default defineBackground(() => {
 				await applyNotifications(newNotifs, prevNotifs)
 			})()
 		}
-		if (message.type === 'github-stats') {
+		if (message.type === 'repository-stats') {
+			const platform = message.platform as RepositoryPlatform
 			const repo = message.repo as string
-			fetchGitHubStats(repo)
+			fetchRepositoryStats(platform, repo)
 				.then((stats) => sendResponse({ ok: true, stats }))
 				.catch((err) => {
-					console.error('[Modrinth Extras] Failed to fetch GitHub stats:', err)
+					console.error('[Modrinth Extras] Failed to fetch repository stats:', err)
 					sendResponse({ ok: false, error: err instanceof Error ? err.message : String(err) })
 				})
 			return true

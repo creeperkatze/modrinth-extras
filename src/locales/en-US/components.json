@@ -71,24 +71,6 @@
   "errorNotice.message": {
     "defaultMessage": "This error might be related to Modrinth Extras. Try disabling the extension and refreshing the page before reporting this to Modrinth. If the error goes away, please report it <link>here</link>."
   },
-  "githubSidebar.forks": {
-    "defaultMessage": "{count} forks"
-  },
-  "githubSidebar.loadError": {
-    "defaultMessage": "Failed to load GitHub data"
-  },
-  "githubSidebar.loading": {
-    "defaultMessage": "Loading"
-  },
-  "githubSidebar.openIssues": {
-    "defaultMessage": "{count} open issues"
-  },
-  "githubSidebar.openPRs": {
-    "defaultMessage": "{count} open pull requests"
-  },
-  "githubSidebar.stars": {
-    "defaultMessage": "{count} stars"
-  },
   "modpacksSidebar.title": {
     "defaultMessage": "Modpacks"
   },
@@ -178,6 +160,27 @@
   },
   "quickSearch.search": {
     "defaultMessage": "Search"
+  },
+  "repositorySidebar.forks": {
+    "defaultMessage": "{count} forks"
+  },
+  "repositorySidebar.loadError": {
+    "defaultMessage": "Failed to load repository data"
+  },
+  "repositorySidebar.loading": {
+    "defaultMessage": "Loading"
+  },
+  "repositorySidebar.openIssues": {
+    "defaultMessage": "{count} open issues"
+  },
+  "repositorySidebar.openPRs": {
+    "defaultMessage": "{count} open pull requests"
+  },
+  "repositorySidebar.stars": {
+    "defaultMessage": "{count} stars"
+  },
+  "repositorySidebar.title": {
+    "defaultMessage": "Repository"
   },
   "toolsSidebar.copied": {
     "defaultMessage": "Copied!"
