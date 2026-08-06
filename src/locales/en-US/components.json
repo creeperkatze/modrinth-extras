@@ -62,9 +62,6 @@
   "discordSidebar.partnered": {
     "defaultMessage": "Partnered"
   },
-  "discordSidebar.verified": {
-    "defaultMessage": "Verified"
-  },
   "errorNotice.message": {
     "defaultMessage": "This error might be related to Modrinth Extras. Try disabling the extension and refreshing the page before reporting this to Modrinth. If the error goes away, please report it <link>here</link>."
   },
@@ -79,6 +76,12 @@
   },
   "githubSidebar.stars": {
     "defaultMessage": "{count} stars"
+  },
+  "modpacksSidebar.more": {
+    "defaultMessage": "Show more modpacks"
+  },
+  "modpacksSidebar.title": {
+    "defaultMessage": "Modpacks"
   },
   "monetizationBadge.demonetized": {
     "defaultMessage": "Not monetized"

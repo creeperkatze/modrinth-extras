@@ -71,6 +71,12 @@
   "feature.githubSidebar.title": {
     "defaultMessage": "GitHub sidebar"
   },
+  "feature.modpacksSidebar.description": {
+    "defaultMessage": "Show all the modpacks the mod is featured in."
+  },
+  "feature.modpacksSidebar.title": {
+    "defaultMessage": "Modpacks sidebar"
+  },
   "feature.monetizationBadge.description": {
     "defaultMessage": "Show the monetization status of a project in the sidebar."
   },

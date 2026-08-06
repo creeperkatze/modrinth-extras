@@ -59,15 +59,6 @@
 					{{ formatMessage(messages['discordSidebar.partnered']) }}
 				</span>
 			</span>
-			<span
-				v-else-if="invite.verified"
-				class="details-list__item !w-full min-w-0 max-w-full !items-start font-semibold text-green"
-			>
-				<ShieldCheckIcon aria-hidden="true" class="mt-0.5 shrink-0" />
-				<span class="min-w-0 flex-1 break-words leading-tight">
-					{{ formatMessage(messages['discordSidebar.verified']) }}
-				</span>
-			</span>
 		</div>
 	</div>
 </template>
@@ -79,7 +70,6 @@ import {
 	InfoIcon,
 	OnlineIndicatorIcon,
 	ServerIcon,
-	ShieldCheckIcon,
 	UsersIcon,
 } from '@modrinth/assets'
 import { defineMessages, useVIntl } from '@modrinth/ui'
@@ -98,7 +88,6 @@ const messages = defineMessages({
 		id: 'discordSidebar.partnered',
 		defaultMessage: 'Partnered',
 	},
-	'discordSidebar.verified': { id: 'discordSidebar.verified', defaultMessage: 'Verified' },
 })
 
 const props = defineProps<{ pageUrl: string }>()
@@ -110,7 +99,6 @@ interface DiscordInvite {
 	approximate_member_count: number
 	approximate_presence_count: number
 	partnered: boolean
-	verified: boolean
 }
 
 const discordUrl = ref<string | null>(null)
@@ -163,7 +151,6 @@ onMounted(async () => {
 			approximate_member_count: data.approximate_member_count ?? 0,
 			approximate_presence_count: data.approximate_presence_count ?? 0,
 			partnered: features.includes('PARTNERED'),
-			verified: features.includes('VERIFIED'),
 		}
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to load Discord data:', err)
