@@ -5,7 +5,7 @@
 			:style="depth > 0 ? { paddingLeft: `${depth * 24}px` } : {}"
 		>
 			<button
-				v-if="depth < MAX_DEPTH && !(childrenLoaded && children.length === 0)"
+				v-if="children.length > 0"
 				class="flex size-[1em] shrink-0 cursor-pointer items-center justify-center border-0 bg-transparent p-0 text-secondary hover:text-primary"
 				:aria-expanded="expanded"
 				:aria-label="
@@ -13,11 +13,9 @@
 						? formatMessage(messages['dependencyNode.collapse'])
 						: formatMessage(messages['dependencyNode.expand'])
 				"
-				@click="toggle"
+				@click="expanded = !expanded"
 			>
-				<LoaderCircleIcon v-if="childrenLoading" class="animate-spin" />
 				<ChevronRightIcon
-					v-else
 					class="transition-transform duration-[150ms] ease"
 					:class="{ 'rotate-90': expanded }"
 				/>
@@ -27,7 +25,7 @@
 			<Avatar
 				:src="dep.project?.icon_url"
 				:alt="dep.project?.name ?? ''"
-				size="1em"
+				size="1.5em"
 				no-shadow
 				class="shrink-0"
 			/>
@@ -54,21 +52,18 @@
 				:key="child.project_id ?? child.version_id"
 				:dep="child"
 				:depth="depth + 1"
+				:children-by-project-id="childrenByProjectId"
 			/>
 		</ul>
 	</li>
 </template>
 
 <script setup lang="ts">
-import { ChevronRightIcon, LoaderCircleIcon } from '@modrinth/assets'
+import { ChevronRightIcon } from '@modrinth/assets'
 import { Avatar, defineMessages, useVIntl } from '@modrinth/ui'
 import { computed, ref } from 'vue'
 
-import {
-	type EnrichedDep,
-	fetchProjectDependencies,
-	fetchVersionDependencies,
-} from '../../../utils/dependencies'
+import { type EnrichedDep } from '../../../utils/dependencies'
 import { navigate } from '../../../utils/page-router'
 
 defineOptions({ name: 'DependencyNode' })
@@ -101,17 +96,15 @@ const messages = defineMessages({
 	},
 })
 
-const MAX_DEPTH = 2
-
 const props = defineProps<{
 	dep: EnrichedDep
 	depth: number
+	childrenByProjectId: Map<string, EnrichedDep[]>
 }>()
 
 const expanded = ref(false)
-const children = ref<EnrichedDep[]>([])
-const childrenLoading = ref(false)
-const childrenLoaded = ref(false)
+
+const children = computed(() => props.childrenByProjectId.get(props.dep.project_id) ?? [])
 
 const projectHref = computed(() => {
 	if (!props.dep.project) return '#'
@@ -143,22 +136,5 @@ function navigateToProject() {
 	const projectType = props.dep.project?.project_types[0]
 	const slug = props.dep.project?.slug
 	if (projectType && slug) navigate(`/${projectType}/${slug}`)
-}
-
-async function toggle() {
-	if (!expanded.value && !childrenLoaded.value) {
-		childrenLoading.value = true
-		try {
-			const projectSlug = props.dep.project?.slug ?? props.dep.project_id
-			children.value = props.dep.version_id
-				? await fetchVersionDependencies(projectSlug, props.dep.version_id)
-				: await fetchProjectDependencies(projectSlug)
-		} finally {
-			childrenLoading.value = false
-			childrenLoaded.value = true
-		}
-		if (children.value.length === 0) return
-	}
-	expanded.value = !expanded.value
 }
 </script>

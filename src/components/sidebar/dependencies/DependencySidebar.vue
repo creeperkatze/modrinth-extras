@@ -48,6 +48,7 @@
 							:key="dep.project_id ?? dep.version_id"
 							:dep="dep"
 							:depth="0"
+							:children-by-project-id="childrenByProjectId"
 						/>
 					</ul>
 				</ScrollablePanel>
@@ -69,11 +70,7 @@ import { LoaderCircleIcon, TriangleAlertIcon, XIcon } from '@modrinth/assets'
 import { ButtonStyled, defineMessages, ScrollablePanel, useVIntl } from '@modrinth/ui'
 import { onMounted, ref } from 'vue'
 
-import {
-	type EnrichedDep,
-	fetchProjectDependencies,
-	fetchVersionDependencies,
-} from '../../../utils/dependencies'
+import { type EnrichedDep, fetchDependencyTree } from '../../../utils/dependencies'
 import DependencyExplorer from '../../project/DependencyExplorer.vue'
 import DependencyNode from './DependencyNode.vue'
 
@@ -100,14 +97,15 @@ const props = defineProps<{
 
 const explorerRef = ref<InstanceType<typeof DependencyExplorer> | null>(null)
 const roots = ref<EnrichedDep[]>([])
+const childrenByProjectId = ref<Map<string, EnrichedDep[]>>(new Map())
 const loading = ref(true)
 const error = ref(false)
 
 onMounted(async () => {
 	try {
-		roots.value = props.versionNumber
-			? await fetchVersionDependencies(props.projectSlug, props.versionNumber)
-			: await fetchProjectDependencies(props.projectSlug)
+		const tree = await fetchDependencyTree(props.projectSlug, props.versionNumber)
+		roots.value = tree.roots
+		childrenByProjectId.value = tree.childrenByProjectId
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to fetch dependencies:', err)
 		error.value = true

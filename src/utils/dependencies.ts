@@ -35,6 +35,12 @@ export function normalizeDeps(dependencies: Labrinth.Versions.v3.Dependency[]): 
 	)
 }
 
+export function indexProjectsById(
+	projects: Labrinth.Projects.v3.Project[],
+): Map<string, Labrinth.Projects.v3.Project> {
+	return new Map(projects.map((project) => [project.id, project]))
+}
+
 export function buildEnrichedDeps(
 	rawDeps: RawDep[],
 	projectsById: ReadonlyMap<string, Labrinth.Projects.v3.Project>,
@@ -43,12 +49,6 @@ export function buildEnrichedDeps(
 		...d,
 		project: projectsById.get(d.project_id) ?? null,
 	}))
-}
-
-function projectsById(
-	projects: Labrinth.Projects.v3.Project[],
-): Map<string, Labrinth.Projects.v3.Project> {
-	return new Map(projects.map((p) => [p.id, p]))
 }
 
 export async function fetchDependencyGraphRoot(
@@ -117,44 +117,72 @@ async function fetchVersions(ids: string[]): Promise<Labrinth.Versions.v3.Versio
 	return versions
 }
 
-export async function fetchProjectDependencies(slugOrId: string): Promise<EnrichedDep[]> {
+// Uses `/project/{id}/dependencies` instead of the graph explorer's bulk `getMultiple` lookup, which silently omits some valid (e.g. unlisted) dependency projects.
+async function fetchDirectDependencies(
+	slugOrId: string,
+	versionIdOrNumber?: string,
+): Promise<EnrichedDep[]> {
 	try {
-		const [versions, depsData] = await Promise.all([
-			modrinthClient.labrinth.versions_v3.getProjectVersions(slugOrId, {
-				limit: 1,
-				include_changelog: false,
-				apiVersion: 3,
-			}),
+		const [version, depsData] = await Promise.all([
+			versionIdOrNumber
+				? modrinthClient.labrinth.versions_v3.getVersionFromIdOrNumber(slugOrId, versionIdOrNumber)
+				: modrinthClient.labrinth.versions_v3
+						.getProjectVersions(slugOrId, { limit: 1, include_changelog: false, apiVersion: 3 })
+						.then((versions) => versions[0]),
 			modrinthClient.labrinth.projects_v3.getDependencies(slugOrId),
 		])
 
-		if (!versions || versions.length === 0) return []
+		if (!version) return []
 		return buildEnrichedDeps(
-			normalizeDeps(versions[0].dependencies ?? []),
-			projectsById(depsData.projects),
+			normalizeDeps(version.dependencies ?? []),
+			indexProjectsById(depsData.projects),
 		)
 	} catch (err) {
-		console.error('[Modrinth Extras] Failed to fetch project dependencies:', err)
+		console.error('[Modrinth Extras] Failed to fetch dependencies:', err)
 		return []
 	}
 }
 
-export async function fetchVersionDependencies(
-	projectSlug: string,
-	versionNumber: string,
-): Promise<EnrichedDep[]> {
-	try {
-		const [version, depsData] = await Promise.all([
-			modrinthClient.labrinth.versions_v3.getVersionFromIdOrNumber(projectSlug, versionNumber),
-			modrinthClient.labrinth.projects_v3.getDependencies(projectSlug),
-		])
+export interface DependencyTree {
+	roots: EnrichedDep[]
+	childrenByProjectId: Map<string, EnrichedDep[]>
+}
 
-		return buildEnrichedDeps(
-			normalizeDeps(version.dependencies ?? []),
-			projectsById(depsData.projects),
+// Caps how many levels deep the tree is fetched, so it can't balloon into unbounded requests.
+const MAX_DEPTH = 4
+
+export async function fetchDependencyTree(
+	projectSlug: string,
+	versionNumber?: string,
+): Promise<DependencyTree> {
+	const roots = await fetchDirectDependencies(projectSlug, versionNumber)
+
+	const childrenByProjectId = new Map<string, EnrichedDep[]>()
+	const visited = new Set<string>()
+	let frontier = roots
+	let depth = 0
+
+	while (frontier.length > 0 && depth < MAX_DEPTH) {
+		const toExpand = frontier.filter((dep) => !visited.has(dep.project_id))
+		for (const dep of toExpand) visited.add(dep.project_id)
+
+		const layers = await Promise.all(
+			toExpand.map(async (dep) => ({
+				projectId: dep.project_id,
+				children: await fetchDirectDependencies(
+					dep.project?.slug ?? dep.project_id,
+					dep.version_id,
+				),
+			})),
 		)
-	} catch (err) {
-		console.error('[Modrinth Extras] Failed to fetch version dependencies:', err)
-		return []
+
+		frontier = []
+		for (const { projectId, children } of layers) {
+			childrenByProjectId.set(projectId, children)
+			frontier.push(...children)
+		}
+		depth++
 	}
+
+	return { roots, childrenByProjectId }
 }

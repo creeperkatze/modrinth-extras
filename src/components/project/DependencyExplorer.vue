@@ -284,6 +284,7 @@ import {
 	type EnrichedDep,
 	fetchDependencyGraphLayer,
 	fetchDependencyGraphRoot,
+	indexProjectsById,
 	isGraphDependency,
 } from '../../utils/dependencies'
 import { navigate, resolveLink } from '../../utils/page-router'
@@ -689,7 +690,7 @@ async function initGraph() {
 
 			const { projects, dependenciesByProjectId } =
 				await fetchDependencyGraphLayer(unexpandedDependencies)
-			const projectsById = new Map(projects.map((project) => [project.id, project]))
+			const projectsById = indexProjectsById(projects)
 			projectsById.set(rootId, rootProject)
 
 			for (const { sourceId, dependencies } of frontier) {
