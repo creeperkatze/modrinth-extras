@@ -20,7 +20,7 @@
 					:class="{ 'rotate-90': expanded }"
 				/>
 			</button>
-			<div v-else class="size-[1em] shrink-0" />
+			<div v-else-if="siblingsHaveChildren" class="size-[1em] shrink-0" />
 
 			<Avatar
 				:src="dep.project?.icon_url"
@@ -53,6 +53,7 @@
 				:dep="child"
 				:depth="depth + 1"
 				:children-by-project-id="childrenByProjectId"
+				:siblings-have-children="childrenHaveGrandchildren"
 			/>
 		</ul>
 	</li>
@@ -100,11 +101,18 @@ const props = defineProps<{
 	dep: EnrichedDep
 	depth: number
 	childrenByProjectId: Map<string, EnrichedDep[]>
+	siblingsHaveChildren?: boolean
 }>()
 
 const expanded = ref(false)
 
 const children = computed(() => props.childrenByProjectId.get(props.dep.project_id) ?? [])
+
+const childrenHaveGrandchildren = computed(() =>
+	children.value.some(
+		(child) => (props.childrenByProjectId.get(child.project_id) ?? []).length > 0,
+	),
+)
 
 const projectHref = computed(() => {
 	if (!props.dep.project) return '#'

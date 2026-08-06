@@ -51,6 +51,7 @@
 							:dep="dep"
 							:depth="0"
 							:children-by-project-id="childrenByProjectId"
+							:siblings-have-children="rootsHaveChildren"
 						/>
 					</ul>
 				</ScrollablePanel>
@@ -70,7 +71,7 @@
 import { Network } from '@lucide/vue'
 import { LoaderCircleIcon, TriangleAlertIcon, XIcon } from '@modrinth/assets'
 import { ButtonStyled, defineMessages, ScrollablePanel, useVIntl } from '@modrinth/ui'
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 import { type EnrichedDep, fetchDependencyTree } from '../../../utils/dependencies'
 import DependencyExplorer from '../../project/DependencyExplorer.vue'
@@ -102,6 +103,10 @@ const roots = ref<EnrichedDep[]>([])
 const childrenByProjectId = ref<Map<string, EnrichedDep[]>>(new Map())
 const loading = ref(true)
 const error = ref(false)
+
+const rootsHaveChildren = computed(() =>
+	roots.value.some((dep) => (childrenByProjectId.value.get(dep.project_id) ?? []).length > 0),
+)
 
 onMounted(async () => {
 	try {
