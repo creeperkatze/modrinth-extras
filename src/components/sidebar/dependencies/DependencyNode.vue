@@ -20,7 +20,7 @@
 					:class="{ 'rotate-90': expanded }"
 				/>
 			</button>
-			<div v-else-if="siblingsHaveChildren" class="size-[1em] shrink-0" />
+			<div v-else-if="depth > 0 || siblingsHaveChildren" class="size-[1em] shrink-0" />
 
 			<Avatar
 				:src="dep.project?.icon_url"
