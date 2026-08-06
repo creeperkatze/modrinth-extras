@@ -81,7 +81,7 @@ export default defineBackground(() => {
 				.then((stats) => sendResponse({ ok: true, stats }))
 				.catch((err) => {
 					console.error('[Modrinth Extras] Failed to fetch GitHub stats:', err)
-					sendResponse({ ok: false })
+					sendResponse({ ok: false, error: err instanceof Error ? err.message : String(err) })
 				})
 			return true
 		}
@@ -91,7 +91,7 @@ export default defineBackground(() => {
 				.then((invite) => sendResponse({ ok: true, invite }))
 				.catch((err) => {
 					console.error('[Modrinth Extras] Failed to fetch Discord invite:', err)
-					sendResponse({ ok: false })
+					sendResponse({ ok: false, error: err instanceof Error ? err.message : String(err) })
 				})
 			return true
 		}

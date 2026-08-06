@@ -5,13 +5,16 @@ export interface GitHubStats {
 	forks: number
 }
 
-export async function fetchGitHubStats(repo: string): Promise<GitHubStats | null> {
+export async function fetchGitHubStats(repo: string): Promise<GitHubStats> {
 	const [repoRes, prRes] = await Promise.all([
 		fetch(`https://api.github.com/repos/${repo}`),
 		fetch(`https://api.github.com/repos/${repo}/pulls?state=open&per_page=1`),
 	])
 
-	if (!repoRes.ok) return null
+	if (!repoRes.ok) {
+		const body = (await repoRes.json().catch(() => null)) as { message?: string } | null
+		throw new Error(body?.message ?? repoRes.statusText)
+	}
 	const repoData = (await repoRes.json()) as {
 		stargazers_count: number
 		forks_count: number

@@ -53,6 +53,12 @@
   "dependencySidebar.title": {
     "defaultMessage": "Dependencies"
   },
+  "discordSidebar.loadError": {
+    "defaultMessage": "Failed to load Discord data"
+  },
+  "discordSidebar.loading": {
+    "defaultMessage": "Loading"
+  },
   "discordSidebar.members": {
     "defaultMessage": "{count} members"
   },
@@ -67,6 +73,12 @@
   },
   "githubSidebar.forks": {
     "defaultMessage": "{count} forks"
+  },
+  "githubSidebar.loadError": {
+    "defaultMessage": "Failed to load GitHub data"
+  },
+  "githubSidebar.loading": {
+    "defaultMessage": "Loading"
   },
   "githubSidebar.openIssues": {
     "defaultMessage": "{count} open issues"

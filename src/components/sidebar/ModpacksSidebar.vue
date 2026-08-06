@@ -10,7 +10,15 @@
 				v-else-if="error"
 				class="details-list__item !w-full min-w-0 max-w-full !items-start font-normal text-secondary"
 			>
-				<span class="min-w-0 flex-1 break-words leading-tight"> Failed to load modpacks </span>
+				<TriangleAlertIcon aria-hidden="true" class="mt-0.5 shrink-0" />
+				<span class="min-w-0 flex-1 break-words leading-tight">
+					Failed to load modpacks
+					<code
+						class="mt-1 block w-fit max-w-full break-words rounded bg-code-bg px-1.5 py-0.5 text-xs text-code-text"
+					>
+						{{ error }}
+					</code>
+				</span>
 			</div>
 			<div
 				v-else-if="modpacks.length === 0"
@@ -42,7 +50,7 @@
 
 <script setup lang="ts">
 import { XIcon } from '@lucide/vue'
-import { LoaderCircleIcon } from '@modrinth/assets'
+import { LoaderCircleIcon, TriangleAlertIcon } from '@modrinth/assets'
 import { Avatar, defineMessages, ScrollablePanel, useVIntl } from '@modrinth/ui'
 import { onMounted, ref } from 'vue'
 
@@ -59,7 +67,7 @@ const modpacks = ref<Array<{ project_id: string; slug: string; title: string; ic
 	[],
 )
 const loading = ref(true)
-const error = ref(false)
+const error = ref<string | null>(null)
 
 onMounted(async () => {
 	try {
@@ -78,7 +86,7 @@ onMounted(async () => {
 		modpacks.value = result.hits
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to load modpacks:', err)
-		error.value = true
+		error.value = err instanceof Error ? err.message : String(err)
 	} finally {
 		loading.value = false
 	}

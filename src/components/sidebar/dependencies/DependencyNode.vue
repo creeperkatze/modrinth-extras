@@ -24,13 +24,13 @@
 			</button>
 			<div v-else class="size-[1em] shrink-0" />
 
-			<img
-				v-if="dep.project?.icon_url"
-				:src="dep.project.icon_url"
-				class="size-[1em] shrink-0 rounded-[2px] object-cover"
-				:alt="dep.project.name"
+			<Avatar
+				:src="dep.project?.icon_url"
+				:alt="dep.project?.name ?? ''"
+				size="1em"
+				no-shadow
+				class="shrink-0"
 			/>
-			<BoxIcon v-else />
 
 			<a
 				:href="projectHref"
@@ -60,8 +60,8 @@
 </template>
 
 <script setup lang="ts">
-import { BoxIcon, ChevronRightIcon, LoaderCircleIcon } from '@modrinth/assets'
-import { defineMessages, useVIntl } from '@modrinth/ui'
+import { ChevronRightIcon, LoaderCircleIcon } from '@modrinth/assets'
+import { Avatar, defineMessages, useVIntl } from '@modrinth/ui'
 import { computed, ref } from 'vue'
 
 import {

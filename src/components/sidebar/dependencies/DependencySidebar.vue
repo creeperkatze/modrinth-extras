@@ -26,8 +26,14 @@
 				v-else-if="error"
 				class="details-list__item !w-full min-w-0 max-w-full !items-start font-normal text-secondary"
 			>
+				<TriangleAlertIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 				<span class="min-w-0 flex-1 break-words leading-tight">
 					{{ formatMessage(messages['dependencySidebar.loadError']) }}
+					<code
+						class="mt-1 block w-fit max-w-full break-words rounded bg-code-bg px-1.5 py-0.5 text-xs text-code-text"
+					>
+						{{ error }}
+					</code>
 				</span>
 			</div>
 			<div
@@ -62,7 +68,7 @@
 
 <script setup lang="ts">
 import { Network } from '@lucide/vue'
-import { LoaderCircleIcon, XIcon } from '@modrinth/assets'
+import { LoaderCircleIcon, TriangleAlertIcon, XIcon } from '@modrinth/assets'
 import { ButtonStyled, defineMessages, ScrollablePanel, useVIntl } from '@modrinth/ui'
 import { onMounted, ref } from 'vue'
 
@@ -98,7 +104,7 @@ const props = defineProps<{
 const explorerRef = ref<InstanceType<typeof DependencyExplorer> | null>(null)
 const roots = ref<EnrichedDep[]>([])
 const loading = ref(true)
-const error = ref(false)
+const error = ref<string | null>(null)
 
 onMounted(async () => {
 	try {
@@ -107,7 +113,7 @@ onMounted(async () => {
 			: await fetchProjectDependencies(props.projectSlug)
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to fetch dependencies:', err)
-		error.value = true
+		error.value = err instanceof Error ? err.message : String(err)
 	} finally {
 		loading.value = false
 	}
