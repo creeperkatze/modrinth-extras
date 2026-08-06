@@ -15,11 +15,6 @@
 				<TriangleAlertIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 				<span class="min-w-0 flex-1 break-words leading-tight">
 					{{ formatMessage(messages['githubSidebar.loadError']) }}
-					<code
-						class="mt-1 block w-fit max-w-full break-words rounded bg-code-bg px-1.5 py-0.5 text-xs text-code-text"
-					>
-						{{ error }}
-					</code>
 				</span>
 			</div>
 			<template v-else-if="stats">
@@ -134,7 +129,7 @@ interface GitHubStats {
 const repoUrl = ref<string | null>(null)
 const stats = ref<GitHubStats | null>(null)
 const loading = ref(true)
-const error = ref<string | null>(null)
+const error = ref(false)
 
 function formatNum(n: number): string {
 	if (n >= 1_000_000) return (n / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M'
@@ -162,13 +157,13 @@ onMounted(async () => {
 
 		const response = await browser.runtime.sendMessage({ type: 'github-stats', repo })
 		if (!response?.ok || !response.stats) {
-			error.value = response?.error ?? 'Unknown error'
+			error.value = true
 			return
 		}
 		stats.value = response.stats
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to load GitHub data:', err)
-		error.value = err instanceof Error ? err.message : String(err)
+		error.value = true
 	} finally {
 		loading.value = false
 	}

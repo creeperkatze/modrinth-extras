@@ -11,14 +11,7 @@
 				class="details-list__item !w-full min-w-0 max-w-full !items-start font-normal text-secondary"
 			>
 				<TriangleAlertIcon aria-hidden="true" class="mt-0.5 shrink-0" />
-				<span class="min-w-0 flex-1 break-words leading-tight">
-					Failed to load modpacks
-					<code
-						class="mt-1 block w-fit max-w-full break-words rounded bg-code-bg px-1.5 py-0.5 text-xs text-code-text"
-					>
-						{{ error }}
-					</code>
-				</span>
+				<span class="min-w-0 flex-1 break-words leading-tight"> Failed to load modpacks </span>
 			</div>
 			<div
 				v-else-if="modpacks.length === 0"
@@ -69,7 +62,7 @@ const modpacks = ref<Array<{ project_id: string; slug: string; title: string; ic
 	[],
 )
 const loading = ref(true)
-const error = ref<string | null>(null)
+const error = ref(false)
 
 onMounted(async () => {
 	try {
@@ -88,7 +81,7 @@ onMounted(async () => {
 		modpacks.value = result.hits
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to load modpacks:', err)
-		error.value = err instanceof Error ? err.message : String(err)
+		error.value = true
 	} finally {
 		loading.value = false
 	}

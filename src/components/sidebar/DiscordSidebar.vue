@@ -18,11 +18,6 @@
 				<TriangleAlertIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 				<span class="min-w-0 flex-1 break-words leading-tight">
 					{{ formatMessage(messages['discordSidebar.loadError']) }}
-					<code
-						class="mt-1 block w-fit max-w-full break-words rounded bg-code-bg px-1.5 py-0.5 text-xs text-code-text"
-					>
-						{{ error }}
-					</code>
 				</span>
 			</div>
 			<template v-else-if="invite">
@@ -131,7 +126,7 @@ interface DiscordInvite {
 const discordUrl = ref<string | null>(null)
 const invite = ref<DiscordInvite | null>(null)
 const loading = ref(true)
-const error = ref<string | null>(null)
+const error = ref(false)
 
 function formatNum(n: number): string {
 	if (n >= 1_000_000) return (n / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M'
@@ -157,13 +152,13 @@ onMounted(async () => {
 
 		const response = await browser.runtime.sendMessage({ type: 'discord-invite', code })
 		if (!response?.ok || !response.invite) {
-			error.value = response?.error ?? 'Unknown error'
+			error.value = true
 			return
 		}
 		invite.value = response.invite
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to load Discord data:', err)
-		error.value = err instanceof Error ? err.message : String(err)
+		error.value = true
 	} finally {
 		loading.value = false
 	}

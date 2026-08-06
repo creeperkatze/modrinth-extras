@@ -29,11 +29,6 @@
 				<TriangleAlertIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 				<span class="min-w-0 flex-1 break-words leading-tight">
 					{{ formatMessage(messages['dependencySidebar.loadError']) }}
-					<code
-						class="mt-1 block w-fit max-w-full break-words rounded bg-code-bg px-1.5 py-0.5 text-xs text-code-text"
-					>
-						{{ error }}
-					</code>
 				</span>
 			</div>
 			<div
@@ -106,7 +101,7 @@ const props = defineProps<{
 const explorerRef = ref<InstanceType<typeof DependencyExplorer> | null>(null)
 const roots = ref<EnrichedDep[]>([])
 const loading = ref(true)
-const error = ref<string | null>(null)
+const error = ref(false)
 
 onMounted(async () => {
 	try {
@@ -115,7 +110,7 @@ onMounted(async () => {
 			: await fetchProjectDependencies(props.projectSlug)
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to fetch dependencies:', err)
-		error.value = err instanceof Error ? err.message : String(err)
+		error.value = true
 	} finally {
 		loading.value = false
 	}
