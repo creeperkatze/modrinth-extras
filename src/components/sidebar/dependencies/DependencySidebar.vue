@@ -41,20 +41,18 @@
 					{{ formatMessage(messages['dependencySidebar.none']) }}
 				</span>
 			</div>
-			<div v-else class="rounded-2xl bg-surface-2 p-2">
-				<ScrollablePanel class="[&__.scrollable-pane]:max-h-96">
-					<ul class="m-0 flex list-none flex-col gap-3 p-0 pr-2">
-						<DependencyNode
-							v-for="dep in roots"
-							:key="dep.project_id ?? dep.version_id"
-							:dep="dep"
-							:depth="0"
-							:children-by-project-id="childrenByProjectId"
-							:siblings-have-children="rootsHaveChildren"
-						/>
-					</ul>
-				</ScrollablePanel>
-			</div>
+			<ScrollablePanel v-else class="[&__.scrollable-pane]:max-h-96">
+				<ul class="m-0 flex list-none flex-col gap-3 p-0 pr-2">
+					<DependencyNode
+						v-for="dep in roots"
+						:key="dep.project_id ?? dep.version_id"
+						:dep="dep"
+						:depth="0"
+						:children-by-project-id="childrenByProjectId"
+						:siblings-have-children="rootsHaveChildren"
+					/>
+				</ul>
+			</ScrollablePanel>
 		</div>
 		<div style="position: absolute; width: 0; height: 0; overflow: visible">
 			<DependencyExplorer
