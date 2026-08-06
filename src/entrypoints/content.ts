@@ -453,7 +453,9 @@ export default defineContentScript({
 				const path = window.location.pathname
 				if (!/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/[^/?#]+/.test(path))
 					return false
-				const list = document.querySelector<HTMLElement>('.normal-page__sidebar .details-list')
+				const list = document.querySelector<HTMLElement>(
+					'.normal-page__sidebar [class*="[&>div]:items-center"]',
+				)
 				if (!list) return false
 				container.style.display = 'contents'
 				list.appendChild(container)
