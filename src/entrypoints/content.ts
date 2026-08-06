@@ -289,7 +289,7 @@ export default defineContentScript({
 	matches: ['https://modrinth.com/*'],
 	cssInjectionMode: 'manifest',
 
-	main() {
+	main(ctx) {
 		console.log('[Modrinth Extras] Content script loaded')
 		loadSavedLocale().catch(() => {})
 		let settings: ExtensionSettings = { ...DEFAULTS }
@@ -655,13 +655,16 @@ export default defineContentScript({
 			for (const inj of injections) inj.schedule()
 		}
 
-		window.addEventListener('modrinth-extras:router-ready', markHydrated, { once: true })
+		ctx.addEventListener(window, 'modrinth-extras:router-ready', markHydrated, { once: true })
 
-		browser.runtime.onMessage.addListener((message) => {
+		function onRuntimeMessage(message: { type?: string; path?: string }) {
 			if (message.type === 'navigate') navigate(message.path as string)
-		})
+		}
+		browser.runtime.onMessage.addListener(onRuntimeMessage)
+		ctx.onInvalidated(() => browser.runtime.onMessage.removeListener(onRuntimeMessage))
 
 		getSettings().then((s) => {
+			if (ctx.isInvalid) return
 			settings = s
 			console.log('[Modrinth Extras] Settings loaded:', JSON.stringify(s))
 			applyAccentColor(settings)
@@ -671,23 +674,23 @@ export default defineContentScript({
 			}
 		})
 
-		browser.storage.onChanged.addListener(
-			(changes: Record<string, { oldValue?: unknown; newValue?: unknown }>) => {
-				if (!('settings' in changes)) return
-				const oldSettings = changes['settings']?.oldValue as ExtensionSettings | undefined
-				const newSettings = changes['settings']?.newValue as ExtensionSettings | undefined
-				Object.assign(settings, newSettings ?? {})
-				const newLocale = newSettings?.locale?.value
-				i18n.global.locale.value = newLocale || detectBrowserLocale()
-				applyAccentColor(settings)
-				remountForChangedSettings(injections, oldSettings, newSettings)
-			},
-		)
+		function onStorageChanged(changes: Record<string, { oldValue?: unknown; newValue?: unknown }>) {
+			if (!('settings' in changes)) return
+			const oldSettings = changes['settings']?.oldValue as ExtensionSettings | undefined
+			const newSettings = changes['settings']?.newValue as ExtensionSettings | undefined
+			Object.assign(settings, newSettings ?? {})
+			const newLocale = newSettings?.locale?.value
+			i18n.global.locale.value = newLocale || detectBrowserLocale()
+			applyAccentColor(settings)
+			remountForChangedSettings(injections, oldSettings, newSettings)
+		}
+		browser.storage.onChanged.addListener(onStorageChanged)
+		ctx.onInvalidated(() => browser.storage.onChanged.removeListener(onStorageChanged))
 
 		let prevProjectSlug: string | null = null
 		const prevScopeKeys = new Map<string, string>()
 
-		window.addEventListener('modrinth-extras:before-navigate', () => {
+		ctx.addEventListener(window, 'modrinth-extras:before-navigate', () => {
 			navigating = true
 			prevProjectSlug = getProjectSlug()
 			for (const inj of injections) {
@@ -701,7 +704,7 @@ export default defineContentScript({
 			}
 		})
 
-		window.addEventListener('modrinth-extras:after-navigate', () => {
+		ctx.addEventListener(window, 'modrinth-extras:after-navigate', () => {
 			navigating = false
 			const newSlug = getProjectSlug()
 			const projectChanged = prevProjectSlug !== newSlug
@@ -726,6 +729,13 @@ export default defineContentScript({
 			}
 		})
 		domObserver.observe(document.documentElement, { childList: true, subtree: true })
-		window.addEventListener('pagehide', () => domObserver.disconnect(), { once: true })
+		ctx.onInvalidated(() => domObserver.disconnect())
+
+		// A newer instance of this content script has taken over (e.g. the
+		// extension updated while this tab stayed open) — tear down our
+		// injected UI so it doesn't keep existing alongside the new instance's.
+		ctx.onInvalidated(() => {
+			for (const inj of injections) inj.unmount()
+		})
 	},
 })

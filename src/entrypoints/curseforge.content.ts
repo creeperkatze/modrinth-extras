@@ -159,10 +159,10 @@ export default defineContentScript({
 	matches: ['https://www.curseforge.com/*'],
 	runAt: 'document_idle',
 
-	main() {
+	main(ctx) {
 		console.log('[Modrinth Extras] CurseForge redirect: content script loaded')
 
-		window.addEventListener('modrinth-extras:cf-navigated', () => {
+		ctx.addEventListener(window, 'modrinth-extras:cf-navigated', () => {
 			console.log(
 				`[Modrinth Extras] CurseForge redirect: SPA navigation detected to ${window.location.pathname}`,
 			)
