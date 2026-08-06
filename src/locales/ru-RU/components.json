@@ -17,18 +17,6 @@
   "errorNotice.message": {
     "defaultMessage": "Ошибка может быть связана с Modrinth Extras. Попробуйте отключить расширение и обновить страницу перед отправкой отчёта в Modrinth. Если ошибка исчезнет, пожалуйста, сообщите об этом <link>здесь</link>."
   },
-  "githubSidebar.forks": {
-    "defaultMessage": "{count} форков"
-  },
-  "githubSidebar.openIssues": {
-    "defaultMessage": "{count} открытых задач"
-  },
-  "githubSidebar.openPRs": {
-    "defaultMessage": "{count} открытых пул-реквестов"
-  },
-  "githubSidebar.stars": {
-    "defaultMessage": "{count} звезд"
-  },
   "notificationsIndicator.markAllAsRead": {
     "defaultMessage": "Отметить всё как прочитанное"
   },

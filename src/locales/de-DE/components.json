@@ -53,6 +53,12 @@
   "dependencySidebar.title": {
     "defaultMessage": "Abhängigkeiten"
   },
+  "discordSidebar.loadError": {
+    "defaultMessage": "Discord-Daten konnten nicht geladen werden"
+  },
+  "discordSidebar.loading": {
+    "defaultMessage": "Wird geladen"
+  },
   "discordSidebar.members": {
     "defaultMessage": "{count} Mitglieder"
   },
@@ -64,21 +70,6 @@
   },
   "errorNotice.message": {
     "defaultMessage": "Dieser Fehler hängt eventuell mit Modrinth Extras zusammen. Versuche, die Erweiterung zu deaktivieren und die Seite neu zu laden, bevor du dies Modrinth meldest. Falls der Fehler verschwindet, melde ihn bitte <link>hier</link>."
-  },
-  "githubSidebar.forks": {
-    "defaultMessage": "{count} Forks"
-  },
-  "githubSidebar.openIssues": {
-    "defaultMessage": "{count} offene Issues"
-  },
-  "githubSidebar.openPRs": {
-    "defaultMessage": "{count} offene Pull Requests"
-  },
-  "githubSidebar.stars": {
-    "defaultMessage": "{count} Sterne"
-  },
-  "modpacksSidebar.more": {
-    "defaultMessage": "Mehr Modpacks anzeigen"
   },
   "modpacksSidebar.title": {
     "defaultMessage": "Modpacks"
@@ -169,6 +160,27 @@
   },
   "quickSearch.search": {
     "defaultMessage": "Suchen"
+  },
+  "repositorySidebar.forks": {
+    "defaultMessage": "{count} Forks"
+  },
+  "repositorySidebar.loadError": {
+    "defaultMessage": "Repository-Daten konnten nicht geladen werden"
+  },
+  "repositorySidebar.loading": {
+    "defaultMessage": "Wird geladen"
+  },
+  "repositorySidebar.openIssues": {
+    "defaultMessage": "{count} offene Issues"
+  },
+  "repositorySidebar.openPRs": {
+    "defaultMessage": "{count} offene Pull Requests"
+  },
+  "repositorySidebar.stars": {
+    "defaultMessage": "{count} Sterne"
+  },
+  "repositorySidebar.title": {
+    "defaultMessage": "Repository"
   },
   "toolsSidebar.copied": {
     "defaultMessage": "Kopiert!"

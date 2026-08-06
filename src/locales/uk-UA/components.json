@@ -65,21 +65,6 @@
   "errorNotice.message": {
     "defaultMessage": "Ця помилка може бути пов'язана з Modrinth Extras. Спробуйте вимкнути розширення та оновити сторінку, перш ніж повідомляти про це Modrinth. Якщо помилка зникне, повідомте про це <link>тут</link>."
   },
-  "githubSidebar.forks": {
-    "defaultMessage": "{count} форків"
-  },
-  "githubSidebar.openIssues": {
-    "defaultMessage": "{count} відкритих задач"
-  },
-  "githubSidebar.openPRs": {
-    "defaultMessage": "{count} відкритих запитів на зміни"
-  },
-  "githubSidebar.stars": {
-    "defaultMessage": "{count} зірок"
-  },
-  "modpacksSidebar.more": {
-    "defaultMessage": "Показати більше збірок"
-  },
   "modpacksSidebar.title": {
     "defaultMessage": "Збірки"
   },

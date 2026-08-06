@@ -29,12 +29,6 @@
   "feature.discordSidebar.title": {
     "defaultMessage": "Barra laterale di Discord"
   },
-  "feature.githubSidebar.description": {
-    "defaultMessage": "Stelle, problemi, richieste di pull e fork per i repository collegati."
-  },
-  "feature.githubSidebar.title": {
-    "defaultMessage": "Barra laterale di GitHub"
-  },
   "feature.notificationBadge.description": {
     "defaultMessage": "Numero di notifiche non lette aggiornate come distintivo sull'icona dell'estensione."
   },

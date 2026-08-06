@@ -62,18 +62,6 @@
   "errorNotice.message": {
     "defaultMessage": "Este error podría estar relacionado con Modrinth Extras. Intenta desactivar la extensión y actualizar la página antes de reportarlo a Modrinth. Si el error desaparece, por favor, reporta el problema <link>aquí</link>."
   },
-  "githubSidebar.forks": {
-    "defaultMessage": "{count} bifurcaciones"
-  },
-  "githubSidebar.openIssues": {
-    "defaultMessage": "{count} problemas abiertos"
-  },
-  "githubSidebar.openPRs": {
-    "defaultMessage": "{count} Abrir solicitudes de extracción"
-  },
-  "githubSidebar.stars": {
-    "defaultMessage": "{count} estrellas"
-  },
   "notificationsIndicator.markAllAsRead": {
     "defaultMessage": "Marcar todo como leído"
   },

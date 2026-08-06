@@ -56,12 +56,6 @@
   "feature.galleryBackground.title": {
     "defaultMessage": "Galería de fondo"
   },
-  "feature.githubSidebar.description": {
-    "defaultMessage": "Estrellas, incidencias, solicitudes de incorporación de cambios y bifurcaciones de los repositorios vinculados."
-  },
-  "feature.githubSidebar.title": {
-    "defaultMessage": "Barra lateral de GitHub"
-  },
   "feature.notificationBadge.description": {
     "defaultMessage": "Recuento actualizado de notificaciones no leídas que aparece como una insignia en el ícono de la extensión."
   },

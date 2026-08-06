@@ -68,12 +68,6 @@
   "feature.galleryBackground.title": {
     "defaultMessage": "Фон галереї"
   },
-  "feature.githubSidebar.description": {
-    "defaultMessage": "Зірки, задачі, запити на зміни та форки для пов'язаних репозиторіїв."
-  },
-  "feature.githubSidebar.title": {
-    "defaultMessage": "GitHub на бічній панелі"
-  },
   "feature.modpacksSidebar.description": {
     "defaultMessage": "Показати всі збірки, до яких входить цей мод."
   },

@@ -35,12 +35,6 @@
   "feature.galleryBackground.title": {
     "defaultMessage": "Фон галереи"
   },
-  "feature.githubSidebar.description": {
-    "defaultMessage": "Звёзды, задачи, запросы на изменения и форки для связанных репозиториев."
-  },
-  "feature.githubSidebar.title": {
-    "defaultMessage": "Боковая панель GitHub"
-  },
   "feature.notificationBadge.description": {
     "defaultMessage": "Актуальное число непрочитанных уведомлений на значке расширения."
   },

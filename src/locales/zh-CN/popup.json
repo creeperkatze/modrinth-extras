@@ -65,12 +65,6 @@
   "feature.galleryBackground.title": {
     "defaultMessage": "图库背景"
   },
-  "feature.githubSidebar.description": {
-    "defaultMessage": "相关仓库的星标、问题、拉取请求和分叉。"
-  },
-  "feature.githubSidebar.title": {
-    "defaultMessage": "GitHub 侧边栏"
-  },
   "feature.monetizationBadge.description": {
     "defaultMessage": "在侧边栏中显示项目的盈利状态。"
   },

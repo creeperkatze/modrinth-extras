@@ -69,10 +69,10 @@
     "defaultMessage": "Galerie-Hintergrund"
   },
   "feature.githubSidebar.description": {
-    "defaultMessage": "Sterne, Issues, Pull Requests und Forks für verknüpfte Repositories."
+    "defaultMessage": "Sterne, Issues, Pull-Requests und Forks für verknüpfte Repos auf GitHub, GitLab, Codeberg und Bitbucket."
   },
   "feature.githubSidebar.title": {
-    "defaultMessage": "GitHub-Seitenleiste"
+    "defaultMessage": "Repository-Seitenleiste"
   },
   "feature.modpacksSidebar.description": {
     "defaultMessage": "Zeige alle Modpacks an, in denen der Mod enthalten ist."

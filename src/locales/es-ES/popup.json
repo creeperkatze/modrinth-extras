@@ -65,12 +65,6 @@
   "feature.galleryBackground.title": {
     "defaultMessage": "Fondo de Galería"
   },
-  "feature.githubSidebar.description": {
-    "defaultMessage": "Estrellas, problemas, solicitudes de cambios, y copias para repositorios vinculados."
-  },
-  "feature.githubSidebar.title": {
-    "defaultMessage": "Barra lateral de GitHub"
-  },
   "feature.monetizationBadge.description": {
     "defaultMessage": "Ver el estado de monetización de un proyecto en la barra lateral."
   },

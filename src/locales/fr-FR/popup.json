@@ -44,12 +44,6 @@
   "feature.galleryBackground.title": {
     "defaultMessage": "Arrière-plan imagé"
   },
-  "feature.githubSidebar.description": {
-    "defaultMessage": "Étoiles, tickets, pull requests et forks pour les dépôts liés."
-  },
-  "feature.githubSidebar.title": {
-    "defaultMessage": "Barre latérale GitHub"
-  },
   "feature.notificationBadge.description": {
     "defaultMessage": "Nombre de notifications non lues affiché sous forme de badge sur l'icône de l'extension."
   },

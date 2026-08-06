@@ -35,12 +35,6 @@
   "feature.galleryBackground.title": {
     "defaultMessage": "Galeri arka planı"
   },
-  "feature.githubSidebar.description": {
-    "defaultMessage": "Bağlı repoların yıldız, issue, pull request ve fork sayıları."
-  },
-  "feature.githubSidebar.title": {
-    "defaultMessage": "GitHub kenar çubuğu"
-  },
   "feature.notificationBadge.description": {
     "defaultMessage": "Eklenti simgesi üzerindeki bildirim işaretiyle, okunmamış bildirim sayısını güncel olarak takip edin."
   },

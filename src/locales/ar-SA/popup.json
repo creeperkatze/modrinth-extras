@@ -56,12 +56,6 @@
   "feature.galleryBackground.title": {
     "defaultMessage": "خلفية المعرض"
   },
-  "feature.githubSidebar.description": {
-    "defaultMessage": "النجوم, المشاكل, طلبات السحب والتفرعات للمستودعات المرتبطة."
-  },
-  "feature.githubSidebar.title": {
-    "defaultMessage": "الشريط الجانبي لـ GitHub"
-  },
   "feature.notificationBadge.description": {
     "defaultMessage": "عدد الإشعارات غير المقروءة المحدّث يظهر على شكل شارة على أيقونة الملحق."
   },
