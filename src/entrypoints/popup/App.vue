@@ -21,7 +21,7 @@
 
 		<ScrollablePanel
 			v-if="settingsLoaded"
-			class="min-h-0 flex-1 [&>.scrollable-pane-wrapper]:h-full [&__.scrollable-pane]:max-h-none [&__.scrollable-pane]:!gap-0 [&__.wrapper-wrapper]:overflow-visible"
+			class="min-h-0 flex-1 [&>.scrollable-pane-wrapper]:h-full [&__.scrollable-pane]:max-h-none [&__.scrollable-pane]:!gap-0 [&__.scrollable-pane]:pt-4 [&__.wrapper-wrapper]:overflow-visible"
 		>
 			<DiscordCard />
 

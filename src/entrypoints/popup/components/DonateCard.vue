@@ -1,6 +1,6 @@
 <template>
-	<div v-if="visible" class="px-3 pt-4">
-		<Card class="donation-card relative !p-0">
+	<div v-if="visible" class="px-3 pb-4">
+		<Card class="donation-card relative !mb-0 !p-0">
 			<a
 				href="https://ko-fi.com/creeperkatze"
 				target="_blank"
