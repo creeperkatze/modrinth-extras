@@ -1,17 +1,15 @@
 <template>
 	<div class="mt-2 flex flex-wrap gap-2">
-		<ButtonStyled
+		<Button
 			v-for="choice in question.choices"
 			:key="choice"
-			type="chip"
-			size="small"
-			:color="selected.includes(choice) ? 'brand' : 'standard'"
-			:highlighted="selected.includes(choice)"
+			:type="selected.includes(choice) ? 'colored' : 'outlined'"
+			:color="selected.includes(choice) ? 'brand' : undefined"
+			size="sm"
+			@click="toggle(choice)"
 		>
-			<button type="button" class="!border !border-solid !border-surface-5" @click="toggle(choice)">
-				{{ choice }}
-			</button>
-		</ButtonStyled>
+			{{ choice }}
+		</Button>
 	</div>
 	<StyledInput
 		v-if="isOpenChoiceSelected"
@@ -21,16 +19,14 @@
 		:placeholder="placeholder"
 	/>
 	<div class="mt-2 flex justify-end">
-		<ButtonStyled color="brand" size="small">
-			<button type="button" :disabled="!canSubmit" @click="submit">
-				{{ submitText }}
-			</button>
-		</ButtonStyled>
+		<Button type="colored" color="brand" size="sm" :disabled="!canSubmit" @click="submit">
+			{{ submitText }}
+		</Button>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { ButtonStyled, StyledInput } from '@modrinth/ui'
+import { Button, StyledInput } from '@modrinth/ui'
 import type { MultipleSurveyQuestion } from 'posthog-js/dist/module.no-external'
 import { computed, ref } from 'vue'
 

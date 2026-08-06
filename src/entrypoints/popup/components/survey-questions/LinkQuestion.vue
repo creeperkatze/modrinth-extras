@@ -1,15 +1,13 @@
 <template>
 	<div class="mt-2 flex justify-end">
-		<ButtonStyled color="brand" size="small">
-			<button type="button" @click="submit">
-				{{ submitText }}
-			</button>
-		</ButtonStyled>
+		<Button type="colored" color="brand" size="sm" @click="submit">
+			{{ submitText }}
+		</Button>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { ButtonStyled } from '@modrinth/ui'
+import { Button } from '@modrinth/ui'
 import type { LinkSurveyQuestion } from 'posthog-js/dist/module.no-external'
 
 const props = defineProps<{

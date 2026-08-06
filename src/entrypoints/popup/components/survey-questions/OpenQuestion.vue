@@ -9,16 +9,14 @@
 		:placeholder="placeholder"
 	/>
 	<div class="mt-2 flex justify-end">
-		<ButtonStyled color="brand" size="small">
-			<button type="button" :disabled="!response.trim()" @click="submit">
-				{{ submitText }}
-			</button>
-		</ButtonStyled>
+		<Button type="colored" color="brand" size="sm" :disabled="!response.trim()" @click="submit">
+			{{ submitText }}
+		</Button>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { ButtonStyled, StyledInput } from '@modrinth/ui'
+import { Button, StyledInput } from '@modrinth/ui'
 import { ref } from 'vue'
 
 defineProps<{

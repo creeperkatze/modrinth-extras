@@ -9,12 +9,16 @@
 			>
 				<Logo role="img" aria-label="Modrinth Extras" class="!h-10 !w-auto text-brand" />
 			</a>
-			<ButtonStyled color="brand" size="standard">
-				<a href="https://modrinth.com" target="_blank" rel="noopener" class="no-underline">
-					Modrinth
-					<ArrowUpRightIcon aria-hidden="true" />
-				</a>
-			</ButtonStyled>
+			<ButtonLink
+				href="https://modrinth.com"
+				target="_blank"
+				type="colored"
+				color="brand"
+				class="no-underline"
+			>
+				Modrinth
+				<ArrowUpRightIcon aria-hidden="true" />
+			</ButtonLink>
 		</header>
 
 		<HorizontalRule class="shrink-0" />
@@ -160,6 +164,7 @@
 					:title="f.title"
 					:description="f.description"
 					:action-icon="f.actionIcon"
+					:action-label="f.actionLabel"
 					:model-value="
 						(typeof f.disabled === 'function' ? f.disabled() : f.disabled)
 							? false
@@ -256,7 +261,7 @@ import {
 	WrenchIcon,
 } from '@modrinth/assets'
 import {
-	ButtonStyled,
+	ButtonLink,
 	defineMessages,
 	HorizontalRule,
 	IntlFormatted,
@@ -503,6 +508,10 @@ const messages = defineMessages({
 		id: 'feature.desktopNotifications.exampleMessage',
 		defaultMessage: 'This is an example notification from Modrinth Extras!',
 	},
+	'feature.desktopNotifications.sendTest': {
+		id: 'feature.desktopNotifications.sendTest',
+		defaultMessage: 'Send test notification',
+	},
 	'feature.curseforgeRedirect.title': {
 		id: 'feature.curseforgeRedirect.title',
 		defaultMessage: 'CurseForge redirect',
@@ -552,6 +561,7 @@ interface FeatureDef {
 	title: string
 	description: string
 	actionIcon?: Component
+	actionLabel?: string
 	onAction?: () => void
 	disabled?: boolean | (() => boolean)
 	disabledTooltip?: string
@@ -767,6 +777,7 @@ const extensionFeatures = computed<FeatureDef[]>(() => [
 		title: formatMessage(messages['feature.desktopNotifications.title']),
 		description: formatMessage(messages['feature.desktopNotifications.description']),
 		actionIcon: PlayIcon,
+		actionLabel: formatMessage(messages['feature.desktopNotifications.sendTest']),
 		onAction: () => {
 			browser.notifications.create({
 				type: 'basic',

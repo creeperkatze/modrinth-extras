@@ -76,14 +76,16 @@
 								? formatMessage(messages['quickSearch.recent'])
 								: formatMessage(messages['quickSearch.examples'])
 						}}</span>
-						<ButtonStyled v-if="recentSearches.length" circular size="small" type="transparent">
-							<button
-								:aria-label="formatMessage(messages['quickSearch.clearRecent'])"
-								@click="clearRecentSearches"
-							>
-								<TrashIcon />
-							</button>
-						</ButtonStyled>
+						<IconButton
+							v-if="recentSearches.length"
+							v-tooltip="formatMessage(messages['quickSearch.clearRecent'])"
+							size="sm"
+							type="quiet"
+							:label="formatMessage(messages['quickSearch.clearRecent'])"
+							@click="clearRecentSearches"
+						>
+							<TrashIcon />
+						</IconButton>
 					</p>
 					<div
 						v-for="(ex, i) in recentSearches.length ? recentSearches : EXAMPLES"
@@ -141,7 +143,7 @@ import {
 	TrashIcon,
 	XIcon,
 } from '@modrinth/assets'
-import { ButtonStyled, defineMessages, useVIntl } from '@modrinth/ui'
+import { defineMessages, IconButton, useVIntl } from '@modrinth/ui'
 import { storage } from '@wxt-dev/storage'
 import { type Component, computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
