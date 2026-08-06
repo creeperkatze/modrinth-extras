@@ -200,6 +200,7 @@ New translations are automatically pulled every Monday.
 | Turkish | [penfflewithadot](https://crowdin.com/profile/penfflewithadot), [ErenTr4210](https://crowdin.com/profile/erentr4210) |
 | Spanish, Latin America | [Dante Li Tao](https://crowdin.com/profile/heroxp) |
 | Arabic | [Hamad Alsayed](https://crowdin.com/profile/hamad_sayed) |
+| Spanish | [eh eh](https://crowdin.com/profile/ehuh) |
 
 ## 🤝 Contributing
 
