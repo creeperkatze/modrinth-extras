@@ -1,8 +1,10 @@
 <template>
-	<div class="card flex-card experimental-styles-within">
-		<h2>{{ formatMessage(messages['toolsSidebar.title']) }}</h2>
-		<div class="details-list min-w-0 max-w-full">
-			<div class="details-list__item !w-full min-w-0 max-w-full !items-start">
+	<div class="mb-3 flex flex-col gap-3 rounded-lg border border-surface-4 bg-surface-3 p-4">
+		<h2 class="m-0 text-lg font-semibold text-contrast">
+			{{ formatMessage(messages['toolsSidebar.title']) }}
+		</h2>
+		<div class="flex min-w-0 max-w-full flex-col gap-3">
+			<div class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal">
 				<CodeIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 				<a
 					:href="modfolioUrl"
@@ -17,7 +19,7 @@
 					/>
 				</a>
 			</div>
-			<div v-if="projectSlug" class="details-list__item !w-full min-w-0 max-w-full !items-start">
+			<div v-if="projectSlug" class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal">
 				<TerminalSquareIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 				<button
 					class="min-w-0 flex-1 cursor-pointer whitespace-normal break-words border-0 bg-transparent p-0 text-left leading-tight text-primary hover:underline [font:inherit]"

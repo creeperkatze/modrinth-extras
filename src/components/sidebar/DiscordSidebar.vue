@@ -1,11 +1,14 @@
 <template>
-	<div v-if="discordUrl" class="card flex-card experimental-styles-within relative">
+	<div
+		v-if="discordUrl"
+		class="relative mb-3 flex flex-col gap-3 rounded-lg border border-surface-4 bg-surface-3 p-4"
+	>
 		<div v-if="invite?.iconUrl" class="absolute right-4 top-4">
 			<Avatar :src="invite.iconUrl" alt="" size="40px" no-shadow />
 		</div>
-		<h2 class="mb-1">Discord</h2>
-		<div class="details-list min-w-0 max-w-full">
-			<div v-if="loading" class="details-list__item !w-full min-w-0 max-w-full !items-start">
+		<h2 class="m-0 text-lg font-semibold text-contrast">Discord</h2>
+		<div class="flex min-w-0 max-w-full flex-col gap-3">
+			<div v-if="loading" class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal">
 				<LoaderCircleIcon class="mt-0.5 shrink-0 animate-spin" />
 				<span class="min-w-0 flex-1 break-words leading-tight">
 					{{ formatMessage(messages['discordSidebar.loading']) }}
@@ -13,7 +16,7 @@
 			</div>
 			<div
 				v-else-if="error"
-				class="details-list__item !w-full min-w-0 max-w-full !items-start font-normal text-secondary"
+				class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal text-secondary"
 			>
 				<TriangleAlertIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 				<span class="min-w-0 flex-1 break-words leading-tight">
@@ -25,7 +28,7 @@
 					:href="discordUrl"
 					target="_blank"
 					rel="noopener"
-					class="details-list__item !w-full min-w-0 max-w-full !items-start hover:underline"
+					class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal hover:underline"
 				>
 					<ServerIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 					<span class="min-w-0 flex-1 break-words leading-tight">
@@ -38,12 +41,12 @@
 				</a>
 				<span
 					v-if="invite.description"
-					class="details-list__item !w-full min-w-0 max-w-full !items-start"
+					class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal"
 				>
 					<InfoIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 					<span class="min-w-0 flex-1 break-words leading-tight">{{ invite.description }}</span>
 				</span>
-				<span class="details-list__item !w-full min-w-0 max-w-full !items-start">
+				<span class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal">
 					<UsersIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 					<span class="min-w-0 flex-1 break-words leading-tight">
 						{{
@@ -53,7 +56,7 @@
 						}}
 					</span>
 				</span>
-				<span class="details-list__item !w-full min-w-0 max-w-full !items-start">
+				<span class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal">
 					<OnlineIndicatorIcon aria-hidden="true" class="mt-0.5 shrink-0 text-green" />
 					<span class="min-w-0 flex-1 break-words leading-tight">
 						{{
@@ -65,7 +68,7 @@
 				</span>
 				<span
 					v-if="invite.partnered"
-					class="details-list__item !w-full min-w-0 max-w-full !items-start font-semibold text-blue"
+					class="flex w-full min-w-0 max-w-full items-start gap-2 font-semibold text-blue"
 				>
 					<AffiliateIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 					<span class="min-w-0 flex-1 break-words leading-tight">

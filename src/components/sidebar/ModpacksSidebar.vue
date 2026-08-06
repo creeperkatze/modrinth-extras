@@ -1,21 +1,23 @@
 <template>
-	<div class="card flex-card experimental-styles-within">
-		<h2>{{ formatMessage(messages.title) }}</h2>
-		<div class="details-list min-w-0 max-w-full">
-			<div v-if="loading" class="details-list__item !w-full min-w-0 max-w-full !items-start">
+	<div class="mb-3 flex flex-col gap-3 rounded-lg border border-surface-4 bg-surface-3 p-4">
+		<h2 class="m-0 text-lg font-semibold text-contrast">
+			{{ formatMessage(messages.title) }}
+		</h2>
+		<div class="flex min-w-0 max-w-full flex-col gap-3">
+			<div v-if="loading" class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal">
 				<LoaderCircleIcon class="mt-0.5 shrink-0 animate-spin" />
 				<span class="min-w-0 flex-1 break-words leading-tight"> Loading </span>
 			</div>
 			<div
 				v-else-if="error"
-				class="details-list__item !w-full min-w-0 max-w-full !items-start font-normal text-secondary"
+				class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal text-secondary"
 			>
 				<TriangleAlertIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 				<span class="min-w-0 flex-1 break-words leading-tight"> Failed to load modpacks </span>
 			</div>
 			<div
 				v-else-if="modpacks.length === 0"
-				class="details-list__item !w-full min-w-0 max-w-full !items-start text-secondary"
+				class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal text-secondary"
 			>
 				<XIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 				<span class="min-w-0 flex-1 break-words leading-tight"> No modpacks found </span>
@@ -28,7 +30,7 @@
 								:href="`https://modrinth.com/modpack/${modpack.slug}`"
 								target="_blank"
 								rel="noopener"
-								class="details-list__item !w-full min-w-0 max-w-full !items-center hover:underline"
+								class="flex w-full min-w-0 max-w-full items-center gap-2 font-normal hover:underline"
 							>
 								<Avatar :src="modpack.icon_url" alt="" size="1.5em" no-shadow class="shrink-0" />
 								<span class="min-w-0 flex-1 truncate text-primary !font-medium">

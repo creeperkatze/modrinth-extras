@@ -2,17 +2,17 @@
 	<div
 		v-if="status === 'force-demonetized'"
 		v-tooltip="formatMessage(messages.forceDemonetizedTitle)"
-		class="details-list__item text-orange"
+		class="flex w-fit items-center gap-2 font-normal text-orange"
 	>
-		<CurrencyIcon aria-hidden="true" />
+		<CurrencyIcon aria-hidden="true" class="shrink-0" />
 		<div>{{ formatMessage(messages.forceDemonetized) }}</div>
 	</div>
-	<div v-else-if="status === 'demonetized'" class="details-list__item">
-		<CurrencyIcon aria-hidden="true" />
+	<div v-else-if="status === 'demonetized'" class="flex w-fit items-center gap-2 font-normal">
+		<CurrencyIcon aria-hidden="true" class="shrink-0" />
 		<div>{{ formatMessage(messages.demonetized) }}</div>
 	</div>
-	<div v-else-if="status === 'monetized'" class="details-list__item">
-		<CurrencyIcon aria-hidden="true" />
+	<div v-else-if="status === 'monetized'" class="flex w-fit items-center gap-2 font-normal">
+		<CurrencyIcon aria-hidden="true" class="shrink-0" />
 		<div>{{ formatMessage(messages.monetized) }}</div>
 	</div>
 </template>

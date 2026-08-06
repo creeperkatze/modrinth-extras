@@ -1,8 +1,11 @@
 <template>
-	<div v-if="repoUrl" class="card flex-card experimental-styles-within">
-		<h2>GitHub</h2>
-		<div class="details-list min-w-0 max-w-full">
-			<div v-if="loading" class="details-list__item !w-full min-w-0 max-w-full !items-start">
+	<div
+		v-if="repoUrl"
+		class="mb-3 flex flex-col gap-3 rounded-lg border border-surface-4 bg-surface-3 p-4"
+	>
+		<h2 class="m-0 text-lg font-semibold text-contrast">GitHub</h2>
+		<div class="flex min-w-0 max-w-full flex-col gap-3">
+			<div v-if="loading" class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal">
 				<LoaderCircleIcon class="mt-0.5 shrink-0 animate-spin" />
 				<span class="min-w-0 flex-1 break-words leading-tight">
 					{{ formatMessage(messages['githubSidebar.loading']) }}
@@ -10,7 +13,7 @@
 			</div>
 			<div
 				v-else-if="error"
-				class="details-list__item !w-full min-w-0 max-w-full !items-start font-normal text-secondary"
+				class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal text-secondary"
 			>
 				<TriangleAlertIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 				<span class="min-w-0 flex-1 break-words leading-tight">
@@ -22,7 +25,7 @@
 					:href="repoUrl + '/stargazers'"
 					target="_blank"
 					rel="noopener"
-					class="details-list__item !w-full min-w-0 max-w-full !items-start hover:underline"
+					class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal hover:underline"
 				>
 					<StarIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 					<span class="min-w-0 flex-1 break-words leading-tight">
@@ -37,7 +40,7 @@
 					:href="repoUrl + '/issues'"
 					target="_blank"
 					rel="noopener"
-					class="details-list__item !w-full min-w-0 max-w-full !items-start hover:underline"
+					class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal hover:underline"
 				>
 					<IssuesIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 					<span class="min-w-0 flex-1 break-words leading-tight">
@@ -52,7 +55,7 @@
 					:href="repoUrl + '/pulls'"
 					target="_blank"
 					rel="noopener"
-					class="details-list__item !w-full min-w-0 max-w-full !items-start hover:underline"
+					class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal hover:underline"
 				>
 					<GitPullRequestIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 					<span class="min-w-0 flex-1 break-words leading-tight">
@@ -67,7 +70,7 @@
 					:href="repoUrl + '/network/members'"
 					target="_blank"
 					rel="noopener"
-					class="details-list__item !w-full min-w-0 max-w-full !items-start hover:underline"
+					class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal hover:underline"
 				>
 					<GitForkIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 					<span class="min-w-0 flex-1 break-words leading-tight">

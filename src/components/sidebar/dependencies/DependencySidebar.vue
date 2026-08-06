@@ -1,7 +1,9 @@
 <template>
-	<div class="card flex-card experimental-styles-within">
+	<div class="mb-3 flex flex-col gap-3 rounded-lg border border-surface-4 bg-surface-3 p-4">
 		<div class="flex items-center justify-between gap-2">
-			<h2>{{ formatMessage(messages['dependencySidebar.title']) }}</h2>
+			<h2 class="m-0 text-lg font-semibold text-contrast">
+				{{ formatMessage(messages['dependencySidebar.title']) }}
+			</h2>
 			<ButtonStyled
 				v-if="showExplorer && !loading && !error && roots.length > 0"
 				circular
@@ -15,8 +17,8 @@
 				</button>
 			</ButtonStyled>
 		</div>
-		<div class="details-list min-w-0 max-w-full">
-			<div v-if="loading" class="details-list__item !w-full min-w-0 max-w-full !items-start">
+		<div class="flex min-w-0 max-w-full flex-col gap-3">
+			<div v-if="loading" class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal">
 				<LoaderCircleIcon class="mt-0.5 shrink-0 animate-spin" />
 				<span class="min-w-0 flex-1 break-words leading-tight">
 					{{ formatMessage(messages['dependencySidebar.loading']) }}
@@ -24,7 +26,7 @@
 			</div>
 			<div
 				v-else-if="error"
-				class="details-list__item !w-full min-w-0 max-w-full !items-start font-normal text-secondary"
+				class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal text-secondary"
 			>
 				<TriangleAlertIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 				<span class="min-w-0 flex-1 break-words leading-tight">
@@ -33,7 +35,7 @@
 			</div>
 			<div
 				v-else-if="roots.length === 0"
-				class="details-list__item !w-full min-w-0 max-w-full !items-start text-secondary"
+				class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal text-secondary"
 			>
 				<XIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 				<span class="min-w-0 flex-1 break-words leading-tight">
