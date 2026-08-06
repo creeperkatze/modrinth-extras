@@ -248,6 +248,7 @@ import {
 	LayoutTemplateIcon,
 	LoaderCircleIcon,
 	MonitorIcon,
+	PackageIcon,
 	PaletteIcon,
 	PlayIcon,
 	SearchIcon,
@@ -423,6 +424,14 @@ const messages = defineMessages({
 		id: 'feature.discordSidebar.description',
 		defaultMessage:
 			'Server name, description, member count, and online count for linked Discord servers.',
+	},
+	'feature.modpacksSidebar.title': {
+		id: 'feature.modpacksSidebar.title',
+		defaultMessage: 'Modpacks sidebar',
+	},
+	'feature.modpacksSidebar.description': {
+		id: 'feature.modpacksSidebar.description',
+		defaultMessage: 'Show all the modpacks the mod is featured in.',
 	},
 	'feature.galleryBackground.title': {
 		id: 'feature.galleryBackground.title',
@@ -694,6 +703,12 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 		icon: DiscordIcon,
 		title: formatMessage(messages['feature.discordSidebar.title']),
 		description: formatMessage(messages['feature.discordSidebar.description']),
+	},
+	{
+		key: 'modpacksSidebar',
+		icon: PackageIcon,
+		title: formatMessage(messages['feature.modpacksSidebar.title']),
+		description: formatMessage(messages['feature.modpacksSidebar.description']),
 	},
 	{
 		key: 'galleryBackground',

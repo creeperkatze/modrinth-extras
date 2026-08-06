@@ -40,6 +40,7 @@ export interface ExtensionSettings {
 	dependencyExplorer: { enabled: boolean }
 	githubSidebar: { enabled: boolean }
 	discordSidebar: { enabled: boolean }
+	modpacksSidebar: { enabled: boolean }
 	galleryBackground: { enabled: boolean }
 	monetizationBadge: { enabled: boolean }
 	translateDescription: { enabled: boolean }
@@ -67,6 +68,7 @@ export const DEFAULTS: ExtensionSettings = {
 	dependencyExplorer: { enabled: true },
 	githubSidebar: { enabled: true },
 	discordSidebar: { enabled: true },
+	modpacksSidebar: { enabled: true },
 	galleryBackground: { enabled: true },
 	monetizationBadge: { enabled: true },
 	translateDescription: { enabled: false },
