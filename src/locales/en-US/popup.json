@@ -50,6 +50,9 @@
   "feature.desktopNotifications.exampleTitle": {
     "defaultMessage": "Example Notification"
   },
+  "feature.desktopNotifications.sendTest": {
+    "defaultMessage": "Send test notification"
+  },
   "feature.desktopNotifications.title": {
     "defaultMessage": "Desktop notifications"
   },

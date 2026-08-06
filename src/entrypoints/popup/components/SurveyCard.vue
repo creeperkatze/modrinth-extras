@@ -42,24 +42,24 @@
 					/>
 				</div>
 			</div>
-			<ButtonStyled type="transparent" circular size="small">
-				<button
-					type="button"
-					class="absolute right-2 top-2"
-					:title="formatMessage(messages['popup.surveyPrompt.dismiss'])"
-					:aria-label="formatMessage(messages['popup.surveyPrompt.dismiss'])"
+			<div class="absolute right-2 top-2">
+				<IconButton
+					v-tooltip="formatMessage(messages['popup.surveyPrompt.dismiss'])"
+					type="quiet"
+					size="sm"
+					:label="formatMessage(messages['popup.surveyPrompt.dismiss'])"
 					@click="dismiss"
 				>
 					<XIcon aria-hidden="true" />
-				</button>
-			</ButtonStyled>
+				</IconButton>
+			</div>
 		</Card>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { MessagesSquareIcon, XIcon } from '@modrinth/assets'
-import { ButtonStyled, Card, defineMessages, useVIntl } from '@modrinth/ui'
+import { Card, defineMessages, IconButton, useVIntl } from '@modrinth/ui'
 import { storage } from '@wxt-dev/storage'
 import type { Survey, SurveyResponseValue } from 'posthog-js/dist/module.no-external'
 import { computed, onMounted, ref } from 'vue'

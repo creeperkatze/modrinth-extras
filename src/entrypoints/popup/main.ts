@@ -1,5 +1,5 @@
 import '../../assets/popup.scss'
-import '../../assets/tailwind.css'
+import '../../assets/popup-tailwind.css'
 import 'floating-vue/dist/style.css'
 
 import FloatingVue from 'floating-vue'

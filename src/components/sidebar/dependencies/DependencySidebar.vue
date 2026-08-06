@@ -2,18 +2,15 @@
 	<div class="card flex-card experimental-styles-within">
 		<div class="flex items-center justify-between gap-2">
 			<h2>{{ formatMessage(messages['dependencySidebar.title']) }}</h2>
-			<ButtonStyled
+			<IconButton
 				v-if="showExplorer && !loading && !error && roots.length > 0"
-				circular
-				type="transparent"
+				v-tooltip="formatMessage(messages['dependencySidebar.openExplorer'])"
+				type="quiet"
+				:label="formatMessage(messages['dependencySidebar.openExplorer'])"
+				@click="explorerRef?.show()"
 			>
-				<button
-					v-tooltip="formatMessage(messages['dependencySidebar.openExplorer'])"
-					@click="explorerRef?.show()"
-				>
-					<Network aria-hidden="true" />
-				</button>
-			</ButtonStyled>
+				<Network aria-hidden="true" />
+			</IconButton>
 		</div>
 		<div class="details-list min-w-0 max-w-full">
 			<div v-if="loading" class="details-list__item !w-full min-w-0 max-w-full !items-start">
@@ -63,7 +60,7 @@
 <script setup lang="ts">
 import { Network } from '@lucide/vue'
 import { LoaderCircleIcon, XIcon } from '@modrinth/assets'
-import { ButtonStyled, defineMessages, ScrollablePanel, useVIntl } from '@modrinth/ui'
+import { defineMessages, IconButton, ScrollablePanel, useVIntl } from '@modrinth/ui'
 import { onMounted, ref } from 'vue'
 
 import {

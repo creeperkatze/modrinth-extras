@@ -15,11 +15,16 @@
 				<div class="text-sm font-semibold text-contrast">{{ title }}</div>
 				<div class="text-xs text-secondary">{{ description }}</div>
 			</div>
-			<ButtonStyled v-if="actionIcon" size="small" type="transparent">
-				<button type="button" :disabled="!modelValue" @click.stop="$emit('action')">
-					<component :is="actionIcon" />
-				</button>
-			</ButtonStyled>
+			<IconButton
+				v-if="actionIcon"
+				size="sm"
+				type="quiet"
+				:disabled="!modelValue"
+				:label="actionLabel"
+				@click.stop="$emit('action')"
+			>
+				<component :is="actionIcon" />
+			</IconButton>
 			<button
 				type="button"
 				role="switch"
@@ -49,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { ButtonStyled, Collapsible } from '@modrinth/ui'
+import { Collapsible, IconButton } from '@modrinth/ui'
 import { Comment, type Component, computed, useSlots } from 'vue'
 
 defineProps<{
@@ -58,6 +63,7 @@ defineProps<{
 	description: string
 	modelValue: boolean
 	actionIcon?: Component
+	actionLabel?: string
 	disabled?: boolean
 	disabledTooltip?: string
 }>()

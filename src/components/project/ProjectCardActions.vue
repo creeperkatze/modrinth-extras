@@ -1,102 +1,116 @@
 <template>
 	<span v-tooltip="downloadTooltip" class="download-action">
-		<ButtonStyled color="brand">
-			<button :disabled="downloadDisabled" @click.stop="handleDownload">
-				<LoaderCircleIcon
-					v-if="downloadLoading || downloadAvailabilityLoading"
-					class="animate-spin"
-				/>
-				<DownloadIcon v-else />
-				{{ formatMessage(messages['projectCardActions.download']) }}
-			</button>
-		</ButtonStyled>
+		<Button
+			type="colored"
+			color="brand"
+			:disabled="downloadDisabled"
+			:loading="downloadLoading || downloadAvailabilityLoading"
+			@click.stop="handleDownload"
+		>
+			<DownloadIcon />
+			{{ formatMessage(messages['projectCardActions.download']) }}
+		</Button>
 	</span>
-	<ButtonStyled circular :color="isFollowed ? 'brand' : undefined">
-		<button
-			v-tooltip="
-				isFollowed
-					? formatMessage(messages['projectCardActions.unfollow'])
-					: formatMessage(messages['projectCardActions.follow'])
-			"
-			:disabled="followLoading"
-			@click.stop="handleFollow"
-		>
-			<LoaderCircleIcon v-if="followLoading" class="animate-spin" />
-			<HeartIcon v-else :fill="isFollowed ? 'currentColor' : 'none'" />
-		</button>
-	</ButtonStyled>
-	<ButtonStyled circular :color="isSaved ? 'brand' : undefined">
-		<button
-			v-if="!isLoggedIn"
-			v-tooltip="formatMessage(messages['projectCardActions.save'])"
-			@click.stop="navigate('/auth/sign-in')"
-		>
-			<BookmarkIcon fill="none" aria-hidden="true" />
-		</button>
-		<PopoutMenu
-			v-else
-			:tooltip="
-				isSaved
-					? formatMessage(messages['projectCardActions.saved'])
-					: formatMessage(messages['projectCardActions.save'])
-			"
-			placement="bottom-end"
-			@click.stop
-		>
+	<IconButton
+		v-tooltip="
+			isFollowed
+				? formatMessage(messages['projectCardActions.unfollow'])
+				: formatMessage(messages['projectCardActions.follow'])
+		"
+		:color="isFollowed ? 'brand' : undefined"
+		:loading="followLoading"
+		:label="
+			isFollowed
+				? formatMessage(messages['projectCardActions.unfollow'])
+				: formatMessage(messages['projectCardActions.follow'])
+		"
+		@click.stop="handleFollow"
+	>
+		<HeartIcon :fill="isFollowed ? 'currentColor' : 'none'" />
+	</IconButton>
+	<IconButton
+		v-if="!isLoggedIn"
+		v-tooltip="formatMessage(messages['projectCardActions.save'])"
+		:color="isSaved ? 'brand' : undefined"
+		:label="formatMessage(messages['projectCardActions.save'])"
+		@click.stop="navigate('/auth/sign-in')"
+	>
+		<BookmarkIcon fill="none" aria-hidden="true" />
+	</IconButton>
+	<TeleportPopoutMenu
+		v-else
+		icon-only
+		:tooltip="
+			isSaved
+				? formatMessage(messages['projectCardActions.saved'])
+				: formatMessage(messages['projectCardActions.save'])
+		"
+		:color="isSaved ? 'brand' : undefined"
+		:label="
+			isSaved
+				? formatMessage(messages['projectCardActions.saved'])
+				: formatMessage(messages['projectCardActions.save'])
+		"
+		placement="bottom-end"
+		@click.stop
+	>
+		<template #trigger>
 			<BookmarkIcon :fill="isSaved ? 'currentColor' : 'none'" aria-hidden="true" />
-			<template #menu>
-				<template v-if="collections === null">
-					<div class="menu-loading">
-						<LoaderCircleIcon class="animate-spin menu-loading-icon" />
-					</div>
-				</template>
-				<template v-else>
-					<StyledInput
-						v-model="collectionsSearch"
-						:placeholder="formatMessage(messages['projectCardActions.searchPlaceholder'])"
-						wrapper-class="menu-search"
-					/>
-					<div v-if="filteredCollections.length > 0" class="collections-list">
-						<Checkbox
-							v-for="col in filteredCollections"
-							:key="col.id"
-							:model-value="!!projectId && col.projects.includes(projectId)"
-							class="popout-checkbox"
-							@update:model-value="handleToggleCollection(col)"
-						>
-							{{ col.name }}
-						</Checkbox>
-					</div>
-					<div v-else class="menu-text">
-						<p class="popout-text">
-							{{ formatMessage(messages['projectCardActions.noCollections']) }}
-						</p>
-					</div>
-					<div class="collection-button">
-						<ButtonStyled>
-							<button @click.stop="handleNewCollection">
-								<PlusIcon />
-								{{ formatMessage(messages['projectCardActions.newCollection']) }}
-							</button>
-						</ButtonStyled>
-					</div>
-				</template>
+		</template>
+		<template #panel>
+			<template v-if="collections === null">
+				<div class="menu-loading">
+					<LoaderCircleIcon class="animate-spin menu-loading-icon" />
+				</div>
 			</template>
-		</PopoutMenu>
-	</ButtonStyled>
-	<ButtonStyled circular type="transparent">
-		<button
-			v-tooltip="
-				copied
-					? formatMessage(messages['projectCardActions.copied'])
-					: formatMessage(messages['projectCardActions.copyLink'])
-			"
-			@click.stop="handleCopyLink"
-		>
-			<CheckIcon v-if="copied" />
-			<LinkIcon v-else />
-		</button>
-	</ButtonStyled>
+			<template v-else>
+				<StyledInput
+					v-model="collectionsSearch"
+					:placeholder="formatMessage(messages['projectCardActions.searchPlaceholder'])"
+					wrapper-class="menu-search"
+				/>
+				<div v-if="filteredCollections.length > 0" class="collections-list">
+					<Checkbox
+						v-for="col in filteredCollections"
+						:key="col.id"
+						:model-value="!!projectId && col.projects.includes(projectId)"
+						class="popout-checkbox"
+						@update:model-value="handleToggleCollection(col)"
+					>
+						{{ col.name }}
+					</Checkbox>
+				</div>
+				<div v-else class="menu-text">
+					<p class="popout-text">
+						{{ formatMessage(messages['projectCardActions.noCollections']) }}
+					</p>
+				</div>
+				<div class="collection-button">
+					<Button @click.stop="handleNewCollection">
+						<PlusIcon />
+						{{ formatMessage(messages['projectCardActions.newCollection']) }}
+					</Button>
+				</div>
+			</template>
+		</template>
+	</TeleportPopoutMenu>
+	<IconButton
+		v-tooltip="
+			copied
+				? formatMessage(messages['projectCardActions.copied'])
+				: formatMessage(messages['projectCardActions.copyLink'])
+		"
+		type="quiet"
+		:label="
+			copied
+				? formatMessage(messages['projectCardActions.copied'])
+				: formatMessage(messages['projectCardActions.copyLink'])
+		"
+		@click.stop="handleCopyLink"
+	>
+		<CheckIcon v-if="copied" />
+		<LinkIcon v-else />
+	</IconButton>
 </template>
 
 <script setup lang="ts">
@@ -111,11 +125,12 @@ import {
 	PlusIcon,
 } from '@modrinth/assets'
 import {
-	ButtonStyled,
+	Button,
 	Checkbox,
 	defineMessages,
-	PopoutMenu,
+	IconButton,
 	StyledInput,
+	TeleportPopoutMenu,
 	useVIntl,
 } from '@modrinth/ui'
 import { computed, onMounted, ref, watch } from 'vue'

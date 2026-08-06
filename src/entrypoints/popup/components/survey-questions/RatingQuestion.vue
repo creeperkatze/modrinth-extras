@@ -1,37 +1,35 @@
 <template>
 	<div class="mt-2 flex items-center justify-between gap-1">
-		<ButtonStyled
-			v-for="value in values"
-			:key="value"
-			type="chip"
-			:circular="isIconMode"
-			:size="isIconMode ? 'standard' : 'small'"
-			:color="rating === value ? 'brand' : 'standard'"
-			:highlighted="rating === value"
-		>
-			<button
-				type="button"
-				:class="[
-					'!border !border-solid !border-surface-5',
-					!isIconMode ? '!min-w-0 flex-1 justify-center' : '',
-				]"
+		<template v-for="value in values" :key="value">
+			<IconButton
+				v-if="isIconMode"
+				:type="rating === value ? 'colored' : 'outlined'"
+				:color="rating === value ? 'brand' : undefined"
+				:label="String(value)"
 				@click="rating = value"
 			>
-				<component :is="ratingIcon(value)" v-if="isIconMode" aria-hidden="true" />
-				<template v-else>{{ value }}</template>
-			</button>
-		</ButtonStyled>
+				<component :is="ratingIcon(value)" aria-hidden="true" />
+			</IconButton>
+			<Button
+				v-else
+				:type="rating === value ? 'colored' : 'outlined'"
+				:color="rating === value ? 'brand' : undefined"
+				size="sm"
+				class="!min-w-0 !flex-1 justify-center"
+				@click="rating = value"
+			>
+				{{ value }}
+			</Button>
+		</template>
 	</div>
 	<div class="mt-1 flex justify-between text-xs text-secondary">
 		<span>{{ question.lowerBoundLabel }}</span>
 		<span>{{ question.upperBoundLabel }}</span>
 	</div>
 	<div class="mt-2 flex justify-end">
-		<ButtonStyled color="brand" size="small">
-			<button type="button" :disabled="rating === null" @click="submit">
-				{{ submitText }}
-			</button>
-		</ButtonStyled>
+		<Button type="colored" color="brand" size="sm" :disabled="rating === null" @click="submit">
+			{{ submitText }}
+		</Button>
 	</div>
 </template>
 
@@ -47,7 +45,7 @@ import {
 	ThumbsDown,
 	ThumbsUp,
 } from '@lucide/vue'
-import { ButtonStyled } from '@modrinth/ui'
+import { Button, IconButton } from '@modrinth/ui'
 import type { RatingSurveyQuestion } from 'posthog-js/dist/module.no-external'
 import { type Component, computed, ref } from 'vue'
 
