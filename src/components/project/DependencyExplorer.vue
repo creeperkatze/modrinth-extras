@@ -238,22 +238,20 @@
 			</div>
 
 			<div class="absolute bottom-3 right-3 flex items-center gap-1.5">
-				<ButtonStyled circular>
-					<button
-						v-tooltip="formatMessage(messages['dependencyExplorer.centerView'])"
-						@click="zoomToFit()"
-					>
-						<ExpandIcon aria-hidden="true" />
-					</button>
-				</ButtonStyled>
-				<ButtonStyled circular>
-					<button
-						v-tooltip="formatMessage(messages['dependencyExplorer.reset'])"
-						@click="initGraph()"
-					>
-						<UpdatedIcon aria-hidden="true" />
-					</button>
-				</ButtonStyled>
+				<IconButton
+					v-tooltip="formatMessage(messages['dependencyExplorer.centerView'])"
+					:label="formatMessage(messages['dependencyExplorer.centerView'])"
+					@click="zoomToFit()"
+				>
+					<ExpandIcon aria-hidden="true" />
+				</IconButton>
+				<IconButton
+					v-tooltip="formatMessage(messages['dependencyExplorer.reset'])"
+					:label="formatMessage(messages['dependencyExplorer.reset'])"
+					@click="initGraph()"
+				>
+					<UpdatedIcon aria-hidden="true" />
+				</IconButton>
 			</div>
 		</div>
 	</NewModal>
@@ -262,8 +260,8 @@
 <script setup lang="ts">
 import { ExpandIcon, SearchIcon, UpdatedIcon } from '@modrinth/assets'
 import {
-	ButtonStyled,
 	defineMessages,
+	IconButton,
 	NewModal,
 	Slider,
 	StyledInput,

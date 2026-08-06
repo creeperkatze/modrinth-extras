@@ -104,8 +104,20 @@
   "monetizationBadge.monetized": {
     "defaultMessage": "Monetized"
   },
+  "notificationsIndicator.acceptInvite": {
+    "defaultMessage": "Accept invite"
+  },
+  "notificationsIndicator.declineInvite": {
+    "defaultMessage": "Decline invite"
+  },
+  "notificationsIndicator.label": {
+    "defaultMessage": "Notifications"
+  },
   "notificationsIndicator.markAllAsRead": {
     "defaultMessage": "Mark all as read"
+  },
+  "notificationsIndicator.markAsRead": {
+    "defaultMessage": "Mark as read"
   },
   "notificationsIndicator.noUnread": {
     "defaultMessage": "No unread notifications"

@@ -173,6 +173,7 @@
 										"
 										type="colored"
 										color="brand"
+										:circular="false"
 										:label="formatMessage(messages['notificationsIndicator.acceptInvite'])"
 										@click.stop.prevent="handleAcceptInvite(notif)"
 									>
@@ -185,6 +186,7 @@
 										"
 										type="colored"
 										color="red"
+										:circular="false"
 										:label="formatMessage(messages['notificationsIndicator.declineInvite'])"
 										@click.stop.prevent="handleDeclineInvite(notif)"
 									>
@@ -192,6 +194,7 @@
 									</IconButton>
 									<IconButton
 										v-else-if="!notif.read"
+										:circular="false"
 										:label="formatMessage(messages['notificationsIndicator.markAsRead'])"
 										@click.stop.prevent="handleMarkAsRead(notif)"
 									>

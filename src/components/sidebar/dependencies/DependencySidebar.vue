@@ -4,18 +4,15 @@
 			<h2 class="m-0 text-lg font-semibold text-contrast">
 				{{ formatMessage(messages['dependencySidebar.title']) }}
 			</h2>
-			<ButtonStyled
+			<IconButton
 				v-if="showExplorer && !loading && !error && roots.length > 0"
-				circular
-				type="transparent"
+				v-tooltip="formatMessage(messages['dependencySidebar.openExplorer'])"
+				type="quiet"
+				:label="formatMessage(messages['dependencySidebar.openExplorer'])"
+				@click="explorerRef?.show()"
 			>
-				<button
-					v-tooltip="formatMessage(messages['dependencySidebar.openExplorer'])"
-					@click="explorerRef?.show()"
-				>
-					<Network aria-hidden="true" />
-				</button>
-			</ButtonStyled>
+				<Network aria-hidden="true" />
+			</IconButton>
 		</div>
 		<div class="flex min-w-0 max-w-full flex-col gap-3">
 			<div v-if="loading" class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal">
@@ -70,7 +67,7 @@
 <script setup lang="ts">
 import { Network } from '@lucide/vue'
 import { LoaderCircleIcon, TriangleAlertIcon, XIcon } from '@modrinth/assets'
-import { ButtonStyled, defineMessages, ScrollablePanel, useVIntl } from '@modrinth/ui'
+import { defineMessages, IconButton, ScrollablePanel, useVIntl } from '@modrinth/ui'
 import { computed, onMounted, ref } from 'vue'
 
 import { type EnrichedDep, fetchDependencyTree } from '../../../utils/dependencies'
