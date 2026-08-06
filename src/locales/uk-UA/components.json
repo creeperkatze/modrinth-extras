@@ -62,9 +62,6 @@
   "discordSidebar.partnered": {
     "defaultMessage": "Партнери"
   },
-  "discordSidebar.verified": {
-    "defaultMessage": "Перевірено"
-  },
   "errorNotice.message": {
     "defaultMessage": "Ця помилка може бути пов'язана з Modrinth Extras. Спробуйте вимкнути розширення та оновити сторінку, перш ніж повідомляти про це Modrinth. Якщо помилка зникне, повідомте про це <link>тут</link>."
   },
@@ -80,6 +77,12 @@
   "githubSidebar.stars": {
     "defaultMessage": "{count} зірок"
   },
+  "modpacksSidebar.more": {
+    "defaultMessage": "Показати більше збірок"
+  },
+  "modpacksSidebar.title": {
+    "defaultMessage": "Збірки"
+  },
   "monetizationBadge.demonetized": {
     "defaultMessage": "Не монетизовано"
   },
@@ -92,8 +95,20 @@
   "monetizationBadge.monetized": {
     "defaultMessage": "Монетизовано"
   },
+  "notificationsIndicator.acceptInvite": {
+    "defaultMessage": "Прийняти запрошення"
+  },
+  "notificationsIndicator.declineInvite": {
+    "defaultMessage": "Відхилити запрошення"
+  },
+  "notificationsIndicator.label": {
+    "defaultMessage": "Повідомлення"
+  },
   "notificationsIndicator.markAllAsRead": {
     "defaultMessage": "Позначити все як прочитане"
+  },
+  "notificationsIndicator.markAsRead": {
+    "defaultMessage": "Позначити як прочитане"
   },
   "notificationsIndicator.noUnread": {
     "defaultMessage": "Немає непрочитаних повідомлень"

@@ -62,9 +62,6 @@
   "discordSidebar.partnered": {
     "defaultMessage": "已配对"
   },
-  "discordSidebar.verified": {
-    "defaultMessage": "已验证"
-  },
   "errorNotice.message": {
     "defaultMessage": "此错误可能与 Modrinth Extras 有关。在向 Modrinth 报告此问题之前，请尝试禁用该扩展并刷新页面。如果错误消失，请<link>在此处</link>报告。"
   },

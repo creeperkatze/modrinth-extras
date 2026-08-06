@@ -62,9 +62,6 @@
   "discordSidebar.partnered": {
     "defaultMessage": "Gepartnert"
   },
-  "discordSidebar.verified": {
-    "defaultMessage": "Verifiziert"
-  },
   "errorNotice.message": {
     "defaultMessage": "Dieser Fehler hängt eventuell mit Modrinth Extras zusammen. Versuche, die Erweiterung zu deaktivieren und die Seite neu zu laden, bevor du dies Modrinth meldest. Falls der Fehler verschwindet, melde ihn bitte <link>hier</link>."
   },
@@ -80,6 +77,12 @@
   "githubSidebar.stars": {
     "defaultMessage": "{count} Sterne"
   },
+  "modpacksSidebar.more": {
+    "defaultMessage": "Mehr Modpacks anzeigen"
+  },
+  "modpacksSidebar.title": {
+    "defaultMessage": "Modpacks"
+  },
   "monetizationBadge.demonetized": {
     "defaultMessage": "Nicht monetarisiert"
   },
@@ -92,8 +95,20 @@
   "monetizationBadge.monetized": {
     "defaultMessage": "Monetarisiert"
   },
+  "notificationsIndicator.acceptInvite": {
+    "defaultMessage": "Einladung akzeptieren"
+  },
+  "notificationsIndicator.declineInvite": {
+    "defaultMessage": "Einladung ablehnen"
+  },
+  "notificationsIndicator.label": {
+    "defaultMessage": "Benachrichtigungen"
+  },
   "notificationsIndicator.markAllAsRead": {
     "defaultMessage": "Alle als gelesen markieren"
+  },
+  "notificationsIndicator.markAsRead": {
+    "defaultMessage": "Als gelesen markieren"
   },
   "notificationsIndicator.noUnread": {
     "defaultMessage": "Keine ungelesenen Benachrichtigungen"

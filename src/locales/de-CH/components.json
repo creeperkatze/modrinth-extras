@@ -1,2 +1,6 @@
-{}
+{
+  "dependencyExplorer.loading": {
+    "defaultMessage": "Wird geladen"
+  }
+}
 

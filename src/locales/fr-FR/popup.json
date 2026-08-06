@@ -1,4 +1,13 @@
 {
+  "feature.accentColor.color": {
+    "defaultMessage": "Couleur"
+  },
+  "feature.accentColor.title": {
+    "defaultMessage": "Couleur d'accentuation"
+  },
+  "feature.activitySparkline.days": {
+    "defaultMessage": "{count} Jours"
+  },
   "feature.activitySparkline.description": {
     "defaultMessage": "Graphique d'activité de publications sur les pages de projet."
   },

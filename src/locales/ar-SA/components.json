@@ -59,9 +59,6 @@
   "discordSidebar.partnered": {
     "defaultMessage": "شريك"
   },
-  "discordSidebar.verified": {
-    "defaultMessage": "Verified"
-  },
   "errorNotice.message": {
     "defaultMessage": "قد يكون هذا الخطأ مرتبطًا بـ Modrinth Extras. حاول تعطيل الملحق وتحديث الصفحة قبل الإبلاغ عن هذا الخطأ إلى Modrinth. إذا اختفى الخطأ، يرجى الإبلاغ عنه <link>هنا</link>."
   },

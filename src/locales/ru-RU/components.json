@@ -14,9 +14,6 @@
   "discordSidebar.partnered": {
     "defaultMessage": "Партнёры"
   },
-  "discordSidebar.verified": {
-    "defaultMessage": "Проверено"
-  },
   "errorNotice.message": {
     "defaultMessage": "Ошибка может быть связана с Modrinth Extras. Попробуйте отключить расширение и обновить страницу перед отправкой отчёта в Modrinth. Если ошибка исчезнет, пожалуйста, сообщите об этом <link>здесь</link>."
   },

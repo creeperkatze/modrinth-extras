@@ -8,9 +8,6 @@
   "discordSidebar.online": {
     "defaultMessage": "{count} trực tuyến"
   },
-  "discordSidebar.verified": {
-    "defaultMessage": "Đã xác minh"
-  },
   "errorNotice.message": {
     "defaultMessage": "Lỗi này có thể liên quan đến Modrinth Extras. Hãy thử tắt tiện ích mở rộng này và làm mới trang trước khi báo cáo lỗi này cho Modrinth. Nếu lỗi biến mất, vui lòng báo cáo <link>tại đây</link>."
   },

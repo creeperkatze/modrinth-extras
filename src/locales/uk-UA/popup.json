@@ -30,7 +30,7 @@
     "defaultMessage": "Інтерактивний граф для дослідження повного дерева залежностей."
   },
   "feature.dependencyExplorer.disabledTooltip": {
-    "defaultMessage": "Потрібна увімкнена бічна панель залежностей"
+    "defaultMessage": "Потрібно увімкнути залежності на бічній панелі"
   },
   "feature.dependencyExplorer.title": {
     "defaultMessage": "Оглядач залежностей"
@@ -39,7 +39,7 @@
     "defaultMessage": "Згортуване дерево залежностей на сторінках проєктів."
   },
   "feature.dependencySidebar.title": {
-    "defaultMessage": "Бічна панель залежностей"
+    "defaultMessage": "Залежності на бічній панелі"
   },
   "feature.desktopNotifications.description": {
     "defaultMessage": "Системні повідомлення для ваших повідомлень Modrinth."
@@ -50,6 +50,9 @@
   "feature.desktopNotifications.exampleTitle": {
     "defaultMessage": "Приклад повідомлення"
   },
+  "feature.desktopNotifications.sendTest": {
+    "defaultMessage": "Надіслати тестове повідомлення"
+  },
   "feature.desktopNotifications.title": {
     "defaultMessage": "Повідомлення на робочому столі"
   },
@@ -57,7 +60,7 @@
     "defaultMessage": "Назва сервера, опис, кількість учасників та онлайн, для пов'язаних серверів Discord."
   },
   "feature.discordSidebar.title": {
-    "defaultMessage": "Бічна панель Discord"
+    "defaultMessage": "Discord на бічній панелі"
   },
   "feature.galleryBackground.description": {
     "defaultMessage": "Відображати обране зображення з галереї як фоновий банер на сторінках проєктів."
@@ -69,7 +72,13 @@
     "defaultMessage": "Зірки, задачі, запити на зміни та форки для пов'язаних репозиторіїв."
   },
   "feature.githubSidebar.title": {
-    "defaultMessage": "Бічна панель GitHub"
+    "defaultMessage": "GitHub на бічній панелі"
+  },
+  "feature.modpacksSidebar.description": {
+    "defaultMessage": "Показати всі збірки, до яких входить цей мод."
+  },
+  "feature.modpacksSidebar.title": {
+    "defaultMessage": "Збірки на бічній панелі"
   },
   "feature.monetizationBadge.description": {
     "defaultMessage": "Відобразити стан монетизації проєкту на бічній панелі."
@@ -135,13 +144,13 @@
     "defaultMessage": "Телеметрія"
   },
   "feature.toolsSidebar.description": {
-    "defaultMessage": "Створити вбудовані коди та скопіювати команди встановлення менеджера модифікацій."
+    "defaultMessage": "Створюйте вбудовані коди та копіюйте команди встановлення для менеджера модифікацій."
   },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "Менеджер модів"
   },
   "feature.toolsSidebar.title": {
-    "defaultMessage": "Бічна панель інструментів"
+    "defaultMessage": "Інструменти на бічній панелі"
   },
   "feature.translateDescription.description": {
     "defaultMessage": "Переклад опису проєкту на вашу мову безпосередньо на пристрої, якщо він відрізняється."

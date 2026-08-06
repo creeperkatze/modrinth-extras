@@ -50,6 +50,9 @@
   "feature.desktopNotifications.exampleTitle": {
     "defaultMessage": "Beispiel-Benachrichtigung"
   },
+  "feature.desktopNotifications.sendTest": {
+    "defaultMessage": "Testbenachrichtigung senden"
+  },
   "feature.desktopNotifications.title": {
     "defaultMessage": "Desktop-Benachrichtigungen"
   },
@@ -70,6 +73,12 @@
   },
   "feature.githubSidebar.title": {
     "defaultMessage": "GitHub-Seitenleiste"
+  },
+  "feature.modpacksSidebar.description": {
+    "defaultMessage": "Zeige alle Modpacks an, in denen der Mod enthalten ist."
+  },
+  "feature.modpacksSidebar.title": {
+    "defaultMessage": "Modpack-Seitenleiste"
   },
   "feature.monetizationBadge.description": {
     "defaultMessage": "Zeigt den Monetarisierungsstatus eines Projekts in der Seitenleiste an."

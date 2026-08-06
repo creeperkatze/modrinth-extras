@@ -14,9 +14,6 @@
   "discordSidebar.partnered": {
     "defaultMessage": "Partenaire"
   },
-  "discordSidebar.verified": {
-    "defaultMessage": "Vérifié"
-  },
   "errorNotice.message": {
     "defaultMessage": "Cette erreur peut être liée à Modrinth Extras. Essayez de désactiver l'extension et de rafraîchir la page avant de la signaler à Modrinth. Si l'erreur disparaît, veuillez la signaler à <link>ici</link>."
   },

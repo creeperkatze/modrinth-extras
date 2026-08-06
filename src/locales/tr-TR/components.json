@@ -14,9 +14,6 @@
   "discordSidebar.partnered": {
     "defaultMessage": "Partner"
   },
-  "discordSidebar.verified": {
-    "defaultMessage": "Doğrulanmış"
-  },
   "errorNotice.message": {
     "defaultMessage": "Bu hata Modrinth Extras ile ilgili olabilir. Bunu Modrinth’e bildirmeden önce eklentiyi devre dışı bırakıp sayfayı yenilemeyi deneyin. Eğer hata giderse, lütfen <link>buradan</link> bildirin."
   },
