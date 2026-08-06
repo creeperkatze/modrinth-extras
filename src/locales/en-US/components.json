@@ -77,9 +77,6 @@
   "githubSidebar.stars": {
     "defaultMessage": "{count} stars"
   },
-  "modpacksSidebar.more": {
-    "defaultMessage": "Show more modpacks"
-  },
   "modpacksSidebar.title": {
     "defaultMessage": "Modpacks"
   },
