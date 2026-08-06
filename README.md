@@ -96,6 +96,10 @@ Server name, description, member count, and online count for linked Discord serv
 
 <img src=".github/assets/screenshots/sidebar.png" width="100%">
 
+### Modpacks sidebar
+
+Show all the modpacks a project is featured in.
+
 ### Gallery background
 
 Display the featured gallery image as a background banner on project pages.
@@ -105,6 +109,10 @@ Display the featured gallery image as a background banner on project pages.
 ### Monetization badge
 
 Show the monetization status of a project in the sidebar.
+
+### Translate description
+
+On-device translation of a project's description into your language, when it differs.
 
 ### Notification badge
 
