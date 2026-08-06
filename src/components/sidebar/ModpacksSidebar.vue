@@ -1,5 +1,7 @@
 <template>
-	<div class="mb-3 flex flex-col gap-3 rounded-lg border border-surface-4 bg-surface-3 p-4">
+	<div
+		class="mb-3 flex flex-col gap-3 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
+	>
 		<h2 class="m-0 text-lg font-semibold text-contrast">
 			{{ formatMessage(messages.title) }}
 		</h2>

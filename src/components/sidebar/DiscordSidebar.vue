@@ -1,7 +1,7 @@
 <template>
 	<div
 		v-if="discordUrl"
-		class="relative mb-3 flex flex-col gap-3 rounded-lg border border-surface-4 bg-surface-3 p-4"
+		class="relative mb-3 flex flex-col gap-3 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
 	>
 		<div v-if="invite?.iconUrl" class="absolute right-4 top-4">
 			<Avatar :src="invite.iconUrl" alt="" size="40px" no-shadow />

@@ -1,7 +1,7 @@
 <template>
 	<div
 		v-if="repoUrl"
-		class="mb-3 flex flex-col gap-3 rounded-lg border border-surface-4 bg-surface-3 p-4"
+		class="mb-3 flex flex-col gap-3 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
 	>
 		<h2 class="m-0 text-lg font-semibold text-contrast">GitHub</h2>
 		<div class="flex min-w-0 max-w-full flex-col gap-3">
