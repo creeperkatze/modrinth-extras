@@ -30,8 +30,8 @@
 								rel="noopener"
 								class="details-list__item !w-full min-w-0 max-w-full !items-center hover:underline"
 							>
-								<Avatar :src="modpack.icon_url" alt="" size="24px" no-shadow class="mt-0.5" />
-								<span class="min-w-0 flex-1 break-words leading-tight">
+								<Avatar :src="modpack.icon_url" alt="" size="1.5em" no-shadow class="shrink-0" />
+								<span class="min-w-0 flex-1 truncate text-primary !font-medium">
 									{{ modpack.title }}
 								</span>
 							</a>
