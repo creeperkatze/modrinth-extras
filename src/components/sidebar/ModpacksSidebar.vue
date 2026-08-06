@@ -2,8 +2,8 @@
 	<div class="card flex-card experimental-styles-within">
 		<button
 			class="flex w-full items-center justify-between gap-2 text-left text-lg font-semibold m-0 text-primary"
-			@click="expanded = !expanded"
 			:disabled="loading || error || modpacks.length === 0"
+			@click="expanded = !expanded"
 		>
 			<h2 class="m-0">{{ formatMessage(messages.title) }}</h2>
 			<ChevronRightIcon
@@ -20,18 +20,16 @@
 			</div>
 		</div>
 		<div v-else-if="error" class="details-list min-w-0 max-w-full">
-			<div class="details-list__item !w-full min-w-0 max-w-full !items-start font-normal text-secondary">
-				<span class="min-w-0 flex-1 break-words leading-tight">
-					Failed to load modpacks
-				</span>
+			<div
+				class="details-list__item !w-full min-w-0 max-w-full !items-start font-normal text-secondary"
+			>
+				<span class="min-w-0 flex-1 break-words leading-tight"> Failed to load modpacks </span>
 			</div>
 		</div>
 		<div v-else-if="modpacks.length === 0" class="details-list min-w-0 max-w-full">
 			<div class="details-list__item !w-full min-w-0 max-w-full !items-start text-secondary">
 				<XIcon aria-hidden="true" class="mt-0.5 shrink-0" />
-				<span class="min-w-0 flex-1 break-words leading-tight">
-					No modpacks found
-				</span>
+				<span class="min-w-0 flex-1 break-words leading-tight"> No modpacks found </span>
 			</div>
 		</div>
 		<div v-else class="details-list min-w-0 max-w-full">
@@ -78,7 +76,9 @@
 					v-if="totalHits > 4"
 					class="absolute inset-x-0 bottom-0 flex h-16 items-end justify-center pb-1"
 				>
-					<div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-surface-3 to-transparent" />
+					<div
+						class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-surface-3 to-transparent"
+					/>
 					<button
 						type="button"
 						class="relative text-sm font-medium text-secondary hover:underline"
@@ -95,7 +95,7 @@
 <script setup lang="ts">
 import { ChevronRightIcon, XIcon } from '@lucide/vue'
 import { LoaderCircleIcon } from '@modrinth/assets'
-import { ScrollablePanel, defineMessages, useVIntl } from '@modrinth/ui'
+import { defineMessages, ScrollablePanel, useVIntl } from '@modrinth/ui'
 import { computed, onMounted, ref } from 'vue'
 
 import { modrinthClient } from '../../utils/api'
