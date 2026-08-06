@@ -399,8 +399,8 @@ const maxDepth = computed(() => nodes.value.reduce((max, node) => Math.max(max, 
 const depthLimit = ref(0)
 
 // Rebuild the simulation over the current visible set so the layout reorganizes.
-function refreshSimulation() {
-	setAutoFit(true)
+function refreshSimulation(fit: boolean) {
+	if (fit) setAutoFit(true)
 	startSimulation(0.4)
 }
 
@@ -409,12 +409,12 @@ function toggleType(type: DepType) {
 	if (next.has(type)) next.delete(type)
 	else next.add(type)
 	hiddenTypes.value = next
-	refreshSimulation()
+	refreshSimulation(false)
 }
 
 function setDepthLimit(value: number) {
 	depthLimit.value = value
-	refreshSimulation()
+	refreshSimulation(true)
 }
 
 const typeVisibleEdges = computed(() =>
