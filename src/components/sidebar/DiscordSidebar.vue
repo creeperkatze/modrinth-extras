@@ -74,6 +74,7 @@ import {
 } from '@modrinth/assets'
 import { defineMessages, useVIntl } from '@modrinth/ui'
 import { onMounted, ref } from 'vue'
+import { browser } from 'wxt/browser'
 
 import { modrinthClient } from '../../utils/api'
 
@@ -126,32 +127,9 @@ onMounted(async () => {
 
 		discordUrl.value = url
 
-		const res = await fetch(`https://discord.com/api/v9/invites/${code}?with_counts=true`)
-		if (!res.ok) return
-
-		const data = (await res.json()) as {
-			approximate_member_count: number
-			approximate_presence_count: number
-			guild: {
-				id: string
-				name: string
-				description: string | null
-				icon: string | null
-				features: string[]
-			}
-		}
-		const { guild } = data
-		const features = guild?.features ?? []
-		invite.value = {
-			name: guild.name,
-			description: guild.description ?? null,
-			iconUrl: guild.icon
-				? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.webp?size=64`
-				: null,
-			approximate_member_count: data.approximate_member_count ?? 0,
-			approximate_presence_count: data.approximate_presence_count ?? 0,
-			partnered: features.includes('PARTNERED'),
-		}
+		const response = await browser.runtime.sendMessage({ type: 'discord-invite', code })
+		if (!response?.ok || !response.invite) return
+		invite.value = response.invite
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to load Discord data:', err)
 	}

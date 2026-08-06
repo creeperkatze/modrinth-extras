@@ -71,6 +71,7 @@ import { GitForkIcon, GitPullRequestIcon } from '@lucide/vue'
 import { ExternalIcon, IssuesIcon, StarIcon } from '@modrinth/assets'
 import { defineMessages, useVIntl } from '@modrinth/ui'
 import { onMounted, ref } from 'vue'
+import { browser } from 'wxt/browser'
 
 import { modrinthClient } from '../../utils/api'
 
@@ -124,32 +125,9 @@ onMounted(async () => {
 		const repo = ghMatch[1]
 		repoUrl.value = `https://github.com/${repo}`
 
-		const [repoRes, prRes] = await Promise.all([
-			fetch(`https://api.github.com/repos/${repo}`),
-			fetch(`https://api.github.com/repos/${repo}/pulls?state=open&per_page=1`),
-		])
-
-		if (!repoRes.ok) return
-		const repoData = (await repoRes.json()) as {
-			stargazers_count: number
-			forks_count: number
-			open_issues_count: number
-		}
-
-		let prCount = 0
-		if (prRes.ok) {
-			const prData = (await prRes.json()) as unknown[]
-			const link = prRes.headers.get('Link')
-			const lastPage = link?.match(/[?&]page=(\d+)>; rel="last"/)
-			prCount = lastPage ? parseInt(lastPage[1]) : prData.length
-		}
-
-		stats.value = {
-			stars: repoData.stargazers_count,
-			forks: repoData.forks_count,
-			prs: prCount,
-			issues: Math.max(0, repoData.open_issues_count - prCount),
-		}
+		const response = await browser.runtime.sendMessage({ type: 'github-stats', repo })
+		if (!response?.ok || !response.stats) return
+		stats.value = response.stats
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to load GitHub data:', err)
 	}

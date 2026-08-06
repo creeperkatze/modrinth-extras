@@ -8,6 +8,8 @@ import {
 	updateBadge,
 } from '../background/badge'
 import { handleNotificationClick } from '../background/desktop-notifications'
+import { fetchDiscordInvite } from '../background/external/discord'
+import { fetchGitHubStats } from '../background/external/github'
 import { detectBrowserLocale } from '../utils/i18n'
 import type { Notification } from '../utils/notifications'
 import { getSettings } from '../utils/settings'
@@ -72,6 +74,26 @@ export default defineBackground(() => {
 				const prevNotifs = await notificationsItem.getValue()
 				await applyNotifications(newNotifs, prevNotifs)
 			})()
+		}
+		if (message.type === 'github-stats') {
+			const repo = message.repo as string
+			fetchGitHubStats(repo)
+				.then((stats) => sendResponse({ ok: true, stats }))
+				.catch((err) => {
+					console.error('[Modrinth Extras] Failed to fetch GitHub stats:', err)
+					sendResponse({ ok: false })
+				})
+			return true
+		}
+		if (message.type === 'discord-invite') {
+			const code = message.code as string
+			fetchDiscordInvite(code)
+				.then((invite) => sendResponse({ ok: true, invite }))
+				.catch((err) => {
+					console.error('[Modrinth Extras] Failed to fetch Discord invite:', err)
+					sendResponse({ ok: false })
+				})
+			return true
 		}
 	})
 
