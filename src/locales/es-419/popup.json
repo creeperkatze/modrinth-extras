@@ -11,6 +11,15 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "Gráfico de tendencia de actividad"
   },
+  "feature.browserNotifications.description": {
+    "defaultMessage": "Notificaciones del sistema operativo para tus notificaciones de Modrinth."
+  },
+  "feature.browserNotifications.exampleMessage": {
+    "defaultMessage": "¡Este es un ejemplo de notificación de Modrinth Extras!"
+  },
+  "feature.browserNotifications.exampleTitle": {
+    "defaultMessage": "Ejemplo de notificación"
+  },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "Redirige las páginas de proyectos de CurseForge a Modrinth cuando esté disponible."
   },
@@ -79,15 +88,6 @@
   },
   "feature.quickSearch.title": {
     "defaultMessage": "Búsqueda rápida"
-  },
-  "feature.systemNotifications.description": {
-    "defaultMessage": "Notificaciones del sistema operativo para tus notificaciones de Modrinth."
-  },
-  "feature.systemNotifications.exampleMessage": {
-    "defaultMessage": "¡Este es un ejemplo de notificación de Modrinth Extras!"
-  },
-  "feature.systemNotifications.exampleTitle": {
-    "defaultMessage": "Ejemplo de notificación"
   },
   "feature.telemetry.description": {
     "defaultMessage": "Ayuda a mejorar la extensión compartiendo de forma anónima estadísticas como la versión de la extensión y qué funciones están habilitadas. Nunca se recopilan datos de Modrinth, actividad ni información personal."

@@ -20,6 +20,18 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "Міні-графік активности"
   },
+  "feature.browserNotifications.description": {
+    "defaultMessage": "Системні повідомлення для ваших повідомлень Modrinth."
+  },
+  "feature.browserNotifications.exampleMessage": {
+    "defaultMessage": "Це приклад повідомлення від Modrinth Extras!"
+  },
+  "feature.browserNotifications.exampleTitle": {
+    "defaultMessage": "Приклад повідомлення"
+  },
+  "feature.browserNotifications.sendTest": {
+    "defaultMessage": "Надіслати тестове повідомлення"
+  },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "За можливості перенаправляти сторінки проєктів CurseForge на Modrinth."
   },
@@ -112,18 +124,6 @@
   },
   "feature.searchBackground.title": {
     "defaultMessage": "Фон у пошуку"
-  },
-  "feature.systemNotifications.description": {
-    "defaultMessage": "Системні повідомлення для ваших повідомлень Modrinth."
-  },
-  "feature.systemNotifications.exampleMessage": {
-    "defaultMessage": "Це приклад повідомлення від Modrinth Extras!"
-  },
-  "feature.systemNotifications.exampleTitle": {
-    "defaultMessage": "Приклад повідомлення"
-  },
-  "feature.systemNotifications.sendTest": {
-    "defaultMessage": "Надіслати тестове повідомлення"
   },
   "feature.telemetry.description": {
     "defaultMessage": "Допоможіть поліпшити роботу розширення, надаючи анонімні статистичні дані, такі як версія розширення та перелік увімкнених функцій. Дані Modrinth, інформація про активність або особисті дані не збиратимуться."

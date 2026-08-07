@@ -5,6 +5,15 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "Мини-график активности"
   },
+  "feature.browserNotifications.description": {
+    "defaultMessage": "Системные уведомления для ваших уведомлений Modrinth."
+  },
+  "feature.browserNotifications.exampleMessage": {
+    "defaultMessage": "Это пример уведомления от Modrinth Extras!"
+  },
+  "feature.browserNotifications.exampleTitle": {
+    "defaultMessage": "Пример уведомления"
+  },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "Перенаправлять страницы проектов CurseForge на Modrinth, когда это возможно."
   },
@@ -52,15 +61,6 @@
   },
   "feature.quickSearch.title": {
     "defaultMessage": "Быстрый поиск"
-  },
-  "feature.systemNotifications.description": {
-    "defaultMessage": "Системные уведомления для ваших уведомлений Modrinth."
-  },
-  "feature.systemNotifications.exampleMessage": {
-    "defaultMessage": "Это пример уведомления от Modrinth Extras!"
-  },
-  "feature.systemNotifications.exampleTitle": {
-    "defaultMessage": "Пример уведомления"
   },
   "feature.telemetry.description": {
     "defaultMessage": "Помогите улучшить расширение, анонимно делясь статистикой, такой как версия расширения и включённые функции. Данные Modrinth, активность и личная информация не собираются."

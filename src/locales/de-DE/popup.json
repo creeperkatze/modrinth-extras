@@ -20,6 +20,18 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "Aktivitäts-Sparkline"
   },
+  "feature.browserNotifications.description": {
+    "defaultMessage": "Benachrichtigungen vom Betriebssystem für deine Modrinth-Benachrichtigungen."
+  },
+  "feature.browserNotifications.exampleMessage": {
+    "defaultMessage": "Das ist eine Beispielbenachrichtigung von Modrinth Extras!"
+  },
+  "feature.browserNotifications.exampleTitle": {
+    "defaultMessage": "Beispiel-Benachrichtigung"
+  },
+  "feature.browserNotifications.sendTest": {
+    "defaultMessage": "Testbenachrichtigung senden"
+  },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "Leite CurseForge-Projektseiten zu Modrinth um, falls verfügbar."
   },
@@ -118,18 +130,6 @@
   },
   "feature.searchBackground.title": {
     "defaultMessage": "Suchhintergrund"
-  },
-  "feature.systemNotifications.description": {
-    "defaultMessage": "Benachrichtigungen vom Betriebssystem für deine Modrinth-Benachrichtigungen."
-  },
-  "feature.systemNotifications.exampleMessage": {
-    "defaultMessage": "Das ist eine Beispielbenachrichtigung von Modrinth Extras!"
-  },
-  "feature.systemNotifications.exampleTitle": {
-    "defaultMessage": "Beispiel-Benachrichtigung"
-  },
-  "feature.systemNotifications.sendTest": {
-    "defaultMessage": "Testbenachrichtigung senden"
   },
   "feature.telemetry.description": {
     "defaultMessage": "Hilf dabei, die Erweiterung zu verbessern, indem du anonym Statistiken wie die Version der Erweiterung und die aktivierten Funktionen teilst. Es werden keine Modrinth-Daten, Aktivitäten oder persönliche Informationen erfasst."

@@ -118,7 +118,7 @@ On-device translation of a project's description into your language, when it dif
 
 Up-to-date unread notification count as a badge on the extension icon.
 
-### System notifications
+### Browser notifications
 
 Operating system notifications for your Modrinth notifications.
 

@@ -5,7 +5,7 @@ import { browser } from 'wxt/browser'
 import { getBackgroundAuthToken, modrinthClient } from '../utils/api'
 import { fetchNotifications, groupNotifications, type Notification } from '../utils/notifications'
 import { getSettings } from '../utils/settings'
-import { sendSystemNotifications } from './system-notifications'
+import { sendBrowserNotifications } from './browser-notifications'
 
 export const notificationsItem = storage.defineItem<Notification[] | null>('local:notifications', {
 	defaultValue: null,
@@ -46,7 +46,7 @@ export async function applyNotifications(
 	if (notificationBadge.enabled) {
 		await setBadge(unread)
 	}
-	await sendSystemNotifications(newNotifs, prevNotifs)
+	await sendBrowserNotifications(newNotifs, prevNotifs)
 	await Promise.all([
 		...(userId ? [userIdItem.setValue(userId)] : []),
 		notificationsItem.setValue(newNotifs),

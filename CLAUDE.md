@@ -29,7 +29,7 @@ UI strings use Vue I18n via `@modrinth/ui`'s `defineMessages` + `useVIntl`. Othe
 
 ## Architecture
 
-- `src/entrypoints/background.ts`: service worker (badge, system notifications, polling)
+- `src/entrypoints/background.ts`: service worker (badge, browser notifications, polling)
 - `src/entrypoints/content.ts`: main content script (ISOLATED world) — mounts all Vue components
 - `src/entrypoints/modrinth-bridge.content.ts`: MAIN world bridge — hooks Nuxt router for SPA navigation
 - `src/entrypoints/curseforge-bridge.content.ts`: patches `history.pushState`/`replaceState` on curseforge.com for SPA navigation

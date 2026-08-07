@@ -5,6 +5,15 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "Etkinlik Grafiği"
   },
+  "feature.browserNotifications.description": {
+    "defaultMessage": "Modrinth bildirimleriniz için işletim sistemi bildirimleri."
+  },
+  "feature.browserNotifications.exampleMessage": {
+    "defaultMessage": "Bu Modrinth Extras'tan bir örnek bildirimdir!"
+  },
+  "feature.browserNotifications.exampleTitle": {
+    "defaultMessage": "Örnek bildirim"
+  },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "Mevcut olduğunda CurseForge proje sayfalarını Modrinth'e yönlendir."
   },
@@ -58,15 +67,6 @@
   },
   "feature.quickSearch.title": {
     "defaultMessage": "Hızlı Arama"
-  },
-  "feature.systemNotifications.description": {
-    "defaultMessage": "Modrinth bildirimleriniz için işletim sistemi bildirimleri."
-  },
-  "feature.systemNotifications.exampleMessage": {
-    "defaultMessage": "Bu Modrinth Extras'tan bir örnek bildirimdir!"
-  },
-  "feature.systemNotifications.exampleTitle": {
-    "defaultMessage": "Örnek bildirim"
   },
   "feature.telemetry.description": {
     "defaultMessage": "Eklenti sürümü ve hangi özelliklerin açık olduğu gibi istatistikleri anonim olarak paylaşarak eklentiyi geliştirmeye yardımcı olun. Modrinth verileri, aktiviteler veya kişisel bilgiler asla toplanmaz."

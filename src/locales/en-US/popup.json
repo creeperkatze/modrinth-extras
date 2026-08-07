@@ -20,6 +20,21 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "Activity sparkline"
   },
+  "feature.browserNotifications.description": {
+    "defaultMessage": "Operating system notifications for your Modrinth notifications."
+  },
+  "feature.browserNotifications.exampleMessage": {
+    "defaultMessage": "This is an example notification from Modrinth Extras!"
+  },
+  "feature.browserNotifications.exampleTitle": {
+    "defaultMessage": "Example Notification"
+  },
+  "feature.browserNotifications.sendTest": {
+    "defaultMessage": "Send test notification"
+  },
+  "feature.browserNotifications.title": {
+    "defaultMessage": "Browser notifications"
+  },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "Redirect CurseForge project pages to Modrinth when available."
   },
@@ -118,21 +133,6 @@
   },
   "feature.searchBackground.title": {
     "defaultMessage": "Search background"
-  },
-  "feature.systemNotifications.description": {
-    "defaultMessage": "Operating system notifications for your Modrinth notifications."
-  },
-  "feature.systemNotifications.exampleMessage": {
-    "defaultMessage": "This is an example notification from Modrinth Extras!"
-  },
-  "feature.systemNotifications.exampleTitle": {
-    "defaultMessage": "Example Notification"
-  },
-  "feature.systemNotifications.sendTest": {
-    "defaultMessage": "Send test notification"
-  },
-  "feature.systemNotifications.title": {
-    "defaultMessage": "System notifications"
   },
   "feature.telemetry.description": {
     "defaultMessage": "Help improve the extension by anonymously sharing statistics like the extension version and which features are enabled. No Modrinth data, activity, or personal information is ever collected."

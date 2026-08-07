@@ -10,7 +10,7 @@ import { getSettings } from '../utils/settings'
 // Maps notification ID to the relative link so the click handler can open the right page
 export const notificationLinks = new Map<string, string>()
 
-export async function sendSystemNotifications(
+export async function sendBrowserNotifications(
 	newNotifs: Notification[],
 	prevNotifs: Notification[] | null,
 ) {
@@ -20,7 +20,7 @@ export async function sendSystemNotifications(
 	// No prior state means this is the first run, save baseline without notifying
 	if (prevNotifs === null) {
 		console.log(
-			'[Modrinth Extras] System notifications: First run, saving baseline without notifying',
+			'[Modrinth Extras] Browser notifications: First run, saving baseline without notifying',
 		)
 		return
 	}
@@ -28,16 +28,18 @@ export async function sendSystemNotifications(
 	const prevIds = new Set(prevNotifs.map((n) => n.id))
 	const brandNew = newNotifs.filter((n) => !n.read && !prevIds.has(n.id))
 	if (brandNew.length === 0) {
-		console.log('[Modrinth Extras] System notifications: No new notifications')
+		console.log('[Modrinth Extras] Browser notifications: No new notifications')
 		return
 	}
 
-	console.log(`[Modrinth Extras] System notifications: ${brandNew.length} new, fetching extra data`)
+	console.log(
+		`[Modrinth Extras] Browser notifications: ${brandNew.length} new, fetching extra data`,
+	)
 	await fetchExtraNotificationData(brandNew)
 
 	const grouped = groupNotifications(brandNew)
 	console.log(
-		`[Modrinth Extras] System notifications: Sending ${grouped.length} notification(s) (${brandNew.length} raw, ${grouped.length} grouped)`,
+		`[Modrinth Extras] Browser notifications: Sending ${grouped.length} notification(s) (${brandNew.length} raw, ${grouped.length} grouped)`,
 	)
 
 	for (const notif of grouped) {
@@ -53,7 +55,7 @@ export async function sendSystemNotifications(
 				: notif.title
 		const message = notif.text
 		console.log(
-			`[Modrinth Extras] System notification: "${title}" (id: ${notif.id}, group size: ${groupSize})`,
+			`[Modrinth Extras] Browser notification: "${title}" (id: ${notif.id}, group size: ${groupSize})`,
 		)
 		notificationLinks.set(notif.id, notif.link)
 		await browser.notifications.create(notif.id, {
