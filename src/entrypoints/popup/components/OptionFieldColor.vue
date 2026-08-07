@@ -32,6 +32,7 @@ import { computed, ref, watch } from 'vue'
 import ColorPicker from './ColorPicker.vue'
 
 const HEX_COLOR_PATTERN = /^#[0-9a-fA-F]{6}$/
+const BARE_HEX_COLOR_PATTERN = /^[0-9a-fA-F]{6}$/
 
 const props = withDefaults(
 	defineProps<{
@@ -62,11 +63,15 @@ watch(
 watch(text, (newValue) => {
 	const trimmed = String(newValue ?? '').trim()
 	if (HEX_COLOR_PATTERN.test(trimmed)) emit('update:modelValue', trimmed)
+	else if (BARE_HEX_COLOR_PATTERN.test(trimmed)) emit('update:modelValue', `#${trimmed}`)
 })
 
-const swatchColor = computed(() =>
-	HEX_COLOR_PATTERN.test(text.value) ? text.value : props.defaultColor,
-)
+const swatchColor = computed(() => {
+	const trimmed = text.value.trim()
+	if (HEX_COLOR_PATTERN.test(trimmed)) return trimmed
+	if (BARE_HEX_COLOR_PATTERN.test(trimmed)) return `#${trimmed}`
+	return props.defaultColor
+})
 
 function toggleOpen() {
 	open.value = !open.value
