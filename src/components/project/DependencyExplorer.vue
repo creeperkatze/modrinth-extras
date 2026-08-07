@@ -39,7 +39,7 @@
 						orient="auto"
 						markerUnits="userSpaceOnUse"
 					>
-						<path d="M 0 0 L 8 3.5 L 0 7 Z" class="fill-green" />
+						<path d="M 0 0 L 8 3.5 L 0 7 Z" class="fill-brand" />
 					</marker>
 					<marker
 						id="mre-arrow-optional"
@@ -85,7 +85,7 @@
 							:d="computeEdgePath(edge, edgeOffsets.get(edgeKey(edge)) ?? 0)"
 							class="fill-none transition-opacity duration-150 ease-in-out"
 							:class="{
-								'stroke-green': edge.type === 'required',
+								'stroke-brand': edge.type === 'required',
 								'stroke-secondary': edge.type === 'optional',
 								'stroke-blue': edge.type === 'embedded',
 							}"
