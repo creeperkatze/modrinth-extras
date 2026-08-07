@@ -32,18 +32,6 @@
   "feature.dependencySidebar.title": {
     "defaultMessage": "Barra lateral de dependencias"
   },
-  "feature.desktopNotifications.description": {
-    "defaultMessage": "Notificaciones del sistema operativo para tus notificaciones de Modrinth."
-  },
-  "feature.desktopNotifications.exampleMessage": {
-    "defaultMessage": "¡Este es un ejemplo de notificación de Modrinth Extras!"
-  },
-  "feature.desktopNotifications.exampleTitle": {
-    "defaultMessage": "Ejemplo de notificación"
-  },
-  "feature.desktopNotifications.title": {
-    "defaultMessage": "Notificaciones de escritorio"
-  },
   "feature.discordSidebar.description": {
     "defaultMessage": "Nombre del servidor, descripción, número de miembros y número de usuarios en línea de los servidores de Discord vinculados."
   },
@@ -91,6 +79,15 @@
   },
   "feature.quickSearch.title": {
     "defaultMessage": "Búsqueda rápida"
+  },
+  "feature.systemNotifications.description": {
+    "defaultMessage": "Notificaciones del sistema operativo para tus notificaciones de Modrinth."
+  },
+  "feature.systemNotifications.exampleMessage": {
+    "defaultMessage": "¡Este es un ejemplo de notificación de Modrinth Extras!"
+  },
+  "feature.systemNotifications.exampleTitle": {
+    "defaultMessage": "Ejemplo de notificación"
   },
   "feature.telemetry.description": {
     "defaultMessage": "Ayuda a mejorar la extensión compartiendo de forma anónima estadísticas como la versión de la extensión y qué funciones están habilitadas. Nunca se recopilan datos de Modrinth, actividad ni información personal."

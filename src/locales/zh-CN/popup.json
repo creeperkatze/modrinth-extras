@@ -41,18 +41,6 @@
   "feature.dependencySidebar.title": {
     "defaultMessage": "依赖关系侧边栏"
   },
-  "feature.desktopNotifications.description": {
-    "defaultMessage": "为您的Modrinth通知提供操作系统通知。"
-  },
-  "feature.desktopNotifications.exampleMessage": {
-    "defaultMessage": "这是来自 Modrinth Extras 的一个通知示例！"
-  },
-  "feature.desktopNotifications.exampleTitle": {
-    "defaultMessage": "示例通知"
-  },
-  "feature.desktopNotifications.title": {
-    "defaultMessage": "桌面通知"
-  },
   "feature.discordSidebar.description": {
     "defaultMessage": "已关联 Discord 服务器的名称、描述、成员数量及在线人数。"
   },
@@ -118,6 +106,15 @@
   },
   "feature.searchBackground.title": {
     "defaultMessage": "搜索背景"
+  },
+  "feature.systemNotifications.description": {
+    "defaultMessage": "为您的Modrinth通知提供操作系统通知。"
+  },
+  "feature.systemNotifications.exampleMessage": {
+    "defaultMessage": "这是来自 Modrinth Extras 的一个通知示例！"
+  },
+  "feature.systemNotifications.exampleTitle": {
+    "defaultMessage": "示例通知"
   },
   "feature.telemetry.description": {
     "defaultMessage": "通过匿名分享扩展程序版本及已启用功能等统计信息，帮助改进该扩展程序。我们绝不会收集任何 Modrinth 数据、活动记录或个人信息。"

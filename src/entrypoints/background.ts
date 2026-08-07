@@ -7,9 +7,9 @@ import {
 	showCachedBadge,
 	updateBadge,
 } from '../background/badge'
-import { handleNotificationClick } from '../background/desktop-notifications'
 import { fetchDiscordInvite } from '../background/external/discord'
 import { fetchRepositoryStats } from '../background/external/repository'
+import { handleNotificationClick } from '../background/system-notifications'
 import { detectBrowserLocale } from '../utils/i18n'
 import type { Notification } from '../utils/notifications'
 import type { RepositoryPlatform } from '../utils/repository-links'

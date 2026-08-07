@@ -11,18 +11,6 @@
   "feature.curseforgeRedirect.title": {
     "defaultMessage": "Reindirizzamento CurseForge"
   },
-  "feature.desktopNotifications.description": {
-    "defaultMessage": "Notifiche del sistema operativo per le tue notifiche Modrinth."
-  },
-  "feature.desktopNotifications.exampleMessage": {
-    "defaultMessage": "Questa è una notifica di esempio da Modrinth Extras!"
-  },
-  "feature.desktopNotifications.exampleTitle": {
-    "defaultMessage": "Notifiche di esempio"
-  },
-  "feature.desktopNotifications.title": {
-    "defaultMessage": "Notifiche desktop"
-  },
   "feature.discordSidebar.description": {
     "defaultMessage": "Nome del server, descrizione, numero di membri e numero di utenti online per i server Discord collegati."
   },
@@ -58,6 +46,15 @@
   },
   "feature.quickSearch.title": {
     "defaultMessage": "Ricerca rapida"
+  },
+  "feature.systemNotifications.description": {
+    "defaultMessage": "Notifiche del sistema operativo per le tue notifiche Modrinth."
+  },
+  "feature.systemNotifications.exampleMessage": {
+    "defaultMessage": "Questa è una notifica di esempio da Modrinth Extras!"
+  },
+  "feature.systemNotifications.exampleTitle": {
+    "defaultMessage": "Notifiche di esempio"
   },
   "feature.telemetry.description": {
     "defaultMessage": "Aiutaci a migliorare l'estensione condividendo in modo anonimo statistiche come la versione dell'estensione e quali funzioni sono attivate. Non vengono mai raccolti dati Modrinth, attività o informazioni personali."

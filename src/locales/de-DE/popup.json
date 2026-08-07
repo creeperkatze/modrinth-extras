@@ -41,21 +41,6 @@
   "feature.dependencySidebar.title": {
     "defaultMessage": "Abhängigkeits-Seitenleiste"
   },
-  "feature.desktopNotifications.description": {
-    "defaultMessage": "Benachrichtigungen vom Betriebssystem für deine Modrinth-Benachrichtigungen."
-  },
-  "feature.desktopNotifications.exampleMessage": {
-    "defaultMessage": "Das ist eine Beispielbenachrichtigung von Modrinth Extras!"
-  },
-  "feature.desktopNotifications.exampleTitle": {
-    "defaultMessage": "Beispiel-Benachrichtigung"
-  },
-  "feature.desktopNotifications.sendTest": {
-    "defaultMessage": "Testbenachrichtigung senden"
-  },
-  "feature.desktopNotifications.title": {
-    "defaultMessage": "Desktop-Benachrichtigungen"
-  },
   "feature.discordSidebar.description": {
     "defaultMessage": "Servername, Beschreibung, Mitgliederzahl und Anzahl der aktiven Nutzer für verknüpfte Discordserver."
   },
@@ -133,6 +118,18 @@
   },
   "feature.searchBackground.title": {
     "defaultMessage": "Suchhintergrund"
+  },
+  "feature.systemNotifications.description": {
+    "defaultMessage": "Benachrichtigungen vom Betriebssystem für deine Modrinth-Benachrichtigungen."
+  },
+  "feature.systemNotifications.exampleMessage": {
+    "defaultMessage": "Das ist eine Beispielbenachrichtigung von Modrinth Extras!"
+  },
+  "feature.systemNotifications.exampleTitle": {
+    "defaultMessage": "Beispiel-Benachrichtigung"
+  },
+  "feature.systemNotifications.sendTest": {
+    "defaultMessage": "Testbenachrichtigung senden"
   },
   "feature.telemetry.description": {
     "defaultMessage": "Hilf dabei, die Erweiterung zu verbessern, indem du anonym Statistiken wie die Version der Erweiterung und die aktivierten Funktionen teilst. Es werden keine Modrinth-Daten, Aktivitäten oder persönliche Informationen erfasst."

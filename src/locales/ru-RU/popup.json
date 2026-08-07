@@ -11,18 +11,6 @@
   "feature.curseforgeRedirect.title": {
     "defaultMessage": "Перенаправление CurseForge"
   },
-  "feature.desktopNotifications.description": {
-    "defaultMessage": "Системные уведомления для ваших уведомлений Modrinth."
-  },
-  "feature.desktopNotifications.exampleMessage": {
-    "defaultMessage": "Это пример уведомления от Modrinth Extras!"
-  },
-  "feature.desktopNotifications.exampleTitle": {
-    "defaultMessage": "Пример уведомления"
-  },
-  "feature.desktopNotifications.title": {
-    "defaultMessage": "Уведомления на рабочем столе"
-  },
   "feature.discordSidebar.description": {
     "defaultMessage": "Название сервера, описание, количество участников и онлайн для связанных серверов Discord."
   },
@@ -64,6 +52,15 @@
   },
   "feature.quickSearch.title": {
     "defaultMessage": "Быстрый поиск"
+  },
+  "feature.systemNotifications.description": {
+    "defaultMessage": "Системные уведомления для ваших уведомлений Modrinth."
+  },
+  "feature.systemNotifications.exampleMessage": {
+    "defaultMessage": "Это пример уведомления от Modrinth Extras!"
+  },
+  "feature.systemNotifications.exampleTitle": {
+    "defaultMessage": "Пример уведомления"
   },
   "feature.telemetry.description": {
     "defaultMessage": "Помогите улучшить расширение, анонимно делясь статистикой, такой как версия расширения и включённые функции. Данные Modrinth, активность и личная информация не собираются."

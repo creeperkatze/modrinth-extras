@@ -53,7 +53,7 @@ const contentFeatures = [
 	'discordSidebar',
 	'galleryBackground',
 ]
-const extensionFeatures = ['notificationBadge', 'desktopNotifications', 'curseforgeRedirect']
+const extensionFeatures = ['notificationBadge', 'systemNotifications', 'curseforgeRedirect']
 
 function featureLines(keys: string[]): string {
 	return keys

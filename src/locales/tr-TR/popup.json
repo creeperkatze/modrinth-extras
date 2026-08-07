@@ -11,18 +11,6 @@
   "feature.curseforgeRedirect.title": {
     "defaultMessage": "CurseForge yönlendirmesi"
   },
-  "feature.desktopNotifications.description": {
-    "defaultMessage": "Modrinth bildirimleriniz için işletim sistemi bildirimleri."
-  },
-  "feature.desktopNotifications.exampleMessage": {
-    "defaultMessage": "Bu Modrinth Extras'tan bir örnek bildirimdir!"
-  },
-  "feature.desktopNotifications.exampleTitle": {
-    "defaultMessage": "Örnek bildirim"
-  },
-  "feature.desktopNotifications.title": {
-    "defaultMessage": "Masaüstü bildirimleri"
-  },
   "feature.discordSidebar.description": {
     "defaultMessage": "Bağlı Discord sunucularının sunucu adı, açıklaması, üye sayısı ve çevrim içi sayısı."
   },
@@ -70,6 +58,15 @@
   },
   "feature.quickSearch.title": {
     "defaultMessage": "Hızlı Arama"
+  },
+  "feature.systemNotifications.description": {
+    "defaultMessage": "Modrinth bildirimleriniz için işletim sistemi bildirimleri."
+  },
+  "feature.systemNotifications.exampleMessage": {
+    "defaultMessage": "Bu Modrinth Extras'tan bir örnek bildirimdir!"
+  },
+  "feature.systemNotifications.exampleTitle": {
+    "defaultMessage": "Örnek bildirim"
   },
   "feature.telemetry.description": {
     "defaultMessage": "Eklenti sürümü ve hangi özelliklerin açık olduğu gibi istatistikleri anonim olarak paylaşarak eklentiyi geliştirmeye yardımcı olun. Modrinth verileri, aktiviteler veya kişisel bilgiler asla toplanmaz."

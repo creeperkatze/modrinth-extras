@@ -492,24 +492,24 @@ const messages = defineMessages({
 		id: 'feature.notificationBadge.description',
 		defaultMessage: 'Up-to-date unread notification count as a badge on the extension icon.',
 	},
-	'feature.desktopNotifications.title': {
-		id: 'feature.desktopNotifications.title',
-		defaultMessage: 'Desktop notifications',
+	'feature.systemNotifications.title': {
+		id: 'feature.systemNotifications.title',
+		defaultMessage: 'System notifications',
 	},
-	'feature.desktopNotifications.description': {
-		id: 'feature.desktopNotifications.description',
+	'feature.systemNotifications.description': {
+		id: 'feature.systemNotifications.description',
 		defaultMessage: 'Operating system notifications for your Modrinth notifications.',
 	},
-	'feature.desktopNotifications.exampleTitle': {
-		id: 'feature.desktopNotifications.exampleTitle',
+	'feature.systemNotifications.exampleTitle': {
+		id: 'feature.systemNotifications.exampleTitle',
 		defaultMessage: 'Example Notification',
 	},
-	'feature.desktopNotifications.exampleMessage': {
-		id: 'feature.desktopNotifications.exampleMessage',
+	'feature.systemNotifications.exampleMessage': {
+		id: 'feature.systemNotifications.exampleMessage',
 		defaultMessage: 'This is an example notification from Modrinth Extras!',
 	},
-	'feature.desktopNotifications.sendTest': {
-		id: 'feature.desktopNotifications.sendTest',
+	'feature.systemNotifications.sendTest': {
+		id: 'feature.systemNotifications.sendTest',
 		defaultMessage: 'Send test notification',
 	},
 	'feature.curseforgeRedirect.title': {
@@ -774,16 +774,16 @@ const extensionFeatures = computed<FeatureDef[]>(() => [
 	{
 		key: 'desktopNotifications',
 		icon: MonitorIcon,
-		title: formatMessage(messages['feature.desktopNotifications.title']),
-		description: formatMessage(messages['feature.desktopNotifications.description']),
+		title: formatMessage(messages['feature.systemNotifications.title']),
+		description: formatMessage(messages['feature.systemNotifications.description']),
 		actionIcon: PlayIcon,
-		actionLabel: formatMessage(messages['feature.desktopNotifications.sendTest']),
+		actionLabel: formatMessage(messages['feature.systemNotifications.sendTest']),
 		onAction: () => {
 			browser.notifications.create({
 				type: 'basic',
 				iconUrl: browser.runtime.getURL('/icon-128.png'),
-				title: formatMessage(messages['feature.desktopNotifications.exampleTitle']),
-				message: formatMessage(messages['feature.desktopNotifications.exampleMessage']),
+				title: formatMessage(messages['feature.systemNotifications.exampleTitle']),
+				message: formatMessage(messages['feature.systemNotifications.exampleMessage']),
 			})
 		},
 	},

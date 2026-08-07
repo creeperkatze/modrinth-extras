@@ -41,21 +41,6 @@
   "feature.dependencySidebar.title": {
     "defaultMessage": "Залежності на бічній панелі"
   },
-  "feature.desktopNotifications.description": {
-    "defaultMessage": "Системні повідомлення для ваших повідомлень Modrinth."
-  },
-  "feature.desktopNotifications.exampleMessage": {
-    "defaultMessage": "Це приклад повідомлення від Modrinth Extras!"
-  },
-  "feature.desktopNotifications.exampleTitle": {
-    "defaultMessage": "Приклад повідомлення"
-  },
-  "feature.desktopNotifications.sendTest": {
-    "defaultMessage": "Надіслати тестове повідомлення"
-  },
-  "feature.desktopNotifications.title": {
-    "defaultMessage": "Повідомлення на робочому столі"
-  },
   "feature.discordSidebar.description": {
     "defaultMessage": "Назва сервера, опис, кількість учасників та онлайн, для пов'язаних серверів Discord."
   },
@@ -127,6 +112,18 @@
   },
   "feature.searchBackground.title": {
     "defaultMessage": "Фон у пошуку"
+  },
+  "feature.systemNotifications.description": {
+    "defaultMessage": "Системні повідомлення для ваших повідомлень Modrinth."
+  },
+  "feature.systemNotifications.exampleMessage": {
+    "defaultMessage": "Це приклад повідомлення від Modrinth Extras!"
+  },
+  "feature.systemNotifications.exampleTitle": {
+    "defaultMessage": "Приклад повідомлення"
+  },
+  "feature.systemNotifications.sendTest": {
+    "defaultMessage": "Надіслати тестове повідомлення"
   },
   "feature.telemetry.description": {
     "defaultMessage": "Допоможіть поліпшити роботу розширення, надаючи анонімні статистичні дані, такі як версія розширення та перелік увімкнених функцій. Дані Modrinth, інформація про активність або особисті дані не збиратимуться."

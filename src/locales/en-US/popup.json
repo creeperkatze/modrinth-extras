@@ -41,21 +41,6 @@
   "feature.dependencySidebar.title": {
     "defaultMessage": "Dependency sidebar"
   },
-  "feature.desktopNotifications.description": {
-    "defaultMessage": "Operating system notifications for your Modrinth notifications."
-  },
-  "feature.desktopNotifications.exampleMessage": {
-    "defaultMessage": "This is an example notification from Modrinth Extras!"
-  },
-  "feature.desktopNotifications.exampleTitle": {
-    "defaultMessage": "Example Notification"
-  },
-  "feature.desktopNotifications.sendTest": {
-    "defaultMessage": "Send test notification"
-  },
-  "feature.desktopNotifications.title": {
-    "defaultMessage": "Desktop notifications"
-  },
   "feature.discordSidebar.description": {
     "defaultMessage": "Server name, description, member count, and online count for linked Discord servers."
   },
@@ -133,6 +118,21 @@
   },
   "feature.searchBackground.title": {
     "defaultMessage": "Search background"
+  },
+  "feature.systemNotifications.description": {
+    "defaultMessage": "Operating system notifications for your Modrinth notifications."
+  },
+  "feature.systemNotifications.exampleMessage": {
+    "defaultMessage": "This is an example notification from Modrinth Extras!"
+  },
+  "feature.systemNotifications.exampleTitle": {
+    "defaultMessage": "Example Notification"
+  },
+  "feature.systemNotifications.sendTest": {
+    "defaultMessage": "Send test notification"
+  },
+  "feature.systemNotifications.title": {
+    "defaultMessage": "System notifications"
   },
   "feature.telemetry.description": {
     "defaultMessage": "Help improve the extension by anonymously sharing statistics like the extension version and which features are enabled. No Modrinth data, activity, or personal information is ever collected."

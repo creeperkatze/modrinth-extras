@@ -32,18 +32,6 @@
   "feature.dependencySidebar.title": {
     "defaultMessage": "الشريط الجانبي للملحقات"
   },
-  "feature.desktopNotifications.description": {
-    "defaultMessage": "إشعارات نظام التشغيل لإشعارات Modrinth الخاصة بك."
-  },
-  "feature.desktopNotifications.exampleMessage": {
-    "defaultMessage": "هذا مثال على إشعار من Modrinth Extras!"
-  },
-  "feature.desktopNotifications.exampleTitle": {
-    "defaultMessage": "مثال لإشعار"
-  },
-  "feature.desktopNotifications.title": {
-    "defaultMessage": "إشعارات سطح المكتب"
-  },
   "feature.discordSidebar.description": {
     "defaultMessage": "اسم الخادم، الوصف، عدد الأعضاء، والعد عبر الإنترنت لخوادم Discord المرتبطة."
   },
@@ -91,6 +79,15 @@
   },
   "feature.quickSearch.title": {
     "defaultMessage": "البحث السريع"
+  },
+  "feature.systemNotifications.description": {
+    "defaultMessage": "إشعارات نظام التشغيل لإشعارات Modrinth الخاصة بك."
+  },
+  "feature.systemNotifications.exampleMessage": {
+    "defaultMessage": "هذا مثال على إشعار من Modrinth Extras!"
+  },
+  "feature.systemNotifications.exampleTitle": {
+    "defaultMessage": "مثال لإشعار"
   },
   "feature.telemetry.description": {
     "defaultMessage": "ساعد في تحسين الملحق من خلال مشاركة إحصائيات بشكل مجهول، مثل إصدار الملحق والميزات التي تم تمكينها. لا يتم جمع أي بيانات Modrinth أو أنشطة أو معلومات شخصية على الإطلاق."
