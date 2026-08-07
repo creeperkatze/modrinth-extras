@@ -21,7 +21,7 @@
     "defaultMessage": "Activity sparkline"
   },
   "feature.browserNotifications.description": {
-    "defaultMessage": "Operating system notifications for your Modrinth notifications."
+    "defaultMessage": "Browser notifications for your Modrinth notifications."
   },
   "feature.browserNotifications.exampleMessage": {
     "defaultMessage": "This is an example notification from Modrinth Extras!"

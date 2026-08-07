@@ -20,9 +20,6 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "Aktivitäts-Sparkline"
   },
-  "feature.browserNotifications.description": {
-    "defaultMessage": "Benachrichtigungen vom Betriebssystem für deine Modrinth-Benachrichtigungen."
-  },
   "feature.browserNotifications.exampleMessage": {
     "defaultMessage": "Das ist eine Beispielbenachrichtigung von Modrinth Extras!"
   },

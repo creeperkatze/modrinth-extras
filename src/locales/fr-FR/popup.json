@@ -14,9 +14,6 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "Graphique d'activité"
   },
-  "feature.browserNotifications.description": {
-    "defaultMessage": "Notifications du système d'exploitation pour tes notifications Modrinth."
-  },
   "feature.browserNotifications.exampleMessage": {
     "defaultMessage": "Ceci est un exemple de notification de Modrinth Extras!"
   },

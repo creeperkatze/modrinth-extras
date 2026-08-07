@@ -11,9 +11,6 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "خط شرارة النشاط"
   },
-  "feature.browserNotifications.description": {
-    "defaultMessage": "إشعارات نظام التشغيل لإشعارات Modrinth الخاصة بك."
-  },
   "feature.browserNotifications.exampleMessage": {
     "defaultMessage": "هذا مثال على إشعار من Modrinth Extras!"
   },

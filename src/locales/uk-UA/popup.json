@@ -20,9 +20,6 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "Міні-графік активности"
   },
-  "feature.browserNotifications.description": {
-    "defaultMessage": "Системні повідомлення для ваших повідомлень Modrinth."
-  },
   "feature.browserNotifications.exampleMessage": {
     "defaultMessage": "Це приклад повідомлення від Modrinth Extras!"
   },

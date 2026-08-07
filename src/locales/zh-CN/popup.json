@@ -20,9 +20,6 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "活动图表"
   },
-  "feature.browserNotifications.description": {
-    "defaultMessage": "为您的Modrinth通知提供操作系统通知。"
-  },
   "feature.browserNotifications.exampleMessage": {
     "defaultMessage": "这是来自 Modrinth Extras 的一个通知示例！"
   },

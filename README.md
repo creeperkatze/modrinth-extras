@@ -120,7 +120,7 @@ Up-to-date unread notification count as a badge on the extension icon.
 
 ### Browser notifications
 
-Operating system notifications for your Modrinth notifications.
+Browser notifications for your Modrinth notifications.
 
 ### CurseForge redirect
 

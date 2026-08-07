@@ -498,7 +498,7 @@ const messages = defineMessages({
 	},
 	'feature.browserNotifications.description': {
 		id: 'feature.browserNotifications.description',
-		defaultMessage: 'Operating system notifications for your Modrinth notifications.',
+		defaultMessage: 'Browser notifications for your Modrinth notifications.',
 	},
 	'feature.browserNotifications.exampleTitle': {
 		id: 'feature.browserNotifications.exampleTitle',
