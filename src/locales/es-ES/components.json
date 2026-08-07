@@ -53,6 +53,12 @@
   "dependencySidebar.title": {
     "defaultMessage": "Dependencias"
   },
+  "discordSidebar.loadError": {
+    "defaultMessage": "No se pudo cargar datos de Discord"
+  },
+  "discordSidebar.loading": {
+    "defaultMessage": "Cargando"
+  },
   "discordSidebar.members": {
     "defaultMessage": "{count} miembros"
   },
@@ -64,6 +70,9 @@
   },
   "errorNotice.message": {
     "defaultMessage": "El error puede ser relacionado con Modrinth Extras. Intenta desactivar la extensión y recargar la página antes de reportar esto a Modrinth. Si este error desaparece, repórtalo <link>Aqui</link>."
+  },
+  "modpacksSidebar.title": {
+    "defaultMessage": "Modpacks"
   },
   "monetizationBadge.demonetized": {
     "defaultMessage": "No monetizado"
@@ -77,8 +86,20 @@
   "monetizationBadge.monetized": {
     "defaultMessage": "Monetizado"
   },
+  "notificationsIndicator.acceptInvite": {
+    "defaultMessage": "Aceptar invitación"
+  },
+  "notificationsIndicator.declineInvite": {
+    "defaultMessage": "Rechazar invitación"
+  },
+  "notificationsIndicator.label": {
+    "defaultMessage": "Notificaciones"
+  },
   "notificationsIndicator.markAllAsRead": {
     "defaultMessage": "Marcar todos como leídos"
+  },
+  "notificationsIndicator.markAsRead": {
+    "defaultMessage": "Marcar comó leido"
   },
   "notificationsIndicator.noUnread": {
     "defaultMessage": "No hay notificaciones sin leer"
@@ -139,6 +160,27 @@
   },
   "quickSearch.search": {
     "defaultMessage": "Buscar"
+  },
+  "repositorySidebar.forks": {
+    "defaultMessage": "{count} copias"
+  },
+  "repositorySidebar.loadError": {
+    "defaultMessage": "No se pudo cargar datos del repositorio"
+  },
+  "repositorySidebar.loading": {
+    "defaultMessage": "Cargando"
+  },
+  "repositorySidebar.openIssues": {
+    "defaultMessage": "{count} Problemas abiertos"
+  },
+  "repositorySidebar.openPRs": {
+    "defaultMessage": "{count} solicitudes de cambios abiertos"
+  },
+  "repositorySidebar.stars": {
+    "defaultMessage": "{count} estrellas"
+  },
+  "repositorySidebar.title": {
+    "defaultMessage": "Repositorio"
   },
   "toolsSidebar.copied": {
     "defaultMessage": "¡Copiado!"

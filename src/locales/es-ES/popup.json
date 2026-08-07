@@ -20,11 +20,20 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "Gráfica de actividad"
   },
+  "feature.browserNotifications.description": {
+    "defaultMessage": "Notificaciones del navegador para tus notificaciones de Modrinth."
+  },
   "feature.browserNotifications.exampleMessage": {
-    "defaultMessage": "¡Este es un ejemplo de una notificación de Modrinth Extras!"
+    "defaultMessage": "¡Esto es un ejemplo de una notificación de Modrinth Extras!"
   },
   "feature.browserNotifications.exampleTitle": {
     "defaultMessage": "Ejemplo de notificación"
+  },
+  "feature.browserNotifications.sendTest": {
+    "defaultMessage": "Enviar notificación de prueba"
+  },
+  "feature.browserNotifications.title": {
+    "defaultMessage": "Notificaciones del navegador"
   },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "Redirigir páginas de CurseForge a las de Modrinth si existen."
@@ -58,6 +67,18 @@
   },
   "feature.galleryBackground.title": {
     "defaultMessage": "Fondo de Galería"
+  },
+  "feature.githubSidebar.description": {
+    "defaultMessage": "Estrellas, problemas, solicitudes de cambios abiertos, y copias para repositorios de GitHub, GitLab, Codeberg y Bitbucket vinculados."
+  },
+  "feature.githubSidebar.title": {
+    "defaultMessage": "Barra lateral del repositorio"
+  },
+  "feature.modpacksSidebar.description": {
+    "defaultMessage": "Mostrar todos los modpacks en los que aparece el mod."
+  },
+  "feature.modpacksSidebar.title": {
+    "defaultMessage": "Barra lateral de modpacks"
   },
   "feature.monetizationBadge.description": {
     "defaultMessage": "Ver el estado de monetización de un proyecto en la barra lateral."

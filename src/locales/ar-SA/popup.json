@@ -11,12 +11,6 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "خط شرارة النشاط"
   },
-  "feature.browserNotifications.exampleMessage": {
-    "defaultMessage": "هذا مثال على إشعار من Modrinth Extras!"
-  },
-  "feature.browserNotifications.exampleTitle": {
-    "defaultMessage": "مثال لإشعار"
-  },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "إعادة توجيه صفحات مشروع CurseForge إلى Modrinth عندما تكون متاحة."
   },

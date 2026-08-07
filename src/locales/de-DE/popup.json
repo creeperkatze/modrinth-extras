@@ -20,14 +20,20 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "Aktivitäts-Sparkline"
   },
+  "feature.browserNotifications.description": {
+    "defaultMessage": "Browser-Benachrichtigungen für deine Modrinth-Benachrichtigungen."
+  },
   "feature.browserNotifications.exampleMessage": {
     "defaultMessage": "Das ist eine Beispielbenachrichtigung von Modrinth Extras!"
   },
   "feature.browserNotifications.exampleTitle": {
-    "defaultMessage": "Beispiel-Benachrichtigung"
+    "defaultMessage": "Beispielbenachrichtigung"
   },
   "feature.browserNotifications.sendTest": {
     "defaultMessage": "Testbenachrichtigung senden"
+  },
+  "feature.browserNotifications.title": {
+    "defaultMessage": "Browser-Benachrichtigungen"
   },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "Leite CurseForge-Projektseiten zu Modrinth um, falls verfügbar."

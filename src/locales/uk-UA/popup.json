@@ -20,15 +20,6 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "Міні-графік активности"
   },
-  "feature.browserNotifications.exampleMessage": {
-    "defaultMessage": "Це приклад повідомлення від Modrinth Extras!"
-  },
-  "feature.browserNotifications.exampleTitle": {
-    "defaultMessage": "Приклад повідомлення"
-  },
-  "feature.browserNotifications.sendTest": {
-    "defaultMessage": "Надіслати тестове повідомлення"
-  },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "За можливості перенаправляти сторінки проєктів CurseForge на Modrinth."
   },

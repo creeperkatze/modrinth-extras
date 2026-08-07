@@ -11,12 +11,6 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "Gráfico de tendencia de actividad"
   },
-  "feature.browserNotifications.exampleMessage": {
-    "defaultMessage": "¡Este es un ejemplo de notificación de Modrinth Extras!"
-  },
-  "feature.browserNotifications.exampleTitle": {
-    "defaultMessage": "Ejemplo de notificación"
-  },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "Redirige las páginas de proyectos de CurseForge a Modrinth cuando esté disponible."
   },

@@ -20,12 +20,6 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "活动图表"
   },
-  "feature.browserNotifications.exampleMessage": {
-    "defaultMessage": "这是来自 Modrinth Extras 的一个通知示例！"
-  },
-  "feature.browserNotifications.exampleTitle": {
-    "defaultMessage": "示例通知"
-  },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "在可用的情况下，将 CurseForge 项目页面重定向至 Modrinth。"
   },
