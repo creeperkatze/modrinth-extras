@@ -93,7 +93,10 @@ async function toggle() {
 		try {
 			const walker = document.createTreeWalker(markdownBody, NodeFilter.SHOW_TEXT, {
 				acceptNode(node) {
-					if (!node.textContent?.trim()) return NodeFilter.FILTER_REJECT
+					const trimmed = node.textContent?.trim()
+					if (!trimmed) return NodeFilter.FILTER_REJECT
+					// Punctuation-only nodes hallucinate garbage text when translated.
+					if (!/\p{L}/u.test(trimmed)) return NodeFilter.FILTER_REJECT
 					if (node.parentElement?.closest('code, pre')) return NodeFilter.FILTER_REJECT
 					return NodeFilter.FILTER_ACCEPT
 				},
@@ -109,8 +112,13 @@ async function toggle() {
 
 			for (const node of textNodes) {
 				const original = node.textContent ?? ''
+				const leading = original.match(/^\s+/)?.[0] ?? ''
+				const trailing = original.match(/\s+$/)?.[0] ?? ''
+
 				const result = await translator.translate(original)
-				node.textContent = result.trim() || original
+				const translatedText = result.trim() || original.trim()
+				// Boundary whitespace matters next to inline elements like links.
+				node.textContent = leading + translatedText + trailing
 			}
 			translated.value = true
 		} finally {
