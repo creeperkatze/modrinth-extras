@@ -53,6 +53,12 @@
   "dependencySidebar.title": {
     "defaultMessage": "Залежності"
   },
+  "discordSidebar.loadError": {
+    "defaultMessage": "Не вдалося завантажити дані Discord"
+  },
+  "discordSidebar.loading": {
+    "defaultMessage": "Завантаження"
+  },
   "discordSidebar.members": {
     "defaultMessage": "{count} учасників"
   },
@@ -154,6 +160,27 @@
   },
   "quickSearch.search": {
     "defaultMessage": "Пошук"
+  },
+  "repositorySidebar.forks": {
+    "defaultMessage": "{count} форків"
+  },
+  "repositorySidebar.loadError": {
+    "defaultMessage": "Не вдалося завантажити дані репозиторію"
+  },
+  "repositorySidebar.loading": {
+    "defaultMessage": "Завантаження"
+  },
+  "repositorySidebar.openIssues": {
+    "defaultMessage": "{count} відкритих задач"
+  },
+  "repositorySidebar.openPRs": {
+    "defaultMessage": "{count} відкритих запитів на злиття"
+  },
+  "repositorySidebar.stars": {
+    "defaultMessage": "{count} зірок"
+  },
+  "repositorySidebar.title": {
+    "defaultMessage": "Репозиторій"
   },
   "toolsSidebar.copied": {
     "defaultMessage": "Скопійовано!"

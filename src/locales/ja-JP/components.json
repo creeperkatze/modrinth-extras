@@ -1,2 +1,117 @@
-{}
+{
+  "dependencyExplorer.depth": {
+    "defaultMessage": "深さ"
+  },
+  "dependencyExplorer.loading": {
+    "defaultMessage": "読み込み中"
+  },
+  "dependencyExplorer.reset": {
+    "defaultMessage": "リセット"
+  },
+  "dependencyNode.optional": {
+    "defaultMessage": "任意"
+  },
+  "dependencyNode.required": {
+    "defaultMessage": "必要"
+  },
+  "dependencySidebar.loading": {
+    "defaultMessage": "読み込み中"
+  },
+  "discordSidebar.loading": {
+    "defaultMessage": "読み込み中"
+  },
+  "discordSidebar.members": {
+    "defaultMessage": "{count}人メンバー"
+  },
+  "discordSidebar.online": {
+    "defaultMessage": "{count}人オンライン"
+  },
+  "notificationsIndicator.acceptInvite": {
+    "defaultMessage": "招待を受け付ける"
+  },
+  "notificationsIndicator.declineInvite": {
+    "defaultMessage": "招待を拒否する"
+  },
+  "notificationsIndicator.label": {
+    "defaultMessage": "通知"
+  },
+  "notificationsIndicator.noUnread": {
+    "defaultMessage": "読んでいない通知がありません"
+  },
+  "notificationsIndicator.projectUpdated": {
+    "defaultMessage": "{title}は変更されました"
+  },
+  "notificationsIndicator.viewAll": {
+    "defaultMessage": "すべて表示"
+  },
+  "notificationsIndicator.viewHistory": {
+    "defaultMessage": "履歴を表示"
+  },
+  "projectCardActions.copied": {
+    "defaultMessage": "コピー済み！"
+  },
+  "projectCardActions.copyLink": {
+    "defaultMessage": "リンクをコピー"
+  },
+  "projectCardActions.download": {
+    "defaultMessage": "ダウンロード"
+  },
+  "projectCardActions.follow": {
+    "defaultMessage": "フォロー"
+  },
+  "projectCardActions.newCollection": {
+    "defaultMessage": "新しいコレクショーンを作成"
+  },
+  "projectCardActions.noCollections": {
+    "defaultMessage": "コレクショーンが見つかりません。"
+  },
+  "projectCardActions.save": {
+    "defaultMessage": "保存"
+  },
+  "projectCardActions.saved": {
+    "defaultMessage": "保存済み"
+  },
+  "projectCardActions.searchPlaceholder": {
+    "defaultMessage": "検索..."
+  },
+  "projectCardActions.unfollow": {
+    "defaultMessage": "フォローをキャンセル"
+  },
+  "quickSearch.examples": {
+    "defaultMessage": "実例"
+  },
+  "quickSearch.recent": {
+    "defaultMessage": "最近"
+  },
+  "quickSearch.search": {
+    "defaultMessage": "検索"
+  },
+  "repositorySidebar.forks": {
+    "defaultMessage": "{count}個のフォーク"
+  },
+  "repositorySidebar.loadError": {
+    "defaultMessage": "リポジトリー情報の読み込みに失敗しました"
+  },
+  "repositorySidebar.loading": {
+    "defaultMessage": "読み込み中"
+  },
+  "repositorySidebar.stars": {
+    "defaultMessage": "{count}スター"
+  },
+  "repositorySidebar.title": {
+    "defaultMessage": "リポジトリー"
+  },
+  "toolsSidebar.copied": {
+    "defaultMessage": "コピー済み！"
+  },
+  "toolsSidebar.copyInstallCommand": {
+    "defaultMessage": "{manager}コマンドをコピー"
+  },
+  "toolsSidebar.title": {
+    "defaultMessage": "ツール"
+  },
+  "translateDescription.translating": {
+    "defaultMessage": "翻訳中…"
+  }
+}
 

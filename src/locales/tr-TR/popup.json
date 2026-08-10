@@ -1,15 +1,60 @@
 {
+  "feature.accentColor.color": {
+    "defaultMessage": "Renk"
+  },
+  "feature.accentColor.description": {
+    "defaultMessage": "Modrinth yeşilini özel bir vurgu rengiyle değiştirin."
+  },
+  "feature.accentColor.title": {
+    "defaultMessage": "Vurgu rengi"
+  },
+  "feature.activitySparkline.days": {
+    "defaultMessage": "{count} gün"
+  },
   "feature.activitySparkline.description": {
     "defaultMessage": "Proje sayfalarında sürüm etkinliği grafiği."
   },
+  "feature.activitySparkline.timeRange": {
+    "defaultMessage": "Zaman aralığı"
+  },
   "feature.activitySparkline.title": {
     "defaultMessage": "Etkinlik Grafiği"
+  },
+  "feature.browserNotifications.description": {
+    "defaultMessage": "Modrinth bildirimleriniz için tarayıcı bildirimleri."
+  },
+  "feature.browserNotifications.exampleMessage": {
+    "defaultMessage": "Bu Modrinth Extras'tan bir örnek bildirimdir!"
+  },
+  "feature.browserNotifications.exampleTitle": {
+    "defaultMessage": "Örnek bildirim"
+  },
+  "feature.browserNotifications.sendTest": {
+    "defaultMessage": "Test bildirimi gönder"
+  },
+  "feature.browserNotifications.title": {
+    "defaultMessage": "Tarayıcı bildirimleri"
   },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "Mevcut olduğunda CurseForge proje sayfalarını Modrinth'e yönlendir."
   },
   "feature.curseforgeRedirect.title": {
     "defaultMessage": "CurseForge yönlendirmesi"
+  },
+  "feature.dependencyExplorer.description": {
+    "defaultMessage": "Bağımlılık ağacının tamamını incelemek için etkileşimli grafik."
+  },
+  "feature.dependencyExplorer.disabledTooltip": {
+    "defaultMessage": "Bağımlılık kenar çubuğunun etkinleştirilmesi gerekiyor"
+  },
+  "feature.dependencyExplorer.title": {
+    "defaultMessage": "Bağımlılık Gezgini"
+  },
+  "feature.dependencySidebar.description": {
+    "defaultMessage": "Proje sayfalarında katlanabilir bağımlılık ağacı."
+  },
+  "feature.dependencySidebar.title": {
+    "defaultMessage": "Bağımlılık kenar çubuğu"
   },
   "feature.discordSidebar.description": {
     "defaultMessage": "Bağlı Discord sunucularının sunucu adı, açıklaması, üye sayısı ve çevrim içi sayısı."
@@ -22,6 +67,24 @@
   },
   "feature.galleryBackground.title": {
     "defaultMessage": "Galeri arka planı"
+  },
+  "feature.githubSidebar.description": {
+    "defaultMessage": "Bağlantılı GitHub, GitLab, Codeberg ve Bitbucket depolarına ait yıldızlar, sorunlar, çekme istekleri ve çatallamalar."
+  },
+  "feature.githubSidebar.title": {
+    "defaultMessage": "Depo kenar çubuğu"
+  },
+  "feature.modpacksSidebar.description": {
+    "defaultMessage": "Bu modun yer aldığı tüm mod paketlerini göster."
+  },
+  "feature.modpacksSidebar.title": {
+    "defaultMessage": "Mod paketleri kenar çubuğu"
+  },
+  "feature.monetizationBadge.description": {
+    "defaultMessage": "Bir projenin gelir elde etme durumunu kenar çubuğunda göster."
+  },
+  "feature.monetizationBadge.title": {
+    "defaultMessage": "Gelir elde etme rozeti"
   },
   "feature.notificationBadge.description": {
     "defaultMessage": "Eklenti simgesi üzerindeki bildirim işaretiyle, okunmamış bildirim sayısını güncel olarak takip edin."
@@ -53,11 +116,23 @@
   "feature.projectCardActions.title": {
     "defaultMessage": "Proje kartı eylemleri"
   },
+  "feature.projectTypesPrimaryNav.description": {
+    "defaultMessage": "Modları, eklentileri, kaynak paketlerini ve diğer proje türlerini ana gezinme çubuğuna taşıyın."
+  },
+  "feature.projectTypesPrimaryNav.title": {
+    "defaultMessage": "Proje türü gezinme"
+  },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K veya / tuşlarına basarak, yükleyiciler, sürümler, kategoriler ve türler için filtrelenmiş etiketlere sahip komut paleti tarzı bir arama yapabilirsiniz."
   },
   "feature.quickSearch.title": {
     "defaultMessage": "Hızlı Arama"
+  },
+  "feature.searchBackground.description": {
+    "defaultMessage": "Keşif sayfalarında bir afiş arka planı gösterin."
+  },
+  "feature.searchBackground.title": {
+    "defaultMessage": "Arama geçmişi"
   },
   "feature.telemetry.description": {
     "defaultMessage": "Eklenti sürümü ve hangi özelliklerin açık olduğu gibi istatistikleri anonim olarak paylaşarak eklentiyi geliştirmeye yardımcı olun. Modrinth verileri, aktiviteler veya kişisel bilgiler asla toplanmaz."
@@ -68,8 +143,32 @@
   "feature.telemetry.title": {
     "defaultMessage": "Telemetri"
   },
+  "feature.toolsSidebar.description": {
+    "defaultMessage": "Gömme kodlarını oluşturun ve mod yöneticisi kurulum komutlarını kopyalayın."
+  },
+  "feature.toolsSidebar.modManager": {
+    "defaultMessage": "Mod yöneticisi"
+  },
   "feature.toolsSidebar.title": {
     "defaultMessage": "Araçlar kenar çubuğu"
+  },
+  "feature.translateDescription.description": {
+    "defaultMessage": "Bir projenin açıklaması, kendi dilinizden farklıysa, cihaz üzerinde kendi dilinize çevrilir."
+  },
+  "feature.translateDescription.disabledTooltip": {
+    "defaultMessage": "Bu tarayıcıda desteklenmeyen API’ler gerektirir"
+  },
+  "feature.translateDescription.title": {
+    "defaultMessage": "Açıklamayı çevir"
+  },
+  "popup.discordPrompt.dismiss": {
+    "defaultMessage": "Vazgeç"
+  },
+  "popup.discordPrompt.message": {
+    "defaultMessage": "Discord sunucusunda yardım alın, görüşlerinizi paylaşın ve güncellemeleri takip edin."
+  },
+  "popup.discordPrompt.title": {
+    "defaultMessage": "Discord Sunucusuna Katıl"
   },
   "popup.donatePrompt.dismiss": {
     "defaultMessage": "Vazgeç"
@@ -101,8 +200,20 @@
   "popup.group.extension": {
     "defaultMessage": "Uzantı"
   },
+  "popup.group.flags": {
+    "defaultMessage": "İşaretçiler"
+  },
   "popup.group.general": {
     "defaultMessage": "Genel"
+  },
+  "popup.surveyPrompt.dismiss": {
+    "defaultMessage": "Vazgeç"
+  },
+  "popup.surveyPrompt.placeholder": {
+    "defaultMessage": "Cevabınızı yazın..."
+  },
+  "popup.surveyPrompt.submit": {
+    "defaultMessage": "Gönder"
   },
   "search.any": {
     "defaultMessage": "Herhangi"

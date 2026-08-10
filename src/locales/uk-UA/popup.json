@@ -12,7 +12,7 @@
     "defaultMessage": "{count} дні(в)"
   },
   "feature.activitySparkline.description": {
-    "defaultMessage": "Графік активності релізів на сторінках проєктів."
+    "defaultMessage": "Графік активности релізів на сторінках проєктів."
   },
   "feature.activitySparkline.timeRange": {
     "defaultMessage": "Проміжок часу"
@@ -20,8 +20,23 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "Міні-графік активности"
   },
+  "feature.browserNotifications.description": {
+    "defaultMessage": "Повідомлення в браузері для ваших повідомлень Modrinth."
+  },
+  "feature.browserNotifications.exampleMessage": {
+    "defaultMessage": "Це приклад повідомлення від Modrinth Extras!"
+  },
+  "feature.browserNotifications.exampleTitle": {
+    "defaultMessage": "Приклад повідомлення"
+  },
+  "feature.browserNotifications.sendTest": {
+    "defaultMessage": "Надіслати тестове повідомлення"
+  },
+  "feature.browserNotifications.title": {
+    "defaultMessage": "Повідомлення у браузері"
+  },
   "feature.curseforgeRedirect.description": {
-    "defaultMessage": "За можливості перенаправляти сторінки проєктів CurseForge на Modrinth."
+    "defaultMessage": "За можливости перенаправляти сторінки проєктів CurseForge на Modrinth."
   },
   "feature.curseforgeRedirect.title": {
     "defaultMessage": "Перенаправлення CurseForge"
@@ -52,6 +67,12 @@
   },
   "feature.galleryBackground.title": {
     "defaultMessage": "Фон галереї"
+  },
+  "feature.githubSidebar.description": {
+    "defaultMessage": "Зірки, проблеми, запити на злиття та форки для пов’язаних репозиторіїв GitHub, GitLab, Codeberg та Bitbucket."
+  },
+  "feature.githubSidebar.title": {
+    "defaultMessage": "Репозиторій на бічній панелі"
   },
   "feature.modpacksSidebar.description": {
     "defaultMessage": "Показати всі збірки, до яких входить цей мод."

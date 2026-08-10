@@ -1,2 +1,36 @@
-{}
+{
+  "feature.accentColor.color": {
+    "defaultMessage": "色"
+  },
+  "feature.activitySparkline.days": {
+    "defaultMessage": "{count}日"
+  },
+  "feature.browserNotifications.sendTest": {
+    "defaultMessage": "テスト通知を送る"
+  },
+  "feature.translateDescription.title": {
+    "defaultMessage": "説明を翻訳する"
+  },
+  "popup.discordPrompt.title": {
+    "defaultMessage": "Discordを参加する"
+  },
+  "popup.group.general": {
+    "defaultMessage": "一般"
+  },
+  "popup.surveyPrompt.submit": {
+    "defaultMessage": "送る"
+  },
+  "search.any": {
+    "defaultMessage": "任意"
+  },
+  "search.placeholder": {
+    "defaultMessage": "検索..."
+  },
+  "settings.language": {
+    "defaultMessage": "言語"
+  },
+  "settings.language.description": {
+    "defaultMessage": "<link>Crowdin</link>で翻訳にご協力してください。一部の言語は未完成の可能性があります。"
+  }
+}
 

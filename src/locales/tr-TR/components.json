@@ -1,9 +1,63 @@
 {
+  "dependencyExplorer.centerView": {
+    "defaultMessage": "Merkez görünümü"
+  },
+  "dependencyExplorer.depth": {
+    "defaultMessage": "Derinlik"
+  },
   "dependencyExplorer.loading": {
     "defaultMessage": "Yükleniyor"
   },
   "dependencyExplorer.noDependencies": {
     "defaultMessage": "Bu projenin hiçbir bağımlılığı yok"
+  },
+  "dependencyExplorer.reset": {
+    "defaultMessage": "Sıfırla"
+  },
+  "dependencyExplorer.search": {
+    "defaultMessage": "Bağımlılıkları ara"
+  },
+  "dependencyExplorer.title": {
+    "defaultMessage": "Bağımlılık Gezgini"
+  },
+  "dependencyNode.collapse": {
+    "defaultMessage": "Bağımlılıkları daralt"
+  },
+  "dependencyNode.embedded": {
+    "defaultMessage": "Gömülü"
+  },
+  "dependencyNode.expand": {
+    "defaultMessage": "Bağımlılıkları genişlet"
+  },
+  "dependencyNode.incompatible": {
+    "defaultMessage": "Uyumsuz"
+  },
+  "dependencyNode.optional": {
+    "defaultMessage": "İsteğe bağlı"
+  },
+  "dependencyNode.required": {
+    "defaultMessage": "Gerekli"
+  },
+  "dependencySidebar.loadError": {
+    "defaultMessage": "Bağımlılıklar yüklenemedi"
+  },
+  "dependencySidebar.loading": {
+    "defaultMessage": "Yükleniyor"
+  },
+  "dependencySidebar.none": {
+    "defaultMessage": "Gerekli bağımlılık yok"
+  },
+  "dependencySidebar.openExplorer": {
+    "defaultMessage": "Bağımlılık gezginini aç"
+  },
+  "dependencySidebar.title": {
+    "defaultMessage": "Bağımlılıklar"
+  },
+  "discordSidebar.loadError": {
+    "defaultMessage": "Discord verileri yüklenemedi"
+  },
+  "discordSidebar.loading": {
+    "defaultMessage": "Yükleniyor"
   },
   "discordSidebar.members": {
     "defaultMessage": "{count} üye"
@@ -17,8 +71,35 @@
   "errorNotice.message": {
     "defaultMessage": "Bu hata Modrinth Extras ile ilgili olabilir. Bunu Modrinth’e bildirmeden önce eklentiyi devre dışı bırakıp sayfayı yenilemeyi deneyin. Eğer hata giderse, lütfen <link>buradan</link> bildirin."
   },
+  "modpacksSidebar.title": {
+    "defaultMessage": "Mod paketleri"
+  },
+  "monetizationBadge.demonetized": {
+    "defaultMessage": "Gelir elde edilmiyor"
+  },
+  "monetizationBadge.forceDemonetized": {
+    "defaultMessage": "Gelir elde etme devre dışı bırakıldı"
+  },
+  "monetizationBadge.forceDemonetizedTitle": {
+    "defaultMessage": "Bu projedeki gelir elde etme özelliği, Modrinth ekibi tarafından devre dışı bırakılmıştır"
+  },
+  "monetizationBadge.monetized": {
+    "defaultMessage": "Gelir Elde eden"
+  },
+  "notificationsIndicator.acceptInvite": {
+    "defaultMessage": "Daveti kabul et"
+  },
+  "notificationsIndicator.declineInvite": {
+    "defaultMessage": "Daveti reddet"
+  },
+  "notificationsIndicator.label": {
+    "defaultMessage": "Bildirimler"
+  },
   "notificationsIndicator.markAllAsRead": {
     "defaultMessage": "Tümünü okundu olarak işaretle"
+  },
+  "notificationsIndicator.markAsRead": {
+    "defaultMessage": "Okundu olarak işaretle"
   },
   "notificationsIndicator.noUnread": {
     "defaultMessage": "Okunmamış bildirim yok"
@@ -80,14 +161,47 @@
   "quickSearch.search": {
     "defaultMessage": "Ara"
   },
+  "repositorySidebar.forks": {
+    "defaultMessage": "{count} Çatallamalar"
+  },
+  "repositorySidebar.loadError": {
+    "defaultMessage": "Depo verileri yüklenemedi"
+  },
+  "repositorySidebar.loading": {
+    "defaultMessage": "Yükleniyor"
+  },
+  "repositorySidebar.openIssues": {
+    "defaultMessage": "{count} açık sorunlar"
+  },
+  "repositorySidebar.openPRs": {
+    "defaultMessage": "{count} açık inceleme istekleri"
+  },
+  "repositorySidebar.stars": {
+    "defaultMessage": "{count} yıldız"
+  },
+  "repositorySidebar.title": {
+    "defaultMessage": "Depo"
+  },
   "toolsSidebar.copied": {
     "defaultMessage": "Kopyalandı!"
+  },
+  "toolsSidebar.copyInstallCommand": {
+    "defaultMessage": "{manager} komutunu kopyala"
   },
   "toolsSidebar.generateEmbed": {
     "defaultMessage": "Embed oluştur"
   },
   "toolsSidebar.title": {
     "defaultMessage": "Araçlar"
+  },
+  "translateDescription.showOriginal": {
+    "defaultMessage": "Özgün içeriği göster"
+  },
+  "translateDescription.translate": {
+    "defaultMessage": "Açıklamayı çevir"
+  },
+  "translateDescription.translating": {
+    "defaultMessage": "Çevriliyor…"
   }
 }
 
