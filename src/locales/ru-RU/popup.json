@@ -1,15 +1,60 @@
 {
+  "feature.accentColor.color": {
+    "defaultMessage": "Цвет"
+  },
+  "feature.accentColor.description": {
+    "defaultMessage": "Заменяет зелёный цвет Modrinth на свой собственный акцентный цвет."
+  },
+  "feature.accentColor.title": {
+    "defaultMessage": "Акцентный цвет"
+  },
+  "feature.activitySparkline.days": {
+    "defaultMessage": "{count} дней"
+  },
   "feature.activitySparkline.description": {
     "defaultMessage": "График активности релизов на страницах проектов."
   },
+  "feature.activitySparkline.timeRange": {
+    "defaultMessage": "Временной диапазон"
+  },
   "feature.activitySparkline.title": {
     "defaultMessage": "Мини-график активности"
+  },
+  "feature.browserNotifications.description": {
+    "defaultMessage": "Браузерные уведомления для ваших уведомлений от Modrinth."
+  },
+  "feature.browserNotifications.exampleMessage": {
+    "defaultMessage": "Это пример уведомления от Modrinth Extras!"
+  },
+  "feature.browserNotifications.exampleTitle": {
+    "defaultMessage": "Пример уведомления"
+  },
+  "feature.browserNotifications.sendTest": {
+    "defaultMessage": "Отправить тестовое уведомление"
+  },
+  "feature.browserNotifications.title": {
+    "defaultMessage": "Браузерные уведомления"
   },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "Перенаправлять страницы проектов CurseForge на Modrinth, когда это возможно."
   },
   "feature.curseforgeRedirect.title": {
     "defaultMessage": "Перенаправление CurseForge"
+  },
+  "feature.dependencyExplorer.description": {
+    "defaultMessage": "Интерактивный график для просмотра полного древа зависимостей."
+  },
+  "feature.dependencyExplorer.disabledTooltip": {
+    "defaultMessage": "Требуется включенная боковая панель зависимостей"
+  },
+  "feature.dependencyExplorer.title": {
+    "defaultMessage": "Просмотрщик зависимостей"
+  },
+  "feature.dependencySidebar.description": {
+    "defaultMessage": "Сворачиваемое древо зависимостей на страницах проектов."
+  },
+  "feature.dependencySidebar.title": {
+    "defaultMessage": "Боковая панель зависимостей"
   },
   "feature.discordSidebar.description": {
     "defaultMessage": "Название сервера, описание, количество участников и онлайн для связанных серверов Discord."
@@ -22,6 +67,24 @@
   },
   "feature.galleryBackground.title": {
     "defaultMessage": "Фон галереи"
+  },
+  "feature.githubSidebar.description": {
+    "defaultMessage": "Звездочки, проблемы, запросы на слияние и форки для привязанных репозиториев на GitHub, GitLab, Codeberg и Bitbucket."
+  },
+  "feature.githubSidebar.title": {
+    "defaultMessage": "Боковая панель репозитория"
+  },
+  "feature.modpacksSidebar.description": {
+    "defaultMessage": "Показать все сборки, в которых представлен этот мод."
+  },
+  "feature.modpacksSidebar.title": {
+    "defaultMessage": "Боковая панель сборок"
+  },
+  "feature.monetizationBadge.description": {
+    "defaultMessage": "Показать статус монетизации проекта в боковой панели."
+  },
+  "feature.monetizationBadge.title": {
+    "defaultMessage": "Значок монетизации"
   },
   "feature.notificationBadge.description": {
     "defaultMessage": "Актуальное число непрочитанных уведомлений на значке расширения."
@@ -38,20 +101,38 @@
   "feature.projectCardActions.description": {
     "defaultMessage": "Скачивайте, подписывайтесь и сохраняйте проекты прямо из карточек проектов."
   },
+  "feature.projectCardActions.gameVersion": {
+    "defaultMessage": "Версия игры"
+  },
   "feature.projectCardActions.modLoader": {
     "defaultMessage": "Загрузчик модов"
   },
   "feature.projectCardActions.pluginLoader": {
     "defaultMessage": "Загрузчик плагинов"
   },
+  "feature.projectCardActions.shaderLoader": {
+    "defaultMessage": "Загрузчик шейдеров"
+  },
   "feature.projectCardActions.title": {
     "defaultMessage": "Действия в карточке проекта"
+  },
+  "feature.projectTypesPrimaryNav.description": {
+    "defaultMessage": "Перемести моды, плагины, наборы ресурсов и другие типы проектов в главную панель навигации."
+  },
+  "feature.projectTypesPrimaryNav.title": {
+    "defaultMessage": "Навигация по типам проектов"
   },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K или / для поиска в стиле командной палитры с фильтрами по загрузчикам, версиям, категориям и типам."
   },
   "feature.quickSearch.title": {
     "defaultMessage": "Быстрый поиск"
+  },
+  "feature.searchBackground.description": {
+    "defaultMessage": "Отображает фон на экране поиска проектов."
+  },
+  "feature.searchBackground.title": {
+    "defaultMessage": "Фон поиска"
   },
   "feature.telemetry.description": {
     "defaultMessage": "Помогите улучшить расширение, анонимно делясь статистикой, такой как версия расширения и включённые функции. Данные Modrinth, активность и личная информация не собираются."
@@ -62,11 +143,47 @@
   "feature.telemetry.title": {
     "defaultMessage": "Телеметрия"
   },
+  "feature.toolsSidebar.description": {
+    "defaultMessage": "Генерируйте встраиваемые коды и копируйте команды установки для менеджеров модов."
+  },
+  "feature.toolsSidebar.modManager": {
+    "defaultMessage": "Менеджер модов"
+  },
   "feature.toolsSidebar.title": {
     "defaultMessage": "Боковая панель инструментов"
   },
+  "feature.translateDescription.description": {
+    "defaultMessage": "Перевод описания проекта на твой язык прямо на устройстве, если оно отличается."
+  },
+  "feature.translateDescription.disabledTooltip": {
+    "defaultMessage": "Требуются API, не поддерживаемые в этом браузере"
+  },
+  "feature.translateDescription.title": {
+    "defaultMessage": "Перевести описание"
+  },
+  "popup.discordPrompt.dismiss": {
+    "defaultMessage": "Отменить"
+  },
+  "popup.discordPrompt.message": {
+    "defaultMessage": "Обратись за помощью, поделись отзывами и следите за обновлениями на Discord сервере."
+  },
+  "popup.discordPrompt.title": {
+    "defaultMessage": "Присоединиться к Discord"
+  },
+  "popup.donatePrompt.dismiss": {
+    "defaultMessage": "Отменить"
+  },
+  "popup.donatePrompt.message": {
+    "defaultMessage": "Modrinth Extras всегда будет бесплатным, с открытым исходным кодом и без рекламы. Если он тебе пригодился, подумай о том, чтобы поддержать его разработку небольшим пожертвованием."
+  },
+  "popup.donatePrompt.title": {
+    "defaultMessage": "Поддержать разработку расширения"
+  },
   "popup.footer.checking": {
     "defaultMessage": "Проверка"
+  },
+  "popup.footer.donate": {
+    "defaultMessage": "Пожертвовать"
   },
   "popup.footer.latestVersion": {
     "defaultMessage": "Последняя версия"
@@ -83,11 +200,26 @@
   "popup.group.extension": {
     "defaultMessage": "Расширение"
   },
+  "popup.group.flags": {
+    "defaultMessage": "Флаги"
+  },
   "popup.group.general": {
     "defaultMessage": "Общие"
   },
+  "popup.surveyPrompt.dismiss": {
+    "defaultMessage": "Отменить"
+  },
+  "popup.surveyPrompt.placeholder": {
+    "defaultMessage": "Напишите свой ответ..."
+  },
+  "popup.surveyPrompt.submit": {
+    "defaultMessage": "Отправить"
+  },
   "search.any": {
     "defaultMessage": "Любой"
+  },
+  "search.placeholder": {
+    "defaultMessage": "Поиск..."
   },
   "settings.language": {
     "defaultMessage": "Язык"

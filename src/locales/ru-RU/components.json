@@ -1,9 +1,63 @@
 {
+  "dependencyExplorer.centerView": {
+    "defaultMessage": "Центрировать вид"
+  },
+  "dependencyExplorer.depth": {
+    "defaultMessage": "Глубина"
+  },
   "dependencyExplorer.loading": {
     "defaultMessage": "Загрузка"
   },
   "dependencyExplorer.noDependencies": {
     "defaultMessage": "У этого проекта нет зависимостей"
+  },
+  "dependencyExplorer.reset": {
+    "defaultMessage": "Сброс"
+  },
+  "dependencyExplorer.search": {
+    "defaultMessage": "Поиск зависимостей"
+  },
+  "dependencyExplorer.title": {
+    "defaultMessage": "Просмотрщик зависимостей"
+  },
+  "dependencyNode.collapse": {
+    "defaultMessage": "Свернуть зависимости"
+  },
+  "dependencyNode.embedded": {
+    "defaultMessage": "Встроенно"
+  },
+  "dependencyNode.expand": {
+    "defaultMessage": "Развернуть зависимости"
+  },
+  "dependencyNode.incompatible": {
+    "defaultMessage": "Несовместимо"
+  },
+  "dependencyNode.optional": {
+    "defaultMessage": "Необязательно"
+  },
+  "dependencyNode.required": {
+    "defaultMessage": "Требуется"
+  },
+  "dependencySidebar.loadError": {
+    "defaultMessage": "Не удалось загрузить зависимости"
+  },
+  "dependencySidebar.loading": {
+    "defaultMessage": "Загрузка"
+  },
+  "dependencySidebar.none": {
+    "defaultMessage": "Нет зависимостей"
+  },
+  "dependencySidebar.openExplorer": {
+    "defaultMessage": "Открыть просмотрщик зависимостей"
+  },
+  "dependencySidebar.title": {
+    "defaultMessage": "Зависимости"
+  },
+  "discordSidebar.loadError": {
+    "defaultMessage": "Не удалось загрузить данные Discord"
+  },
+  "discordSidebar.loading": {
+    "defaultMessage": "Загрузка"
   },
   "discordSidebar.members": {
     "defaultMessage": "{count} участников"
@@ -17,8 +71,35 @@
   "errorNotice.message": {
     "defaultMessage": "Ошибка может быть связана с Modrinth Extras. Попробуйте отключить расширение и обновить страницу перед отправкой отчёта в Modrinth. Если ошибка исчезнет, пожалуйста, сообщите об этом <link>здесь</link>."
   },
+  "modpacksSidebar.title": {
+    "defaultMessage": "Сборки"
+  },
+  "monetizationBadge.demonetized": {
+    "defaultMessage": "Не монетизировано"
+  },
+  "monetizationBadge.forceDemonetized": {
+    "defaultMessage": "Монетизация отключена"
+  },
+  "monetizationBadge.forceDemonetizedTitle": {
+    "defaultMessage": "Монетизация этого проекта была отключена сотрудниками Modrinth"
+  },
+  "monetizationBadge.monetized": {
+    "defaultMessage": "Монетизировано"
+  },
+  "notificationsIndicator.acceptInvite": {
+    "defaultMessage": "Принять приглашение"
+  },
+  "notificationsIndicator.declineInvite": {
+    "defaultMessage": "Отклонить приглашение"
+  },
+  "notificationsIndicator.label": {
+    "defaultMessage": "Уведомления"
+  },
   "notificationsIndicator.markAllAsRead": {
     "defaultMessage": "Отметить всё как прочитанное"
+  },
+  "notificationsIndicator.markAsRead": {
+    "defaultMessage": "Отметить как прочитанное"
   },
   "notificationsIndicator.noUnread": {
     "defaultMessage": "Нет непрочитанных уведомлений"
@@ -32,6 +113,9 @@
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "Посмотреть историю"
   },
+  "projectCardActions.checkingDownload": {
+    "defaultMessage": "Проверка доступной версии..."
+  },
   "projectCardActions.copied": {
     "defaultMessage": "Скопировано!"
   },
@@ -40,6 +124,9 @@
   },
   "projectCardActions.download": {
     "defaultMessage": "Скачать"
+  },
+  "projectCardActions.downloadUnavailable": {
+    "defaultMessage": "{loader, select, none {Нет доступных версий для {version}} other {Нет доступных версий для {loader} {version}}}"
   },
   "projectCardActions.follow": {
     "defaultMessage": "Подписаться"
@@ -62,6 +149,9 @@
   "projectCardActions.unfollow": {
     "defaultMessage": "Отписаться"
   },
+  "quickSearch.clearRecent": {
+    "defaultMessage": "Очистить недавние"
+  },
   "quickSearch.examples": {
     "defaultMessage": "Примеры"
   },
@@ -71,14 +161,47 @@
   "quickSearch.search": {
     "defaultMessage": "Поиск"
   },
+  "repositorySidebar.forks": {
+    "defaultMessage": "{count} форков"
+  },
+  "repositorySidebar.loadError": {
+    "defaultMessage": "Не удалось загрузить данные репозитория"
+  },
+  "repositorySidebar.loading": {
+    "defaultMessage": "Загрузка"
+  },
+  "repositorySidebar.openIssues": {
+    "defaultMessage": "{count} открытых проблем"
+  },
+  "repositorySidebar.openPRs": {
+    "defaultMessage": "{count} открытых запросов на слияние"
+  },
+  "repositorySidebar.stars": {
+    "defaultMessage": "{count} звезд"
+  },
+  "repositorySidebar.title": {
+    "defaultMessage": "Репозиторий"
+  },
   "toolsSidebar.copied": {
     "defaultMessage": "Скопировано!"
+  },
+  "toolsSidebar.copyInstallCommand": {
+    "defaultMessage": "Скопировать {manager} команду"
   },
   "toolsSidebar.generateEmbed": {
     "defaultMessage": "Сгенерировать код для встраивания"
   },
   "toolsSidebar.title": {
     "defaultMessage": "Инструменты"
+  },
+  "translateDescription.showOriginal": {
+    "defaultMessage": "Показать оригинал"
+  },
+  "translateDescription.translate": {
+    "defaultMessage": "Перевод описания"
+  },
+  "translateDescription.translating": {
+    "defaultMessage": "Перевод…"
   }
 }
 
