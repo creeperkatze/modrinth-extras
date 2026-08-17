@@ -203,9 +203,10 @@ New translations are automatically pulled every Monday.
 | Chinese Simplified | [xinyihl](https://crowdin.com/profile/xinyihl), [AlexYang](https://crowdin.com/profile/A012pyshjs210) |
 | Korean | [젠고](https://crowdin.com/profile/minejango2) |
 | Vietnamese | [Lê](https://crowdin.com/profile/suri-cutie) |
-| Russian | [vanapro1](https://crowdin.com/profile/vanapro1) |
+| Japanese | [Finity 2010](https://crowdin.com/profile/finity2010) |
+| Russian | [vanapro1](https://crowdin.com/profile/vanapro1), [IceBan](https://crowdin.com/profile/iceban) |
 | Ukrainian | [Tenwoc](https://crowdin.com/profile/tenwoc), [CreativeTragern](https://crowdin.com/profile/creativetragern) |
-| Turkish | [penfflewithadot](https://crowdin.com/profile/penfflewithadot), [ErenTr4210](https://crowdin.com/profile/erentr4210) |
+| Turkish | [penfflewithadot](https://crowdin.com/profile/penfflewithadot), [ErenTr4210](https://crowdin.com/profile/erentr4210), [Serkan Aynacı](https://crowdin.com/profile/serkanaynaci2007) |
 | Spanish, Latin America | [Dante Li Tao](https://crowdin.com/profile/heroxp) |
 | Arabic | [Hamad Alsayed](https://crowdin.com/profile/hamad_sayed) |
 | Spanish | [eh eh](https://crowdin.com/profile/ehuh) |
