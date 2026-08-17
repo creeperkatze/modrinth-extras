@@ -1,5 +1,6 @@
 <template>
 	<div
+		v-if="slug"
 		class="mb-3 flex flex-col gap-3 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
 	>
 		<h2 class="m-0 text-lg font-semibold text-contrast">
@@ -60,6 +61,10 @@ const messages = defineMessages({
 
 const props = defineProps<{ pageUrl: string }>()
 
+const slug = new URL(props.pageUrl).pathname.match(
+	/^\/(mod|plugin|datapack|shader|resourcepack|modpack|server)\/([^/]+)/,
+)?.[2]
+
 const modpacks = ref<Array<{ project_id: string; slug: string; title: string; icon_url: string }>>(
 	[],
 )
@@ -68,9 +73,6 @@ const error = ref(false)
 
 onMounted(async () => {
 	try {
-		const slug = new URL(props.pageUrl).pathname.match(
-			/^\/(mod|plugin|datapack|shader|resourcepack|modpack|server)\/([^/]+)/,
-		)?.[2]
 		if (!slug) return
 
 		const project = await modrinthClient.labrinth.projects_v2.get(slug)
