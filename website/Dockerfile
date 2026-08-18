@@ -9,6 +9,8 @@ RUN pnpm install --frozen-lockfile
 
 COPY . .
 
+ARG VERSION
+ENV VERSION=$VERSION
 RUN pnpm build
 
 FROM caddy:alpine

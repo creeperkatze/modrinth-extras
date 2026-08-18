@@ -1,6 +1,6 @@
 {
     "name": "modrinth-extras-website",
-    "version": "1.6.3",
+    "version": "0.0.0",
     "private": true,
     "type": "module",
     "scripts": {

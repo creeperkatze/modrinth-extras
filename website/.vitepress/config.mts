@@ -1,10 +1,7 @@
-import { createRequire } from 'node:module'
-
 import svgLoader from 'vite-svg-loader'
 import { defineConfig } from 'vitepress'
 
-const require = createRequire(import.meta.url)
-const { version } = require('../package.json') as { version: string }
+const version = process.env.VERSION
 
 const title = 'Modrinth Extras'
 const description = 'A browser extension that enhances Modrinth on the website and beyond.'
@@ -35,7 +32,14 @@ export default defineConfig({
 		siteTitle: false,
 		nav: [
 			{ text: 'Translate', link: 'https://crowdin.com/project/modrinth-extras', target: '_blank' },
-			{ text: `v${version}`, link: 'https://github.com/creeperkatze/modrinth-extras/releases' },
+			...(version
+				? [
+						{
+							text: `v${version}`,
+							link: 'https://github.com/creeperkatze/modrinth-extras/releases',
+						},
+					]
+				: []),
 		],
 		socialLinks: [
 			{ icon: 'github', link: 'https://github.com/creeperkatze/modrinth-extras' },
