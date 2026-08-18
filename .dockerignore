@@ -1,5 +1,0 @@
-**/node_modules
-**/.output
-**/.wxt
-website/.vitepress/dist
-website/.vitepress/cache

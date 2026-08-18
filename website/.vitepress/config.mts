@@ -4,7 +4,7 @@ import svgLoader from 'vite-svg-loader'
 import { defineConfig } from 'vitepress'
 
 const require = createRequire(import.meta.url)
-const { version } = require('../../package.json') as { version: string }
+const { version } = require('../package.json') as { version: string }
 
 const title = 'Modrinth Extras'
 const description = 'A browser extension that enhances Modrinth on the website and beyond.'
