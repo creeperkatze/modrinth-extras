@@ -4,14 +4,13 @@ WORKDIR /app
 
 RUN corepack enable
 
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-COPY patches ./patches
-COPY modrinth ./modrinth
-RUN pnpm install --frozen-lockfile
+COPY package.json ./
+COPY website/package.json website/pnpm-lock.yaml website/pnpm-workspace.yaml ./website/
+RUN cd website && pnpm install --frozen-lockfile
 
 COPY website ./website
 
-RUN pnpm website:build
+RUN cd website && pnpm build
 
 FROM caddy:alpine
 
