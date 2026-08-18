@@ -14,8 +14,11 @@
         "scripts": "node scripts/run.mjs",
         "intl:generate": "node scripts/run.mjs generate-locales",
         "intl:extract": "formatjs extract \"src/entrypoints/**/*.{vue,ts}\" --ignore \"src/**/*.d.ts\" --out-file src/locales/en-US/popup.json --preserve-whitespace && formatjs extract \"src/components/**/*.vue\" --ignore \"src/**/*.d.ts\" --out-file src/locales/en-US/components.json --preserve-whitespace",
-        "lint": "eslint src/",
-        "lint:fix": "eslint src/ --fix",
+        "website:dev": "vitepress dev website",
+        "website:build": "vitepress build website",
+        "website:preview": "vitepress preview website",
+        "lint": "eslint src/ website/",
+        "lint:fix": "eslint src/ website/ --fix",
         "release:patch": "pnpm version patch && git push && git push --tags",
         "release:minor": "pnpm version minor && git push && git push --tags",
         "release:major": "pnpm version major && git push && git push --tags"
@@ -61,6 +64,7 @@
         "typescript": "^6.0.3",
         "typescript-eslint": "^8.65.0",
         "vite-svg-loader": "^5.1.1",
+        "vitepress": "^1.6.4",
         "vue-eslint-parser": "^10.4.1",
         "vue-tsc": "^3.3.7",
         "wxt": "^0.20.26"

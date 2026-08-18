@@ -37,6 +37,12 @@ export default tseslint.config(
 		},
 	},
 	{
-		ignores: ['.wxt/', '.output/', 'node_modules/'],
+		ignores: [
+			'.wxt/',
+			'.output/',
+			'node_modules/',
+			'website/.vitepress/cache/',
+			'website/.vitepress/dist/',
+		],
 	},
 )
