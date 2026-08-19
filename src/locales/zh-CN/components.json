@@ -24,7 +24,7 @@
     "defaultMessage": "收起依赖树"
   },
   "dependencyNode.embedded": {
-    "defaultMessage": "内置的"
+    "defaultMessage": "内置的依赖项"
   },
   "dependencyNode.expand": {
     "defaultMessage": "展开依赖关系"
@@ -36,7 +36,7 @@
     "defaultMessage": "可选的"
   },
   "dependencyNode.required": {
-    "defaultMessage": "仅显示必需依赖项"
+    "defaultMessage": "显示必需的依赖项"
   },
   "dependencySidebar.loadError": {
     "defaultMessage": "无法加载依赖关系"
@@ -53,6 +53,12 @@
   "dependencySidebar.title": {
     "defaultMessage": "依赖项"
   },
+  "discordSidebar.loadError": {
+    "defaultMessage": "加载 Discord 服务器数据失败"
+  },
+  "discordSidebar.loading": {
+    "defaultMessage": "加载中"
+  },
   "discordSidebar.members": {
     "defaultMessage": "{count} 位成员"
   },
@@ -65,11 +71,14 @@
   "errorNotice.message": {
     "defaultMessage": "此错误可能与 Modrinth Extras 有关。在向 Modrinth 报告此问题之前，请尝试禁用该扩展并刷新页面。如果错误消失，请<link>在此处</link>报告。"
   },
+  "modpacksSidebar.title": {
+    "defaultMessage": "整合包"
+  },
   "monetizationBadge.demonetized": {
     "defaultMessage": "未开启盈利"
   },
   "monetizationBadge.forceDemonetized": {
-    "defaultMessage": "盈利已被禁用"
+    "defaultMessage": "已停用获利"
   },
   "monetizationBadge.forceDemonetizedTitle": {
     "defaultMessage": "该项目的盈利功能已被 Modrinth 停用"
@@ -77,8 +86,20 @@
   "monetizationBadge.monetized": {
     "defaultMessage": "已开启盈利"
   },
+  "notificationsIndicator.acceptInvite": {
+    "defaultMessage": "接受邀请"
+  },
+  "notificationsIndicator.declineInvite": {
+    "defaultMessage": "拒绝邀请"
+  },
+  "notificationsIndicator.label": {
+    "defaultMessage": "通知"
+  },
   "notificationsIndicator.markAllAsRead": {
     "defaultMessage": "全部标记为已读"
+  },
+  "notificationsIndicator.markAsRead": {
+    "defaultMessage": "标记为已读"
   },
   "notificationsIndicator.noUnread": {
     "defaultMessage": "没有未读通知"
@@ -123,7 +144,7 @@
     "defaultMessage": "已保存"
   },
   "projectCardActions.searchPlaceholder": {
-    "defaultMessage": "搜索..."
+    "defaultMessage": "搜索……"
   },
   "projectCardActions.unfollow": {
     "defaultMessage": "取消关注"
@@ -139,6 +160,27 @@
   },
   "quickSearch.search": {
     "defaultMessage": "搜索"
+  },
+  "repositorySidebar.forks": {
+    "defaultMessage": "{count} 个 fork"
+  },
+  "repositorySidebar.loadError": {
+    "defaultMessage": "加载仓库数据失败"
+  },
+  "repositorySidebar.loading": {
+    "defaultMessage": "加载中"
+  },
+  "repositorySidebar.openIssues": {
+    "defaultMessage": "{count} 个未解决的 Issue"
+  },
+  "repositorySidebar.openPRs": {
+    "defaultMessage": "{count} 个未合并的 Pull Request"
+  },
+  "repositorySidebar.stars": {
+    "defaultMessage": "{count} 个 Star"
+  },
+  "repositorySidebar.title": {
+    "defaultMessage": "仓库"
   },
   "toolsSidebar.copied": {
     "defaultMessage": "已复制！"

@@ -9,7 +9,7 @@
     "defaultMessage": "内容页面功能："
   },
   "meta.description.extensionTitle": {
-    "defaultMessage": "扩展功能："
+    "defaultMessage": "此扩展的功能："
   },
   "meta.description.footer": {
     "defaultMessage": "所有功能均为可选，可通过扩展程序弹出窗口单独启用或禁用。\n\nModrinth Extras 是一款<link>开源扩展程序</link>。"

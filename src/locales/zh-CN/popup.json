@@ -20,6 +20,21 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "活动图表"
   },
+  "feature.browserNotifications.description": {
+    "defaultMessage": "接收来自 Modrinth 的浏览器通知。"
+  },
+  "feature.browserNotifications.exampleMessage": {
+    "defaultMessage": "这是来自 Modrinth Extras 的测试通知！"
+  },
+  "feature.browserNotifications.exampleTitle": {
+    "defaultMessage": "测试通知"
+  },
+  "feature.browserNotifications.sendTest": {
+    "defaultMessage": "发送测试通知"
+  },
+  "feature.browserNotifications.title": {
+    "defaultMessage": "浏览器通知"
+  },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "在可用的情况下，将 CurseForge 项目页面重定向至 Modrinth。"
   },
@@ -52,6 +67,18 @@
   },
   "feature.galleryBackground.title": {
     "defaultMessage": "图库背景"
+  },
+  "feature.githubSidebar.description": {
+    "defaultMessage": "显示已关联的 GitHub、GitLab、Codeberg 和 Bitbucket 仓库的 Star、Issue、Pull Request 及 Fork 数量。"
+  },
+  "feature.githubSidebar.title": {
+    "defaultMessage": "仓库侧边栏"
+  },
+  "feature.modpacksSidebar.description": {
+    "defaultMessage": "显示包含该模组的所有整合包。"
+  },
+  "feature.modpacksSidebar.title": {
+    "defaultMessage": "整合包侧边栏"
   },
   "feature.monetizationBadge.description": {
     "defaultMessage": "在侧边栏中显示项目的盈利状态。"
@@ -133,6 +160,15 @@
   },
   "feature.translateDescription.title": {
     "defaultMessage": "翻译项目简介"
+  },
+  "popup.discordPrompt.dismiss": {
+    "defaultMessage": "忽略"
+  },
+  "popup.discordPrompt.message": {
+    "defaultMessage": "在我们的 Discord 服务器获取帮助、分享反馈并关注最新动态。"
+  },
+  "popup.discordPrompt.title": {
+    "defaultMessage": "加入我们的 Discord 服务器"
   },
   "popup.donatePrompt.dismiss": {
     "defaultMessage": "忽略"
