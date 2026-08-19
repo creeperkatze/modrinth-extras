@@ -41,13 +41,8 @@ onMounted(async () => {
 const cards = computed(() => {
 	if (!stats.value) return []
 	const { chrome, firefox, edge } = stats.value
-	const known = [chrome, firefox, edge].filter((n): n is number => n !== null)
 
 	const list: { label: string; value: string }[] = []
-	if (known.length > 1) {
-		const total = known.reduce((sum, n) => sum + n, 0)
-		list.push({ label: 'Total Users', value: total.toLocaleString() })
-	}
 	if (chrome !== null) list.push({ label: 'Chrome Users', value: chrome.toLocaleString() })
 	if (firefox !== null) list.push({ label: 'Firefox Users', value: firefox.toLocaleString() })
 	if (edge !== null) list.push({ label: 'Edge Users', value: edge.toLocaleString() })
@@ -115,17 +110,13 @@ const cards = computed(() => {
 	}
 
 	.stat-card {
-		flex-basis: calc(50% - 8px);
+		flex-basis: calc(33.333% - 11px);
 	}
 }
 
 @media (min-width: 960px) {
 	.stats-bar {
 		padding: 0 64px 16px;
-	}
-
-	.stat-card {
-		flex-basis: calc(25% - 12px);
 	}
 }
 </style>
