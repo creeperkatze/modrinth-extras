@@ -36,10 +36,10 @@
     "defaultMessage": "Повідомлення у браузері"
   },
   "feature.curseforgeRedirect.description": {
-    "defaultMessage": "За можливости перенаправляти сторінки проєктів CurseForge на Modrinth."
+    "defaultMessage": "За можливости переадресовувати сторінки проєктів CurseForge на Modrinth."
   },
   "feature.curseforgeRedirect.title": {
-    "defaultMessage": "Перенаправлення CurseForge"
+    "defaultMessage": "Переадресування CurseForge"
   },
   "feature.dependencyExplorer.description": {
     "defaultMessage": "Інтерактивний граф для дослідження повного дерева залежностей."
@@ -117,10 +117,10 @@
     "defaultMessage": "Дії у картці проєкту"
   },
   "feature.projectTypesPrimaryNav.description": {
-    "defaultMessage": "Перемістити модифікації, плагіни, набори ресурсів та інші типи проєктів у головну панель навігації."
+    "defaultMessage": "Перемістити моди, плагіни, пакети ресурсів та інші типи проєктів у головну панель навігації."
   },
   "feature.projectTypesPrimaryNav.title": {
-    "defaultMessage": "Навігація за типами проєктів"
+    "defaultMessage": "Типи проєктів у навігації"
   },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K або / для пошуку у стилі палітри команд із фільтрами для завантажувачів, версій, категорій та типів."
