@@ -1,7 +1,6 @@
 <template>
-	<StyledInput
+	<Textarea
 		v-model="response"
-		multiline
 		:rows="3"
 		resize="vertical"
 		class="mt-2 w-full"
@@ -16,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { Button, StyledInput } from '@modrinth/ui'
+import { Button, Textarea } from '@modrinth/ui'
 import { ref } from 'vue'
 
 defineProps<{

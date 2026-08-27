@@ -64,7 +64,7 @@
 				</div>
 			</template>
 			<template v-else>
-				<StyledInput
+				<Input
 					v-model="collectionsSearch"
 					:placeholder="formatMessage(messages['projectCardActions.searchPlaceholder'])"
 					wrapper-class="menu-search"
@@ -129,7 +129,7 @@ import {
 	Checkbox,
 	defineMessages,
 	IconButton,
-	StyledInput,
+	Input,
 	TeleportPopoutMenu,
 	useVIntl,
 } from '@modrinth/ui'

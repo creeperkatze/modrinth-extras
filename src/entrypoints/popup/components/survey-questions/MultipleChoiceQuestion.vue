@@ -11,7 +11,7 @@
 			{{ choice }}
 		</Button>
 	</div>
-	<StyledInput
+	<Input
 		v-if="isOpenChoiceSelected"
 		v-model="openText"
 		class="mt-2 w-full"
@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { Button, StyledInput } from '@modrinth/ui'
+import { Button, Input } from '@modrinth/ui'
 import type { MultipleSurveyQuestion } from 'posthog-js/dist/module.no-external'
 import { computed, ref } from 'vue'
 

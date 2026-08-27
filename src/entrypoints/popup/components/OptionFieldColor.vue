@@ -11,7 +11,7 @@
 				:style="{ backgroundColor: swatchColor }"
 				@click="toggleOpen"
 			/>
-			<StyledInput v-model="text" size="small" wrapper-class="w-24" :placeholder="defaultColor" />
+			<Input v-model="text" size="small" wrapper-class="w-24" :placeholder="defaultColor" />
 		</div>
 
 		<ColorPicker
@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { StyledInput } from '@modrinth/ui'
+import { Input } from '@modrinth/ui'
 import { computed, ref, watch } from 'vue'
 
 import ColorPicker from './ColorPicker.vue'

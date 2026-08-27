@@ -192,7 +192,7 @@
 			</div>
 
 			<div v-if="!initialLoading" class="absolute right-3 top-3 w-64">
-				<StyledInput
+				<Input
 					v-model="searchQuery"
 					type="text"
 					:icon="searchIcon"
@@ -259,15 +259,7 @@
 
 <script setup lang="ts">
 import { ExpandIcon, SearchIcon, UpdatedIcon } from '@modrinth/assets'
-import {
-	defineMessages,
-	IconButton,
-	NewModal,
-	Slider,
-	StyledInput,
-	Toggle,
-	useVIntl,
-} from '@modrinth/ui'
+import { defineMessages, IconButton, Input, NewModal, Slider, Toggle, useVIntl } from '@modrinth/ui'
 import { computed, nextTick, onUnmounted, ref, useTemplateRef, watch } from 'vue'
 
 import {
