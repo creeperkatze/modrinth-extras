@@ -33,7 +33,9 @@
        x2="464.80676"
        y2="460.15836"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1.9997278,0,0,1.9997278,186.39398,815.14694)" /></defs><sodipodi:namedview
+       gradientTransform="matrix(1.9997278,0,0,1.9997278,186.39398,815.14694)" /><style
+       id="style3">#text1{fill:#ffffff}
+       @media (prefers-color-scheme: light){#text1{fill:#1a1a1a}}</style></defs><sodipodi:namedview
      id="namedview2"
      pagecolor="#505050"
      bordercolor="#ffffff"
@@ -62,7 +64,7 @@
        style="display:inline;fill:url(#linearGradient4);fill-rule:evenodd;stroke-width:15.6542;stroke-linejoin:round;stroke-miterlimit:0;paint-order:markers fill stroke"
        d="m 906.7754,1354.83 v 172.2032 H 731.77006 v 98.402 H 906.7754 v 172.2034 h 100.0031 v -172.2034 h 175.0053 v -98.402 H 1006.7785 V 1354.83 Z" /></g><text
      xml:space="preserve"
-     style="font-weight:600;font-size:65.7891px;line-height:0.8;font-family:Inter;-inkscape-font-specification:'Inter Semi-Bold';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke-width:0.548245;stroke-linejoin:round;stroke-miterlimit:0;paint-order:markers fill stroke;font-style:normal;font-stretch:normal;font-variant:normal"
+     style="font-weight:600;font-size:65.7891px;line-height:0.8;font-family:Inter;-inkscape-font-specification:'Inter Semi-Bold';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill-opacity:1;stroke-width:0.548245;stroke-linejoin:round;stroke-miterlimit:0;paint-order:markers fill stroke;font-style:normal;font-stretch:normal;font-variant:normal"
      x="110.11256"
      y="57.407627"
      id="text1"

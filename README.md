@@ -1,4 +1,4 @@
-# <img src=".github/assets/logo.png" alt="Modrinth Extras" height="100">
+# <img src=".github/assets/logo.svg" alt="Modrinth Extras" height="100">
 
 A browser extension that enhances Modrinth on the website and beyond.
 
