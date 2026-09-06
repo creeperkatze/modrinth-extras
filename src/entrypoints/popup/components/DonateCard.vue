@@ -59,10 +59,7 @@ const messages = defineMessages({
 	},
 })
 
-const DONATE_PROMPT_DELAY_MS = 5 * 24 * 60 * 60 * 1000 // 5 days
-
 interface DonatePromptState {
-	installedAt: number
 	dismissed: boolean
 }
 
@@ -72,21 +69,13 @@ const visible = ref(false)
 
 async function dismiss(): Promise<void> {
 	visible.value = false
-	const existing = await donatePromptItem.getValue()
-	await donatePromptItem.setValue({
-		installedAt: existing?.installedAt ?? Date.now(),
-		dismissed: true,
-	})
+	await donatePromptItem.setValue({ dismissed: true })
 }
 
 onMounted(async () => {
 	const existing = await donatePromptItem.getValue()
 	if (existing?.dismissed) return
-
-	const state = existing ?? { installedAt: Date.now(), dismissed: false }
-	if (!existing) await donatePromptItem.setValue(state)
-
-	if (Date.now() - state.installedAt >= DONATE_PROMPT_DELAY_MS) visible.value = true
+	visible.value = true
 })
 </script>
 
