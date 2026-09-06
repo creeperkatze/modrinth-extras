@@ -194,7 +194,7 @@ Translations are managed on [Crowdin](https://crowdin.com/project/modrinth-extra
 
 New translations are automatically pulled every Monday.
 
-### Contributors ❤️
+### Translators ❤️
 
 | Language | Translators |
 |----------|------------|
