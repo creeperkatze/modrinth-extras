@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="mb-3 flex flex-col gap-3 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
+		class="my-3 flex flex-col gap-3 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
 	>
 		<div class="flex items-center justify-between gap-2">
 			<h2 class="m-0 text-lg font-semibold text-contrast">
