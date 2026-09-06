@@ -577,11 +577,14 @@ const DAY_RANGE_ITEMS = computed<SelectItem[]>(() =>
 	})),
 )
 
+let loadersRequest: Promise<Labrinth.Tags.v2.Loader[]> | undefined
+
 async function fetchLoadersByType(...types: string[]): Promise<SelectItem[]> {
-	const data = await modrinthClient.request<Labrinth.Tags.v2.Loader[]>('/tag/loader', {
+	loadersRequest ??= modrinthClient.request<Labrinth.Tags.v2.Loader[]>('/tag/loader', {
 		api: 'labrinth',
 		version: 3,
 	})
+	const data = await loadersRequest
 	return data
 		.filter((l) => types.some((type) => l.supported_project_types.includes(type)))
 		.map((l) => ({ label: l.name.charAt(0).toUpperCase() + l.name.slice(1), value: l.name }))
@@ -592,7 +595,9 @@ async function fetchGameVersions(): Promise<SelectItem[]> {
 		api: 'labrinth',
 		version: 2,
 	})
-	return data.map((v) => ({ label: v.version, value: v.version }))
+	return data
+		.filter((v) => v.version_type === 'release')
+		.map((v) => ({ label: v.version, value: v.version }))
 }
 
 const generalFeatures = computed<FeatureDef[]>(() => [
