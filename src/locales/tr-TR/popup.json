@@ -69,7 +69,7 @@
     "defaultMessage": "Galeri arka planı"
   },
   "feature.githubSidebar.description": {
-    "defaultMessage": "Bağlantılı GitHub, GitLab, Codeberg ve Bitbucket depolarına ait yıldızlar, sorunlar, çekme istekleri ve çatallamalar."
+    "defaultMessage": "Bağlantılı GitHub, GitLab, Codeberg ve Bitbucket repo'larına ait star'lar, issue'lar, pull request'ler ve fork'lar."
   },
   "feature.githubSidebar.title": {
     "defaultMessage": "Depo kenar çubuğu"
