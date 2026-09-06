@@ -25,25 +25,14 @@
 			>
 				<component :is="actionIcon" />
 			</IconButton>
-			<button
-				type="button"
-				role="switch"
-				:aria-checked="modelValue"
+			<Toggle
+				small
+				:model-value="modelValue"
 				:aria-label="title"
 				:disabled="disabled"
-				class="relative m-0 inline-flex h-5 w-[38px] shrink-0 items-center rounded-full border-0 p-0 transition-colors duration-200"
-				:class="[
-					disabled ? 'cursor-not-allowed' : 'cursor-pointer',
-					modelValue ? '!bg-brand' : '!bg-button-bg',
-				]"
-				@click.stop="!disabled && $emit('update:modelValue', !modelValue)"
-			>
-				<span
-					class="absolute left-0.5 top-0.5 size-4 rounded-full transition-[transform,background-color] duration-200"
-					:class="modelValue ? 'bg-black/85' : 'bg-gray-400'"
-					:style="modelValue ? { transform: 'translateX(18px)' } : {}"
-				/>
-			</button>
+				@click.stop
+				@update:model-value="$emit('update:modelValue', $event)"
+			/>
 		</div>
 		<Collapsible :collapsed="!(modelValue && hasOptionsSlot)" overflow-visible>
 			<div class="flex flex-col gap-2 p-2 pl-11">
@@ -54,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import { Collapsible, IconButton } from '@modrinth/ui'
+import { Collapsible, IconButton, Toggle } from '@modrinth/ui'
 import { Comment, type Component, computed, useSlots } from 'vue'
 
 defineProps<{
