@@ -92,22 +92,6 @@ const compactOptions = computed<CompactComboboxEntry[]>(() =>
 	height: 1rem;
 }
 
-.compact-combobox svg.rotate-90 {
-	transform: rotate(90deg) !important;
-}
-
-.compact-combobox svg.-rotate-90 {
-	transform: rotate(-90deg) !important;
-}
-
-.compact-combobox svg.-translate-y-1\/2.rotate-90 {
-	transform: translateY(-50%) rotate(90deg) !important;
-}
-
-.compact-combobox svg.-translate-y-1\/2.-rotate-90 {
-	transform: translateY(-50%) rotate(-90deg) !important;
-}
-
 .compact-combobox-dropdown .compact-combobox-option {
 	gap: 0.5rem;
 	padding: 0.5rem 0.75rem;
