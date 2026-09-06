@@ -1,5 +1,5 @@
-import '../../assets/popup.scss'
 import '../../assets/popup-tailwind.css'
+import '../../assets/popup.scss'
 import 'floating-vue/dist/style.css'
 
 import FloatingVue from 'floating-vue'
@@ -8,8 +8,6 @@ import { createApp, h } from 'vue'
 import { installI18n, loadSavedLocale } from '../../utils/i18n'
 import App from './App.vue'
 
-// Apply the correct theme class to <html> synchronously so CSS custom
-// properties from variables.scss are resolved before Vue renders anything.
 function applyTheme(dark: boolean) {
 	document.documentElement.classList.toggle('dark-mode', dark)
 	document.documentElement.classList.toggle('light-mode', !dark)
