@@ -43,7 +43,7 @@ function t(messages: Messages, key: string): string {
 	return messages[key] ?? ''
 }
 
-const generalFeatures = ['notifications', 'quickSearch', 'projectCardActions']
+const generalFeatures = ['notifications', 'quickSearch', 'projectCardActions', 'accentColor']
 const contentFeatures = [
 	'activitySparkline',
 	'toolsSidebar',
@@ -51,7 +51,11 @@ const contentFeatures = [
 	'dependencyExplorer',
 	'githubSidebar',
 	'discordSidebar',
+	'modpacksSidebar',
+	'platformsSidebar',
 	'galleryBackground',
+	'monetizationBadge',
+	'translateDescription',
 ]
 const extensionFeatures = ['notificationBadge', 'browserNotifications', 'curseforgeRedirect']
 
