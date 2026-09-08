@@ -100,6 +100,10 @@ Server name, description, member count, and online count for linked Discord serv
 
 Show all the modpacks a project is featured in.
 
+### Other platforms sidebar
+
+Find the same project or author on CurseForge, Hangar, and SpigotMC, with download counts and direct links. Shown on both project and user pages.
+
 ### Gallery background
 
 Display the featured gallery image as a background banner on project pages.

@@ -113,6 +113,18 @@
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "View history"
   },
+  "platformsSidebar.downloads": {
+    "defaultMessage": "{count} downloads"
+  },
+  "platformsSidebar.loadError": {
+    "defaultMessage": "Failed to load other platforms"
+  },
+  "platformsSidebar.loading": {
+    "defaultMessage": "Loading"
+  },
+  "platformsSidebar.title": {
+    "defaultMessage": "Other platforms"
+  },
   "projectCardActions.checkingDownload": {
     "defaultMessage": "Checking available version..."
   },

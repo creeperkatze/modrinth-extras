@@ -14,6 +14,7 @@ import TranslateDescription from '../components/project/TranslateDescription.vue
 import DependencySidebar from '../components/sidebar/dependencies/DependencySidebar.vue'
 import DiscordSidebar from '../components/sidebar/DiscordSidebar.vue'
 import ModpacksSidebar from '../components/sidebar/ModpacksSidebar.vue'
+import PlatformsSidebar from '../components/sidebar/PlatformsSidebar.vue'
 import RepositorySidebar from '../components/sidebar/RepositorySidebar.vue'
 import ToolsSidebar from '../components/sidebar/ToolsSidebar.vue'
 import ErrorNotice from '../components/site/ErrorNotice.vue'
@@ -543,6 +544,26 @@ export default defineContentScript({
 			},
 		})
 
+		// getProjectSlug() is null on user pages, so the scope key has to cover both page kinds.
+		const PLATFORM_SUBJECT_PATTERN =
+			/^\/(?:mod|plugin|datapack|shader|resourcepack|modpack|server|user|organization)\/([^/?#]+)/
+
+		const platformsSidebar = createInjection({
+			id: 'modrinth-extras-platforms-sidebar',
+			isEnabled: () => settings.platformsSidebar.enabled,
+			settingsKeys: ['platformsSidebar'],
+			persistent: false,
+			projectScoped: true,
+			scopeKey: () => window.location.pathname.match(PLATFORM_SUBJECT_PATTERN)?.[0] ?? '',
+			attach: attachToSidebar,
+			createApp() {
+				const pageUrl = window.location.href.split('?')[0].split('#')[0]
+				const app = createApp(h(PlatformsSidebar, { pageUrl }))
+				installI18n(app)
+				return app
+			},
+		})
+
 		const errorNotice = createInjection({
 			id: 'modrinth-extras-error-notice',
 			isEnabled: () => true,
@@ -637,6 +658,7 @@ export default defineContentScript({
 			toolsSidebar,
 			dependencySidebar,
 			modpacksSidebar,
+			platformsSidebar,
 			activitySparkline,
 			galleryBackground,
 			monetizationBadge,

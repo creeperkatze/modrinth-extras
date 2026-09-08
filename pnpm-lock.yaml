@@ -36,6 +36,9 @@ importers:
       '@wxt-dev/storage':
         specifier: ^1.2.8
         version: 1.2.8
+      curseforge-js:
+        specifier: ^1.1.3
+        version: 1.1.3
       d3-force:
         specifier: ^3.0.0
         version: 3.0.0
@@ -51,9 +54,15 @@ importers:
       floating-vue:
         specifier: ^5.2.2
         version: 5.2.2(vue@3.5.40(typescript@6.0.3))
+      hangarmc-js:
+        specifier: ^1.0.3
+        version: 1.0.3
       posthog-js:
         specifier: ^1.406.2
         version: 1.406.2
+      spiget-js:
+        specifier: ^1.0.2
+        version: 1.0.2
       vue:
         specifier: ^3.5.40
         version: 3.5.40(typescript@6.0.3)
@@ -4033,6 +4042,10 @@ packages:
   csstype@3.2.3:
     resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
 
+  curseforge-js@1.1.3:
+    resolution: {integrity: sha512-ZA2EfGP8e5jtO2PDlycFrsJhJtY/sZbbR1bJ5U47exCgcasUZkH52bVKsTdiHNtbiCK+YSXdmi/iMZojU4uIXg==}
+    engines: {node: '>=18'}
+
   d3-color@3.1.0:
     resolution: {integrity: sha512-zg/chbXyeBtMQ1LbD/WSoW2DpC3I0mpmPdW+ynRTj/x2DAWYrIY7qeZIHidozwV24m4iavr15lNwIwLxRmOxhA==}
     engines: {node: '>=12'}
@@ -4834,6 +4847,10 @@ packages:
 
   growly@1.3.0:
     resolution: {integrity: sha512-+xGQY0YyAWCnqy7Cd++hc2JqMYzlm0dG30Jd0beaA64sROr8C4nt8Yc9V5Ro3avlSUDTN0ulqP/VBKi1/lLygw==}
+
+  hangarmc-js@1.0.3:
+    resolution: {integrity: sha512-WSrsN80DtjX4Ga1Kqy23kexwjQiLfNscHUee5z9z2xDsBP/6mHz5FtO+cIViTGeWLDvx2hFoPZpnzsjWsWbLCQ==}
+    engines: {node: '>=18'}
 
   has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
@@ -6453,6 +6470,10 @@ packages:
 
   spdx-license-ids@3.0.23:
     resolution: {integrity: sha512-CWLcCCH7VLu13TgOH+r8p1O/Znwhqv/dbb6lqWy67G+pT1kHmeD/+V36AVb/vq8QMIQwVShJ6Ssl5FPh0fuSdw==}
+
+  spiget-js@1.0.2:
+    resolution: {integrity: sha512-tqDcIAVZbgLSEjYKXicZAQXRo44J4jpUywymvpJnacLRThd+FwoJcNBv8eCZQi+DP2kb7+5D8s8rmk+MKiMKXQ==}
+    engines: {node: '>=18'}
 
   split2@4.2.0:
     resolution: {integrity: sha512-UcjcJOWknrNkF6PLX83qcHM6KHgVKNkV62Y8a5uYDVv9ydGQVwAHMKqHdJje1VTWpljG0WYpCDhrCdAOYH4TWg==}
@@ -10578,6 +10599,8 @@ snapshots:
 
   csstype@3.2.3: {}
 
+  curseforge-js@1.1.3: {}
+
   d3-color@3.1.0: {}
 
   d3-dispatch@3.0.1: {}
@@ -11547,6 +11570,8 @@ snapshots:
       strip-bom-string: 1.0.0
 
   growly@1.3.0: {}
+
+  hangarmc-js@1.0.3: {}
 
   has-flag@4.0.0: {}
 
@@ -13214,6 +13239,8 @@ snapshots:
       spdx-license-ids: 3.0.23
 
   spdx-license-ids@3.0.23: {}
+
+  spiget-js@1.0.2: {}
 
   split2@4.2.0: {}
 

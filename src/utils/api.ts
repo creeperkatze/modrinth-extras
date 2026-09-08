@@ -1,7 +1,10 @@
 import { type AuthConfig, AuthFeature, GenericModrinthClient } from '@modrinth/api-client'
 import { browser } from 'wxt/browser'
 
-const USER_AGENT = `creeperkatze/modrinth-extras/${browser.runtime.getManifest().version} (contact@creeperkatze.dev)`
+export const USER_AGENT = `creeperkatze/modrinth-extras/${browser.runtime.getManifest().version} (contact@creeperkatze.dev)`
+
+// The platform clients call the fetch they are given unbound, which a service worker rejects.
+export const boundFetch: typeof globalThis.fetch = (...args) => globalThis.fetch(...args)
 
 let cachedToken: string | null = null
 

@@ -239,6 +239,7 @@ import {
 	ArrowUpRightIcon,
 	BellIcon,
 	BellRingIcon,
+	BoxesIcon,
 	ChartIcon,
 	CheckCircleIcon,
 	ClockIcon,
@@ -437,6 +438,14 @@ const messages = defineMessages({
 	'feature.modpacksSidebar.description': {
 		id: 'feature.modpacksSidebar.description',
 		defaultMessage: 'Show all the modpacks the mod is featured in.',
+	},
+	'feature.platformsSidebar.title': {
+		id: 'feature.platformsSidebar.title',
+		defaultMessage: 'Other platforms sidebar',
+	},
+	'feature.platformsSidebar.description': {
+		id: 'feature.platformsSidebar.description',
+		defaultMessage: 'Find the same project or author on CurseForge, Hangar, and SpigotMC.',
 	},
 	'feature.galleryBackground.title': {
 		id: 'feature.galleryBackground.title',
@@ -724,6 +733,12 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 		icon: PackageIcon,
 		title: formatMessage(messages['feature.modpacksSidebar.title']),
 		description: formatMessage(messages['feature.modpacksSidebar.description']),
+	},
+	{
+		key: 'platformsSidebar',
+		icon: BoxesIcon,
+		title: formatMessage(messages['feature.platformsSidebar.title']),
+		description: formatMessage(messages['feature.platformsSidebar.description']),
 	},
 	{
 		key: 'galleryBackground',

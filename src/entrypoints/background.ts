@@ -9,6 +9,7 @@ import {
 } from '../background/badge'
 import { handleNotificationClick } from '../background/browser-notifications'
 import { fetchDiscordInvite } from '../background/external/discord'
+import { findPlatformProjects, findPlatformUsers } from '../background/external/platforms'
 import { fetchRepositoryStats } from '../background/external/repository'
 import { detectBrowserLocale } from '../utils/i18n'
 import type { Notification } from '../utils/notifications'
@@ -83,6 +84,19 @@ export default defineBackground(() => {
 				.then((stats) => sendResponse({ ok: true, stats }))
 				.catch((err) => {
 					console.error('[Modrinth Extras] Failed to fetch repository stats:', err)
+					sendResponse({ ok: false, error: err instanceof Error ? err.message : String(err) })
+				})
+			return true
+		}
+		if (message.type === 'platform-matches') {
+			const lookup =
+				message.kind === 'user'
+					? findPlatformUsers(message.username as string)
+					: findPlatformProjects(message.title as string, message.slug as string)
+			lookup
+				.then((matches) => sendResponse({ ok: true, matches }))
+				.catch((err) => {
+					console.error('[Modrinth Extras] Failed to fetch platform matches:', err)
 					sendResponse({ ok: false, error: err instanceof Error ? err.message : String(err) })
 				})
 			return true
