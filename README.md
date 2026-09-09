@@ -23,11 +23,30 @@ Install from your browser's extension store:
 
 Prefer to build from source? See [Building from source](#-building-from-source) below.
 
+## 📸 Screenshots
+
+<table>
+<tr>
+<td width="50%"><img src=".github/assets/screenshots/extension.png" width="100%"><br><i>Extension popup</i></td>
+<td width="50%"><img src=".github/assets/screenshots/notifications.png" width="100%"><br><i>Notifications</i></td>
+</tr>
+<tr>
+<td width="50%"><img src=".github/assets/screenshots/quicksearch.gif" width="100%"><br><i>Quick search</i></td>
+<td width="50%"><img src=".github/assets/screenshots/project-card-actions.png" width="100%"><br><i>Project card actions</i></td>
+</tr>
+<tr>
+<td width="50%"><img src=".github/assets/screenshots/sparkline.png" width="100%"><br><i>Activity sparkline</i></td>
+<td width="50%"><img src=".github/assets/screenshots/dependency-explorer.png" width="100%"><br><i>Dependency explorer</i></td>
+</tr>
+<tr>
+<td width="50%"><img src=".github/assets/screenshots/sidebar.png" width="100%"><br><i>Sidebars</i></td>
+<td width="50%"><img src=".github/assets/screenshots/gallery-background.png" width="100%"><br><i>Gallery background</i></td>
+</tr>
+</table>
+
 ## ✨ Features
 
 All features can be individually toggled from the extension popup.
-
-<img src=".github/assets/screenshots/extension.png" width="100%">
 
 ### General
 
@@ -94,27 +113,6 @@ All features can be individually toggled from the extension popup.
 <tr>
 <td width="50%"><b>CurseForge redirect</b><br>Redirect CurseForge project pages to Modrinth when available.</td>
 <td width="50%"><b>Telemetry</b><br>Help improve the extension by anonymously sharing statistics like the extension version and which features are enabled. No Modrinth data, activity, or personal information is ever collected.</td>
-</tr>
-</table>
-
-## 📸 Screenshots
-
-<table>
-<tr>
-<td width="50%"><img src=".github/assets/screenshots/notifications.png" width="100%"><br><i>Notifications</i></td>
-<td width="50%"><img src=".github/assets/screenshots/quicksearch.gif" width="100%"><br><i>Quick search</i></td>
-</tr>
-<tr>
-<td width="50%"><img src=".github/assets/screenshots/project-card-actions.png" width="100%"><br><i>Project card actions</i></td>
-<td width="50%"><img src=".github/assets/screenshots/sparkline.png" width="100%"><br><i>Activity sparkline</i></td>
-</tr>
-<tr>
-<td width="50%"><img src=".github/assets/screenshots/dependency-explorer.png" width="100%"><br><i>Dependency explorer</i></td>
-<td width="50%"><img src=".github/assets/screenshots/sidebar.png" width="100%"><br><i>Sidebars</i></td>
-</tr>
-<tr>
-<td width="50%"><img src=".github/assets/screenshots/gallery-background.png" width="100%"><br><i>Gallery background</i></td>
-<td width="50%"></td>
 </tr>
 </table>
 
