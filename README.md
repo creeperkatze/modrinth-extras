@@ -29,106 +29,94 @@ All features can be individually toggled from the extension popup.
 
 <img src=".github/assets/screenshots/extension.png" width="100%">
 
-### Language
+### General
 
-Help translate on [Crowdin](https://crowdin.com/project/modrinth-extras). Some languages may be incomplete.
+<table>
+<tr>
+<td width="50%"><b>Language</b><br>Help translate on <a href="https://crowdin.com/project/modrinth-extras">Crowdin</a>. Some languages may be incomplete.</td>
+<td width="50%"><b>Notifications</b><br>View, manage, and clear unread notifications right in the header without leaving the current page.</td>
+</tr>
+<tr>
+<td width="50%"><b>Quick search</b><br>Ctrl+K or / for a command palette style search with faceted tags for loaders, versions, categories, and types.</td>
+<td width="50%"><b>Project card actions</b><br>Download, follow, and save projects right from their project cards.</td>
+</tr>
+<tr>
+<td width="50%"><b>Accent color</b><br>Replace the Modrinth green with a custom accent color.</td>
+<td width="50%"></td>
+</tr>
+</table>
 
-### Notifications
+### Content pages
 
-View, manage, and clear unread notifications right in the header without leaving the current page.
+<table>
+<tr>
+<td width="50%"><b>Activity sparkline</b><br>Release activity chart on project pages.</td>
+<td width="50%"><b>Tools sidebar</b><br>Generate embeds and copy mod manager install commands.</td>
+</tr>
+<tr>
+<td width="50%"><b>Dependency sidebar</b><br>Collapsible dependency tree on project pages.</td>
+<td width="50%"><b>Dependency explorer</b><br>Interactive graph for exploring the full dependency tree.</td>
+</tr>
+<tr>
+<td width="50%"><b>Repository sidebar</b><br>Stars, issues, pull requests, and forks for linked GitHub, GitLab, Codeberg, and Bitbucket repositories.</td>
+<td width="50%"><b>Discord sidebar</b><br>Server name, description, member count, and online count for linked Discord servers.</td>
+</tr>
+<tr>
+<td width="50%"><b>Modpacks sidebar</b><br>Show all the modpacks the mod is featured in.</td>
+<td width="50%"><b>Other platforms sidebar</b><br>Find the same project or author on CurseForge, Hangar, and SpigotMC.</td>
+</tr>
+<tr>
+<td width="50%"><b>Gallery background</b><br>Display the featured gallery image as a background banner on project pages.</td>
+<td width="50%"><b>Monetization badge</b><br>Show the monetization status of a project in the sidebar.</td>
+</tr>
+<tr>
+<td width="50%"><b>Translate description</b><br>On-device translation of a project's description into your language, when it differs.</td>
+<td width="50%"></td>
+</tr>
+</table>
 
-<img src=".github/assets/screenshots/notifications.png" width="100%">
+### Flags
 
-### Quick search
+<table>
+<tr>
+<td width="50%"><b>Search background</b><br>Show a banner background on the discover pages.</td>
+<td width="50%"><b>Project type navigation</b><br>Move mods, plugins, resource packs, and other project types into the main navigation bar.</td>
+</tr>
+</table>
 
-Ctrl+K or / for a command palette style search with faceted tags for loaders, versions, categories, and types.
+### Extension
 
-<img src=".github/assets/screenshots/quicksearch.gif" width="100%">
+<table>
+<tr>
+<td width="50%"><b>Notification badge</b><br>Up-to-date unread notification count as a badge on the extension icon.</td>
+<td width="50%"><b>Browser notifications</b><br>Browser notifications for your Modrinth notifications.</td>
+</tr>
+<tr>
+<td width="50%"><b>CurseForge redirect</b><br>Redirect CurseForge project pages to Modrinth when available.</td>
+<td width="50%"><b>Telemetry</b><br>Help improve the extension by anonymously sharing statistics like the extension version and which features are enabled. No Modrinth data, activity, or personal information is ever collected.</td>
+</tr>
+</table>
 
-### Project card actions
+## 📸 Screenshots
 
-Download, follow, and save projects right from their project cards.
-
-- **Download:** downloads the latest primary file directly.
-- **Follow / Unfollow:** follow or unfollow the project.
-- **Save:** save or remove the project from your collections.
-- **Copy link:** copy the project's link to your clipboard.
-
-<img src=".github/assets/screenshots/project-card-actions.png" width="100%">
-
-### Accent color
-
-Replace the Modrinth green with a custom accent color.
-
-### Activity sparkline
-
-Release activity chart on project pages.
-
-<img src=".github/assets/screenshots/sparkline.png" width="100%">
-
-### Tools sidebar
-
-Generate embeds and copy mod manager install commands.
-
-- **Generate embed:** opens [Modfolio](https://modfolio.creeperkatze.dev) pre-loaded with the current page URL to generate an embeddable card or badge.
-
-On project pages, an additional developer utility is shown:
-
-- **Copy install command:** copies an install command for the configured mod manager (packwiz or ferium) to the clipboard.
-
-### Dependency sidebar
-
-Collapsible dependency tree on project pages.
-
-### Dependency explorer
-
-Interactive graph for exploring the full dependency tree.
-
-<img src=".github/assets/screenshots/dependency-explorer.png" width="100%">
-
-### Repository sidebar
-
-Stars, issues, pull requests, and forks for linked GitHub, GitLab, Codeberg, and Bitbucket repositories.
-
-### Discord sidebar
-
-Server name, description, member count, and online count for linked Discord servers.
-
-<img src=".github/assets/screenshots/sidebar.png" width="100%">
-
-### Modpacks sidebar
-
-Show all the modpacks a project is featured in.
-
-### Other platforms sidebar
-
-Find the same project or author on CurseForge, Hangar, and SpigotMC, with download counts and direct links. Shown on both project and user pages.
-
-### Gallery background
-
-Display the featured gallery image as a background banner on project pages.
-
-<img src=".github/assets/screenshots/gallery-background.png" width="100%">
-
-### Monetization badge
-
-Show the monetization status of a project in the sidebar.
-
-### Translate description
-
-On-device translation of a project's description into your language, when it differs.
-
-### Notification badge
-
-Up-to-date unread notification count as a badge on the extension icon.
-
-### Browser notifications
-
-Browser notifications for your Modrinth notifications.
-
-### CurseForge redirect
-
-Redirect CurseForge project pages to Modrinth when available.
+<table>
+<tr>
+<td width="50%"><img src=".github/assets/screenshots/notifications.png" width="100%"><br><i>Notifications</i></td>
+<td width="50%"><img src=".github/assets/screenshots/quicksearch.gif" width="100%"><br><i>Quick search</i></td>
+</tr>
+<tr>
+<td width="50%"><img src=".github/assets/screenshots/project-card-actions.png" width="100%"><br><i>Project card actions</i></td>
+<td width="50%"><img src=".github/assets/screenshots/sparkline.png" width="100%"><br><i>Activity sparkline</i></td>
+</tr>
+<tr>
+<td width="50%"><img src=".github/assets/screenshots/dependency-explorer.png" width="100%"><br><i>Dependency explorer</i></td>
+<td width="50%"><img src=".github/assets/screenshots/sidebar.png" width="100%"><br><i>Sidebars</i></td>
+</tr>
+<tr>
+<td width="50%"><img src=".github/assets/screenshots/gallery-background.png" width="100%"><br><i>Gallery background</i></td>
+<td width="50%"></td>
+</tr>
+</table>
 
 ## 🔒 Building from source
 
