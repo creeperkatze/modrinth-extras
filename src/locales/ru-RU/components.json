@@ -60,7 +60,7 @@
     "defaultMessage": "Загрузка"
   },
   "discordSidebar.members": {
-    "defaultMessage": "{count} участников"
+    "defaultMessage": "{count, plural, one {# участник} few {# участника} other {# участников}"
   },
   "discordSidebar.online": {
     "defaultMessage": "{count} онлайн"
@@ -113,6 +113,18 @@
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "Посмотреть историю"
   },
+  "platformsSidebar.downloads": {
+    "defaultMessage": "{count, plural, one {# скачивание} few {# скачивания} other {# скачиваний}"
+  },
+  "platformsSidebar.loadError": {
+    "defaultMessage": "Не удалось загрузить другие платформы"
+  },
+  "platformsSidebar.loading": {
+    "defaultMessage": "Загрузка"
+  },
+  "platformsSidebar.title": {
+    "defaultMessage": "Другие платформы"
+  },
   "projectCardActions.checkingDownload": {
     "defaultMessage": "Проверка доступной версии..."
   },
@@ -120,7 +132,7 @@
     "defaultMessage": "Скопировано!"
   },
   "projectCardActions.copyLink": {
-    "defaultMessage": "Скопировать ссылку"
+    "defaultMessage": "Копировать ссылку"
   },
   "projectCardActions.download": {
     "defaultMessage": "Скачать"
@@ -162,7 +174,7 @@
     "defaultMessage": "Поиск"
   },
   "repositorySidebar.forks": {
-    "defaultMessage": "{count} форков"
+    "defaultMessage": "{count, plural, one {# форк} few {# форка} other {# форков}"
   },
   "repositorySidebar.loadError": {
     "defaultMessage": "Не удалось загрузить данные репозитория"
@@ -171,13 +183,13 @@
     "defaultMessage": "Загрузка"
   },
   "repositorySidebar.openIssues": {
-    "defaultMessage": "{count} открытых проблем"
+    "defaultMessage": "{count, plural, one {# открытая проблема} few {# открытой проблемы} other {# открытых проблем}"
   },
   "repositorySidebar.openPRs": {
-    "defaultMessage": "{count} открытых запросов на слияние"
+    "defaultMessage": "{count, plural, one {# запрос на слияние} few {# запроса на слияние} other {# запросов на слияние}"
   },
   "repositorySidebar.stars": {
-    "defaultMessage": "{count} звезд"
+    "defaultMessage": "{count, plural, one {# звезда} few {# звезды} other {# звёзд}"
   },
   "repositorySidebar.title": {
     "defaultMessage": "Репозиторий"
@@ -186,7 +198,7 @@
     "defaultMessage": "Скопировано!"
   },
   "toolsSidebar.copyInstallCommand": {
-    "defaultMessage": "Скопировать {manager} команду"
+    "defaultMessage": "Копировать команду {manager}"
   },
   "toolsSidebar.generateEmbed": {
     "defaultMessage": "Сгенерировать код для встраивания"
@@ -201,7 +213,7 @@
     "defaultMessage": "Перевод описания"
   },
   "translateDescription.translating": {
-    "defaultMessage": "Перевод…"
+    "defaultMessage": "Перевод..."
   }
 }
 

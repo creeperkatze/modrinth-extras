@@ -98,6 +98,12 @@
   "feature.notifications.title": {
     "defaultMessage": "Уведомления"
   },
+  "feature.platformsSidebar.description": {
+    "defaultMessage": "Найти тот же проект или автора на CurseForge, Hangar и SpigotMC."
+  },
+  "feature.platformsSidebar.title": {
+    "defaultMessage": "Боковая панель других платформ"
+  },
   "feature.projectCardActions.description": {
     "defaultMessage": "Скачивайте, подписывайтесь и сохраняйте проекты прямо из карточек проектов."
   },
