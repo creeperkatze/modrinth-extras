@@ -12,7 +12,7 @@
     "defaultMessage": "Функции расширения:"
   },
   "meta.description.footer": {
-    "defaultMessage": "Все функции являются необязательными и могут быть включены или отключены по отдельности во всплывающем окне расширения.\n\nModrinth Extras — <link>открытый исходный код</link>."
+    "defaultMessage": "Все функции необязательны и могут быть переключены отдельно во всплывающем окне расширения.\n\nModrinth Extras — <link>открытый проект</link>."
   },
   "meta.description.disclaimer": {
     "defaultMessage": "Расширение не связано с Modrinth и не поддерживается им."

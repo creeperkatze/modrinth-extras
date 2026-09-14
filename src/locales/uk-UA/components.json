@@ -113,6 +113,18 @@
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "Переглянути історію"
   },
+  "platformsSidebar.downloads": {
+    "defaultMessage": "{count} завантажень"
+  },
+  "platformsSidebar.loadError": {
+    "defaultMessage": "Не вдалося завантажити інші платформи"
+  },
+  "platformsSidebar.loading": {
+    "defaultMessage": "Завантаження"
+  },
+  "platformsSidebar.title": {
+    "defaultMessage": "Інші платформи"
+  },
   "projectCardActions.checkingDownload": {
     "defaultMessage": "Перевірка доступної версії..."
   },
