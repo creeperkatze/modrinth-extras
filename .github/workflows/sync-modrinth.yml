@@ -76,7 +76,7 @@ jobs:
         with:
           token: ${{ secrets.GH_PAT }}
           commit-message: 'chore: update modrinth submodule to ${{ steps.update.outputs.new_sha }}'
-          branch: sync/modrinth-submodule
+          branch: sync/modrinth
           delete-branch: true
           title: 'Update modrinth submodule'
           labels: dependencies
