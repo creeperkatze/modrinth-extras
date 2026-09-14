@@ -44,8 +44,8 @@ jobs:
           echo "changed=true" >> "$GITHUB_OUTPUT"
           echo "old_sha=$old_sha" >> "$GITHUB_OUTPUT"
           echo "new_sha=$new_sha" >> "$GITHUB_OUTPUT"
-          echo "old_subject=$(git log -1 --format=%s "$old_sha")" >> "$GITHUB_OUTPUT"
-          echo "new_subject=$(git log -1 --format=%s "$new_sha")" >> "$GITHUB_OUTPUT"
+          echo "old_short=$(git rev-parse --short "$old_sha")" >> "$GITHUB_OUTPUT"
+          echo "new_short=$(git rev-parse --short "$new_sha")" >> "$GITHUB_OUTPUT"
 
           {
             echo "commits<<COMMITS_EOF"
@@ -99,7 +99,7 @@ jobs:
           title: 'chore: update Modrinth submodule'
           labels: dependencies
           body: |
-            Bumps the Modrinth submodule from "${{ steps.update.outputs.old_subject }}" ([`${{ steps.update.outputs.old_sha }}`](https://github.com/modrinth/code/commit/${{ steps.update.outputs.old_sha }})) to "${{ steps.update.outputs.new_subject }}" ([`${{ steps.update.outputs.new_sha }}`](https://github.com/modrinth/code/commit/${{ steps.update.outputs.new_sha }})).
+            Bumps the Modrinth submodule from [`${{ steps.update.outputs.old_short }}`](https://github.com/modrinth/code/commit/${{ steps.update.outputs.old_sha }}) to [`${{ steps.update.outputs.new_short }}`](https://github.com/modrinth/code/commit/${{ steps.update.outputs.new_sha }}).
 
             Upstream commits:
             ${{ steps.update.outputs.commits }}
