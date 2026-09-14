@@ -113,6 +113,18 @@
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "Geçmişi görüntüle"
   },
+  "platformsSidebar.downloads": {
+    "defaultMessage": "{count} kez indirildi"
+  },
+  "platformsSidebar.loadError": {
+    "defaultMessage": "Diğer platformlar yüklenemedi"
+  },
+  "platformsSidebar.loading": {
+    "defaultMessage": "Yükleniyor"
+  },
+  "platformsSidebar.title": {
+    "defaultMessage": "Diğer platformlar"
+  },
   "projectCardActions.checkingDownload": {
     "defaultMessage": "Mevcut sürüm kontrol ediliyor..."
   },
@@ -162,7 +174,7 @@
     "defaultMessage": "Ara"
   },
   "repositorySidebar.forks": {
-    "defaultMessage": "{count} Çatallamalar"
+    "defaultMessage": "{count} forks"
   },
   "repositorySidebar.loadError": {
     "defaultMessage": "Depo verileri yüklenemedi"
