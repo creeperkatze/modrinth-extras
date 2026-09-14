@@ -78,11 +78,11 @@ jobs:
           commit-message: 'chore: update modrinth submodule to ${{ steps.update.outputs.new_sha }}'
           branch: sync/modrinth
           delete-branch: true
-          title: 'Update modrinth submodule'
+          title: 'chore: update Modrinth submodule'
           labels: dependencies
           body: |
-            Bumps the `modrinth` submodule from [`${{ steps.update.outputs.old_sha }}`](https://github.com/modrinth/code/commit/${{ steps.update.outputs.old_sha }}) to [`${{ steps.update.outputs.new_sha }}`](https://github.com/modrinth/code/commit/${{ steps.update.outputs.new_sha }}).
+            Bumps the Modrinth submodule from [`${{ steps.update.outputs.old_sha }}`](https://github.com/modrinth/code/commit/${{ steps.update.outputs.old_sha }}) to [`${{ steps.update.outputs.new_sha }}`](https://github.com/modrinth/code/commit/${{ steps.update.outputs.new_sha }}).
 
             [Compare changes](https://github.com/modrinth/code/compare/${{ steps.update.outputs.old_sha }}...${{ steps.update.outputs.new_sha }})
 
-            `pnpm build`, `pnpm build:firefox`, and `pnpm lint` all passed against the new submodule commit before this PR was opened.
+            ``pnpm lint`, pnpm build` and `pnpm build:firefox` all passed against the new submodule commit.
