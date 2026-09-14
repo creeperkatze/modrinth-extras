@@ -23,14 +23,19 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           submodules: recursive
-          token: ${{ secrets.GH_PAT }}
 
       - name: Check for upstream changes
         id: update
         working-directory: modrinth
         run: |
           old_sha=$(git rev-parse HEAD)
-          git fetch origin main
+
+          if [ "$(git rev-parse --is-shallow-repository)" = "true" ]; then
+            git fetch --unshallow origin main
+          else
+            git fetch origin main
+          fi
+
           new_sha=$(git rev-parse origin/main)
 
           if [ "$old_sha" = "$new_sha" ]; then
@@ -92,8 +97,7 @@ jobs:
         if: steps.update.outputs.changed == 'true' && steps.install.outcome == 'success' && steps.build-chrome.outcome == 'success' && steps.build-firefox.outcome == 'success' && steps.lint.outcome == 'success'
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
-          token: ${{ secrets.GH_PAT }}
-          commit-message: 'chore: update modrinth submodule to ${{ steps.update.outputs.new_sha }}'
+          commit-message: 'chore: update modrinth submodule'
           committer: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
           author: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
           branch: sync/modrinth
