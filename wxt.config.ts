@@ -65,7 +65,9 @@ export default defineConfig({
 		] as any,
 		resolve: {
 			alias: {
-				'@stripe/stripe-js': fileURLToPath(new URL('./src/mocks/stripe-js.ts', import.meta.url)),
+				'@stripe/stripe-js/pure': fileURLToPath(
+					new URL('./src/mocks/stripe-js.ts', import.meta.url),
+				),
 				// Gitignored codegen output in the submodule
 				'./language-settings-coverage.generated': fileURLToPath(
 					new URL('./src/mocks/language-settings-coverage.ts', import.meta.url),
