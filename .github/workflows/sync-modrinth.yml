@@ -94,6 +94,8 @@ jobs:
         with:
           token: ${{ secrets.GH_PAT }}
           commit-message: 'chore: update modrinth submodule to ${{ steps.update.outputs.new_sha }}'
+          committer: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
+          author: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
           branch: sync/modrinth
           delete-branch: true
           title: 'chore: update Modrinth submodule'
