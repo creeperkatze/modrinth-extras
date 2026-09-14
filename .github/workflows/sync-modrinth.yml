@@ -12,6 +12,7 @@ concurrency:
 permissions:
   contents: write
   pull-requests: write
+  issues: write
 
 jobs:
   sync:
@@ -55,23 +56,31 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
+        id: install
         if: steps.update.outputs.changed == 'true'
+        continue-on-error: true
         run: pnpm install --no-frozen-lockfile
 
       - name: Build (Chrome/Edge)
-        if: steps.update.outputs.changed == 'true'
+        id: build-chrome
+        if: steps.update.outputs.changed == 'true' && steps.install.outcome == 'success'
+        continue-on-error: true
         run: pnpm build
 
       - name: Build (Firefox)
-        if: steps.update.outputs.changed == 'true'
+        id: build-firefox
+        if: steps.update.outputs.changed == 'true' && steps.install.outcome == 'success'
+        continue-on-error: true
         run: pnpm build:firefox
 
       - name: Lint
-        if: steps.update.outputs.changed == 'true'
+        id: lint
+        if: steps.update.outputs.changed == 'true' && steps.install.outcome == 'success'
+        continue-on-error: true
         run: pnpm lint
 
       - name: Open pull request
-        if: steps.update.outputs.changed == 'true'
+        if: steps.update.outputs.changed == 'true' && steps.install.outcome == 'success' && steps.build-chrome.outcome == 'success' && steps.build-firefox.outcome == 'success' && steps.lint.outcome == 'success'
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           token: ${{ secrets.GH_PAT }}
@@ -85,4 +94,71 @@ jobs:
 
             [Compare changes](https://github.com/modrinth/code/compare/${{ steps.update.outputs.old_sha }}...${{ steps.update.outputs.new_sha }})
 
-            ``pnpm lint`, pnpm build` and `pnpm build:firefox` all passed against the new submodule commit.
+            `pnpm lint`, `pnpm build` and `pnpm build:firefox` all passed against the new submodule commit.
+
+      - name: Open issue on build failure
+        if: steps.update.outputs.changed == 'true' && (steps.install.outcome == 'failure' || steps.build-chrome.outcome == 'failure' || steps.build-firefox.outcome == 'failure' || steps.lint.outcome == 'failure')
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          OLD_SHA: ${{ steps.update.outputs.old_sha }}
+          NEW_SHA: ${{ steps.update.outputs.new_sha }}
+          INSTALL_OUTCOME: ${{ steps.install.outcome }}
+          BUILD_CHROME_OUTCOME: ${{ steps.build-chrome.outcome }}
+          BUILD_FIREFOX_OUTCOME: ${{ steps.build-firefox.outcome }}
+          LINT_OUTCOME: ${{ steps.lint.outcome }}
+        with:
+          script: |
+            const label = 'sync-modrinth-failure'
+            const title = 'chore: modrinth submodule sync is failing'
+            const { OLD_SHA, NEW_SHA, INSTALL_OUTCOME, BUILD_CHROME_OUTCOME, BUILD_FIREFOX_OUTCOME, LINT_OUTCOME } = process.env
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
+
+            const failedSteps = [
+              ['Install dependencies', INSTALL_OUTCOME],
+              ['Build (Chrome/Edge)', BUILD_CHROME_OUTCOME],
+              ['Build (Firefox)', BUILD_FIREFOX_OUTCOME],
+              ['Lint', LINT_OUTCOME],
+            ]
+              .filter(([, outcome]) => outcome === 'failure')
+              .map(([name]) => `- ${name}`)
+              .join('\n')
+
+            const body = [
+              `The scheduled [sync-modrinth.yml](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/blob/main/.github/workflows/sync-modrinth.yml) run failed while updating the \`modrinth\` submodule from [\`${OLD_SHA}\`](https://github.com/modrinth/code/commit/${OLD_SHA}) to [\`${NEW_SHA}\`](https://github.com/modrinth/code/commit/${NEW_SHA}).`,
+              '',
+              'Failed steps:',
+              failedSteps,
+              '',
+              `[Compare changes](https://github.com/modrinth/code/compare/${OLD_SHA}...${NEW_SHA}) · [Run logs](${runUrl})`,
+              '',
+              'No pull request was opened.',
+            ].join('\n')
+
+            try {
+              await github.rest.issues.createLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: label,
+                color: 'd93f0b',
+                description: 'The scheduled modrinth submodule sync failed to build',
+              })
+            } catch (error) {
+              if (error.status !== 422) throw error
+            }
+
+            const { data: existing } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: label,
+            })
+
+            if (existing.length === 0) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: [label],
+              })
+            }
