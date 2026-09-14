@@ -316,6 +316,9 @@ importers:
       '@codemirror/view':
         specifier: ^6.22.1
         version: 6.40.0
+      '@floating-ui/vue':
+        specifier: ^2.0.1
+        version: 2.0.1(vue@3.5.30(typescript@5.9.3))
       '@intercom/messenger-js-sdk':
         specifier: ^0.0.14
         version: 0.0.14
@@ -391,9 +394,6 @@ importers:
       flatpickr:
         specifier: ^4.6.13
         version: 4.6.13
-      floating-vue:
-        specifier: ^5.2.2
-        version: 5.2.2(vue@3.5.30(typescript@5.9.3))
       fuse.js:
         specifier: ^6.6.2
         version: 6.6.2
@@ -1622,11 +1622,25 @@ packages:
   '@floating-ui/core@1.7.5':
     resolution: {integrity: sha512-1Ih4WTWyw0+lKyFMcBHGbb5U5FtuHJuujoyyr5zTaWS5EYMeT6Jb2AuDeftsCsEuchO+mM2ij5+q9crhydzLhQ==}
 
+  '@floating-ui/core@1.8.0':
+    resolution: {integrity: sha512-0CIZ5itps/8x7BG8dEIhs53BvCUH2PCoogtakwRTut+Arm58sJooJ0AuZhLw2HJYIR5cMLNPBSS728sPho2khQ==}
+
   '@floating-ui/dom@1.1.1':
     resolution: {integrity: sha512-TpIO93+DIujg3g7SykEAGZMDtbJRrmnYRCNYSjJlvIbGhBjRSNTLVbNeDQBrzy9qDgUbiWdc7KA0uZHZ2tJmiw==}
 
+  '@floating-ui/dom@1.8.0':
+    resolution: {integrity: sha512-yXSrzeHZBTZadLOlfyhCkJHNeLJnHRnRInwdZ40L7ZiaAtrBwoYlsDrX3v5zB1Utk7CLfzcOVnVVWoXEky7Ceg==}
+
   '@floating-ui/utils@0.2.11':
     resolution: {integrity: sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg==}
+
+  '@floating-ui/utils@0.2.12':
+    resolution: {integrity: sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==}
+
+  '@floating-ui/vue@2.0.1':
+    resolution: {integrity: sha512-043dyEKD9TDSfz080YH2vobubgg+NIo/9Fw4RAl7sEMpD8Am1DNrrSTl/GpMBjyGHoD/FbJY2QLawY+HSQsEIA==}
+    peerDependencies:
+      vue: '>=3.3.0'
 
   '@formatjs/cli-native-darwin-arm64@1.1.8':
     resolution: {integrity: sha512-uIHA6JFbG5vE3GlQodIrbYMmQc50mhBBVJ++ze99Tetfj4eFmIOtVKz2UMt8P8QmvCUZQMyEH95Jm+FbBDY46A==}
@@ -8140,11 +8154,28 @@ snapshots:
     dependencies:
       '@floating-ui/utils': 0.2.11
 
+  '@floating-ui/core@1.8.0':
+    dependencies:
+      '@floating-ui/utils': 0.2.12
+
   '@floating-ui/dom@1.1.1':
     dependencies:
       '@floating-ui/core': 1.7.5
 
+  '@floating-ui/dom@1.8.0':
+    dependencies:
+      '@floating-ui/core': 1.8.0
+      '@floating-ui/utils': 0.2.12
+
   '@floating-ui/utils@0.2.11': {}
+
+  '@floating-ui/utils@0.2.12': {}
+
+  '@floating-ui/vue@2.0.1(vue@3.5.30(typescript@5.9.3))':
+    dependencies:
+      '@floating-ui/dom': 1.8.0
+      '@floating-ui/utils': 0.2.12
+      vue: 3.5.30(typescript@5.9.3)
 
   '@formatjs/cli-native-darwin-arm64@1.1.8':
     optional: true
@@ -11453,12 +11484,6 @@ snapshots:
 
   flatted@3.4.2: {}
 
-  floating-vue@5.2.2(vue@3.5.30(typescript@5.9.3)):
-    dependencies:
-      '@floating-ui/dom': 1.1.1
-      vue: 3.5.30(typescript@5.9.3)
-      vue-resize: 2.0.0-alpha.1(vue@3.5.30(typescript@5.9.3))
-
   floating-vue@5.2.2(vue@3.5.40(typescript@6.0.3)):
     dependencies:
       '@floating-ui/dom': 1.1.1
@@ -13995,10 +14020,6 @@ snapshots:
       vue: 3.5.40(typescript@6.0.3)
 
   vue-inbrowser-compiler-independent-utils@4.71.1(vue@3.5.30(typescript@5.9.3)):
-    dependencies:
-      vue: 3.5.30(typescript@5.9.3)
-
-  vue-resize@2.0.0-alpha.1(vue@3.5.30(typescript@5.9.3)):
     dependencies:
       vue: 3.5.30(typescript@5.9.3)
 
