@@ -1,0 +1,88 @@
+name: Sync Modrinth
+
+on:
+  schedule:
+    - cron: '0 6 * * MON'
+  workflow_dispatch:
+
+concurrency:
+  group: sync-modrinth
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    name: Update modrinth submodule
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: recursive
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Check for upstream changes
+        id: update
+        working-directory: modrinth
+        run: |
+          old_sha=$(git rev-parse HEAD)
+          git fetch origin main
+          new_sha=$(git rev-parse origin/main)
+
+          if [ "$old_sha" = "$new_sha" ]; then
+            echo "No upstream changes."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git checkout "$new_sha"
+
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          echo "old_sha=$old_sha" >> "$GITHUB_OUTPUT"
+          echo "new_sha=$new_sha" >> "$GITHUB_OUTPUT"
+
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+        if: steps.update.outputs.changed == 'true'
+
+      - name: Setup Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        if: steps.update.outputs.changed == 'true'
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        if: steps.update.outputs.changed == 'true'
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Build (Chrome/Edge)
+        if: steps.update.outputs.changed == 'true'
+        run: pnpm build
+
+      - name: Build (Firefox)
+        if: steps.update.outputs.changed == 'true'
+        run: pnpm build:firefox
+
+      - name: Lint
+        if: steps.update.outputs.changed == 'true'
+        run: pnpm lint
+
+      - name: Open pull request
+        if: steps.update.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          token: ${{ secrets.GH_PAT }}
+          commit-message: 'chore: update modrinth submodule to ${{ steps.update.outputs.new_sha }}'
+          branch: sync/modrinth-submodule
+          delete-branch: true
+          title: 'Update modrinth submodule'
+          labels: dependencies
+          body: |
+            Bumps the `modrinth` submodule from [`${{ steps.update.outputs.old_sha }}`](https://github.com/modrinth/code/commit/${{ steps.update.outputs.old_sha }}) to [`${{ steps.update.outputs.new_sha }}`](https://github.com/modrinth/code/commit/${{ steps.update.outputs.new_sha }}).
+
+            [Compare changes](https://github.com/modrinth/code/compare/${{ steps.update.outputs.old_sha }}...${{ steps.update.outputs.new_sha }})
+
+            `pnpm build`, `pnpm build:firefox`, and `pnpm lint` all passed against the new submodule commit before this PR was opened.
