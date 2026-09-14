@@ -98,6 +98,12 @@
   "feature.notifications.title": {
     "defaultMessage": "Bildirimler"
   },
+  "feature.platformsSidebar.description": {
+    "defaultMessage": "CurseForge, Hangar ve SpigotMC üzerinde aynı projeyi veya geliştiriciyi bulun."
+  },
+  "feature.platformsSidebar.title": {
+    "defaultMessage": "Diğer platformlar kenar çubuğu"
+  },
   "feature.projectCardActions.description": {
     "defaultMessage": "Projeleri doğrudan proje kartlarından kolayca indirin, takip edin ve kaydedin."
   },

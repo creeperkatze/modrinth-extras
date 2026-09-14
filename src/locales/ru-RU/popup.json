@@ -57,7 +57,7 @@
     "defaultMessage": "Боковая панель зависимостей"
   },
   "feature.discordSidebar.description": {
-    "defaultMessage": "Название сервера, описание, количество участников и онлайн для связанных серверов Discord."
+    "defaultMessage": "Название, описание, количество участников и онлайн сервера для связанных серверов Discord."
   },
   "feature.discordSidebar.title": {
     "defaultMessage": "Боковая панель Discord"
@@ -69,7 +69,7 @@
     "defaultMessage": "Фон галереи"
   },
   "feature.githubSidebar.description": {
-    "defaultMessage": "Звездочки, проблемы, запросы на слияние и форки для привязанных репозиториев на GitHub, GitLab, Codeberg и Bitbucket."
+    "defaultMessage": "Звёзды, проблемы, запросы на слияние и форки для привязанных репозиториев на GitHub, GitLab, Codeberg и Bitbucket."
   },
   "feature.githubSidebar.title": {
     "defaultMessage": "Боковая панель репозитория"
@@ -123,7 +123,7 @@
     "defaultMessage": "Действия в карточке проекта"
   },
   "feature.projectTypesPrimaryNav.description": {
-    "defaultMessage": "Перемести моды, плагины, наборы ресурсов и другие типы проектов в главную панель навигации."
+    "defaultMessage": "Переместить моды, плагины, наборы ресурсов и другие типы проектов на главную панель навигации."
   },
   "feature.projectTypesPrimaryNav.title": {
     "defaultMessage": "Навигация по типам проектов"
@@ -174,7 +174,7 @@
     "defaultMessage": "Обратись за помощью, поделись отзывами и следите за обновлениями на Discord сервере."
   },
   "popup.discordPrompt.title": {
-    "defaultMessage": "Присоединиться к Discord"
+    "defaultMessage": "Вступите в Discord"
   },
   "popup.donatePrompt.dismiss": {
     "defaultMessage": "Отменить"
@@ -189,7 +189,7 @@
     "defaultMessage": "Проверка"
   },
   "popup.footer.donate": {
-    "defaultMessage": "Пожертвовать"
+    "defaultMessage": "Поддержать"
   },
   "popup.footer.latestVersion": {
     "defaultMessage": "Последняя версия"
@@ -213,10 +213,10 @@
     "defaultMessage": "Общие"
   },
   "popup.surveyPrompt.dismiss": {
-    "defaultMessage": "Отменить"
+    "defaultMessage": "Закрыть"
   },
   "popup.surveyPrompt.placeholder": {
-    "defaultMessage": "Напишите свой ответ..."
+    "defaultMessage": "Введите ответ..."
   },
   "popup.surveyPrompt.submit": {
     "defaultMessage": "Отправить"

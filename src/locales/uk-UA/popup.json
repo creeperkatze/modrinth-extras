@@ -98,6 +98,12 @@
   "feature.notifications.title": {
     "defaultMessage": "Повідомлення"
   },
+  "feature.platformsSidebar.description": {
+    "defaultMessage": "Знаходити цей самий проєкт або автора на CurseForge, Hangar та SpigotMC."
+  },
+  "feature.platformsSidebar.title": {
+    "defaultMessage": "Інші платформи на бічній панелі"
+  },
   "feature.projectCardActions.description": {
     "defaultMessage": "Завантажуйте, підписуйтесь та зберігайте проєкти прямо з їхніх карток."
   },
