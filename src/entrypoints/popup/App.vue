@@ -31,8 +31,6 @@
 
 			<DonateCard />
 
-			<SurveyCard />
-
 			<FeatureGroup :label="formatMessage(messages['popup.group.general'])">
 				<div class="rounded-xl transition-colors duration-200 hover:bg-surface-3">
 					<div class="flex items-center gap-3 px-2 py-2">
@@ -294,7 +292,6 @@ import FeatureGroup from './components/FeatureGroup.vue'
 import FeatureRow from './components/FeatureRow.vue'
 import OptionFieldColor from './components/OptionFieldColor.vue'
 import OptionFieldSelect, { type SelectItem } from './components/OptionFieldSelect.vue'
-import SurveyCard from './components/SurveyCard.vue'
 
 const { formatMessage } = useVIntl()
 

@@ -8,6 +8,7 @@ packages:
 
 allowBuilds:
   '@parcel/watcher': true
+  '@wxt-dev/analytics': false
   canvas: false
   core-js: false
   esbuild: true

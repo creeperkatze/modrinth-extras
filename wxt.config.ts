@@ -10,7 +10,7 @@ export default defineConfig({
 	srcDir: 'src',
 	publicDir: 'src/public',
 	outDir: '.output',
-	modules: ['@wxt-dev/module-vue'],
+	modules: ['@wxt-dev/module-vue', '@wxt-dev/analytics/module'],
 	manifest: {
 		name: '__MSG_extName__',
 		description: '__MSG_extDescription__',

@@ -1,5 +1,7 @@
 import { browser } from 'wxt/browser'
 
+import { analytics } from '#analytics'
+
 import {
 	applyNotifications,
 	notificationsItem,
@@ -11,24 +13,15 @@ import { handleNotificationClick } from '../background/browser-notifications'
 import { fetchDiscordInvite } from '../background/external/discord'
 import { findPlatformProjects, findPlatformUsers } from '../background/external/platforms'
 import { fetchRepositoryStats } from '../background/external/repository'
-import { detectBrowserLocale } from '../utils/i18n'
 import type { Notification } from '../utils/notifications'
 import type { RepositoryPlatform } from '../utils/repository-links'
-import { getSettings } from '../utils/settings'
-import { capture, initTelemetry } from '../utils/telemetry'
+import { initTelemetry } from '../utils/telemetry'
 
 const ALARM_NAME = 'modrinth-extras-poll'
 const POLL_INTERVAL_MINUTES = 5
 
 export default defineBackground(() => {
-	void (async () => {
-		await initTelemetry()
-		const settings = await getSettings()
-		capture('extension_started', {
-			...settings,
-			locale: settings.locale.value || detectBrowserLocale(),
-		})
-	})()
+	void initTelemetry()
 
 	browser.storage.onChanged.addListener((changes, area) => {
 		if (area !== 'local' || !('settings' in changes)) return
@@ -115,9 +108,9 @@ export default defineBackground(() => {
 
 	browser.runtime.onInstalled.addListener((details) => {
 		if (details.reason === 'install') {
-			capture('extension_installed')
+			void analytics.track('extension_installed')
 		} else if (details.reason === 'update') {
-			capture('extension_updated', { from_extension_version: details.previousVersion })
+			void analytics.track('extension_updated', { from_extension_version: details.previousVersion })
 		}
 	})
 

@@ -16,12 +16,14 @@ const darkQuery = window.matchMedia('(prefers-color-scheme: dark)')
 applyTheme(darkQuery.matches)
 darkQuery.addEventListener('change', (e) => applyTheme(e.matches))
 
-await loadSavedLocale()
+void (async () => {
+	await loadSavedLocale()
 
-const app = createApp({
-	render: () => h(App),
-})
+	const app = createApp({
+		render: () => h(App),
+	})
 
-installI18n(app)
-app.use(FloatingVue)
-app.mount('#app')
+	installI18n(app)
+	app.use(FloatingVue)
+	app.mount('#app')
+})()
