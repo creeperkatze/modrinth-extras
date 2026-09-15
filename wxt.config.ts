@@ -68,31 +68,12 @@ export default defineConfig({
 				'@stripe/stripe-js/pure': fileURLToPath(
 					new URL('./src/mocks/stripe-js.ts', import.meta.url),
 				),
-				// Gitignored codegen output in the submodule
+				'@intercom/messenger-js-sdk': fileURLToPath(
+					new URL('./src/mocks/intercom.ts', import.meta.url),
+				),
 				'./language-settings-coverage.generated': fileURLToPath(
 					new URL('./src/mocks/language-settings-coverage.ts', import.meta.url),
 				),
-			},
-		},
-		css: {
-			preprocessorOptions: {
-				scss: {
-					silenceDeprecations: ['import'],
-				},
-			},
-		},
-		build: {
-			chunkSizeWarningLimit: 2000,
-			rolldownOptions: {
-				checks: {
-					pluginTimings: false,
-				},
-				external: (id: string) => id.startsWith('@xterm/'),
-				onwarn(warning, warn) {
-					if (warning.code === 'EMPTY_IMPORT_META') return
-					if (warning.code === 'EVAL' && warning.id?.includes('ace-builds')) return
-					warn(warning)
-				},
 			},
 		},
 	}),
