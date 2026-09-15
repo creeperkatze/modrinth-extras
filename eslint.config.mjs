@@ -37,6 +37,14 @@ export default tseslint.config(
 		},
 	},
 	{
+		files: ['scripts/**'],
+		languageOptions: {
+			globals: {
+				...globals.node,
+			},
+		},
+	},
+	{
 		ignores: [
 			'.wxt/',
 			'.output/',

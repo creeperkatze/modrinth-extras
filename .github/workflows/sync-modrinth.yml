@@ -93,8 +93,14 @@ jobs:
         continue-on-error: true
         run: pnpm lint
 
+      - name: Check for remote code
+        id: check-remote-code
+        if: steps.update.outputs.changed == 'true' && steps.install.outcome == 'success' && steps.build-chrome.outcome == 'success' && steps.build-firefox.outcome == 'success'
+        continue-on-error: true
+        run: pnpm scripts check-remote-code
+
       - name: Open pull request
-        if: steps.update.outputs.changed == 'true' && steps.install.outcome == 'success' && steps.build-chrome.outcome == 'success' && steps.build-firefox.outcome == 'success' && steps.lint.outcome == 'success'
+        if: steps.update.outputs.changed == 'true' && steps.install.outcome == 'success' && steps.build-chrome.outcome == 'success' && steps.build-firefox.outcome == 'success' && steps.lint.outcome == 'success' && steps.check-remote-code.outcome == 'success'
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           commit-message: 'chore: update modrinth submodule'
@@ -112,10 +118,10 @@ jobs:
 
             [Compare changes](https://github.com/modrinth/code/compare/${{ steps.update.outputs.old_sha }}...${{ steps.update.outputs.new_sha }})
 
-            `pnpm lint`, `pnpm build` and `pnpm build:firefox` all passed against the new submodule commit.
+            `pnpm lint`, `pnpm build`, `pnpm build:firefox` and the remote-code check all passed against the new submodule commit.
 
       - name: Open issue on build failure
-        if: steps.update.outputs.changed == 'true' && (steps.install.outcome == 'failure' || steps.build-chrome.outcome == 'failure' || steps.build-firefox.outcome == 'failure' || steps.lint.outcome == 'failure')
+        if: steps.update.outputs.changed == 'true' && (steps.install.outcome == 'failure' || steps.build-chrome.outcome == 'failure' || steps.build-firefox.outcome == 'failure' || steps.lint.outcome == 'failure' || steps.check-remote-code.outcome == 'failure')
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           OLD_SHA: ${{ steps.update.outputs.old_sha }}
@@ -124,11 +130,12 @@ jobs:
           BUILD_CHROME_OUTCOME: ${{ steps.build-chrome.outcome }}
           BUILD_FIREFOX_OUTCOME: ${{ steps.build-firefox.outcome }}
           LINT_OUTCOME: ${{ steps.lint.outcome }}
+          CHECK_REMOTE_CODE_OUTCOME: ${{ steps.check-remote-code.outcome }}
         with:
           script: |
             const label = 'sync-modrinth-failure'
             const title = 'chore: modrinth submodule sync is failing'
-            const { OLD_SHA, NEW_SHA, INSTALL_OUTCOME, BUILD_CHROME_OUTCOME, BUILD_FIREFOX_OUTCOME, LINT_OUTCOME } = process.env
+            const { OLD_SHA, NEW_SHA, INSTALL_OUTCOME, BUILD_CHROME_OUTCOME, BUILD_FIREFOX_OUTCOME, LINT_OUTCOME, CHECK_REMOTE_CODE_OUTCOME } = process.env
             const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
 
             const failedSteps = [
@@ -136,6 +143,7 @@ jobs:
               ['Build (Chrome/Edge)', BUILD_CHROME_OUTCOME],
               ['Build (Firefox)', BUILD_FIREFOX_OUTCOME],
               ['Lint', LINT_OUTCOME],
+              ['Check for remote code', CHECK_REMOTE_CODE_OUTCOME],
             ]
               .filter(([, outcome]) => outcome === 'failure')
               .map(([name]) => `- ${name}`)
