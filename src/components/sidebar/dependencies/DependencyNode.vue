@@ -33,7 +33,7 @@
 			<a
 				:href="projectHref"
 				class="min-w-0 flex-1 truncate text-primary no-underline hover:underline"
-				@click.prevent="navigateToProject"
+				@click="navigateToProject"
 			>
 				{{ dep.project?.name ?? dep.project_id }}
 			</a>
@@ -140,7 +140,12 @@ const badgeClass = computed(
 		})[props.dep.dependency_type] ?? 'bg-button-bg border-button-bg text-secondary',
 )
 
-function navigateToProject() {
+function navigateToProject(event: MouseEvent) {
+	// Let the browser handle natively
+	if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) {
+		return
+	}
+	event.preventDefault()
 	const projectType = props.dep.project?.project_types[0]
 	const slug = props.dep.project?.slug
 	if (projectType && slug) navigate(`/${projectType}/${slug}`)
