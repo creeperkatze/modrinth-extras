@@ -601,9 +601,11 @@ async function fetchGameVersions(): Promise<SelectItem[]> {
 		api: 'labrinth',
 		version: 2,
 	})
-	return data
-		.filter((v) => v.version_type === 'release')
-		.map((v) => ({ label: v.version, value: v.version }))
+	return data.map((v) => ({
+		label: v.version,
+		value: v.version,
+		snapshot: v.version_type !== 'release',
+	}))
 }
 
 const generalFeatures = computed<FeatureDef[]>(() => [

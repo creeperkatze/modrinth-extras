@@ -10,10 +10,15 @@
 		:show-search-icon="showSearchIcon"
 		:select-search-text-on-focus="selectSearchTextOnFocus"
 		:max-height="maxHeight"
+		:no-options-message="noOptionsMessage"
 		trigger-class="compact-combobox-trigger"
 		dropdown-class="compact-combobox-dropdown"
 		@update:model-value="$emit('update:modelValue', $event)"
-	/>
+	>
+		<template v-if="$slots['dropdown-footer']" #dropdown-footer>
+			<slot name="dropdown-footer" />
+		</template>
+	</Combobox>
 </template>
 
 <script setup lang="ts">
@@ -33,6 +38,7 @@ const props = withDefaults(
 		showSearchIcon?: boolean
 		selectSearchTextOnFocus?: boolean
 		maxHeight?: number
+		noOptionsMessage?: string
 	}>(),
 	{
 		modelValue: undefined,
@@ -43,6 +49,7 @@ const props = withDefaults(
 		showSearchIcon: false,
 		selectSearchTextOnFocus: false,
 		maxHeight: 240,
+		noOptionsMessage: undefined,
 	},
 )
 

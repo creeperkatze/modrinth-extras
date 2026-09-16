@@ -215,8 +215,20 @@
   "search.any": {
     "defaultMessage": "Any"
   },
+  "search.hideSnapshots": {
+    "defaultMessage": "Hide snapshots"
+  },
+  "search.loading": {
+    "defaultMessage": "Loading..."
+  },
+  "search.noResults": {
+    "defaultMessage": "No results found"
+  },
   "search.placeholder": {
     "defaultMessage": "Search..."
+  },
+  "search.showAllVersions": {
+    "defaultMessage": "Show all versions"
   },
   "settings.language": {
     "defaultMessage": "Language"
