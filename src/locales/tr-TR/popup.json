@@ -212,20 +212,20 @@
   "popup.group.general": {
     "defaultMessage": "Genel"
   },
-  "popup.surveyPrompt.dismiss": {
-    "defaultMessage": "Vazgeç"
-  },
-  "popup.surveyPrompt.placeholder": {
-    "defaultMessage": "Cevabınızı yazın..."
-  },
-  "popup.surveyPrompt.submit": {
-    "defaultMessage": "Gönder"
-  },
   "search.any": {
     "defaultMessage": "Herhangi"
   },
+  "search.loading": {
+    "defaultMessage": "Yükleniyor..."
+  },
+  "search.noResults": {
+    "defaultMessage": "Hiçbir sonuç bulunamadı"
+  },
   "search.placeholder": {
     "defaultMessage": "Ara..."
+  },
+  "search.showAllVersions": {
+    "defaultMessage": "Tüm Versiyonları Göster"
   },
   "settings.language": {
     "defaultMessage": "Dil"

@@ -212,20 +212,23 @@
   "popup.group.general": {
     "defaultMessage": "General"
   },
-  "popup.surveyPrompt.dismiss": {
-    "defaultMessage": "Descartar"
-  },
-  "popup.surveyPrompt.placeholder": {
-    "defaultMessage": "Escribe tu respuesta..."
-  },
-  "popup.surveyPrompt.submit": {
-    "defaultMessage": "Enviar"
-  },
   "search.any": {
     "defaultMessage": "Cualquiera"
   },
+  "search.hideSnapshots": {
+    "defaultMessage": "Ocultar snapshots"
+  },
+  "search.loading": {
+    "defaultMessage": "Cargando..."
+  },
+  "search.noResults": {
+    "defaultMessage": "No se han encontrado resultados"
+  },
   "search.placeholder": {
     "defaultMessage": "Buscar..."
+  },
+  "search.showAllVersions": {
+    "defaultMessage": "Mostrar todas las versiones"
   },
   "settings.language": {
     "defaultMessage": "Idioma"

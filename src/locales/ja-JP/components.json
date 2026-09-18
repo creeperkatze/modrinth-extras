@@ -26,6 +26,9 @@
   "discordSidebar.online": {
     "defaultMessage": "{count}人オンライン"
   },
+  "modpacksSidebar.title": {
+    "defaultMessage": "モッドパック"
+  },
   "notificationsIndicator.acceptInvite": {
     "defaultMessage": "招待を受け付ける"
   },
@@ -46,6 +49,12 @@
   },
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "履歴を表示"
+  },
+  "platformsSidebar.downloads": {
+    "defaultMessage": "{count}個のダウンロード"
+  },
+  "platformsSidebar.loading": {
+    "defaultMessage": "読み込み中"
   },
   "projectCardActions.copied": {
     "defaultMessage": "コピー済み！"
@@ -109,6 +118,9 @@
   },
   "toolsSidebar.title": {
     "defaultMessage": "ツール"
+  },
+  "translateDescription.translate": {
+    "defaultMessage": "概要を翻訳"
   },
   "translateDescription.translating": {
     "defaultMessage": "翻訳中…"

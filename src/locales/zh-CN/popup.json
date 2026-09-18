@@ -206,15 +206,6 @@
   "popup.group.general": {
     "defaultMessage": "一般"
   },
-  "popup.surveyPrompt.dismiss": {
-    "defaultMessage": "忽略"
-  },
-  "popup.surveyPrompt.placeholder": {
-    "defaultMessage": "请输入你的回答……"
-  },
-  "popup.surveyPrompt.submit": {
-    "defaultMessage": "发送"
-  },
   "search.any": {
     "defaultMessage": "任何"
   },

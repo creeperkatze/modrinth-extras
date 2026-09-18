@@ -57,13 +57,13 @@
     "defaultMessage": "Боковая панель зависимостей"
   },
   "feature.discordSidebar.description": {
-    "defaultMessage": "Название, описание, количество участников и онлайн сервера для связанных серверов Discord."
+    "defaultMessage": "Название, описание, количество участников и онлайн для связанных серверов Discord."
   },
   "feature.discordSidebar.title": {
     "defaultMessage": "Боковая панель Discord"
   },
   "feature.galleryBackground.description": {
-    "defaultMessage": "Отображать изображение из галереи как фоновый баннер на страницах проектов."
+    "defaultMessage": "Отображать обложку как фоновый баннер на страницах проектов."
   },
   "feature.galleryBackground.title": {
     "defaultMessage": "Фон галереи"
@@ -75,7 +75,7 @@
     "defaultMessage": "Боковая панель репозитория"
   },
   "feature.modpacksSidebar.description": {
-    "defaultMessage": "Показать все сборки, в которых представлен этот мод."
+    "defaultMessage": "Показать все сборки с модом."
   },
   "feature.modpacksSidebar.title": {
     "defaultMessage": "Боковая панель сборок"
@@ -93,7 +93,7 @@
     "defaultMessage": "Значок уведомлений"
   },
   "feature.notifications.description": {
-    "defaultMessage": "Просматривайте, управляйте и очищайте непрочитанные уведомления прямо в заголовке, не покидая текущую страницу."
+    "defaultMessage": "Просматривать, управлять и очищать непрочитанные уведомления прямо в заголовке."
   },
   "feature.notifications.title": {
     "defaultMessage": "Уведомления"
@@ -159,31 +159,31 @@
     "defaultMessage": "Боковая панель инструментов"
   },
   "feature.translateDescription.description": {
-    "defaultMessage": "Перевести описание проекта на Ваш язык прямо на устройстве, если оно отличается."
+    "defaultMessage": "Перевод описания проекта на ваш язык прямо на устройстве, если он отличается."
   },
   "feature.translateDescription.disabledTooltip": {
     "defaultMessage": "Требуются API, не поддерживаемые в этом браузере"
   },
   "feature.translateDescription.title": {
-    "defaultMessage": "Перевести описание"
+    "defaultMessage": "Перевод описания"
   },
   "popup.discordPrompt.dismiss": {
-    "defaultMessage": "Отменить"
+    "defaultMessage": "Закрыть"
   },
   "popup.discordPrompt.message": {
-    "defaultMessage": "Обратись за помощью, поделись отзывами и следите за обновлениями на Discord сервере."
+    "defaultMessage": "Обратитесь за помощью, делитесь мнением и следите за обновлениями в Discord."
   },
   "popup.discordPrompt.title": {
     "defaultMessage": "Вступите в Discord"
   },
   "popup.donatePrompt.dismiss": {
-    "defaultMessage": "Отменить"
+    "defaultMessage": "Закрыть"
   },
   "popup.donatePrompt.message": {
-    "defaultMessage": "Modrinth Extras всегда будет бесплатным, с открытым исходным кодом и без рекламы. Если он тебе пригодился, подумай о том, чтобы поддержать его разработку небольшим пожертвованием."
+    "defaultMessage": "Modrinth Extras всегда будет бесплатным, открытым и без рекламы. Если он пригодился, поддержите разработку копеечкой."
   },
   "popup.donatePrompt.title": {
-    "defaultMessage": "Поддержать разработку"
+    "defaultMessage": "Поддержите расширение"
   },
   "popup.footer.checking": {
     "defaultMessage": "Проверка"
@@ -212,26 +212,29 @@
   "popup.group.general": {
     "defaultMessage": "Общие"
   },
-  "popup.surveyPrompt.dismiss": {
-    "defaultMessage": "Закрыть"
-  },
-  "popup.surveyPrompt.placeholder": {
-    "defaultMessage": "Введите ответ..."
-  },
-  "popup.surveyPrompt.submit": {
-    "defaultMessage": "Отправить"
-  },
   "search.any": {
     "defaultMessage": "Любой"
   },
+  "search.hideSnapshots": {
+    "defaultMessage": "Скрыть снапшоты"
+  },
+  "search.loading": {
+    "defaultMessage": "Загрузка..."
+  },
+  "search.noResults": {
+    "defaultMessage": "Ничего не найдено"
+  },
   "search.placeholder": {
     "defaultMessage": "Поиск..."
+  },
+  "search.showAllVersions": {
+    "defaultMessage": "Показать все версии"
   },
   "settings.language": {
     "defaultMessage": "Язык"
   },
   "settings.language.description": {
-    "defaultMessage": "Помогите с переводом на <link>Crowdin</link>. Некоторые языки могут быть переведены не полностью."
+    "defaultMessage": "Помогите с переводом на <link>Crowdin</link>. Некоторые языки не закончены."
   }
 }
 

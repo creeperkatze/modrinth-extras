@@ -1,6 +1,6 @@
 {
   "dependencyExplorer.centerView": {
-    "defaultMessage": "Центрировать вид"
+    "defaultMessage": "Вид по центру"
   },
   "dependencyExplorer.depth": {
     "defaultMessage": "Глубина"
@@ -69,7 +69,7 @@
     "defaultMessage": "Партнёры"
   },
   "errorNotice.message": {
-    "defaultMessage": "Ошибка может быть связана с Modrinth Extras. Попробуйте отключить расширение и обновить страницу перед отправкой отчёта в Modrinth. Если ошибка исчезнет, пожалуйста, сообщите об этом <link>здесь</link>."
+    "defaultMessage": "Ошибка может быть связана с Modrinth Extras. Отключите расширение и обновите страницу перед отправкой отчёта в Modrinth. Если ошибка исчезнет, сообщите об этом <link>здесь</link>."
   },
   "modpacksSidebar.title": {
     "defaultMessage": "Сборки"
