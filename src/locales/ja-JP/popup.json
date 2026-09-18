@@ -1,6 +1,12 @@
 {
   "feature.accentColor.color": {
-    "defaultMessage": "色"
+    "defaultMessage": "カラー"
+  },
+  "feature.accentColor.description": {
+    "defaultMessage": "Modrinthの緑をカスタムのアクセントカラーで変更します。"
+  },
+  "feature.accentColor.title": {
+    "defaultMessage": "アクセントカラー"
   },
   "feature.activitySparkline.days": {
     "defaultMessage": "{count}日"
@@ -8,23 +14,77 @@
   "feature.browserNotifications.sendTest": {
     "defaultMessage": "テスト通知を送る"
   },
+  "feature.browserNotifications.title": {
+    "defaultMessage": "ブラウザーの通知"
+  },
+  "feature.discordSidebar.title": {
+    "defaultMessage": "Discordサイドバー"
+  },
+  "feature.galleryBackground.title": {
+    "defaultMessage": "ギャラリーの背景"
+  },
+  "feature.monetizationBadge.title": {
+    "defaultMessage": "モネタイズのバッジ"
+  },
+  "feature.notificationBadge.title": {
+    "defaultMessage": "通知のバッジ"
+  },
+  "feature.notifications.title": {
+    "defaultMessage": "通知"
+  },
+  "feature.platformsSidebar.description": {
+    "defaultMessage": "CurseForge、Hangar、とSpigotMCで同じのプロジェクトや開発者を見つけます。"
+  },
+  "feature.platformsSidebar.title": {
+    "defaultMessage": "他のプラットフォームのサイドバー"
+  },
+  "feature.projectCardActions.gameVersion": {
+    "defaultMessage": "ゲームバージョン"
+  },
+  "feature.searchBackground.title": {
+    "defaultMessage": "背景を検索"
+  },
+  "feature.telemetry.disabledTooltip": {
+    "defaultMessage": "Firefoxのデータ収集設定で制御しています"
+  },
+  "feature.telemetry.title": {
+    "defaultMessage": "テレメンタラリー"
+  },
+  "feature.toolsSidebar.title": {
+    "defaultMessage": "ツールのサイドバー"
+  },
   "feature.translateDescription.title": {
-    "defaultMessage": "説明を翻訳する"
+    "defaultMessage": "概要を翻訳"
   },
   "popup.discordPrompt.title": {
     "defaultMessage": "Discordを参加する"
   },
+  "popup.footer.updateAvailable": {
+    "defaultMessage": "更新が利用可能です"
+  },
+  "popup.group.flags": {
+    "defaultMessage": "フラッグ"
+  },
   "popup.group.general": {
     "defaultMessage": "一般"
-  },
-  "popup.surveyPrompt.submit": {
-    "defaultMessage": "送る"
   },
   "search.any": {
     "defaultMessage": "任意"
   },
+  "search.hideSnapshots": {
+    "defaultMessage": "スナップショットを非表示"
+  },
+  "search.loading": {
+    "defaultMessage": "読み込み中..."
+  },
+  "search.noResults": {
+    "defaultMessage": "結果が見つかりません"
+  },
   "search.placeholder": {
     "defaultMessage": "検索..."
+  },
+  "search.showAllVersions": {
+    "defaultMessage": "全てのバージョンを表示"
   },
   "settings.language": {
     "defaultMessage": "言語"

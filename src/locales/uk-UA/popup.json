@@ -212,20 +212,23 @@
   "popup.group.general": {
     "defaultMessage": "Загальні"
   },
-  "popup.surveyPrompt.dismiss": {
-    "defaultMessage": "Відхилити"
-  },
-  "popup.surveyPrompt.placeholder": {
-    "defaultMessage": "Напишіть свою відповідь..."
-  },
-  "popup.surveyPrompt.submit": {
-    "defaultMessage": "Надіслати"
-  },
   "search.any": {
     "defaultMessage": "Будь-який"
   },
+  "search.hideSnapshots": {
+    "defaultMessage": "Приховати знімки"
+  },
+  "search.loading": {
+    "defaultMessage": "Завантаження..."
+  },
+  "search.noResults": {
+    "defaultMessage": "Результатів не знайдено"
+  },
   "search.placeholder": {
     "defaultMessage": "Пошук..."
+  },
+  "search.showAllVersions": {
+    "defaultMessage": "Показати всі версії"
   },
   "settings.language": {
     "defaultMessage": "Мова"
