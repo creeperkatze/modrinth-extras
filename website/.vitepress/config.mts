@@ -36,7 +36,12 @@ export default defineConfig({
 				? [
 						{
 							text: `v${version}`,
-							link: 'https://github.com/creeperkatze/modrinth-extras/releases',
+							items: [
+								{
+									text: 'Changelog',
+									link: 'https://github.com/creeperkatze/modrinth-extras/releases',
+								},
+							],
 						},
 					]
 				: []),
