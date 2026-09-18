@@ -1,7 +1,5 @@
 import { browser } from 'wxt/browser'
 
-import { analytics } from '#analytics'
-
 import {
 	applyNotifications,
 	notificationsItem,
@@ -15,7 +13,7 @@ import { findPlatformProjects, findPlatformUsers } from '../background/external/
 import { fetchRepositoryStats } from '../background/external/repository'
 import type { Notification } from '../utils/notifications'
 import type { RepositoryPlatform } from '../utils/repository-links'
-import { initTelemetry } from '../utils/telemetry'
+import { analytics, initTelemetry } from '../utils/telemetry'
 
 const ALARM_NAME = 'modrinth-extras-poll'
 const POLL_INTERVAL_MINUTES = 5

@@ -1,9 +1,18 @@
+import { createAnalytics } from '@wxt-dev/analytics'
+import { posthog } from '@wxt-dev/analytics/providers/posthog'
 import { browser } from 'wxt/browser'
-
-import { analytics } from '#analytics'
 
 import { detectBrowserLocale } from './i18n'
 import { type ExtensionSettings, getSettings } from './settings'
+
+export const analytics = createAnalytics({
+	providers: [
+		posthog({
+			apiKey: 'phc_oWL7DUqxG3kmN20nWBkie7Eu7i3GJMdvGnvKRWBI7hi',
+			apiHost: 'https://hedgehog.creeperkatze.dev',
+		}),
+	],
+})
 
 function flattenSettings(settings: ExtensionSettings): Record<string, string> {
 	const flat: Record<string, string> = {}
