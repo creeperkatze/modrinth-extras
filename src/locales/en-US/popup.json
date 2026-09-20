@@ -9,7 +9,7 @@
     "defaultMessage": "Accent color"
   },
   "feature.activitySparkline.days": {
-    "defaultMessage": "{count} days"
+    "defaultMessage": "{count, plural, one {# day} other {# days}}"
   },
   "feature.activitySparkline.description": {
     "defaultMessage": "Release activity chart on project pages."

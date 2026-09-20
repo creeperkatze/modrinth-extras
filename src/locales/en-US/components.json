@@ -60,7 +60,7 @@
     "defaultMessage": "Loading"
   },
   "discordSidebar.members": {
-    "defaultMessage": "{count} members"
+    "defaultMessage": "{count, plural, one {# member} other {# members}}"
   },
   "discordSidebar.online": {
     "defaultMessage": "{count} online"
@@ -114,7 +114,7 @@
     "defaultMessage": "View history"
   },
   "platformsSidebar.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count, plural, one {# download} other {# downloads}}"
   },
   "platformsSidebar.loadError": {
     "defaultMessage": "Failed to load other platforms"
@@ -174,7 +174,7 @@
     "defaultMessage": "Search"
   },
   "repositorySidebar.forks": {
-    "defaultMessage": "{count} forks"
+    "defaultMessage": "{count, plural, one {# fork} other {# forks}}"
   },
   "repositorySidebar.loadError": {
     "defaultMessage": "Failed to load repository data"
@@ -183,13 +183,13 @@
     "defaultMessage": "Loading"
   },
   "repositorySidebar.openIssues": {
-    "defaultMessage": "{count} open issues"
+    "defaultMessage": "{count, plural, one {# open issue} other {# open issues}}"
   },
   "repositorySidebar.openPRs": {
-    "defaultMessage": "{count} open pull requests"
+    "defaultMessage": "{count, plural, one {# open pull request} other {# open pull requests}}"
   },
   "repositorySidebar.stars": {
-    "defaultMessage": "{count} stars"
+    "defaultMessage": "{count, plural, one {# star} other {# stars}}"
   },
   "repositorySidebar.title": {
     "defaultMessage": "Repository"

@@ -76,16 +76,22 @@ const messages = defineMessages({
 		id: 'repositorySidebar.loadError',
 		defaultMessage: 'Failed to load repository data',
 	},
-	'repositorySidebar.stars': { id: 'repositorySidebar.stars', defaultMessage: '{count} stars' },
+	'repositorySidebar.stars': {
+		id: 'repositorySidebar.stars',
+		defaultMessage: '{count, plural, one {# star} other {# stars}}',
+	},
 	'repositorySidebar.openIssues': {
 		id: 'repositorySidebar.openIssues',
-		defaultMessage: '{count} open issues',
+		defaultMessage: '{count, plural, one {# open issue} other {# open issues}}',
 	},
 	'repositorySidebar.openPRs': {
 		id: 'repositorySidebar.openPRs',
-		defaultMessage: '{count} open pull requests',
+		defaultMessage: '{count, plural, one {# open pull request} other {# open pull requests}}',
 	},
-	'repositorySidebar.forks': { id: 'repositorySidebar.forks', defaultMessage: '{count} forks' },
+	'repositorySidebar.forks': {
+		id: 'repositorySidebar.forks',
+		defaultMessage: '{count, plural, one {# fork} other {# forks}}',
+	},
 })
 
 const props = defineProps<{ pageUrl: string }>()
@@ -102,12 +108,6 @@ const stats = ref<RepositoryStats | null>(null)
 const loading = ref(true)
 const error = ref(false)
 
-function formatNum(n: number): string {
-	if (n >= 1_000_000) return (n / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M'
-	if (n >= 1_000) return (n / 1_000).toFixed(1).replace(/\.0$/, '') + 'k'
-	return String(n)
-}
-
 const statRows = computed(() => {
 	if (!stats.value || !repoInfo.value) return []
 	const links = getRepositoryLinks(repoInfo.value.platform, repoInfo.value.repoUrl)
@@ -118,7 +118,7 @@ const statRows = computed(() => {
 			key: 'stars',
 			icon: StarIcon,
 			text: formatMessage(messages['repositorySidebar.stars'], {
-				count: formatNum(stats.value.stars),
+				count: stats.value.stars,
 			}),
 			href: links.stars,
 		})
@@ -144,7 +144,7 @@ const statRows = computed(() => {
 			key: 'forks',
 			icon: GitForkIcon,
 			text: formatMessage(messages['repositorySidebar.forks'], {
-				count: formatNum(stats.value.forks),
+				count: stats.value.forks,
 			}),
 			href: links.forks,
 		})

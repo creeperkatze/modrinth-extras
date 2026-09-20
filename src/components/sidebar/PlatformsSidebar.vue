@@ -52,7 +52,7 @@
 					v-if="match.downloads !== undefined"
 					:aria-label="
 						formatMessage(messages['platformsSidebar.downloads'], {
-							count: formatCompact(match.downloads),
+							count: match.downloads,
 						})
 					"
 					class="mt-0.5 flex shrink-0 items-center gap-1 leading-tight text-secondary"
@@ -90,7 +90,7 @@ const messages = defineMessages({
 	},
 	'platformsSidebar.downloads': {
 		id: 'platformsSidebar.downloads',
-		defaultMessage: '{count} downloads',
+		defaultMessage: '{count, plural, one {# download} other {# downloads}}',
 	},
 })
 

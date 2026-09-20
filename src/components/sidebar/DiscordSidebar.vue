@@ -51,7 +51,7 @@
 					<span class="min-w-0 flex-1 break-words leading-tight">
 						{{
 							formatMessage(messages['discordSidebar.members'], {
-								count: formatNum(invite.approximate_member_count),
+								count: invite.approximate_member_count,
 							})
 						}}
 					</span>
@@ -106,7 +106,7 @@ const messages = defineMessages({
 	},
 	'discordSidebar.members': {
 		id: 'discordSidebar.members',
-		defaultMessage: '{count} members',
+		defaultMessage: '{count, plural, one {# member} other {# members}}',
 	},
 	'discordSidebar.online': { id: 'discordSidebar.online', defaultMessage: '{count} online' },
 	'discordSidebar.partnered': {

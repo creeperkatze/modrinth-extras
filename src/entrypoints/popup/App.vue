@@ -376,7 +376,7 @@ const messages = defineMessages({
 	},
 	'feature.activitySparkline.days': {
 		id: 'feature.activitySparkline.days',
-		defaultMessage: '{count} days',
+		defaultMessage: '{count, plural, one {# day} other {# days}}',
 	},
 	'feature.toolsSidebar.title': {
 		id: 'feature.toolsSidebar.title',
