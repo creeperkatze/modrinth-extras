@@ -1,0 +1,173 @@
+<script setup lang="ts">
+interface ShowcaseItem {
+	title: string
+	details: string
+	image: string
+}
+
+const items: ShowcaseItem[] = [
+	{
+		title: 'Every feature, one click away',
+		details:
+			'Every feature can be individually toggled from the extension popup, so you can build the exact Modrinth experience you want.',
+		image: '/screenshots/extension.png',
+	},
+	{
+		title: 'Act without leaving the list',
+		details:
+			'Download, follow, save, and copy links for projects directly from their cards, no need to open each page.',
+		image: '/screenshots/project-card-actions.png',
+	},
+	{
+		title: 'A page that matches the project',
+		details:
+			"Display a project's featured gallery image as a full banner background, so shaders and resource packs look the part.",
+		image: '/screenshots/gallery-background.png',
+	},
+	{
+		title: 'Notifications, right in the header',
+		details:
+			"View, manage, and clear unread notifications without leaving the page you're on, with optional browser notifications and an unread badge on the extension icon.",
+		image: '/screenshots/notifications.png',
+	},
+	{
+		title: 'Explore the full dependency tree',
+		details:
+			"An interactive graph lets you dig through a project's required, optional, and embedded dependencies, as deep as you want to go.",
+		image: '/screenshots/dependency-explorer.png',
+	},
+	{
+		title: 'Find anything in seconds',
+		details:
+			'Press Ctrl+K or / to open a command palette style search, with faceted tags for loaders, versions, categories, and types built right into your query.',
+		image: '/screenshots/quicksearch.png',
+	},
+	{
+		title: 'See how active a project really is',
+		details:
+			'A release activity sparkline on every project page shows update frequency at a glance, before you even scroll down.',
+		image: '/screenshots/sparkline.png',
+	},
+	{
+		title: 'The full picture, right in the sidebar',
+		details:
+			'Repository stars, issues, and pull requests. Discord member counts. Every modpack a mod is featured in. All shown right in the sidebar.',
+		image: '/screenshots/sidebar.png',
+	},
+]
+</script>
+
+<template>
+	<div class="showcase">
+		<div class="container">
+			<div class="showcase-inner">
+				<article
+					v-for="(item, index) in items"
+					:key="item.title"
+					class="showcase-row"
+					:class="{ reverse: index % 2 === 1 }"
+				>
+					<div class="showcase-media">
+						<img
+							:src="item.image"
+							:alt="item.title"
+							width="1280"
+							height="800"
+							loading="lazy"
+							decoding="async"
+						/>
+					</div>
+					<div class="showcase-text">
+						<h3>{{ item.title }}</h3>
+						<p>{{ item.details }}</p>
+					</div>
+				</article>
+			</div>
+		</div>
+	</div>
+</template>
+
+<style scoped>
+.showcase {
+	position: relative;
+	padding: 32px 24px 8px;
+}
+
+.container {
+	max-width: 1152px;
+	margin: 0 auto;
+}
+
+.showcase-inner {
+	display: flex;
+	flex-direction: column;
+	gap: 64px;
+}
+
+.showcase-row {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 24px;
+}
+
+.showcase-media {
+	flex: 1 1 0;
+	width: 100%;
+}
+
+.showcase-media img {
+	width: 100%;
+	aspect-ratio: 1280 / 800;
+	object-fit: cover;
+	border-radius: 12px;
+	background-color: var(--vp-c-bg-soft);
+}
+
+.showcase-text {
+	flex: 1 1 0;
+	width: 100%;
+}
+
+.showcase-text h3 {
+	font-size: 1.25rem;
+	font-weight: 600;
+	line-height: 1.4;
+	margin: 0 0 8px;
+	letter-spacing: -0.01em;
+}
+
+.showcase-text p {
+	font-size: 0.95rem;
+	line-height: 1.6;
+	color: var(--vp-c-text-2);
+	margin: 0;
+}
+
+@media (min-width: 640px) {
+	.showcase {
+		padding-top: 48px;
+		padding-left: 48px;
+		padding-right: 48px;
+	}
+}
+
+@media (min-width: 768px) {
+	.showcase-row {
+		flex-direction: row;
+		align-items: center;
+		gap: 48px;
+	}
+
+	.showcase-row.reverse {
+		flex-direction: row-reverse;
+	}
+}
+
+@media (min-width: 960px) {
+	.showcase {
+		padding-left: 64px;
+		padding-right: 64px;
+	}
+}
+</style>
