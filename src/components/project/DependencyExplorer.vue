@@ -213,7 +213,6 @@
 					:min="0"
 					:max="maxDepth"
 					:step="1"
-					size="small"
 					@update:model-value="setDepthLimit"
 				/>
 			</div>
