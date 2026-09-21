@@ -8,9 +8,6 @@
   "feature.accentColor.title": {
     "defaultMessage": "アクセントカラー"
   },
-  "feature.activitySparkline.days": {
-    "defaultMessage": "{count}日"
-  },
   "feature.browserNotifications.sendTest": {
     "defaultMessage": "テスト通知を送る"
   },

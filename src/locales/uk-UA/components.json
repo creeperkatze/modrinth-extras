@@ -59,9 +59,6 @@
   "discordSidebar.loading": {
     "defaultMessage": "Завантаження"
   },
-  "discordSidebar.members": {
-    "defaultMessage": "{count} учасників"
-  },
   "discordSidebar.online": {
     "defaultMessage": "{count} в мережі"
   },
@@ -112,9 +109,6 @@
   },
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "Переглянути історію"
-  },
-  "platformsSidebar.downloads": {
-    "defaultMessage": "{count} завантажень"
   },
   "platformsSidebar.loadError": {
     "defaultMessage": "Не вдалося завантажити інші платформи"
@@ -173,23 +167,11 @@
   "quickSearch.search": {
     "defaultMessage": "Пошук"
   },
-  "repositorySidebar.forks": {
-    "defaultMessage": "{count} форків"
-  },
   "repositorySidebar.loadError": {
     "defaultMessage": "Не вдалося завантажити дані репозиторію"
   },
   "repositorySidebar.loading": {
     "defaultMessage": "Завантаження"
-  },
-  "repositorySidebar.openIssues": {
-    "defaultMessage": "{count} відкритих задач"
-  },
-  "repositorySidebar.openPRs": {
-    "defaultMessage": "{count} відкритих запитів на злиття"
-  },
-  "repositorySidebar.stars": {
-    "defaultMessage": "{count} зірок"
   },
   "repositorySidebar.title": {
     "defaultMessage": "Репозиторій"

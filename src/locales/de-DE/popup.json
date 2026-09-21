@@ -9,7 +9,7 @@
     "defaultMessage": "Akzentfarbe"
   },
   "feature.activitySparkline.days": {
-    "defaultMessage": "{count} Tage"
+    "defaultMessage": "{count, plural, one {# Tag} other {# Tage}}"
   },
   "feature.activitySparkline.description": {
     "defaultMessage": "Graph zur Veröffentlichungsaktivität auf Projektseiten."
@@ -111,13 +111,13 @@
     "defaultMessage": "Spielversion"
   },
   "feature.projectCardActions.modLoader": {
-    "defaultMessage": "Modloader"
+    "defaultMessage": "Mod-Loader"
   },
   "feature.projectCardActions.pluginLoader": {
-    "defaultMessage": "Pluginloader"
+    "defaultMessage": "Plugin-Loader"
   },
   "feature.projectCardActions.shaderLoader": {
-    "defaultMessage": "Shaderloader"
+    "defaultMessage": "Shader-Loader"
   },
   "feature.projectCardActions.title": {
     "defaultMessage": "Projektkarten-Aktionen"

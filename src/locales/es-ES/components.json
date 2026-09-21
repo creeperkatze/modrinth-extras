@@ -59,9 +59,6 @@
   "discordSidebar.loading": {
     "defaultMessage": "Cargando"
   },
-  "discordSidebar.members": {
-    "defaultMessage": "{count} miembros"
-  },
   "discordSidebar.online": {
     "defaultMessage": "{count} en línea"
   },
@@ -112,9 +109,6 @@
   },
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "Ver Historial"
-  },
-  "platformsSidebar.downloads": {
-    "defaultMessage": "{count} descargas"
   },
   "platformsSidebar.loadError": {
     "defaultMessage": "Error al cargar otras plataformas"
@@ -173,23 +167,11 @@
   "quickSearch.search": {
     "defaultMessage": "Buscar"
   },
-  "repositorySidebar.forks": {
-    "defaultMessage": "{count} copias"
-  },
   "repositorySidebar.loadError": {
     "defaultMessage": "No se pudo cargar datos del repositorio"
   },
   "repositorySidebar.loading": {
     "defaultMessage": "Cargando"
-  },
-  "repositorySidebar.openIssues": {
-    "defaultMessage": "{count} Problemas abiertos"
-  },
-  "repositorySidebar.openPRs": {
-    "defaultMessage": "{count} solicitudes de cambios abiertos"
-  },
-  "repositorySidebar.stars": {
-    "defaultMessage": "{count} estrellas"
   },
   "repositorySidebar.title": {
     "defaultMessage": "Repositorio"

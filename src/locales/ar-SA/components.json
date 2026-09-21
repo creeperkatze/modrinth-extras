@@ -50,9 +50,6 @@
   "dependencySidebar.title": {
     "defaultMessage": "التوابع"
   },
-  "discordSidebar.members": {
-    "defaultMessage": "{count} عضو"
-  },
   "discordSidebar.online": {
     "defaultMessage": "{count} عبر الإنترنت"
   },

@@ -60,13 +60,13 @@
     "defaultMessage": "Wird geladen"
   },
   "discordSidebar.members": {
-    "defaultMessage": "{count} Mitglieder"
+    "defaultMessage": "{count, plural, one {# Mitglied} other {# Mitglieder}}"
   },
   "discordSidebar.online": {
     "defaultMessage": "{count} online"
   },
   "discordSidebar.partnered": {
-    "defaultMessage": "Gepartnert"
+    "defaultMessage": "Partner"
   },
   "errorNotice.message": {
     "defaultMessage": "Dieser Fehler hängt eventuell mit Modrinth Extras zusammen. Versuche, die Erweiterung zu deaktivieren und die Seite neu zu laden, bevor du dies Modrinth meldest. Falls der Fehler verschwindet, melde ihn bitte <link>hier</link>."
@@ -114,7 +114,7 @@
     "defaultMessage": "Verlauf anzeigen"
   },
   "platformsSidebar.downloads": {
-    "defaultMessage": "{count} Downloads"
+    "defaultMessage": "{count, plural, one {# Download} other {# Downloads}}"
   },
   "platformsSidebar.loadError": {
     "defaultMessage": "Fehler beim Laden anderer Plattformen"
@@ -174,7 +174,7 @@
     "defaultMessage": "Suchen"
   },
   "repositorySidebar.forks": {
-    "defaultMessage": "{count} Forks"
+    "defaultMessage": "{count, plural, one {# Fork} other {# Forks}}"
   },
   "repositorySidebar.loadError": {
     "defaultMessage": "Repository-Daten konnten nicht geladen werden"
@@ -183,13 +183,13 @@
     "defaultMessage": "Wird geladen"
   },
   "repositorySidebar.openIssues": {
-    "defaultMessage": "{count} offene Issues"
+    "defaultMessage": "{count, plural, one {# offenes Issue} other {# offene Issues}}"
   },
   "repositorySidebar.openPRs": {
-    "defaultMessage": "{count} offene Pull Requests"
+    "defaultMessage": "{count, plural, one {# offene Pull Request} other {# offene Pull Requests}}"
   },
   "repositorySidebar.stars": {
-    "defaultMessage": "{count} Sterne"
+    "defaultMessage": "{count, plural, one {# Stern} other {# Sterne}}"
   },
   "repositorySidebar.title": {
     "defaultMessage": "Repository"

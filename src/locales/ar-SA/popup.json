@@ -1,7 +1,4 @@
 {
-  "feature.activitySparkline.days": {
-    "defaultMessage": "{count} يوم"
-  },
   "feature.activitySparkline.description": {
     "defaultMessage": "جدول نشاط الإصدار في صفحات المشاريع."
   },
