@@ -8,9 +8,6 @@
   "feature.accentColor.title": {
     "defaultMessage": "强调色"
   },
-  "feature.activitySparkline.days": {
-    "defaultMessage": "{count} 天"
-  },
   "feature.activitySparkline.description": {
     "defaultMessage": "在项目页面上展示活动图表。"
   },

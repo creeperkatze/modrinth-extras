@@ -59,9 +59,6 @@
   "discordSidebar.loading": {
     "defaultMessage": "Yükleniyor"
   },
-  "discordSidebar.members": {
-    "defaultMessage": "{count} üye"
-  },
   "discordSidebar.online": {
     "defaultMessage": "{count} çevrim içi"
   },
@@ -112,9 +109,6 @@
   },
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "Geçmişi görüntüle"
-  },
-  "platformsSidebar.downloads": {
-    "defaultMessage": "{count} kez indirildi"
   },
   "platformsSidebar.loadError": {
     "defaultMessage": "Diğer platformlar yüklenemedi"
@@ -173,23 +167,11 @@
   "quickSearch.search": {
     "defaultMessage": "Ara"
   },
-  "repositorySidebar.forks": {
-    "defaultMessage": "{count} forks"
-  },
   "repositorySidebar.loadError": {
     "defaultMessage": "Depo verileri yüklenemedi"
   },
   "repositorySidebar.loading": {
     "defaultMessage": "Yükleniyor"
-  },
-  "repositorySidebar.openIssues": {
-    "defaultMessage": "{count} açık sorunlar"
-  },
-  "repositorySidebar.openPRs": {
-    "defaultMessage": "{count} açık inceleme istekleri"
-  },
-  "repositorySidebar.stars": {
-    "defaultMessage": "{count} yıldız"
   },
   "repositorySidebar.title": {
     "defaultMessage": "Depo"

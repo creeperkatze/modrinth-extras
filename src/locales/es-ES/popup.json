@@ -8,9 +8,6 @@
   "feature.accentColor.title": {
     "defaultMessage": "Color de acento"
   },
-  "feature.activitySparkline.days": {
-    "defaultMessage": "{count} días"
-  },
   "feature.activitySparkline.description": {
     "defaultMessage": "Gráfica de actividad de publicaciones en las páginas del proyecto."
   },

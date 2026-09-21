@@ -2,9 +2,6 @@
   "dependencyExplorer.loading": {
     "defaultMessage": "Đang tải"
   },
-  "discordSidebar.members": {
-    "defaultMessage": "{count} thành viên"
-  },
   "discordSidebar.online": {
     "defaultMessage": "{count} trực tuyến"
   },

@@ -50,9 +50,6 @@
   "dependencySidebar.title": {
     "defaultMessage": "Dependencias"
   },
-  "discordSidebar.members": {
-    "defaultMessage": "{count} miembros"
-  },
   "discordSidebar.online": {
     "defaultMessage": "{count} en línea"
   },

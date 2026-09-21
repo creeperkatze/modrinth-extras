@@ -1,7 +1,4 @@
 {
-  "feature.activitySparkline.days": {
-    "defaultMessage": "{count} days"
-  },
   "feature.activitySparkline.description": {
     "defaultMessage": "Publica el gráfico de actividades en las páginas del proyecto."
   },

@@ -5,9 +5,6 @@
   "dependencyExplorer.noDependencies": {
     "defaultMessage": "Questo progetto non ha dipendenze"
   },
-  "discordSidebar.members": {
-    "defaultMessage": "{count} membri"
-  },
   "discordSidebar.online": {
     "defaultMessage": "{count} online "
   },

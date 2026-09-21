@@ -59,9 +59,6 @@
   "discordSidebar.loading": {
     "defaultMessage": "加载中"
   },
-  "discordSidebar.members": {
-    "defaultMessage": "{count} 位成员"
-  },
   "discordSidebar.online": {
     "defaultMessage": "{count} 人在线"
   },
@@ -161,23 +158,11 @@
   "quickSearch.search": {
     "defaultMessage": "搜索"
   },
-  "repositorySidebar.forks": {
-    "defaultMessage": "{count} 个 fork"
-  },
   "repositorySidebar.loadError": {
     "defaultMessage": "加载仓库数据失败"
   },
   "repositorySidebar.loading": {
     "defaultMessage": "加载中"
-  },
-  "repositorySidebar.openIssues": {
-    "defaultMessage": "{count} 个未解决的 Issue"
-  },
-  "repositorySidebar.openPRs": {
-    "defaultMessage": "{count} 个未合并的 Pull Request"
-  },
-  "repositorySidebar.stars": {
-    "defaultMessage": "{count} 个 Star"
   },
   "repositorySidebar.title": {
     "defaultMessage": "仓库"

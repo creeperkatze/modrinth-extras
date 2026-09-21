@@ -3,13 +3,13 @@
     "defaultMessage": "Цвет"
   },
   "feature.accentColor.description": {
-    "defaultMessage": "Заменяет зелёный цвет Modrinth на свой собственный акцентный цвет."
+    "defaultMessage": "Заменить зелёный цвет Modrinth другим акцентным цветом."
   },
   "feature.accentColor.title": {
     "defaultMessage": "Акцентный цвет"
   },
   "feature.activitySparkline.days": {
-    "defaultMessage": "{count} дней"
+    "defaultMessage": "{count, plural, one {# день} few {# дня} other {# дней}}"
   },
   "feature.activitySparkline.description": {
     "defaultMessage": "График активности релизов на страницах проектов."
@@ -21,7 +21,7 @@
     "defaultMessage": "Мини-график активности"
   },
   "feature.browserNotifications.description": {
-    "defaultMessage": "Браузерные уведомления для ваших уведомлений от Modrinth."
+    "defaultMessage": "Браузерные уведомления для уведомлений Modrinth."
   },
   "feature.browserNotifications.exampleMessage": {
     "defaultMessage": "Это пример уведомления от Modrinth Extras!"
@@ -45,10 +45,10 @@
     "defaultMessage": "Интерактивный график для просмотра полного древа зависимостей."
   },
   "feature.dependencyExplorer.disabledTooltip": {
-    "defaultMessage": "Требуется включенная боковая панель зависимостей"
+    "defaultMessage": "Требуется включённая боковая панель зависимостей"
   },
   "feature.dependencyExplorer.title": {
-    "defaultMessage": "Просмотрщик зависимостей"
+    "defaultMessage": "Карта зависимостей"
   },
   "feature.dependencySidebar.description": {
     "defaultMessage": "Сворачиваемое древо зависимостей на страницах проектов."
@@ -135,13 +135,13 @@
     "defaultMessage": "Быстрый поиск"
   },
   "feature.searchBackground.description": {
-    "defaultMessage": "Отображает фон на экране поиска проектов."
+    "defaultMessage": "Отображать фон на странице поиска."
   },
   "feature.searchBackground.title": {
     "defaultMessage": "Фон поиска"
   },
   "feature.telemetry.description": {
-    "defaultMessage": "Помогите улучшить расширение, анонимно делясь статистикой, такой как версия расширения и включённые функции. Данные Modrinth, активность и личная информация не собираются."
+    "defaultMessage": "Помогите улучшить расширение, анонимно делясь статистикой, такой как версия расширения и включённые функции. Данные Modrinth, активность и личные данные не собираются."
   },
   "feature.telemetry.disabledTooltip": {
     "defaultMessage": "Управляется настройками сбора данных Firefox"
@@ -192,13 +192,13 @@
     "defaultMessage": "Поддержать"
   },
   "popup.footer.latestVersion": {
-    "defaultMessage": "Последняя версия"
+    "defaultMessage": "Обновлений нет"
   },
   "popup.footer.starOnGitHub": {
     "defaultMessage": "На GitHub"
   },
   "popup.footer.updateAvailable": {
-    "defaultMessage": "Доступно обновление"
+    "defaultMessage": "Обновить"
   },
   "popup.group.contentPages": {
     "defaultMessage": "Страницы контента"

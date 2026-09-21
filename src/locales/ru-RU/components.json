@@ -1,6 +1,6 @@
 {
   "dependencyExplorer.centerView": {
-    "defaultMessage": "Вид по центру"
+    "defaultMessage": "Центрировать"
   },
   "dependencyExplorer.depth": {
     "defaultMessage": "Глубина"
@@ -12,13 +12,13 @@
     "defaultMessage": "У этого проекта нет зависимостей"
   },
   "dependencyExplorer.reset": {
-    "defaultMessage": "Сброс"
+    "defaultMessage": "Сбросить"
   },
   "dependencyExplorer.search": {
     "defaultMessage": "Поиск зависимостей"
   },
   "dependencyExplorer.title": {
-    "defaultMessage": "Просмотрщик зависимостей"
+    "defaultMessage": "Карта зависимостей"
   },
   "dependencyNode.collapse": {
     "defaultMessage": "Свернуть зависимости"
@@ -36,7 +36,7 @@
     "defaultMessage": "Необязательно"
   },
   "dependencyNode.required": {
-    "defaultMessage": "Требуется"
+    "defaultMessage": "Необходимо"
   },
   "dependencySidebar.loadError": {
     "defaultMessage": "Не удалось загрузить зависимости"
@@ -48,7 +48,7 @@
     "defaultMessage": "Нет зависимостей"
   },
   "dependencySidebar.openExplorer": {
-    "defaultMessage": "Открыть просмотрщик зависимостей"
+    "defaultMessage": "Открыть карту зависимостей"
   },
   "dependencySidebar.title": {
     "defaultMessage": "Зависимости"
@@ -60,7 +60,7 @@
     "defaultMessage": "Загрузка"
   },
   "discordSidebar.members": {
-    "defaultMessage": "{count, plural, one {# участник} few {# участника} other {# участников}"
+    "defaultMessage": "{count, plural, one {# участник} few {# участника} other {# участников}}"
   },
   "discordSidebar.online": {
     "defaultMessage": "{count} онлайн"
@@ -75,7 +75,7 @@
     "defaultMessage": "Сборки"
   },
   "monetizationBadge.demonetized": {
-    "defaultMessage": "Не монетизировано"
+    "defaultMessage": "Без монетизации"
   },
   "monetizationBadge.forceDemonetized": {
     "defaultMessage": "Монетизация отключена"
@@ -84,7 +84,7 @@
     "defaultMessage": "Монетизация этого проекта была отключена сотрудниками Modrinth"
   },
   "monetizationBadge.monetized": {
-    "defaultMessage": "Монетизировано"
+    "defaultMessage": "С монетизацией"
   },
   "notificationsIndicator.acceptInvite": {
     "defaultMessage": "Принять приглашение"
@@ -105,16 +105,16 @@
     "defaultMessage": "Нет непрочитанных уведомлений"
   },
   "notificationsIndicator.projectUpdated": {
-    "defaultMessage": "Обновление: {title}"
+    "defaultMessage": "{title} обновлён"
   },
   "notificationsIndicator.viewAll": {
-    "defaultMessage": "Просмотреть всё"
+    "defaultMessage": "Посмотреть всё"
   },
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "Посмотреть историю"
   },
   "platformsSidebar.downloads": {
-    "defaultMessage": "{count, plural, one {# скачивание} few {# скачивания} other {# скачиваний}"
+    "defaultMessage": "{count, plural, one {# скачивание} few {# скачивания} other {# скачиваний}}"
   },
   "platformsSidebar.loadError": {
     "defaultMessage": "Не удалось загрузить другие платформы"
@@ -126,7 +126,7 @@
     "defaultMessage": "Другие платформы"
   },
   "projectCardActions.checkingDownload": {
-    "defaultMessage": "Проверка доступной версии..."
+    "defaultMessage": "Поиск доступной версии..."
   },
   "projectCardActions.copied": {
     "defaultMessage": "Скопировано!"
@@ -168,13 +168,13 @@
     "defaultMessage": "Примеры"
   },
   "quickSearch.recent": {
-    "defaultMessage": "Последние"
+    "defaultMessage": "Недавние"
   },
   "quickSearch.search": {
     "defaultMessage": "Поиск"
   },
   "repositorySidebar.forks": {
-    "defaultMessage": "{count, plural, one {# форк} few {# форка} other {# форков}"
+    "defaultMessage": "{count, plural, one {# форк} few {# форка} other {# форков}}"
   },
   "repositorySidebar.loadError": {
     "defaultMessage": "Не удалось загрузить данные репозитория"
@@ -183,13 +183,13 @@
     "defaultMessage": "Загрузка"
   },
   "repositorySidebar.openIssues": {
-    "defaultMessage": "{count, plural, one {# открытая проблема} few {# открытой проблемы} other {# открытых проблем}"
+    "defaultMessage": "{count, plural, one {# открытая проблема} few {# открытой проблемы} other {# открытых проблем}}"
   },
   "repositorySidebar.openPRs": {
-    "defaultMessage": "{count, plural, one {# запрос на слияние} few {# запроса на слияние} other {# запросов на слияние}"
+    "defaultMessage": "{count, plural, one {# запрос на слияние} few {# запроса на слияние} other {# запросов на слияние}}"
   },
   "repositorySidebar.stars": {
-    "defaultMessage": "{count, plural, one {# звезда} few {# звезды} other {# звёзд}"
+    "defaultMessage": "{count, plural, one {# звезда} few {# звезды} other {# звёзд}}"
   },
   "repositorySidebar.title": {
     "defaultMessage": "Репозиторий"

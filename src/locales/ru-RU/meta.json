@@ -1,6 +1,6 @@
 {
   "meta.summary": {
-    "defaultMessage": "Браузерное расширение, расширяющее возможности Modrinth на сайте и вне его."
+    "defaultMessage": "Браузерное расширение, улучшающее Modrinth на сайте и вне его."
   },
   "meta.description.generalTitle": {
     "defaultMessage": "Основные функции:"
@@ -12,7 +12,7 @@
     "defaultMessage": "Функции расширения:"
   },
   "meta.description.footer": {
-    "defaultMessage": "Все функции необязательны и переключаются отдельно во всплывающем окне расширения.\n\nModrinth Extras — <link>открытый проект</link>."
+    "defaultMessage": "Все функции необязательны и переключаются отдельно в окне расширения.\n\nModrinth Extras — <link>открытый проект</link>."
   },
   "meta.description.disclaimer": {
     "defaultMessage": "Расширение не связано и не поддерживается Modrinth."

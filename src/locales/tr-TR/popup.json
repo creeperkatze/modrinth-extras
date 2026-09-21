@@ -8,9 +8,6 @@
   "feature.accentColor.title": {
     "defaultMessage": "Vurgu rengi"
   },
-  "feature.activitySparkline.days": {
-    "defaultMessage": "{count} gün"
-  },
   "feature.activitySparkline.description": {
     "defaultMessage": "Proje sayfalarında sürüm etkinliği grafiği."
   },
