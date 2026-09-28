@@ -8,6 +8,9 @@
   "feature.accentColor.title": {
     "defaultMessage": "Акцентний колір"
   },
+  "feature.activitySparkline.days": {
+    "defaultMessage": "{count, plural, one {# день} few {# дні} many {# днів} other {# днів}}"
+  },
   "feature.activitySparkline.description": {
     "defaultMessage": "Графік активности релізів на сторінках проєктів."
   },
