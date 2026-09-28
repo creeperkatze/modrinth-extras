@@ -59,6 +59,9 @@
   "discordSidebar.loading": {
     "defaultMessage": "加载中"
   },
+  "discordSidebar.members": {
+    "defaultMessage": "{count, plural, one {# 名成员} other {# 名成员}}"
+  },
   "discordSidebar.online": {
     "defaultMessage": "{count} 人在线"
   },
@@ -110,6 +113,18 @@
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "查看历史"
   },
+  "platformsSidebar.downloads": {
+    "defaultMessage": "{count, plural, one {# 次下载} other {# 次下载}}"
+  },
+  "platformsSidebar.loadError": {
+    "defaultMessage": "无法加载其他平台"
+  },
+  "platformsSidebar.loading": {
+    "defaultMessage": "加载中"
+  },
+  "platformsSidebar.title": {
+    "defaultMessage": "其他平台"
+  },
   "projectCardActions.checkingDownload": {
     "defaultMessage": "正在检查可用版本……"
   },
@@ -158,11 +173,23 @@
   "quickSearch.search": {
     "defaultMessage": "搜索"
   },
+  "repositorySidebar.forks": {
+    "defaultMessage": "{count, plural, one {# 个fork} other {# 个fork}}"
+  },
   "repositorySidebar.loadError": {
     "defaultMessage": "加载仓库数据失败"
   },
   "repositorySidebar.loading": {
     "defaultMessage": "加载中"
+  },
+  "repositorySidebar.openIssues": {
+    "defaultMessage": "{count, plural, other {# 个开启的 issue}}"
+  },
+  "repositorySidebar.openPRs": {
+    "defaultMessage": "{count, plural, other {# 个开启的拉取请求}}"
+  },
+  "repositorySidebar.stars": {
+    "defaultMessage": "{count, plural, one {# 个星标} other {# 个星标}}"
   },
   "repositorySidebar.title": {
     "defaultMessage": "仓库"

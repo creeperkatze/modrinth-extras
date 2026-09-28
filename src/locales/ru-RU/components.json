@@ -81,7 +81,7 @@
     "defaultMessage": "Монетизация отключена"
   },
   "monetizationBadge.forceDemonetizedTitle": {
-    "defaultMessage": "Монетизация этого проекта была отключена сотрудниками Modrinth"
+    "defaultMessage": "Монетизация этого проекта отключена командой Modrinth"
   },
   "monetizationBadge.monetized": {
     "defaultMessage": "С монетизацией"
@@ -201,7 +201,7 @@
     "defaultMessage": "Копировать команду {manager}"
   },
   "toolsSidebar.generateEmbed": {
-    "defaultMessage": "Сгенерировать код для встраивания"
+    "defaultMessage": "Создать код для вставки"
   },
   "toolsSidebar.title": {
     "defaultMessage": "Инструменты"

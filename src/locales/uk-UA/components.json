@@ -59,6 +59,9 @@
   "discordSidebar.loading": {
     "defaultMessage": "Завантаження"
   },
+  "discordSidebar.members": {
+    "defaultMessage": "{count, plural, one {# учасник} few {# учасники} many {# учасників} other {# учасників}}"
+  },
   "discordSidebar.online": {
     "defaultMessage": "{count} в мережі"
   },
@@ -109,6 +112,9 @@
   },
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "Переглянути історію"
+  },
+  "platformsSidebar.downloads": {
+    "defaultMessage": "{count, plural, one {# завантаження} few {# завантаження} many {# завантажень} other {# завантажень}}"
   },
   "platformsSidebar.loadError": {
     "defaultMessage": "Не вдалося завантажити інші платформи"
@@ -167,11 +173,23 @@
   "quickSearch.search": {
     "defaultMessage": "Пошук"
   },
+  "repositorySidebar.forks": {
+    "defaultMessage": "{count, plural, one {# вилка} few {# вилки} many {# вилок} other {# вилок}}"
+  },
   "repositorySidebar.loadError": {
     "defaultMessage": "Не вдалося завантажити дані репозиторію"
   },
   "repositorySidebar.loading": {
     "defaultMessage": "Завантаження"
+  },
+  "repositorySidebar.openIssues": {
+    "defaultMessage": "{count, plural, one {# відкрита проблема} few {# відкриті проблеми} many {# відкритих проблем} other {# відкритих проблем}}"
+  },
+  "repositorySidebar.openPRs": {
+    "defaultMessage": "{count, plural, one {# відкритий запит на злиття} few {# відкритих запити на злиття} many {# відкритих запитів на злиття} other {# відкритих запитів на злиття}}"
+  },
+  "repositorySidebar.stars": {
+    "defaultMessage": "{count, plural, one {# зірка} few {# зірки} many {# зірок} other {# зірок}}"
   },
   "repositorySidebar.title": {
     "defaultMessage": "Репозиторій"

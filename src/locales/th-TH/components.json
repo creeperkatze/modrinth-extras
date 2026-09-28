@@ -1,2 +1,90 @@
-{}
+{
+  "dependencyExplorer.loading": {
+    "defaultMessage": "กำลังโหลด"
+  },
+  "dependencyExplorer.reset": {
+    "defaultMessage": "รีเซ็ต"
+  },
+  "dependencyNode.optional": {
+    "defaultMessage": "ไม่บังคับ"
+  },
+  "dependencyNode.required": {
+    "defaultMessage": "จำเป็น"
+  },
+  "dependencySidebar.loading": {
+    "defaultMessage": "กำลังโหลด"
+  },
+  "discordSidebar.loading": {
+    "defaultMessage": "กำลังโหลด"
+  },
+  "discordSidebar.online": {
+    "defaultMessage": "{count} ออนไลน์"
+  },
+  "notificationsIndicator.acceptInvite": {
+    "defaultMessage": "รับการเชิญ"
+  },
+  "notificationsIndicator.viewAll": {
+    "defaultMessage": "ดูทั้งหมด"
+  },
+  "notificationsIndicator.viewHistory": {
+    "defaultMessage": "ดูประวัติ"
+  },
+  "platformsSidebar.loading": {
+    "defaultMessage": "กำลังโหลด"
+  },
+  "platformsSidebar.title": {
+    "defaultMessage": "แพลตฟอร์มอื่นๆ"
+  },
+  "projectCardActions.copied": {
+    "defaultMessage": "คัดลอกแล้ว"
+  },
+  "projectCardActions.copyLink": {
+    "defaultMessage": "คัดลอกลิงก์"
+  },
+  "projectCardActions.download": {
+    "defaultMessage": "ดาวน์โหลด"
+  },
+  "projectCardActions.follow": {
+    "defaultMessage": "ติดตาม"
+  },
+  "projectCardActions.save": {
+    "defaultMessage": "บันทึก"
+  },
+  "projectCardActions.saved": {
+    "defaultMessage": "บันทึกแล้ว"
+  },
+  "projectCardActions.searchPlaceholder": {
+    "defaultMessage": "ค้นหา..."
+  },
+  "projectCardActions.unfollow": {
+    "defaultMessage": "เลิกติดตาม"
+  },
+  "quickSearch.examples": {
+    "defaultMessage": "ตัวอย่าง"
+  },
+  "quickSearch.recent": {
+    "defaultMessage": "ล่า​สุด"
+  },
+  "quickSearch.search": {
+    "defaultMessage": "ค้นหา"
+  },
+  "repositorySidebar.loading": {
+    "defaultMessage": "กำลังโหลด"
+  },
+  "toolsSidebar.copied": {
+    "defaultMessage": "คัดลอกแล้ว"
+  },
+  "toolsSidebar.title": {
+    "defaultMessage": "เครื่องมือ"
+  },
+  "translateDescription.showOriginal": {
+    "defaultMessage": "แสดงต้นฉบับ"
+  },
+  "translateDescription.translate": {
+    "defaultMessage": "แปลคำอธิบาย"
+  },
+  "translateDescription.translating": {
+    "defaultMessage": "กำลังแปล..."
+  }
+}
 

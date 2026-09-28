@@ -1,2 +1,36 @@
-{}
+{
+  "feature.accentColor.color": {
+    "defaultMessage": "สี"
+  },
+  "feature.toolsSidebar.title": {
+    "defaultMessage": "แถบเครื่องมือ"
+  },
+  "popup.discordPrompt.dismiss": {
+    "defaultMessage": "ปิด"
+  },
+  "popup.discordPrompt.title": {
+    "defaultMessage": "Join the Discord"
+  },
+  "popup.donatePrompt.dismiss": {
+    "defaultMessage": "ไม่สนใจ"
+  },
+  "popup.footer.donate": {
+    "defaultMessage": "สนับสนุน"
+  },
+  "popup.footer.starOnGitHub": {
+    "defaultMessage": "บน GitHub"
+  },
+  "popup.group.extension": {
+    "defaultMessage": "ส่วนเสริม"
+  },
+  "search.any": {
+    "defaultMessage": "ทั้งหมด"
+  },
+  "search.placeholder": {
+    "defaultMessage": "ค้นหา..."
+  },
+  "settings.language": {
+    "defaultMessage": "ภาษา"
+  }
+}
 
