@@ -143,7 +143,12 @@ import {
 } from '../../utils/collection-state'
 import { followedSlugs } from '../../utils/follow-state'
 import { navigate } from '../../utils/page-router'
-import { getQuickDownload, type QuickDownloadSettings } from '../../utils/project-card-state'
+import {
+	getQuickDownload,
+	getRequiredDependencyFiles,
+	type QuickDownloadSettings,
+	saveFiles,
+} from '../../utils/project-card-state'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
@@ -203,7 +208,8 @@ const isSaved = computed(
 const projectId = ref<string | null>(null)
 const downloadLoading = ref(false)
 const downloadAvailabilityLoading = ref(false)
-const downloadFileUrl = ref<string | null>(null)
+const downloadFile = ref<Labrinth.Versions.v3.VersionFile | null>(null)
+const downloadVersionId = ref<string | null>(null)
 const downloadAvailabilityChecked = ref(false)
 const followLoading = ref(false)
 const copied = ref(false)
@@ -213,14 +219,14 @@ const downloadDisabled = computed(
 	() =>
 		downloadLoading.value ||
 		downloadAvailabilityLoading.value ||
-		(downloadAvailabilityChecked.value && !downloadFileUrl.value),
+		(downloadAvailabilityChecked.value && !downloadFile.value),
 )
 
 const downloadTooltip = computed(() => {
 	if (downloadAvailabilityLoading.value) {
 		return formatMessage(messages['projectCardActions.checkingDownload'])
 	}
-	if (downloadAvailabilityChecked.value && !downloadFileUrl.value) {
+	if (downloadAvailabilityChecked.value && !downloadFile.value) {
 		const loader = getSelectedLoader()
 		return formatMessage(messages['projectCardActions.downloadUnavailable'], {
 			loader: loader ? loader.charAt(0).toUpperCase() + loader.slice(1) : 'none',
@@ -275,10 +281,23 @@ async function handleDownload() {
 	if (downloadDisabled.value) return
 	downloadLoading.value = true
 	try {
-		if (!downloadFileUrl.value) await refreshDownloadAvailability()
-		if (downloadFileUrl.value) window.open(downloadFileUrl.value, '_blank')
+		if (!downloadFile.value) await refreshDownloadAvailability()
+		if (!downloadFile.value || !downloadVersionId.value) return
+
+		const dependencyFiles = props.downloadSettings.downloadDependencies
+			? await getRequiredDependencyFiles(
+					downloadVersionId.value,
+					props.projectType,
+					props.downloadSettings,
+				)
+			: []
+		if (dependencyFiles.length === 0) {
+			window.open(downloadFile.value.url, '_blank')
+		} else {
+			await saveFiles([downloadFile.value, ...dependencyFiles])
+		}
 	} catch (err) {
-		console.error('[Modrinth Extras] Download failed:', err)
+		console.error('[Modrinth Extras] Failed to download:', err)
 	} finally {
 		downloadLoading.value = false
 	}
@@ -287,7 +306,8 @@ async function handleDownload() {
 async function refreshDownloadAvailability() {
 	downloadAvailabilityLoading.value = true
 	downloadAvailabilityChecked.value = false
-	downloadFileUrl.value = null
+	downloadFile.value = null
+	downloadVersionId.value = null
 
 	try {
 		const result = await getQuickDownload(
@@ -296,7 +316,8 @@ async function refreshDownloadAvailability() {
 			props.downloadSettings,
 		)
 		projectId.value = result.projectId
-		downloadFileUrl.value = result.downloadUrl
+		downloadFile.value = result.file
+		downloadVersionId.value = result.versionId
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to check download availability:', err)
 	} finally {

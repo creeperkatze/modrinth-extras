@@ -639,12 +639,19 @@ export default defineContentScript({
 					target.parentElement?.querySelector<HTMLAnchorElement>('a[href]')?.getAttribute('href') ??
 					''
 				const [, projectType, projectSlug] = href.match(PROJECT_TYPE_PATTERN) ?? []
-				const { modLoader, pluginLoader, shaderLoader, gameVersion } = settings.projectCardActions
+				const { modLoader, pluginLoader, shaderLoader, gameVersion, downloadDependencies } =
+					settings.projectCardActions
 				const app = createApp(
 					h(ProjectCardActions, {
 						projectSlug,
 						projectType,
-						downloadSettings: { modLoader, pluginLoader, shaderLoader, gameVersion },
+						downloadSettings: {
+							modLoader,
+							pluginLoader,
+							shaderLoader,
+							gameVersion,
+							downloadDependencies,
+						},
 					}),
 				)
 				app.use(FloatingVue)

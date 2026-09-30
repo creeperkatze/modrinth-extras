@@ -33,6 +33,7 @@ export interface ExtensionSettings {
 		pluginLoader: string
 		shaderLoader: string
 		gameVersion: string
+		downloadDependencies: boolean
 	}
 	activitySparkline: { enabled: boolean; days: string }
 	toolsSidebar: { enabled: boolean; modManager: string }
@@ -62,6 +63,7 @@ export const DEFAULTS: ExtensionSettings = {
 		pluginLoader: '',
 		shaderLoader: '',
 		gameVersion: '',
+		downloadDependencies: false,
 	},
 	activitySparkline: { enabled: true, days: '60' },
 	toolsSidebar: { enabled: true, modManager: 'packwiz' },

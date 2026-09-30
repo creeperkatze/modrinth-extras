@@ -82,6 +82,12 @@
 								:default-color="opt.defaultColor"
 								@update:model-value="updateOption(f.key, opt.key, $event)"
 							/>
+							<OptionFieldToggle
+								v-else-if="opt.type === 'toggle'"
+								:label="opt.label"
+								:model-value="!!(settings[f.key] as unknown as Record<string, boolean>)[opt.key]"
+								@update:model-value="updateOption(f.key, opt.key, $event)"
+							/>
 							<OptionFieldSelect
 								v-else
 								:label="opt.label"
@@ -121,6 +127,12 @@
 								:label="opt.label"
 								:model-value="(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''"
 								:default-color="opt.defaultColor"
+								@update:model-value="updateOption(f.key, opt.key, $event)"
+							/>
+							<OptionFieldToggle
+								v-else-if="opt.type === 'toggle'"
+								:label="opt.label"
+								:model-value="!!(settings[f.key] as unknown as Record<string, boolean>)[opt.key]"
 								@update:model-value="updateOption(f.key, opt.key, $event)"
 							/>
 							<OptionFieldSelect
@@ -292,6 +304,7 @@ import FeatureGroup from './components/FeatureGroup.vue'
 import FeatureRow from './components/FeatureRow.vue'
 import OptionFieldColor from './components/OptionFieldColor.vue'
 import OptionFieldSelect, { type SelectItem } from './components/OptionFieldSelect.vue'
+import OptionFieldToggle from './components/OptionFieldToggle.vue'
 
 const { formatMessage } = useVIntl()
 
@@ -349,6 +362,10 @@ const messages = defineMessages({
 	'feature.projectCardActions.gameVersion': {
 		id: 'feature.projectCardActions.gameVersion',
 		defaultMessage: 'Game version',
+	},
+	'feature.projectCardActions.downloadDependencies': {
+		id: 'feature.projectCardActions.downloadDependencies',
+		defaultMessage: 'Download dependencies',
 	},
 	'feature.accentColor.title': {
 		id: 'feature.accentColor.title',
@@ -547,7 +564,7 @@ type FeatureKey = Exclude<keyof ExtensionSettings, 'locale'>
 
 interface FeatureOption {
 	key: string
-	type: 'select' | 'color'
+	type: 'select' | 'color' | 'toggle'
 	label: string
 	items?: SelectItem[]
 	fetchItems?: () => Promise<SelectItem[]>
@@ -651,6 +668,11 @@ const generalFeatures = computed<FeatureDef[]>(() => [
 				type: 'select',
 				label: formatMessage(messages['feature.projectCardActions.shaderLoader']),
 				fetchItems: () => fetchLoadersByType('shader'),
+			},
+			{
+				key: 'downloadDependencies',
+				type: 'toggle',
+				label: formatMessage(messages['feature.projectCardActions.downloadDependencies']),
 			},
 		],
 	},
@@ -835,7 +857,11 @@ async function updateEnabled(key: FeatureKey, enabled: boolean) {
 	}
 }
 
-async function updateOption(featureKey: keyof ExtensionSettings, optionKey: string, value: string) {
+async function updateOption(
+	featureKey: keyof ExtensionSettings,
+	optionKey: string,
+	value: string | boolean,
+) {
 	;(settings[featureKey] as Record<string, unknown>)[optionKey] = value
 	await saveSettings(settings as ExtensionSettings)
 }

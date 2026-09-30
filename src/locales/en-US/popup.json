@@ -107,6 +107,9 @@
   "feature.projectCardActions.description": {
     "defaultMessage": "Download, follow, and save projects right from their project cards."
   },
+  "feature.projectCardActions.downloadDependencies": {
+    "defaultMessage": "Download dependencies"
+  },
   "feature.projectCardActions.gameVersion": {
     "defaultMessage": "Game version"
   },
