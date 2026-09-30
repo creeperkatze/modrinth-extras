@@ -146,11 +146,20 @@
   "moddexReviews.sortLabel": {
     "defaultMessage": "Sort reviews"
   },
+  "moddexReviews.sortLowestRating": {
+    "defaultMessage": "Lowest rated"
+  },
   "moddexReviews.sortNewest": {
     "defaultMessage": "Newest"
   },
+  "moddexReviews.sortOldest": {
+    "defaultMessage": "Oldest"
+  },
   "moddexReviews.sortRating": {
     "defaultMessage": "Highest rated"
+  },
+  "moddexReviews.sortUnhelpful": {
+    "defaultMessage": "Most unhelpful"
   },
   "moddexReviews.tab": {
     "defaultMessage": "Reviews"

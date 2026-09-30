@@ -46,6 +46,7 @@ export async function fetchModdexReviews(
 	isModpack: boolean,
 	token: string,
 	sort: ReviewSortField,
+	direction: 'asc' | 'desc',
 	page: number,
 ): Promise<ModdexReviewsResult> {
 	if (!token) return { ok: false, error: 'no-token' }
@@ -59,7 +60,7 @@ export async function fetchModdexReviews(
 			// Star-only ratings are missing from the review list, so the totals come from the project.
 			const [project, res] = await Promise.all([
 				page === 1 ? api.get(slug) : null,
-				api.listReviews(slug, { sort, direction: 'desc', per_page: 15, page }),
+				api.listReviews(slug, { sort, direction, per_page: 15, page }),
 			])
 			return {
 				ok: true,

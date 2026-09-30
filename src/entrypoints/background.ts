@@ -100,6 +100,7 @@ export default defineBackground(() => {
 				message.isModpack as boolean,
 				message.token as string,
 				message.sort as ReviewSortField,
+				message.direction as 'asc' | 'desc',
 				message.page as number,
 			)
 				.then((result) => sendResponse(result))

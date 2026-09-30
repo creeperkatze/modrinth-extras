@@ -415,8 +415,11 @@ const messages = defineMessages({
 	sortLabel: { id: 'moddexReviews.sortLabel', defaultMessage: 'Sort reviews' },
 	sortBy: { id: 'moddexReviews.sortBy', defaultMessage: 'Sort by:' },
 	sortNewest: { id: 'moddexReviews.sortNewest', defaultMessage: 'Newest' },
+	sortOldest: { id: 'moddexReviews.sortOldest', defaultMessage: 'Oldest' },
 	sortRating: { id: 'moddexReviews.sortRating', defaultMessage: 'Highest rated' },
+	sortLowestRating: { id: 'moddexReviews.sortLowestRating', defaultMessage: 'Lowest rated' },
 	sortHelpful: { id: 'moddexReviews.sortHelpful', defaultMessage: 'Most helpful' },
+	sortUnhelpful: { id: 'moddexReviews.sortUnhelpful', defaultMessage: 'Most unhelpful' },
 	developer: { id: 'moddexReviews.developer', defaultMessage: 'Developer' },
 	posted: { id: 'moddexReviews.posted', defaultMessage: 'Posted {time}' },
 	edited: { id: 'moddexReviews.edited', defaultMessage: 'Edited' },
@@ -437,13 +440,25 @@ const messages = defineMessages({
 	moderatorNote: { id: 'moddexReviews.moderatorNote', defaultMessage: 'Moderator note:' },
 })
 
-const sortOptions = computed(() => [
-	{ value: 'created_at', label: formatMessage(messages.sortNewest) },
-	{ value: 'rating', label: formatMessage(messages.sortRating) },
-	{ value: 'helpful_votes', label: formatMessage(messages.sortHelpful) },
-])
+const SORTS = {
+	newest: { field: 'created_at', direction: 'desc' },
+	oldest: { field: 'created_at', direction: 'asc' },
+	highest: { field: 'rating', direction: 'desc' },
+	lowest: { field: 'rating', direction: 'asc' },
+	helpful: { field: 'helpful_votes', direction: 'desc' },
+	unhelpful: { field: 'unhelpful_votes', direction: 'desc' },
+} as const
 
-type ReviewSort = 'created_at' | 'rating' | 'helpful_votes'
+type ReviewSort = keyof typeof SORTS
+
+const sortOptions = computed(() => [
+	{ value: 'newest', label: formatMessage(messages.sortNewest) },
+	{ value: 'oldest', label: formatMessage(messages.sortOldest) },
+	{ value: 'highest', label: formatMessage(messages.sortRating) },
+	{ value: 'lowest', label: formatMessage(messages.sortLowestRating) },
+	{ value: 'helpful', label: formatMessage(messages.sortHelpful) },
+	{ value: 'unhelpful', label: formatMessage(messages.sortUnhelpful) },
+])
 
 const props = defineProps<{ projectSlug: string; isModpack: boolean }>()
 
@@ -469,7 +484,7 @@ const reviews = ref<Review[]>([])
 const page = ref<ModdexReviewsPage | null>(null)
 const total = ref(0)
 const summary = ref<ModdexSummary | null>(null)
-const sort = ref<ReviewSort>('created_at')
+const sort = ref<ReviewSort>('newest')
 let requestId = 0
 
 function getNav(): HTMLElement | null {
@@ -543,7 +558,8 @@ async function load(pageNumber: number) {
 			slug: props.projectSlug,
 			isModpack: props.isModpack,
 			token: moddexReviews.apiToken.trim(),
-			sort: sort.value,
+			sort: SORTS[sort.value].field,
+			direction: SORTS[sort.value].direction,
 			page: pageNumber,
 		})) as ModdexReviewsResult | undefined
 		if (id !== requestId) return
