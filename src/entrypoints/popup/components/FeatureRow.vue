@@ -13,7 +13,9 @@
 			<component :is="icon" aria-hidden="true" class="!size-6 shrink-0 text-secondary" />
 			<div class="min-w-0 flex-1">
 				<div class="text-sm font-semibold text-contrast">{{ title }}</div>
-				<div class="text-xs text-secondary">{{ description }}</div>
+				<div class="text-xs text-secondary">
+					<slot name="description">{{ description }}</slot>
+				</div>
 			</div>
 			<IconButton
 				v-if="actionIcon"

@@ -120,6 +120,22 @@
 					:disabled-tooltip="f.disabledTooltip"
 					@update:model-value="updateEnabled(f.key, $event)"
 				>
+					<template v-if="f.key === 'moddexReviews'" #description>
+						{{ f.description }}
+						<IntlFormatted :message-id="messages['feature.moddexReviews.getToken']">
+							<template #link="{ children }">
+								<a
+									href="https://moddex.gg/settings?tab=tokens"
+									target="_blank"
+									rel="noopener"
+									class="text-link"
+									@click.stop
+								>
+									<component :is="() => children" />
+								</a>
+							</template>
+						</IntlFormatted>
+					</template>
 					<template v-if="f.options">
 						<template v-for="opt in f.options" :key="opt.key">
 							<OptionFieldColor
@@ -526,6 +542,10 @@ const messages = defineMessages({
 	'feature.moddexReviews.apiToken': {
 		id: 'feature.moddexReviews.apiToken',
 		defaultMessage: 'API token',
+	},
+	'feature.moddexReviews.getToken': {
+		id: 'feature.moddexReviews.getToken',
+		defaultMessage: '<link>Get an API token</link>',
 	},
 	'feature.notificationBadge.title': {
 		id: 'feature.notificationBadge.title',
