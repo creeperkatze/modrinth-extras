@@ -133,7 +133,7 @@
 									/>
 								</span>
 							</span>
-							<span class="text-sm text-secondary">
+							<span class="text-base text-secondary">
 								{{ formatMessage(messages.ratingsCount, { count: summary.totalRatings }) }}
 							</span>
 						</div>
@@ -143,7 +143,7 @@
 						class="grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-3"
 					>
 						<div v-for="cat in summaryCategories" :key="cat.label" class="flex flex-col gap-1">
-							<div class="flex items-center justify-between text-sm text-secondary">
+							<div class="flex items-center justify-between text-base text-secondary">
 								<span>{{ cat.label }}</span>
 								<span class="font-semibold text-contrast">{{ cat.value.toFixed(1) }}</span>
 							</div>
@@ -197,13 +197,13 @@
 								<span class="truncate font-semibold text-contrast">{{ review.author.name }}</span>
 								<span
 									v-if="review.is_verified_developer"
-									class="inline-flex items-center gap-1 rounded-full bg-brand-highlight px-2 py-0.5 text-xs font-semibold text-brand"
+									class="inline-flex items-center gap-1 rounded-full bg-brand-highlight px-2 py-0.5 text-base font-semibold text-brand"
 								>
 									<ShieldCheckIcon aria-hidden="true" class="size-3.5" />
 									{{ formatMessage(messages.developer) }}
 								</span>
 							</div>
-							<div class="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-sm text-secondary">
+							<div class="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-base text-secondary">
 								<span :title="formatDate(review.created_at)">
 									{{
 										formatMessage(messages.posted, { time: formatRelativeTime(review.created_at) })
@@ -233,7 +233,7 @@
 									/>
 								</span>
 							</span>
-							<span class="text-sm font-semibold text-contrast">{{
+							<span class="text-base font-semibold text-contrast">{{
 								review.rating.toFixed(1)
 							}}</span>
 						</div>
@@ -248,7 +248,7 @@
 							:key="cat.label"
 							class="flex flex-col gap-1"
 						>
-							<div class="flex items-center justify-between text-sm text-secondary">
+							<div class="flex items-center justify-between text-base text-secondary">
 								<span>{{ cat.label }}</span>
 								<span class="font-semibold text-contrast">{{ cat.value.toFixed(1) }}</span>
 							</div>
@@ -273,28 +273,28 @@
 					/>
 					<!-- eslint-enable vue/no-v-html -->
 
-					<footer class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-secondary">
-						<div v-if="review.minecraft_version" class="flex flex-wrap gap-1">
+					<PageHeaderMetadata
+						v-if="review.minecraft_version || review.playtime_hours || review.helpful_votes > 0"
+					>
+						<PageHeaderMetadataTagsItem v-if="review.minecraft_version">
 							<TagItem
 								v-for="version in formatGameVersions(review.minecraft_version, gameVersionTags)"
 								:key="version"
 							>
 								{{ version }}
 							</TagItem>
-						</div>
-						<span v-if="review.playtime_hours" class="inline-flex items-center gap-1.5">
-							<ClockIcon aria-hidden="true" class="size-4" />
+						</PageHeaderMetadataTagsItem>
+						<PageHeaderMetadataItem v-if="review.playtime_hours" :icon="ClockIcon">
 							{{ formatMessage(messages.playtime, { hours: review.playtime_hours }) }}
-						</span>
-						<span v-if="review.helpful_votes > 0" class="inline-flex items-center gap-1.5">
-							<HeartIcon aria-hidden="true" class="size-4" />
+						</PageHeaderMetadataItem>
+						<PageHeaderMetadataItem v-if="review.helpful_votes > 0" :icon="HeartIcon">
 							{{ formatMessage(messages.helpful, { count: review.helpful_votes }) }}
-						</span>
-					</footer>
+						</PageHeaderMetadataItem>
+					</PageHeaderMetadata>
 
 					<div
 						v-if="review.public_moderator_note"
-						class="rounded-xl border border-solid border-surface-5 bg-surface-4 p-3 text-sm text-secondary"
+						class="rounded-xl border border-solid border-surface-5 bg-surface-4 p-3 text-base text-secondary"
 					>
 						<span class="font-semibold text-contrast">{{
 							formatMessage(messages.moderatorNote)
@@ -330,6 +330,9 @@ import {
 	Chips,
 	defineMessages,
 	IntlFormatted,
+	PageHeaderMetadata,
+	PageHeaderMetadataItem,
+	PageHeaderMetadataTagsItem,
 	TagItem,
 	useRelativeTime,
 	useVIntl,
