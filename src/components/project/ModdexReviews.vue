@@ -111,6 +111,60 @@
 			</div>
 
 			<template v-else>
+				<div
+					v-if="summary && summary.totalRatings > 0"
+					class="flex flex-col gap-4 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
+				>
+					<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+						<span class="text-4xl font-bold leading-none text-contrast">
+							{{ summary.average.toFixed(1) }}
+						</span>
+						<div class="flex flex-col gap-1">
+							<span
+								class="relative inline-flex"
+								role="img"
+								:aria-label="ratingLabel(summary.average)"
+							>
+								<span class="inline-flex text-surface-5">
+									<StarIcon v-for="i in 5" :key="i" aria-hidden="true" class="size-5" />
+								</span>
+								<span
+									class="absolute inset-y-0 left-0 inline-flex overflow-hidden text-orange"
+									:style="{ width: `${(summary.average / 5) * 100}%` }"
+								>
+									<StarIcon
+										v-for="i in 5"
+										:key="i"
+										aria-hidden="true"
+										class="size-5 shrink-0 fill-current"
+									/>
+								</span>
+							</span>
+							<span class="text-sm text-secondary">
+								{{ formatMessage(messages.ratingsCount, { count: summary.totalRatings }) }}
+							</span>
+						</div>
+					</div>
+					<div
+						v-if="summaryCategories.length"
+						class="grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-3"
+					>
+						<div v-for="cat in summaryCategories" :key="cat.label" class="flex flex-col gap-1">
+							<div class="flex items-center justify-between text-sm text-secondary">
+								<span>{{ cat.label }}</span>
+								<span class="font-semibold text-contrast">{{ cat.value.toFixed(1) }}</span>
+							</div>
+							<div class="h-1.5 w-full overflow-hidden rounded-full bg-surface-5">
+								<div
+									class="h-full rounded-full"
+									:class="barColor(cat.value)"
+									:style="{ width: `${(cat.value / 5) * 100}%` }"
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+
 				<div class="flex flex-wrap items-center justify-between gap-2">
 					<span class="text-sm font-semibold text-secondary">
 						{{ formatMessage(messages.count, { count: total }) }}
@@ -290,11 +344,15 @@ import {
 import type { GameVersionTag } from '@modrinth/utils'
 import { configuredXss, md } from '@modrinth/utils'
 import type { Review } from 'moddex-js'
-import { onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { browser } from 'wxt/browser'
 
 import ModdexLogo from '../../assets/moddex.svg?component'
-import type { ModdexReviewsPage, ModdexReviewsResult } from '../../background/external/moddex'
+import type {
+	ModdexReviewsPage,
+	ModdexReviewsResult,
+	ModdexSummary,
+} from '../../background/external/moddex'
 import { formatGameVersions, loadGameVersionTags } from '../../utils/game-versions'
 import { i18n } from '../../utils/i18n'
 import { getSettings } from '../../utils/settings'
@@ -361,6 +419,10 @@ const messages = defineMessages({
 	developer: { id: 'moddexReviews.developer', defaultMessage: 'Developer' },
 	posted: { id: 'moddexReviews.posted', defaultMessage: 'Posted {time}' },
 	edited: { id: 'moddexReviews.edited', defaultMessage: 'Edited' },
+	ratingsCount: {
+		id: 'moddexReviews.ratingsCount',
+		defaultMessage: '{count, plural, one {# rating} other {# ratings}}',
+	},
 	rating: { id: 'moddexReviews.rating', defaultMessage: 'Rated {rating} out of 5' },
 	gameplay: { id: 'moddexReviews.gameplay', defaultMessage: 'Gameplay' },
 	performance: { id: 'moddexReviews.performance', defaultMessage: 'Performance' },
@@ -407,6 +469,7 @@ const state = ref<State>('idle')
 const reviews = ref<Review[]>([])
 const page = ref<ModdexReviewsPage | null>(null)
 const total = ref(0)
+const summary = ref<ModdexSummary | null>(null)
 const sort = ref<ReviewSort>('created_at')
 let requestId = 0
 
@@ -494,6 +557,7 @@ async function load(pageNumber: number) {
 			reviews.value =
 				pageNumber === 1 ? result.data.reviews : [...reviews.value, ...result.data.reviews]
 			page.value = result.data
+			if (result.data.summary) summary.value = result.data.summary
 			total.value = result.data.total
 			state.value = 'ready'
 		}
@@ -527,13 +591,27 @@ function barColor(value: number): string {
 	return 'bg-red'
 }
 
-function categoryRatings(review: Review) {
+function categoryRatings(ratings: {
+	gameplay_rating: number | null
+	performance_rating: number | null
+	aesthetics_rating: number | null
+}) {
 	return [
-		{ label: formatMessage(messages.gameplay), value: review.gameplay_rating },
-		{ label: formatMessage(messages.performance), value: review.performance_rating },
-		{ label: formatMessage(messages.aesthetics), value: review.aesthetics_rating },
-	].filter((c): c is { label: string; value: number } => c.value != null)
+		{ label: formatMessage(messages.gameplay), value: ratings.gameplay_rating },
+		{ label: formatMessage(messages.performance), value: ratings.performance_rating },
+		{ label: formatMessage(messages.aesthetics), value: ratings.aesthetics_rating },
+	].filter((c): c is { label: string; value: number } => c.value != null && c.value > 0)
 }
+
+const summaryCategories = computed(() =>
+	summary.value
+		? categoryRatings({
+				gameplay_rating: summary.value.gameplay,
+				performance_rating: summary.value.performance,
+				aesthetics_rating: summary.value.aesthetics,
+			})
+		: [],
+)
 
 // Clicking a native tab, even the current one, must hand the page back to Modrinth.
 function onNavClick(event: MouseEvent) {

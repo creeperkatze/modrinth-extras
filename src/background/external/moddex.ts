@@ -6,8 +6,18 @@ import ModDexClient, {
 	type ReviewSortField,
 } from 'moddex-js'
 
+export interface ModdexSummary {
+	average: number
+	gameplay: number
+	performance: number
+	aesthetics: number
+	totalRatings: number
+	writtenReviews: number
+}
+
 export interface ModdexReviewsPage {
 	reviews: Review[]
+	summary: ModdexSummary | null
 	page: number
 	lastPage: number
 	total: number
@@ -46,11 +56,25 @@ export async function fetchModdexReviews(
 	for (const kind of kinds) {
 		try {
 			const api = kind === 'modpack' ? moddex.modpacks : moddex.mods
-			const res = await api.listReviews(slug, { sort, direction: 'desc', per_page: 15, page })
+			// Star-only ratings are missing from the review list, so the totals come from the project.
+			const [project, res] = await Promise.all([
+				page === 1 ? api.get(slug) : null,
+				api.listReviews(slug, { sort, direction: 'desc', per_page: 15, page }),
+			])
 			return {
 				ok: true,
 				data: {
 					reviews: res.data,
+					summary: project
+						? {
+								average: project.average_rating,
+								gameplay: project.gameplay_rating,
+								performance: project.performance_rating,
+								aesthetics: project.aesthetics_rating,
+								totalRatings: project.total_ratings,
+								writtenReviews: project.written_reviews_count,
+							}
+						: null,
 					page: res.meta.current_page,
 					lastPage: res.meta.last_page,
 					total: res.meta.total,
