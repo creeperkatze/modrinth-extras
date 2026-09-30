@@ -16,20 +16,12 @@
 			<div
 				class="flex flex-wrap items-center gap-3 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
 			>
-				<a
-					href="https://moddex.gg"
-					target="_blank"
-					rel="noopener"
-					aria-label="ModDex"
-					class="shrink-0"
-				>
-					<ModdexLogo aria-hidden="true" class="size-12" />
-				</a>
+				<ModdexLogo aria-hidden="true" class="size-12 shrink-0" />
 				<div class="flex min-w-0 flex-1 flex-col gap-1">
 					<h2 class="m-0 text-lg font-semibold text-contrast">
 						{{ formatMessage(messages.title) }}
 					</h2>
-					<span class="text-sm text-secondary">
+					<span class="text-base text-secondary">
 						<IntlFormatted :message-id="messages.credit">
 							<template #link="{ children }">
 								<a
@@ -47,6 +39,12 @@
 				<div v-if="page" class="flex flex-wrap items-center gap-2">
 					<ButtonLink :href="page.projectUrl" target="_blank" rel="noopener">
 						{{ formatMessage(messages.writeReview) }}
+						<ExternalIcon aria-hidden="true" />
+					</ButtonLink>
+				</div>
+				<div v-else-if="state === 'not-found'" class="flex flex-wrap items-center gap-2">
+					<ButtonLink href="https://moddex.gg" target="_blank" rel="noopener">
+						{{ formatMessage(messages.openModdex) }}
 						<ExternalIcon aria-hidden="true" />
 					</ButtonLink>
 				</div>
@@ -99,15 +97,10 @@
 
 			<div
 				v-else-if="state === 'not-found'"
-				class="flex flex-col gap-3 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
+				class="flex items-center gap-2 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4 text-secondary"
 			>
-				<span class="text-secondary">{{ formatMessage(messages.notFound) }}</span>
-				<div>
-					<ButtonLink href="https://moddex.gg" target="_blank" rel="noopener">
-						{{ formatMessage(messages.openModdex) }}
-						<ExternalIcon aria-hidden="true" />
-					</ButtonLink>
-				</div>
+				<TriangleAlertIcon aria-hidden="true" class="size-5 shrink-0" />
+				{{ formatMessage(messages.notFound) }}
 			</div>
 
 			<template v-else>
@@ -166,7 +159,7 @@
 				</div>
 
 				<div class="flex flex-wrap items-center justify-between gap-2">
-					<span class="text-sm font-semibold text-secondary">
+					<span class="text-base font-semibold text-secondary">
 						{{ formatMessage(messages.count, { count: total }) }}
 					</span>
 					<Chips
@@ -382,6 +375,7 @@ const messages = defineMessages({
 		defaultMessage: 'Reviews provided by <link>ModDex</link>, written by its community.',
 	},
 	writeReview: { id: 'moddexReviews.writeReview', defaultMessage: 'Write a review' },
+	openModdex: { id: 'moddexReviews.openModdex', defaultMessage: 'Open ModDex' },
 	loading: { id: 'moddexReviews.loading', defaultMessage: 'Loading reviews…' },
 	loadError: {
 		id: 'moddexReviews.loadError',
@@ -406,7 +400,6 @@ const messages = defineMessages({
 		id: 'moddexReviews.notFound',
 		defaultMessage: 'This project could not be found on ModDex.',
 	},
-	openModdex: { id: 'moddexReviews.openModdex', defaultMessage: 'Open ModDex' },
 	count: {
 		id: 'moddexReviews.count',
 		defaultMessage: '{count, plural, one {# written review} other {# written reviews}}',
