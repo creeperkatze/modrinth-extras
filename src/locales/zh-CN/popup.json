@@ -8,6 +8,9 @@
   "feature.accentColor.title": {
     "defaultMessage": "强调色"
   },
+  "feature.activitySparkline.days": {
+    "defaultMessage": "{count, plural, one {# 天} other {# 天}}"
+  },
   "feature.activitySparkline.description": {
     "defaultMessage": "在项目页面上展示活动图表。"
   },
@@ -94,6 +97,12 @@
   },
   "feature.notifications.title": {
     "defaultMessage": "通知"
+  },
+  "feature.platformsSidebar.description": {
+    "defaultMessage": "在CurseForge、Hangar和SpigotMC上找到同一个项目或作者。"
+  },
+  "feature.platformsSidebar.title": {
+    "defaultMessage": "其他平台侧边栏"
   },
   "feature.projectCardActions.description": {
     "defaultMessage": "直接从项目卡片下载、关注和保存项目。"
@@ -206,8 +215,20 @@
   "search.any": {
     "defaultMessage": "任何"
   },
+  "search.hideSnapshots": {
+    "defaultMessage": "隐藏快照版"
+  },
+  "search.loading": {
+    "defaultMessage": "加载中……"
+  },
+  "search.noResults": {
+    "defaultMessage": "未找到结果"
+  },
   "search.placeholder": {
     "defaultMessage": "搜索……"
+  },
+  "search.showAllVersions": {
+    "defaultMessage": "显示所有版本"
   },
   "settings.language": {
     "defaultMessage": "语言"

@@ -15,7 +15,7 @@
     "defaultMessage": "График активности релизов на страницах проектов."
   },
   "feature.activitySparkline.timeRange": {
-    "defaultMessage": "Временной диапазон"
+    "defaultMessage": "Период"
   },
   "feature.activitySparkline.title": {
     "defaultMessage": "Мини-график активности"
@@ -150,7 +150,7 @@
     "defaultMessage": "Телеметрия"
   },
   "feature.toolsSidebar.description": {
-    "defaultMessage": "Генерируйте встраиваемые коды и копируйте команды установки для менеджеров модов."
+    "defaultMessage": "Создавать коды для вставки, и копировать команды установки для менеджера модов."
   },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "Менеджер модов"
@@ -171,7 +171,7 @@
     "defaultMessage": "Закрыть"
   },
   "popup.discordPrompt.message": {
-    "defaultMessage": "Обратитесь за помощью, делитесь мнением и следите за обновлениями в Discord."
+    "defaultMessage": "Обращайтесь за помощью, делитесь мнением и следите за обновлениями в Discord."
   },
   "popup.discordPrompt.title": {
     "defaultMessage": "Вступите в Discord"
@@ -210,10 +210,10 @@
     "defaultMessage": "Флаги"
   },
   "popup.group.general": {
-    "defaultMessage": "Общие"
+    "defaultMessage": "Основное"
   },
   "search.any": {
-    "defaultMessage": "Любой"
+    "defaultMessage": "Неважно"
   },
   "search.hideSnapshots": {
     "defaultMessage": "Скрыть снапшоты"
