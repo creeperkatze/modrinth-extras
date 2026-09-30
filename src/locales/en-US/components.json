@@ -71,6 +71,96 @@
   "errorNotice.message": {
     "defaultMessage": "This error might be related to Modrinth Extras. Try disabling the extension and refreshing the page before reporting this to Modrinth. If the error goes away, please report it <link>here</link>."
   },
+  "moddexReviews.aesthetics": {
+    "defaultMessage": "Aesthetics"
+  },
+  "moddexReviews.count": {
+    "defaultMessage": "{count, plural, one {# written review} other {# written reviews}}"
+  },
+  "moddexReviews.createToken": {
+    "defaultMessage": "Create a token"
+  },
+  "moddexReviews.credit": {
+    "defaultMessage": "Reviews provided by <link>ModDex</link>, written by its community."
+  },
+  "moddexReviews.developer": {
+    "defaultMessage": "Developer"
+  },
+  "moddexReviews.edited": {
+    "defaultMessage": "Edited"
+  },
+  "moddexReviews.empty": {
+    "defaultMessage": "No written reviews yet. Be the first!"
+  },
+  "moddexReviews.gameplay": {
+    "defaultMessage": "Gameplay"
+  },
+  "moddexReviews.helpful": {
+    "defaultMessage": "{count, plural, one {# person found this helpful} other {# people found this helpful}}"
+  },
+  "moddexReviews.invalidTokenTitle": {
+    "defaultMessage": "Your ModDex API token is invalid or expired"
+  },
+  "moddexReviews.loadError": {
+    "defaultMessage": "Failed to load reviews from ModDex"
+  },
+  "moddexReviews.loadMore": {
+    "defaultMessage": "Load more reviews"
+  },
+  "moddexReviews.loading": {
+    "defaultMessage": "Loading reviews…"
+  },
+  "moddexReviews.moderatorNote": {
+    "defaultMessage": "Moderator note:"
+  },
+  "moddexReviews.noTokenTitle": {
+    "defaultMessage": "ModDex API token required"
+  },
+  "moddexReviews.notFound": {
+    "defaultMessage": "This project could not be found on ModDex."
+  },
+  "moddexReviews.openModdex": {
+    "defaultMessage": "Open ModDex"
+  },
+  "moddexReviews.performance": {
+    "defaultMessage": "Performance"
+  },
+  "moddexReviews.playtime": {
+    "defaultMessage": "{hours, number} h played"
+  },
+  "moddexReviews.posted": {
+    "defaultMessage": "Posted {time}"
+  },
+  "moddexReviews.rateLimited": {
+    "defaultMessage": "ModDex rate limit reached, try again in a minute"
+  },
+  "moddexReviews.rating": {
+    "defaultMessage": "Rated {rating} out of 5"
+  },
+  "moddexReviews.sortHelpful": {
+    "defaultMessage": "Most helpful"
+  },
+  "moddexReviews.sortLabel": {
+    "defaultMessage": "Sort reviews"
+  },
+  "moddexReviews.sortNewest": {
+    "defaultMessage": "Newest"
+  },
+  "moddexReviews.sortRating": {
+    "defaultMessage": "Highest rated"
+  },
+  "moddexReviews.tab": {
+    "defaultMessage": "Reviews"
+  },
+  "moddexReviews.title": {
+    "defaultMessage": "Community reviews"
+  },
+  "moddexReviews.tokenHelp": {
+    "defaultMessage": "ModDex only serves reviews to signed-in API users. Create a free token on ModDex, then paste it into the Modrinth Extras popup under \"ModDex reviews\"."
+  },
+  "moddexReviews.writeReview": {
+    "defaultMessage": "Write a review"
+  },
   "modpacksSidebar.title": {
     "defaultMessage": "Modpacks"
   },

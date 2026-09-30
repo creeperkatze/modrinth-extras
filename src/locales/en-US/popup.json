@@ -74,6 +74,15 @@
   "feature.githubSidebar.title": {
     "defaultMessage": "Repository sidebar"
   },
+  "feature.moddexReviews.apiToken": {
+    "defaultMessage": "API token"
+  },
+  "feature.moddexReviews.description": {
+    "defaultMessage": "Adds a Reviews tab to projects with community reviews from ModDex."
+  },
+  "feature.moddexReviews.title": {
+    "defaultMessage": "ModDex reviews"
+  },
   "feature.modpacksSidebar.description": {
     "defaultMessage": "Show all the modpacks the mod is featured in."
   },

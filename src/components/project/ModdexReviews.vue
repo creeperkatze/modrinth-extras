@@ -1,0 +1,546 @@
+<template>
+	<a
+		ref="tabEl"
+		href="#reviews"
+		role="tab"
+		:aria-selected="active"
+		class="button-animation z-[1] flex flex-row items-center gap-2 px-4 py-2 no-underline focus:rounded-full"
+		:class="active ? 'text-button-textSelected' : 'text-contrast'"
+		@click.prevent="activate"
+	>
+		<span class="text-nowrap">{{ formatMessage(messages.tab) }}</span>
+	</a>
+
+	<Teleport v-if="active && panelTarget" :to="panelTarget">
+		<div id="modrinth-extras-reviews-panel" class="flex flex-col gap-3">
+			<div
+				class="flex flex-wrap items-center gap-3 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
+			>
+				<div class="flex min-w-0 flex-1 flex-col gap-1">
+					<h2 class="m-0 text-lg font-semibold text-contrast">
+						{{ formatMessage(messages.title) }}
+					</h2>
+					<span class="text-sm text-secondary">
+						<IntlFormatted :message-id="messages.credit">
+							<template #link="{ children }">
+								<a
+									href="https://moddex.gg"
+									target="_blank"
+									rel="noopener"
+									class="font-semibold text-link"
+								>
+									<component :is="() => children" />
+								</a>
+							</template>
+						</IntlFormatted>
+					</span>
+				</div>
+				<div v-if="page" class="flex flex-wrap items-center gap-2">
+					<ButtonLink :href="page.projectUrl" target="_blank" rel="noopener">
+						{{ formatMessage(messages.writeReview) }}
+						<ExternalIcon aria-hidden="true" />
+					</ButtonLink>
+				</div>
+			</div>
+
+			<div
+				v-if="state === 'loading' && !reviews.length"
+				class="flex items-center gap-2 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4 text-secondary"
+			>
+				<LoaderCircleIcon aria-hidden="true" class="size-5 animate-spin" />
+				{{ formatMessage(messages.loading) }}
+			</div>
+
+			<div
+				v-else-if="state === 'no-token' || state === 'invalid-token'"
+				class="flex flex-col gap-3 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
+			>
+				<div class="flex items-start gap-2 text-contrast">
+					<KeyIcon aria-hidden="true" class="mt-0.5 size-5 shrink-0" />
+					<span class="font-semibold">
+						{{
+							formatMessage(
+								state === 'no-token' ? messages.noTokenTitle : messages.invalidTokenTitle,
+							)
+						}}
+					</span>
+				</div>
+				<p class="m-0 text-secondary">{{ formatMessage(messages.tokenHelp) }}</p>
+				<div>
+					<ButtonLink
+						type="colored"
+						color="brand"
+						href="https://moddex.gg/settings?tab=tokens"
+						target="_blank"
+						rel="noopener"
+					>
+						{{ formatMessage(messages.createToken) }}
+						<ExternalIcon aria-hidden="true" />
+					</ButtonLink>
+				</div>
+			</div>
+
+			<div
+				v-else-if="state === 'error' || state === 'rate-limited'"
+				class="flex items-center gap-2 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4 text-secondary"
+			>
+				<TriangleAlertIcon aria-hidden="true" class="size-5 shrink-0" />
+				{{ formatMessage(state === 'rate-limited' ? messages.rateLimited : messages.loadError) }}
+			</div>
+
+			<div
+				v-else-if="state === 'not-found'"
+				class="flex flex-col gap-3 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
+			>
+				<span class="text-secondary">{{ formatMessage(messages.notFound) }}</span>
+				<div>
+					<ButtonLink href="https://moddex.gg" target="_blank" rel="noopener">
+						{{ formatMessage(messages.openModdex) }}
+						<ExternalIcon aria-hidden="true" />
+					</ButtonLink>
+				</div>
+			</div>
+
+			<template v-else>
+				<div class="flex flex-wrap items-center justify-between gap-2">
+					<span class="text-sm font-semibold text-secondary">
+						{{ formatMessage(messages.count, { count: total }) }}
+					</span>
+					<Chips
+						v-model="sort"
+						:items="SORTS"
+						:format-label="(item: ModdexReviewSort) => formatMessage(sortMessages[item])"
+						:capitalize="false"
+						size="small"
+						hide-checkmark-icon
+						:aria-label="formatMessage(messages.sortLabel)"
+					/>
+				</div>
+
+				<div
+					v-if="!reviews.length"
+					class="rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4 text-secondary"
+				>
+					{{ formatMessage(messages.empty) }}
+				</div>
+
+				<article
+					v-for="review in reviews"
+					:key="review.id"
+					class="flex flex-col gap-3 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
+				>
+					<header class="flex items-start gap-3">
+						<div
+							class="flex size-10 shrink-0 items-center justify-center rounded-full bg-surface-5 text-lg font-bold text-contrast"
+							aria-hidden="true"
+						>
+							{{ review.author.name.charAt(0).toUpperCase() }}
+						</div>
+						<div class="flex min-w-0 flex-1 flex-col gap-0.5">
+							<div class="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+								<span class="truncate font-semibold text-contrast">{{ review.author.name }}</span>
+								<span
+									v-if="review.is_verified_developer"
+									class="inline-flex items-center gap-1 rounded-full bg-brand-highlight px-2 py-0.5 text-xs font-semibold text-brand"
+								>
+									<ShieldCheckIcon aria-hidden="true" class="size-3.5" />
+									{{ formatMessage(messages.developer) }}
+								</span>
+							</div>
+							<div class="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-sm text-secondary">
+								<span :title="formatDate(review.created_at)">
+									{{
+										formatMessage(messages.posted, { time: formatRelativeTime(review.created_at) })
+									}}
+								</span>
+								<span v-if="review.edited_at">· {{ formatMessage(messages.edited) }}</span>
+							</div>
+						</div>
+						<div class="flex shrink-0 items-center gap-1.5">
+							<span
+								class="relative inline-flex"
+								role="img"
+								:aria-label="ratingLabel(review.rating)"
+							>
+								<span class="inline-flex text-surface-5">
+									<StarIcon v-for="i in 5" :key="i" aria-hidden="true" class="size-4" />
+								</span>
+								<span
+									class="absolute inset-y-0 left-0 inline-flex overflow-hidden text-orange"
+									:style="{ width: `${(review.rating / 5) * 100}%` }"
+								>
+									<StarIcon
+										v-for="i in 5"
+										:key="i"
+										aria-hidden="true"
+										class="size-4 shrink-0 fill-current"
+									/>
+								</span>
+							</span>
+							<span class="text-sm font-semibold text-contrast">{{
+								review.rating.toFixed(1)
+							}}</span>
+						</div>
+					</header>
+
+					<div
+						v-if="categoryRatings(review).length"
+						class="grid grid-cols-1 gap-x-6 gap-y-1.5 sm:grid-cols-3"
+					>
+						<div
+							v-for="cat in categoryRatings(review)"
+							:key="cat.label"
+							class="flex flex-col gap-1"
+						>
+							<div class="flex items-center justify-between text-xs text-secondary">
+								<span>{{ cat.label }}</span>
+								<span class="font-semibold text-contrast">{{ cat.value.toFixed(1) }}</span>
+							</div>
+							<div class="h-1.5 w-full overflow-hidden rounded-full bg-surface-5">
+								<div
+									class="h-full rounded-full bg-orange"
+									:style="{ width: `${(cat.value / 5) * 100}%` }"
+								/>
+							</div>
+						</div>
+					</div>
+
+					<div v-if="review.title" class="text-base font-semibold text-contrast">
+						{{ review.title }}
+					</div>
+					<!-- eslint-disable vue/no-v-html -->
+					<div
+						v-if="review.content"
+						class="markdown-body break-words text-primary"
+						v-html="renderReview(review.content)"
+					/>
+					<!-- eslint-enable vue/no-v-html -->
+
+					<footer class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-secondary">
+						<span v-if="review.minecraft_version" class="inline-flex items-center gap-1.5">
+							<GameIcon aria-hidden="true" class="size-4" />
+							{{ review.minecraft_version }}
+						</span>
+						<span v-if="review.playtime_hours" class="inline-flex items-center gap-1.5">
+							<ClockIcon aria-hidden="true" class="size-4" />
+							{{ formatMessage(messages.playtime, { hours: review.playtime_hours }) }}
+						</span>
+						<span v-if="review.helpful_votes > 0" class="inline-flex items-center gap-1.5">
+							<HeartIcon aria-hidden="true" class="size-4" />
+							{{ formatMessage(messages.helpful, { count: review.helpful_votes }) }}
+						</span>
+					</footer>
+
+					<div
+						v-if="review.public_moderator_note"
+						class="rounded-xl border border-solid border-surface-5 bg-surface-4 p-3 text-sm text-secondary"
+					>
+						<span class="font-semibold text-contrast">{{
+							formatMessage(messages.moderatorNote)
+						}}</span>
+						{{ review.public_moderator_note }}
+					</div>
+				</article>
+
+				<div v-if="page && page.page < page.lastPage" class="flex justify-center">
+					<Button :loading="state === 'loading'" @click="loadMore">
+						{{ formatMessage(messages.loadMore) }}
+					</Button>
+				</div>
+			</template>
+		</div>
+	</Teleport>
+</template>
+
+<script setup lang="ts">
+import {
+	ClockIcon,
+	ExternalIcon,
+	GameIcon,
+	HeartIcon,
+	KeyIcon,
+	LoaderCircleIcon,
+	ShieldCheckIcon,
+	StarIcon,
+	TriangleAlertIcon,
+} from '@modrinth/assets'
+import {
+	Button,
+	ButtonLink,
+	Chips,
+	defineMessages,
+	IntlFormatted,
+	useRelativeTime,
+	useVIntl,
+} from '@modrinth/ui'
+import { configuredXss, md } from '@modrinth/utils'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
+import { browser } from 'wxt/browser'
+
+import type {
+	ModdexReview,
+	ModdexReviewSort,
+	ModdexReviewsPage,
+	ModdexReviewsResult,
+} from '../../background/external/moddex'
+import { i18n } from '../../utils/i18n'
+import { getSettings } from '../../utils/settings'
+
+// Reviews are untrusted, so raw HTML and images are off before Modrinth's sanitizer runs.
+const markdown = md({ html: false, breaks: true }).disable('image')
+const defaultLinkOpen =
+	markdown.renderer.rules.link_open ??
+	((tokens, idx, options, _env, self) => self.renderToken(tokens, idx, options))
+markdown.renderer.rules.link_open = (tokens, idx, options, env, self) => {
+	tokens[idx]?.attrSet('target', '_blank')
+	return defaultLinkOpen(tokens, idx, options, env, self)
+}
+
+function renderReview(content: string): string {
+	return configuredXss.process(markdown.render(content))
+}
+
+const { formatMessage } = useVIntl()
+const formatRelativeTime = useRelativeTime()
+
+const messages = defineMessages({
+	tab: { id: 'moddexReviews.tab', defaultMessage: 'Reviews' },
+	title: { id: 'moddexReviews.title', defaultMessage: 'Community reviews' },
+	credit: {
+		id: 'moddexReviews.credit',
+		defaultMessage: 'Reviews provided by <link>ModDex</link>, written by its community.',
+	},
+	writeReview: { id: 'moddexReviews.writeReview', defaultMessage: 'Write a review' },
+	loading: { id: 'moddexReviews.loading', defaultMessage: 'Loading reviews…' },
+	loadError: {
+		id: 'moddexReviews.loadError',
+		defaultMessage: 'Failed to load reviews from ModDex',
+	},
+	rateLimited: {
+		id: 'moddexReviews.rateLimited',
+		defaultMessage: 'ModDex rate limit reached, try again in a minute',
+	},
+	noTokenTitle: { id: 'moddexReviews.noTokenTitle', defaultMessage: 'ModDex API token required' },
+	invalidTokenTitle: {
+		id: 'moddexReviews.invalidTokenTitle',
+		defaultMessage: 'Your ModDex API token is invalid or expired',
+	},
+	tokenHelp: {
+		id: 'moddexReviews.tokenHelp',
+		defaultMessage:
+			'ModDex only serves reviews to signed-in API users. Create a free token on ModDex, then paste it into the Modrinth Extras popup under "ModDex reviews".',
+	},
+	createToken: { id: 'moddexReviews.createToken', defaultMessage: 'Create a token' },
+	notFound: {
+		id: 'moddexReviews.notFound',
+		defaultMessage: 'This project could not be found on ModDex.',
+	},
+	openModdex: { id: 'moddexReviews.openModdex', defaultMessage: 'Open ModDex' },
+	count: {
+		id: 'moddexReviews.count',
+		defaultMessage: '{count, plural, one {# written review} other {# written reviews}}',
+	},
+	empty: { id: 'moddexReviews.empty', defaultMessage: 'No written reviews yet. Be the first!' },
+	sortLabel: { id: 'moddexReviews.sortLabel', defaultMessage: 'Sort reviews' },
+	sortNewest: { id: 'moddexReviews.sortNewest', defaultMessage: 'Newest' },
+	sortRating: { id: 'moddexReviews.sortRating', defaultMessage: 'Highest rated' },
+	sortHelpful: { id: 'moddexReviews.sortHelpful', defaultMessage: 'Most helpful' },
+	developer: { id: 'moddexReviews.developer', defaultMessage: 'Developer' },
+	posted: { id: 'moddexReviews.posted', defaultMessage: 'Posted {time}' },
+	edited: { id: 'moddexReviews.edited', defaultMessage: 'Edited' },
+	rating: { id: 'moddexReviews.rating', defaultMessage: 'Rated {rating} out of 5' },
+	gameplay: { id: 'moddexReviews.gameplay', defaultMessage: 'Gameplay' },
+	performance: { id: 'moddexReviews.performance', defaultMessage: 'Performance' },
+	aesthetics: { id: 'moddexReviews.aesthetics', defaultMessage: 'Aesthetics' },
+	playtime: { id: 'moddexReviews.playtime', defaultMessage: '{hours, number} h played' },
+	helpful: {
+		id: 'moddexReviews.helpful',
+		defaultMessage:
+			'{count, plural, one {# person found this helpful} other {# people found this helpful}}',
+	},
+	moderatorNote: { id: 'moddexReviews.moderatorNote', defaultMessage: 'Moderator note:' },
+	loadMore: { id: 'moddexReviews.loadMore', defaultMessage: 'Load more reviews' },
+})
+
+const sortMessages = {
+	created_at: messages.sortNewest,
+	rating: messages.sortRating,
+	helpful_votes: messages.sortHelpful,
+}
+
+const SORTS: ModdexReviewSort[] = ['created_at', 'rating', 'helpful_votes']
+
+const props = defineProps<{ projectSlug: string; isModpack: boolean }>()
+
+type State =
+	| 'idle'
+	| 'loading'
+	| 'ready'
+	| 'no-token'
+	| 'invalid-token'
+	| 'not-found'
+	| 'rate-limited'
+	| 'error'
+
+const CONTENT_SELECTOR = '.normal-page__content'
+const ACTIVE_CONTENT_CLASS = 'modrinth-extras-reviews-active'
+const ACTIVE_NAV_CLASS = 'modrinth-extras-reviews-nav-active'
+
+const active = ref(false)
+const panelTarget = ref<HTMLElement | null>(null)
+const state = ref<State>('idle')
+const reviews = ref<ModdexReview[]>([])
+const page = ref<ModdexReviewsPage | null>(null)
+const total = ref(0)
+const sort = ref<ModdexReviewSort>('created_at')
+let requestId = 0
+
+function getNav(): HTMLElement | null {
+	return document.querySelector<HTMLElement>(`${CONTENT_SELECTOR} > div > nav`)
+}
+
+const tabEl = ref<HTMLElement | null>(null)
+let savedSliderStyle: string | null = null
+let resizeObserver: ResizeObserver | undefined
+
+function getSlider(): HTMLElement | null {
+	return getNav()?.querySelector<HTMLElement>(':scope > .pointer-events-none.absolute') ?? null
+}
+
+// NavTabs only knows its own links, so the highlight is moved under this tab by hand.
+function moveSliderToTab() {
+	const nav = getNav()
+	const slider = getSlider()
+	const tab = tabEl.value
+	if (!nav || !slider || !tab) return
+	slider.style.left = `${tab.offsetLeft}px`
+	slider.style.top = `${tab.offsetTop}px`
+	slider.style.right = `${nav.clientWidth - tab.offsetLeft - tab.offsetWidth}px`
+	slider.style.bottom = `${nav.clientHeight - tab.offsetTop - tab.offsetHeight}px`
+}
+
+// Vue only patches changed style values, so the original must be put back before it navigates.
+function restoreSlider() {
+	const slider = getSlider()
+	if (slider && savedSliderStyle !== null) slider.style.cssText = savedSliderStyle
+	savedSliderStyle = null
+}
+
+function setActive(value: boolean) {
+	active.value = value
+	panelTarget.value = value ? document.querySelector<HTMLElement>(CONTENT_SELECTOR) : null
+	document.querySelector(CONTENT_SELECTOR)?.classList.toggle(ACTIVE_CONTENT_CLASS, value)
+	const nav = getNav()
+	nav?.classList.toggle(ACTIVE_NAV_CLASS, value)
+
+	resizeObserver?.disconnect()
+	if (value) {
+		const slider = getSlider()
+		if (slider && savedSliderStyle === null) savedSliderStyle = slider.style.cssText
+		moveSliderToTab()
+		if (nav) {
+			resizeObserver = new ResizeObserver(moveSliderToTab)
+			resizeObserver.observe(nav)
+		}
+	} else {
+		restoreSlider()
+	}
+}
+
+function activate() {
+	setActive(true)
+	if (state.value === 'idle') void load(1)
+}
+
+function deactivate() {
+	if (active.value) setActive(false)
+}
+
+async function load(pageNumber: number) {
+	const id = ++requestId
+	state.value = 'loading'
+	try {
+		const { moddexReviews } = await getSettings()
+		const result = (await browser.runtime.sendMessage({
+			type: 'moddex-reviews',
+			slug: props.projectSlug,
+			isModpack: props.isModpack,
+			token: moddexReviews.apiToken.trim(),
+			sort: sort.value,
+			page: pageNumber,
+		})) as ModdexReviewsResult | undefined
+		if (id !== requestId) return
+
+		if (!result) {
+			state.value = 'error'
+		} else if (!result.ok) {
+			state.value = result.error === 'failed' ? 'error' : result.error
+		} else {
+			reviews.value =
+				pageNumber === 1 ? result.data.reviews : [...reviews.value, ...result.data.reviews]
+			page.value = result.data
+			total.value = result.data.total
+			state.value = 'ready'
+		}
+	} catch (err) {
+		console.error('[Modrinth Extras] Failed to load ModDex reviews:', err)
+		if (id === requestId) state.value = 'error'
+	}
+}
+
+function loadMore() {
+	if (page.value && state.value !== 'loading') void load(page.value.page + 1)
+}
+
+watch(sort, () => {
+	if (state.value !== 'idle') void load(1)
+})
+
+function formatDate(iso: string): string {
+	return new Intl.DateTimeFormat(i18n.global.locale.value, { dateStyle: 'medium' }).format(
+		new Date(iso),
+	)
+}
+
+function ratingLabel(rating: number): string {
+	return formatMessage(messages.rating, { rating: rating.toFixed(1) })
+}
+
+function categoryRatings(review: ModdexReview) {
+	return [
+		{ label: formatMessage(messages.gameplay), value: review.gameplay_rating },
+		{ label: formatMessage(messages.performance), value: review.performance_rating },
+		{ label: formatMessage(messages.aesthetics), value: review.aesthetics_rating },
+	].filter((c): c is { label: string; value: number } => c.value != null)
+}
+
+// Clicking a native tab, even the current one, must hand the page back to Modrinth.
+function onNavClick(event: MouseEvent) {
+	const link = (event.target as HTMLElement).closest('a')
+	if (link && link.getAttribute('href') !== '#reviews' && link.closest('nav') === getNav()) {
+		deactivate()
+	}
+}
+
+onMounted(() => {
+	document.addEventListener('click', onNavClick, true)
+	window.addEventListener('modrinth-extras:before-navigate', deactivate)
+})
+
+onUnmounted(() => {
+	document.removeEventListener('click', onNavClick, true)
+	window.removeEventListener('modrinth-extras:before-navigate', deactivate)
+	resizeObserver?.disconnect()
+	setActive(false)
+})
+</script>
+
+<style>
+.modrinth-extras-reviews-active > :not(:first-child):not(#modrinth-extras-reviews-panel) {
+	display: none !important;
+}
+
+.modrinth-extras-reviews-nav-active .tab-color {
+	color: var(--color-contrast) !important;
+}
+</style>

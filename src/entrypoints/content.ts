@@ -8,6 +8,7 @@ import NotificationsIndicator from '../components/header/NotificationsIndicator.
 import QuickSearch from '../components/header/QuickSearch.vue'
 import ActivitySparkline from '../components/project/ActivitySparkline.vue'
 import GalleryBackground from '../components/project/GalleryBackground.vue'
+import ModdexReviews from '../components/project/ModdexReviews.vue'
 import MonetizationBadge from '../components/project/MonetizationBadge.vue'
 import ProjectCardActions from '../components/project/ProjectCardActions.vue'
 import TranslateDescription from '../components/project/TranslateDescription.vue'
@@ -499,6 +500,30 @@ export default defineContentScript({
 			},
 		})
 
+		const moddexReviews = createInjection({
+			id: 'modrinth-extras-moddex-reviews',
+			isEnabled: () => settings.moddexReviews.enabled,
+			settingsKeys: ['moddexReviews'],
+			persistent: false,
+			projectScoped: true,
+			attach(container) {
+				if (!PROJECT_TYPE_PATTERN.test(window.location.pathname)) return false
+				const nav = document.querySelector<HTMLElement>('.normal-page__content > div > nav')
+				if (!nav) return false
+				container.style.display = 'contents'
+				nav.appendChild(container)
+				return document.contains(container)
+			},
+			createApp() {
+				const [, projectType, slug] = window.location.pathname.match(PROJECT_TYPE_PATTERN) ?? []
+				const app = createApp(
+					h(ModdexReviews, { projectSlug: slug ?? '', isModpack: projectType === 'modpack' }),
+				)
+				installI18n(app)
+				return app
+			},
+		})
+
 		const repositorySidebar = createInjection({
 			id: 'modrinth-extras-repository-sidebar',
 			isEnabled: () => settings.githubSidebar.enabled,
@@ -670,6 +695,7 @@ export default defineContentScript({
 			galleryBackground,
 			monetizationBadge,
 			translateDescription,
+			moddexReviews,
 			repositorySidebar,
 			discordSidebar,
 			errorNotice,

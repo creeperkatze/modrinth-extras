@@ -9,6 +9,7 @@ import {
 } from '../background/badge'
 import { handleNotificationClick } from '../background/browser-notifications'
 import { fetchDiscordInvite } from '../background/external/discord'
+import { fetchModdexReviews, type ModdexReviewSort } from '../background/external/moddex'
 import { findPlatformProjects, findPlatformUsers } from '../background/external/platforms'
 import { fetchRepositoryStats } from '../background/external/repository'
 import type { Notification } from '../utils/notifications'
@@ -89,6 +90,21 @@ export default defineBackground(() => {
 				.catch((err) => {
 					console.error('[Modrinth Extras] Failed to fetch platform matches:', err)
 					sendResponse({ ok: false, error: err instanceof Error ? err.message : String(err) })
+				})
+			return true
+		}
+		if (message.type === 'moddex-reviews') {
+			fetchModdexReviews(
+				message.slug as string,
+				message.isModpack as boolean,
+				message.token as string,
+				message.sort as ModdexReviewSort,
+				message.page as number,
+			)
+				.then((result) => sendResponse(result))
+				.catch((err) => {
+					console.error('[Modrinth Extras] Failed to fetch ModDex reviews:', err)
+					sendResponse({ ok: false, error: 'failed' })
 				})
 			return true
 		}

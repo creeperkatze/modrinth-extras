@@ -135,6 +135,12 @@
 								:model-value="!!(settings[f.key] as unknown as Record<string, boolean>)[opt.key]"
 								@update:model-value="updateOption(f.key, opt.key, $event)"
 							/>
+							<OptionFieldText
+								v-else-if="opt.type === 'text'"
+								:label="opt.label"
+								:model-value="(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''"
+								@update:model-value="updateOption(f.key, opt.key, $event)"
+							/>
 							<OptionFieldSelect
 								v-else
 								:label="opt.label"
@@ -267,6 +273,7 @@ import {
 	PaletteIcon,
 	PlayIcon,
 	SearchIcon,
+	StarIcon,
 	TagCategoryZapIcon,
 	WrenchIcon,
 } from '@modrinth/assets'
@@ -304,6 +311,7 @@ import FeatureGroup from './components/FeatureGroup.vue'
 import FeatureRow from './components/FeatureRow.vue'
 import OptionFieldColor from './components/OptionFieldColor.vue'
 import OptionFieldSelect, { type SelectItem } from './components/OptionFieldSelect.vue'
+import OptionFieldText from './components/OptionFieldText.vue'
 import OptionFieldToggle from './components/OptionFieldToggle.vue'
 
 const { formatMessage } = useVIntl()
@@ -507,6 +515,18 @@ const messages = defineMessages({
 		id: 'feature.translateDescription.disabledTooltip',
 		defaultMessage: 'Requires APIs not supported in this browser',
 	},
+	'feature.moddexReviews.title': {
+		id: 'feature.moddexReviews.title',
+		defaultMessage: 'ModDex reviews',
+	},
+	'feature.moddexReviews.description': {
+		id: 'feature.moddexReviews.description',
+		defaultMessage: 'Adds a Reviews tab to projects with community reviews from ModDex.',
+	},
+	'feature.moddexReviews.apiToken': {
+		id: 'feature.moddexReviews.apiToken',
+		defaultMessage: 'API token',
+	},
 	'feature.notificationBadge.title': {
 		id: 'feature.notificationBadge.title',
 		defaultMessage: 'Notification badge',
@@ -564,7 +584,7 @@ type FeatureKey = Exclude<keyof ExtensionSettings, 'locale'>
 
 interface FeatureOption {
 	key: string
-	type: 'select' | 'color' | 'toggle'
+	type: 'select' | 'color' | 'toggle' | 'text'
 	label: string
 	items?: SelectItem[]
 	fetchItems?: () => Promise<SelectItem[]>
@@ -780,6 +800,19 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 		description: formatMessage(messages['feature.translateDescription.description']),
 		disabled: () => !translationSupported,
 		disabledTooltip: formatMessage(messages['feature.translateDescription.disabledTooltip']),
+	},
+	{
+		key: 'moddexReviews',
+		icon: StarIcon,
+		title: formatMessage(messages['feature.moddexReviews.title']),
+		description: formatMessage(messages['feature.moddexReviews.description']),
+		options: [
+			{
+				key: 'apiToken',
+				type: 'text',
+				label: formatMessage(messages['feature.moddexReviews.apiToken']),
+			},
+		],
 	},
 ])
 
