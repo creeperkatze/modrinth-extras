@@ -218,6 +218,9 @@ importers:
       hangarmc-js:
         specifier: ^1.0.5
         version: 1.0.5
+      moddex-js:
+        specifier: ^1.0.0
+        version: 1.0.0
       spiget-js:
         specifier: ^1.0.4
         version: 1.0.4
@@ -5694,6 +5697,10 @@ packages:
 
   mlly@1.8.2:
     resolution: {integrity: sha512-d+ObxMQFmbt10sretNDytwt85VrbkhhUA/JBGm1MPaWJ65Cl4wOgLaB1NYvJSZ0Ef03MMEU/0xpPMXUIQ29UfA==}
+
+  moddex-js@1.0.0:
+    resolution: {integrity: sha512-xqEWEnm5tA5oHk0SHPellBOZ2ORIUy2AoRm4lA31y1VGgXeCHBJON33B1j1mdZw77GSjdGPup1JsjXR9tdUZAg==}
+    engines: {node: '>=18'}
 
   motion-dom@12.38.0:
     resolution: {integrity: sha512-pdkHLD8QYRp8VfiNLb8xIBJis1byQ9gPT3Jnh2jqfFtAsWUA3dEepDlsWe/xMpO8McV+VdpKVcp+E+TGJEtOoA==}
@@ -12514,6 +12521,8 @@ snapshots:
       pathe: 2.0.3
       pkg-types: 1.3.1
       ufo: 1.6.4
+
+  moddex-js@1.0.0: {}
 
   motion-dom@12.38.0:
     dependencies:

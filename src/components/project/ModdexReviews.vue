@@ -108,8 +108,8 @@
 					</span>
 					<Chips
 						v-model="sort"
-						:items="SORTS"
-						:format-label="(item: ModdexReviewSort) => formatMessage(sortMessages[item])"
+						:items="[...SORTS]"
+						:format-label="(item: ReviewSort) => formatMessage(sortMessages[item])"
 						:capitalize="false"
 						size="small"
 						hide-checkmark-icon
@@ -274,15 +274,11 @@ import {
 	useVIntl,
 } from '@modrinth/ui'
 import { configuredXss, md } from '@modrinth/utils'
+import type { Review } from 'moddex-js'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { browser } from 'wxt/browser'
 
-import type {
-	ModdexReview,
-	ModdexReviewSort,
-	ModdexReviewsPage,
-	ModdexReviewsResult,
-} from '../../background/external/moddex'
+import type { ModdexReviewsPage, ModdexReviewsResult } from '../../background/external/moddex'
 import { i18n } from '../../utils/i18n'
 import { getSettings } from '../../utils/settings'
 
@@ -368,7 +364,8 @@ const sortMessages = {
 	helpful_votes: messages.sortHelpful,
 }
 
-const SORTS: ModdexReviewSort[] = ['created_at', 'rating', 'helpful_votes']
+const SORTS = ['created_at', 'rating', 'helpful_votes'] as const
+type ReviewSort = (typeof SORTS)[number]
 
 const props = defineProps<{ projectSlug: string; isModpack: boolean }>()
 
@@ -389,10 +386,10 @@ const ACTIVE_NAV_CLASS = 'modrinth-extras-reviews-nav-active'
 const active = ref(false)
 const panelTarget = ref<HTMLElement | null>(null)
 const state = ref<State>('idle')
-const reviews = ref<ModdexReview[]>([])
+const reviews = ref<Review[]>([])
 const page = ref<ModdexReviewsPage | null>(null)
 const total = ref(0)
-const sort = ref<ModdexReviewSort>('created_at')
+const sort = ref<ReviewSort>('created_at')
 let requestId = 0
 
 function getNav(): HTMLElement | null {
@@ -506,7 +503,7 @@ function ratingLabel(rating: number): string {
 	return formatMessage(messages.rating, { rating: rating.toFixed(1) })
 }
 
-function categoryRatings(review: ModdexReview) {
+function categoryRatings(review: Review) {
 	return [
 		{ label: formatMessage(messages.gameplay), value: review.gameplay_rating },
 		{ label: formatMessage(messages.performance), value: review.performance_rating },

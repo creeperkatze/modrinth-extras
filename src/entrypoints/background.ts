@@ -1,3 +1,4 @@
+import type { ReviewSortField } from 'moddex-js'
 import { browser } from 'wxt/browser'
 
 import {
@@ -9,7 +10,7 @@ import {
 } from '../background/badge'
 import { handleNotificationClick } from '../background/browser-notifications'
 import { fetchDiscordInvite } from '../background/external/discord'
-import { fetchModdexReviews, type ModdexReviewSort } from '../background/external/moddex'
+import { fetchModdexReviews } from '../background/external/moddex'
 import { findPlatformProjects, findPlatformUsers } from '../background/external/platforms'
 import { fetchRepositoryStats } from '../background/external/repository'
 import type { Notification } from '../utils/notifications'
@@ -98,7 +99,7 @@ export default defineBackground(() => {
 				message.slug as string,
 				message.isModpack as boolean,
 				message.token as string,
-				message.sort as ModdexReviewSort,
+				message.sort as ReviewSortField,
 				message.page as number,
 			)
 				.then((result) => sendResponse(result))
