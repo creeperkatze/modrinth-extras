@@ -192,13 +192,14 @@
 							:key="cat.label"
 							class="flex flex-col gap-1"
 						>
-							<div class="flex items-center justify-between text-xs text-secondary">
+							<div class="flex items-center justify-between text-sm text-secondary">
 								<span>{{ cat.label }}</span>
 								<span class="font-semibold text-contrast">{{ cat.value.toFixed(1) }}</span>
 							</div>
 							<div class="h-1.5 w-full overflow-hidden rounded-full bg-surface-5">
 								<div
-									class="h-full rounded-full bg-orange"
+									class="h-full rounded-full"
+									:class="barColor(cat.value)"
 									:style="{ width: `${(cat.value / 5) * 100}%` }"
 								/>
 							</div>
@@ -501,6 +502,12 @@ function formatDate(iso: string): string {
 
 function ratingLabel(rating: number): string {
 	return formatMessage(messages.rating, { rating: rating.toFixed(1) })
+}
+
+function barColor(value: number): string {
+	if (value >= 4) return 'bg-green'
+	if (value >= 3) return 'bg-orange'
+	return 'bg-red'
 }
 
 function categoryRatings(review: Review) {
