@@ -480,9 +480,10 @@ export default defineContentScript({
 			settingsKeys: ['translateDescription'],
 			persistent: false,
 			projectScoped: true,
+			scopeKey: () => window.location.pathname,
 			attach(container) {
 				const path = window.location.pathname
-				if (!/^\/(mod|plugin|datapack|shader|resourcepack|modpack|server)\/[^/?#]+/.test(path))
+				if (!/^\/(mod|plugin|datapack|shader|resourcepack|modpack|server)\/[^/?#]+\/?$/.test(path))
 					return false
 				const descriptionCard = document.querySelector<HTMLElement>('.normal-page__content .card')
 				if (!descriptionCard) return false
