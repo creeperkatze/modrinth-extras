@@ -218,10 +218,14 @@
 					<!-- eslint-enable vue/no-v-html -->
 
 					<footer class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-secondary">
-						<span v-if="review.minecraft_version" class="inline-flex items-center gap-1.5">
-							<GameIcon aria-hidden="true" class="size-4" />
-							{{ review.minecraft_version }}
-						</span>
+						<div v-if="review.minecraft_version" class="flex flex-wrap gap-1">
+							<TagItem
+								v-for="version in formatGameVersions(review.minecraft_version, gameVersionTags)"
+								:key="version"
+							>
+								{{ version }}
+							</TagItem>
+						</div>
 						<span v-if="review.playtime_hours" class="inline-flex items-center gap-1.5">
 							<ClockIcon aria-hidden="true" class="size-4" />
 							{{ formatMessage(messages.playtime, { hours: review.playtime_hours }) }}
@@ -257,7 +261,6 @@
 import {
 	ClockIcon,
 	ExternalIcon,
-	GameIcon,
 	HeartIcon,
 	KeyIcon,
 	LoaderCircleIcon,
@@ -271,15 +274,18 @@ import {
 	Chips,
 	defineMessages,
 	IntlFormatted,
+	TagItem,
 	useRelativeTime,
 	useVIntl,
 } from '@modrinth/ui'
+import type { GameVersionTag } from '@modrinth/utils'
 import { configuredXss, md } from '@modrinth/utils'
 import type { Review } from 'moddex-js'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { browser } from 'wxt/browser'
 
 import type { ModdexReviewsPage, ModdexReviewsResult } from '../../background/external/moddex'
+import { formatGameVersions, loadGameVersionTags } from '../../utils/game-versions'
 import { i18n } from '../../utils/i18n'
 import { getSettings } from '../../utils/settings'
 
@@ -384,6 +390,7 @@ const CONTENT_SELECTOR = '.normal-page__content'
 const ACTIVE_CONTENT_CLASS = 'modrinth-extras-reviews-active'
 const ACTIVE_NAV_CLASS = 'modrinth-extras-reviews-nav-active'
 
+const gameVersionTags = ref<GameVersionTag[]>([])
 const active = ref(false)
 const panelTarget = ref<HTMLElement | null>(null)
 const state = ref<State>('idle')
@@ -527,6 +534,7 @@ function onNavClick(event: MouseEvent) {
 }
 
 onMounted(() => {
+	void loadGameVersionTags().then((tags) => (gameVersionTags.value = tags))
 	document.addEventListener('click', onNavClick, true)
 	window.addEventListener('modrinth-extras:before-navigate', deactivate)
 })
