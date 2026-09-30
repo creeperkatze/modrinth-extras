@@ -16,6 +16,15 @@
 			<div
 				class="flex flex-wrap items-center gap-3 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
 			>
+				<a
+					href="https://moddex.gg"
+					target="_blank"
+					rel="noopener"
+					aria-label="ModDex"
+					class="shrink-0"
+				>
+					<ModdexLogo aria-hidden="true" class="size-12" />
+				</a>
 				<div class="flex min-w-0 flex-1 flex-col gap-1">
 					<h2 class="m-0 text-lg font-semibold text-contrast">
 						{{ formatMessage(messages.title) }}
@@ -284,6 +293,7 @@ import type { Review } from 'moddex-js'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { browser } from 'wxt/browser'
 
+import ModdexLogo from '../../assets/moddex.svg?component'
 import type { ModdexReviewsPage, ModdexReviewsResult } from '../../background/external/moddex'
 import { formatGameVersions, loadGameVersionTags } from '../../utils/game-versions'
 import { i18n } from '../../utils/i18n'
