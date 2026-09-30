@@ -162,15 +162,16 @@
 					<span class="text-base font-semibold text-secondary">
 						{{ formatMessage(messages.count, { count: total }) }}
 					</span>
-					<Chips
-						v-model="sort"
-						:items="[...SORTS]"
-						:format-label="(item: ReviewSort) => formatMessage(sortMessages[item])"
-						:capitalize="false"
-						size="small"
-						hide-checkmark-icon
-						:aria-label="formatMessage(messages.sortLabel)"
-					/>
+					<div class="flex items-center gap-1.5">
+						<FilterIcon class="size-5 shrink-0 text-secondary" aria-hidden="true" />
+						<Combobox
+							v-model="sort"
+							:options="sortOptions"
+							trigger-type="base"
+							trigger-size="lg"
+							:aria-label="formatMessage(messages.sortLabel)"
+						/>
+					</div>
 				</div>
 
 				<div
@@ -303,11 +304,13 @@
 					</div>
 				</article>
 
-				<div v-if="page && page.page < page.lastPage" class="flex justify-center">
-					<Button :loading="state === 'loading'" @click="loadMore">
-						{{ formatMessage(messages.loadMore) }}
-					</Button>
-				</div>
+				<Pagination
+					v-if="page"
+					:page="page.page"
+					:count="page.lastPage"
+					class="justify-end"
+					@switch-page="switchPage"
+				/>
 			</template>
 		</div>
 	</Teleport>
@@ -317,6 +320,7 @@
 import {
 	ClockIcon,
 	ExternalIcon,
+	FilterIcon,
 	HeartIcon,
 	KeyIcon,
 	LoaderCircleIcon,
@@ -325,14 +329,14 @@ import {
 	TriangleAlertIcon,
 } from '@modrinth/assets'
 import {
-	Button,
 	ButtonLink,
-	Chips,
+	Combobox,
 	defineMessages,
 	IntlFormatted,
 	PageHeaderMetadata,
 	PageHeaderMetadataItem,
 	PageHeaderMetadataTagsItem,
+	Pagination,
 	TagItem,
 	useRelativeTime,
 	useVIntl,
@@ -430,17 +434,15 @@ const messages = defineMessages({
 			'{count, plural, one {# person found this helpful} other {# people found this helpful}}',
 	},
 	moderatorNote: { id: 'moddexReviews.moderatorNote', defaultMessage: 'Moderator note:' },
-	loadMore: { id: 'moddexReviews.loadMore', defaultMessage: 'Load more reviews' },
 })
 
-const sortMessages = {
-	created_at: messages.sortNewest,
-	rating: messages.sortRating,
-	helpful_votes: messages.sortHelpful,
-}
+const sortOptions = computed(() => [
+	{ value: 'created_at', label: formatMessage(messages.sortNewest) },
+	{ value: 'rating', label: formatMessage(messages.sortRating) },
+	{ value: 'helpful_votes', label: formatMessage(messages.sortHelpful) },
+])
 
-const SORTS = ['created_at', 'rating', 'helpful_votes'] as const
-type ReviewSort = (typeof SORTS)[number]
+type ReviewSort = 'created_at' | 'rating' | 'helpful_votes'
 
 const props = defineProps<{ projectSlug: string; isModpack: boolean }>()
 
@@ -550,8 +552,7 @@ async function load(pageNumber: number) {
 		} else if (!result.ok) {
 			state.value = result.error === 'failed' ? 'error' : result.error
 		} else {
-			reviews.value =
-				pageNumber === 1 ? result.data.reviews : [...reviews.value, ...result.data.reviews]
+			reviews.value = result.data.reviews
 			page.value = result.data
 			if (result.data.summary) summary.value = result.data.summary
 			total.value = result.data.total
@@ -563,8 +564,11 @@ async function load(pageNumber: number) {
 	}
 }
 
-function loadMore() {
-	if (page.value && state.value !== 'loading') void load(page.value.page + 1)
+function switchPage(pageNumber: number) {
+	if (state.value === 'loading') return
+	void load(pageNumber).then(() =>
+		document.getElementById('modrinth-extras-reviews-panel')?.scrollIntoView({ block: 'start' }),
+	)
 }
 
 watch(sort, () => {

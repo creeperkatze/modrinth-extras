@@ -104,9 +104,6 @@
   "moddexReviews.loadError": {
     "defaultMessage": "Failed to load reviews from ModDex"
   },
-  "moddexReviews.loadMore": {
-    "defaultMessage": "Load more reviews"
-  },
   "moddexReviews.loading": {
     "defaultMessage": "Loading reviews…"
   },
