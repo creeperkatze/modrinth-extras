@@ -137,6 +137,9 @@
   "moddexReviews.ratingsCount": {
     "defaultMessage": "{count, plural, one {# rating} other {# ratings}}"
   },
+  "moddexReviews.sortBy": {
+    "defaultMessage": "Sort by:"
+  },
   "moddexReviews.sortHelpful": {
     "defaultMessage": "Most helpful"
   },

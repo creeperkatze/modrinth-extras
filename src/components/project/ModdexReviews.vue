@@ -162,16 +162,17 @@
 					<span class="text-base font-semibold text-secondary">
 						{{ formatMessage(messages.count, { count: total }) }}
 					</span>
-					<div class="flex items-center gap-1.5">
-						<FilterIcon class="size-5 shrink-0 text-secondary" aria-hidden="true" />
-						<Combobox
-							v-model="sort"
-							:options="sortOptions"
-							trigger-type="base"
-							trigger-size="lg"
-							:aria-label="formatMessage(messages.sortLabel)"
-						/>
-					</div>
+					<Combobox
+						v-model="sort"
+						:options="sortOptions"
+						trigger-type="base"
+						class="!w-[16rem] min-w-max max-w-full"
+						:aria-label="formatMessage(messages.sortLabel)"
+					>
+						<template #prefix>
+							<span class="font-semibold text-primary">{{ formatMessage(messages.sortBy) }}</span>
+						</template>
+					</Combobox>
 				</div>
 
 				<div
@@ -320,7 +321,6 @@
 import {
 	ClockIcon,
 	ExternalIcon,
-	FilterIcon,
 	HeartIcon,
 	KeyIcon,
 	LoaderCircleIcon,
@@ -413,6 +413,7 @@ const messages = defineMessages({
 	},
 	empty: { id: 'moddexReviews.empty', defaultMessage: 'No written reviews yet. Be the first!' },
 	sortLabel: { id: 'moddexReviews.sortLabel', defaultMessage: 'Sort reviews' },
+	sortBy: { id: 'moddexReviews.sortBy', defaultMessage: 'Sort by:' },
 	sortNewest: { id: 'moddexReviews.sortNewest', defaultMessage: 'Newest' },
 	sortRating: { id: 'moddexReviews.sortRating', defaultMessage: 'Highest rated' },
 	sortHelpful: { id: 'moddexReviews.sortHelpful', defaultMessage: 'Most helpful' },
