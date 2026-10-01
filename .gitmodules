@@ -1,3 +1,6 @@
 [submodule "modrinth"]
 	path = modrinth
 	url = https://github.com/modrinth/code
+[submodule "website/.vitepress/shared"]
+	path = website/.vitepress/shared
+	url = https://github.com/creeperkatze/vitepress-theme.git

@@ -1,24 +1,30 @@
 /* eslint-disable simple-import-sort/imports */
 
-import { h } from 'vue'
-import DefaultTheme from 'vitepress/theme'
+import { browserStoreStats, createTheme, messagesFromGlob } from '../shared/theme'
 
-import DonateButton from './DonateButton.vue'
-import HeroLogo from './HeroLogo.vue'
-import Showcase from './Showcase.vue'
-import SiteFooter from './SiteFooter.vue'
-import StatsBar from './StatsBar.vue'
+import Logo from './icons/logo.svg?skipsvgo'
+// Must come after the theme so the brand colors win
 import './custom.css'
 
-export default {
-	extends: DefaultTheme,
-	Layout() {
-		return h(DefaultTheme.Layout, null, {
-			'nav-bar-content-after': () => h(DonateButton),
-			'home-hero-info-before': () => h(HeroLogo),
-			'home-features-before': () => h(StatsBar),
-			'home-features-after': () => h(Showcase),
-			'layout-bottom': () => h(SiteFooter),
-		})
-	},
-}
+export default createTheme({
+	messages: messagesFromGlob(
+		import.meta.glob('../../src/locales/*.json', { eager: true, import: 'default' }),
+	),
+	logo: Logo,
+	stats: browserStoreStats({
+		chrome: 'ajmkilipadfpaefpcjfgnkejalmhdlcj',
+		firefox: 'modrinth-extras',
+		edge: 'jkfgnimibfpoohbmaibjdjdmfnjmbjcj',
+	}),
+	showcase: [
+		{ key: 'popup', image: '/screenshots/extension.png' },
+		{ key: 'cardActions', image: '/screenshots/project-card-actions.png' },
+		{ key: 'galleryBackground', image: '/screenshots/gallery-background.png' },
+		{ key: 'notifications', image: '/screenshots/notifications.png' },
+		{ key: 'dependencyExplorer', image: '/screenshots/dependency-explorer.png' },
+		{ key: 'quickSearch', image: '/screenshots/quicksearch.png' },
+		{ key: 'sparkline', image: '/screenshots/sparkline.png' },
+		{ key: 'sidebar', image: '/screenshots/sidebar.png' },
+	],
+	footerLinks: [{ key: 'footer.privacy', link: '/privacy' }],
+})

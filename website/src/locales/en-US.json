@@ -1,0 +1,49 @@
+{
+	"meta": {
+		"summary": "A browser extension that enhances Modrinth on the website and beyond.",
+		"feature": {
+			"popup": {
+				"title": "Every feature, one click away",
+				"description": "Every feature can be individually toggled from the extension popup, so you can build the exact Modrinth experience you want."
+			},
+			"cardActions": {
+				"title": "Act without leaving the list",
+				"description": "Download, follow, save, and copy links for projects directly from their cards, no need to open each page."
+			},
+			"galleryBackground": {
+				"title": "A page that matches the project",
+				"description": "Display a project's featured gallery image as a full banner background, so shaders and resource packs look the part."
+			},
+			"notifications": {
+				"title": "Notifications, right in the header",
+				"description": "View, manage, and clear unread notifications without leaving the page you're on, with optional browser notifications and an unread badge on the extension icon."
+			},
+			"dependencyExplorer": {
+				"title": "Explore the full dependency tree",
+				"description": "An interactive graph lets you dig through a project's required, optional, and embedded dependencies, as deep as you want to go."
+			},
+			"quickSearch": {
+				"title": "Find anything in seconds",
+				"description": "Press Ctrl+K or / to open a command palette style search, with faceted tags for loaders, versions, categories, and types built right into your query."
+			},
+			"sparkline": {
+				"title": "See how active a project really is",
+				"description": "A release activity sparkline on every project page shows update frequency at a glance, before you even scroll down."
+			},
+			"sidebar": {
+				"title": "The full picture, right in the sidebar",
+				"description": "Repository stars, issues, and pull requests. Discord member counts. Every modpack a mod is featured in. All shown right in the sidebar."
+			}
+		}
+	},
+	"nav": {
+		"translate": "Translate"
+	},
+	"stats": {
+		"users": "{browser} Users"
+	},
+	"footer": {
+		"notAffiliated": "Not affiliated with Modrinth",
+		"privacy": "Privacy"
+	}
+}

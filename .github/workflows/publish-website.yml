@@ -21,6 +21,9 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
+      # Only the website theme, the modrinth submodule isn't needed here
+      - run: git submodule update --init --depth 1 website/.vitepress/shared
+
       - id: version
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

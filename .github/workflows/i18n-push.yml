@@ -6,6 +6,7 @@ on:
     paths:
       - '.github/workflows/i18n-push.yml'
       - 'src/locales/en-US/**'
+      - 'website/src/locales/en-US.json'
       - 'crowdin.yml'
   workflow_dispatch:
 
