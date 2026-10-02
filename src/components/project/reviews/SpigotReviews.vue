@@ -118,14 +118,9 @@
 						>
 							{{ authorName(review) }}
 						</a>
-						<div class="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-base text-secondary">
-							<span :title="formatDate(review.createdAt)">
-								{{ formatMessage(messages.posted, { time: formatRelativeTime(review.createdAt) }) }}
-							</span>
-							<span v-if="review.version">
-								· {{ formatMessage(messages.version, { version: review.version }) }}
-							</span>
-						</div>
+						<span class="text-base text-secondary" :title="formatDate(review.createdAt)">
+							{{ formatMessage(messages.posted, { time: formatRelativeTime(review.createdAt) }) }}
+						</span>
 					</div>
 					<div class="flex shrink-0 items-center gap-1.5">
 						<ReviewStars :rating="review.rating" />
@@ -137,6 +132,19 @@
 
 				<!-- eslint-disable vue/no-v-html -->
 				<div class="markdown-body break-words text-primary" v-html="renderReview(review.message)" />
+
+				<PageHeaderMetadata v-if="review.version">
+					<PageHeaderMetadataItem :icon="VersionIcon">
+						<a
+							:href="`${page.resourceUrl}history`"
+							target="_blank"
+							rel="noopener"
+							class="no-click-animation hover:underline"
+						>
+							{{ formatMessage(messages.version, { version: review.version }) }}
+						</a>
+					</PageHeaderMetadataItem>
+				</PageHeaderMetadata>
 
 				<div
 					v-if="review.response"
@@ -164,12 +172,14 @@
 </template>
 
 <script setup lang="ts">
-import { ExternalIcon, LoaderCircleIcon, TriangleAlertIcon } from '@modrinth/assets'
+import { ExternalIcon, LoaderCircleIcon, TriangleAlertIcon, VersionIcon } from '@modrinth/assets'
 import {
 	ButtonLink,
 	Combobox,
 	defineMessages,
 	IntlFormatted,
+	PageHeaderMetadata,
+	PageHeaderMetadataItem,
 	Pagination,
 	useRelativeTime,
 	useVIntl,
