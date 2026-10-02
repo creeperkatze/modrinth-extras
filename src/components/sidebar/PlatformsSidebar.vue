@@ -71,9 +71,9 @@ import { defineMessages, useVIntl } from '@modrinth/ui'
 import { onMounted, ref } from 'vue'
 import { browser } from 'wxt/browser'
 
-import CurseForgeIcon from '../../assets/platforms/curseforge.svg?component'
-import HangarIcon from '../../assets/platforms/hangar.svg?component'
-import SpigotIcon from '../../assets/platforms/spigot.svg?component'
+import CurseForgeIcon from '../../assets/icons/platforms/curseforge.svg?component'
+import HangarIcon from '../../assets/icons/platforms/hangar.svg?component'
+import SpigotIcon from '../../assets/icons/platforms/spigot.svg?component'
 import { modrinthClient } from '../../utils/api'
 import { type Platform, PLATFORM_LABELS, type PlatformMatch } from '../../utils/platforms'
 

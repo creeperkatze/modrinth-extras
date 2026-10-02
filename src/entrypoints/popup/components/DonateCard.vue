@@ -39,7 +39,7 @@ import { Card, defineMessages, IconButton, useVIntl } from '@modrinth/ui'
 import { storage } from '@wxt-dev/storage'
 import { onMounted, ref } from 'vue'
 
-import KofiIcon from '../../../assets/kofi.svg?component'
+import KofiIcon from '../../../assets/icons/kofi.svg?component'
 
 const { formatMessage } = useVIntl()
 

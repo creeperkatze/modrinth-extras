@@ -131,9 +131,6 @@
   "moddexReviews.rateLimited": {
     "defaultMessage": "ModDex rate limit reached, try again in a minute"
   },
-  "moddexReviews.rating": {
-    "defaultMessage": "Rated {rating} out of 5"
-  },
   "moddexReviews.ratingsCount": {
     "defaultMessage": "{count, plural, one {# rating} other {# ratings}}"
   },
@@ -161,14 +158,11 @@
   "moddexReviews.sortUnhelpful": {
     "defaultMessage": "Most unhelpful"
   },
-  "moddexReviews.tab": {
-    "defaultMessage": "Reviews"
-  },
   "moddexReviews.title": {
     "defaultMessage": "Community reviews"
   },
   "moddexReviews.tokenHelp": {
-    "defaultMessage": "ModDex only serves reviews to signed-in API users. Create a free token on ModDex, then paste it into the Modrinth Extras popup under \"ModDex reviews\"."
+    "defaultMessage": "ModDex only serves reviews to signed-in API users. Create a free token on ModDex, then paste it into the Modrinth Extras popup under \"Reviews\"."
   },
   "moddexReviews.writeReview": {
     "defaultMessage": "Write a review"
@@ -263,6 +257,12 @@
   "projectCardActions.unfollow": {
     "defaultMessage": "Unfollow"
   },
+  "projectReviews.source": {
+    "defaultMessage": "Review source"
+  },
+  "projectReviews.tab": {
+    "defaultMessage": "Reviews"
+  },
   "quickSearch.clearRecent": {
     "defaultMessage": "Clear recent"
   },
@@ -295,6 +295,63 @@
   },
   "repositorySidebar.title": {
     "defaultMessage": "Repository"
+  },
+  "reviewStars.rating": {
+    "defaultMessage": "Rated {rating} out of 5"
+  },
+  "spigotReviews.authorResponse": {
+    "defaultMessage": "Author response:"
+  },
+  "spigotReviews.credit": {
+    "defaultMessage": "Reviews provided by <link>SpigotMC</link>, written by its community."
+  },
+  "spigotReviews.empty": {
+    "defaultMessage": "No reviews yet."
+  },
+  "spigotReviews.loadError": {
+    "defaultMessage": "Failed to load reviews from SpigotMC"
+  },
+  "spigotReviews.loading": {
+    "defaultMessage": "Loading reviews…"
+  },
+  "spigotReviews.notFound": {
+    "defaultMessage": "This plugin could not be found on SpigotMC."
+  },
+  "spigotReviews.posted": {
+    "defaultMessage": "Posted {time}"
+  },
+  "spigotReviews.ratingsCount": {
+    "defaultMessage": "{count, plural, one {# rating} other {# ratings}}"
+  },
+  "spigotReviews.sortBy": {
+    "defaultMessage": "Sort by:"
+  },
+  "spigotReviews.sortLabel": {
+    "defaultMessage": "Sort reviews"
+  },
+  "spigotReviews.sortLowestRating": {
+    "defaultMessage": "Lowest rated"
+  },
+  "spigotReviews.sortNewest": {
+    "defaultMessage": "Newest"
+  },
+  "spigotReviews.sortOldest": {
+    "defaultMessage": "Oldest"
+  },
+  "spigotReviews.sortRating": {
+    "defaultMessage": "Highest rated"
+  },
+  "spigotReviews.title": {
+    "defaultMessage": "Community reviews"
+  },
+  "spigotReviews.unknownAuthor": {
+    "defaultMessage": "SpigotMC member"
+  },
+  "spigotReviews.version": {
+    "defaultMessage": "Version {version}"
+  },
+  "spigotReviews.writeReview": {
+    "defaultMessage": "Write a review"
   },
   "toolsSidebar.copied": {
     "defaultMessage": "Copied!"

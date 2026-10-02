@@ -8,9 +8,9 @@ import NotificationsIndicator from '../components/header/NotificationsIndicator.
 import QuickSearch from '../components/header/QuickSearch.vue'
 import ActivitySparkline from '../components/project/ActivitySparkline.vue'
 import GalleryBackground from '../components/project/GalleryBackground.vue'
-import ModdexReviews from '../components/project/ModdexReviews.vue'
 import MonetizationBadge from '../components/project/MonetizationBadge.vue'
 import ProjectCardActions from '../components/project/ProjectCardActions.vue'
+import ProjectReviews from '../components/project/reviews/ProjectReviews.vue'
 import TranslateDescription from '../components/project/TranslateDescription.vue'
 import DependencySidebar from '../components/sidebar/dependencies/DependencySidebar.vue'
 import DiscordSidebar from '../components/sidebar/DiscordSidebar.vue'
@@ -501,10 +501,11 @@ export default defineContentScript({
 			},
 		})
 
-		const moddexReviews = createInjection({
-			id: 'modrinth-extras-moddex-reviews',
-			isEnabled: () => settings.moddexReviews.enabled,
-			settingsKeys: ['moddexReviews'],
+		const projectReviews = createInjection({
+			id: 'modrinth-extras-project-reviews',
+			isEnabled: () =>
+				settings.reviews.enabled && (settings.reviews.moddex || settings.reviews.spigot),
+			settingsKeys: ['reviews'],
 			persistent: false,
 			projectScoped: true,
 			attach(container) {
@@ -518,8 +519,14 @@ export default defineContentScript({
 			createApp() {
 				const [, projectType, slug] = window.location.pathname.match(PROJECT_TYPE_PATTERN) ?? []
 				const app = createApp(
-					h(ModdexReviews, { projectSlug: slug ?? '', isModpack: projectType === 'modpack' }),
+					h(ProjectReviews, {
+						projectSlug: slug ?? '',
+						isModpack: projectType === 'modpack',
+						moddex: settings.reviews.moddex,
+						spigot: settings.reviews.spigot,
+					}),
 				)
+				app.use(FloatingVue)
 				installI18n(app)
 				return app
 			},
@@ -696,7 +703,7 @@ export default defineContentScript({
 			galleryBackground,
 			monetizationBadge,
 			translateDescription,
-			moddexReviews,
+			projectReviews,
 			repositorySidebar,
 			discordSidebar,
 			errorNotice,

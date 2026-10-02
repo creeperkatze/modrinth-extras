@@ -13,6 +13,7 @@ import { fetchDiscordInvite } from '../background/external/discord'
 import { fetchModdexReviews } from '../background/external/moddex'
 import { findPlatformProjects, findPlatformUsers } from '../background/external/platforms'
 import { fetchRepositoryStats } from '../background/external/repository'
+import { fetchSpigotReviews, type SpigotReviewSort } from '../background/external/spigot'
 import type { Notification } from '../utils/notifications'
 import type { RepositoryPlatform } from '../utils/repository-links'
 import { analytics, initTelemetry } from '../utils/telemetry'
@@ -106,6 +107,19 @@ export default defineBackground(() => {
 				.then((result) => sendResponse(result))
 				.catch((err) => {
 					console.error('[Modrinth Extras] Failed to fetch ModDex reviews:', err)
+					sendResponse({ ok: false, error: 'failed' })
+				})
+			return true
+		}
+		if (message.type === 'spigot-reviews') {
+			fetchSpigotReviews(
+				message.title as string,
+				message.sort as SpigotReviewSort,
+				message.page as number,
+			)
+				.then((result) => sendResponse(result))
+				.catch((err) => {
+					console.error('[Modrinth Extras] Failed to fetch SpigotMC reviews:', err)
 					sendResponse({ ok: false, error: 'failed' })
 				})
 			return true

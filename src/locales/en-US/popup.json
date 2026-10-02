@@ -74,18 +74,6 @@
   "feature.githubSidebar.title": {
     "defaultMessage": "Repository sidebar"
   },
-  "feature.moddexReviews.apiToken": {
-    "defaultMessage": "API token"
-  },
-  "feature.moddexReviews.description": {
-    "defaultMessage": "Adds a Reviews tab to projects with community reviews from ModDex."
-  },
-  "feature.moddexReviews.getToken": {
-    "defaultMessage": "<link>Get an API token</link>"
-  },
-  "feature.moddexReviews.title": {
-    "defaultMessage": "ModDex reviews"
-  },
   "feature.modpacksSidebar.description": {
     "defaultMessage": "Show all the modpacks the mod is featured in."
   },
@@ -148,6 +136,24 @@
   },
   "feature.quickSearch.title": {
     "defaultMessage": "Quick search"
+  },
+  "feature.reviews.description": {
+    "defaultMessage": "Adds a Reviews tab to projects with community reviews from ModDex and SpigotMC."
+  },
+  "feature.reviews.getModdexToken": {
+    "defaultMessage": "<link>Get a ModDex API token</link>"
+  },
+  "feature.reviews.moddex": {
+    "defaultMessage": "ModDex reviews"
+  },
+  "feature.reviews.moddexApiToken": {
+    "defaultMessage": "ModDex API token"
+  },
+  "feature.reviews.spigot": {
+    "defaultMessage": "SpigotMC reviews"
+  },
+  "feature.reviews.title": {
+    "defaultMessage": "Reviews"
   },
   "feature.searchBackground.description": {
     "defaultMessage": "Show a banner background on the discover pages."

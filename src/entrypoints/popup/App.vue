@@ -120,9 +120,9 @@
 					:disabled-tooltip="f.disabledTooltip"
 					@update:model-value="updateEnabled(f.key, $event)"
 				>
-					<template v-if="f.key === 'moddexReviews'" #description>
+					<template v-if="f.key === 'reviews'" #description>
 						{{ f.description }}
-						<IntlFormatted :message-id="messages['feature.moddexReviews.getToken']">
+						<IntlFormatted :message-id="messages['feature.reviews.getModdexToken']">
 							<template #link="{ children }">
 								<a
 									href="https://moddex.gg/settings?tab=tokens"
@@ -305,7 +305,7 @@ import { storage } from '@wxt-dev/storage'
 import { type Component, computed, onMounted, reactive, ref, watch } from 'vue'
 import { browser } from 'wxt/browser'
 
-import KofiIcon from '../../assets/kofi.svg?component'
+import KofiIcon from '../../assets/icons/kofi.svg?component'
 import CompactCombobox from '../../components/ui/CompactCombobox.vue'
 import Logo from '../../public/logo.svg?component'
 import { applyAccentColor } from '../../utils/accent-color'
@@ -531,21 +531,30 @@ const messages = defineMessages({
 		id: 'feature.translateDescription.disabledTooltip',
 		defaultMessage: 'Requires APIs not supported in this browser',
 	},
-	'feature.moddexReviews.title': {
-		id: 'feature.moddexReviews.title',
+	'feature.reviews.title': {
+		id: 'feature.reviews.title',
+		defaultMessage: 'Reviews',
+	},
+	'feature.reviews.description': {
+		id: 'feature.reviews.description',
+		defaultMessage:
+			'Adds a Reviews tab to projects with community reviews from ModDex and SpigotMC.',
+	},
+	'feature.reviews.moddex': {
+		id: 'feature.reviews.moddex',
 		defaultMessage: 'ModDex reviews',
 	},
-	'feature.moddexReviews.description': {
-		id: 'feature.moddexReviews.description',
-		defaultMessage: 'Adds a Reviews tab to projects with community reviews from ModDex.',
+	'feature.reviews.moddexApiToken': {
+		id: 'feature.reviews.moddexApiToken',
+		defaultMessage: 'ModDex API token',
 	},
-	'feature.moddexReviews.apiToken': {
-		id: 'feature.moddexReviews.apiToken',
-		defaultMessage: 'API token',
+	'feature.reviews.getModdexToken': {
+		id: 'feature.reviews.getModdexToken',
+		defaultMessage: '<link>Get a ModDex API token</link>',
 	},
-	'feature.moddexReviews.getToken': {
-		id: 'feature.moddexReviews.getToken',
-		defaultMessage: '<link>Get an API token</link>',
+	'feature.reviews.spigot': {
+		id: 'feature.reviews.spigot',
+		defaultMessage: 'SpigotMC reviews (plugins only)',
 	},
 	'feature.notificationBadge.title': {
 		id: 'feature.notificationBadge.title',
@@ -822,15 +831,25 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 		disabledTooltip: formatMessage(messages['feature.translateDescription.disabledTooltip']),
 	},
 	{
-		key: 'moddexReviews',
+		key: 'reviews',
 		icon: StarIcon,
-		title: formatMessage(messages['feature.moddexReviews.title']),
-		description: formatMessage(messages['feature.moddexReviews.description']),
+		title: formatMessage(messages['feature.reviews.title']),
+		description: formatMessage(messages['feature.reviews.description']),
 		options: [
 			{
-				key: 'apiToken',
+				key: 'moddex',
+				type: 'toggle',
+				label: formatMessage(messages['feature.reviews.moddex']),
+			},
+			{
+				key: 'moddexApiToken',
 				type: 'text',
-				label: formatMessage(messages['feature.moddexReviews.apiToken']),
+				label: formatMessage(messages['feature.reviews.moddexApiToken']),
+			},
+			{
+				key: 'spigot',
+				type: 'toggle',
+				label: formatMessage(messages['feature.reviews.spigot']),
 			},
 		],
 	},
