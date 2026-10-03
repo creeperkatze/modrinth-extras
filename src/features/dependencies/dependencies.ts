@@ -82,9 +82,10 @@ export async function fetchDependencyGraphLayer(dependencies: RawDep[]): Promise
 			versionIdsByProjectId.set(dependency.project_id, dependency.version_id)
 		}
 	}
+	// project.versions is ordered oldest first, so unpinned dependencies use the last one.
 	const versions = await fetchVersions(
 		projects.flatMap((project) => {
-			const versionId = versionIdsByProjectId.get(project.id) ?? project.versions[0]
+			const versionId = versionIdsByProjectId.get(project.id) ?? project.versions.at(-1)
 			return versionId ? [versionId] : []
 		}),
 	)
@@ -102,9 +103,21 @@ export async function fetchDependencyGraphLayer(dependencies: RawDep[]): Promise
 }
 
 async function fetchProjects(ids: string[]): Promise<Labrinth.Projects.v3.Project[]> {
+	const uniqueIds = [...new Set(ids)]
 	const projects: Labrinth.Projects.v3.Project[] = []
-	for (const batch of chunkIdsForQuery(ids)) {
+	for (const batch of chunkIdsForQuery(uniqueIds)) {
 		projects.push(...(await modrinthClient.labrinth.projects_v3.getMultiple(batch)))
+	}
+
+	// The bulk route silently leaves out some valid projects, like unlisted ones.
+	const found = new Set(projects.map((project) => project.id))
+	const fallbacks = await Promise.allSettled(
+		uniqueIds
+			.filter((id) => !found.has(id))
+			.map((id) => modrinthClient.labrinth.projects_v3.get(id)),
+	)
+	for (const result of fallbacks) {
+		if (result.status === 'fulfilled') projects.push(result.value)
 	}
 	return projects
 }
@@ -117,32 +130,6 @@ async function fetchVersions(ids: string[]): Promise<Labrinth.Versions.v3.Versio
 	return versions
 }
 
-// Uses `/project/{id}/dependencies` instead of the graph explorer's bulk `getMultiple` lookup, which silently omits some valid (e.g. unlisted) dependency projects.
-async function fetchDirectDependencies(
-	slugOrId: string,
-	versionIdOrNumber?: string,
-): Promise<EnrichedDep[]> {
-	try {
-		const [version, depsData] = await Promise.all([
-			versionIdOrNumber
-				? modrinthClient.labrinth.versions_v3.getVersionFromIdOrNumber(slugOrId, versionIdOrNumber)
-				: modrinthClient.labrinth.versions_v3
-						.getProjectVersions(slugOrId, { limit: 1, include_changelog: false, apiVersion: 3 })
-						.then((versions) => versions[0]),
-			modrinthClient.labrinth.projects_v3.getDependencies(slugOrId),
-		])
-
-		if (!version) return []
-		return buildEnrichedDeps(
-			normalizeDeps(version.dependencies ?? []),
-			indexProjectsById(depsData.projects),
-		)
-	} catch (err) {
-		console.error('[Modrinth Extras] Failed to fetch dependencies:', err)
-		return []
-	}
-}
-
 export interface DependencyTree {
 	roots: EnrichedDep[]
 	childrenByProjectId: Map<string, EnrichedDep[]>
@@ -151,38 +138,42 @@ export interface DependencyTree {
 // Caps how many levels deep the tree is fetched, so it can't balloon into unbounded requests.
 const MAX_DEPTH = 4
 
+// Each layer costs one batched projects and one batched versions lookup, however wide it is.
 export async function fetchDependencyTree(
 	projectSlug: string,
 	versionNumber?: string,
 ): Promise<DependencyTree> {
-	const roots = await fetchDirectDependencies(projectSlug, versionNumber)
+	const { dependencies } = await fetchDependencyGraphRoot(projectSlug, versionNumber)
+	const rootDeps = dependencies.filter(isGraphDependency)
 
-	const childrenByProjectId = new Map<string, EnrichedDep[]>()
-	const visited = new Set<string>()
-	let frontier = roots
-	let depth = 0
+	const projectsById = new Map<string, Labrinth.Projects.v3.Project>()
+	const rawChildrenByProjectId = new Map<string, RawDep[]>()
+	let frontier = rootDeps
 
-	while (frontier.length > 0 && depth < MAX_DEPTH) {
-		const toExpand = frontier.filter((dep) => !visited.has(dep.project_id))
-		for (const dep of toExpand) visited.add(dep.project_id)
-
-		const layers = await Promise.all(
-			toExpand.map(async (dep) => ({
-				projectId: dep.project_id,
-				children: await fetchDirectDependencies(
-					dep.project?.slug ?? dep.project_id,
-					dep.version_id,
-				),
-			})),
-		)
+	for (let depth = 0; depth < MAX_DEPTH && frontier.length > 0; depth++) {
+		const toExpand = frontier.filter((dep) => !rawChildrenByProjectId.has(dep.project_id))
+		const { projects, dependenciesByProjectId } = await fetchDependencyGraphLayer(toExpand)
 
 		frontier = []
-		for (const { projectId, children } of layers) {
-			childrenByProjectId.set(projectId, children)
+		for (const project of projects) {
+			projectsById.set(project.id, project)
+			const children = (dependenciesByProjectId.get(project.id) ?? []).filter(isGraphDependency)
+			rawChildrenByProjectId.set(project.id, children)
 			frontier.push(...children)
 		}
-		depth++
 	}
 
-	return { roots, childrenByProjectId }
+	// The deepest layer isn't expanded, but its projects are still shown.
+	const unknownIds = frontier.map((dep) => dep.project_id).filter((id) => !projectsById.has(id))
+	for (const project of await fetchProjects(unknownIds)) projectsById.set(project.id, project)
+
+	return {
+		roots: buildEnrichedDeps(rootDeps, projectsById),
+		childrenByProjectId: new Map(
+			[...rawChildrenByProjectId].map(([id, children]) => [
+				id,
+				buildEnrichedDeps(children, projectsById),
+			]),
+		),
+	}
 }

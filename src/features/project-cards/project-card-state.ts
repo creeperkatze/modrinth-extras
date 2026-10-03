@@ -81,35 +81,22 @@ async function flush() {
 			}
 		}
 
-		const missingVersionIds = [
-			...new Set(
-				requests
-					.flatMap((request) => projects.get(request.projectSlug)?.versions ?? [])
-					.filter((id) => !versions.has(id)),
-			),
-		]
-
-		if (missingVersionIds.length > 0) {
-			const fetchedVersions = (
-				await Promise.all(
-					chunkIdsForQuery(missingVersionIds).map((ids) =>
-						modrinthClient.labrinth.versions_v3.getVersions(ids),
-					),
-				)
-			).flat()
-			for (const version of fetchedVersions) versions.set(version.id, version)
-		}
-
-		for (const request of requests) {
-			const project = projects.get(request.projectSlug)
-			if (!project) throw new Error(`Project not found: ${request.projectSlug}`)
-			const version = findVersion(request)
-			request.resolve({
-				projectId: project.id,
-				versionId: version?.id ?? null,
-				file: version ? getPrimaryFile(version) : null,
-			})
-		}
+		await Promise.all(
+			requests.map(async (request) => {
+				try {
+					const project = projects.get(request.projectSlug)
+					if (!project) throw new Error(`Project not found: ${request.projectSlug}`)
+					const version = await findVersion(project, request)
+					request.resolve({
+						projectId: project.id,
+						versionId: version?.id ?? null,
+						file: version ? getPrimaryFile(version) : null,
+					})
+				} catch (err) {
+					request.reject(err)
+				}
+			}),
+		)
 	} catch (err) {
 		for (const request of requests) request.reject(err)
 	} finally {
@@ -118,27 +105,31 @@ async function flush() {
 	}
 }
 
-function findVersion(request: DownloadRequest): Labrinth.Versions.v3.Version | null {
-	const project = projects.get(request.projectSlug)
-	if (!project) return null
-
+// The server filters the versions, so only matching ones are downloaded instead of the full history.
+async function findVersion(
+	project: Labrinth.Projects.v3.Project,
+	request: DownloadRequest,
+): Promise<Labrinth.Versions.v3.Version | null> {
 	const preferredLoader = getPreferredLoader(request.projectType, request.settings)
-	const matchingVersions = project.versions
-		.map((id) => versions.get(id))
-		.filter((version): version is Labrinth.Versions.v3.Version => {
-			if (!version) return false
-			if (!matchesPreferredLoader(version, request.projectType, preferredLoader)) return false
-			if (
-				request.settings.gameVersion &&
-				!version.game_versions.includes(request.settings.gameVersion)
-			) {
-				return false
-			}
-			return true
-		})
-		.sort((a, b) => Date.parse(b.date_published) - Date.parse(a.date_published))
+	// Modpack versions list their pack loaders separately, so those are matched here instead.
+	const checkLoaderLocally = !!preferredLoader && request.projectType === 'modpack'
 
-	return matchingVersions[0] ?? null
+	const candidates = await modrinthClient.labrinth.versions_v3.getProjectVersions(project.id, {
+		loaders: preferredLoader && !checkLoaderLocally ? [preferredLoader] : undefined,
+		game_versions: request.settings.gameVersion ? [request.settings.gameVersion] : undefined,
+		include_changelog: false,
+		limit: checkLoaderLocally ? undefined : 1,
+		apiVersion: 3,
+	})
+
+	const version =
+		candidates
+			.filter((candidate) =>
+				matchesPreferredLoader(candidate, request.projectType, preferredLoader),
+			)
+			.sort((a, b) => Date.parse(b.date_published) - Date.parse(a.date_published))[0] ?? null
+	if (version) versions.set(version.id, version)
+	return version
 }
 
 function getPrimaryFile(

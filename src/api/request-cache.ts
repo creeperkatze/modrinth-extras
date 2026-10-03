@@ -63,8 +63,10 @@ export class RequestCacheFeature extends AbstractFeature {
 		}
 		const value = this.track(next())
 		this.cache.set(key, { expires: now + ttlFor(context), value })
-		value.catch(() => {
-			if (this.cache.get(key)?.value === value) this.cache.delete(key)
+		// A 404 won't change on retry, so only other failures are dropped from the cache.
+		value.catch((err) => {
+			const notFound = err instanceof ModrinthApiError && err.statusCode === 404
+			if (!notFound && this.cache.get(key)?.value === value) this.cache.delete(key)
 		})
 		return structuredClone(await value)
 	}
