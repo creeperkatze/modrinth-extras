@@ -13,7 +13,7 @@ import { LOCALES } from './locales'
 
 const LOCALE_CODES = new Set(LOCALES.map((l) => l.code))
 
-const localeModules = import.meta.glob<{ default: CrowdinMessages }>('../locales/*/*.json', {
+const localeModules = import.meta.glob<{ default: CrowdinMessages }>('../../locales/*/*.json', {
 	eager: true,
 })
 
