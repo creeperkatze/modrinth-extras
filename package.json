@@ -35,7 +35,7 @@
         "d3-transition": "^3.0.1",
         "d3-zoom": "^3.0.0",
         "floating-vue": "^5.4.0",
-        "hangarmc-js": "^1.0.5",
+        "hangarmc-js": "^1.1.0",
         "moddex-js": "^1.0.1",
         "spiget-js": "^1.0.4",
         "vue": "^3.5.43",
