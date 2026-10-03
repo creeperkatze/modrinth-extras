@@ -1,6 +1,8 @@
 import { type AuthConfig, AuthFeature, GenericModrinthClient } from '@modrinth/api-client'
 import { browser } from 'wxt/browser'
 
+import { RequestCacheFeature } from './request-cache'
+
 export const USER_AGENT = `creeperkatze/modrinth-extras/${browser.runtime.getManifest().version} (contact@creeperkatze.dev)`
 
 // The platform clients call the fetch they are given unbound, which a service worker rejects.
@@ -16,13 +18,18 @@ export function getAuthToken(): string {
 	return cachedToken
 }
 
+const requestCache = new RequestCacheFeature()
+
+// Cached responses belong to whoever was signed in, so they go with the token.
 export function invalidateTokenCache() {
 	cachedToken = null
+	requestCache.clear()
 }
 
 export const modrinthClient = new GenericModrinthClient({
 	userAgent: USER_AGENT,
 	features: [
+		requestCache,
 		new AuthFeature({
 			token: async () =>
 				typeof document === 'undefined' ? getBackgroundAuthToken() : getAuthToken(),

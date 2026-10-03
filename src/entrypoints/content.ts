@@ -24,7 +24,7 @@ import { applyAccentColor } from '../utils/accent-color'
 import { initFollowState } from '../utils/follow-state'
 import { detectBrowserLocale, i18n, installI18n, loadSavedLocale } from '../utils/i18n'
 import { navigate } from '../utils/page-router'
-import { DEFAULTS, type ExtensionSettings, getSettings } from '../utils/settings'
+import { DEFAULTS, type ExtensionSettings, getSettings, withoutSecrets } from '../utils/settings'
 import { isTranslationSupported } from '../utils/translate-description'
 
 // Gate injections until Nuxt hydration is complete. The router-bridge
@@ -729,7 +729,7 @@ export default defineContentScript({
 		getSettings().then((s) => {
 			if (ctx.isInvalid) return
 			settings = s
-			console.log('[Modrinth Extras] Settings loaded:', JSON.stringify(s))
+			console.log('[Modrinth Extras] Settings loaded:', JSON.stringify(withoutSecrets(s)))
 			applyAccentColor(settings)
 			for (const inj of injections) {
 				if (inj.config.settingsKeys.length > 0) inj.unmount()

@@ -3,7 +3,7 @@ import { posthog } from '@wxt-dev/analytics/providers/posthog'
 import { browser } from 'wxt/browser'
 
 import { detectBrowserLocale } from './i18n'
-import { DEFAULTS, type ExtensionSettings, getSettings, TELEMETRY_EXCLUDED } from './settings'
+import { type ExtensionSettings, getSettings, withoutSecrets } from './settings'
 
 export const analytics = createAnalytics({
 	providers: [
@@ -14,15 +14,11 @@ export const analytics = createAnalytics({
 	],
 })
 
-// Only known settings are sent, since storage can still hold keys from older versions.
 function flattenSettings(settings: ExtensionSettings): Record<string, string> {
 	const flat: Record<string, string> = {}
-	for (const key of Object.keys(DEFAULTS) as (keyof ExtensionSettings)[]) {
-		const excluded: string[] = TELEMETRY_EXCLUDED[key] ?? []
-		const values = settings[key] as unknown as Record<string, unknown>
-		for (const subKey of Object.keys(DEFAULTS[key])) {
-			if (excluded.includes(subKey)) continue
-			flat[`${key}_${subKey}`] = String(values[subKey])
+	for (const [key, values] of Object.entries(withoutSecrets(settings))) {
+		for (const [subKey, value] of Object.entries(values)) {
+			flat[`${key}_${subKey}`] = String(value)
 		}
 	}
 	return flat
