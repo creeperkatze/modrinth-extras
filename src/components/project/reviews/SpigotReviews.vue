@@ -200,9 +200,10 @@ import type {
 import { modrinthClient } from '../../../utils/api'
 import { i18n } from '../../../utils/i18n'
 import { navigate } from '../../../utils/page-router'
+import type { MatchableProject } from '../../../utils/platforms'
 import ReviewStars from './ReviewStars.vue'
 
-const props = defineProps<{ projectSlug: string; projectTitle: string }>()
+const props = defineProps<{ project: MatchableProject }>()
 
 const { formatMessage } = useVIntl()
 const formatRelativeTime = useRelativeTime()
@@ -292,7 +293,7 @@ async function load(pageNumber: number) {
 	try {
 		const result = (await browser.runtime.sendMessage({
 			type: 'spigot-reviews',
-			title: props.projectTitle,
+			project: props.project,
 			sort: SORTS[sort.value],
 			page: pageNumber,
 		})) as SpigotReviewsResult | undefined
@@ -326,7 +327,7 @@ watch(sort, () => void load(1))
 async function loadVersionPaths() {
 	try {
 		const versions = await modrinthClient.labrinth.versions_v3.getProjectVersions(
-			props.projectSlug,
+			props.project.slug,
 			{ include_changelog: false, apiVersion: 3 },
 		)
 		const projectPath = window.location.pathname.match(/^\/[^/]+\/[^/]+/)?.[0]

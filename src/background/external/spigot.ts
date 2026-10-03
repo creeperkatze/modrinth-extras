@@ -1,7 +1,20 @@
-import SpigetClient, { type Author, type Icon, type Resource, type ResourceReview } from 'spiget-js'
+import SpigetClient, {
+	type Author,
+	type Icon,
+	type Resource,
+	type ResourceReview,
+	SpigetError,
+	type SpigetPaginatedResponse,
+} from 'spiget-js'
 
 import { USER_AGENT } from '../../utils/api'
-import { namesMatch, type PlatformMatch } from '../../utils/platforms'
+import {
+	type MatchableProject,
+	matchProject,
+	nameMatch,
+	namesMatch,
+	type PlatformMatch,
+} from '../../utils/platforms'
 
 // Spiget's CORS rules reject a custom User-Agent, so it goes in the header Spiget allows instead.
 const spigetFetch: typeof globalThis.fetch = (input, init) => {
@@ -102,21 +115,47 @@ function toAuthorMatch(author: Author): PlatformMatch {
 	}
 }
 
-function findSpigotResource(title: string): Promise<Resource | null> {
-	return cached(resourceCache, title, async () => {
-		// Spiget resources have no slug, so the title is the only thing to match on.
-		const response = await client.resources.search(title, {
-			field: 'name',
-			size: SEARCH_SIZE,
-			sort: '-downloads',
-		})
-		return response.data?.find((candidate) => namesMatch(candidate.name, title)) ?? null
+// Spiget answers a search without results with a 404.
+async function searchResults<T>(search: Promise<SpigetPaginatedResponse<T>>): Promise<T[]> {
+	try {
+		return (await search).data ?? []
+	} catch (err) {
+		if (err instanceof SpigetError && err.status === 404) return []
+		throw err
+	}
+}
+
+function findSpigotResource(project: MatchableProject): Promise<Resource | null> {
+	return cached(resourceCache, project.slug, async () => {
+		const resources = await searchResults(
+			client.resources.search(project.name, {
+				field: 'name',
+				size: SEARCH_SIZE,
+				sort: '-downloads',
+			}),
+		)
+		// Spiget only returns author ids, so names are looked up just for results with a fitting name.
+		const candidates = await Promise.all(
+			resources
+				.filter((resource) => nameMatch(project, resource))
+				.map(async (resource) => ({
+					item: resource,
+					name: resource.name,
+					authors: [(await getAuthor(resource.author.id))?.name ?? ''],
+				})),
+		)
+		return matchProject(project, candidates)
 	})
 }
 
 // Deleted members can't be looked up anymore, so they resolve to null instead of failing the page.
 function getAuthor(id: number): Promise<Author | null> {
-	return cached(authorCache, id, () => client.authors.get(id).catch(() => null))
+	return cached(authorCache, id, () =>
+		client.authors.get(id).catch((err) => {
+			if (err instanceof SpigetError && err.status === 404) return null
+			throw err
+		}),
+	)
 }
 
 function decodeBase64(value: string): string {
@@ -137,24 +176,25 @@ function toReview(review: ResourceReview, author: Author | null): SpigotReview {
 	}
 }
 
-export async function findSpigotProject(title: string): Promise<PlatformMatch | null> {
-	const resource = await findSpigotResource(title)
+export async function findSpigotProject(project: MatchableProject): Promise<PlatformMatch | null> {
+	const resource = await findSpigotResource(project)
 	return resource ? toResourceMatch(resource) : null
 }
 
 export async function findSpigotUser(username: string): Promise<PlatformMatch | null> {
-	const response = await client.authors.search(username, { field: 'name', size: SEARCH_SIZE })
-
-	const author = response.data?.find((candidate) => namesMatch(candidate.name, username))
+	const authors = await searchResults(
+		client.authors.search(username, { field: 'name', size: SEARCH_SIZE }),
+	)
+	const author = authors.find((candidate) => namesMatch(candidate.name, username))
 	return author ? toAuthorMatch(author) : null
 }
 
 export async function fetchSpigotReviews(
-	title: string,
+	project: MatchableProject,
 	sort: SpigotReviewSort,
 	page: number,
 ): Promise<SpigotReviewsResult> {
-	const resource = await findSpigotResource(title)
+	const resource = await findSpigotResource(project)
 	if (!resource) return { ok: false, error: 'not-found' }
 
 	const response = await client.resources.getReviews(resource.id, {
@@ -163,7 +203,9 @@ export async function fetchSpigotReviews(
 		sort,
 	})
 	// Spiget only returns the reviewer's id, so names and avatars are looked up separately.
-	const authors = await Promise.all(response.data.map((review) => getAuthor(review.author.id)))
+	const authors = await Promise.all(
+		response.data.map((review) => getAuthor(review.author.id).catch(() => null)),
+	)
 
 	return {
 		ok: true,

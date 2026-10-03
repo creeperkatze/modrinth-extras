@@ -1,4 +1,4 @@
-import type { PlatformMatch } from '../../utils/platforms'
+import type { MatchableProject, PlatformMatch } from '../../utils/platforms'
 import { findCurseForgeProject, findCurseForgeUser } from './curseforge'
 import { findHangarProject, findHangarUser } from './hangar'
 import { findSpigotProject, findSpigotUser } from './spigot'
@@ -19,10 +19,10 @@ async function collect(
 	})
 }
 
-export function findPlatformProjects(title: string, slug: string): Promise<PlatformMatch[]> {
+export function findPlatformProjects(project: MatchableProject): Promise<PlatformMatch[]> {
 	return collect(
-		[findCurseForgeProject(title, slug), findHangarProject(title, slug), findSpigotProject(title)],
-		`project "${title}"`,
+		[findCurseForgeProject(project), findHangarProject(project), findSpigotProject(project)],
+		`project "${project.name}"`,
 	)
 }
 

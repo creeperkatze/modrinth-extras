@@ -1,7 +1,12 @@
 import CurseForgeClient, { GameId, type Mod, ModsSearchSortField } from 'curseforge-js'
 
 import { boundFetch, USER_AGENT } from '../../utils/api'
-import { namesMatch, pickBestMatch, type PlatformMatch } from '../../utils/platforms'
+import {
+	type MatchableProject,
+	matchProject,
+	namesMatch,
+	type PlatformMatch,
+} from '../../utils/platforms'
 
 // CurseForge's API needs a key that cannot ship in a public extension; api.curse.tools mirrors it keylessly.
 const client = new CurseForgeClient({
@@ -23,15 +28,14 @@ function toMatch(mod: Mod): PlatformMatch {
 }
 
 export async function findCurseForgeProject(
-	title: string,
-	slug: string,
+	project: MatchableProject,
 ): Promise<PlatformMatch | null> {
 	// The slug lookup only hits when both platforms use the same slug, so a title search backs it up.
 	const [bySlug, byTitle] = await Promise.allSettled([
-		client.mods.search({ gameId: GameId.Minecraft, slug }),
+		client.mods.search({ gameId: GameId.Minecraft, slug: project.slug }),
 		client.mods.search({
 			gameId: GameId.Minecraft,
-			searchFilter: title,
+			searchFilter: project.name,
 			pageSize: SEARCH_PAGE_SIZE,
 			sortField: ModsSearchSortField.Popularity,
 			sortOrder: 'desc',
@@ -41,16 +45,18 @@ export async function findCurseForgeProject(
 	// Either search alone is enough to match on, so only a double failure is worth reporting.
 	if (bySlug.status === 'rejected' && byTitle.status === 'rejected') throw byTitle.reason
 
-	const candidates = [
+	const mods = [
 		...(bySlug.status === 'fulfilled' ? (bySlug.value.data ?? []) : []),
 		...(byTitle.status === 'fulfilled' ? (byTitle.value.data ?? []) : []),
 	]
-	const mod = pickBestMatch(
-		candidates,
-		(candidate) => candidate.name,
-		(candidate) => candidate.slug,
-		title,
-		slug,
+	const mod = matchProject(
+		project,
+		mods.map((candidate) => ({
+			item: candidate,
+			name: candidate.name,
+			slug: candidate.slug,
+			authors: candidate.authors.map((author) => author.name),
+		})),
 	)
 
 	return mod ? toMatch(mod) : null

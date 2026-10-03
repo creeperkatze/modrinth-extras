@@ -15,6 +15,7 @@ import { findPlatformProjects, findPlatformUsers } from '../background/external/
 import { fetchRepositoryStats } from '../background/external/repository'
 import { fetchSpigotReviews, type SpigotReviewSort } from '../background/external/spigot'
 import type { Notification } from '../utils/notifications'
+import type { MatchableProject } from '../utils/platforms'
 import type { RepositoryPlatform } from '../utils/repository-links'
 import { analytics, initTelemetry } from '../utils/telemetry'
 
@@ -86,7 +87,7 @@ export default defineBackground(() => {
 			const lookup =
 				message.kind === 'user'
 					? findPlatformUsers(message.username as string)
-					: findPlatformProjects(message.title as string, message.slug as string)
+					: findPlatformProjects(message.project as MatchableProject)
 			lookup
 				.then((matches) => sendResponse({ ok: true, matches }))
 				.catch((err) => {
@@ -113,7 +114,7 @@ export default defineBackground(() => {
 		}
 		if (message.type === 'spigot-reviews') {
 			fetchSpigotReviews(
-				message.title as string,
+				message.project as MatchableProject,
 				message.sort as SpigotReviewSort,
 				message.page as number,
 			)

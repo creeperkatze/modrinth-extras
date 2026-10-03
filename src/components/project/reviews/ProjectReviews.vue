@@ -28,11 +28,7 @@
 					:project-slug="projectSlug"
 					:is-modpack="isModpack"
 				/>
-				<SpigotReviews
-					v-else-if="source === 'spigot' && projectTitle"
-					:project-slug="projectSlug"
-					:project-title="projectTitle"
-				/>
+				<SpigotReviews v-else-if="source === 'spigot' && spigotProject" :project="spigotProject" />
 			</KeepAlive>
 		</div>
 	</Teleport>
@@ -40,12 +36,12 @@
 
 <script setup lang="ts">
 import { defineMessages, Tabs, type TabsTab, useVIntl } from '@modrinth/ui'
-import { type Component, computed, onMounted, onUnmounted, ref } from 'vue'
+import { type Component, computed, onMounted, onUnmounted, ref, shallowRef } from 'vue'
 
 import ModdexLogo from '../../../assets/icons/moddex.svg?component'
 import SpigotIcon from '../../../assets/icons/spigot.svg?component'
 import { modrinthClient } from '../../../utils/api'
-import { PLATFORM_LABELS } from '../../../utils/platforms'
+import { getMatchableProject, type MatchableProject } from '../../../utils/platforms'
 import ModdexReviews from './ModdexReviews.vue'
 import SpigotReviews from './SpigotReviews.vue'
 
@@ -53,7 +49,7 @@ type ReviewSource = 'moddex' | 'spigot'
 
 const SOURCE_TABS: Record<ReviewSource, { label: string; icon: Component }> = {
 	moddex: { label: 'ModDex', icon: ModdexLogo },
-	spigot: { label: PLATFORM_LABELS.spigot, icon: SpigotIcon },
+	spigot: { label: 'SpigotMC', icon: SpigotIcon },
 }
 
 const { formatMessage } = useVIntl()
@@ -74,7 +70,8 @@ const CONTENT_SELECTOR = '.normal-page__content'
 const ACTIVE_CONTENT_CLASS = 'modrinth-extras-reviews-active'
 const ACTIVE_NAV_CLASS = 'modrinth-extras-reviews-nav-active'
 
-const projectTitle = ref<string | null>(null)
+// Kept shallow so the project can be sent to the background, which can't clone Vue proxies.
+const spigotProject = shallowRef<MatchableProject | null>(null)
 const active = ref(false)
 const panelTarget = ref<HTMLElement | null>(null)
 const source = ref<ReviewSource | null>(null)
@@ -82,7 +79,7 @@ const source = ref<ReviewSource | null>(null)
 const sources = computed(() => {
 	const list: ReviewSource[] = []
 	if (props.moddex) list.push('moddex')
-	if (props.spigot && projectTitle.value) list.push('spigot')
+	if (props.spigot && spigotProject.value) list.push('spigot')
 	return list
 })
 
@@ -160,17 +157,19 @@ function onNavClick(event: MouseEvent) {
 }
 
 // SpigotMC only hosts plugins, so other projects would only find unrelated namesakes.
-async function loadSpigotTitle() {
+async function loadSpigotProject() {
 	try {
 		const project = await modrinthClient.labrinth.projects_v3.get(props.projectSlug)
-		if (project.project_types.includes('plugin')) projectTitle.value = project.name
+		if (project.project_types.includes('plugin')) {
+			spigotProject.value = await getMatchableProject(project)
+		}
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to load project for SpigotMC reviews:', err)
 	}
 }
 
 onMounted(() => {
-	if (props.spigot) void loadSpigotTitle()
+	if (props.spigot) void loadSpigotProject()
 	document.addEventListener('click', onNavClick, true)
 	window.addEventListener('modrinth-extras:before-navigate', deactivate)
 })

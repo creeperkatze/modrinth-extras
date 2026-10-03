@@ -1,7 +1,7 @@
 import HangarClient, { HangarError, type Project } from 'hangarmc-js'
 
 import { boundFetch, USER_AGENT } from '../../utils/api'
-import { pickBestMatch, type PlatformMatch } from '../../utils/platforms'
+import { type MatchableProject, matchProject, type PlatformMatch } from '../../utils/platforms'
 
 const client = new HangarClient({ userAgent: USER_AGENT, fetch: boundFetch })
 
@@ -19,21 +19,20 @@ function toMatch(project: Project): PlatformMatch {
 	}
 }
 
-export async function findHangarProject(
-	title: string,
-	slug: string,
-): Promise<PlatformMatch | null> {
-	const response = await client.projects.list({ query: title, limit: SEARCH_LIMIT })
+export async function findHangarProject(project: MatchableProject): Promise<PlatformMatch | null> {
+	const response = await client.projects.list({ query: project.name, limit: SEARCH_LIMIT })
 
-	const project = pickBestMatch(
-		response.result ?? [],
-		(candidate) => candidate.name,
-		(candidate) => candidate.namespace.slug,
-		title,
-		slug,
+	const match = matchProject(
+		project,
+		(response.result ?? []).map((candidate) => ({
+			item: candidate,
+			name: candidate.name,
+			slug: candidate.namespace.slug,
+			authors: [candidate.namespace.owner, ...(candidate.memberNames ?? [])],
+		})),
 	)
 
-	return project ? toMatch(project) : null
+	return match ? toMatch(match) : null
 }
 
 export async function findHangarUser(username: string): Promise<PlatformMatch | null> {

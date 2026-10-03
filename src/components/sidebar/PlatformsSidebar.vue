@@ -36,12 +36,12 @@
 					class="flex min-w-0 flex-1 items-start gap-2 hover:underline"
 				>
 					<component
-						:is="PLATFORM_ICONS[match.platform]"
+						:is="PLATFORMS[match.platform].icon"
 						aria-hidden="true"
 						class="mt-0.5 shrink-0"
 					/>
 					<span class="min-w-0 flex-1 break-words leading-tight">
-						{{ PLATFORM_LABELS[match.platform] }}
+						{{ PLATFORMS[match.platform].label }}
 						<ExternalIcon
 							aria-hidden="true"
 							class="external-icon ml-1 inline !mb-0 align-[-0.125em]"
@@ -75,7 +75,7 @@ import CurseForgeIcon from '../../assets/icons/platforms/curseforge.svg?componen
 import HangarIcon from '../../assets/icons/platforms/hangar.svg?component'
 import SpigotIcon from '../../assets/icons/platforms/spigot.svg?component'
 import { modrinthClient } from '../../utils/api'
-import { type Platform, PLATFORM_LABELS, type PlatformMatch } from '../../utils/platforms'
+import { getMatchableProject, type Platform, type PlatformMatch } from '../../utils/platforms'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
@@ -94,11 +94,11 @@ const messages = defineMessages({
 	},
 })
 
-const PLATFORM_ICONS = {
-	curseforge: CurseForgeIcon,
-	hangar: HangarIcon,
-	spigot: SpigotIcon,
-} satisfies Record<Platform, unknown>
+const PLATFORMS = {
+	curseforge: { label: 'CurseForge', icon: CurseForgeIcon },
+	hangar: { label: 'Hangar', icon: HangarIcon },
+	spigot: { label: 'SpigotMC', icon: SpigotIcon },
+} satisfies Record<Platform, { label: string; icon: unknown }>
 
 const PROJECT_PATTERN = /^\/(?:mod|plugin|datapack|shader|resourcepack|modpack|server)\/([^/]+)/
 const USER_PATTERN = /^\/(?:user|organization)\/([^/]+)/
@@ -132,8 +132,9 @@ onMounted(async () => {
 			? {
 					type: 'platform-matches',
 					kind: 'project',
-					title: (await modrinthClient.labrinth.projects_v3.get(projectSlug)).name,
-					slug: projectSlug,
+					project: await getMatchableProject(
+						await modrinthClient.labrinth.projects_v3.get(projectSlug),
+					),
 				}
 			: { type: 'platform-matches', kind: 'user', username }
 
