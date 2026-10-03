@@ -3,7 +3,7 @@ import { posthog } from '@wxt-dev/analytics/providers/posthog'
 import { browser } from 'wxt/browser'
 
 import { detectBrowserLocale } from './i18n'
-import { type ExtensionSettings, getSettings } from './settings'
+import { type ExtensionSettings, getSettings, TELEMETRY_EXCLUDED } from './settings'
 
 export const analytics = createAnalytics({
 	providers: [
@@ -17,7 +17,9 @@ export const analytics = createAnalytics({
 function flattenSettings(settings: ExtensionSettings): Record<string, string> {
 	const flat: Record<string, string> = {}
 	for (const [key, value] of Object.entries(settings)) {
+		const excluded: string[] = TELEMETRY_EXCLUDED[key as keyof ExtensionSettings] ?? []
 		for (const [subKey, subValue] of Object.entries(value as Record<string, unknown>)) {
+			if (excluded.includes(subKey)) continue
 			flat[`${key}_${subKey}`] = String(subValue)
 		}
 	}

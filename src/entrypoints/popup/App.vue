@@ -743,6 +743,29 @@ const generalFeatures = computed<FeatureDef[]>(() => [
 
 const contentPageFeatures = computed<FeatureDef[]>(() => [
 	{
+		key: 'reviews',
+		icon: StarIcon,
+		title: formatMessage(messages['feature.reviews.title']),
+		description: formatMessage(messages['feature.reviews.description']),
+		options: [
+			{
+				key: 'moddex',
+				type: 'toggle',
+				label: formatMessage(messages['feature.reviews.moddex']),
+			},
+			{
+				key: 'moddexApiToken',
+				type: 'text',
+				label: formatMessage(messages['feature.reviews.moddexApiToken']),
+			},
+			{
+				key: 'spigot',
+				type: 'toggle',
+				label: formatMessage(messages['feature.reviews.spigot']),
+			},
+		],
+	},
+	{
 		key: 'activitySparkline',
 		icon: ChartIcon,
 		title: formatMessage(messages['feature.activitySparkline.title']),
@@ -829,29 +852,6 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 		description: formatMessage(messages['feature.translateDescription.description']),
 		disabled: () => !translationSupported,
 		disabledTooltip: formatMessage(messages['feature.translateDescription.disabledTooltip']),
-	},
-	{
-		key: 'reviews',
-		icon: StarIcon,
-		title: formatMessage(messages['feature.reviews.title']),
-		description: formatMessage(messages['feature.reviews.description']),
-		options: [
-			{
-				key: 'moddex',
-				type: 'toggle',
-				label: formatMessage(messages['feature.reviews.moddex']),
-			},
-			{
-				key: 'moddexApiToken',
-				type: 'text',
-				label: formatMessage(messages['feature.reviews.moddexApiToken']),
-			},
-			{
-				key: 'spigot',
-				type: 'toggle',
-				label: formatMessage(messages['feature.reviews.spigot']),
-			},
-		],
 	},
 ])
 

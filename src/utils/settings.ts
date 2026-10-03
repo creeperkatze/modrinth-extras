@@ -85,6 +85,13 @@ export const DEFAULTS: ExtensionSettings = {
 	telemetry: { enabled: true },
 }
 
+type SettingKeys = { [K in keyof ExtensionSettings]?: (keyof ExtensionSettings[K])[] }
+
+// Settings that must never be sent with telemetry
+export const TELEMETRY_EXCLUDED: SettingKeys = {
+	reviews: ['moddexApiToken'],
+}
+
 const settingsItem = storage.defineItem<DeepPartial<ExtensionSettings>>('local:settings')
 
 let cache: ExtensionSettings = structuredClone(DEFAULTS)
