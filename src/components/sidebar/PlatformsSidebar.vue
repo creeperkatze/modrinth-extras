@@ -79,7 +79,7 @@ import {
 	getMatchableProject,
 	type Platform,
 	type PlatformMatch,
-} from '../../features/platforms/platforms'
+} from '../../features/platforms/matching'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({

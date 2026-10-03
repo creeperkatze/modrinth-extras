@@ -66,7 +66,7 @@ import {
 	detectRepository,
 	getRepositoryLinks,
 	type RepositoryInfo,
-} from '../../features/repository/repository-links'
+} from '../../features/repository/links'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({

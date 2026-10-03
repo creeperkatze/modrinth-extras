@@ -1,7 +1,8 @@
 import { type AuthConfig, AuthFeature, GenericModrinthClient } from '@modrinth/api-client'
 import { browser } from 'wxt/browser'
 
-import { RequestCacheFeature } from './request-cache'
+import { RequestCacheFeature } from './features/cache'
+import { RequestThrottleFeature } from './features/throttle'
 
 export const USER_AGENT = `creeperkatze/modrinth-extras/${browser.runtime.getManifest().version} (contact@creeperkatze.dev)`
 
@@ -26,9 +27,11 @@ export function invalidateTokenCache() {
 	requestCache.clear()
 }
 
+// Features run from last to first, so cache hits return before the throttle queues anything.
 export const modrinthClient = new GenericModrinthClient({
 	userAgent: USER_AGENT,
 	features: [
+		new RequestThrottleFeature(),
 		requestCache,
 		new AuthFeature({
 			token: async () =>

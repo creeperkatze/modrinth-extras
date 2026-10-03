@@ -1,6 +1,6 @@
 import type { Labrinth } from '@modrinth/api-client'
 
-import type { MatchableProject } from '../src/features/platforms/platforms'
+import type { MatchableProject } from '../src/features/platforms/matching'
 import { CASES, type Listings } from './platform-matching-cases'
 
 // The lookups read the version and auth cookie through wxt/browser, which only exists in a browser.
@@ -9,10 +9,10 @@ import { CASES, type Listings } from './platform-matching-cases'
 	cookies: { get: async () => null },
 }
 
-const { findCurseForgeProject } = await import('../src/background/external/curseforge')
-const { findHangarProject } = await import('../src/background/external/hangar')
-const { findSpigotProject } = await import('../src/background/external/spigot')
-const { getMatchableProject } = await import('../src/features/platforms/platforms')
+const { findCurseForgeProject } = await import('../src/background/external/platforms/curseforge')
+const { findHangarProject } = await import('../src/background/external/platforms/hangar')
+const { findSpigotProject } = await import('../src/background/external/platforms/spigot')
+const { getMatchableProject } = await import('../src/features/platforms/matching')
 
 const RATE_LIMIT_RETRIES = 3
 const RATE_LIMIT_DELAY_MS = 60_000

@@ -1,4 +1,4 @@
-import type { RepositoryStats } from './repository'
+import type { RepositoryStats } from './index'
 
 export async function fetchCodebergStats(repo: string): Promise<RepositoryStats> {
 	const res = await fetch(`https://codeberg.org/api/v1/repos/${repo}`)

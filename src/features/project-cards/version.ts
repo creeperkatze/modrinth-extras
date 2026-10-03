@@ -1,7 +1,7 @@
 import type { Labrinth } from '@modrinth/api-client'
 
+import { chunkIdsForQuery } from '../../api/chunk-ids'
 import { modrinthClient } from '../../api/client'
-import { chunkIdsForQuery } from '../../api/query'
 
 export interface QuickDownloadSettings {
 	modLoader: string
@@ -21,12 +21,14 @@ interface DownloadRequest {
 	projectSlug: string
 	projectType: string
 	settings: QuickDownloadSettings
+	signal?: AbortSignal
 	resolve: (result: QuickDownloadResult) => void
 	reject: (error: unknown) => void
 }
 
 const projects = new Map<string, Labrinth.Projects.v3.Project>()
-const versions = new Map<string, Labrinth.Versions.v3.Version>()
+// Versions found for cards, kept so their dependencies can be resolved on download.
+export const knownVersions = new Map<string, Labrinth.Versions.v3.Version>()
 const pending: DownloadRequest[] = []
 let flushScheduled = false
 let flushing = false
@@ -35,9 +37,10 @@ export function getQuickDownload(
 	projectSlug: string,
 	projectType: string,
 	settings: QuickDownloadSettings,
+	signal?: AbortSignal,
 ): Promise<QuickDownloadResult> {
 	return new Promise((resolve, reject) => {
-		pending.push({ projectSlug, projectType, settings, resolve, reject })
+		pending.push({ projectSlug, projectType, settings, signal, resolve, reject })
 		scheduleFlush()
 	})
 }
@@ -54,7 +57,12 @@ function scheduleFlush() {
 async function flush() {
 	if (flushing || pending.length === 0) return
 	flushing = true
-	const requests = pending.splice(0)
+	// Cards that left the page before their turn don't need a lookup anymore.
+	const requests = pending.splice(0).filter((request) => {
+		if (!request.signal?.aborted) return true
+		request.reject(request.signal.reason)
+		return false
+	})
 
 	try {
 		const missingProjectSlugs = [
@@ -111,16 +119,33 @@ async function findVersion(
 	request: DownloadRequest,
 ): Promise<Labrinth.Versions.v3.Version | null> {
 	const preferredLoader = getPreferredLoader(request.projectType, request.settings)
+	const { gameVersion } = request.settings
 	// Modpack versions list their pack loaders separately, so those are matched here instead.
 	const checkLoaderLocally = !!preferredLoader && request.projectType === 'modpack'
 
-	const candidates = await modrinthClient.labrinth.versions_v3.getProjectVersions(project.id, {
-		loaders: preferredLoader && !checkLoaderLocally ? [preferredLoader] : undefined,
-		game_versions: request.settings.gameVersion ? [request.settings.gameVersion] : undefined,
-		include_changelog: false,
-		limit: checkLoaderLocally ? undefined : 1,
-		apiVersion: 3,
-	})
+	// The project lists every loader and game version it supports, so clear misses need no request.
+	const projectGameVersions = project.game_versions
+	if (
+		gameVersion &&
+		Array.isArray(projectGameVersions) &&
+		!projectGameVersions.includes(gameVersion)
+	) {
+		return null
+	}
+	if (preferredLoader && !checkLoaderLocally && !project.loaders.includes(preferredLoader)) {
+		return null
+	}
+
+	const params: Record<string, string> = { include_changelog: 'false' }
+	if (preferredLoader && !checkLoaderLocally) params.loaders = JSON.stringify([preferredLoader])
+	if (gameVersion) params.game_versions = JSON.stringify([gameVersion])
+	if (!checkLoaderLocally) params.limit = '1'
+
+	// Search only lists public projects, and without auth the request needs no CORS preflight.
+	const candidates = await modrinthClient.request<Labrinth.Versions.v3.Version[]>(
+		`/project/${project.id}/version`,
+		{ api: 'labrinth', version: 3, params, skipAuth: true, signal: request.signal },
+	)
 
 	const version =
 		candidates
@@ -128,116 +153,14 @@ async function findVersion(
 				matchesPreferredLoader(candidate, request.projectType, preferredLoader),
 			)
 			.sort((a, b) => Date.parse(b.date_published) - Date.parse(a.date_published))[0] ?? null
-	if (version) versions.set(version.id, version)
+	if (version) knownVersions.set(version.id, version)
 	return version
 }
 
-function getPrimaryFile(
+export function getPrimaryFile(
 	version: Labrinth.Versions.v3.Version,
 ): Labrinth.Versions.v3.VersionFile | null {
 	return version.files.find((item) => item.primary) ?? version.files[0] ?? null
-}
-
-export async function getRequiredDependencyFiles(
-	versionId: string,
-	projectType: string,
-	settings: QuickDownloadSettings,
-): Promise<Labrinth.Versions.v3.VersionFile[]> {
-	const root = versions.get(versionId)
-	// Modpacks already bundle their own dependencies
-	if (!root || projectType === 'modpack') return []
-
-	const preferredLoader = getPreferredLoader(projectType, settings)
-	const loaders = preferredLoader ? [preferredLoader] : getVersionLoaders(root, projectType)
-	const gameVersions = settings.gameVersion ? [settings.gameVersion] : root.game_versions
-
-	const seenProjectIds = new Set([root.project_id])
-	const seenDependencyKeys = new Set<string>()
-	const files: Labrinth.Versions.v3.VersionFile[] = []
-	let frontier = [root]
-
-	while (frontier.length > 0) {
-		const dependencies = frontier
-			.flatMap((version) => version.dependencies ?? [])
-			.filter((dependency) => {
-				if (dependency.dependency_type !== 'required') return false
-				if (dependency.project_id && seenProjectIds.has(dependency.project_id)) return false
-				const key = dependency.version_id ?? dependency.project_id
-				if (!key || seenDependencyKeys.has(key)) return false
-				seenDependencyKeys.add(key)
-				return true
-			})
-
-		const resolved = await Promise.all(
-			dependencies.map((dependency) => resolveDependencyVersion(dependency, loaders, gameVersions)),
-		)
-
-		frontier = []
-		for (const version of resolved) {
-			if (!version || seenProjectIds.has(version.project_id)) continue
-			seenProjectIds.add(version.project_id)
-			frontier.push(version)
-			const file = getPrimaryFile(version)
-			if (file) files.push(file)
-		}
-	}
-
-	return files
-}
-
-async function resolveDependencyVersion(
-	dependency: Labrinth.Versions.v3.Dependency,
-	loaders: string[],
-	gameVersions: string[],
-): Promise<Labrinth.Versions.v3.Version | null> {
-	try {
-		if (dependency.version_id) {
-			const cached = versions.get(dependency.version_id)
-			if (cached) return cached
-			const version = await modrinthClient.labrinth.versions_v3.getVersion(dependency.version_id)
-			versions.set(version.id, version)
-			return version
-		}
-
-		if (!dependency.project_id) return null
-		const [version] = await modrinthClient.labrinth.versions_v3.getProjectVersions(
-			dependency.project_id,
-			{
-				loaders,
-				game_versions: gameVersions,
-				include_changelog: false,
-				limit: 1,
-				apiVersion: 3,
-			},
-		)
-		return version ?? null
-	} catch (err) {
-		console.error('[Modrinth Extras] Failed to resolve dependency:', err)
-		return null
-	}
-}
-
-export async function saveFiles(files: Labrinth.Versions.v3.VersionFile[]) {
-	const blobs = await Promise.all(
-		files.map(async (file) => {
-			const response = await fetch(file.url)
-			if (!response.ok) throw new Error(`Failed to fetch ${file.url}: ${response.status}`)
-			return { filename: file.filename, blob: await response.blob() }
-		}),
-	)
-
-	// Saved as blobs since opening several download URLs in a row cancels all but the last
-	for (const { filename, blob } of blobs) {
-		const url = URL.createObjectURL(blob)
-		const anchor = document.createElement('a')
-		anchor.href = url
-		anchor.download = filename
-		anchor.style.display = 'none'
-		document.body.appendChild(anchor)
-		anchor.click()
-		anchor.remove()
-		setTimeout(() => URL.revokeObjectURL(url), 60_000)
-	}
 }
 
 function matchesPreferredLoader(
@@ -258,7 +181,10 @@ function matchesPreferredLoader(
 	return loaders.includes(preferredLoader)
 }
 
-function getVersionLoaders(version: Labrinth.Versions.v3.Version, projectType: string): string[] {
+export function getVersionLoaders(
+	version: Labrinth.Versions.v3.Version,
+	projectType: string,
+): string[] {
 	const loaders = Array.isArray(version.loaders) ? version.loaders : []
 
 	if (projectType !== 'modpack') {
@@ -273,7 +199,7 @@ function getVersionLoaders(version: Labrinth.Versions.v3.Version, projectType: s
 	return loaders.filter((loader) => loader !== 'mrpack')
 }
 
-function getPreferredLoader(projectType: string, settings: QuickDownloadSettings): string {
+export function getPreferredLoader(projectType: string, settings: QuickDownloadSettings): string {
 	switch (projectType) {
 		case 'plugin':
 			return settings.pluginLoader

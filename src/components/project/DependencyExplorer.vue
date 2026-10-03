@@ -262,13 +262,6 @@ import { ExpandIcon, SearchIcon, UpdatedIcon } from '@modrinth/assets'
 import { defineMessages, IconButton, Input, NewModal, Slider, Toggle, useVIntl } from '@modrinth/ui'
 import { computed, nextTick, onUnmounted, ref, useTemplateRef, watch } from 'vue'
 
-import {
-	type GraphEdge,
-	type GraphNode,
-	NODE_RADIUS,
-	ROOT_NODE_RADIUS,
-	useForceGraph,
-} from '../../composables/useForceGraph'
 import { navigate, resolveLink } from '../../content/page-router'
 import {
 	buildEnrichedDeps,
@@ -277,7 +270,14 @@ import {
 	fetchDependencyGraphRoot,
 	indexProjectsById,
 	isGraphDependency,
-} from '../../features/dependencies/dependencies'
+} from '../../features/dependencies/graph'
+import {
+	type GraphEdge,
+	type GraphNode,
+	NODE_RADIUS,
+	ROOT_NODE_RADIUS,
+	useForceGraph,
+} from '../../features/dependencies/useForceGraph'
 
 // Cast: duplicate `vue` instances under pnpm make `@modrinth/assets`/`@modrinth/ui` `Component` types nominally unrelated.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -1,8 +1,8 @@
 import type { Labrinth } from '@modrinth/api-client'
 import { browser } from 'wxt/browser'
 
+import { chunkIdsForQuery } from '../../api/chunk-ids'
 import { modrinthClient } from '../../api/client'
-import { chunkIdsForQuery } from '../../api/query'
 
 export type NotificationExtraData = {
 	project?: Labrinth.Projects.v3.Project

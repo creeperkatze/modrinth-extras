@@ -1,4 +1,4 @@
-import type { RepositoryStats } from './repository'
+import type { RepositoryStats } from './index'
 
 export async function fetchGitLabStats(repo: string): Promise<RepositoryStats> {
 	const id = encodeURIComponent(repo)

@@ -8,16 +8,16 @@ import {
 	showCachedBadge,
 	updateBadge,
 } from '../background/badge'
-import { handleNotificationClick } from '../background/browser-notifications'
 import { fetchDiscordInvite } from '../background/external/discord'
 import { fetchModdexReviews } from '../background/external/moddex'
 import { findPlatformProjects, findPlatformUsers } from '../background/external/platforms'
-import { fetchRepositoryStats } from '../background/external/repository'
-import { fetchSpigotReviews, type SpigotReviewSort } from '../background/external/spigot'
+import { fetchSpigotReviews, type SpigotReviewSort } from '../background/external/platforms/spigot'
+import { fetchRepositoryStats } from '../background/external/repositories'
+import { handleNotificationClick } from '../background/notifications'
 import { analytics, initTelemetry } from '../core/telemetry'
 import type { Notification } from '../features/notifications/notifications'
-import type { MatchableProject } from '../features/platforms/platforms'
-import type { RepositoryPlatform } from '../features/repository/repository-links'
+import type { MatchableProject } from '../features/platforms/matching'
+import type { RepositoryPlatform } from '../features/repository/links'
 
 const ALARM_NAME = 'modrinth-extras-poll'
 const POLL_INTERVAL_MINUTES = 5

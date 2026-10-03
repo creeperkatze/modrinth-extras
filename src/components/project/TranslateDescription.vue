@@ -22,7 +22,7 @@ import {
 	createTranslator,
 	detectTranslationCandidate,
 	type TranslationCandidate,
-} from '../../features/translation/translate-description'
+} from '../../features/translation/translator'
 
 const { formatMessage } = useVIntl()
 

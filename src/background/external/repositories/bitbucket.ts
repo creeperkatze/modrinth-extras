@@ -1,4 +1,4 @@
-import type { RepositoryStats } from './repository'
+import type { RepositoryStats } from './index'
 
 // Bitbucket Cloud has no stars concept, so RepositoryStats.stars is left undefined here.
 export async function fetchBitbucketStats(repo: string): Promise<RepositoryStats> {

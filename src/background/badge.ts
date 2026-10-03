@@ -9,7 +9,7 @@ import {
 	groupNotifications,
 	type Notification,
 } from '../features/notifications/notifications'
-import { sendBrowserNotifications } from './browser-notifications'
+import { sendBrowserNotifications } from './notifications'
 
 export const notificationsItem = storage.defineItem<Notification[] | null>('local:notifications', {
 	defaultValue: null,

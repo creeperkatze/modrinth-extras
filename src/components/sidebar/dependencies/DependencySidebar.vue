@@ -70,7 +70,7 @@ import { LoaderCircleIcon, TriangleAlertIcon, XIcon } from '@modrinth/assets'
 import { defineMessages, IconButton, ScrollablePanel, useVIntl } from '@modrinth/ui'
 import { computed, onMounted, ref } from 'vue'
 
-import { type EnrichedDep, fetchDependencyTree } from '../../../features/dependencies/dependencies'
+import { type EnrichedDep, fetchDependencyTree } from '../../../features/dependencies/graph'
 import DependencyExplorer from '../../project/DependencyExplorer.vue'
 import DependencyNode from './DependencyNode.vue'
 

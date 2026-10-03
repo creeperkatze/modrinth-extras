@@ -1,4 +1,4 @@
-import type { RepositoryStats } from './repository'
+import type { RepositoryStats } from './index'
 
 export async function fetchGitHubStats(repo: string): Promise<RepositoryStats> {
 	const [repoRes, prRes] = await Promise.all([

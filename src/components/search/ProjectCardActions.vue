@@ -133,7 +133,7 @@ import {
 	TeleportPopoutMenu,
 	useVIntl,
 } from '@modrinth/ui'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import { getAuthToken, modrinthClient } from '../../api/client'
 import { navigate } from '../../content/page-router'
@@ -141,14 +141,11 @@ import {
 	collections,
 	initCollections,
 	toggleProjectInCollection,
-} from '../../features/project-cards/collection-state'
-import { followedSlugs } from '../../features/project-cards/follow-state'
-import {
-	getQuickDownload,
-	getRequiredDependencyFiles,
-	type QuickDownloadSettings,
-	saveFiles,
-} from '../../features/project-cards/project-card-state'
+} from '../../features/project-cards/collection'
+import { getRequiredDependencyFiles } from '../../features/project-cards/dependencies'
+import { saveFiles } from '../../features/project-cards/download'
+import { followedSlugs } from '../../features/project-cards/follow'
+import { getQuickDownload, type QuickDownloadSettings } from '../../features/project-cards/version'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
@@ -303,7 +300,13 @@ async function handleDownload() {
 	}
 }
 
+let availabilityController: AbortController | null = null
+
 async function refreshDownloadAvailability() {
+	availabilityController?.abort()
+	const controller = new AbortController()
+	availabilityController = controller
+
 	downloadAvailabilityLoading.value = true
 	downloadAvailabilityChecked.value = false
 	downloadFile.value = null
@@ -314,17 +317,25 @@ async function refreshDownloadAvailability() {
 			props.projectSlug,
 			props.projectType,
 			props.downloadSettings,
+			controller.signal,
 		)
+		if (controller.signal.aborted) return
 		projectId.value = result.projectId
 		downloadFile.value = result.file
 		downloadVersionId.value = result.versionId
 	} catch (err) {
+		if (controller.signal.aborted) return
 		console.error('[Modrinth Extras] Failed to check download availability:', err)
 	} finally {
-		downloadAvailabilityChecked.value = true
-		downloadAvailabilityLoading.value = false
+		if (!controller.signal.aborted) {
+			downloadAvailabilityChecked.value = true
+			downloadAvailabilityLoading.value = false
+		}
 	}
 }
+
+// Scrolling through search pages unmounts cards, and their lookups shouldn't use up the rate limit.
+onBeforeUnmount(() => availabilityController?.abort())
 
 async function handleFollow() {
 	if (!isLoggedIn) return navigate('/auth/sign-in')

@@ -65,7 +65,7 @@ import { Avatar, defineMessages, useVIntl } from '@modrinth/ui'
 import { computed, ref } from 'vue'
 
 import { navigate } from '../../../content/page-router'
-import { type EnrichedDep } from '../../../features/dependencies/dependencies'
+import { type EnrichedDep } from '../../../features/dependencies/graph'
 
 defineOptions({ name: 'DependencyNode' })
 

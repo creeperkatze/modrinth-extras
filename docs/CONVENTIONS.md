@@ -6,7 +6,7 @@ Formatted with Prettier: tabs, single quotes, no semicolons, trailing commas, 10
 
 ## API calls
 
-Use the shared `modrinthClient` from `src/api/client.ts` rather than calling `fetch` directly. It reads the auth token from the `auth-token` cookie automatically. It also shares identical GET requests between components and pauses after being rate limited, so fetching the same data from several components is fine.
+Use the shared `modrinthClient` from `src/api/client.ts` rather than calling `fetch` directly. It reads the auth token from the `auth-token` cookie automatically. It also shares identical GET requests between components, runs at most 4 requests at once and pauses after being rate limited, so fetching the same data from several components is fine. Still prefer batch routes like `/projects?ids` over one request per item.
 
 ## Settings
 

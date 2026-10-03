@@ -197,10 +197,10 @@ import type {
 	SpigotReviewSort,
 	SpigotReviewsPage,
 	SpigotReviewsResult,
-} from '../../../background/external/spigot'
+} from '../../../background/external/platforms/spigot'
 import { navigate } from '../../../content/page-router'
 import { i18n } from '../../../core/i18n/i18n'
-import type { MatchableProject } from '../../../features/platforms/platforms'
+import type { MatchableProject } from '../../../features/platforms/matching'
 import ReviewStars from './ReviewStars.vue'
 
 const props = defineProps<{ project: MatchableProject }>()

@@ -1,7 +1,7 @@
 import type { Labrinth } from '@modrinth/api-client'
 
+import { chunkIdsForQuery } from '../../api/chunk-ids'
 import { modrinthClient } from '../../api/client'
-import { chunkIdsForQuery } from '../../api/query'
 
 export interface RawDep {
 	project_id: string

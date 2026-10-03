@@ -41,7 +41,7 @@ import { type Component, computed, onMounted, onUnmounted, ref, shallowRef } fro
 import { modrinthClient } from '../../../api/client'
 import ModdexLogo from '../../../assets/icons/moddex.svg?component'
 import SpigotIcon from '../../../assets/icons/spigot.svg?component'
-import { getMatchableProject, type MatchableProject } from '../../../features/platforms/platforms'
+import { getMatchableProject, type MatchableProject } from '../../../features/platforms/matching'
 import ModdexReviews from './ModdexReviews.vue'
 import SpigotReviews from './SpigotReviews.vue'
 

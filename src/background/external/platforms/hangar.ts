@@ -1,11 +1,11 @@
 import HangarClient, { HangarError, type Project } from 'hangarmc-js'
 
-import { boundFetch, USER_AGENT } from '../../api/client'
+import { boundFetch, USER_AGENT } from '../../../api/client'
 import {
 	type MatchableProject,
 	matchProject,
 	type PlatformMatch,
-} from '../../features/platforms/platforms'
+} from '../../../features/platforms/matching'
 
 const client = new HangarClient({ userAgent: USER_AGENT, fetch: boundFetch })
 
