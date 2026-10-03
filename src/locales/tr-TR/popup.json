@@ -8,6 +8,9 @@
   "feature.accentColor.title": {
     "defaultMessage": "Vurgu rengi"
   },
+  "feature.activitySparkline.days": {
+    "defaultMessage": "{count, plural, one {# gün} other {# gün}}"
+  },
   "feature.activitySparkline.description": {
     "defaultMessage": "Proje sayfalarında sürüm etkinliği grafiği."
   },
@@ -104,6 +107,9 @@
   "feature.projectCardActions.description": {
     "defaultMessage": "Projeleri doğrudan proje kartlarından kolayca indirin, takip edin ve kaydedin."
   },
+  "feature.projectCardActions.downloadDependencies": {
+    "defaultMessage": "Bağımlılıkları indir"
+  },
   "feature.projectCardActions.gameVersion": {
     "defaultMessage": "Oyun sürümü"
   },
@@ -130,6 +136,24 @@
   },
   "feature.quickSearch.title": {
     "defaultMessage": "Hızlı Arama"
+  },
+  "feature.reviews.description": {
+    "defaultMessage": "Projeye, ModDex ve SpigotMC'den topluluk incelemelerini içeren bir İncelemeler sekmesi ekler."
+  },
+  "feature.reviews.getModdexToken": {
+    "defaultMessage": "<link>ModDex API token'ı alın</link>"
+  },
+  "feature.reviews.moddex": {
+    "defaultMessage": "ModDex incelemeleri"
+  },
+  "feature.reviews.moddexApiToken": {
+    "defaultMessage": "ModDex API token"
+  },
+  "feature.reviews.spigot": {
+    "defaultMessage": "SpigotMC incelemeleri"
+  },
+  "feature.reviews.title": {
+    "defaultMessage": "İncelemeler"
   },
   "feature.searchBackground.description": {
     "defaultMessage": "Keşif sayfalarında bir afiş arka planı gösterin."
@@ -211,6 +235,9 @@
   },
   "search.any": {
     "defaultMessage": "Herhangi"
+  },
+  "search.hideSnapshots": {
+    "defaultMessage": "Snapshotları gizle"
   },
   "search.loading": {
     "defaultMessage": "Yükleniyor..."

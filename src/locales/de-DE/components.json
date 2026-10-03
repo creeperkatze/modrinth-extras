@@ -71,6 +71,99 @@
   "errorNotice.message": {
     "defaultMessage": "Dieser Fehler hängt eventuell mit Modrinth Extras zusammen. Versuche, die Erweiterung zu deaktivieren und die Seite neu zu laden, bevor du dies Modrinth meldest. Falls der Fehler verschwindet, melde ihn bitte <link>hier</link>."
   },
+  "moddexReviews.aesthetics": {
+    "defaultMessage": "Ästhetik"
+  },
+  "moddexReviews.createToken": {
+    "defaultMessage": "Ein Token erstellen"
+  },
+  "moddexReviews.credit": {
+    "defaultMessage": "Bewertungen bereitgestellt von <link>ModDex</link>, verfasst von der Community."
+  },
+  "moddexReviews.developer": {
+    "defaultMessage": "Entwickler"
+  },
+  "moddexReviews.edited": {
+    "defaultMessage": "Bearbeitet"
+  },
+  "moddexReviews.empty": {
+    "defaultMessage": "Noch keine geschriebenen Bewertungen. Sei der Erste!"
+  },
+  "moddexReviews.gameplay": {
+    "defaultMessage": "Gameplay"
+  },
+  "moddexReviews.helpful": {
+    "defaultMessage": "{count, plural,one {# Person fand dies hilfreich}other {# Personen fanden dies hilfreich}}"
+  },
+  "moddexReviews.invalidTokenTitle": {
+    "defaultMessage": "Dein API-Token für ModDex ist ungültig oder abgelaufen"
+  },
+  "moddexReviews.loadError": {
+    "defaultMessage": "Bewertungen von ModDex konnten nicht geladen werden"
+  },
+  "moddexReviews.loading": {
+    "defaultMessage": "Bewertungen werden geladen…"
+  },
+  "moddexReviews.moderatorNote": {
+    "defaultMessage": "Anmerkung eines Moderators:"
+  },
+  "moddexReviews.noTokenTitle": {
+    "defaultMessage": "API-Token von ModDex erforderlich"
+  },
+  "moddexReviews.notFound": {
+    "defaultMessage": "Dieses Projekt konnte nicht auf ModDex gefunden werden."
+  },
+  "moddexReviews.openModdex": {
+    "defaultMessage": "ModDex öffnen"
+  },
+  "moddexReviews.performance": {
+    "defaultMessage": "Leistung"
+  },
+  "moddexReviews.playtime": {
+    "defaultMessage": "{hours, number} Std. gespielt"
+  },
+  "moddexReviews.posted": {
+    "defaultMessage": "Veröffentlicht {time}"
+  },
+  "moddexReviews.rateLimited": {
+    "defaultMessage": "Ratenbegrenzung von ModDex erreicht, versuche es in einer Minute erneut"
+  },
+  "moddexReviews.ratingsCount": {
+    "defaultMessage": "{count, plural, one {# Bewertung} other {# Bewertungen}}"
+  },
+  "moddexReviews.sortBy": {
+    "defaultMessage": "Sortieren nach:"
+  },
+  "moddexReviews.sortHelpful": {
+    "defaultMessage": "Am hilfreichsten"
+  },
+  "moddexReviews.sortLabel": {
+    "defaultMessage": "Bewertungen sortieren"
+  },
+  "moddexReviews.sortLowestRating": {
+    "defaultMessage": "Am niedrigsten bewertet"
+  },
+  "moddexReviews.sortNewest": {
+    "defaultMessage": "Neueste"
+  },
+  "moddexReviews.sortOldest": {
+    "defaultMessage": "Älteste"
+  },
+  "moddexReviews.sortRating": {
+    "defaultMessage": "Am höchsten bewertet"
+  },
+  "moddexReviews.sortUnhelpful": {
+    "defaultMessage": "Am wenigsten hilfreich"
+  },
+  "moddexReviews.title": {
+    "defaultMessage": "Bewertungen von der Community"
+  },
+  "moddexReviews.tokenHelp": {
+    "defaultMessage": "ModDex zeigt Bewertungen nur für angemeldete API-Nutzer an. Erstelle ein kostenloses Token auf ModDex und füge es dann in das Popup-Fenster von Modrinth Extras unter „Bewertungen“ ein."
+  },
+  "moddexReviews.writeReview": {
+    "defaultMessage": "Schreibe eine Bewertung"
+  },
   "modpacksSidebar.title": {
     "defaultMessage": "Modpacks"
   },
@@ -161,6 +254,12 @@
   "projectCardActions.unfollow": {
     "defaultMessage": "Entfolgen"
   },
+  "projectReviews.source": {
+    "defaultMessage": "Quelle der Bewertungen"
+  },
+  "projectReviews.tab": {
+    "defaultMessage": "Bewertungen"
+  },
   "quickSearch.clearRecent": {
     "defaultMessage": "Kürzliche löschen"
   },
@@ -193,6 +292,63 @@
   },
   "repositorySidebar.title": {
     "defaultMessage": "Repository"
+  },
+  "reviewStars.rating": {
+    "defaultMessage": "Mit {rating} von 5 bewertet"
+  },
+  "spigotReviews.authorResponse": {
+    "defaultMessage": "Antwort des Autors:"
+  },
+  "spigotReviews.credit": {
+    "defaultMessage": "Bewertungen bereitgestellt von <link>SpigotMC</link>, verfasst von der Community."
+  },
+  "spigotReviews.empty": {
+    "defaultMessage": "Noch keine Bewertungen."
+  },
+  "spigotReviews.loadError": {
+    "defaultMessage": "Bewertungen von SpigotMC konnten nicht geladen werden"
+  },
+  "spigotReviews.loading": {
+    "defaultMessage": "Bewertungen werden geladen…"
+  },
+  "spigotReviews.notFound": {
+    "defaultMessage": "Dieses Plugin konnte nicht auf SpigotMC gefunden werden."
+  },
+  "spigotReviews.posted": {
+    "defaultMessage": "Veröffentlicht {time}"
+  },
+  "spigotReviews.ratingsCount": {
+    "defaultMessage": "{count, plural, one {# Bewertung} other {# Bewertungen}}"
+  },
+  "spigotReviews.sortBy": {
+    "defaultMessage": "Sortieren nach:"
+  },
+  "spigotReviews.sortLabel": {
+    "defaultMessage": "Bewertungen sortieren"
+  },
+  "spigotReviews.sortLowestRating": {
+    "defaultMessage": "Am niedrigsten bewertet"
+  },
+  "spigotReviews.sortNewest": {
+    "defaultMessage": "Neueste"
+  },
+  "spigotReviews.sortOldest": {
+    "defaultMessage": "Älteste"
+  },
+  "spigotReviews.sortRating": {
+    "defaultMessage": "Am höchsten bewertet"
+  },
+  "spigotReviews.title": {
+    "defaultMessage": "Bewertungen von der Community"
+  },
+  "spigotReviews.unknownAuthor": {
+    "defaultMessage": "SpigotMC-Mitglied"
+  },
+  "spigotReviews.version": {
+    "defaultMessage": "Version {version}"
+  },
+  "spigotReviews.writeReview": {
+    "defaultMessage": "Schreibe eine Bewertung"
   },
   "toolsSidebar.copied": {
     "defaultMessage": "Kopiert!"

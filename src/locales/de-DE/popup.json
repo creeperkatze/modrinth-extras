@@ -107,6 +107,9 @@
   "feature.projectCardActions.description": {
     "defaultMessage": "Projekte direkt über ihre Projektkarten herunterladen, folgen und speichern."
   },
+  "feature.projectCardActions.downloadDependencies": {
+    "defaultMessage": "Abhängigkeiten herunterladen"
+  },
   "feature.projectCardActions.gameVersion": {
     "defaultMessage": "Spielversion"
   },
@@ -133,6 +136,24 @@
   },
   "feature.quickSearch.title": {
     "defaultMessage": "Schnellsuche"
+  },
+  "feature.reviews.description": {
+    "defaultMessage": "Fügt Projekten einen Bewertungs-Tab mit Bewertungen aus der Community von ModDex und SpigotMC hinzu."
+  },
+  "feature.reviews.getModdexToken": {
+    "defaultMessage": "<link>API-Token für ModDex erhalten</link>"
+  },
+  "feature.reviews.moddex": {
+    "defaultMessage": "Bewertungen von ModDex"
+  },
+  "feature.reviews.moddexApiToken": {
+    "defaultMessage": "API-Token für ModDex"
+  },
+  "feature.reviews.spigot": {
+    "defaultMessage": "Bewertungen von SpigotMC"
+  },
+  "feature.reviews.title": {
+    "defaultMessage": "Bewertungen"
   },
   "feature.searchBackground.description": {
     "defaultMessage": "Zeige auf den Entdeckungsseiten einen Banner-Hintergrund an."

@@ -8,6 +8,9 @@
   "feature.accentColor.title": {
     "defaultMessage": "Color de acento"
   },
+  "feature.activitySparkline.days": {
+    "defaultMessage": "{count, plural, one {# día} other {# días}}"
+  },
   "feature.activitySparkline.description": {
     "defaultMessage": "Gráfica de actividad de publicaciones en las páginas del proyecto."
   },
@@ -104,6 +107,9 @@
   "feature.projectCardActions.description": {
     "defaultMessage": "Descargar, seguir, y guardar proyectos directamente de sus fichas."
   },
+  "feature.projectCardActions.downloadDependencies": {
+    "defaultMessage": "Descargar dependencias"
+  },
   "feature.projectCardActions.gameVersion": {
     "defaultMessage": "Versión del juego"
   },
@@ -130,6 +136,24 @@
   },
   "feature.quickSearch.title": {
     "defaultMessage": "Búsqueda rápida"
+  },
+  "feature.reviews.description": {
+    "defaultMessage": "Añade una pestaña de Reseñas a proyectos con reseñas de la comunidad de ModDex y SpigotMC."
+  },
+  "feature.reviews.getModdexToken": {
+    "defaultMessage": "<link>Obtén un token de API de ModDex</link>"
+  },
+  "feature.reviews.moddex": {
+    "defaultMessage": "Reseñas de ModDex"
+  },
+  "feature.reviews.moddexApiToken": {
+    "defaultMessage": "Token de API de ModDex"
+  },
+  "feature.reviews.spigot": {
+    "defaultMessage": "Reseñas de SpigotMC"
+  },
+  "feature.reviews.title": {
+    "defaultMessage": "Reseñas"
   },
   "feature.searchBackground.description": {
     "defaultMessage": "Mostrar un fondo de banner en las páginas para descubrir."

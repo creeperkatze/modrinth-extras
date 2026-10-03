@@ -71,6 +71,99 @@
   "errorNotice.message": {
     "defaultMessage": "Ошибка может быть связана с Modrinth Extras. Отключите расширение и обновите страницу перед отправкой отчёта в Modrinth. Если ошибка исчезнет, сообщите об этом <link>здесь</link>."
   },
+  "moddexReviews.aesthetics": {
+    "defaultMessage": "Эстетика"
+  },
+  "moddexReviews.createToken": {
+    "defaultMessage": "Создать токен"
+  },
+  "moddexReviews.credit": {
+    "defaultMessage": "Отзывы берутся из <link>ModDex</link> и написаны его сообществом."
+  },
+  "moddexReviews.developer": {
+    "defaultMessage": "Разработчик"
+  },
+  "moddexReviews.edited": {
+    "defaultMessage": "Изменено"
+  },
+  "moddexReviews.empty": {
+    "defaultMessage": "Отзывов пока нет. Напишите первый!"
+  },
+  "moddexReviews.gameplay": {
+    "defaultMessage": "Геймплей"
+  },
+  "moddexReviews.helpful": {
+    "defaultMessage": "{count, plural, one {# человек посчитал это полезным} few {# человека посчитали это полезным} other {# человек посчитали это полезным}}"
+  },
+  "moddexReviews.invalidTokenTitle": {
+    "defaultMessage": "Ваш API-токен ModDex недействителен или просрочен"
+  },
+  "moddexReviews.loadError": {
+    "defaultMessage": "Не удалось загрузить отзывы из ModDex"
+  },
+  "moddexReviews.loading": {
+    "defaultMessage": "Загрузка отзывов..."
+  },
+  "moddexReviews.moderatorNote": {
+    "defaultMessage": "Примечание модератора:"
+  },
+  "moddexReviews.noTokenTitle": {
+    "defaultMessage": "Требуется API-токен ModDex"
+  },
+  "moddexReviews.notFound": {
+    "defaultMessage": "Этот проект не найден на ModDex."
+  },
+  "moddexReviews.openModdex": {
+    "defaultMessage": "Открыть ModDex"
+  },
+  "moddexReviews.performance": {
+    "defaultMessage": "Производительность"
+  },
+  "moddexReviews.playtime": {
+    "defaultMessage": "Сыграно {hours, number} ч."
+  },
+  "moddexReviews.posted": {
+    "defaultMessage": "Опубликовано {time}"
+  },
+  "moddexReviews.rateLimited": {
+    "defaultMessage": "Слишком много запросов ModDex. Повторите попытку позже"
+  },
+  "moddexReviews.ratingsCount": {
+    "defaultMessage": "{count, plural, one {# оценка} few {# оценки} other {# оценок}}"
+  },
+  "moddexReviews.sortBy": {
+    "defaultMessage": "Сортировка:"
+  },
+  "moddexReviews.sortHelpful": {
+    "defaultMessage": "Полезность"
+  },
+  "moddexReviews.sortLabel": {
+    "defaultMessage": "Сортировка отзывов"
+  },
+  "moddexReviews.sortLowestRating": {
+    "defaultMessage": "Худшая оценка"
+  },
+  "moddexReviews.sortNewest": {
+    "defaultMessage": "Новые"
+  },
+  "moddexReviews.sortOldest": {
+    "defaultMessage": "Старые"
+  },
+  "moddexReviews.sortRating": {
+    "defaultMessage": "Лучшая оценка"
+  },
+  "moddexReviews.sortUnhelpful": {
+    "defaultMessage": "Бесполезность"
+  },
+  "moddexReviews.title": {
+    "defaultMessage": "Отзывы сообщества"
+  },
+  "moddexReviews.tokenHelp": {
+    "defaultMessage": "Отзывы видны только авторизованным пользователям API. Создайте токен на ModDex и вставьте его в окно Modrinth Extras в разделе отзывов."
+  },
+  "moddexReviews.writeReview": {
+    "defaultMessage": "Написать отзыв"
+  },
   "modpacksSidebar.title": {
     "defaultMessage": "Сборки"
   },
@@ -161,6 +254,12 @@
   "projectCardActions.unfollow": {
     "defaultMessage": "Отписаться"
   },
+  "projectReviews.source": {
+    "defaultMessage": "Источник отзыва"
+  },
+  "projectReviews.tab": {
+    "defaultMessage": "Отзывы"
+  },
   "quickSearch.clearRecent": {
     "defaultMessage": "Очистить недавние"
   },
@@ -193,6 +292,63 @@
   },
   "repositorySidebar.title": {
     "defaultMessage": "Репозиторий"
+  },
+  "reviewStars.rating": {
+    "defaultMessage": "Оценка: {rating}/5"
+  },
+  "spigotReviews.authorResponse": {
+    "defaultMessage": "Ответ автора:"
+  },
+  "spigotReviews.credit": {
+    "defaultMessage": "Отзывы берутся из <link>SpigotMC</link> и написаны его сообществом."
+  },
+  "spigotReviews.empty": {
+    "defaultMessage": "Отзывов пока нет."
+  },
+  "spigotReviews.loadError": {
+    "defaultMessage": "Не удалось загрузить отзывы из SpigotMC"
+  },
+  "spigotReviews.loading": {
+    "defaultMessage": "Загрузка отзывов..."
+  },
+  "spigotReviews.notFound": {
+    "defaultMessage": "Этот плагин не найден на SpigotMC."
+  },
+  "spigotReviews.posted": {
+    "defaultMessage": "Опубликовано {time}"
+  },
+  "spigotReviews.ratingsCount": {
+    "defaultMessage": "{count, plural, one {# оценка} few {# оценки} other {# оценок}}"
+  },
+  "spigotReviews.sortBy": {
+    "defaultMessage": "Сортировка:"
+  },
+  "spigotReviews.sortLabel": {
+    "defaultMessage": "Сортировка отзывов"
+  },
+  "spigotReviews.sortLowestRating": {
+    "defaultMessage": "Худшая оценка"
+  },
+  "spigotReviews.sortNewest": {
+    "defaultMessage": "Новые"
+  },
+  "spigotReviews.sortOldest": {
+    "defaultMessage": "Старые"
+  },
+  "spigotReviews.sortRating": {
+    "defaultMessage": "Лучшая оценка"
+  },
+  "spigotReviews.title": {
+    "defaultMessage": "Отзывы сообщества"
+  },
+  "spigotReviews.unknownAuthor": {
+    "defaultMessage": "Участник SpigotMC"
+  },
+  "spigotReviews.version": {
+    "defaultMessage": "Версия {version}"
+  },
+  "spigotReviews.writeReview": {
+    "defaultMessage": "Написать отзыв"
   },
   "toolsSidebar.copied": {
     "defaultMessage": "Скопировано!"
