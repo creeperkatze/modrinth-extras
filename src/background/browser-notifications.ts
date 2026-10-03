@@ -1,11 +1,11 @@
 import { browser } from 'wxt/browser'
 
+import { getSettings } from '../core/settings'
 import {
 	fetchExtraNotificationData,
 	groupNotifications,
 	type Notification,
-} from '../utils/notifications'
-import { getSettings } from '../utils/settings'
+} from '../features/notifications/notifications'
 
 // Maps notification ID to the relative link so the click handler can open the right page
 export const notificationLinks = new Map<string, string>()

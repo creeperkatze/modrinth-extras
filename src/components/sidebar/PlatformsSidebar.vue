@@ -71,11 +71,15 @@ import { defineMessages, useVIntl } from '@modrinth/ui'
 import { onMounted, ref } from 'vue'
 import { browser } from 'wxt/browser'
 
+import { modrinthClient } from '../../api/client'
 import CurseForgeIcon from '../../assets/icons/platforms/curseforge.svg?component'
 import HangarIcon from '../../assets/icons/platforms/hangar.svg?component'
 import SpigotIcon from '../../assets/icons/platforms/spigot.svg?component'
-import { modrinthClient } from '../../utils/api'
-import { getMatchableProject, type Platform, type PlatformMatch } from '../../utils/platforms'
+import {
+	getMatchableProject,
+	type Platform,
+	type PlatformMatch,
+} from '../../features/platforms/platforms'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({

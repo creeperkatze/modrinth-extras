@@ -147,8 +147,8 @@ import { defineMessages, IconButton, useVIntl } from '@modrinth/ui'
 import { storage } from '@wxt-dev/storage'
 import { type Component, computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
-import { modrinthClient } from '../../utils/api'
-import { navigate } from '../../utils/page-router'
+import { modrinthClient } from '../../api/client'
+import { navigate } from '../../content/page-router'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({

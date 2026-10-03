@@ -242,7 +242,8 @@ import {
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { browser } from 'wxt/browser'
 
-import { invalidateTokenCache, modrinthClient } from '../../utils/api'
+import { invalidateTokenCache, modrinthClient } from '../../api/client'
+import { navigate, resolveLink } from '../../content/page-router'
 import {
 	fetchExtraNotificationData,
 	fetchNotifications,
@@ -251,9 +252,8 @@ import {
 	type Notification,
 	type NotificationExtraData,
 	syncToBackground,
-} from '../../utils/notifications'
-import { navigate, resolveLink } from '../../utils/page-router'
-import { acceptTeamInvite, removeSelfFromTeam } from '../../utils/teams'
+} from '../../features/notifications/notifications'
+import { acceptTeamInvite, removeSelfFromTeam } from '../../features/notifications/teams'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({

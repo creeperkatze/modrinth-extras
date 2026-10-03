@@ -61,12 +61,12 @@ import { defineMessages, useVIntl } from '@modrinth/ui'
 import { computed, onMounted, ref } from 'vue'
 import { browser } from 'wxt/browser'
 
-import { modrinthClient } from '../../utils/api'
+import { modrinthClient } from '../../api/client'
 import {
 	detectRepository,
 	getRepositoryLinks,
 	type RepositoryInfo,
-} from '../../utils/repository-links'
+} from '../../features/repository/repository-links'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({

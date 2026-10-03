@@ -1,4 +1,4 @@
-import type { MatchableProject, PlatformMatch } from '../../utils/platforms'
+import type { MatchableProject, PlatformMatch } from '../../features/platforms/platforms'
 import { findCurseForgeProject, findCurseForgeUser } from './curseforge'
 import { findHangarProject, findHangarUser } from './hangar'
 import { findSpigotProject, findSpigotUser } from './spigot'

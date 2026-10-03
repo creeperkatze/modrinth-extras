@@ -269,6 +269,7 @@ import {
 	ROOT_NODE_RADIUS,
 	useForceGraph,
 } from '../../composables/useForceGraph'
+import { navigate, resolveLink } from '../../content/page-router'
 import {
 	buildEnrichedDeps,
 	type EnrichedDep,
@@ -276,8 +277,7 @@ import {
 	fetchDependencyGraphRoot,
 	indexProjectsById,
 	isGraphDependency,
-} from '../../utils/dependencies'
-import { navigate, resolveLink } from '../../utils/page-router'
+} from '../../features/dependencies/dependencies'
 
 // Cast: duplicate `vue` instances under pnpm make `@modrinth/assets`/`@modrinth/ui` `Component` types nominally unrelated.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

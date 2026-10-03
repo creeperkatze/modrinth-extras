@@ -8,8 +8,8 @@ import {
 import type { App } from 'vue'
 import { createI18n } from 'vue-i18n'
 
+import { getSettings } from '../settings'
 import { LOCALES } from './locales'
-import { getSettings } from './settings'
 
 const LOCALE_CODES = new Set(LOCALES.map((l) => l.code))
 

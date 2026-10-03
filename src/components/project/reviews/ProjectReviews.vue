@@ -38,10 +38,10 @@
 import { defineMessages, Tabs, type TabsTab, useVIntl } from '@modrinth/ui'
 import { type Component, computed, onMounted, onUnmounted, ref, shallowRef } from 'vue'
 
+import { modrinthClient } from '../../../api/client'
 import ModdexLogo from '../../../assets/icons/moddex.svg?component'
 import SpigotIcon from '../../../assets/icons/spigot.svg?component'
-import { modrinthClient } from '../../../utils/api'
-import { getMatchableProject, type MatchableProject } from '../../../utils/platforms'
+import { getMatchableProject, type MatchableProject } from '../../../features/platforms/platforms'
 import ModdexReviews from './ModdexReviews.vue'
 import SpigotReviews from './SpigotReviews.vue'
 

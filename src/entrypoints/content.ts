@@ -20,12 +20,12 @@ import RepositorySidebar from '../components/sidebar/RepositorySidebar.vue'
 import ToolsSidebar from '../components/sidebar/ToolsSidebar.vue'
 import ErrorNotice from '../components/site/ErrorNotice.vue'
 import FooterBadge from '../components/site/FooterBadge.vue'
-import { applyAccentColor } from '../utils/accent-color'
-import { initFollowState } from '../utils/follow-state'
-import { detectBrowserLocale, i18n, installI18n, loadSavedLocale } from '../utils/i18n'
-import { navigate } from '../utils/page-router'
-import { DEFAULTS, type ExtensionSettings, getSettings, withoutSecrets } from '../utils/settings'
-import { isTranslationSupported } from '../utils/translate-description'
+import { navigate } from '../content/page-router'
+import { detectBrowserLocale, i18n, installI18n, loadSavedLocale } from '../core/i18n/i18n'
+import { DEFAULTS, type ExtensionSettings, getSettings, withoutSecrets } from '../core/settings'
+import { applyAccentColor } from '../features/accent-color/accent-color'
+import { initFollowState } from '../features/project-cards/follow-state'
+import { isTranslationSupported } from '../features/translation/translate-description'
 
 // Gate injections until Nuxt hydration is complete. The router-bridge
 // (MAIN world) dispatches "modrinth-extras:router-ready" once it hooks

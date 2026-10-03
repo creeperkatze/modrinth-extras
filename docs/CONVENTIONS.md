@@ -6,11 +6,13 @@ Formatted with Prettier: tabs, single quotes, no semicolons, trailing commas, 10
 
 ## API calls
 
-Use the shared `apiFetch` helper rather than calling `fetch` directly. It reads the auth token from the `auth-token` cookie automatically. Pass `{ apiVersion: 3 }` for v3 endpoints.
+Use the shared `modrinthClient` from `src/api/client.ts` rather than calling `fetch` directly. It reads the auth token from the `auth-token` cookie automatically. It also shares identical GET requests between components and pauses after being rate limited, so fetching the same data from several components is fine.
 
 ## Settings
 
 Read settings through the shared `getSettings()` helper. Never read extension storage directly from components.
+
+Any setting that holds a credential, like an API token, must be listed in `SECRET_SETTINGS`. Use `withoutSecrets()` whenever settings are logged or sent anywhere.
 
 ## Logging
 

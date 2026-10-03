@@ -2,6 +2,16 @@
 
 Modrinth Extras is a WXT-based browser extension with two content-script worlds and a background service worker.
 
+## Project structure
+
+- `src/entrypoints/` holds the WXT entrypoints. Keep them thin and wire things up from the folders below.
+- `src/api/` talks to Modrinth: the shared `modrinthClient`, its request cache, and API helpers.
+- `src/core/` holds services every context uses: settings, Modrinth flags, telemetry and i18n. Features may import from `core/`, never the other way round.
+- `src/content/` is the content-script runtime, like SPA navigation helpers.
+- `src/features/<feature>/` holds the logic of one feature. Its Vue components stay in `src/components/`, grouped by where they appear on the page.
+- `src/background/` holds service worker logic. `background/external/` has the clients for other platforms, which only run in the worker.
+- `src/utils/` is only for small generic helpers. If a helper imports the API client or settings, it belongs somewhere else.
+
 ## Content script worlds
 
 - The main content script runs in the ISOLATED world. It cannot access page JavaScript; it mounts all Vue components, handles settings, and listens for browser messages.

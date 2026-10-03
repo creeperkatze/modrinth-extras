@@ -1,7 +1,7 @@
 import type { Labrinth } from '@modrinth/api-client'
 import { ref } from 'vue'
 
-import { modrinthClient } from './api'
+import { modrinthClient } from '../../api/client'
 
 export const collections = ref<Labrinth.Collections.Collection[] | null>(null)
 

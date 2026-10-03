@@ -191,16 +191,16 @@ import { configuredXss } from '@modrinth/utils'
 import { computed, onMounted, ref, watch } from 'vue'
 import { browser } from 'wxt/browser'
 
+import { modrinthClient } from '../../../api/client'
 import type {
 	SpigotReview,
 	SpigotReviewSort,
 	SpigotReviewsPage,
 	SpigotReviewsResult,
 } from '../../../background/external/spigot'
-import { modrinthClient } from '../../../utils/api'
-import { i18n } from '../../../utils/i18n'
-import { navigate } from '../../../utils/page-router'
-import type { MatchableProject } from '../../../utils/platforms'
+import { navigate } from '../../../content/page-router'
+import { i18n } from '../../../core/i18n/i18n'
+import type { MatchableProject } from '../../../features/platforms/platforms'
 import ReviewStars from './ReviewStars.vue'
 
 const props = defineProps<{ project: MatchableProject }>()

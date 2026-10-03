@@ -95,7 +95,7 @@ import { Avatar, defineMessages, useVIntl } from '@modrinth/ui'
 import { onMounted, ref } from 'vue'
 import { browser } from 'wxt/browser'
 
-import { modrinthClient } from '../../utils/api'
+import { modrinthClient } from '../../api/client'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({

@@ -64,7 +64,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
-import { modrinthClient } from '../../utils/api'
+import { modrinthClient } from '../../api/client'
 
 const props = defineProps<{ projectSlug: string; days: number }>()
 

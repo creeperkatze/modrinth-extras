@@ -1,6 +1,6 @@
 import type { Labrinth } from '@modrinth/api-client'
 
-import { modrinthClient } from './api'
+import { modrinthClient } from '../../api/client'
 
 export type Platform = 'curseforge' | 'hangar' | 'spigot'
 

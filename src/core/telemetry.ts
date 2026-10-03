@@ -2,7 +2,7 @@ import { createAnalytics } from '@wxt-dev/analytics'
 import { posthog } from '@wxt-dev/analytics/providers/posthog'
 import { browser } from 'wxt/browser'
 
-import { detectBrowserLocale } from './i18n'
+import { detectBrowserLocale } from './i18n/i18n'
 import { type ExtensionSettings, getSettings, withoutSecrets } from './settings'
 
 export const analytics = createAnalytics({

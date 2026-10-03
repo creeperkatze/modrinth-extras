@@ -7,14 +7,14 @@ import SpigetClient, {
 	type SpigetPaginatedResponse,
 } from 'spiget-js'
 
-import { USER_AGENT } from '../../utils/api'
+import { USER_AGENT } from '../../api/client'
 import {
 	type MatchableProject,
 	matchProject,
 	nameMatch,
 	namesMatch,
 	type PlatformMatch,
-} from '../../utils/platforms'
+} from '../../features/platforms/platforms'
 
 // Spiget's CORS rules reject a custom User-Agent, so it goes in the header Spiget allows instead.
 const spigetFetch: typeof globalThis.fetch = (input, init) => {

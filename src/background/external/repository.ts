@@ -1,4 +1,4 @@
-import type { RepositoryPlatform } from '../../utils/repository-links'
+import type { RepositoryPlatform } from '../../features/repository/repository-links'
 import { fetchBitbucketStats } from './bitbucket'
 import { fetchCodebergStats } from './codeberg'
 import { fetchGitHubStats } from './github'

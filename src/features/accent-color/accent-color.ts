@@ -1,5 +1,5 @@
-import { hexToRgb } from './color'
-import type { ExtensionSettings } from './settings'
+import type { ExtensionSettings } from '../../core/settings'
+import { hexToRgb } from '../../utils/color'
 
 export function applyAccentColor(settings: Pick<ExtensionSettings, 'accentColor'>) {
 	const root = document.documentElement.style

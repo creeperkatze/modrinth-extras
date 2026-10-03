@@ -52,7 +52,7 @@ import { LoaderCircleIcon, TriangleAlertIcon } from '@modrinth/assets'
 import { Avatar, defineMessages, ScrollablePanel, useVIntl } from '@modrinth/ui'
 import { onMounted, ref } from 'vue'
 
-import { modrinthClient } from '../../utils/api'
+import { modrinthClient } from '../../api/client'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({

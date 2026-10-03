@@ -296,9 +296,9 @@ import type {
 	ModdexReviewsResult,
 	ModdexSummary,
 } from '../../../background/external/moddex'
-import { formatGameVersions, loadGameVersionTags } from '../../../utils/game-versions'
-import { i18n } from '../../../utils/i18n'
-import { getSettings } from '../../../utils/settings'
+import { i18n } from '../../../core/i18n/i18n'
+import { getSettings } from '../../../core/settings'
+import { formatGameVersions, loadGameVersionTags } from '../../../features/reviews/game-versions'
 import ReviewStars from './ReviewStars.vue'
 
 // Reviews are untrusted, so raw HTML and images are off before Modrinth's sanitizer runs.

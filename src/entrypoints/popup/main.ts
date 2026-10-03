@@ -5,7 +5,7 @@ import 'floating-vue/dist/style.css'
 import FloatingVue from 'floating-vue'
 import { createApp, h } from 'vue'
 
-import { installI18n, loadSavedLocale } from '../../utils/i18n'
+import { installI18n, loadSavedLocale } from '../../core/i18n/i18n'
 import App from './App.vue'
 
 function applyTheme(dark: boolean) {

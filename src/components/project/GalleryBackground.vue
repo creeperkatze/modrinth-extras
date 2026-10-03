@@ -22,7 +22,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 
-import { modrinthClient } from '../../utils/api'
+import { modrinthClient } from '../../api/client'
 
 const props = defineProps<{ projectSlug: string }>()
 

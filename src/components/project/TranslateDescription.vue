@@ -17,12 +17,12 @@ import { LanguagesIcon, LoaderCircleIcon } from '@modrinth/assets'
 import { defineMessages, useVIntl } from '@modrinth/ui'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 
-import { i18n } from '../../utils/i18n'
+import { i18n } from '../../core/i18n/i18n'
 import {
 	createTranslator,
 	detectTranslationCandidate,
 	type TranslationCandidate,
-} from '../../utils/translate-description'
+} from '../../features/translation/translate-description'
 
 const { formatMessage } = useVIntl()
 

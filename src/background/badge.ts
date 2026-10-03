@@ -2,9 +2,13 @@ import type { Labrinth } from '@modrinth/api-client'
 import { storage } from '@wxt-dev/storage'
 import { browser } from 'wxt/browser'
 
-import { getBackgroundAuthToken, modrinthClient } from '../utils/api'
-import { fetchNotifications, groupNotifications, type Notification } from '../utils/notifications'
-import { getSettings } from '../utils/settings'
+import { getBackgroundAuthToken, modrinthClient } from '../api/client'
+import { getSettings } from '../core/settings'
+import {
+	fetchNotifications,
+	groupNotifications,
+	type Notification,
+} from '../features/notifications/notifications'
 import { sendBrowserNotifications } from './browser-notifications'
 
 export const notificationsItem = storage.defineItem<Notification[] | null>('local:notifications', {

@@ -1,12 +1,12 @@
 import CurseForgeClient, { GameId, type Mod, ModsSearchSortField } from 'curseforge-js'
 
-import { boundFetch, USER_AGENT } from '../../utils/api'
+import { boundFetch, USER_AGENT } from '../../api/client'
 import {
 	type MatchableProject,
 	matchProject,
 	namesMatch,
 	type PlatformMatch,
-} from '../../utils/platforms'
+} from '../../features/platforms/platforms'
 
 // CurseForge's API needs a key that cannot ship in a public extension; api.curse.tools mirrors it keylessly.
 const client = new CurseForgeClient({

@@ -1,7 +1,7 @@
 import type { Labrinth } from '@modrinth/api-client'
 
-import { modrinthClient } from './api'
-import { chunkIdsForQuery } from './query'
+import { modrinthClient } from '../../api/client'
+import { chunkIdsForQuery } from '../../api/query'
 
 export interface QuickDownloadSettings {
 	modLoader: string

@@ -1,7 +1,7 @@
 import type { Labrinth } from '@modrinth/api-client'
 import { formatVersionsForDisplay, type GameVersionTag } from '@modrinth/utils'
 
-import { modrinthClient } from './api'
+import { modrinthClient } from '../../api/client'
 
 let tagsPromise: Promise<GameVersionTag[]> | null = null
 

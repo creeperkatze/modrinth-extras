@@ -1,7 +1,7 @@
 import type { Labrinth } from '@modrinth/api-client'
 import { ref } from 'vue'
 
-import { modrinthClient } from './api'
+import { modrinthClient } from '../../api/client'
 
 export const followUserId = ref<string | null | undefined>(undefined)
 export const followedSlugs = ref<Set<string> | null>(null)

@@ -305,22 +305,22 @@ import { storage } from '@wxt-dev/storage'
 import { type Component, computed, onMounted, reactive, ref, watch } from 'vue'
 import { browser } from 'wxt/browser'
 
+import { modrinthClient } from '../../api/client'
 import KofiIcon from '../../assets/icons/kofi.svg?component'
 import CompactCombobox from '../../components/ui/CompactCombobox.vue'
-import Logo from '../../public/logo.svg?component'
-import { applyAccentColor } from '../../utils/accent-color'
-import { modrinthClient } from '../../utils/api'
-import { detectBrowserLocale, i18n } from '../../utils/i18n'
-import { LOCALES } from '../../utils/locales'
+import { detectBrowserLocale, i18n } from '../../core/i18n/i18n'
+import { LOCALES } from '../../core/i18n/locales'
 import {
 	getModrinthFlags,
 	MODRINTH_FLAG_DEFAULTS,
 	type ModrinthFlagKey,
 	setModrinthFlag,
-} from '../../utils/modrinth-flags'
-import { DEFAULTS, type ExtensionSettings, getSettings, saveSettings } from '../../utils/settings'
-import { setTelemetryEnabled } from '../../utils/telemetry'
-import { isTranslationSupported } from '../../utils/translate-description'
+} from '../../core/modrinth-flags'
+import { DEFAULTS, type ExtensionSettings, getSettings, saveSettings } from '../../core/settings'
+import { setTelemetryEnabled } from '../../core/telemetry'
+import { applyAccentColor } from '../../features/accent-color/accent-color'
+import { isTranslationSupported } from '../../features/translation/translate-description'
+import Logo from '../../public/logo.svg?component'
 import DiscordCard from './components/DiscordCard.vue'
 import DonateCard from './components/DonateCard.vue'
 import FeatureGroup from './components/FeatureGroup.vue'

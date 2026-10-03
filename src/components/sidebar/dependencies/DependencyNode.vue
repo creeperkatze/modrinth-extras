@@ -64,8 +64,8 @@ import { ChevronRightIcon } from '@modrinth/assets'
 import { Avatar, defineMessages, useVIntl } from '@modrinth/ui'
 import { computed, ref } from 'vue'
 
-import { type EnrichedDep } from '../../../utils/dependencies'
-import { navigate } from '../../../utils/page-router'
+import { navigate } from '../../../content/page-router'
+import { type EnrichedDep } from '../../../features/dependencies/dependencies'
 
 defineOptions({ name: 'DependencyNode' })
 
