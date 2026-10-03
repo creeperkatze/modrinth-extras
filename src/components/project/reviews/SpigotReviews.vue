@@ -90,7 +90,7 @@
 			</div>
 
 			<article
-				v-for="review in reviews"
+				v-for="{ review, version } in reviewsWithVersions"
 				:key="review.key"
 				class="flex flex-col gap-3 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
 			>
@@ -133,18 +133,18 @@
 				<!-- eslint-disable vue/no-v-html -->
 				<div class="markdown-body break-words text-primary" v-html="renderReview(review.message)" />
 
-				<PageHeaderMetadata v-if="review.version">
+				<PageHeaderMetadata v-if="version">
 					<PageHeaderMetadataItem :icon="VersionIcon">
 						<a
-							v-if="versionPaths.has(review.version)"
-							:href="versionPaths.get(review.version)"
+							v-if="version.path"
+							:href="version.path"
 							class="no-click-animation hover:underline"
-							@click="openVersion($event, versionPaths.get(review.version)!)"
+							@click="openVersion($event, version.path)"
 						>
-							{{ formatMessage(messages.version, { version: review.version }) }}
+							{{ formatMessage(messages.version, { version: version.label }) }}
 						</a>
 						<template v-else>
-							{{ formatMessage(messages.version, { version: review.version }) }}
+							{{ formatMessage(messages.version, { version: version.label }) }}
 						</template>
 					</PageHeaderMetadataItem>
 				</PageHeaderMetadata>
@@ -265,8 +265,48 @@ const page = ref<SpigotReviewsPage | null>(null)
 const sort = ref<ReviewSort>('newest')
 const PLUGIN_LOADERS = new Set(['bukkit', 'spigot', 'paper', 'purpur', 'folia'])
 
-const versionPaths = ref(new Map<string, string>())
+interface ModrinthVersion {
+	number: string
+	path: string
+	published: number
+}
+
+// Plugin builds come first, since a version number can have one build per loader.
+const modrinthVersions = ref<ModrinthVersion[]>([])
 let requestId = 0
+
+// Spigot version names are free text, like "[6.0.4.0]" or "v2.3.1".
+function normalizeVersion(name: string): string {
+	return name
+		.toLowerCase()
+		.replace(/^[\s[(]*v?/, '')
+		.replace(/[\s\])]*$/, '')
+}
+
+function resolveVersion(review: SpigotReview): { label: string; path: string | null } | null {
+	// "Latest" means the version that was newest when the review was written.
+	if (/^\W*latest\W*$/i.test(review.version)) {
+		const reviewed = Date.parse(review.createdAt)
+		const current = modrinthVersions.value
+			.filter((version) => version.published <= reviewed)
+			.reduce<ModrinthVersion | null>(
+				(newest, version) => (newest && newest.published >= version.published ? newest : version),
+				null,
+			)
+		return current ? { label: current.number, path: current.path } : null
+	}
+
+	// Names without a digit, like "Deleted", are not versions.
+	if (!/\d/.test(review.version)) return null
+
+	const name = normalizeVersion(review.version)
+	const match = modrinthVersions.value.find((version) => normalizeVersion(version.number) === name)
+	return { label: review.version, path: match?.path ?? null }
+}
+
+const reviewsWithVersions = computed(() =>
+	reviews.value.map((review) => ({ review, version: resolveVersion(review) })),
+)
 
 // Spigot smilies use relative image paths that would break here, so images go before sanitizing.
 function renderReview(html: string): string {
@@ -323,8 +363,8 @@ function switchPage(pageNumber: number) {
 
 watch(sort, () => void load(1))
 
-// Spigot and Modrinth name versions independently, so only exact matches get a link.
-async function loadVersionPaths() {
+// Spigot and Modrinth name versions independently, so only matching names get a link.
+async function loadModrinthVersions() {
 	try {
 		const versions = await modrinthClient.labrinth.versions_v3.getProjectVersions(
 			props.project.slug,
@@ -333,18 +373,14 @@ async function loadVersionPaths() {
 		const projectPath = window.location.pathname.match(/^\/[^/]+\/[^/]+/)?.[0]
 		if (!projectPath) return
 
-		// A number can have one build per loader, and the review is about the plugin build.
 		const isPlugin = (loaders: string[]) => loaders.some((loader) => PLUGIN_LOADERS.has(loader))
-		const sorted = [...versions].sort(
-			(a, b) => Number(isPlugin(b.loaders)) - Number(isPlugin(a.loaders)),
-		)
-		const paths = new Map<string, string>()
-		for (const version of sorted) {
-			if (!paths.has(version.version_number)) {
-				paths.set(version.version_number, `${projectPath}/version/${version.id}`)
-			}
-		}
-		versionPaths.value = paths
+		modrinthVersions.value = [...versions]
+			.sort((a, b) => Number(isPlugin(b.loaders)) - Number(isPlugin(a.loaders)))
+			.map((version) => ({
+				number: version.version_number,
+				path: `${projectPath}/version/${version.id}`,
+				published: Date.parse(version.date_published),
+			}))
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to load Modrinth versions for SpigotMC reviews:', err)
 	}
@@ -359,6 +395,6 @@ function openVersion(event: MouseEvent, path: string) {
 
 onMounted(() => {
 	void load(1)
-	void loadVersionPaths()
+	void loadModrinthVersions()
 })
 </script>
