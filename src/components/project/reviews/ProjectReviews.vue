@@ -30,6 +30,7 @@
 				/>
 				<SpigotReviews
 					v-else-if="source === 'spigot' && projectTitle"
+					:project-slug="projectSlug"
 					:project-title="projectTitle"
 				/>
 			</KeepAlive>

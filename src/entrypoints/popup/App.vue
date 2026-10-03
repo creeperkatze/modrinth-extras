@@ -554,7 +554,7 @@ const messages = defineMessages({
 	},
 	'feature.reviews.spigot': {
 		id: 'feature.reviews.spigot',
-		defaultMessage: 'SpigotMC reviews (plugins only)',
+		defaultMessage: 'SpigotMC reviews',
 	},
 	'feature.notificationBadge.title': {
 		id: 'feature.notificationBadge.title',

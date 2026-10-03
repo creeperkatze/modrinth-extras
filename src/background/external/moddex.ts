@@ -20,7 +20,6 @@ export interface ModdexReviewsPage {
 	summary: ModdexSummary | null
 	page: number
 	lastPage: number
-	total: number
 	projectUrl: string
 }
 
@@ -78,7 +77,6 @@ export async function fetchModdexReviews(
 						: null,
 					page: res.meta.current_page,
 					lastPage: res.meta.last_page,
-					total: res.meta.total,
 					projectUrl: `https://moddex.gg/${kind}/${encodeURIComponent(slug)}`,
 				},
 			}

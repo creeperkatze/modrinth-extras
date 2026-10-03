@@ -136,13 +136,16 @@
 				<PageHeaderMetadata v-if="review.version">
 					<PageHeaderMetadataItem :icon="VersionIcon">
 						<a
-							:href="`${page.resourceUrl}history`"
-							target="_blank"
-							rel="noopener"
+							v-if="versionPaths.has(review.version)"
+							:href="versionPaths.get(review.version)"
 							class="no-click-animation hover:underline"
+							@click="openVersion($event, versionPaths.get(review.version)!)"
 						>
 							{{ formatMessage(messages.version, { version: review.version }) }}
 						</a>
+						<template v-else>
+							{{ formatMessage(messages.version, { version: review.version }) }}
+						</template>
 					</PageHeaderMetadataItem>
 				</PageHeaderMetadata>
 
@@ -194,10 +197,12 @@ import type {
 	SpigotReviewsPage,
 	SpigotReviewsResult,
 } from '../../../background/external/spigot'
+import { modrinthClient } from '../../../utils/api'
 import { i18n } from '../../../utils/i18n'
+import { navigate } from '../../../utils/page-router'
 import ReviewStars from './ReviewStars.vue'
 
-const props = defineProps<{ projectTitle: string }>()
+const props = defineProps<{ projectSlug: string; projectTitle: string }>()
 
 const { formatMessage } = useVIntl()
 const formatRelativeTime = useRelativeTime()
@@ -257,6 +262,9 @@ const state = ref<State>('loading')
 const reviews = ref<SpigotReview[]>([])
 const page = ref<SpigotReviewsPage | null>(null)
 const sort = ref<ReviewSort>('newest')
+const PLUGIN_LOADERS = new Set(['bukkit', 'spigot', 'paper', 'purpur', 'folia'])
+
+const versionPaths = ref(new Map<string, string>())
 let requestId = 0
 
 // Spigot smilies use relative image paths that would break here, so images go before sanitizing.
@@ -314,5 +322,42 @@ function switchPage(pageNumber: number) {
 
 watch(sort, () => void load(1))
 
-onMounted(() => void load(1))
+// Spigot and Modrinth name versions independently, so only exact matches get a link.
+async function loadVersionPaths() {
+	try {
+		const versions = await modrinthClient.labrinth.versions_v3.getProjectVersions(
+			props.projectSlug,
+			{ include_changelog: false, apiVersion: 3 },
+		)
+		const projectPath = window.location.pathname.match(/^\/[^/]+\/[^/]+/)?.[0]
+		if (!projectPath) return
+
+		// A number can have one build per loader, and the review is about the plugin build.
+		const isPlugin = (loaders: string[]) => loaders.some((loader) => PLUGIN_LOADERS.has(loader))
+		const sorted = [...versions].sort(
+			(a, b) => Number(isPlugin(b.loaders)) - Number(isPlugin(a.loaders)),
+		)
+		const paths = new Map<string, string>()
+		for (const version of sorted) {
+			if (!paths.has(version.version_number)) {
+				paths.set(version.version_number, `${projectPath}/version/${version.id}`)
+			}
+		}
+		versionPaths.value = paths
+	} catch (err) {
+		console.error('[Modrinth Extras] Failed to load Modrinth versions for SpigotMC reviews:', err)
+	}
+}
+
+// Plain clicks stay in the page like Modrinth's own links, modified clicks open a new tab as usual.
+function openVersion(event: MouseEvent, path: string) {
+	if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return
+	event.preventDefault()
+	navigate(path)
+}
+
+onMounted(() => {
+	void load(1)
+	void loadVersionPaths()
+})
 </script>

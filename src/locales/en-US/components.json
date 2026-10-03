@@ -74,9 +74,6 @@
   "moddexReviews.aesthetics": {
     "defaultMessage": "Aesthetics"
   },
-  "moddexReviews.count": {
-    "defaultMessage": "{count, plural, one {# written review} other {# written reviews}}"
-  },
   "moddexReviews.createToken": {
     "defaultMessage": "Create a token"
   },

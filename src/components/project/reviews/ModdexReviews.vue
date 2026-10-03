@@ -135,9 +135,6 @@
 						<span class="font-semibold text-primary">{{ formatMessage(messages.sortBy) }}</span>
 					</template>
 				</Combobox>
-				<span class="text-base font-semibold text-secondary">
-					{{ formatMessage(messages.count, { count: total }) }}
-				</span>
 				<Pagination
 					v-if="page"
 					:page="page.page"
@@ -353,10 +350,6 @@ const messages = defineMessages({
 		id: 'moddexReviews.notFound',
 		defaultMessage: 'This project could not be found on ModDex.',
 	},
-	count: {
-		id: 'moddexReviews.count',
-		defaultMessage: '{count, plural, one {# written review} other {# written reviews}}',
-	},
 	empty: { id: 'moddexReviews.empty', defaultMessage: 'No written reviews yet. Be the first!' },
 	sortLabel: { id: 'moddexReviews.sortLabel', defaultMessage: 'Sort reviews' },
 	sortBy: { id: 'moddexReviews.sortBy', defaultMessage: 'Sort by:' },
@@ -420,7 +413,6 @@ const gameVersionTags = ref<GameVersionTag[]>([])
 const state = ref<State>('loading')
 const reviews = ref<Review[]>([])
 const page = ref<ModdexReviewsPage | null>(null)
-const total = ref(0)
 const summary = ref<ModdexSummary | null>(null)
 const sort = ref<ReviewSort>('newest')
 let requestId = 0
@@ -449,7 +441,6 @@ async function load(pageNumber: number) {
 			reviews.value = result.data.reviews
 			page.value = result.data
 			if (result.data.summary) summary.value = result.data.summary
-			total.value = result.data.total
 			state.value = 'ready'
 		}
 	} catch (err) {
