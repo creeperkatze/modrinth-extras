@@ -107,6 +107,9 @@
   "feature.projectCardActions.description": {
     "defaultMessage": "Скачивайте, подписывайтесь и сохраняйте проекты прямо из карточек проектов."
   },
+  "feature.projectCardActions.downloadDependencies": {
+    "defaultMessage": "Скачивание зависимостей"
+  },
   "feature.projectCardActions.gameVersion": {
     "defaultMessage": "Версия игры"
   },
@@ -133,6 +136,24 @@
   },
   "feature.quickSearch.title": {
     "defaultMessage": "Быстрый поиск"
+  },
+  "feature.reviews.description": {
+    "defaultMessage": "Добавляет вкладку отзывов в проекты с отзывами сообщества из ModDex и SpigotMC."
+  },
+  "feature.reviews.getModdexToken": {
+    "defaultMessage": "<link>Создать API-токен ModDex</link>"
+  },
+  "feature.reviews.moddex": {
+    "defaultMessage": "Отзывы ModDex"
+  },
+  "feature.reviews.moddexApiToken": {
+    "defaultMessage": "API-токен ModDex"
+  },
+  "feature.reviews.spigot": {
+    "defaultMessage": "Отзывы SpigotMC"
+  },
+  "feature.reviews.title": {
+    "defaultMessage": "Отзывы"
   },
   "feature.searchBackground.description": {
     "defaultMessage": "Отображать фон на странице поиска."

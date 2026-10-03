@@ -1,0 +1,49 @@
+{
+	"meta": {
+		"summary": "Modrinth'i hem kendi sitesinde hem de ötesinde geliştiren bir tarayıcı uzantısı.",
+		"feature": {
+			"popup": {
+				"title": "Her özellik, tek bir tık uzaklıkta",
+				"description": ""
+			},
+			"cardActions": {
+				"title": "",
+				"description": ""
+			},
+			"galleryBackground": {
+				"title": "",
+				"description": ""
+			},
+			"notifications": {
+				"title": "",
+				"description": ""
+			},
+			"dependencyExplorer": {
+				"title": "",
+				"description": ""
+			},
+			"quickSearch": {
+				"title": "",
+				"description": ""
+			},
+			"sparkline": {
+				"title": "",
+				"description": ""
+			},
+			"sidebar": {
+				"title": "",
+				"description": ""
+			}
+		}
+	},
+	"nav": {
+		"translate": ""
+	},
+	"stats": {
+		"users": ""
+	},
+	"footer": {
+		"notAffiliated": "",
+		"privacy": ""
+	}
+}

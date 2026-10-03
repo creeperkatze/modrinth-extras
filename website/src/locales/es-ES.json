@@ -1,0 +1,49 @@
+{
+	"meta": {
+		"summary": "Una extensión que mejora la experiencia de Modrinth tanto dentro que fuera.",
+		"feature": {
+			"popup": {
+				"title": "Cada función, a un clic de distancia",
+				"description": "Cada función se puede activar o desactivar individualmente desde la ventana emergente de la extensión, así que puedes personalizar Modrinth exactamente como quieras."
+			},
+			"cardActions": {
+				"title": "Acciones rápidas desde la lista",
+				"description": "Descarga, sigue, guarda y copia enlaces de los proyectos directamente desde sus tarjetas, sin necesidad de abrir cada página."
+			},
+			"galleryBackground": {
+				"title": "Una página que coincide con el proyecto",
+				"description": "Muestra la imagen destacada de la galería del proyecto como fondo a pantalla completa de la cabecera, para que los shaders y los paquetes de recursos luzcan mejor."
+			},
+			"notifications": {
+				"title": "Notificaciones, justo en la cabecera",
+				"description": "Consulta, gestiona y borra notificaciones sin leer sin salir de la página en la que esta, con notificaciones opcionales del navegador y una insignia de no leído en el icono de la extensión."
+			},
+			"dependencyExplorer": {
+				"title": "Explora el árbol completo de dependencias",
+				"description": "Un gráfico interactivo te permite mirar las dependencias obligatorias, opcionales e integradas de un proyecto, tan a fondo como quieras."
+			},
+			"quickSearch": {
+				"title": "Encuentra cualquier cosa en segundos",
+				"description": "Pulsa Ctrl+K o / para abrir un buscador tipo paleta de comandos, con filtros por cargadores, versiones, categorías y tipos integrados en tu búsqueda."
+			},
+			"sparkline": {
+				"title": "Mira lo activo que está realmente un proyecto",
+				"description": "Una línea de actividad de lanzamiento en cada página del proyecto muestra la frecuencia de actualizaciones de un vistazo, antes incluso de que bajes."
+			},
+			"sidebar": {
+				"title": "La imagen completa, justo en la barra lateral",
+				"description": "Estrellas del repositorio, problemas, y solicitudes de cambios. Los miembros de Discord cuentan. Cada modpack en el que aparece un mod. Todos mostrados justo en la barra lateral."
+			}
+		}
+	},
+	"nav": {
+		"translate": "Traducir"
+	},
+	"stats": {
+		"users": "{browser} Usuarios"
+	},
+	"footer": {
+		"notAffiliated": "No afiliado con Modrinth",
+		"privacy": "Privacidad"
+	}
+}

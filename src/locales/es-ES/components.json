@@ -59,6 +59,9 @@
   "discordSidebar.loading": {
     "defaultMessage": "Cargando"
   },
+  "discordSidebar.members": {
+    "defaultMessage": "{count, plural, one {# miembro} other {# miembros}}"
+  },
   "discordSidebar.online": {
     "defaultMessage": "{count} en línea"
   },
@@ -67,6 +70,99 @@
   },
   "errorNotice.message": {
     "defaultMessage": "El error puede ser relacionado con Modrinth Extras. Intenta desactivar la extensión y recargar la página antes de reportar esto a Modrinth. Si este error desaparece, repórtalo <link>Aqui</link>."
+  },
+  "moddexReviews.aesthetics": {
+    "defaultMessage": "Estética"
+  },
+  "moddexReviews.createToken": {
+    "defaultMessage": "Crear un token"
+  },
+  "moddexReviews.credit": {
+    "defaultMessage": "Reseñas proporcionas por <link>ModDex</link>, escrito por su comunidad."
+  },
+  "moddexReviews.developer": {
+    "defaultMessage": "Desarrollador"
+  },
+  "moddexReviews.edited": {
+    "defaultMessage": "Editado"
+  },
+  "moddexReviews.empty": {
+    "defaultMessage": "Aún no hay reseñas escritas. ¡Sé el primero!"
+  },
+  "moddexReviews.gameplay": {
+    "defaultMessage": "Jugabilidad"
+  },
+  "moddexReviews.helpful": {
+    "defaultMessage": "{count, plural, one {# persona econtró esto útil} other {# personas econtraron esto útil}}"
+  },
+  "moddexReviews.invalidTokenTitle": {
+    "defaultMessage": "Tu token de la API de ModDex no es válida o se caducó"
+  },
+  "moddexReviews.loadError": {
+    "defaultMessage": "Error al cargar las reseñas de ModDex"
+  },
+  "moddexReviews.loading": {
+    "defaultMessage": "Cargando reseñas…"
+  },
+  "moddexReviews.moderatorNote": {
+    "defaultMessage": "Nota del moderador:"
+  },
+  "moddexReviews.noTokenTitle": {
+    "defaultMessage": "Se requiere un token de API de ModDex"
+  },
+  "moddexReviews.notFound": {
+    "defaultMessage": "Este proyecto no se pudo encontrar en ModDex."
+  },
+  "moddexReviews.openModdex": {
+    "defaultMessage": "Abrir ModDex"
+  },
+  "moddexReviews.performance": {
+    "defaultMessage": "Rendimiento"
+  },
+  "moddexReviews.playtime": {
+    "defaultMessage": "{hours, number} horas jugadas"
+  },
+  "moddexReviews.posted": {
+    "defaultMessage": "Publicado el {time}"
+  },
+  "moddexReviews.rateLimited": {
+    "defaultMessage": "Se alcanzó el límite de solicitudes de ModDex, Inténtelo de nuevo en un minuto"
+  },
+  "moddexReviews.ratingsCount": {
+    "defaultMessage": "{count, plural, one {# reseña} other {# reseñas}}"
+  },
+  "moddexReviews.sortBy": {
+    "defaultMessage": "Ordenar por:"
+  },
+  "moddexReviews.sortHelpful": {
+    "defaultMessage": "Más útil"
+  },
+  "moddexReviews.sortLabel": {
+    "defaultMessage": "Ordenar reseñas"
+  },
+  "moddexReviews.sortLowestRating": {
+    "defaultMessage": "Menos valorado"
+  },
+  "moddexReviews.sortNewest": {
+    "defaultMessage": "Más recientes"
+  },
+  "moddexReviews.sortOldest": {
+    "defaultMessage": "Más antiguo"
+  },
+  "moddexReviews.sortRating": {
+    "defaultMessage": "Mejor valorados"
+  },
+  "moddexReviews.sortUnhelpful": {
+    "defaultMessage": "Menos útil"
+  },
+  "moddexReviews.title": {
+    "defaultMessage": "Reseñas de la comunidad"
+  },
+  "moddexReviews.tokenHelp": {
+    "defaultMessage": "ModDex solo muestra reseñas a usuarios de su API conectados. Crea un token gratuito en ModDex y pégalo en la ventana emergente de Modrinth Extras en \"Reseñas\"."
+  },
+  "moddexReviews.writeReview": {
+    "defaultMessage": "Escribe una reseña"
   },
   "modpacksSidebar.title": {
     "defaultMessage": "Modpacks"
@@ -109,6 +205,9 @@
   },
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "Ver Historial"
+  },
+  "platformsSidebar.downloads": {
+    "defaultMessage": "{count, plural, one {# descarga} other {# descargas}}"
   },
   "platformsSidebar.loadError": {
     "defaultMessage": "Error al cargar otras plataformas"
@@ -155,6 +254,12 @@
   "projectCardActions.unfollow": {
     "defaultMessage": "Dejar de seguir"
   },
+  "projectReviews.source": {
+    "defaultMessage": "Fuente de la reseña"
+  },
+  "projectReviews.tab": {
+    "defaultMessage": "Reseñas"
+  },
   "quickSearch.clearRecent": {
     "defaultMessage": "Borrar reciente"
   },
@@ -167,14 +272,83 @@
   "quickSearch.search": {
     "defaultMessage": "Buscar"
   },
+  "repositorySidebar.forks": {
+    "defaultMessage": "{count, plural, one {# copia} other {# copias}}"
+  },
   "repositorySidebar.loadError": {
     "defaultMessage": "No se pudo cargar datos del repositorio"
   },
   "repositorySidebar.loading": {
     "defaultMessage": "Cargando"
   },
+  "repositorySidebar.openIssues": {
+    "defaultMessage": "{count, plural, one {# problema abierto} other {# problemas abiertos}}"
+  },
+  "repositorySidebar.openPRs": {
+    "defaultMessage": "{count, plural, one {# Solicitud de cambio abierta} other {# Solicitud de cambios abierta}}"
+  },
+  "repositorySidebar.stars": {
+    "defaultMessage": "{count, plural, one {# estrella} other {# estrellas}}"
+  },
   "repositorySidebar.title": {
     "defaultMessage": "Repositorio"
+  },
+  "reviewStars.rating": {
+    "defaultMessage": "Calificado {rating} de 5"
+  },
+  "spigotReviews.authorResponse": {
+    "defaultMessage": "Respuesta del autor:"
+  },
+  "spigotReviews.credit": {
+    "defaultMessage": "Reseñas proporcionadas por <link>SpigotMC</link>, escrito por su comunidad."
+  },
+  "spigotReviews.empty": {
+    "defaultMessage": "Aun no hay reseñas."
+  },
+  "spigotReviews.loadError": {
+    "defaultMessage": "Error al cargar las reseñas de SpigotMC"
+  },
+  "spigotReviews.loading": {
+    "defaultMessage": "Cargando reseñas…"
+  },
+  "spigotReviews.notFound": {
+    "defaultMessage": "Este plugin no está disponible en SpigotMC."
+  },
+  "spigotReviews.posted": {
+    "defaultMessage": "Publicado {time}"
+  },
+  "spigotReviews.ratingsCount": {
+    "defaultMessage": "{count, plural, one {# reseña} other {# reseñas}}"
+  },
+  "spigotReviews.sortBy": {
+    "defaultMessage": "Ordenar por:"
+  },
+  "spigotReviews.sortLabel": {
+    "defaultMessage": "Ordenar reseñas"
+  },
+  "spigotReviews.sortLowestRating": {
+    "defaultMessage": "Menos valorado"
+  },
+  "spigotReviews.sortNewest": {
+    "defaultMessage": "Más recientes"
+  },
+  "spigotReviews.sortOldest": {
+    "defaultMessage": "Más antiguo"
+  },
+  "spigotReviews.sortRating": {
+    "defaultMessage": "Más valorado"
+  },
+  "spigotReviews.title": {
+    "defaultMessage": "Reseñas de la comunidad"
+  },
+  "spigotReviews.unknownAuthor": {
+    "defaultMessage": "Miembro de SpigotMC"
+  },
+  "spigotReviews.version": {
+    "defaultMessage": "Version {version}"
+  },
+  "spigotReviews.writeReview": {
+    "defaultMessage": "Escribe una reseña"
   },
   "toolsSidebar.copied": {
     "defaultMessage": "¡Copiado!"
