@@ -10,8 +10,8 @@
     },
     "dependencies": {
         "intl-messageformat": "^12.1.2",
-        "vue": "^3.5.42",
-        "vue-i18n": "^11.4.12"
+        "vue": "^3.5.43",
+        "vue-i18n": "^11.4.13"
     },
     "devDependencies": {
         "vite-svg-loader": "^5.1.3",
