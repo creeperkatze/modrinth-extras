@@ -14,6 +14,7 @@ export default defineSiteConfig(
 				target: '_blank',
 			},
 		],
+		footerLinks: (t, prefix) => [{ text: t('footer.privacy'), link: `${prefix}/privacy` }],
 		socialLinks: [{ icon: 'discord', link: 'https://link.creeperkatze.dev/discord' }],
 	},
 	{

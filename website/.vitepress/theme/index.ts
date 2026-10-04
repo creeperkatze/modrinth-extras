@@ -26,5 +26,4 @@ export default createTheme({
 		{ key: 'sparkline', image: '/screenshots/sparkline.png' },
 		{ key: 'sidebar', image: '/screenshots/sidebar.png' },
 	],
-	footerLinks: [{ key: 'footer.privacy', link: '/privacy' }],
 })
