@@ -14,7 +14,7 @@ import { findPlatformProjects, findPlatformUsers } from '../background/external/
 import { fetchSpigotReviews, type SpigotReviewSort } from '../background/external/platforms/spigot'
 import { fetchRepositoryStats } from '../background/external/repositories'
 import { handleNotificationClick } from '../background/notifications'
-import { analytics, initTelemetry } from '../core/telemetry'
+import { analytics, initTelemetry, trackExtensionStarted } from '../core/telemetry'
 import type { Notification } from '../features/notifications/notifications'
 import type { MatchableProject } from '../features/platforms/matching'
 import type { RepositoryPlatform } from '../features/repository/links'
@@ -147,6 +147,7 @@ export default defineBackground(() => {
 
 	// Ensure the service worker wakes immediately on browser start
 	browser.runtime.onStartup.addListener(() => {
+		void trackExtensionStarted()
 		showCachedBadge()
 		updateBadge()
 	})

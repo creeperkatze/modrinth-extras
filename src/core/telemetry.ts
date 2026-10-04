@@ -38,6 +38,10 @@ export async function initTelemetry(): Promise<void> {
 	}
 
 	await analytics.setEnabled(telemetryEnabled)
+}
+
+export async function trackExtensionStarted(): Promise<void> {
+	const settings = await getSettings()
 	await analytics.track('extension_started', {
 		...flattenSettings(settings),
 		locale: settings.locale.value || detectBrowserLocale(),
