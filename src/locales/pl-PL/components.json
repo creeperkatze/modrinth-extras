@@ -1,2 +1,234 @@
-{}
+{
+  "dependencyExplorer.centerView": {
+    "defaultMessage": "Wyśrodkuj widok"
+  },
+  "dependencyExplorer.depth": {
+    "defaultMessage": "Głębokość"
+  },
+  "dependencyExplorer.loading": {
+    "defaultMessage": "Ładowanie"
+  },
+  "dependencyExplorer.noDependencies": {
+    "defaultMessage": "Ten projekt nie ma zależności"
+  },
+  "dependencyExplorer.reset": {
+    "defaultMessage": "Resetuj"
+  },
+  "dependencyExplorer.search": {
+    "defaultMessage": "Szukaj zależności"
+  },
+  "dependencyExplorer.title": {
+    "defaultMessage": "Przeglądarka zależności"
+  },
+  "dependencyNode.collapse": {
+    "defaultMessage": "Zwiń zależności"
+  },
+  "dependencyNode.embedded": {
+    "defaultMessage": "Wbudowane"
+  },
+  "dependencyNode.expand": {
+    "defaultMessage": "Rozwiń zależności"
+  },
+  "dependencyNode.incompatible": {
+    "defaultMessage": "Niekompatybilne"
+  },
+  "dependencyNode.optional": {
+    "defaultMessage": "Opcjonalne"
+  },
+  "dependencyNode.required": {
+    "defaultMessage": "Wymagane"
+  },
+  "dependencySidebar.loadError": {
+    "defaultMessage": "Nie udało się załadować zależności"
+  },
+  "dependencySidebar.loading": {
+    "defaultMessage": "Ładowanie"
+  },
+  "dependencySidebar.none": {
+    "defaultMessage": "Brak zależności"
+  },
+  "dependencySidebar.openExplorer": {
+    "defaultMessage": "Otwórz przeglądarkę zależności"
+  },
+  "dependencySidebar.title": {
+    "defaultMessage": "Zależności"
+  },
+  "discordSidebar.loadError": {
+    "defaultMessage": "Nie udało się załadować danych Discord"
+  },
+  "discordSidebar.loading": {
+    "defaultMessage": "Ładowanie"
+  },
+  "discordSidebar.members": {
+    "defaultMessage": "{count, plural, one {# członek} few {# członków} other {# członków}}"
+  },
+  "discordSidebar.online": {
+    "defaultMessage": "{count} online"
+  },
+  "errorNotice.message": {
+    "defaultMessage": "Ten błąd może być związany z Modrinth Extras. Spróbuj wyłączyć to rozszerzenie i odświeżyć stronę, zanim zgłosisz ten problem do Modrinth. Jeśli błąd zniknie, zgłoś to <link>tutaj</link>."
+  },
+  "moddexReviews.createToken": {
+    "defaultMessage": "Utwórz token"
+  },
+  "moddexReviews.credit": {
+    "defaultMessage": "Recenzje dostarczone przez <link>ModDex</link>, napisane przez członków tej społeczności."
+  },
+  "moddexReviews.developer": {
+    "defaultMessage": "Autor"
+  },
+  "moddexReviews.edited": {
+    "defaultMessage": "Edytowane"
+  },
+  "moddexReviews.empty": {
+    "defaultMessage": "Brak recenzji. Napisz pierwszą!"
+  },
+  "moddexReviews.loading": {
+    "defaultMessage": "Ładowanie recenzji…"
+  },
+  "moddexReviews.moderatorNote": {
+    "defaultMessage": "Uwaga moderatora:"
+  },
+  "moddexReviews.openModdex": {
+    "defaultMessage": "Otwórz ModDex"
+  },
+  "moddexReviews.playtime": {
+    "defaultMessage": "Grano przez {hours, number} godz."
+  },
+  "moddexReviews.posted": {
+    "defaultMessage": "Opublikowano {time}"
+  },
+  "moddexReviews.sortBy": {
+    "defaultMessage": "Sortuj według:"
+  },
+  "moddexReviews.sortHelpful": {
+    "defaultMessage": "Najbardziej pomocne"
+  },
+  "moddexReviews.sortLabel": {
+    "defaultMessage": "Sortuj recenzje"
+  },
+  "moddexReviews.sortLowestRating": {
+    "defaultMessage": "Najniżej oceniane"
+  },
+  "moddexReviews.sortNewest": {
+    "defaultMessage": "Najnowsze"
+  },
+  "moddexReviews.sortOldest": {
+    "defaultMessage": "Najstarsze"
+  },
+  "moddexReviews.sortRating": {
+    "defaultMessage": "Najwyżej oceniane"
+  },
+  "moddexReviews.sortUnhelpful": {
+    "defaultMessage": "Najmniej pomocne"
+  },
+  "moddexReviews.title": {
+    "defaultMessage": "Recenzje społeczności"
+  },
+  "moddexReviews.tokenHelp": {
+    "defaultMessage": "ModDex udostępnia recenzje tylko zalogowanym przez API użytkownikom. Utwórz darmowy token na ModDex, a potem wklej go w okienku Modrinth Extras w sekcji „Recenzje”."
+  },
+  "moddexReviews.writeReview": {
+    "defaultMessage": "Napisz recenzję"
+  },
+  "projectCardActions.save": {
+    "defaultMessage": "Zapisz"
+  },
+  "projectCardActions.saved": {
+    "defaultMessage": "Zapisano"
+  },
+  "projectCardActions.searchPlaceholder": {
+    "defaultMessage": "Szukaj..."
+  },
+  "projectCardActions.unfollow": {
+    "defaultMessage": "Przestań obserwować"
+  },
+  "projectReviews.tab": {
+    "defaultMessage": "Recenzje"
+  },
+  "quickSearch.examples": {
+    "defaultMessage": "Przykłady"
+  },
+  "repositorySidebar.loading": {
+    "defaultMessage": "Ładowanie"
+  },
+  "repositorySidebar.stars": {
+    "defaultMessage": "{count, plural, one {# gwiazdka} few {# gwiazdki} other {# gwiazdek}}"
+  },
+  "repositorySidebar.title": {
+    "defaultMessage": "Repozytorium"
+  },
+  "reviewStars.rating": {
+    "defaultMessage": "Oceniono na {rating} z 5"
+  },
+  "spigotReviews.authorResponse": {
+    "defaultMessage": "Odpowiedź autora:"
+  },
+  "spigotReviews.credit": {
+    "defaultMessage": "Recenzje dostarczone przez <link>SpigotMC</link>, napisane przez członków tej społeczności."
+  },
+  "spigotReviews.empty": {
+    "defaultMessage": "Brak recenzji."
+  },
+  "spigotReviews.loadError": {
+    "defaultMessage": "Nie udało się załadować recenzji ze SpigotMC"
+  },
+  "spigotReviews.loading": {
+    "defaultMessage": "Ładowanie recenzji…"
+  },
+  "spigotReviews.notFound": {
+    "defaultMessage": "Nie udało się znaleźć tego pluginu na SpigotMC."
+  },
+  "spigotReviews.posted": {
+    "defaultMessage": "Opublikowano {time}"
+  },
+  "spigotReviews.ratingsCount": {
+    "defaultMessage": "{count, plural, one {# ocena} few {# oceny} other {# ocen}}"
+  },
+  "spigotReviews.sortBy": {
+    "defaultMessage": "Sortuj według:"
+  },
+  "spigotReviews.sortLabel": {
+    "defaultMessage": "Sortuj recenzje"
+  },
+  "spigotReviews.sortLowestRating": {
+    "defaultMessage": "Najniżej oceniane"
+  },
+  "spigotReviews.sortNewest": {
+    "defaultMessage": "Najnowsze"
+  },
+  "spigotReviews.sortOldest": {
+    "defaultMessage": "Najstarsze"
+  },
+  "spigotReviews.sortRating": {
+    "defaultMessage": "Najwyżej oceniane"
+  },
+  "spigotReviews.title": {
+    "defaultMessage": "Recenzje społeczności"
+  },
+  "spigotReviews.unknownAuthor": {
+    "defaultMessage": "Członek SpigotMC"
+  },
+  "spigotReviews.version": {
+    "defaultMessage": "Wersja {version}"
+  },
+  "spigotReviews.writeReview": {
+    "defaultMessage": "Napisz recenzję"
+  },
+  "toolsSidebar.copied": {
+    "defaultMessage": "Skopiowano!"
+  },
+  "toolsSidebar.title": {
+    "defaultMessage": "Narzędzia"
+  },
+  "translateDescription.showOriginal": {
+    "defaultMessage": "Pokaż oryginał"
+  },
+  "translateDescription.translate": {
+    "defaultMessage": "Przetłumacz opis"
+  },
+  "translateDescription.translating": {
+    "defaultMessage": "Tłumaczenie…"
+  }
+}
 
