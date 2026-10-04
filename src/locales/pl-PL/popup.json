@@ -1,2 +1,78 @@
-{}
+{
+  "feature.accentColor.color": {
+    "defaultMessage": "Kolor"
+  },
+  "feature.accentColor.description": {
+    "defaultMessage": "Zamień zieleń Modrinth na własny kolor akcentu."
+  },
+  "feature.accentColor.title": {
+    "defaultMessage": "Kolor akcentu"
+  },
+  "feature.activitySparkline.days": {
+    "defaultMessage": "{count, plural, one {# dzień} few {# dni} other {# dni}}"
+  },
+  "feature.projectCardActions.pluginLoader": {
+    "defaultMessage": "Loader pluginów"
+  },
+  "feature.projectCardActions.shaderLoader": {
+    "defaultMessage": "Loader shaderów"
+  },
+  "feature.quickSearch.title": {
+    "defaultMessage": "Szybkie wyszukiwanie"
+  },
+  "popup.donatePrompt.dismiss": {
+    "defaultMessage": "Odrzuć"
+  },
+  "popup.footer.checking": {
+    "defaultMessage": "Sprawdzanie"
+  },
+  "popup.footer.donate": {
+    "defaultMessage": "Wspomóż"
+  },
+  "popup.footer.latestVersion": {
+    "defaultMessage": "Najnowsza wersja"
+  },
+  "popup.footer.starOnGitHub": {
+    "defaultMessage": "Na GitHub"
+  },
+  "popup.footer.updateAvailable": {
+    "defaultMessage": "Dostępna aktualizacja"
+  },
+  "popup.group.contentPages": {
+    "defaultMessage": "Strony zawartości"
+  },
+  "popup.group.extension": {
+    "defaultMessage": "Rozszerzenie"
+  },
+  "popup.group.flags": {
+    "defaultMessage": "Flagi"
+  },
+  "popup.group.general": {
+    "defaultMessage": "Ogólne"
+  },
+  "search.any": {
+    "defaultMessage": "Wszystko"
+  },
+  "search.hideSnapshots": {
+    "defaultMessage": "Ukryj snapshoty"
+  },
+  "search.loading": {
+    "defaultMessage": "Ładowanie..."
+  },
+  "search.noResults": {
+    "defaultMessage": "Brak wyników wyszukiwania"
+  },
+  "search.placeholder": {
+    "defaultMessage": "Szukaj..."
+  },
+  "search.showAllVersions": {
+    "defaultMessage": "Pokaż wszystkie wersje"
+  },
+  "settings.language": {
+    "defaultMessage": "Język"
+  },
+  "settings.language.description": {
+    "defaultMessage": "Pomóż w tłumaczeniu na <link>Crowdin</link>. Niektóre tłumaczenia mogą być niekompletne."
+  }
+}
 

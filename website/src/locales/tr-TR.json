@@ -4,14 +4,14 @@
 		"feature": {
 			"popup": {
 				"title": "Her özellik, tek bir tık uzaklıkta",
-				"description": ""
+				"description": "Modrinth deneyimini tamamen kendi zevkine göre şekillendirebilmen için dilediğin özelliği pencereden tek tıkla açıp kapatabilirsin"
 			},
 			"cardActions": {
 				"title": "",
-				"description": ""
+				"description": "Tek tek sayfa açmak yerine indirme, takip, kaydetme ve link kopyalama işlemlerini direkt kart üzerinden yapabilirsin."
 			},
 			"galleryBackground": {
-				"title": "",
+				"title": "Projeyle uyumlu bir sayfa",
 				"description": ""
 			},
 			"notifications": {
@@ -43,7 +43,7 @@
 		"users": ""
 	},
 	"footer": {
-		"notAffiliated": "",
-		"privacy": ""
+		"notAffiliated": "Modrinth ile bir bağlantısı yoktur",
+		"privacy": "Gizlilik"
 	}
 }

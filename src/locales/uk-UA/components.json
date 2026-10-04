@@ -71,6 +71,99 @@
   "errorNotice.message": {
     "defaultMessage": "Ця помилка може бути пов'язана з Modrinth Extras. Спробуйте вимкнути розширення та оновити сторінку, перш ніж повідомляти про це Modrinth. Якщо помилка зникне, повідомте про це <link>тут</link>."
   },
+  "moddexReviews.aesthetics": {
+    "defaultMessage": "Естетика"
+  },
+  "moddexReviews.createToken": {
+    "defaultMessage": "Створити токен"
+  },
+  "moddexReviews.credit": {
+    "defaultMessage": "Відгуки надані <link>ModDex</link> і написані його спільнотою."
+  },
+  "moddexReviews.developer": {
+    "defaultMessage": "Розробник"
+  },
+  "moddexReviews.edited": {
+    "defaultMessage": "Відредаговано"
+  },
+  "moddexReviews.empty": {
+    "defaultMessage": "Поки що не написано відгуків. Будьте першим!"
+  },
+  "moddexReviews.gameplay": {
+    "defaultMessage": "Ігровий процес"
+  },
+  "moddexReviews.helpful": {
+    "defaultMessage": "{count, plural, one {# особа визнала це корисним} few {# особи визнали це корисним} many {# осіб визнали це корисним} other {# осіб визнали це корисним}}"
+  },
+  "moddexReviews.invalidTokenTitle": {
+    "defaultMessage": "Ваш токен API ModDex є недійсним або термін його дії закінчився"
+  },
+  "moddexReviews.loadError": {
+    "defaultMessage": "Не вдалося завантажити відгуки з ModDex"
+  },
+  "moddexReviews.loading": {
+    "defaultMessage": "Завантажуємо відгуки…"
+  },
+  "moddexReviews.moderatorNote": {
+    "defaultMessage": "Примітка модератора:"
+  },
+  "moddexReviews.noTokenTitle": {
+    "defaultMessage": "Потрібен токен API ModDex"
+  },
+  "moddexReviews.notFound": {
+    "defaultMessage": "Цей проєкт не вдалося знайти на ModDex."
+  },
+  "moddexReviews.openModdex": {
+    "defaultMessage": "Відкрити ModDex"
+  },
+  "moddexReviews.performance": {
+    "defaultMessage": "Продуктивність"
+  },
+  "moddexReviews.playtime": {
+    "defaultMessage": "Зіграно {hours, number} год"
+  },
+  "moddexReviews.posted": {
+    "defaultMessage": "Опубліковано {time}"
+  },
+  "moddexReviews.rateLimited": {
+    "defaultMessage": "Досягнуто обмеження частоти запитів ModDex. Спробуйте ще раз через хвилину"
+  },
+  "moddexReviews.ratingsCount": {
+    "defaultMessage": "{count, plural, one {# оцінка} few {# оцінки} many {# оцінок} other {# оцінок}}"
+  },
+  "moddexReviews.sortBy": {
+    "defaultMessage": "Сортувати за:"
+  },
+  "moddexReviews.sortHelpful": {
+    "defaultMessage": "Найкорисніші"
+  },
+  "moddexReviews.sortLabel": {
+    "defaultMessage": "Відсортувати відгуки"
+  },
+  "moddexReviews.sortLowestRating": {
+    "defaultMessage": "З найнижчим рейтингом"
+  },
+  "moddexReviews.sortNewest": {
+    "defaultMessage": "Найновіші"
+  },
+  "moddexReviews.sortOldest": {
+    "defaultMessage": "Найстаріші"
+  },
+  "moddexReviews.sortRating": {
+    "defaultMessage": "З найвищим рейтингом"
+  },
+  "moddexReviews.sortUnhelpful": {
+    "defaultMessage": "Найкорисніші"
+  },
+  "moddexReviews.title": {
+    "defaultMessage": "Відгуки спільноти"
+  },
+  "moddexReviews.tokenHelp": {
+    "defaultMessage": "ModDex надає доступ до відгуків лише зареєстрованим користувачам API. Створіть безплатний токен на ModDex, а потім вставте його у спливне вікно Modrinth Extras у розділі «Відгуки»."
+  },
+  "moddexReviews.writeReview": {
+    "defaultMessage": "Написати відгук"
+  },
   "modpacksSidebar.title": {
     "defaultMessage": "Збірки"
   },
@@ -161,6 +254,12 @@
   "projectCardActions.unfollow": {
     "defaultMessage": "Відписатися"
   },
+  "projectReviews.source": {
+    "defaultMessage": "Джерело відгуку"
+  },
+  "projectReviews.tab": {
+    "defaultMessage": "Відгуки"
+  },
   "quickSearch.clearRecent": {
     "defaultMessage": "Очистити останнє"
   },
@@ -193,6 +292,63 @@
   },
   "repositorySidebar.title": {
     "defaultMessage": "Репозиторій"
+  },
+  "reviewStars.rating": {
+    "defaultMessage": "Оцінка: {rating} з 5"
+  },
+  "spigotReviews.authorResponse": {
+    "defaultMessage": "Відповідь автора:"
+  },
+  "spigotReviews.credit": {
+    "defaultMessage": "Відгуки надані <link>SpigotMC</link> і написані його спільнотою."
+  },
+  "spigotReviews.empty": {
+    "defaultMessage": "Поки що немає відгуків."
+  },
+  "spigotReviews.loadError": {
+    "defaultMessage": "Не вдалося завантажити відгуки з SpigotMC"
+  },
+  "spigotReviews.loading": {
+    "defaultMessage": "Завантажуємо відгуки…"
+  },
+  "spigotReviews.notFound": {
+    "defaultMessage": "Цей плагін не вдалося знайти на SpigotMC."
+  },
+  "spigotReviews.posted": {
+    "defaultMessage": "Опубліковано {time}"
+  },
+  "spigotReviews.ratingsCount": {
+    "defaultMessage": "{count, plural, one {# оцінка} few {# оцінки} many {# оцінок} other {# оцінок}}"
+  },
+  "spigotReviews.sortBy": {
+    "defaultMessage": "Сортувати за:"
+  },
+  "spigotReviews.sortLabel": {
+    "defaultMessage": "Відсортувати відгуки"
+  },
+  "spigotReviews.sortLowestRating": {
+    "defaultMessage": "З найнижчим рейтингом"
+  },
+  "spigotReviews.sortNewest": {
+    "defaultMessage": "Найновіші"
+  },
+  "spigotReviews.sortOldest": {
+    "defaultMessage": "Найстаріші"
+  },
+  "spigotReviews.sortRating": {
+    "defaultMessage": "З найвищим рейтингом"
+  },
+  "spigotReviews.title": {
+    "defaultMessage": "Відгуки спільноти"
+  },
+  "spigotReviews.unknownAuthor": {
+    "defaultMessage": "Учасник SpigotMC"
+  },
+  "spigotReviews.version": {
+    "defaultMessage": "Версія {version}"
+  },
+  "spigotReviews.writeReview": {
+    "defaultMessage": "Написати відгук"
   },
   "toolsSidebar.copied": {
     "defaultMessage": "Скопійовано!"
