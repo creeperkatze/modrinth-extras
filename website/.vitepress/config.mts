@@ -22,5 +22,7 @@ export default defineSiteConfig(
 			logo: '/icon.svg',
 			siteTitle: false,
 		},
+		// Stops Vite from picking up the extension's Tailwind PostCSS config in the repo root
+		vite: { css: { postcss: {} } },
 	},
 )
