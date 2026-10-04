@@ -7,40 +7,12 @@
 				"description": "Modrinth deneyimini tamamen kendi zevkine göre şekillendirebilmen için dilediğin özelliği pencereden tek tıkla açıp kapatabilirsin"
 			},
 			"cardActions": {
-				"title": "",
 				"description": "Tek tek sayfa açmak yerine indirme, takip, kaydetme ve link kopyalama işlemlerini direkt kart üzerinden yapabilirsin."
 			},
 			"galleryBackground": {
-				"title": "Projeyle uyumlu bir sayfa",
-				"description": ""
-			},
-			"notifications": {
-				"title": "",
-				"description": ""
-			},
-			"dependencyExplorer": {
-				"title": "",
-				"description": ""
-			},
-			"quickSearch": {
-				"title": "",
-				"description": ""
-			},
-			"sparkline": {
-				"title": "",
-				"description": ""
-			},
-			"sidebar": {
-				"title": "",
-				"description": ""
+				"title": "Projeyle uyumlu bir sayfa"
 			}
 		}
-	},
-	"nav": {
-		"translate": ""
-	},
-	"stats": {
-		"users": ""
 	},
 	"footer": {
 		"notAffiliated": "Modrinth ile bir bağlantısı yoktur",

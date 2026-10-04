@@ -1,47 +1,4 @@
 {
-	"meta": {
-		"summary": "",
-		"feature": {
-			"popup": {
-				"title": "",
-				"description": ""
-			},
-			"cardActions": {
-				"title": "",
-				"description": ""
-			},
-			"galleryBackground": {
-				"title": "",
-				"description": ""
-			},
-			"notifications": {
-				"title": "",
-				"description": ""
-			},
-			"dependencyExplorer": {
-				"title": "",
-				"description": ""
-			},
-			"quickSearch": {
-				"title": "",
-				"description": ""
-			},
-			"sparkline": {
-				"title": "",
-				"description": ""
-			},
-			"sidebar": {
-				"title": "",
-				"description": ""
-			}
-		}
-	},
-	"nav": {
-		"translate": ""
-	},
-	"stats": {
-		"users": ""
-	},
 	"footer": {
 		"notAffiliated": "Nie powiązany z Modrinth",
 		"privacy": "Prywatność"
