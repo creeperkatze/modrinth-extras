@@ -24,7 +24,7 @@
     "defaultMessage": "Свернуть зависимости"
   },
   "dependencyNode.embedded": {
-    "defaultMessage": "Встроенно"
+    "defaultMessage": "Встроено"
   },
   "dependencyNode.expand": {
     "defaultMessage": "Развернуть зависимости"
@@ -282,7 +282,7 @@
     "defaultMessage": "Загрузка"
   },
   "repositorySidebar.openIssues": {
-    "defaultMessage": "{count, plural, one {# открытая проблема} few {# открытой проблемы} other {# открытых проблем}}"
+    "defaultMessage": "{count, plural, one {# открытая проблема} few {# открытые проблемы} other {# открытых проблем}}"
   },
   "repositorySidebar.openPRs": {
     "defaultMessage": "{count, plural, one {# запрос на слияние} few {# запроса на слияние} other {# запросов на слияние}}"
@@ -354,7 +354,7 @@
     "defaultMessage": "Скопировано!"
   },
   "toolsSidebar.copyInstallCommand": {
-    "defaultMessage": "Копировать команду {manager}"
+    "defaultMessage": "Команда {manager}"
   },
   "toolsSidebar.generateEmbed": {
     "defaultMessage": "Создать код для вставки"
