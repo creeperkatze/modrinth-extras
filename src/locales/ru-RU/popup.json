@@ -3,7 +3,7 @@
     "defaultMessage": "Цвет"
   },
   "feature.accentColor.description": {
-    "defaultMessage": "Заменить зелёный цвет Modrinth другим акцентным цветом."
+    "defaultMessage": "Замените зелёный цвет Modrinth другим акцентным цветом."
   },
   "feature.accentColor.title": {
     "defaultMessage": "Акцентный цвет"
@@ -93,7 +93,7 @@
     "defaultMessage": "Значок уведомлений"
   },
   "feature.notifications.description": {
-    "defaultMessage": "Просматривать, управлять и очищать непрочитанные уведомления прямо в заголовке."
+    "defaultMessage": "Просматривайте, управляйте и очищайте непрочитанные уведомления прямо в заголовке."
   },
   "feature.notifications.title": {
     "defaultMessage": "Уведомления"
