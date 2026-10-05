@@ -212,9 +212,6 @@ importers:
       d3-zoom:
         specifier: ^3.0.0
         version: 3.0.0
-      floating-vue:
-        specifier: ^5.4.0
-        version: 5.4.0(vue@3.5.43(typescript@6.0.3))
       hangarmc-js:
         specifier: ^1.1.0
         version: 1.1.0
@@ -4938,15 +4935,6 @@ packages:
 
   flatted@3.4.4:
     resolution: {integrity: sha512-5+ybhBZANEJxaH3X5evAFatUxLfEHSr7n6kYJ+1Qd0mUqr4eu9gIf6GDbWHf8RJijHrjjO8G+la14SlL2SeS1Q==}
-
-  floating-vue@5.4.0:
-    resolution: {integrity: sha512-hb5y5N8sXs9Dy4iZfWBKLzf3FkUkqhbkQREhRulAEvIihMlSGxc/7pXGrIDetoqXm/RRHNVjvN6lql9IhMM+tQ==}
-    peerDependencies:
-      '@nuxt/kit': ^3.2.0 || ^4.0.0 || ^5.0.0-0
-      vue: ^3.2.0
-    peerDependenciesMeta:
-      '@nuxt/kit':
-        optional: true
 
   foreground-child@3.3.1:
     resolution: {integrity: sha512-gIXjKqtFuWEgzFRJA9WCQeSJLZDjgJUOMCMzxtvFq/37KojM1BFGufqsCy0r4qSQmYLsZYMeyRqzIWOMup03sw==}
@@ -11901,11 +11889,6 @@ snapshots:
   flatpickr@4.6.13: {}
 
   flatted@3.4.4: {}
-
-  floating-vue@5.4.0(vue@3.5.43(typescript@6.0.3)):
-    dependencies:
-      '@floating-ui/dom': 1.8.0
-      vue: 3.5.43(typescript@6.0.3)
 
   foreground-child@3.3.1:
     dependencies:

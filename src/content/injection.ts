@@ -1,4 +1,4 @@
-import FloatingVue from 'floating-vue'
+import { installTooltipDirective, TooltipDirective } from '@modrinth/ui'
 import { type App, type Component, createApp, h } from 'vue'
 
 import { installI18n } from '../core/i18n/i18n'
@@ -9,13 +9,22 @@ export type SettingsGetter = () => ExtensionSettings
 // Injections wait for Nuxt hydration, which the MAIN world bridge reports with "modrinth-extras:router-ready".
 export const pageState = { hydrated: false, navigating: false }
 
-export function createExtensionApp(
-	component: Component,
-	props?: Record<string, unknown>,
-	options: { tooltips?: boolean } = {},
-): App {
+let tooltipHostMounted = false
+
+// Every extension app shares one tooltip host, like Modrinth's layout does
+function mountTooltipHost() {
+	if (tooltipHostMounted) return
+	tooltipHostMounted = true
+	const el = document.createElement('div')
+	el.id = 'modrinth-extras-tooltip-host'
+	document.body.appendChild(el)
+	createApp(TooltipDirective).mount(el)
+}
+
+export function createExtensionApp(component: Component, props?: Record<string, unknown>): App {
 	const app = createApp(h(component, props))
-	if (options.tooltips) app.use(FloatingVue)
+	installTooltipDirective(app)
+	mountTooltipHost()
 	installI18n(app)
 	return app
 }

@@ -87,7 +87,7 @@ export function projectInjections(settings: SettingsGetter) {
 			const slug = window.location.pathname.match(
 				/^\/(mod|plugin|datapack|shader|resourcepack|modpack|server)\/([^/]+)/,
 			)?.[2]
-			return createExtensionApp(MonetizationBadge, { projectSlug: slug ?? '' }, { tooltips: true })
+			return createExtensionApp(MonetizationBadge, { projectSlug: slug ?? '' })
 		},
 	})
 
@@ -133,16 +133,12 @@ export function projectInjections(settings: SettingsGetter) {
 		},
 		createApp() {
 			const [, projectType, slug] = window.location.pathname.match(PROJECT_TYPE_PATTERN) ?? []
-			return createExtensionApp(
-				ProjectReviews,
-				{
-					projectSlug: slug ?? '',
-					isModpack: projectType === 'modpack',
-					moddex: settings().reviews.moddex,
-					spigot: settings().reviews.spigot,
-				},
-				{ tooltips: true },
-			)
+			return createExtensionApp(ProjectReviews, {
+				projectSlug: slug ?? '',
+				isModpack: projectType === 'modpack',
+				moddex: settings().reviews.moddex,
+				spigot: settings().reviews.spigot,
+			})
 		},
 	})
 

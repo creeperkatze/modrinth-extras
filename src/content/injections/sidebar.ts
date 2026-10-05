@@ -44,15 +44,11 @@ export function sidebarInjections(settings: SettingsGetter) {
 		},
 		createApp() {
 			const match = window.location.pathname.match(PROJECT_DEP_PATTERN)
-			return createExtensionApp(
-				DependencySidebar,
-				{
-					projectSlug: match?.[2] ?? '',
-					versionNumber: match?.[3],
-					showExplorer: settings().dependencyExplorer.enabled,
-				},
-				{ tooltips: true },
-			)
+			return createExtensionApp(DependencySidebar, {
+				projectSlug: match?.[2] ?? '',
+				versionNumber: match?.[3],
+				showExplorer: settings().dependencyExplorer.enabled,
+			})
 		},
 	})
 

@@ -54,21 +54,17 @@ export function searchInjections(settings: SettingsGetter) {
 			const [, projectType, projectSlug] = getCardHref(target).match(PROJECT_TYPE_PATTERN) ?? []
 			const { modLoader, pluginLoader, shaderLoader, gameVersion, downloadDependencies } =
 				settings().projectCardActions
-			return createExtensionApp(
-				ProjectCardActions,
-				{
-					projectSlug: projectSlug ?? '',
-					projectType: projectType ?? '',
-					downloadSettings: {
-						modLoader,
-						pluginLoader,
-						shaderLoader,
-						gameVersion,
-						downloadDependencies,
-					},
+			return createExtensionApp(ProjectCardActions, {
+				projectSlug: projectSlug ?? '',
+				projectType: projectType ?? '',
+				downloadSettings: {
+					modLoader,
+					pluginLoader,
+					shaderLoader,
+					gameVersion,
+					downloadDependencies,
 				},
-				{ tooltips: true },
-			)
+			})
 		},
 	})
 

@@ -31,7 +31,7 @@ export function headerInjections(settings: SettingsGetter) {
 			flexRow.insertBefore(container, childInFlex)
 			return true
 		},
-		createApp: () => createExtensionApp(NotificationsIndicator, {}, { tooltips: true }),
+		createApp: () => createExtensionApp(NotificationsIndicator),
 	})
 
 	const quickSearch = createInjection({
