@@ -1,66 +1,68 @@
-import type { ExtensionSettings } from '../../core/settings'
-import { hexToRgb } from '../../utils/color'
+import { type Colord, colord } from 'colord'
 
-type Rgb = [number, number, number]
+import type { ExtensionSettings } from '../../core/settings'
+import { setImageAccent } from './images'
 
 const STYLE_ID = 'modrinth-extras-accent-color'
 
-const rgba = ([r, g, b]: Rgb, alpha: number) => `rgba(${r}, ${g}, ${b}, ${alpha})`
+const rgba = (color: Colord, alpha: number) => color.alpha(alpha).toRgbString()
 
-function mix(rgb: Rgb, base: number, amount: number): Rgb {
-	return rgb.map((c) => Math.round(c * amount + base * (1 - amount))) as Rgb
+function mix(color: Colord, base: number, amount: number) {
+	const { r, g, b } = color.toRgb()
+	const channel = (c: number) => Math.round(c * amount + base * (1 - amount))
+	return colord({ r: channel(r), g: channel(g), b: channel(b) })
 }
 
 // The brand gradients are defined per theme upstream, so they need theme-scoped rules
-function gradientStyles(rgb: Rgb) {
+function gradientStyles(color: Colord) {
 	return `
 html:root {
-	--brand-gradient-bg: linear-gradient(0deg, ${rgba(rgb, 0.175)} 0%, ${rgba(rgb, 0.125)} 100%);
-	--brand-gradient-border: ${rgba(mix(rgb, 0, 0.3), 0.15)};
-	--landing-green-label: ${rgba(mix(rgb, 0, 0.78), 1)};
-	--landing-green-label-bg: ${rgba(rgb, 0.15)};
+	--brand-gradient-bg: linear-gradient(0deg, ${rgba(color, 0.175)} 0%, ${rgba(color, 0.125)} 100%);
+	--brand-gradient-border: ${rgba(mix(color, 0, 0.3), 0.15)};
+	--landing-green-label: ${rgba(mix(color, 0, 0.78), 1)};
+	--landing-green-label-bg: ${rgba(color, 0.15)};
 }
 html:root:not(.retro-mode) {
-	--brand-gradient-strong-bg: linear-gradient(270deg, ${rgba(rgb, 0.175)} 0%, ${rgba(rgb, 0.12)} 100%);
+	--brand-gradient-strong-bg: linear-gradient(270deg, ${rgba(color, 0.175)} 0%, ${rgba(color, 0.12)} 100%);
 }
 html:root:is(.dark-mode, .oled-mode, .retro-mode) {
-	--brand-gradient-bg: linear-gradient(0deg, ${rgba(mix(rgb, 0, 0.16), 0.2)} 0%, ${rgba(mix(rgb, 0, 0.63), 0.1)} 100%);
-	--brand-gradient-border: ${rgba(mix(rgb, 255, 0.5), 0.08)};
-	--landing-green-label: ${rgba(rgb, 1)};
+	--brand-gradient-bg: linear-gradient(0deg, ${rgba(mix(color, 0, 0.16), 0.2)} 0%, ${rgba(mix(color, 0, 0.63), 0.1)} 100%);
+	--brand-gradient-border: ${rgba(mix(color, 255, 0.5), 0.08)};
+	--landing-green-label: ${rgba(color, 1)};
 }
 html:root.dark-mode {
-	--brand-gradient-strong-bg: linear-gradient(270deg, ${rgba(mix(rgb, 8, 0.04), 1)} 10%, ${rgba(mix(rgb, 18, 0.06), 1)} 100%);
+	--brand-gradient-strong-bg: linear-gradient(270deg, ${rgba(mix(color, 8, 0.04), 1)} 10%, ${rgba(mix(color, 18, 0.06), 1)} 100%);
 }
 html:root.oled-mode {
-	--brand-gradient-bg: linear-gradient(0deg, ${rgba(mix(rgb, 0, 0.3), 0.15)} 0%, ${rgba(mix(rgb, 0, 0.63), 0.1)} 100%);
-	--brand-gradient-strong-bg: linear-gradient(270deg, ${rgba(mix(rgb, 8, 0.04), 0.6)} 10%, ${rgba(mix(rgb, 18, 0.06), 0.5)} 100%);
+	--brand-gradient-bg: linear-gradient(0deg, ${rgba(mix(color, 0, 0.3), 0.15)} 0%, ${rgba(mix(color, 0, 0.63), 0.1)} 100%);
+	--brand-gradient-strong-bg: linear-gradient(270deg, ${rgba(mix(color, 8, 0.04), 0.6)} 10%, ${rgba(mix(color, 18, 0.06), 0.5)} 100%);
 }
 `
 }
 
 // Some landing and hosting page elements hardcode the brand green
-function hardcodedOverrides(rgb: Rgb) {
+function hardcodedOverrides(color: Colord) {
 	return `
 .blob-demonstration::after {
-	background: linear-gradient(0deg, ${rgba(rgb, 1)} 0%, ${rgba(rgb, 0)} 100%) !important;
+	background: linear-gradient(0deg, ${rgba(color, 1)} 0%, ${rgba(color, 0)} 100%) !important;
 }
 [style*="27, 217, 106, 0.23"] {
-	background-image: radial-gradient(86.12% 101.64% at 95.97% 94.07%, ${rgba(rgb, 0.23)} 0%, ${rgba(mix(rgb, 0, 0.53), 0.2)} 100%) !important;
+	background-image: radial-gradient(86.12% 101.64% at 95.97% 94.07%, ${rgba(color, 0.23)} 0%, ${rgba(mix(color, 0, 0.53), 0.2)} 100%) !important;
 }
 [style*="12, 107, 52, 0.55"] {
-	border-color: ${rgba(mix(rgb, 0, 0.49), 0.55)} !important;
+	border-color: ${rgba(mix(color, 0, 0.49), 0.55)} !important;
 }
 [style*="27, 217, 106, 0.13"] {
-	box-shadow: 0px 12px 38.1px ${rgba(rgb, 0.13)} !important;
+	box-shadow: 0px 12px 38.1px ${rgba(color, 0.13)} !important;
 }
 `
 }
 
 export function applyAccentColor(settings: Pick<ExtensionSettings, 'accentColor'>) {
 	const root = document.documentElement.style
-	const rgb = settings.accentColor.enabled ? hexToRgb(settings.accentColor.color) : null
+	const color = colord(settings.accentColor.color)
 
-	if (!rgb) {
+	if (!settings.accentColor.enabled || !color.isValid()) {
 		root.removeProperty('--color-brand')
 		root.removeProperty('--color-brand-highlight')
 		root.removeProperty('--color-brand-shadow')
@@ -69,19 +71,19 @@ export function applyAccentColor(settings: Pick<ExtensionSettings, 'accentColor'
 		root.removeProperty('--color-green-bg')
 		root.removeProperty('--loading-bar-gradient')
 		document.getElementById(STYLE_ID)?.remove()
+		setImageAccent(null)
 		return
 	}
 
-	const [r, g, b] = rgb
 	root.setProperty('--color-brand', settings.accentColor.color)
-	root.setProperty('--color-brand-highlight', `rgba(${r}, ${g}, ${b}, 0.25)`)
-	root.setProperty('--color-brand-shadow', `rgba(${r}, ${g}, ${b}, 0.7)`)
+	root.setProperty('--color-brand-highlight', rgba(color, 0.25))
+	root.setProperty('--color-brand-shadow', rgba(color, 0.7))
 	root.setProperty('--color-green', settings.accentColor.color)
-	root.setProperty('--color-green-highlight', `rgba(${r}, ${g}, ${b}, 0.25)`)
-	root.setProperty('--color-green-bg', `rgba(${r}, ${g}, ${b}, 0.1)`)
+	root.setProperty('--color-green-highlight', rgba(color, 0.25))
+	root.setProperty('--color-green-bg', rgba(color, 0.1))
 	root.setProperty(
 		'--loading-bar-gradient',
-		`linear-gradient(to right, ${settings.accentColor.color} 0%, rgba(${r}, ${g}, ${b}, 0.5) 100%)`,
+		`linear-gradient(to right, ${settings.accentColor.color} 0%, ${rgba(color, 0.5)} 100%)`,
 	)
 
 	let style = document.getElementById(STYLE_ID)
@@ -90,5 +92,6 @@ export function applyAccentColor(settings: Pick<ExtensionSettings, 'accentColor'
 		style.id = STYLE_ID
 		document.head.append(style)
 	}
-	style.textContent = gradientStyles(rgb) + hardcodedOverrides(rgb)
+	style.textContent = gradientStyles(color) + hardcodedOverrides(color)
+	setImageAccent(settings.accentColor.color)
 }

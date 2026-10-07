@@ -13,6 +13,7 @@ import { navigate } from '../content/page-router'
 import { detectBrowserLocale, i18n, loadSavedLocale } from '../core/i18n/i18n'
 import { DEFAULTS, type ExtensionSettings, getSettings, withoutSecrets } from '../core/settings'
 import { applyAccentColor } from '../features/accent-color/apply'
+import { recolorBrandImages } from '../features/accent-color/images'
 
 export default defineContentScript({
 	matches: ['https://modrinth.com/*'],
@@ -106,6 +107,7 @@ export default defineContentScript({
 		})
 
 		const domObserver = new MutationObserver(() => {
+			recolorBrandImages()
 			for (const inj of injections) {
 				inj.checkDetached()
 				inj.schedule()

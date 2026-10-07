@@ -929,14 +929,28 @@ async function updateEnabled(key: FeatureKey, enabled: boolean) {
 	}
 }
 
-async function updateOption(
+let pendingSave: ReturnType<typeof setTimeout> | undefined
+
+function flushPendingSave() {
+	if (!pendingSave) return
+	clearTimeout(pendingSave)
+	pendingSave = undefined
+	saveSettings(settings as ExtensionSettings).catch((err) =>
+		console.error('[Modrinth Extras] Failed to save settings:', err),
+	)
+}
+
+// Dragging the color picker fires an update per frame, so batch the storage writes
+function updateOption(
 	featureKey: keyof ExtensionSettings,
 	optionKey: string,
 	value: string | boolean,
 ) {
 	;(settings[featureKey] as Record<string, unknown>)[optionKey] = value
-	await saveSettings(settings as ExtensionSettings)
+	pendingSave ??= setTimeout(flushPendingSave, 100)
 }
+
+window.addEventListener('pagehide', flushPendingSave)
 
 const modrinthFlags = reactive({ ...MODRINTH_FLAG_DEFAULTS })
 

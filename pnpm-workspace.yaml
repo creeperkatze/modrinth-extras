@@ -6,6 +6,8 @@ packages:
   - 'modrinth/packages/tooling-config'
   - 'modrinth/packages/blog'
 
+nodeOptions: '--max-old-space-size=4096'
+
 allowBuilds:
   '@parcel/watcher': true
   '@wxt-dev/analytics': false
