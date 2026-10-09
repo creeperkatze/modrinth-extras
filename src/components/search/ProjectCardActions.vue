@@ -37,63 +37,63 @@
 	>
 		<BookmarkIcon fill="none" aria-hidden="true" />
 	</IconButton>
-	<TeleportPopoutMenu
-		v-else
-		icon-only
-		:tooltip="
-			isSaved
-				? formatMessage(messages['projectCardActions.saved'])
-				: formatMessage(messages['projectCardActions.save'])
-		"
-		:color="isSaved ? 'brand' : undefined"
-		:label="
-			isSaved
-				? formatMessage(messages['projectCardActions.saved'])
-				: formatMessage(messages['projectCardActions.save'])
-		"
-		placement="bottom-end"
-		@click.stop
-	>
-		<template #trigger>
-			<BookmarkIcon :fill="isSaved ? 'currentColor' : 'none'" aria-hidden="true" />
-		</template>
-		<template #panel>
-			<template v-if="collections === null">
-				<div class="menu-loading">
-					<LoaderCircleIcon class="animate-spin menu-loading-icon" />
-				</div>
+	<span v-else class="save-action" @click.stop>
+		<TeleportPopoutMenu
+			icon-only
+			:tooltip="
+				isSaved
+					? formatMessage(messages['projectCardActions.saved'])
+					: formatMessage(messages['projectCardActions.save'])
+			"
+			:color="isSaved ? 'brand' : undefined"
+			:label="
+				isSaved
+					? formatMessage(messages['projectCardActions.saved'])
+					: formatMessage(messages['projectCardActions.save'])
+			"
+			placement="bottom-end"
+		>
+			<template #trigger>
+				<BookmarkIcon :fill="isSaved ? 'currentColor' : 'none'" aria-hidden="true" />
 			</template>
-			<template v-else>
-				<Input
-					v-model="collectionsSearch"
-					:placeholder="formatMessage(messages['projectCardActions.searchPlaceholder'])"
-					wrapper-class="menu-search"
-				/>
-				<div v-if="filteredCollections.length > 0" class="collections-list">
-					<Checkbox
-						v-for="col in filteredCollections"
-						:key="col.id"
-						:model-value="!!projectId && col.projects.includes(projectId)"
-						class="popout-checkbox"
-						@update:model-value="handleToggleCollection(col)"
-					>
-						{{ col.name }}
-					</Checkbox>
-				</div>
-				<div v-else class="menu-text">
-					<p class="popout-text">
-						{{ formatMessage(messages['projectCardActions.noCollections']) }}
-					</p>
-				</div>
-				<div class="collection-button">
-					<Button @click.stop="handleNewCollection">
-						<PlusIcon />
-						{{ formatMessage(messages['projectCardActions.newCollection']) }}
-					</Button>
-				</div>
+			<template #panel>
+				<template v-if="collections === null">
+					<div class="menu-loading">
+						<LoaderCircleIcon class="animate-spin menu-loading-icon" />
+					</div>
+				</template>
+				<template v-else>
+					<Input
+						v-model="collectionsSearch"
+						:placeholder="formatMessage(messages['projectCardActions.searchPlaceholder'])"
+						wrapper-class="menu-search"
+					/>
+					<div v-if="filteredCollections.length > 0" class="collections-list">
+						<Checkbox
+							v-for="col in filteredCollections"
+							:key="col.id"
+							:model-value="!!projectId && col.projects.includes(projectId)"
+							class="popout-checkbox"
+							@update:model-value="handleToggleCollection(col)"
+						>
+							{{ col.name }}
+						</Checkbox>
+					</div>
+					<div v-else class="menu-text">
+						<p class="popout-text">
+							{{ formatMessage(messages['projectCardActions.noCollections']) }}
+						</p>
+					</div>
+					<div class="collection-button">
+						<Button @click.stop="handleNewCollection">
+							<PlusIcon />
+							{{ formatMessage(messages['projectCardActions.newCollection']) }}
+						</Button>
+					</div>
+				</template>
 			</template>
-		</template>
-	</TeleportPopoutMenu>
+		</TeleportPopoutMenu>
+	</span>
 	<IconButton
 		v-tooltip="
 			copied
@@ -442,7 +442,8 @@ async function handleCopyLink() {
 	white-space: nowrap;
 }
 
-.download-action {
+.download-action,
+.save-action {
 	display: inline-flex;
 }
 </style>
