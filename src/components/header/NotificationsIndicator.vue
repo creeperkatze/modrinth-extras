@@ -242,7 +242,7 @@ import {
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { browser } from 'wxt/browser'
 
-import { invalidateTokenCache, modrinthClient } from '../../api/client'
+import { getAuthToken, modrinthClient } from '../../api/client'
 import { navigate, resolveLink } from '../../content/page-router'
 import {
 	fetchExtraNotificationData,
@@ -317,31 +317,59 @@ const userId = ref<string | null | false>(null)
 const notificationsData = ref<Notification[] | null>(null)
 
 async function refreshNotifications() {
-	if (!userId.value) return
+	const id = userId.value
+	if (!id) return
 	try {
-		const notifs = await fetchNotifications(userId.value)
-		syncToBackground(notifs)
-		notificationsData.value = await fetchExtraNotificationData(notifs.filter((n) => !n.read))
+		const notifs = await fetchNotifications(id)
+		// The account may have been switched while fetching
+		if (userId.value !== id) return
+		// Synced before the extra data is attached, which would make the message huge
+		syncToBackground(notifs, id)
+		const unread = await fetchExtraNotificationData(notifs.filter((n) => !n.read))
+		if (userId.value !== id) return
+		notificationsData.value = unread
 	} catch (err) {
 		console.warn('[Modrinth Extras] Failed to fetch notifications:', err)
 	}
 }
 
-function hasAuthCookie(): boolean {
-	return document.cookie.split('; ').some((row) => row.startsWith('auth-token='))
-}
-
-async function tryAuth(): Promise<boolean> {
+async function fetchUserId(): Promise<string | null> {
 	try {
 		const user = await modrinthClient.request<Labrinth.Users.v2.User>('/user', {
 			api: 'labrinth',
 			version: 2,
 		})
-		userId.value = user.id
-		await refreshNotifications()
-		return true
+		return user.id
 	} catch {
-		return false
+		return null
+	}
+}
+
+let authToken = ''
+let authenticating = false
+
+async function signIn() {
+	userId.value = (authToken && (await fetchUserId())) || false
+	await refreshNotifications()
+}
+
+// Compares the token so switching accounts is caught, not just signing in or out
+async function syncAuth() {
+	if (authenticating) return
+	const token = getAuthToken()
+	if (token !== authToken) {
+		authToken = token
+		userId.value = token ? null : false
+		notificationsData.value = null
+		currentPage.value = 1
+	} else if (userId.value || !token) {
+		return
+	}
+	authenticating = true
+	try {
+		await signIn()
+	} finally {
+		authenticating = false
 	}
 }
 
@@ -383,22 +411,9 @@ let authWatchInterval: ReturnType<typeof setInterval> | null = null
 let refreshInterval: ReturnType<typeof setInterval> | null = null
 
 onMounted(async () => {
-	if (!(await tryAuth())) {
-		userId.value = false
-	}
-
-	// Watches cookie, signs in when cookie appears, signs out when it disappears
-	authWatchInterval = setInterval(async () => {
-		const cookie = hasAuthCookie()
-		if (userId.value && !cookie) {
-			invalidateTokenCache()
-			userId.value = false
-			notificationsData.value = null
-		} else if (!userId.value && cookie) {
-			invalidateTokenCache()
-			await tryAuth()
-		}
-	}, 1_000)
+	authToken = getAuthToken()
+	await signIn()
+	authWatchInterval = setInterval(syncAuth, 1_000)
 
 	refreshInterval = setInterval(() => {
 		if (userId.value) refreshNotifications()

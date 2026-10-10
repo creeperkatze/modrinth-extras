@@ -3,7 +3,7 @@ import { browser } from 'wxt/browser'
 
 import {
 	applyNotifications,
-	notificationsItem,
+	getPreviousNotifications,
 	setBadge,
 	showCachedBadge,
 	updateBadge,
@@ -67,9 +67,10 @@ export default defineBackground(() => {
 		}
 		if (message.type === 'notifications-fetched') {
 			const newNotifs = message.notifications as Notification[]
+			const userId = message.userId as string
 			;(async () => {
-				const prevNotifs = await notificationsItem.getValue()
-				await applyNotifications(newNotifs, prevNotifs)
+				const prevNotifs = await getPreviousNotifications(userId)
+				await applyNotifications(newNotifs, prevNotifs, userId)
 			})()
 		}
 		if (message.type === 'repository-stats') {

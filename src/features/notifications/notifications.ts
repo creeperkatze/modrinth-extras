@@ -146,6 +146,8 @@ export async function markNotificationsAsRead(ids: string[]): Promise<void> {
 	}
 }
 
-export function syncToBackground(notifications: Notification[]) {
-	browser.runtime.sendMessage({ type: 'notifications-fetched', notifications }).catch(() => {})
+export function syncToBackground(notifications: Notification[], userId: string) {
+	browser.runtime
+		.sendMessage({ type: 'notifications-fetched', notifications, userId })
+		.catch(() => {})
 }

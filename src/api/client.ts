@@ -9,22 +9,21 @@ export const USER_AGENT = `creeperkatze/modrinth-extras/${browser.runtime.getMan
 // The platform clients call the fetch they are given unbound, which a service worker rejects.
 export const boundFetch: typeof globalThis.fetch = (...args) => globalThis.fetch(...args)
 
-let cachedToken: string | null = null
-
+// Read on every call since the site refreshes and switches the token without reloading.
 export function getAuthToken(): string {
-	if (cachedToken !== null) return cachedToken
 	if (typeof document === 'undefined') return ''
 	const cookie = document.cookie.split('; ').find((row) => row.startsWith('auth-token='))
-	cachedToken = cookie ? decodeURIComponent(cookie.split('=').slice(1).join('=')) : ''
-	return cachedToken
+	return cookie ? decodeURIComponent(cookie.split('=').slice(1).join('=')) : ''
 }
 
 const requestCache = new RequestCacheFeature()
+let lastToken: string | null = null
 
 // Cached responses belong to whoever was signed in, so they go with the token.
-export function invalidateTokenCache() {
-	cachedToken = null
-	requestCache.clear()
+function trackToken(token: string): string {
+	if (lastToken !== null && token !== lastToken) requestCache.clear()
+	lastToken = token
+	return token
 }
 
 // Features run from last to first, so cache hits return before the throttle queues anything.
@@ -35,7 +34,9 @@ export const modrinthClient = new GenericModrinthClient({
 		requestCache,
 		new AuthFeature({
 			token: async () =>
-				typeof document === 'undefined' ? getBackgroundAuthToken() : getAuthToken(),
+				trackToken(
+					typeof document === 'undefined' ? await getBackgroundAuthToken() : getAuthToken(),
+				),
 			tokenPrefix: '',
 		} as AuthConfig),
 	],

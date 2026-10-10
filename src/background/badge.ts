@@ -19,6 +19,15 @@ export const lastUpdatedItem = storage.defineItem<number | null>('local:lastUpda
 	defaultValue: null,
 })
 
+// Another account's notifications can't serve as the baseline
+export async function getPreviousNotifications(userId: string): Promise<Notification[] | null> {
+	const [prevUserId, prevNotifs] = await Promise.all([
+		userIdItem.getValue(),
+		notificationsItem.getValue(),
+	])
+	return prevUserId === userId && Array.isArray(prevNotifs) ? prevNotifs : null
+}
+
 export async function setBadge(unread: number) {
 	const action = browser.action ?? browser.browserAction
 
@@ -60,10 +69,7 @@ export async function applyNotifications(
 
 export async function updateBadge() {
 	try {
-		const [{ notificationBadge }, prevNotifs] = await Promise.all([
-			getSettings(),
-			notificationsItem.getValue(),
-		])
+		const { notificationBadge } = await getSettings()
 		if (!notificationBadge.enabled) {
 			await setBadge(0)
 			return
@@ -88,7 +94,7 @@ export async function updateBadge() {
 		if (!user?.id) throw new Error('Failed to fetch user')
 
 		const notifs = await fetchNotifications(user.id)
-		await applyNotifications(notifs, Array.isArray(prevNotifs) ? prevNotifs : null, user.id)
+		await applyNotifications(notifs, await getPreviousNotifications(user.id), user.id)
 	} catch (err) {
 		console.error('[Modrinth Extras] Badge: Background update failed:', err)
 		await setBadge(0)
