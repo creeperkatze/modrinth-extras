@@ -23,96 +23,40 @@ Install from your browser's extension store:
 
 Prefer to build from source? See [Building from source](#-building-from-source) below.
 
-## 📸 Screenshots
-
-<table>
-<tr>
-<td width="50%"><img src=".github/assets/screenshots/extension.png" width="100%"><br><i>Extension popup</i></td>
-<td width="50%"><img src=".github/assets/screenshots/notifications.png" width="100%"><br><i>Notifications</i></td>
-</tr>
-<tr>
-<td width="50%"><img src=".github/assets/screenshots/quicksearch.gif" width="100%"><br><i>Quick search</i></td>
-<td width="50%"><img src=".github/assets/screenshots/project-card-actions.png" width="100%"><br><i>Project card actions</i></td>
-</tr>
-<tr>
-<td width="50%"><img src=".github/assets/screenshots/sparkline.png" width="100%"><br><i>Activity sparkline</i></td>
-<td width="50%"><img src=".github/assets/screenshots/dependency-explorer.png" width="100%"><br><i>Dependency explorer</i></td>
-</tr>
-<tr>
-<td width="50%"><img src=".github/assets/screenshots/sidebar.png" width="100%"><br><i>Sidebars</i></td>
-<td width="50%"><img src=".github/assets/screenshots/gallery-background.png" width="100%"><br><i>Gallery background</i></td>
-</tr>
-</table>
-
 ## ✨ Features
 
-All features can be individually toggled from the extension popup.
-
-### General
-
 <table>
 <tr>
-<td width="50%"><b>Language</b><br>Help translate on <a href="https://crowdin.com/project/modrinth-extras">Crowdin</a>. Some languages may be incomplete.</td>
-<td width="50%"><b>Notifications</b><br>View, manage, and clear unread notifications right in the header without leaving the current page.</td>
+<td width="50%"><img src=".github/assets/screenshots/extension.png"></td>
+<td width="50%"><h3>Every feature, one click away</h3>Every feature can be individually toggled from the extension popup, so you can build the exact Modrinth experience you want.</td>
 </tr>
 <tr>
-<td width="50%"><b>Quick search</b><br>Ctrl+K or / for a command palette style search with faceted tags for loaders, versions, categories, and types.</td>
-<td width="50%"><b>Project card actions</b><br>Download, follow, and save projects right from their project cards.</td>
+<td width="50%"><h3>Act without leaving the list</h3>Download, follow, save, and copy links for projects directly from their cards, no need to open each page.</td>
+<td width="50%"><img src=".github/assets/screenshots/project-card-actions.png"></td>
 </tr>
 <tr>
-<td width="50%"><b>Accent color</b><br>Replace the Modrinth green with a custom accent color.</td>
-<td width="50%"></td>
-</tr>
-</table>
-
-### Content pages
-
-<table>
-<tr>
-<td width="50%"><b>Activity sparkline</b><br>Release activity chart on project pages.</td>
-<td width="50%"><b>Tools sidebar</b><br>Generate embeds and copy mod manager install commands.</td>
+<td width="50%"><img src=".github/assets/screenshots/gallery-background.png"></td>
+<td width="50%"><h3>A page that matches the project</h3>Display a project's featured gallery image as a full banner background, so shaders and resource packs look the part.</td>
 </tr>
 <tr>
-<td width="50%"><b>Dependency sidebar</b><br>Collapsible dependency tree on project pages.</td>
-<td width="50%"><b>Dependency explorer</b><br>Interactive graph for exploring the full dependency tree.</td>
+<td width="50%"><h3>Notifications, right in the header</h3>View, manage, and clear unread notifications without leaving the page you're on, with optional browser notifications and an unread badge on the extension icon.</td>
+<td width="50%"><img src=".github/assets/screenshots/notifications.png"></td>
 </tr>
 <tr>
-<td width="50%"><b>Repository sidebar</b><br>Stars, issues, pull requests, and forks for linked GitHub, GitLab, Codeberg, and Bitbucket repositories.</td>
-<td width="50%"><b>Discord sidebar</b><br>Server name, description, member count, and online count for linked Discord servers.</td>
+<td width="50%"><img src=".github/assets/screenshots/dependency-explorer.png"></td>
+<td width="50%"><h3>Explore the full dependency tree</h3>An interactive graph lets you dig through a project's required, optional, and embedded dependencies, as deep as you want to go.</td>
 </tr>
 <tr>
-<td width="50%"><b>Modpacks sidebar</b><br>Show all the modpacks the mod is featured in.</td>
-<td width="50%"><b>Other platforms sidebar</b><br>Find the same project or author on CurseForge, Hangar, and SpigotMC.</td>
+<td width="50%"><h3>Find anything in seconds</h3>Press Ctrl+K or / to open a command palette style search, with faceted tags for loaders, versions, categories, and types built right into your query.</td>
+<td width="50%"><img src=".github/assets/screenshots/quicksearch.gif"></td>
 </tr>
 <tr>
-<td width="50%"><b>Gallery background</b><br>Display the featured gallery image as a background banner on project pages.</td>
-<td width="50%"><b>Monetization badge</b><br>Show the monetization status of a project in the sidebar.</td>
+<td width="50%"><img src=".github/assets/screenshots/sparkline.png"></td>
+<td width="50%"><h3>See how active a project really is</h3>A release activity sparkline on every project page shows update frequency at a glance, before you even scroll down.</td>
 </tr>
 <tr>
-<td width="50%"><b>Translate description</b><br>On-device translation of a project's description into your language, when it differs.</td>
-<td width="50%"></td>
-</tr>
-</table>
-
-### Flags
-
-<table>
-<tr>
-<td width="50%"><b>Search background</b><br>Show a banner background on the discover pages.</td>
-<td width="50%"><b>Project type navigation</b><br>Move mods, plugins, resource packs, and other project types into the main navigation bar.</td>
-</tr>
-</table>
-
-### Extension
-
-<table>
-<tr>
-<td width="50%"><b>Notification badge</b><br>Up-to-date unread notification count as a badge on the extension icon.</td>
-<td width="50%"><b>Browser notifications</b><br>Browser notifications for your Modrinth notifications.</td>
-</tr>
-<tr>
-<td width="50%"><b>CurseForge redirect</b><br>Redirect CurseForge project pages to Modrinth when available.</td>
-<td width="50%"><b>Telemetry</b><br>Help improve the extension by anonymously sharing statistics like the extension version and which features are enabled. No Modrinth data, activity, or personal information is ever collected.</td>
+<td width="50%"><h3>The full picture, right in the sidebar</h3>Repository stars, issues, and pull requests. Discord member counts. Every modpack a mod is featured in. All shown right in the sidebar.</td>
+<td width="50%"><img src=".github/assets/screenshots/sidebar.png"></td>
 </tr>
 </table>
 
