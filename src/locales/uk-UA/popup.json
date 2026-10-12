@@ -75,7 +75,7 @@
     "defaultMessage": "Репозиторій на бічній панелі"
   },
   "feature.modpacksSidebar.description": {
-    "defaultMessage": "Показати всі збірки, до яких входить цей мод."
+    "defaultMessage": "Показати всі збірки, до яких входить цей проєкт."
   },
   "feature.modpacksSidebar.title": {
     "defaultMessage": "Збірки на бічній панелі"
@@ -228,7 +228,7 @@
     "defaultMessage": "Розширення"
   },
   "popup.group.flags": {
-    "defaultMessage": "Прапори"
+    "defaultMessage": "Прапорці"
   },
   "popup.group.general": {
     "defaultMessage": "Загальні"

@@ -107,6 +107,9 @@
   "feature.projectCardActions.description": {
     "defaultMessage": "直接从项目卡片下载、关注和保存项目。"
   },
+  "feature.projectCardActions.downloadDependencies": {
+    "defaultMessage": "下载依赖项"
+  },
   "feature.projectCardActions.gameVersion": {
     "defaultMessage": "游戏版本"
   },
@@ -133,6 +136,24 @@
   },
   "feature.quickSearch.title": {
     "defaultMessage": "快速搜索"
+  },
+  "feature.reviews.description": {
+    "defaultMessage": "为项目添加一个“评论”选项卡，展示来自 ModDex 和 SpigotMC 社区的评论。"
+  },
+  "feature.reviews.getModdexToken": {
+    "defaultMessage": "<link>获取 ModDex API 令牌</link>"
+  },
+  "feature.reviews.moddex": {
+    "defaultMessage": "ModDex 评论"
+  },
+  "feature.reviews.moddexApiToken": {
+    "defaultMessage": "ModDex API 令牌"
+  },
+  "feature.reviews.spigot": {
+    "defaultMessage": "SpigotMC 评论"
+  },
+  "feature.reviews.title": {
+    "defaultMessage": "评论"
   },
   "feature.searchBackground.description": {
     "defaultMessage": "在发现页面上显示横幅背景。"
