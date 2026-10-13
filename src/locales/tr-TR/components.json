@@ -59,6 +59,9 @@
   "discordSidebar.loading": {
     "defaultMessage": "Yükleniyor"
   },
+  "discordSidebar.members": {
+    "defaultMessage": "{count, plural, one {# üye} other {# üye}}"
+  },
   "discordSidebar.online": {
     "defaultMessage": "{count} çevrim içi"
   },
@@ -67,6 +70,99 @@
   },
   "errorNotice.message": {
     "defaultMessage": "Bu hata Modrinth Extras ile ilgili olabilir. Bunu Modrinth’e bildirmeden önce eklentiyi devre dışı bırakıp sayfayı yenilemeyi deneyin. Eğer hata giderse, lütfen <link>buradan</link> bildirin."
+  },
+  "moddexReviews.aesthetics": {
+    "defaultMessage": "Estetik"
+  },
+  "moddexReviews.createToken": {
+    "defaultMessage": "Token oluştur"
+  },
+  "moddexReviews.credit": {
+    "defaultMessage": "Değerlendirmeler <link>ModDex</link> tarafından sağlanmakta olup kendi topluluğu tarafından yazılmıştır."
+  },
+  "moddexReviews.developer": {
+    "defaultMessage": "Geliştirici"
+  },
+  "moddexReviews.edited": {
+    "defaultMessage": "Düzenlendi"
+  },
+  "moddexReviews.empty": {
+    "defaultMessage": "Henüz hiç değerlendirme yapılmamış. İlk değerlendirmeyi sen yaz!"
+  },
+  "moddexReviews.gameplay": {
+    "defaultMessage": "Oynanış"
+  },
+  "moddexReviews.helpful": {
+    "defaultMessage": "{count, plural, one {# kişi bunu yararlı buldu} other {# kişi bunu yararlı buldu}}"
+  },
+  "moddexReviews.invalidTokenTitle": {
+    "defaultMessage": "ModDex API token'ınız geçersiz veya süresi dolmuş"
+  },
+  "moddexReviews.loadError": {
+    "defaultMessage": "ModDex üzerindeki değerlendirmeler yüklenemedi"
+  },
+  "moddexReviews.loading": {
+    "defaultMessage": "Değerlendirmeler yükleniyor…"
+  },
+  "moddexReviews.moderatorNote": {
+    "defaultMessage": "Moderatör notu:"
+  },
+  "moddexReviews.noTokenTitle": {
+    "defaultMessage": "ModDex API tokenı gereklidir"
+  },
+  "moddexReviews.notFound": {
+    "defaultMessage": "Bu proje ModDex'te bulunamadı."
+  },
+  "moddexReviews.openModdex": {
+    "defaultMessage": "ModDex'i aç"
+  },
+  "moddexReviews.performance": {
+    "defaultMessage": "Performans"
+  },
+  "moddexReviews.playtime": {
+    "defaultMessage": "{hours, number} sa. oynandı"
+  },
+  "moddexReviews.posted": {
+    "defaultMessage": "{time} paylaşıldı"
+  },
+  "moddexReviews.rateLimited": {
+    "defaultMessage": "ModDex istek sınırına ulaşıldı bir dakika sonra tekrar deneyin"
+  },
+  "moddexReviews.ratingsCount": {
+    "defaultMessage": "{count, plural, one {# değerlendirme} other {# değerlendirme}}"
+  },
+  "moddexReviews.sortBy": {
+    "defaultMessage": "Sıralama:"
+  },
+  "moddexReviews.sortHelpful": {
+    "defaultMessage": "En yararlı"
+  },
+  "moddexReviews.sortLabel": {
+    "defaultMessage": "Değerlendirmeleri sırala"
+  },
+  "moddexReviews.sortLowestRating": {
+    "defaultMessage": "En düşük puanlı"
+  },
+  "moddexReviews.sortNewest": {
+    "defaultMessage": "En yeni"
+  },
+  "moddexReviews.sortOldest": {
+    "defaultMessage": "En eski"
+  },
+  "moddexReviews.sortRating": {
+    "defaultMessage": "En yüksek puanlı"
+  },
+  "moddexReviews.sortUnhelpful": {
+    "defaultMessage": "En az yararlı"
+  },
+  "moddexReviews.title": {
+    "defaultMessage": "Topluluk değerlendirmeleri"
+  },
+  "moddexReviews.tokenHelp": {
+    "defaultMessage": "ModDex, değerlendirmeleri yalnızca oturum açmış API kullanıcılarına sunar. ModDex üzerinde ücretsiz bir token oluşturun ve ardından bunu Modrinth Extras açılır penceresindeki \"Değerlendirmeler\" alanına yapıştırın."
+  },
+  "moddexReviews.writeReview": {
+    "defaultMessage": "Değerlendirme yaz"
   },
   "modpacksSidebar.title": {
     "defaultMessage": "Mod paketleri"
@@ -109,6 +205,9 @@
   },
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "Geçmişi görüntüle"
+  },
+  "platformsSidebar.downloads": {
+    "defaultMessage": "{count, plural, one {# indirme} other {# indirme}}"
   },
   "platformsSidebar.loadError": {
     "defaultMessage": "Diğer platformlar yüklenemedi"
@@ -155,6 +254,12 @@
   "projectCardActions.unfollow": {
     "defaultMessage": "Takibi bırak"
   },
+  "projectReviews.source": {
+    "defaultMessage": "Değerlendirme Kaynağı"
+  },
+  "projectReviews.tab": {
+    "defaultMessage": "Değerlendirmeler"
+  },
   "quickSearch.clearRecent": {
     "defaultMessage": "Son ögeleri temizle"
   },
@@ -167,14 +272,83 @@
   "quickSearch.search": {
     "defaultMessage": "Ara"
   },
+  "repositorySidebar.forks": {
+    "defaultMessage": "{count, plural, one {# fork} other {# fork}}"
+  },
   "repositorySidebar.loadError": {
     "defaultMessage": "Depo verileri yüklenemedi"
   },
   "repositorySidebar.loading": {
     "defaultMessage": "Yükleniyor"
   },
+  "repositorySidebar.openIssues": {
+    "defaultMessage": "{count, plural, one {# açık issue} other {# açık issue}}"
+  },
+  "repositorySidebar.openPRs": {
+    "defaultMessage": "{count, plural, one {# açık pull request} other {# açık pull request}}"
+  },
+  "repositorySidebar.stars": {
+    "defaultMessage": "{count, plural, one {# star} other {# stars}}"
+  },
   "repositorySidebar.title": {
     "defaultMessage": "Depo"
+  },
+  "reviewStars.rating": {
+    "defaultMessage": "5 üzerinden {rating} puan verildi"
+  },
+  "spigotReviews.authorResponse": {
+    "defaultMessage": "Geliştirici Yanıtı:"
+  },
+  "spigotReviews.credit": {
+    "defaultMessage": "Değerlendirmeler <link>SpigotMC</link> tarafından sağlanmakta olup kendi topluluğu tarafından yazılmıştır."
+  },
+  "spigotReviews.empty": {
+    "defaultMessage": "Henüz değerlendirme yok."
+  },
+  "spigotReviews.loadError": {
+    "defaultMessage": "SpigotMC üzerindeki değerlendirmeler yüklenemedi"
+  },
+  "spigotReviews.loading": {
+    "defaultMessage": "Değerlendirmeler yükleniyor…"
+  },
+  "spigotReviews.notFound": {
+    "defaultMessage": "Bu eklenti SpigotMC'de bulunamadı."
+  },
+  "spigotReviews.posted": {
+    "defaultMessage": "{time} paylaşıldı"
+  },
+  "spigotReviews.ratingsCount": {
+    "defaultMessage": "{count, plural, one {# değerlendirme} other {# değerlendirme}}"
+  },
+  "spigotReviews.sortBy": {
+    "defaultMessage": "Sıralama:"
+  },
+  "spigotReviews.sortLabel": {
+    "defaultMessage": "Değerlendirmeleri sırala"
+  },
+  "spigotReviews.sortLowestRating": {
+    "defaultMessage": "En düşük puanlı"
+  },
+  "spigotReviews.sortNewest": {
+    "defaultMessage": "En yeni"
+  },
+  "spigotReviews.sortOldest": {
+    "defaultMessage": "En eski"
+  },
+  "spigotReviews.sortRating": {
+    "defaultMessage": "En yüksek puanlı"
+  },
+  "spigotReviews.title": {
+    "defaultMessage": "Topluluk incelemeleri"
+  },
+  "spigotReviews.unknownAuthor": {
+    "defaultMessage": "SpigotMC üyesi"
+  },
+  "spigotReviews.version": {
+    "defaultMessage": "Sürüm {version}"
+  },
+  "spigotReviews.writeReview": {
+    "defaultMessage": "İnceleme Yaz"
   },
   "toolsSidebar.copied": {
     "defaultMessage": "Kopyalandı!"

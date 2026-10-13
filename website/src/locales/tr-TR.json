@@ -7,12 +7,40 @@
 				"description": "Modrinth deneyimini tamamen kendi zevkine göre şekillendirebilmen için dilediğin özelliği pencereden tek tıkla açıp kapatabilirsin"
 			},
 			"cardActions": {
+				"title": "Listeden ayrılmadan hallet",
 				"description": "Tek tek sayfa açmak yerine indirme, takip, kaydetme ve link kopyalama işlemlerini direkt kart üzerinden yapabilirsin."
 			},
 			"galleryBackground": {
-				"title": "Projeyle uyumlu bir sayfa"
+				"title": "Projeyle uyumlu bir sayfa",
+				"description": "Shader ve kaynak paketlerinin tam da görünmesi gerektiği gibi durması için projenin öne çıkan galeri görselini tam ekran afiş arka planı olarak sergile."
+			},
+			"notifications": {
+				"title": "Bildirimler doğrudan sayfanın en üstünde",
+				"description": "İsteğe bağlı tarayıcı bildirimleri ve eklenti simgesindeki okunmamış rozeti sayesinde, bulunduğun sayfadan ayrılmadan okunmamış bildirimleri görüntüle, yönet ve temizle."
+			},
+			"dependencyExplorer": {
+				"title": "Tüm bağımlılık ağacını keşfet",
+				"description": "Etkileşimli bir grafik; bir projenin gerekli, isteğe bağlı ve gömülü bağımlılıklarını dilediğin derinliğe inerek incelemeni sağlar."
+			},
+			"quickSearch": {
+				"title": "Saniyeler içinde dilediğini bul",
+				"description": "Yükleyiciler, sürümler, kategoriler ve türler için filtre etiketlerini doğrudan sorguna ekleyen komut paleti tarzı aramayı açmak için Ctrl+K veya / tuşuna bas."
+			},
+			"sparkline": {
+				"title": "Bir projenin ne kadar aktif olduğunu gerçekten gör",
+				"description": "Her proje sayfasındaki sürüm etkinliği grafiği, daha aşağı kaydırmana bile gerek kalmadan güncelleme sıklığını bir bakışta gösterir."
+			},
+			"sidebar": {
+				"title": "Tüm detaylar doğrudan yan panelde",
+				"description": "Repository star'ları, issue'lar ve pull request'ler. Discord üye sayıları. Bir modun yer aldığı tüm modpack'ler. Hepsi doğrudan yan panelde."
 			}
 		}
+	},
+	"nav": {
+		"translate": "Çevir"
+	},
+	"stats": {
+		"users": "{browser} Kullanıcıları"
 	},
 	"footer": {
 		"notAffiliated": "Modrinth ile bir bağlantısı yoktur",

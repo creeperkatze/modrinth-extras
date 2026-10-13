@@ -273,7 +273,7 @@
     "defaultMessage": "Пошук"
   },
   "repositorySidebar.forks": {
-    "defaultMessage": "{count, plural, one {# вилка} few {# вилки} many {# вилок} other {# вилок}}"
+    "defaultMessage": "{count, plural, one {# форк} few {# форки} many {# форків} other {# форків}}"
   },
   "repositorySidebar.loadError": {
     "defaultMessage": "Не вдалося завантажити дані репозиторію"
@@ -285,7 +285,7 @@
     "defaultMessage": "{count, plural, one {# відкрита проблема} few {# відкриті проблеми} many {# відкритих проблем} other {# відкритих проблем}}"
   },
   "repositorySidebar.openPRs": {
-    "defaultMessage": "{count, plural, one {# відкритий запит на злиття} few {# відкритих запити на злиття} many {# відкритих запитів на злиття} other {# відкритих запитів на злиття}}"
+    "defaultMessage": "{count, plural, one {# запит на злиття} few {# запити на злиття} many {# запитів на злиття} other {# запитів на злиття}}"
   },
   "repositorySidebar.stars": {
     "defaultMessage": "{count, plural, one {# зірка} few {# зірки} many {# зірок} other {# зірок}}"
