@@ -5,7 +5,10 @@ import { installTooltipDirective, TooltipDirective } from '@modrinth/ui'
 import { createApp, h } from 'vue'
 
 import { installI18n, loadSavedLocale } from '../../core/i18n/i18n'
+import { installErrorReporting, reportUncaughtErrors } from '../../core/telemetry'
 import App from './App.vue'
+
+reportUncaughtErrors()
 
 function applyTheme(dark: boolean) {
 	document.documentElement.classList.toggle('dark-mode', dark)
@@ -22,6 +25,7 @@ void (async () => {
 		render: () => [h(App), h(TooltipDirective)],
 	})
 
+	installErrorReporting(app)
 	installI18n(app)
 	installTooltipDirective(app)
 	app.mount('#app')

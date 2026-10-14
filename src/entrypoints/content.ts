@@ -12,6 +12,7 @@ import { getProjectSlug } from '../content/page'
 import { navigate } from '../content/page-router'
 import { detectBrowserLocale, i18n, loadSavedLocale } from '../core/i18n/i18n'
 import { DEFAULTS, type ExtensionSettings, getSettings, withoutSecrets } from '../core/settings'
+import { reportUncaughtErrors } from '../core/telemetry'
 import { applyAccentColor } from '../features/accent-color/apply'
 import { recolorBrandImages } from '../features/accent-color/images'
 
@@ -21,6 +22,7 @@ export default defineContentScript({
 
 	main(ctx) {
 		console.log('[Modrinth Extras] Content script loaded')
+		reportUncaughtErrors()
 		loadSavedLocale().catch(() => {})
 		let settings: ExtensionSettings = { ...DEFAULTS }
 		const getCurrentSettings = () => settings

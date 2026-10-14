@@ -6,6 +6,7 @@ Modrinth Extras shares anonymous statistics to help improve the extension. This 
 
 - When the extension starts, is installed, or is updated (extension version and platform)
 - Which features of the extension are used
+- Error reports when something in the extension breaks (error message and stack trace)
 
 ## What is not collected
 

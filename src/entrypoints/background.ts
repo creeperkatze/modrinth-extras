@@ -14,7 +14,12 @@ import { findPlatformProjects, findPlatformUsers } from '../background/external/
 import { fetchSpigotReviews, type SpigotReviewSort } from '../background/external/platforms/spigot'
 import { fetchRepositoryStats } from '../background/external/repositories'
 import { handleNotificationClick } from '../background/notifications'
-import { analytics, initTelemetry, trackExtensionStarted } from '../core/telemetry'
+import {
+	analytics,
+	initTelemetry,
+	type SerializedError,
+	trackExtensionStarted,
+} from '../core/telemetry'
 import type { Notification } from '../features/notifications/notifications'
 import type { MatchableProject } from '../features/platforms/matching'
 import type { RepositoryPlatform } from '../features/repository/links'
@@ -53,6 +58,13 @@ export default defineBackground(() => {
 	})
 
 	browser.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+		if (message.type === 'capture-exception') {
+			void analytics.captureException(
+				message.error as SerializedError,
+				message.properties as Record<string, string | undefined> | undefined,
+			)
+			return
+		}
 		if (message.type === 'refresh') {
 			updateBadge().then(() => sendResponse({ ok: true }))
 			return true

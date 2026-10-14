@@ -3,6 +3,7 @@ import { type App, type Component, createApp, h } from 'vue'
 
 import { installI18n } from '../core/i18n/i18n'
 import type { ExtensionSettings } from '../core/settings'
+import { installErrorReporting } from '../core/telemetry'
 
 export type SettingsGetter = () => ExtensionSettings
 
@@ -23,6 +24,7 @@ function mountTooltipHost() {
 
 export function createExtensionApp(component: Component, props?: Record<string, unknown>): App {
 	const app = createApp(h(component, props))
+	installErrorReporting(app)
 	installTooltipDirective(app)
 	mountTooltipHost()
 	installI18n(app)
