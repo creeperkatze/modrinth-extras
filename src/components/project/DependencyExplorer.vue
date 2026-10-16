@@ -73,10 +73,7 @@
 
 				<rect width="100%" height="100%" fill="url(#mre-explorer-grid)" />
 
-				<g
-					v-if="!initialLoading"
-					:style="{ transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})` }"
-				>
+				<g v-if="!initialLoading" :ref="setViewportEl">
 					<g class="pointer-events-none">
 						<path
 							v-for="edge in visibleEdges"
@@ -359,8 +356,6 @@ const loadingProgress = ref(0)
 const {
 	nodes,
 	edges,
-	pan,
-	zoom,
 	panning,
 	draggingNodeId,
 	nodeById,
@@ -371,6 +366,7 @@ const {
 	computeEdgePath,
 	setNodeEl,
 	setEdgeEl,
+	setViewportEl,
 	recomputeEdgeOffsets,
 	startSimulation,
 	setActiveAccessors,

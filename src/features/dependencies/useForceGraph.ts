@@ -59,8 +59,6 @@ export const NODE_RADIUS = 22
 export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 	const nodes = ref<GraphNode[]>([])
 	const edges = ref<GraphEdge[]>([])
-	const pan = ref({ x: 480, y: 290 })
-	const zoom = ref(1)
 	const panning = ref(false)
 	const draggingNodeId = ref<string | null>(null)
 
@@ -80,6 +78,10 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 	// settles. Cleared when the simulation ends or the user pans/zooms/drags.
 	let autoFit = false
 	let zoomBehavior: ZoomBehavior<SVGSVGElement, unknown> | null = null
+	// Not reactive so panning and zooming don't re-render the whole graph
+	let pan = { x: 480, y: 290 }
+	let zoom = 1
+	let viewportEl: SVGGElement | null = null
 
 	// Subset of nodes/edges the simulation and view act on; the consumer can narrow it.
 	let activeNodes: () => GraphNode[] = () => nodes.value
@@ -236,9 +238,19 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 			})
 	}
 
+	function applyViewportTransform() {
+		if (viewportEl) viewportEl.style.transform = `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`
+	}
+
+	function setViewportEl(el: Element | null) {
+		viewportEl = el as SVGGElement | null
+		applyViewportTransform()
+	}
+
 	function applyZoomTransform(transform: ZoomTransform) {
-		pan.value = { x: transform.x, y: transform.y }
-		zoom.value = transform.k
+		pan = { x: transform.x, y: transform.y }
+		zoom = transform.k
+		applyViewportTransform()
 	}
 
 	function setZoomTransform(transform: ZoomTransform, options: ViewportOptions = {}) {
@@ -262,7 +274,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 			.call(zoomBehavior.transform, transform)
 	}
 
-	function setViewport(x: number, y: number, scale = zoom.value, options: ViewportOptions = {}) {
+	function setViewport(x: number, y: number, scale = zoom, options: ViewportOptions = {}) {
 		setZoomTransform(zoomIdentity.translate(x, y).scale(scale), options)
 	}
 
@@ -305,7 +317,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		const key = edgeKey(edge)
 		if (edgeKeys.has(key)) return
 		edgeKeys.add(key)
-		edges.value.push(edge)
+		edges.value.push(markRaw(edge))
 	}
 
 	function reset() {
@@ -321,7 +333,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		draggingNode = null
 		draggingNodeId.value = null
 		panning.value = false
-		setViewport(pan.value.x, pan.value.y, 1, { animate: false })
+		setViewport(pan.x, pan.y, 1, { animate: false })
 	}
 
 	function onNodeMouseDown(event: MouseEvent, node: GraphNode) {
@@ -346,8 +358,8 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 			const dx = event.clientX - dragStartMouse.x
 			const dy = event.clientY - dragStartMouse.y
 			if (Math.abs(dx) > 3 || Math.abs(dy) > 3) dragMoved = true
-			draggingNode.fx = dragStartNode.x + dx / zoom.value
-			draggingNode.fy = dragStartNode.y + dy / zoom.value
+			draggingNode.fx = dragStartNode.x + dx / zoom
+			draggingNode.fy = dragStartNode.y + dy / zoom
 			draggingNode.x = draggingNode.fx
 			draggingNode.y = draggingNode.fy
 		}
@@ -402,10 +414,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 				})
 
 			const selection = select(svgEl).call(zoomBehavior)
-			selection.call(
-				zoomBehavior.transform,
-				zoomIdentity.translate(pan.value.x, pan.value.y).scale(zoom.value),
-			)
+			selection.call(zoomBehavior.transform, zoomIdentity.translate(pan.x, pan.y).scale(zoom))
 
 			onCleanup(() => {
 				selection.interrupt(VIEWPORT_TRANSITION_NAME)
@@ -425,8 +434,6 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 	return {
 		nodes,
 		edges,
-		pan,
-		zoom,
 		panning,
 		draggingNodeId,
 		nodeById,
@@ -438,6 +445,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		computeEdgePath,
 		setNodeEl,
 		setEdgeEl,
+		setViewportEl,
 		recomputeEdgeOffsets,
 		startSimulation,
 		setActiveAccessors,
