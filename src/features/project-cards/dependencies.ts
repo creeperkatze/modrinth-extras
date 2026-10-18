@@ -6,6 +6,7 @@ import {
 	getPrimaryFile,
 	getVersionLoaders,
 	knownVersions,
+	listProjectVersions,
 	type QuickDownloadSettings,
 } from './version'
 
@@ -71,16 +72,11 @@ async function resolveDependencyVersion(
 		}
 
 		if (!dependency.project_id) return null
-		const [version] = await modrinthClient.labrinth.versions_v3.getProjectVersions(
-			dependency.project_id,
-			{
-				loaders,
-				game_versions: gameVersions,
-				include_changelog: false,
-				limit: 1,
-				apiVersion: 3,
-			},
-		)
+		const [version] = await listProjectVersions(dependency.project_id, {
+			loaders,
+			gameVersions,
+			limit: 1,
+		})
 		return version ?? null
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to resolve dependency:', err)

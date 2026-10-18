@@ -136,16 +136,14 @@ async function findVersion(
 		return null
 	}
 
-	const params: Record<string, string> = { include_changelog: 'false' }
-	if (preferredLoader && !checkLoaderLocally) params.loaders = JSON.stringify([preferredLoader])
-	if (gameVersion) params.game_versions = JSON.stringify([gameVersion])
-	if (!checkLoaderLocally) params.limit = '1'
-
 	// Search only lists public projects, and without auth the request needs no CORS preflight.
-	const candidates = await modrinthClient.request<Labrinth.Versions.v3.Version[]>(
-		`/project/${project.id}/version`,
-		{ api: 'labrinth', version: 3, params, skipAuth: true, signal: request.signal },
-	)
+	const candidates = await listProjectVersions(project.id, {
+		loaders: preferredLoader && !checkLoaderLocally ? [preferredLoader] : [],
+		gameVersions: gameVersion ? [gameVersion] : [],
+		limit: checkLoaderLocally ? undefined : 1,
+		skipAuth: true,
+		signal: request.signal,
+	})
 
 	const version =
 		candidates
@@ -155,6 +153,33 @@ async function findVersion(
 			.sort((a, b) => Date.parse(b.date_published) - Date.parse(a.date_published))[0] ?? null
 	if (version) knownVersions.set(version.id, version)
 	return version
+}
+
+export function listProjectVersions(
+	projectId: string,
+	options: {
+		loaders: string[]
+		gameVersions: string[]
+		limit?: number
+		skipAuth?: boolean
+		signal?: AbortSignal
+	},
+): Promise<Labrinth.Versions.v3.Version[]> {
+	const params: Record<string, string> = { include_changelog: 'false' }
+	if (options.loaders.length > 0) params.loaders = JSON.stringify(options.loaders)
+	// The v3 route ignores a top-level game_versions filter and only reads it from loader_fields.
+	if (options.gameVersions.length > 0) {
+		params.loader_fields = JSON.stringify({ game_versions: options.gameVersions })
+	}
+	if (options.limit !== undefined) params.limit = String(options.limit)
+
+	return modrinthClient.request<Labrinth.Versions.v3.Version[]>(`/project/${projectId}/version`, {
+		api: 'labrinth',
+		version: 3,
+		params,
+		skipAuth: options.skipAuth,
+		signal: options.signal,
+	})
 }
 
 export function getPrimaryFile(
