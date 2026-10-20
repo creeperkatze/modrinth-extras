@@ -166,29 +166,13 @@
 							</span>
 						</div>
 						<div class="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-base text-secondary">
-							<template v-if="review.created_at">
-								<a
-									v-if="review.url"
-									:href="withRef(review.url)"
-									target="_blank"
-									rel="noopener"
-									class="no-click-animation text-secondary hover:underline"
-									:title="formatDate(review.created_at)"
-								>
-									{{
-										formatMessage(messages.posted, {
-											time: formatRelativeTime(review.created_at),
-										})
-									}}
-								</a>
-								<span v-else :title="formatDate(review.created_at)">
-									{{
-										formatMessage(messages.posted, {
-											time: formatRelativeTime(review.created_at),
-										})
-									}}
-								</span>
-							</template>
+							<span v-if="review.created_at" :title="formatDate(review.created_at)">
+								{{
+									formatMessage(messages.posted, {
+										time: formatRelativeTime(review.created_at),
+									})
+								}}
+							</span>
 							<span v-if="review.edited_at">· {{ formatMessage(messages.edited) }}</span>
 						</div>
 					</div>
