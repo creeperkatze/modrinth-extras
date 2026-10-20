@@ -125,6 +125,16 @@ async function searchResults<T>(search: Promise<SpigetPaginatedResponse<T>>): Pr
 	}
 }
 
+// Contributors is free text like "mdcfe, JRoy, Trent / drtshock", so only plain username tokens are kept.
+function contributorNames(resource: Resource): string[] {
+	return (resource.contributors ?? '')
+		.split(',')
+		.filter((entry) => !entry.includes('://'))
+		.flatMap((entry) => entry.split(/[/&]/))
+		.map((token) => token.trim())
+		.filter((token) => /^\w+$/.test(token))
+}
+
 function findSpigotResource(project: MatchableProject): Promise<Resource | null> {
 	return cached(resourceCache, project.slug, async () => {
 		const resources = await searchResults(
@@ -135,13 +145,17 @@ function findSpigotResource(project: MatchableProject): Promise<Resource | null>
 			}),
 		)
 		// Spiget only returns author ids, so names are looked up just for results with a fitting name.
+		// The uploader account is often renamed or differs from Modrinth, so contributors count too.
 		const candidates = await Promise.all(
 			resources
 				.filter((resource) => nameMatch(project, resource))
 				.map(async (resource) => ({
 					item: resource,
 					name: resource.name,
-					authors: [(await getAuthor(resource.author.id))?.name ?? ''],
+					authors: [
+						(await getAuthor(resource.author.id))?.name ?? '',
+						...contributorNames(resource),
+					],
 				})),
 		)
 		return matchProject(project, candidates)
