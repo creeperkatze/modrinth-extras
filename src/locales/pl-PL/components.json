@@ -68,12 +68,6 @@
   "errorNotice.message": {
     "defaultMessage": "Ten błąd może być związany z Modrinth Extras. Spróbuj wyłączyć to rozszerzenie i odświeżyć stronę, zanim zgłosisz ten problem do Modrinth. Jeśli błąd zniknie, zgłoś to <link>tutaj</link>."
   },
-  "moddexReviews.createToken": {
-    "defaultMessage": "Utwórz token"
-  },
-  "moddexReviews.credit": {
-    "defaultMessage": "Recenzje dostarczone przez <link>ModDex</link>, napisane przez członków tej społeczności."
-  },
   "moddexReviews.developer": {
     "defaultMessage": "Autor"
   },
@@ -107,9 +101,6 @@
   "moddexReviews.sortLabel": {
     "defaultMessage": "Sortuj recenzje"
   },
-  "moddexReviews.sortLowestRating": {
-    "defaultMessage": "Najniżej oceniane"
-  },
   "moddexReviews.sortNewest": {
     "defaultMessage": "Najnowsze"
   },
@@ -119,14 +110,8 @@
   "moddexReviews.sortRating": {
     "defaultMessage": "Najwyżej oceniane"
   },
-  "moddexReviews.sortUnhelpful": {
-    "defaultMessage": "Najmniej pomocne"
-  },
   "moddexReviews.title": {
     "defaultMessage": "Recenzje społeczności"
-  },
-  "moddexReviews.tokenHelp": {
-    "defaultMessage": "ModDex udostępnia recenzje tylko zalogowanym przez API użytkownikom. Utwórz darmowy token na ModDex, a potem wklej go w okienku Modrinth Extras w sekcji „Recenzje”."
   },
   "moddexReviews.writeReview": {
     "defaultMessage": "Napisz recenzję"
@@ -163,9 +148,6 @@
   },
   "spigotReviews.authorResponse": {
     "defaultMessage": "Odpowiedź autora:"
-  },
-  "spigotReviews.credit": {
-    "defaultMessage": "Recenzje dostarczone przez <link>SpigotMC</link>, napisane przez członków tej społeczności."
   },
   "spigotReviews.empty": {
     "defaultMessage": "Brak recenzji."

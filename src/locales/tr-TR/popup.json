@@ -140,14 +140,8 @@
   "feature.reviews.description": {
     "defaultMessage": "Projeye, ModDex ve SpigotMC'den topluluk incelemelerini içeren bir İncelemeler sekmesi ekler."
   },
-  "feature.reviews.getModdexToken": {
-    "defaultMessage": "<link>ModDex API token'ı alın</link>"
-  },
   "feature.reviews.moddex": {
     "defaultMessage": "ModDex incelemeleri"
-  },
-  "feature.reviews.moddexApiToken": {
-    "defaultMessage": "ModDex API token"
   },
   "feature.reviews.spigot": {
     "defaultMessage": "SpigotMC incelemeleri"

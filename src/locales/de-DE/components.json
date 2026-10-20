@@ -74,14 +74,14 @@
   "moddexReviews.aesthetics": {
     "defaultMessage": "Ästhetik"
   },
-  "moddexReviews.createToken": {
-    "defaultMessage": "Ein Token erstellen"
-  },
   "moddexReviews.credit": {
-    "defaultMessage": "Bewertungen bereitgestellt von <link>ModDex</link>, verfasst von der Community."
+    "defaultMessage": "Bewertungen von <link>ModDex</link>, verfasst von der Community."
   },
   "moddexReviews.developer": {
     "defaultMessage": "Entwickler"
+  },
+  "moddexReviews.developerResponse": {
+    "defaultMessage": "Antwort des Entwicklers:"
   },
   "moddexReviews.edited": {
     "defaultMessage": "Bearbeitet"
@@ -95,9 +95,6 @@
   "moddexReviews.helpful": {
     "defaultMessage": "{count, plural,one {# Person fand dies hilfreich}other {# Personen fanden dies hilfreich}}"
   },
-  "moddexReviews.invalidTokenTitle": {
-    "defaultMessage": "Dein API-Token für ModDex ist ungültig oder abgelaufen"
-  },
   "moddexReviews.loadError": {
     "defaultMessage": "Bewertungen von ModDex konnten nicht geladen werden"
   },
@@ -106,9 +103,6 @@
   },
   "moddexReviews.moderatorNote": {
     "defaultMessage": "Anmerkung eines Moderators:"
-  },
-  "moddexReviews.noTokenTitle": {
-    "defaultMessage": "API-Token von ModDex erforderlich"
   },
   "moddexReviews.notFound": {
     "defaultMessage": "Dieses Projekt konnte nicht auf ModDex gefunden werden."
@@ -140,9 +134,6 @@
   "moddexReviews.sortLabel": {
     "defaultMessage": "Bewertungen sortieren"
   },
-  "moddexReviews.sortLowestRating": {
-    "defaultMessage": "Am niedrigsten bewertet"
-  },
   "moddexReviews.sortNewest": {
     "defaultMessage": "Neueste"
   },
@@ -152,14 +143,8 @@
   "moddexReviews.sortRating": {
     "defaultMessage": "Am höchsten bewertet"
   },
-  "moddexReviews.sortUnhelpful": {
-    "defaultMessage": "Am wenigsten hilfreich"
-  },
   "moddexReviews.title": {
     "defaultMessage": "Bewertungen von der Community"
-  },
-  "moddexReviews.tokenHelp": {
-    "defaultMessage": "ModDex zeigt Bewertungen nur für angemeldete API-Nutzer an. Erstelle ein kostenloses Token auf ModDex und füge es dann in das Popup-Fenster von Modrinth Extras unter „Bewertungen“ ein."
   },
   "moddexReviews.writeReview": {
     "defaultMessage": "Schreibe eine Bewertung"
@@ -300,7 +285,7 @@
     "defaultMessage": "Antwort des Autors:"
   },
   "spigotReviews.credit": {
-    "defaultMessage": "Bewertungen bereitgestellt von <link>SpigotMC</link>, verfasst von der Community."
+    "defaultMessage": "Bewertungen von <link>SpigotMC</link>, verfasst von der Community."
   },
   "spigotReviews.empty": {
     "defaultMessage": "Noch keine Bewertungen."

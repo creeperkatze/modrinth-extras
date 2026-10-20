@@ -74,12 +74,6 @@
   "moddexReviews.aesthetics": {
     "defaultMessage": "Estética"
   },
-  "moddexReviews.createToken": {
-    "defaultMessage": "Crear un token"
-  },
-  "moddexReviews.credit": {
-    "defaultMessage": "Reseñas proporcionas por <link>ModDex</link>, escrito por su comunidad."
-  },
   "moddexReviews.developer": {
     "defaultMessage": "Desarrollador"
   },
@@ -95,9 +89,6 @@
   "moddexReviews.helpful": {
     "defaultMessage": "{count, plural, one {# persona econtró esto útil} other {# personas econtraron esto útil}}"
   },
-  "moddexReviews.invalidTokenTitle": {
-    "defaultMessage": "Tu token de la API de ModDex no es válida o se caducó"
-  },
   "moddexReviews.loadError": {
     "defaultMessage": "Error al cargar las reseñas de ModDex"
   },
@@ -106,9 +97,6 @@
   },
   "moddexReviews.moderatorNote": {
     "defaultMessage": "Nota del moderador:"
-  },
-  "moddexReviews.noTokenTitle": {
-    "defaultMessage": "Se requiere un token de API de ModDex"
   },
   "moddexReviews.notFound": {
     "defaultMessage": "Este proyecto no se pudo encontrar en ModDex."
@@ -140,9 +128,6 @@
   "moddexReviews.sortLabel": {
     "defaultMessage": "Ordenar reseñas"
   },
-  "moddexReviews.sortLowestRating": {
-    "defaultMessage": "Menos valorado"
-  },
   "moddexReviews.sortNewest": {
     "defaultMessage": "Más recientes"
   },
@@ -152,14 +137,8 @@
   "moddexReviews.sortRating": {
     "defaultMessage": "Mejor valorados"
   },
-  "moddexReviews.sortUnhelpful": {
-    "defaultMessage": "Menos útil"
-  },
   "moddexReviews.title": {
     "defaultMessage": "Reseñas de la comunidad"
-  },
-  "moddexReviews.tokenHelp": {
-    "defaultMessage": "ModDex solo muestra reseñas a usuarios de su API conectados. Crea un token gratuito en ModDex y pégalo en la ventana emergente de Modrinth Extras en \"Reseñas\"."
   },
   "moddexReviews.writeReview": {
     "defaultMessage": "Escribe una reseña"
@@ -298,9 +277,6 @@
   },
   "spigotReviews.authorResponse": {
     "defaultMessage": "Respuesta del autor:"
-  },
-  "spigotReviews.credit": {
-    "defaultMessage": "Reseñas proporcionadas por <link>SpigotMC</link>, escrito por su comunidad."
   },
   "spigotReviews.empty": {
     "defaultMessage": "Aun no hay reseñas."

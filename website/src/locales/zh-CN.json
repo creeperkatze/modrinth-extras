@@ -1,0 +1,49 @@
+{
+	"meta": {
+		"summary": "一款浏览器扩展程序，旨在增强网站上及网站之外的 Modrinth 功能。",
+		"feature": {
+			"popup": {
+				"title": "所有功能，一键即达",
+				"description": "每项功能都可通过扩展程序的弹出窗口单独启用或禁用，因此您可以打造完全符合您期望的 Modrinth 使用体验。"
+			},
+			"cardActions": {
+				"title": "在不离开列表的情况下进行操作",
+				"description": "直接从项目卡片中下载、关注、保存和复制链接，无需逐一打开每个页面。"
+			},
+			"galleryBackground": {
+				"title": "与项目匹配的页面",
+				"description": "将项目的精选图库图片作为全屏横幅背景显示，让光影包和资源包的项目页面看起来更符合主题。"
+			},
+			"notifications": {
+				"title": "通知，在页眉中",
+				"description": "无需离开当前页面即可查看、管理和清除未读通知，还可选择启用浏览器通知，并在扩展程序图标上显示未读标记。"
+			},
+			"dependencyExplorer": {
+				"title": "浏览完整的依赖关系树",
+				"description": "通过交互式图表，您可以深入查看项目的必需、可选和嵌入的依赖关系，深度完全由您决定。"
+			},
+			"quickSearch": {
+				"title": "几秒钟内找到任何内容",
+				"description": "按 Ctrl+K 或 / 键，即可使用类似命令面板的搜索功能，支持按加载器、版本、类别和类型进行多维标签搜索。"
+			},
+			"sparkline": {
+				"title": "了解一个项目实际的活跃程度",
+				"description": "每个项目页面上都显示有一个发布活动迷你图表，让您无需向下滚动，就能一目了然地了解更新频率。"
+			},
+			"sidebar": {
+				"title": "完整情况，就在侧边栏",
+				"description": "仓库的星标数、问题和拉取请求。Discord 服务器成员数量。每个模组所被收录的模组包。所有内容都直接显示在侧边栏中。"
+			}
+		}
+	},
+	"nav": {
+		"translate": "翻译"
+	},
+	"stats": {
+		"users": "{browser} 用户"
+	},
+	"footer": {
+		"notAffiliated": "与 Modrinth 无关联",
+		"privacy": "隐私政策"
+	}
+}

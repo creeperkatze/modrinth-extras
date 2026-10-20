@@ -140,14 +140,8 @@
   "feature.reviews.description": {
     "defaultMessage": "Fügt Projekten einen Bewertungs-Tab mit Bewertungen aus der Community von ModDex und SpigotMC hinzu."
   },
-  "feature.reviews.getModdexToken": {
-    "defaultMessage": "<link>API-Token für ModDex erhalten</link>"
-  },
   "feature.reviews.moddex": {
     "defaultMessage": "Bewertungen von ModDex"
-  },
-  "feature.reviews.moddexApiToken": {
-    "defaultMessage": "API-Token für ModDex"
   },
   "feature.reviews.spigot": {
     "defaultMessage": "Bewertungen von SpigotMC"

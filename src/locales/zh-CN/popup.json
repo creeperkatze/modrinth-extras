@@ -140,14 +140,8 @@
   "feature.reviews.description": {
     "defaultMessage": "为项目添加一个“评论”选项卡，展示来自 ModDex 和 SpigotMC 社区的评论。"
   },
-  "feature.reviews.getModdexToken": {
-    "defaultMessage": "<link>获取 ModDex API 令牌</link>"
-  },
   "feature.reviews.moddex": {
     "defaultMessage": "ModDex 评论"
-  },
-  "feature.reviews.moddexApiToken": {
-    "defaultMessage": "ModDex API 令牌"
   },
   "feature.reviews.spigot": {
     "defaultMessage": "SpigotMC 评论"

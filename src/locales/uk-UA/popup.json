@@ -140,14 +140,8 @@
   "feature.reviews.description": {
     "defaultMessage": "Додає вкладку «Відгуки» до проєктів, на якій відображаються відгуки спільнот з ModDex та SpigotMC."
   },
-  "feature.reviews.getModdexToken": {
-    "defaultMessage": "<link>Отримати токен API ModDex</link>"
-  },
   "feature.reviews.moddex": {
     "defaultMessage": "Відгуки ModDex"
-  },
-  "feature.reviews.moddexApiToken": {
-    "defaultMessage": "Токен API ModDex"
   },
   "feature.reviews.spigot": {
     "defaultMessage": "Відгуки SpigotMC"

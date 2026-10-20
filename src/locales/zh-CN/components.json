@@ -36,7 +36,7 @@
     "defaultMessage": "可选的"
   },
   "dependencyNode.required": {
-    "defaultMessage": "显示必需的依赖项"
+    "defaultMessage": "必需的依赖项"
   },
   "dependencySidebar.loadError": {
     "defaultMessage": "无法加载依赖关系"
@@ -74,12 +74,6 @@
   "moddexReviews.aesthetics": {
     "defaultMessage": "视觉表现"
   },
-  "moddexReviews.createToken": {
-    "defaultMessage": "创建令牌"
-  },
-  "moddexReviews.credit": {
-    "defaultMessage": "评论来自 <link>ModDex</link>，由其用户撰写。"
-  },
   "moddexReviews.developer": {
     "defaultMessage": "开发者"
   },
@@ -95,9 +89,6 @@
   "moddexReviews.helpful": {
     "defaultMessage": "{count, plural, other {# 人认为此内容有帮助}}"
   },
-  "moddexReviews.invalidTokenTitle": {
-    "defaultMessage": "您的 ModDex API 令牌无效或已过期"
-  },
   "moddexReviews.loadError": {
     "defaultMessage": "无法从 ModDex 加载评论"
   },
@@ -106,9 +97,6 @@
   },
   "moddexReviews.moderatorNote": {
     "defaultMessage": "版主注："
-  },
-  "moddexReviews.noTokenTitle": {
-    "defaultMessage": "需要 ModDex API 令牌"
   },
   "moddexReviews.notFound": {
     "defaultMessage": "在 ModDex 上找不到该项目。"
@@ -140,9 +128,6 @@
   "moddexReviews.sortLabel": {
     "defaultMessage": "排序评论"
   },
-  "moddexReviews.sortLowestRating": {
-    "defaultMessage": "评分最低"
-  },
   "moddexReviews.sortNewest": {
     "defaultMessage": "最新"
   },
@@ -152,14 +137,8 @@
   "moddexReviews.sortRating": {
     "defaultMessage": "评分最高"
   },
-  "moddexReviews.sortUnhelpful": {
-    "defaultMessage": "最无帮助"
-  },
   "moddexReviews.title": {
     "defaultMessage": "社区评论"
-  },
-  "moddexReviews.tokenHelp": {
-    "defaultMessage": "ModDex 仅向通过身份验证的 API 请求提供评论数据。请在 ModDex 上免费创建一个 API 令牌，然后打开 Modrinth Extras 的扩展面板，在“评论”一栏中粘贴该令牌。你可以点击工具栏中的 Modrinth Extras 图标直接打开该面板，也可以先打开浏览器的“扩展”菜单，再点击 Modrinth Extras 条目。"
   },
   "moddexReviews.writeReview": {
     "defaultMessage": "发表评论"
@@ -298,9 +277,6 @@
   },
   "spigotReviews.authorResponse": {
     "defaultMessage": "作者回复："
-  },
-  "spigotReviews.credit": {
-    "defaultMessage": "评论来自 <link>SpigotMC</link>，由其用户撰写。"
   },
   "spigotReviews.empty": {
     "defaultMessage": "暂无评论。"

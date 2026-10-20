@@ -1,0 +1,11 @@
+{
+	"nav": {
+		"translate": "Übersetzen"
+	},
+	"stats": {
+		"users": "{browser} Benutzer"
+	},
+	"footer": {
+		"privacy": "Privatsphäre"
+	}
+}
