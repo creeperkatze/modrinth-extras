@@ -140,14 +140,8 @@
   "feature.reviews.description": {
     "defaultMessage": "Añade una pestaña de Reseñas a proyectos con reseñas de la comunidad de ModDex y SpigotMC."
   },
-  "feature.reviews.getModdexToken": {
-    "defaultMessage": "<link>Obtén un token de API de ModDex</link>"
-  },
   "feature.reviews.moddex": {
     "defaultMessage": "Reseñas de ModDex"
-  },
-  "feature.reviews.moddexApiToken": {
-    "defaultMessage": "Token de API de ModDex"
   },
   "feature.reviews.spigot": {
     "defaultMessage": "Reseñas de SpigotMC"

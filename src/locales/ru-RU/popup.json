@@ -140,14 +140,8 @@
   "feature.reviews.description": {
     "defaultMessage": "Добавляет вкладку отзывов в проекты с отзывами сообщества из ModDex и SpigotMC."
   },
-  "feature.reviews.getModdexToken": {
-    "defaultMessage": "<link>Создать API-токен ModDex</link>"
-  },
   "feature.reviews.moddex": {
     "defaultMessage": "Отзывы ModDex"
-  },
-  "feature.reviews.moddexApiToken": {
-    "defaultMessage": "API-токен ModDex"
   },
   "feature.reviews.spigot": {
     "defaultMessage": "Отзывы SpigotMC"

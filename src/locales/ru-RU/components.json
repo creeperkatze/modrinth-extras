@@ -74,14 +74,14 @@
   "moddexReviews.aesthetics": {
     "defaultMessage": "Эстетика"
   },
-  "moddexReviews.createToken": {
-    "defaultMessage": "Создать токен"
-  },
   "moddexReviews.credit": {
-    "defaultMessage": "Отзывы берутся из <link>ModDex</link> и написаны его сообществом."
+    "defaultMessage": "Отзывы из <link>ModDex</link>, написанные его сообществом."
   },
   "moddexReviews.developer": {
     "defaultMessage": "Разработчик"
+  },
+  "moddexReviews.developerResponse": {
+    "defaultMessage": "Ответ разработчика:"
   },
   "moddexReviews.edited": {
     "defaultMessage": "Изменено"
@@ -95,9 +95,6 @@
   "moddexReviews.helpful": {
     "defaultMessage": "{count, plural, one {# человек посчитал это полезным} few {# человека посчитали это полезным} other {# человек посчитали это полезным}}"
   },
-  "moddexReviews.invalidTokenTitle": {
-    "defaultMessage": "Ваш API-токен ModDex недействителен или просрочен"
-  },
   "moddexReviews.loadError": {
     "defaultMessage": "Не удалось загрузить отзывы из ModDex"
   },
@@ -106,9 +103,6 @@
   },
   "moddexReviews.moderatorNote": {
     "defaultMessage": "Примечание модератора:"
-  },
-  "moddexReviews.noTokenTitle": {
-    "defaultMessage": "Требуется API-токен ModDex"
   },
   "moddexReviews.notFound": {
     "defaultMessage": "Этот проект не найден на ModDex."
@@ -140,9 +134,6 @@
   "moddexReviews.sortLabel": {
     "defaultMessage": "Сортировка отзывов"
   },
-  "moddexReviews.sortLowestRating": {
-    "defaultMessage": "Худшая оценка"
-  },
   "moddexReviews.sortNewest": {
     "defaultMessage": "Новые"
   },
@@ -152,14 +143,8 @@
   "moddexReviews.sortRating": {
     "defaultMessage": "Лучшая оценка"
   },
-  "moddexReviews.sortUnhelpful": {
-    "defaultMessage": "Бесполезность"
-  },
   "moddexReviews.title": {
     "defaultMessage": "Отзывы сообщества"
-  },
-  "moddexReviews.tokenHelp": {
-    "defaultMessage": "Отзывы видны только авторизованным пользователям API. Создайте токен на ModDex и вставьте его в окно Modrinth Extras в разделе отзывов."
   },
   "moddexReviews.writeReview": {
     "defaultMessage": "Написать отзыв"
@@ -300,7 +285,7 @@
     "defaultMessage": "Ответ автора:"
   },
   "spigotReviews.credit": {
-    "defaultMessage": "Отзывы берутся из <link>SpigotMC</link> и написаны его сообществом."
+    "defaultMessage": "Отзывы из <link>SpigotMC</link>, написанные его сообществом."
   },
   "spigotReviews.empty": {
     "defaultMessage": "Отзывов пока нет."

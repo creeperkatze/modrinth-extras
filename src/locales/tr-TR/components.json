@@ -74,12 +74,6 @@
   "moddexReviews.aesthetics": {
     "defaultMessage": "Estetik"
   },
-  "moddexReviews.createToken": {
-    "defaultMessage": "Token oluştur"
-  },
-  "moddexReviews.credit": {
-    "defaultMessage": "Değerlendirmeler <link>ModDex</link> tarafından sağlanmakta olup kendi topluluğu tarafından yazılmıştır."
-  },
   "moddexReviews.developer": {
     "defaultMessage": "Geliştirici"
   },
@@ -95,9 +89,6 @@
   "moddexReviews.helpful": {
     "defaultMessage": "{count, plural, one {# kişi bunu yararlı buldu} other {# kişi bunu yararlı buldu}}"
   },
-  "moddexReviews.invalidTokenTitle": {
-    "defaultMessage": "ModDex API token'ınız geçersiz veya süresi dolmuş"
-  },
   "moddexReviews.loadError": {
     "defaultMessage": "ModDex üzerindeki değerlendirmeler yüklenemedi"
   },
@@ -106,9 +97,6 @@
   },
   "moddexReviews.moderatorNote": {
     "defaultMessage": "Moderatör notu:"
-  },
-  "moddexReviews.noTokenTitle": {
-    "defaultMessage": "ModDex API tokenı gereklidir"
   },
   "moddexReviews.notFound": {
     "defaultMessage": "Bu proje ModDex'te bulunamadı."
@@ -140,9 +128,6 @@
   "moddexReviews.sortLabel": {
     "defaultMessage": "Değerlendirmeleri sırala"
   },
-  "moddexReviews.sortLowestRating": {
-    "defaultMessage": "En düşük puanlı"
-  },
   "moddexReviews.sortNewest": {
     "defaultMessage": "En yeni"
   },
@@ -152,14 +137,8 @@
   "moddexReviews.sortRating": {
     "defaultMessage": "En yüksek puanlı"
   },
-  "moddexReviews.sortUnhelpful": {
-    "defaultMessage": "En az yararlı"
-  },
   "moddexReviews.title": {
     "defaultMessage": "Topluluk değerlendirmeleri"
-  },
-  "moddexReviews.tokenHelp": {
-    "defaultMessage": "ModDex, değerlendirmeleri yalnızca oturum açmış API kullanıcılarına sunar. ModDex üzerinde ücretsiz bir token oluşturun ve ardından bunu Modrinth Extras açılır penceresindeki \"Değerlendirmeler\" alanına yapıştırın."
   },
   "moddexReviews.writeReview": {
     "defaultMessage": "Değerlendirme yaz"
@@ -298,9 +277,6 @@
   },
   "spigotReviews.authorResponse": {
     "defaultMessage": "Geliştirici Yanıtı:"
-  },
-  "spigotReviews.credit": {
-    "defaultMessage": "Değerlendirmeler <link>SpigotMC</link> tarafından sağlanmakta olup kendi topluluğu tarafından yazılmıştır."
   },
   "spigotReviews.empty": {
     "defaultMessage": "Henüz değerlendirme yok."

@@ -74,12 +74,6 @@
   "moddexReviews.aesthetics": {
     "defaultMessage": "Естетика"
   },
-  "moddexReviews.createToken": {
-    "defaultMessage": "Створити токен"
-  },
-  "moddexReviews.credit": {
-    "defaultMessage": "Відгуки надані <link>ModDex</link> і написані його спільнотою."
-  },
   "moddexReviews.developer": {
     "defaultMessage": "Розробник"
   },
@@ -95,9 +89,6 @@
   "moddexReviews.helpful": {
     "defaultMessage": "{count, plural, one {# особа визнала це корисним} few {# особи визнали це корисним} many {# осіб визнали це корисним} other {# осіб визнали це корисним}}"
   },
-  "moddexReviews.invalidTokenTitle": {
-    "defaultMessage": "Ваш токен API ModDex є недійсним або термін його дії закінчився"
-  },
   "moddexReviews.loadError": {
     "defaultMessage": "Не вдалося завантажити відгуки з ModDex"
   },
@@ -106,9 +97,6 @@
   },
   "moddexReviews.moderatorNote": {
     "defaultMessage": "Примітка модератора:"
-  },
-  "moddexReviews.noTokenTitle": {
-    "defaultMessage": "Потрібен токен API ModDex"
   },
   "moddexReviews.notFound": {
     "defaultMessage": "Цей проєкт не вдалося знайти на ModDex."
@@ -140,9 +128,6 @@
   "moddexReviews.sortLabel": {
     "defaultMessage": "Відсортувати відгуки"
   },
-  "moddexReviews.sortLowestRating": {
-    "defaultMessage": "З найнижчим рейтингом"
-  },
   "moddexReviews.sortNewest": {
     "defaultMessage": "Найновіші"
   },
@@ -152,14 +137,8 @@
   "moddexReviews.sortRating": {
     "defaultMessage": "З найвищим рейтингом"
   },
-  "moddexReviews.sortUnhelpful": {
-    "defaultMessage": "Найкорисніші"
-  },
   "moddexReviews.title": {
     "defaultMessage": "Відгуки спільноти"
-  },
-  "moddexReviews.tokenHelp": {
-    "defaultMessage": "ModDex надає доступ до відгуків лише зареєстрованим користувачам API. Створіть безплатний токен на ModDex, а потім вставте його у спливне вікно Modrinth Extras у розділі «Відгуки»."
   },
   "moddexReviews.writeReview": {
     "defaultMessage": "Написати відгук"
@@ -298,9 +277,6 @@
   },
   "spigotReviews.authorResponse": {
     "defaultMessage": "Відповідь автора:"
-  },
-  "spigotReviews.credit": {
-    "defaultMessage": "Відгуки надані <link>SpigotMC</link> і написані його спільнотою."
   },
   "spigotReviews.empty": {
     "defaultMessage": "Поки що немає відгуків."
