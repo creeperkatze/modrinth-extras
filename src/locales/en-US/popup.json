@@ -140,14 +140,8 @@
   "feature.reviews.description": {
     "defaultMessage": "Adds a Reviews tab to projects with community reviews from ModDex and SpigotMC."
   },
-  "feature.reviews.getModdexToken": {
-    "defaultMessage": "<link>Get a ModDex API token</link>"
-  },
   "feature.reviews.moddex": {
     "defaultMessage": "ModDex reviews"
-  },
-  "feature.reviews.moddexApiToken": {
-    "defaultMessage": "ModDex API token"
   },
   "feature.reviews.spigot": {
     "defaultMessage": "SpigotMC reviews"

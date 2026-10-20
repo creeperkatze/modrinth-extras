@@ -212,7 +212,7 @@ const messages = defineMessages({
 	title: { id: 'spigotReviews.title', defaultMessage: 'Community reviews' },
 	credit: {
 		id: 'spigotReviews.credit',
-		defaultMessage: 'Reviews provided by <link>SpigotMC</link>, written by its community.',
+		defaultMessage: 'Reviews from <link>SpigotMC</link>, written by its community.',
 	},
 	writeReview: { id: 'spigotReviews.writeReview', defaultMessage: 'Write a review' },
 	loading: { id: 'spigotReviews.loading', defaultMessage: 'Loading reviews…' },

@@ -23,11 +23,7 @@
 				@update:value="source = $event as ReviewSource"
 			/>
 			<KeepAlive>
-				<ModdexReviews
-					v-if="source === 'moddex'"
-					:project-slug="projectSlug"
-					:is-modpack="isModpack"
-				/>
+				<ModdexReviews v-if="source === 'moddex'" :project-slug="projectSlug" />
 				<SpigotReviews v-else-if="source === 'spigot' && spigotProject" :project="spigotProject" />
 			</KeepAlive>
 		</div>
@@ -61,7 +57,6 @@ const messages = defineMessages({
 
 const props = defineProps<{
 	projectSlug: string
-	isModpack: boolean
 	moddex: boolean
 	spigot: boolean
 }>()

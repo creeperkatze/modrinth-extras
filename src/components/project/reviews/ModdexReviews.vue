@@ -10,12 +10,7 @@
 				<span class="text-base text-secondary">
 					<IntlFormatted :message-id="messages.credit">
 						<template #link="{ children }">
-							<a
-								href="https://moddex.gg"
-								target="_blank"
-								rel="noopener"
-								class="font-semibold text-link"
-							>
+							<a :href="MODDEX_URL" target="_blank" rel="noopener" class="font-semibold text-link">
 								<component :is="() => children" />
 							</a>
 						</template>
@@ -23,13 +18,13 @@
 				</span>
 			</div>
 			<div v-if="page" class="flex flex-wrap items-center gap-2">
-				<ButtonLink :href="page.projectUrl" target="_blank" rel="noopener">
+				<ButtonLink :href="page.writeReviewUrl" target="_blank" rel="noopener">
 					{{ formatMessage(messages.writeReview) }}
 					<ExternalIcon aria-hidden="true" />
 				</ButtonLink>
 			</div>
 			<div v-else-if="state === 'not-found'" class="flex flex-wrap items-center gap-2">
-				<ButtonLink href="https://moddex.gg" target="_blank" rel="noopener">
+				<ButtonLink :href="MODDEX_URL" target="_blank" rel="noopener">
 					{{ formatMessage(messages.openModdex) }}
 					<ExternalIcon aria-hidden="true" />
 				</ButtonLink>
@@ -42,33 +37,6 @@
 		>
 			<LoaderCircleIcon aria-hidden="true" class="size-5 animate-spin" />
 			{{ formatMessage(messages.loading) }}
-		</div>
-
-		<div
-			v-else-if="state === 'no-token' || state === 'invalid-token'"
-			class="flex flex-col gap-3 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
-		>
-			<div class="flex items-start gap-2 text-contrast">
-				<KeyIcon aria-hidden="true" class="mt-0.5 size-5 shrink-0" />
-				<span class="font-semibold">
-					{{
-						formatMessage(state === 'no-token' ? messages.noTokenTitle : messages.invalidTokenTitle)
-					}}
-				</span>
-			</div>
-			<p class="m-0 text-secondary">{{ formatMessage(messages.tokenHelp) }}</p>
-			<div>
-				<ButtonLink
-					type="colored"
-					color="brand"
-					href="https://moddex.gg/settings?tab=tokens"
-					target="_blank"
-					rel="noopener"
-				>
-					{{ formatMessage(messages.createToken) }}
-					<ExternalIcon aria-hidden="true" />
-				</ButtonLink>
-			</div>
 		</div>
 
 		<div
@@ -104,10 +72,14 @@
 					</div>
 				</div>
 				<div
-					v-if="summaryCategories.length"
+					v-if="categoryRatings(summary.categories).length"
 					class="grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-3"
 				>
-					<div v-for="cat in summaryCategories" :key="cat.label" class="flex flex-col gap-1">
+					<div
+						v-for="cat in categoryRatings(summary.categories)"
+						:key="cat.label"
+						class="flex flex-col gap-1"
+					>
 						<div class="flex items-center justify-between text-base text-secondary">
 							<span>{{ cat.label }}</span>
 							<span class="font-semibold text-contrast">{{ cat.value.toFixed(1) }}</span>
@@ -158,14 +130,33 @@
 			>
 				<header class="flex items-start gap-3">
 					<div
-						class="flex size-10 shrink-0 items-center justify-center rounded-full bg-surface-5 text-lg font-bold text-contrast"
+						class="relative flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-surface-5 text-lg font-bold text-contrast"
 						aria-hidden="true"
 					>
 						{{ review.author.name.charAt(0).toUpperCase() }}
+						<img
+							v-if="review.author.avatar_url"
+							:src="review.author.avatar_url"
+							alt=""
+							loading="lazy"
+							class="absolute inset-0 size-full object-cover"
+							@error="hideImage"
+						/>
 					</div>
 					<div class="flex min-w-0 flex-1 flex-col gap-0.5">
 						<div class="flex flex-wrap items-center gap-x-2 gap-y-0.5">
-							<span class="truncate font-semibold text-contrast">{{ review.author.name }}</span>
+							<a
+								v-if="review.author.profile_url"
+								:href="withRef(review.author.profile_url)"
+								target="_blank"
+								rel="noopener"
+								class="no-click-animation truncate font-semibold text-contrast hover:underline"
+							>
+								{{ review.author.name }}
+							</a>
+							<span v-else class="truncate font-semibold text-contrast">{{
+								review.author.name
+							}}</span>
 							<span
 								v-if="review.is_verified_developer"
 								class="inline-flex items-center gap-1 rounded-full bg-brand-highlight px-2 py-0.5 text-base font-semibold text-brand"
@@ -175,11 +166,29 @@
 							</span>
 						</div>
 						<div class="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-base text-secondary">
-							<span :title="formatDate(review.created_at)">
-								{{
-									formatMessage(messages.posted, { time: formatRelativeTime(review.created_at) })
-								}}
-							</span>
+							<template v-if="review.created_at">
+								<a
+									v-if="review.url"
+									:href="withRef(review.url)"
+									target="_blank"
+									rel="noopener"
+									class="no-click-animation text-secondary hover:underline"
+									:title="formatDate(review.created_at)"
+								>
+									{{
+										formatMessage(messages.posted, {
+											time: formatRelativeTime(review.created_at),
+										})
+									}}
+								</a>
+								<span v-else :title="formatDate(review.created_at)">
+									{{
+										formatMessage(messages.posted, {
+											time: formatRelativeTime(review.created_at),
+										})
+									}}
+								</span>
+							</template>
 							<span v-if="review.edited_at">· {{ formatMessage(messages.edited) }}</span>
 						</div>
 					</div>
@@ -192,10 +201,14 @@
 				</header>
 
 				<div
-					v-if="categoryRatings(review).length"
+					v-if="categoryRatings(review.categories).length"
 					class="grid grid-cols-1 gap-x-6 gap-y-1.5 sm:grid-cols-3"
 				>
-					<div v-for="cat in categoryRatings(review)" :key="cat.label" class="flex flex-col gap-1">
+					<div
+						v-for="cat in categoryRatings(review.categories)"
+						:key="cat.label"
+						class="flex flex-col gap-1"
+					>
 						<div class="flex items-center justify-between text-base text-secondary">
 							<span>{{ cat.label }}</span>
 							<span class="font-semibold text-contrast">{{ cat.value.toFixed(1) }}</span>
@@ -241,6 +254,21 @@
 				</PageHeaderMetadata>
 
 				<div
+					v-if="review.developer_response"
+					class="flex flex-col gap-1 rounded-xl border border-solid border-surface-5 bg-surface-4 p-3 text-base"
+				>
+					<span class="font-semibold text-contrast">{{
+						formatMessage(messages.developerResponse)
+					}}</span>
+					<!-- eslint-disable vue/no-v-html -->
+					<div
+						class="markdown-body break-words text-secondary"
+						v-html="renderReview(review.developer_response.content)"
+					/>
+					<!-- eslint-enable vue/no-v-html -->
+				</div>
+
+				<div
 					v-if="review.public_moderator_note"
 					class="rounded-xl border border-solid border-surface-5 bg-surface-4 p-3 text-base text-secondary"
 				>
@@ -267,7 +295,6 @@ import {
 	ClockIcon,
 	ExternalIcon,
 	HeartIcon,
-	KeyIcon,
 	LoaderCircleIcon,
 	ShieldCheckIcon,
 	TriangleAlertIcon,
@@ -287,7 +314,7 @@ import {
 } from '@modrinth/ui'
 import type { GameVersionTag } from '@modrinth/utils'
 import { configuredXss, md } from '@modrinth/utils'
-import type { Review } from 'moddex-js'
+import type { Review, ReviewCategories, ReviewSort } from 'moddex-js'
 import { computed, onMounted, ref, watch } from 'vue'
 import { browser } from 'wxt/browser'
 
@@ -297,7 +324,6 @@ import type {
 	ModdexSummary,
 } from '../../../background/external/moddex'
 import { i18n } from '../../../core/i18n/i18n'
-import { getSettings } from '../../../core/settings'
 import { formatGameVersions, loadGameVersionTags } from '../../../features/reviews/game-versions'
 import ReviewStars from './ReviewStars.vue'
 
@@ -315,6 +341,14 @@ function renderReview(content: string): string {
 	return configuredXss.process(markdown.render(content))
 }
 
+const MODDEX_URL = 'https://moddex.gg/?ref=modrinth-extras'
+
+function withRef(link: string): string {
+	const url = new URL(link)
+	url.searchParams.set('ref', 'modrinth-extras')
+	return url.href
+}
+
 const { formatMessage } = useVIntl()
 const formatRelativeTime = useRelativeTime()
 
@@ -322,7 +356,7 @@ const messages = defineMessages({
 	title: { id: 'moddexReviews.title', defaultMessage: 'Community reviews' },
 	credit: {
 		id: 'moddexReviews.credit',
-		defaultMessage: 'Reviews provided by <link>ModDex</link>, written by its community.',
+		defaultMessage: 'Reviews from <link>ModDex</link>, written by its community.',
 	},
 	writeReview: { id: 'moddexReviews.writeReview', defaultMessage: 'Write a review' },
 	openModdex: { id: 'moddexReviews.openModdex', defaultMessage: 'Open ModDex' },
@@ -335,17 +369,6 @@ const messages = defineMessages({
 		id: 'moddexReviews.rateLimited',
 		defaultMessage: 'ModDex rate limit reached, try again in a minute',
 	},
-	noTokenTitle: { id: 'moddexReviews.noTokenTitle', defaultMessage: 'ModDex API token required' },
-	invalidTokenTitle: {
-		id: 'moddexReviews.invalidTokenTitle',
-		defaultMessage: 'Your ModDex API token is invalid or expired',
-	},
-	tokenHelp: {
-		id: 'moddexReviews.tokenHelp',
-		defaultMessage:
-			'ModDex only serves reviews to signed-in API users. Create a free token on ModDex, then paste it into the Modrinth Extras popup under "Reviews".',
-	},
-	createToken: { id: 'moddexReviews.createToken', defaultMessage: 'Create a token' },
 	notFound: {
 		id: 'moddexReviews.notFound',
 		defaultMessage: 'This project could not be found on ModDex.',
@@ -356,9 +379,7 @@ const messages = defineMessages({
 	sortNewest: { id: 'moddexReviews.sortNewest', defaultMessage: 'Newest' },
 	sortOldest: { id: 'moddexReviews.sortOldest', defaultMessage: 'Oldest' },
 	sortRating: { id: 'moddexReviews.sortRating', defaultMessage: 'Highest rated' },
-	sortLowestRating: { id: 'moddexReviews.sortLowestRating', defaultMessage: 'Lowest rated' },
 	sortHelpful: { id: 'moddexReviews.sortHelpful', defaultMessage: 'Most helpful' },
-	sortUnhelpful: { id: 'moddexReviews.sortUnhelpful', defaultMessage: 'Most unhelpful' },
 	developer: { id: 'moddexReviews.developer', defaultMessage: 'Developer' },
 	posted: { id: 'moddexReviews.posted', defaultMessage: 'Posted {time}' },
 	edited: { id: 'moddexReviews.edited', defaultMessage: 'Edited' },
@@ -375,39 +396,23 @@ const messages = defineMessages({
 		defaultMessage:
 			'{count, plural, one {# person found this helpful} other {# people found this helpful}}',
 	},
+	developerResponse: {
+		id: 'moddexReviews.developerResponse',
+		defaultMessage: 'Developer response:',
+	},
 	moderatorNote: { id: 'moddexReviews.moderatorNote', defaultMessage: 'Moderator note:' },
 })
 
-const SORTS = {
-	newest: { field: 'created_at', direction: 'desc' },
-	oldest: { field: 'created_at', direction: 'asc' },
-	highest: { field: 'rating', direction: 'desc' },
-	lowest: { field: 'rating', direction: 'asc' },
-	helpful: { field: 'helpful_votes', direction: 'desc' },
-	unhelpful: { field: 'unhelpful_votes', direction: 'desc' },
-} as const
-
-type ReviewSort = keyof typeof SORTS
-
-const sortOptions = computed(() => [
+const sortOptions = computed<{ value: ReviewSort; label: string }[]>(() => [
 	{ value: 'newest', label: formatMessage(messages.sortNewest) },
 	{ value: 'oldest', label: formatMessage(messages.sortOldest) },
-	{ value: 'highest', label: formatMessage(messages.sortRating) },
-	{ value: 'lowest', label: formatMessage(messages.sortLowestRating) },
+	{ value: 'rating', label: formatMessage(messages.sortRating) },
 	{ value: 'helpful', label: formatMessage(messages.sortHelpful) },
-	{ value: 'unhelpful', label: formatMessage(messages.sortUnhelpful) },
 ])
 
-const props = defineProps<{ projectSlug: string; isModpack: boolean }>()
+const props = defineProps<{ projectSlug: string }>()
 
-type State =
-	| 'loading'
-	| 'ready'
-	| 'no-token'
-	| 'invalid-token'
-	| 'not-found'
-	| 'rate-limited'
-	| 'error'
+type State = 'loading' | 'ready' | 'not-found' | 'rate-limited' | 'error'
 
 const gameVersionTags = ref<GameVersionTag[]>([])
 const state = ref<State>('loading')
@@ -421,14 +426,10 @@ async function load(pageNumber: number) {
 	const id = ++requestId
 	state.value = 'loading'
 	try {
-		const { reviews: reviewSettings } = await getSettings()
 		const result = (await browser.runtime.sendMessage({
 			type: 'moddex-reviews',
 			slug: props.projectSlug,
-			isModpack: props.isModpack,
-			token: reviewSettings.moddexApiToken.trim(),
-			sort: SORTS[sort.value].field,
-			direction: SORTS[sort.value].direction,
+			sort: sort.value,
 			page: pageNumber,
 		})) as ModdexReviewsResult | undefined
 		if (id !== requestId) return
@@ -470,27 +471,17 @@ function barColor(value: number): string {
 	return 'bg-red'
 }
 
-function categoryRatings(ratings: {
-	gameplay_rating: number | null
-	performance_rating: number | null
-	aesthetics_rating: number | null
-}) {
+function categoryRatings(categories: ReviewCategories) {
 	return [
-		{ label: formatMessage(messages.gameplay), value: ratings.gameplay_rating },
-		{ label: formatMessage(messages.performance), value: ratings.performance_rating },
-		{ label: formatMessage(messages.aesthetics), value: ratings.aesthetics_rating },
+		{ label: formatMessage(messages.gameplay), value: categories.gameplay },
+		{ label: formatMessage(messages.performance), value: categories.performance },
+		{ label: formatMessage(messages.aesthetics), value: categories.aesthetics },
 	].filter((c): c is { label: string; value: number } => c.value != null && c.value > 0)
 }
 
-const summaryCategories = computed(() =>
-	summary.value
-		? categoryRatings({
-				gameplay_rating: summary.value.gameplay,
-				performance_rating: summary.value.performance,
-				aesthetics_rating: summary.value.aesthetics,
-			})
-		: [],
-)
+function hideImage(event: Event) {
+	;(event.target as HTMLImageElement).hidden = true
+}
 
 onMounted(() => {
 	void loadGameVersionTags().then((tags) => (gameVersionTags.value = tags))

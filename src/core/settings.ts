@@ -48,7 +48,7 @@ export interface ExtensionSettings {
 	galleryBackground: { enabled: boolean }
 	monetizationBadge: { enabled: boolean }
 	translateDescription: { enabled: boolean }
-	reviews: { enabled: boolean; moddex: boolean; moddexApiToken: string; spigot: boolean }
+	reviews: { enabled: boolean; moddex: boolean; spigot: boolean }
 	notificationBadge: { enabled: boolean }
 	desktopNotifications: { enabled: boolean }
 	curseforgeRedirect: { enabled: boolean }
@@ -79,7 +79,7 @@ export const DEFAULTS: ExtensionSettings = {
 	galleryBackground: { enabled: true },
 	monetizationBadge: { enabled: true },
 	translateDescription: { enabled: false },
-	reviews: { enabled: true, moddex: true, moddexApiToken: '', spigot: true },
+	reviews: { enabled: true, moddex: true, spigot: true },
 	notificationBadge: { enabled: true },
 	desktopNotifications: { enabled: false },
 	curseforgeRedirect: { enabled: false },
@@ -90,9 +90,7 @@ export const DEFAULTS: ExtensionSettings = {
 type SettingKeys = { [K in keyof ExtensionSettings]?: (keyof ExtensionSettings[K])[] }
 
 // Settings that must never be logged or sent with telemetry
-export const SECRET_SETTINGS: SettingKeys = {
-	reviews: ['moddexApiToken'],
-}
+export const SECRET_SETTINGS: SettingKeys = {}
 
 // Copy that is safe to log or send, without secrets and without keys from older versions.
 export function withoutSecrets(

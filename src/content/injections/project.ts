@@ -132,10 +132,9 @@ export function projectInjections(settings: SettingsGetter) {
 			return document.contains(container)
 		},
 		createApp() {
-			const [, projectType, slug] = window.location.pathname.match(PROJECT_TYPE_PATTERN) ?? []
+			const [, , slug] = window.location.pathname.match(PROJECT_TYPE_PATTERN) ?? []
 			return createExtensionApp(ProjectReviews, {
 				projectSlug: slug ?? '',
-				isModpack: projectType === 'modpack',
 				moddex: settings().reviews.moddex,
 				spigot: settings().reviews.spigot,
 			})

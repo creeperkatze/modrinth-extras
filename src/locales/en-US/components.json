@@ -74,14 +74,14 @@
   "moddexReviews.aesthetics": {
     "defaultMessage": "Aesthetics"
   },
-  "moddexReviews.createToken": {
-    "defaultMessage": "Create a token"
-  },
   "moddexReviews.credit": {
-    "defaultMessage": "Reviews provided by <link>ModDex</link>, written by its community."
+    "defaultMessage": "Reviews from <link>ModDex</link>, written by its community."
   },
   "moddexReviews.developer": {
     "defaultMessage": "Developer"
+  },
+  "moddexReviews.developerResponse": {
+    "defaultMessage": "Developer response:"
   },
   "moddexReviews.edited": {
     "defaultMessage": "Edited"
@@ -95,9 +95,6 @@
   "moddexReviews.helpful": {
     "defaultMessage": "{count, plural, one {# person found this helpful} other {# people found this helpful}}"
   },
-  "moddexReviews.invalidTokenTitle": {
-    "defaultMessage": "Your ModDex API token is invalid or expired"
-  },
   "moddexReviews.loadError": {
     "defaultMessage": "Failed to load reviews from ModDex"
   },
@@ -106,9 +103,6 @@
   },
   "moddexReviews.moderatorNote": {
     "defaultMessage": "Moderator note:"
-  },
-  "moddexReviews.noTokenTitle": {
-    "defaultMessage": "ModDex API token required"
   },
   "moddexReviews.notFound": {
     "defaultMessage": "This project could not be found on ModDex."
@@ -140,9 +134,6 @@
   "moddexReviews.sortLabel": {
     "defaultMessage": "Sort reviews"
   },
-  "moddexReviews.sortLowestRating": {
-    "defaultMessage": "Lowest rated"
-  },
   "moddexReviews.sortNewest": {
     "defaultMessage": "Newest"
   },
@@ -152,14 +143,8 @@
   "moddexReviews.sortRating": {
     "defaultMessage": "Highest rated"
   },
-  "moddexReviews.sortUnhelpful": {
-    "defaultMessage": "Most unhelpful"
-  },
   "moddexReviews.title": {
     "defaultMessage": "Community reviews"
-  },
-  "moddexReviews.tokenHelp": {
-    "defaultMessage": "ModDex only serves reviews to signed-in API users. Create a free token on ModDex, then paste it into the Modrinth Extras popup under \"Reviews\"."
   },
   "moddexReviews.writeReview": {
     "defaultMessage": "Write a review"
@@ -300,7 +285,7 @@
     "defaultMessage": "Author response:"
   },
   "spigotReviews.credit": {
-    "defaultMessage": "Reviews provided by <link>SpigotMC</link>, written by its community."
+    "defaultMessage": "Reviews from <link>SpigotMC</link>, written by its community."
   },
   "spigotReviews.empty": {
     "defaultMessage": "No reviews yet."

@@ -219,8 +219,8 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0
       moddex-js:
-        specifier: ^1.0.1
-        version: 1.0.1
+        specifier: ^2.0.0
+        version: 2.0.0
       spiget-js:
         specifier: ^1.0.4
         version: 1.0.4
@@ -5751,8 +5751,8 @@ packages:
   mlly@1.8.2:
     resolution: {integrity: sha512-d+ObxMQFmbt10sretNDytwt85VrbkhhUA/JBGm1MPaWJ65Cl4wOgLaB1NYvJSZ0Ef03MMEU/0xpPMXUIQ29UfA==}
 
-  moddex-js@1.0.1:
-    resolution: {integrity: sha512-ImliTALF7qH0sg/Gc93lGaANyOme8olfKOHYXVmODizaDfl5GRBv0t3r+FJIPvZJjDsf7kU4ntyJRCS3ZNT2lA==}
+  moddex-js@2.0.0:
+    resolution: {integrity: sha512-5dcirG6oPXv2LM2Y0t+QXpA8q2HoLobHwobjrE7i4NnJ5l0FVPkghXQBHsXpOoDTO7MzuiZxClZsnZ+kaNlGuw==}
     engines: {node: '>=18'}
 
   motion-dom@12.38.0:
@@ -12649,7 +12649,7 @@ snapshots:
       pkg-types: 1.3.1
       ufo: 1.6.4
 
-  moddex-js@1.0.1: {}
+  moddex-js@2.0.0: {}
 
   motion-dom@12.38.0:
     dependencies:

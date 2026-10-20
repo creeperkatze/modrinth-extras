@@ -120,22 +120,6 @@
 					:disabled-tooltip="f.disabledTooltip"
 					@update:model-value="updateEnabled(f.key, $event)"
 				>
-					<template v-if="f.key === 'reviews'" #description>
-						{{ f.description }}
-						<IntlFormatted :message-id="messages['feature.reviews.getModdexToken']">
-							<template #link="{ children }">
-								<a
-									href="https://moddex.gg/settings?tab=tokens"
-									target="_blank"
-									rel="noopener"
-									class="text-link"
-									@click.stop
-								>
-									<component :is="() => children" />
-								</a>
-							</template>
-						</IntlFormatted>
-					</template>
 					<template v-if="f.options">
 						<template v-for="opt in f.options" :key="opt.key">
 							<OptionFieldColor
@@ -544,14 +528,6 @@ const messages = defineMessages({
 		id: 'feature.reviews.moddex',
 		defaultMessage: 'ModDex reviews',
 	},
-	'feature.reviews.moddexApiToken': {
-		id: 'feature.reviews.moddexApiToken',
-		defaultMessage: 'ModDex API token',
-	},
-	'feature.reviews.getModdexToken': {
-		id: 'feature.reviews.getModdexToken',
-		defaultMessage: '<link>Get a ModDex API token</link>',
-	},
 	'feature.reviews.spigot': {
 		id: 'feature.reviews.spigot',
 		defaultMessage: 'SpigotMC reviews',
@@ -752,11 +728,6 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 				key: 'moddex',
 				type: 'toggle',
 				label: formatMessage(messages['feature.reviews.moddex']),
-			},
-			{
-				key: 'moddexApiToken',
-				type: 'text',
-				label: formatMessage(messages['feature.reviews.moddexApiToken']),
 			},
 			{
 				key: 'spigot',

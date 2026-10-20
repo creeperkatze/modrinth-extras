@@ -1,18 +1,23 @@
 import ModDexClient, {
-	ModDexAuthenticationError,
 	ModDexNotFoundError,
 	ModDexRateLimitError,
+	type RatingStep,
 	type Review,
-	type ReviewSortField,
+	type ReviewCategories,
+	type ReviewSort,
 } from 'moddex-js'
+import { browser } from 'wxt/browser'
+
+const REF = 'modrinth-extras'
+
+const client = new ModDexClient({
+	client: `modrinth-extras/${browser.runtime.getManifest().version}`,
+})
 
 export interface ModdexSummary {
 	average: number
-	gameplay: number
-	performance: number
-	aesthetics: number
 	totalRatings: number
-	writtenReviews: number
+	categories: ReviewCategories
 }
 
 export interface ModdexReviewsPage {
@@ -20,72 +25,63 @@ export interface ModdexReviewsPage {
 	summary: ModdexSummary | null
 	page: number
 	lastPage: number
-	projectUrl: string
+	writeReviewUrl: string
 }
 
 export type ModdexReviewsResult =
 	| { ok: true; data: ModdexReviewsPage }
-	| { ok: false; error: 'no-token' | 'invalid-token' | 'not-found' | 'rate-limited' | 'failed' }
+	| { ok: false; error: 'not-found' | 'rate-limited' | 'failed' }
 
-const CACHE_TTL_MS = 5 * 60_000
-
-let client: ModDexClient | null = null
-let clientToken = ''
-
-function getClient(token: string): ModDexClient {
-	if (!client || clientToken !== token) {
-		client = new ModDexClient({ token, cache: { ttlMs: CACHE_TTL_MS } })
-		clientToken = token
-	}
-	return client
+function withRef(link: string): string {
+	const url = new URL(link)
+	url.searchParams.set('ref', REF)
+	return url.href
 }
 
+function histogramAverage(histogram: RatingStep[]): number | null {
+	const count = histogram.reduce((sum, step) => sum + step.count, 0)
+	if (!count) return null
+	return histogram.reduce((sum, step) => sum + step.rating * step.count, 0) / count
+}
+
+// The project is a Modrinth slug or ID, which ModDex resolves without needing the project type.
 export async function fetchModdexReviews(
-	slug: string,
-	isModpack: boolean,
-	token: string,
-	sort: ReviewSortField,
-	direction: 'asc' | 'desc',
+	project: string,
+	sort: ReviewSort,
 	page: number,
 ): Promise<ModdexReviewsResult> {
-	if (!token) return { ok: false, error: 'no-token' }
-
-	const moddex = getClient(token)
-	// Modrinth types don't always line up with ModDex, so fall back to the other kind.
-	const kinds = isModpack ? (['modpack', 'mod'] as const) : (['mod', 'modpack'] as const)
-	for (const kind of kinds) {
-		try {
-			const api = kind === 'modpack' ? moddex.modpacks : moddex.mods
-			// Star-only ratings are missing from the review list, so the totals come from the project.
-			const [project, res] = await Promise.all([
-				page === 1 ? api.get(slug) : null,
-				api.listReviews(slug, { sort, direction, per_page: 15, page }),
-			])
-			return {
-				ok: true,
-				data: {
-					reviews: res.data,
-					summary: project
+	try {
+		// The review list only carries the overall rating, so category ratings need the project too.
+		const [list, details] = await Promise.all([
+			client.lookup.listReviews('modrinth', project, { sort, page }),
+			page === 1 ? client.lookup.get('modrinth', project, { include: ['ratings'] }) : null,
+		])
+		const { rating, links } = list.meta.project
+		const categories = details?.data.ratings?.categories
+		return {
+			ok: true,
+			data: {
+				reviews: list.data,
+				summary:
+					categories && rating.average !== null
 						? {
-								average: project.average_rating,
-								gameplay: project.gameplay_rating,
-								performance: project.performance_rating,
-								aesthetics: project.aesthetics_rating,
-								totalRatings: project.total_ratings,
-								writtenReviews: project.written_reviews_count,
+								average: rating.average,
+								totalRatings: rating.count,
+								categories: {
+									gameplay: histogramAverage(categories.gameplay),
+									performance: histogramAverage(categories.performance),
+									aesthetics: histogramAverage(categories.aesthetics),
+								},
 							}
 						: null,
-					page: res.meta.current_page,
-					lastPage: res.meta.last_page,
-					projectUrl: `https://moddex.gg/${kind}/${encodeURIComponent(slug)}`,
-				},
-			}
-		} catch (err) {
-			if (err instanceof ModDexNotFoundError) continue
-			if (err instanceof ModDexAuthenticationError) return { ok: false, error: 'invalid-token' }
-			if (err instanceof ModDexRateLimitError) return { ok: false, error: 'rate-limited' }
-			throw err
+				page: list.meta.current_page,
+				lastPage: list.meta.last_page,
+				writeReviewUrl: withRef(links.write_review),
+			},
 		}
+	} catch (err) {
+		if (err instanceof ModDexNotFoundError) return { ok: false, error: 'not-found' }
+		if (err instanceof ModDexRateLimitError) return { ok: false, error: 'rate-limited' }
+		throw err
 	}
-	return { ok: false, error: 'not-found' }
 }

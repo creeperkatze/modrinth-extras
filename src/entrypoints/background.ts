@@ -1,4 +1,4 @@
-import type { ReviewSortField } from 'moddex-js'
+import type { ReviewSort } from 'moddex-js'
 import { browser } from 'wxt/browser'
 
 import {
@@ -110,14 +110,7 @@ export default defineBackground(() => {
 			return true
 		}
 		if (message.type === 'moddex-reviews') {
-			fetchModdexReviews(
-				message.slug as string,
-				message.isModpack as boolean,
-				message.token as string,
-				message.sort as ReviewSortField,
-				message.direction as 'asc' | 'desc',
-				message.page as number,
-			)
+			fetchModdexReviews(message.slug as string, message.sort as ReviewSort, message.page as number)
 				.then((result) => sendResponse(result))
 				.catch((err) => {
 					console.error('[Modrinth Extras] Failed to fetch ModDex reviews:', err)
