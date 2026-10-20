@@ -17,6 +17,12 @@ export async function sendBrowserNotifications(
 	const { desktopNotifications } = await getSettings()
 	if (!desktopNotifications.enabled) return
 
+	// The API is undefined when the optional permission was revoked outside the popup
+	if (!browser.notifications) {
+		console.log('[Modrinth Extras] Browser notifications: Permission not granted, skipping')
+		return
+	}
+
 	// No prior state means this is the first run, save baseline without notifying
 	if (prevNotifs === null) {
 		console.log(
