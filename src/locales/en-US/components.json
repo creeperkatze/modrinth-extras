@@ -341,6 +341,9 @@
   "toolsSidebar.copyInstallCommand": {
     "defaultMessage": "Copy {manager} command"
   },
+  "toolsSidebar.decompileIn": {
+    "defaultMessage": "Decompile in {tool}"
+  },
   "toolsSidebar.generateEmbed": {
     "defaultMessage": "Generate embed"
   },

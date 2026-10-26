@@ -22,6 +22,8 @@ export function sidebarInjections(settings: SettingsGetter) {
 		settingsKeys: ['toolsSidebar'],
 		persistent: false,
 		projectScoped: true,
+		scopeKey: () =>
+			window.location.pathname.match(PROJECT_DEP_PATTERN)?.slice(2, 4).join('/') ?? '',
 		attach: attachToSidebar,
 		createApp: () =>
 			createExtensionApp(ToolsSidebar, {

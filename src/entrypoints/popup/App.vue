@@ -409,7 +409,8 @@ const messages = defineMessages({
 	},
 	'feature.toolsSidebar.description': {
 		id: 'feature.toolsSidebar.description',
-		defaultMessage: 'Generate embeds and copy mod manager install commands.',
+		defaultMessage:
+			'Generate embeds, copy mod manager install commands, and decompile in slicer or modsrc.',
 	},
 	'feature.toolsSidebar.modManager': {
 		id: 'feature.toolsSidebar.modManager',

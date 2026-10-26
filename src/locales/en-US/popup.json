@@ -165,7 +165,7 @@
     "defaultMessage": "Telemetry"
   },
   "feature.toolsSidebar.description": {
-    "defaultMessage": "Generate embeds and copy mod manager install commands."
+    "defaultMessage": "Generate embeds, copy mod manager install commands, and decompile in slicer or modsrc."
   },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "Mod manager"

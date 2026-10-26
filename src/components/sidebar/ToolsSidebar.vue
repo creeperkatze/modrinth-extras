@@ -53,14 +53,43 @@
 					/>
 				</button>
 			</div>
+			<div
+				v-for="link in decompilerLinks"
+				:key="link.url"
+				class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal"
+			>
+				<component :is="link.icon" aria-hidden="true" class="mt-0.5 shrink-0" />
+				<a
+					:href="link.url"
+					target="_blank"
+					rel="noopener"
+					class="min-w-0 flex-1 break-words leading-tight hover:underline"
+				>
+					{{ formatMessage(messages['toolsSidebar.decompileIn'], { tool: link.label }) }}
+					<ExternalIcon
+						aria-hidden="true"
+						class="external-icon ml-1 inline !mb-0 align-[-0.125em]"
+					/>
+				</a>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { CheckIcon, CodeIcon, CopyIcon, ExternalIcon, TerminalSquareIcon } from '@modrinth/assets'
+import {
+	CheckIcon,
+	CodeIcon,
+	CoffeeIcon,
+	CopyIcon,
+	ExternalIcon,
+	TerminalSquareIcon,
+} from '@modrinth/assets'
 import { defineMessages, useVIntl } from '@modrinth/ui'
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+
+import ModsrcIcon from '../../assets/icons/modsrc.svg?component'
+import { type DecompilerLinks, fetchDecompilerLinks } from '../../features/decompilers/links'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
@@ -74,6 +103,10 @@ const messages = defineMessages({
 		defaultMessage: 'Copy {manager} command',
 	},
 	'toolsSidebar.copied': { id: 'toolsSidebar.copied', defaultMessage: 'Copied!' },
+	'toolsSidebar.decompileIn': {
+		id: 'toolsSidebar.decompileIn',
+		defaultMessage: 'Decompile in {tool}',
+	},
 })
 
 const props = defineProps<{
@@ -103,9 +136,9 @@ const modfolioUrl = computed(
 const projectMatch = computed(() => {
 	try {
 		const match = new URL(props.pageUrl).pathname.match(
-			/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/([^/]+)/,
+			/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/([^/]+)(?:\/version\/([^/?#]+))?/,
 		)
-		return match ? { type: match[1], slug: match[2] } : null
+		return match ? { type: match[1], slug: match[2], version: match[3] } : null
 	} catch {
 		return null
 	}
@@ -127,4 +160,25 @@ async function copyInstallCommand() {
 		installCommandCopied.value = false
 	}, 1500)
 }
+
+const links = ref<DecompilerLinks | null>(null)
+
+const decompilerLinks = computed(() => {
+	if (!links.value) return []
+	return [
+		// slicer's logo is Lucide's coffee icon
+		{ label: 'slicer', url: links.value.slicer, icon: CoffeeIcon },
+		...(links.value.modsrc ? [{ label: 'modsrc', url: links.value.modsrc, icon: ModsrcIcon }] : []),
+	]
+})
+
+onMounted(async () => {
+	const { type, slug, version } = projectMatch.value ?? {}
+	if (!slug || type === 'modpack') return
+	try {
+		links.value = await fetchDecompilerLinks(slug, version)
+	} catch (err) {
+		console.error('[Modrinth Extras] Failed to fetch decompiler links:', err)
+	}
+})
 </script>
