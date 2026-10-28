@@ -119,7 +119,7 @@ const MOD_MANAGERS: Record<
 	{ label: string; command: (slug: string, type: string) => string }
 > = {
 	packwiz: {
-		label: 'Packwiz',
+		label: 'packwiz',
 		command: (slug) => `packwiz mr add ${slug}`,
 	},
 	ferium: {

@@ -622,7 +622,7 @@ interface FeatureOption {
 }
 
 const MOD_MANAGER_ITEMS: SelectItem[] = [
-	{ label: 'Packwiz', value: 'packwiz' },
+	{ label: 'packwiz', value: 'packwiz' },
 	{ label: 'Ferium', value: 'ferium' },
 	{ label: 'Pakku', value: 'pakku' },
 ]
