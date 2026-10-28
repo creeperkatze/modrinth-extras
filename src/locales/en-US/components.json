@@ -1,4 +1,7 @@
 {
+  "compareVersions.compareWith": {
+    "defaultMessage": "Compare with"
+  },
   "compareVersions.label": {
     "defaultMessage": "Compare with previous"
   },

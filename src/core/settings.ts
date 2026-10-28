@@ -71,7 +71,7 @@ export const DEFAULTS: ExtensionSettings = {
 	},
 	activitySparkline: { enabled: true, days: '60' },
 	toolsSidebar: { enabled: true, modManager: 'packwiz', decompiler: 'slicer' },
-	compareVersions: { enabled: true },
+	compareVersions: { enabled: false },
 	dependencySidebar: { enabled: true },
 	dependencyExplorer: { enabled: true },
 	githubSidebar: { enabled: true },

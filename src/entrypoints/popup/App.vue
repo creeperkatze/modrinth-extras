@@ -426,7 +426,8 @@ const messages = defineMessages({
 	},
 	'feature.compareVersions.description': {
 		id: 'feature.compareVersions.description',
-		defaultMessage: 'Compare the decompiled code of a version with the previous one in modsrc.',
+		defaultMessage:
+			'Compare the decompiled code of versions in modsrc, from version pages, the versions list and the changelog.',
 	},
 	'feature.dependencySidebar.title': {
 		id: 'feature.dependencySidebar.title',

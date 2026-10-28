@@ -1,23 +1,32 @@
 <template>
-	<ButtonLink
-		v-if="comparison"
+	<SplitButton
+		v-if="comparisons.all.length"
 		v-tooltip="
-			formatMessage(messages['compareVersions.tooltip'], { version: comparison.previousVersion })
+			comparisons.previous
+				? formatMessage(messages['compareVersions.tooltip'], {
+						version: comparisons.previous.versionNumber,
+					})
+				: undefined
 		"
-		:href="comparison.url"
-		target="_blank"
+		:menu-label="formatMessage(messages['compareVersions.compareWith'])"
+		:options="options"
+		:primary-disabled="!comparisons.previous"
+		@click="openPrevious"
 	>
 		<ModsrcIcon aria-hidden="true" />
 		{{ formatMessage(messages['compareVersions.label']) }}
-	</ButtonLink>
+	</SplitButton>
 </template>
 
 <script setup lang="ts">
-import { ButtonLink, defineMessages, useVIntl } from '@modrinth/ui'
-import { onMounted, ref } from 'vue'
+import { type ButtonMenuOption, defineMessages, SplitButton, useVIntl } from '@modrinth/ui'
+import { computed, onMounted, ref } from 'vue'
 
 import ModsrcIcon from '../../assets/icons/modsrc.svg?component'
-import { fetchVersionComparison, type VersionComparison } from '../../features/decompilers/links'
+import {
+	fetchVersionComparisons,
+	type VersionComparisons,
+} from '../../features/decompilers/compare'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
@@ -29,6 +38,10 @@ const messages = defineMessages({
 		id: 'compareVersions.tooltip',
 		defaultMessage: 'Compare with {version} in modsrc',
 	},
+	'compareVersions.compareWith': {
+		id: 'compareVersions.compareWith',
+		defaultMessage: 'Compare with',
+	},
 })
 
 const props = defineProps<{
@@ -36,13 +49,35 @@ const props = defineProps<{
 	version: string
 }>()
 
-const comparison = ref<VersionComparison | null>(null)
+const comparisons = ref<VersionComparisons>({ previous: null, all: [] })
+
+const options = computed<ButtonMenuOption[]>(() => [
+	{
+		type: 'heading',
+		id: 'compare-with',
+		label: formatMessage(messages['compareVersions.compareWith']),
+	},
+	...comparisons.value.all.map(
+		(comparison): ButtonMenuOption => ({
+			type: 'link',
+			id: comparison.url,
+			label: comparison.versionNumber,
+			href: comparison.url,
+			target: '_blank',
+			selected: comparison.url === comparisons.value.previous?.url,
+		}),
+	),
+])
+
+function openPrevious() {
+	if (comparisons.value.previous) window.open(comparisons.value.previous.url, '_blank', 'noopener')
+}
 
 onMounted(async () => {
 	try {
-		comparison.value = await fetchVersionComparison(props.projectSlug, props.version)
+		comparisons.value = await fetchVersionComparisons(props.projectSlug, props.version)
 	} catch (err) {
-		console.error('[Modrinth Extras] Failed to fetch version comparison:', err)
+		console.error('[Modrinth Extras] Failed to fetch version comparisons:', err)
 	}
 })
 </script>

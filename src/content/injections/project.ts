@@ -1,15 +1,36 @@
 import ActivitySparkline from '../../components/project/ActivitySparkline.vue'
 import CompareVersionsButton from '../../components/project/CompareVersionsButton.vue'
+import CompareVersionsLink from '../../components/project/CompareVersionsLink.vue'
 import GalleryBackground from '../../components/project/GalleryBackground.vue'
 import MonetizationBadge from '../../components/project/MonetizationBadge.vue'
 import ProjectReviews from '../../components/project/reviews/ProjectReviews.vue'
 import TranslateDescription from '../../components/project/TranslateDescription.vue'
 import { isTranslationSupported } from '../../features/translation/translator'
-import { createExtensionApp, createInjection, type SettingsGetter } from '../injection'
+import {
+	createDynamicInjection,
+	createExtensionApp,
+	createInjection,
+	type SettingsGetter,
+} from '../injection'
 import { PROJECT_TYPE_PATTERN } from '../page'
 
 const VERSION_PAGE_PATTERN =
 	/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/([^/?#]+)\/version\/([^/?#]+)/
+
+function linkedVersion(target: HTMLElement): { projectSlug: string; version: string } | null {
+	const href = target.querySelector<HTMLAnchorElement>('a[href*="/version/"]')?.getAttribute('href')
+	const [, , projectSlug, version] =
+		new URL(href ?? '/', window.location.origin).pathname.match(VERSION_PAGE_PATTERN) ?? []
+	return projectSlug && version ? { projectSlug, version: decodeURI(version) } : null
+}
+
+function insertAfter(sibling: Element | null | undefined): HTMLElement | null {
+	if (!sibling) return null
+	const container = document.createElement('div')
+	container.style.display = 'contents'
+	sibling.after(container)
+	return container
+}
 
 export function projectInjections(settings: SettingsGetter) {
 	const activitySparkline = createInjection({
@@ -172,6 +193,31 @@ export function projectInjections(settings: SettingsGetter) {
 		},
 	})
 
+	const compareVersionRows = createDynamicInjection({
+		settingsKeys: ['compareVersions'],
+		persistent: false,
+		isEnabled: () => settings().compareVersions.enabled,
+		targets: 'tr.version-row-link',
+		attach(row) {
+			if (!linkedVersion(row)) return null
+			const actions = row.querySelector('[data-no-row-click].justify-end')
+			return insertAfter(actions?.firstElementChild)
+		},
+		createApp: (row) => createExtensionApp(CompareVersionsLink, { ...linkedVersion(row) }),
+	})
+
+	const compareChangelogEntries = createDynamicInjection({
+		settingsKeys: ['compareVersions'],
+		persistent: false,
+		isEnabled: () => settings().compareVersions.enabled,
+		targets: '.changelog-item',
+		attach(entry) {
+			if (!linkedVersion(entry)) return null
+			return insertAfter(entry.querySelector('.version-header > .ml-auto'))
+		},
+		createApp: (entry) => createExtensionApp(CompareVersionsLink, { ...linkedVersion(entry) }),
+	})
+
 	return [
 		activitySparkline,
 		galleryBackground,
@@ -179,5 +225,7 @@ export function projectInjections(settings: SettingsGetter) {
 		translateDescription,
 		projectReviews,
 		compareVersions,
+		compareVersionRows,
+		compareChangelogEntries,
 	]
 }
