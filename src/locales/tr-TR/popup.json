@@ -125,12 +125,6 @@
   "feature.projectCardActions.title": {
     "defaultMessage": "Proje kartı eylemleri"
   },
-  "feature.projectTypesPrimaryNav.description": {
-    "defaultMessage": "Modları, eklentileri, kaynak paketlerini ve diğer proje türlerini ana gezinme çubuğuna taşıyın."
-  },
-  "feature.projectTypesPrimaryNav.title": {
-    "defaultMessage": "Proje türü gezinme"
-  },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K veya / tuşlarına basarak, yükleyiciler, sürümler, kategoriler ve türler için filtrelenmiş etiketlere sahip komut paleti tarzı bir arama yapabilirsiniz."
   },
@@ -149,12 +143,6 @@
   "feature.reviews.title": {
     "defaultMessage": "İncelemeler"
   },
-  "feature.searchBackground.description": {
-    "defaultMessage": "Keşif sayfalarında bir afiş arka planı gösterin."
-  },
-  "feature.searchBackground.title": {
-    "defaultMessage": "Arama geçmişi"
-  },
   "feature.telemetry.description": {
     "defaultMessage": "Eklenti sürümü ve hangi özelliklerin açık olduğu gibi istatistikleri anonim olarak paylaşarak eklentiyi geliştirmeye yardımcı olun. Modrinth verileri, aktiviteler veya kişisel bilgiler asla toplanmaz."
   },
@@ -163,9 +151,6 @@
   },
   "feature.telemetry.title": {
     "defaultMessage": "Telemetri"
-  },
-  "feature.toolsSidebar.description": {
-    "defaultMessage": "Gömme kodlarını oluşturun ve mod yöneticisi kurulum komutlarını kopyalayın."
   },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "Mod yöneticisi"
@@ -215,14 +200,8 @@
   "popup.footer.updateAvailable": {
     "defaultMessage": "Güncelleme mevcut"
   },
-  "popup.group.contentPages": {
-    "defaultMessage": "İçerik Sayfaları"
-  },
   "popup.group.extension": {
     "defaultMessage": "Uzantı"
-  },
-  "popup.group.flags": {
-    "defaultMessage": "İşaretçiler"
   },
   "popup.group.general": {
     "defaultMessage": "Genel"

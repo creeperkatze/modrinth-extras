@@ -38,9 +38,6 @@
   "feature.projectCardActions.gameVersion": {
     "defaultMessage": "ゲームバージョン"
   },
-  "feature.searchBackground.title": {
-    "defaultMessage": "背景を検索"
-  },
   "feature.telemetry.disabledTooltip": {
     "defaultMessage": "Firefoxのデータ収集設定で制御しています"
   },
@@ -58,9 +55,6 @@
   },
   "popup.footer.updateAvailable": {
     "defaultMessage": "更新が利用可能です"
-  },
-  "popup.group.flags": {
-    "defaultMessage": "フラッグ"
   },
   "popup.group.general": {
     "defaultMessage": "一般"

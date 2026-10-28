@@ -35,6 +35,12 @@
   "feature.browserNotifications.title": {
     "defaultMessage": "Browser-Benachrichtigungen"
   },
+  "feature.compareVersions.description": {
+    "defaultMessage": "Vergleiche den dekompilierten Code von Versionen in modsrc, auf den Versionsseiten, in der Versionsliste und bei den Änderungen."
+  },
+  "feature.compareVersions.title": {
+    "defaultMessage": "Versionen vergleichen"
+  },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "Leite CurseForge-Projektseiten zu Modrinth um, falls verfügbar."
   },
@@ -125,12 +131,6 @@
   "feature.projectCardActions.title": {
     "defaultMessage": "Projektkarten-Aktionen"
   },
-  "feature.projectTypesPrimaryNav.description": {
-    "defaultMessage": "Verschiebe Mods, Plugins, Ressourcenpakete und andere Projekttypen in die Hauptnavigationsleiste."
-  },
-  "feature.projectTypesPrimaryNav.title": {
-    "defaultMessage": "Projekttyp-Navigation"
-  },
   "feature.quickSearch.description": {
     "defaultMessage": "Strg+K oder / für eine Suche im Stil einer Befehlspalette mit gefilterten Tags für Loader, Versionen, Kategorien und Typen."
   },
@@ -149,12 +149,6 @@
   "feature.reviews.title": {
     "defaultMessage": "Bewertungen"
   },
-  "feature.searchBackground.description": {
-    "defaultMessage": "Zeige auf den Entdeckungsseiten einen Banner-Hintergrund an."
-  },
-  "feature.searchBackground.title": {
-    "defaultMessage": "Suchhintergrund"
-  },
   "feature.telemetry.description": {
     "defaultMessage": "Hilf dabei, die Erweiterung zu verbessern, indem du anonym Statistiken wie die Version der Erweiterung und die aktivierten Funktionen teilst. Es werden keine Modrinth-Daten, Aktivitäten oder persönliche Informationen erfasst."
   },
@@ -164,8 +158,11 @@
   "feature.telemetry.title": {
     "defaultMessage": "Telemetrie"
   },
+  "feature.toolsSidebar.decompiler": {
+    "defaultMessage": "Dekompiler"
+  },
   "feature.toolsSidebar.description": {
-    "defaultMessage": "Generiere Einbettungen und kopiere Installationsbefehle für Mod-Manager."
+    "defaultMessage": "Generiere Einbettungen, kopiere Installationsbefehle für Mod-Manager und dekompiliere Mods."
   },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "Mod-Manager"
@@ -215,17 +212,17 @@
   "popup.footer.updateAvailable": {
     "defaultMessage": "Aktualisierung verfügbar"
   },
-  "popup.group.contentPages": {
-    "defaultMessage": "Inhaltsseiten"
-  },
   "popup.group.extension": {
     "defaultMessage": "Erweiterung"
   },
-  "popup.group.flags": {
-    "defaultMessage": "Flags"
-  },
   "popup.group.general": {
     "defaultMessage": "Allgemein"
+  },
+  "popup.group.sidebar": {
+    "defaultMessage": "Seitenleiste"
+  },
+  "popup.tab.projects": {
+    "defaultMessage": "Projekte"
   },
   "search.any": {
     "defaultMessage": "Beliebig"

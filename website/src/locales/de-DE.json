@@ -1,4 +1,7 @@
 {
+	"meta": {
+		"summary": "Eine Browser-Erweiterung, die Modrinth auf der Website und darüber hinaus erweitert."
+	},
 	"nav": {
 		"translate": "Übersetzen"
 	},

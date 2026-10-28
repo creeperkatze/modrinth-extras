@@ -125,12 +125,6 @@
   "feature.projectCardActions.title": {
     "defaultMessage": "Acciones de la ficha el proyecto"
   },
-  "feature.projectTypesPrimaryNav.description": {
-    "defaultMessage": "Mover mods, plugins, paquetes de recursos y otros tipos de proyectos a la barra principal."
-  },
-  "feature.projectTypesPrimaryNav.title": {
-    "defaultMessage": "Navegación de tipos de proyectos"
-  },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K o / para buscar el estilo de la paleta de comandos con etiquetas de versiones, categorías y tipos."
   },
@@ -149,12 +143,6 @@
   "feature.reviews.title": {
     "defaultMessage": "Reseñas"
   },
-  "feature.searchBackground.description": {
-    "defaultMessage": "Mostrar un fondo de banner en las páginas para descubrir."
-  },
-  "feature.searchBackground.title": {
-    "defaultMessage": "Fondo de búsqueda"
-  },
   "feature.telemetry.description": {
     "defaultMessage": "Ayudamos a mejorar la extensión si comparte de forma anónima datos como la versión de la extensión y las funciones activadas. Nunca se cogerá tus datos de Modrinth, ni información sobre su actividad ni datos personales."
   },
@@ -163,9 +151,6 @@
   },
   "feature.telemetry.title": {
     "defaultMessage": "Telemetría"
-  },
-  "feature.toolsSidebar.description": {
-    "defaultMessage": "Genera contenido incrustado para copiar comandos de instalación del gestor de mods."
   },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "Gestor de mods"
@@ -215,14 +200,8 @@
   "popup.footer.updateAvailable": {
     "defaultMessage": "Actualización disponible"
   },
-  "popup.group.contentPages": {
-    "defaultMessage": "Páginas de contenido"
-  },
   "popup.group.extension": {
     "defaultMessage": "Extensión"
-  },
-  "popup.group.flags": {
-    "defaultMessage": "Funciones experimentales"
   },
   "popup.group.general": {
     "defaultMessage": "General"

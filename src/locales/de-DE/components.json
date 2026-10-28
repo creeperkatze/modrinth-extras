@@ -1,4 +1,13 @@
 {
+  "compareVersions.compareWith": {
+    "defaultMessage": "Vergleichen mit"
+  },
+  "compareVersions.label": {
+    "defaultMessage": "Mit vorheriger vergleichen"
+  },
+  "compareVersions.tooltip": {
+    "defaultMessage": "Mit {version} in modsrc vergleichen"
+  },
   "dependencyExplorer.centerView": {
     "defaultMessage": "Ansicht zentrieren"
   },
@@ -281,6 +290,24 @@
   "reviewStars.rating": {
     "defaultMessage": "Mit {rating} von 5 bewertet"
   },
+  "sidebarLayout.customize": {
+    "defaultMessage": "Seitenleiste anpassen"
+  },
+  "sidebarLayout.done": {
+    "defaultMessage": "Fertig"
+  },
+  "sidebarLayout.drag": {
+    "defaultMessage": "Zum Anordnen ziehen"
+  },
+  "sidebarLayout.hide": {
+    "defaultMessage": "Ausblenden"
+  },
+  "sidebarLayout.revert": {
+    "defaultMessage": "Rückgängig"
+  },
+  "sidebarLayout.show": {
+    "defaultMessage": "Anzeigen"
+  },
   "spigotReviews.authorResponse": {
     "defaultMessage": "Antwort des Autors:"
   },
@@ -340,6 +367,9 @@
   },
   "toolsSidebar.copyInstallCommand": {
     "defaultMessage": "Befehl für {manager} kopieren"
+  },
+  "toolsSidebar.decompileWith": {
+    "defaultMessage": "Dekompilieren mit {tool}"
   },
   "toolsSidebar.generateEmbed": {
     "defaultMessage": "Einbettung generieren"

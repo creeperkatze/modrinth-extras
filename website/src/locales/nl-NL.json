@@ -1,0 +1,17 @@
+{
+	"meta": {
+		"summary": "Een browserextensie die Modrinth op de website en daarbuiten nog beter maakt.",
+		"feature": {
+			"notifications": {
+				"description": "Bekijk, beheer en wis ongelezen meldingen zonder de pagina te verlaten waarop je nu zit, met optionele browsermeldingen en een ongelezen-badge op het pictogram van de extensie."
+			},
+			"sparkline": {
+				"description": "Een release-activiteit op elke projectpagina toont de update frequentie in een oogopslag, voordat u zelfs naar beneden scrolt."
+			},
+			"sidebar": {
+				"title": "De volledige afbeelding, rechts in de zijbalk",
+				"description": "Repository sterren, issues en pull requests. Discord leden tellen. Elke modpack een mod wordt erin weergegeven. Alles rechts weergegeven in de zijbalk."
+			}
+		}
+	}
+}
