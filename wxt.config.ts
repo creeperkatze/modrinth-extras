@@ -1,10 +1,35 @@
 import { createRequire } from 'node:module'
+import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import svgLoader from 'vite-svg-loader'
-import { defineConfig } from 'wxt'
+import { defineConfig, type WxtViteConfig } from 'wxt'
 
 const { version } = createRequire(import.meta.url)('./package.json')
+
+// Taken from wxt because vite is not a direct dependency
+type VitePlugin = Extract<NonNullable<WxtViteConfig['plugins']>[number], { name: string }>
+
+const IMAGE_FILE = /\.(png|webp|jpe?g|gif|avif|svg)$/i
+
+// Vite emits imported images even if the code using them is tree-shaken
+function dropUnusedImages(): VitePlugin {
+	return {
+		name: 'modrinth-extras:drop-unused-images',
+		apply: 'build',
+		enforce: 'post',
+		generateBundle(_, bundle) {
+			const outputs = Object.values(bundle).flatMap((file) =>
+				file.type === 'chunk' ? [file.code] : typeof file.source === 'string' ? [file.source] : [],
+			)
+			for (const [fileName, file] of Object.entries(bundle)) {
+				if (file.type !== 'asset' || !IMAGE_FILE.test(fileName)) continue
+				const name = path.basename(fileName)
+				if (!outputs.some((output) => output.includes(name))) delete bundle[fileName]
+			}
+		},
+	}
+}
 
 export default defineConfig({
 	srcDir: 'src',
@@ -61,6 +86,7 @@ export default defineConfig({
 					],
 				},
 			}),
+			dropUnusedImages(),
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		] as any,
 		resolve: {
