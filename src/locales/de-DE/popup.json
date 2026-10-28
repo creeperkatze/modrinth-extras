@@ -5,8 +5,14 @@
   "feature.accentColor.description": {
     "defaultMessage": "Ersetze das Modrinth-Grün durch eine eigene Akzentfarbe."
   },
+  "feature.accentColor.lowContrast": {
+    "defaultMessage": "Diese Farbe ist auf deinem Modrinth-Farbschema Thema schwer zu erkennen."
+  },
   "feature.accentColor.title": {
     "defaultMessage": "Akzentfarbe"
+  },
+  "feature.accentColor.unreadableButtons": {
+    "defaultMessage": "Text auf Schaltflächen in dieser Farbe ist auf deinem Modrinth-Farbschema schwer zu lesen."
   },
   "feature.activitySparkline.days": {
     "defaultMessage": "{count, plural, one {# Tag} other {# Tage}}"

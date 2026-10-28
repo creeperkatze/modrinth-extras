@@ -5,8 +5,14 @@
   "feature.accentColor.description": {
     "defaultMessage": "Замените зелёный цвет Modrinth другим акцентным цветом."
   },
+  "feature.accentColor.lowContrast": {
+    "defaultMessage": "Этот цвет плохо виден в вашей теме Modrinth."
+  },
   "feature.accentColor.title": {
     "defaultMessage": "Акцентный цвет"
+  },
+  "feature.accentColor.unreadableButtons": {
+    "defaultMessage": "Текст на кнопках этого цвета плохо читается в вашей теме Modrinth."
   },
   "feature.activitySparkline.days": {
     "defaultMessage": "{count, plural, one {# день} few {# дня} other {# дней}}"
