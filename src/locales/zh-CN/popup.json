@@ -125,12 +125,6 @@
   "feature.projectCardActions.title": {
     "defaultMessage": "项目卡片操作"
   },
-  "feature.projectTypesPrimaryNav.description": {
-    "defaultMessage": "将模组、插件、资源包等项目类型移至主导航栏。"
-  },
-  "feature.projectTypesPrimaryNav.title": {
-    "defaultMessage": "在主导航栏中显示项目类型"
-  },
   "feature.quickSearch.description": {
     "defaultMessage": "按 Ctrl+K 或 / 键，即可使用类似命令面板的搜索功能，支持按加载器、版本、类别和类型进行多维标签搜索。"
   },
@@ -149,12 +143,6 @@
   "feature.reviews.title": {
     "defaultMessage": "评论"
   },
-  "feature.searchBackground.description": {
-    "defaultMessage": "在发现页面上显示横幅背景。"
-  },
-  "feature.searchBackground.title": {
-    "defaultMessage": "搜索背景"
-  },
   "feature.telemetry.description": {
     "defaultMessage": "通过匿名分享扩展程序版本及已启用功能等统计信息，帮助改进该扩展程序。我们绝不会收集任何 Modrinth 数据、活动记录或个人信息。"
   },
@@ -163,9 +151,6 @@
   },
   "feature.telemetry.title": {
     "defaultMessage": "遥测数据"
-  },
-  "feature.toolsSidebar.description": {
-    "defaultMessage": "生成嵌入代码并复制模组管理器安装命令。"
   },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "模组管理器"
@@ -215,14 +200,8 @@
   "popup.footer.updateAvailable": {
     "defaultMessage": "有可用更新"
   },
-  "popup.group.contentPages": {
-    "defaultMessage": "内容页"
-  },
   "popup.group.extension": {
     "defaultMessage": "扩展"
-  },
-  "popup.group.flags": {
-    "defaultMessage": "实验性开关"
   },
   "popup.group.general": {
     "defaultMessage": "一般"

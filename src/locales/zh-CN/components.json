@@ -74,8 +74,14 @@
   "moddexReviews.aesthetics": {
     "defaultMessage": "视觉表现"
   },
+  "moddexReviews.credit": {
+    "defaultMessage": "评论来自 <link>ModDex</link>，由其用户撰写。"
+  },
   "moddexReviews.developer": {
     "defaultMessage": "开发者"
+  },
+  "moddexReviews.developerResponse": {
+    "defaultMessage": "开发者回复："
   },
   "moddexReviews.edited": {
     "defaultMessage": "已编辑"
@@ -277,6 +283,9 @@
   },
   "spigotReviews.authorResponse": {
     "defaultMessage": "作者回复："
+  },
+  "spigotReviews.credit": {
+    "defaultMessage": "评论来自 <link>SpigotMC</link>，由其用户撰写。"
   },
   "spigotReviews.empty": {
     "defaultMessage": "暂无评论。"

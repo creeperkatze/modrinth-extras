@@ -1,4 +1,13 @@
 {
+  "compareVersions.compareWith": {
+    "defaultMessage": "Сравнить с"
+  },
+  "compareVersions.label": {
+    "defaultMessage": "Сравнить с прошлой"
+  },
+  "compareVersions.tooltip": {
+    "defaultMessage": "Сравнить с {version} в modsrc"
+  },
   "dependencyExplorer.centerView": {
     "defaultMessage": "Центрировать"
   },
@@ -36,7 +45,7 @@
     "defaultMessage": "Необязательно"
   },
   "dependencyNode.required": {
-    "defaultMessage": "Необходимо"
+    "defaultMessage": "Обязательно"
   },
   "dependencySidebar.loadError": {
     "defaultMessage": "Не удалось загрузить зависимости"
@@ -281,6 +290,24 @@
   "reviewStars.rating": {
     "defaultMessage": "Оценка: {rating}/5"
   },
+  "sidebarLayout.customize": {
+    "defaultMessage": "Настроить боковую панель"
+  },
+  "sidebarLayout.done": {
+    "defaultMessage": "Готово"
+  },
+  "sidebarLayout.drag": {
+    "defaultMessage": "Потяните перестановки"
+  },
+  "sidebarLayout.hide": {
+    "defaultMessage": "Скрыть"
+  },
+  "sidebarLayout.revert": {
+    "defaultMessage": "Откатить"
+  },
+  "sidebarLayout.show": {
+    "defaultMessage": "Показать"
+  },
   "spigotReviews.authorResponse": {
     "defaultMessage": "Ответ автора:"
   },
@@ -351,7 +378,7 @@
     "defaultMessage": "Показать оригинал"
   },
   "translateDescription.translate": {
-    "defaultMessage": "Перевод описания"
+    "defaultMessage": "Перевести описание"
   },
   "translateDescription.translating": {
     "defaultMessage": "Перевод..."

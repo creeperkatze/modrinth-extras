@@ -68,9 +68,6 @@
   "popup.footer.updateAvailable": {
     "defaultMessage": "Aggiornamento disponibile"
   },
-  "popup.group.contentPages": {
-    "defaultMessage": "Pagine di contenuto"
-  },
   "popup.group.extension": {
     "defaultMessage": "Estensione"
   },

@@ -86,9 +86,6 @@
   "feature.telemetry.title": {
     "defaultMessage": "Telemetría"
   },
-  "feature.toolsSidebar.description": {
-    "defaultMessage": "Genera códigos para insertar y copia los comandos de instalación del administrador de mod."
-  },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "Administrador de mods"
   },
@@ -118,9 +115,6 @@
   },
   "popup.footer.updateAvailable": {
     "defaultMessage": "Hay una actualización disponible"
-  },
-  "popup.group.contentPages": {
-    "defaultMessage": "Páginas de contenido"
   },
   "popup.group.extension": {
     "defaultMessage": "Extensión"

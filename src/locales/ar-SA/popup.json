@@ -86,9 +86,6 @@
   "feature.telemetry.title": {
     "defaultMessage": "بيانات تتبع الاستخدام"
   },
-  "feature.toolsSidebar.description": {
-    "defaultMessage": "إنشاء عناصر مضمنة ونسخ أوامر تثبيت مدير التعديل."
-  },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "مدير التعديلات"
   },
@@ -118,9 +115,6 @@
   },
   "popup.footer.updateAvailable": {
     "defaultMessage": "يوجد تحديث متوفر"
-  },
-  "popup.group.contentPages": {
-    "defaultMessage": "صفحات المحتوى"
   },
   "popup.group.extension": {
     "defaultMessage": "ملحق"

@@ -35,6 +35,12 @@
   "feature.browserNotifications.title": {
     "defaultMessage": "Браузерные уведомления"
   },
+  "feature.compareVersions.description": {
+    "defaultMessage": "Сравнивать декомпилированный код версий в modsrc — на страницах версий, в списке версий и в списке изменений."
+  },
+  "feature.compareVersions.title": {
+    "defaultMessage": "Сравнение версий"
+  },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "Перенаправлять страницы проектов CurseForge на Modrinth, когда это возможно."
   },
@@ -125,12 +131,6 @@
   "feature.projectCardActions.title": {
     "defaultMessage": "Действия в карточке проекта"
   },
-  "feature.projectTypesPrimaryNav.description": {
-    "defaultMessage": "Переместить моды, плагины, наборы ресурсов и другие типы проектов на главную панель навигации."
-  },
-  "feature.projectTypesPrimaryNav.title": {
-    "defaultMessage": "Навигация по типам проектов"
-  },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K или / для поиска в стиле командной палитры с фильтрами по загрузчикам, версиям, категориям и типам."
   },
@@ -149,12 +149,6 @@
   "feature.reviews.title": {
     "defaultMessage": "Отзывы"
   },
-  "feature.searchBackground.description": {
-    "defaultMessage": "Отображать фон на странице поиска."
-  },
-  "feature.searchBackground.title": {
-    "defaultMessage": "Фон поиска"
-  },
   "feature.telemetry.description": {
     "defaultMessage": "Помогите улучшить расширение, анонимно делясь статистикой, такой как версия расширения и включённые функции. Данные Modrinth, активность и личные данные не собираются."
   },
@@ -164,8 +158,11 @@
   "feature.telemetry.title": {
     "defaultMessage": "Телеметрия"
   },
+  "feature.toolsSidebar.decompiler": {
+    "defaultMessage": "Декомпилятор"
+  },
   "feature.toolsSidebar.description": {
-    "defaultMessage": "Создавать коды для вставки, и копировать команды установки для менеджера модов."
+    "defaultMessage": "Создавать коды для вставки, копировать команды установки для менеджера модов и декомпилировать моды."
   },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "Менеджер модов"
@@ -215,17 +212,17 @@
   "popup.footer.updateAvailable": {
     "defaultMessage": "Обновить"
   },
-  "popup.group.contentPages": {
-    "defaultMessage": "Страницы контента"
-  },
   "popup.group.extension": {
     "defaultMessage": "Расширение"
   },
-  "popup.group.flags": {
-    "defaultMessage": "Флаги"
-  },
   "popup.group.general": {
     "defaultMessage": "Основное"
+  },
+  "popup.group.sidebar": {
+    "defaultMessage": "Боковая панель"
+  },
+  "popup.tab.projects": {
+    "defaultMessage": "Проекты"
   },
   "search.any": {
     "defaultMessage": "Неважно"

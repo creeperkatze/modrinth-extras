@@ -74,8 +74,14 @@
   "moddexReviews.aesthetics": {
     "defaultMessage": "Estetik"
   },
+  "moddexReviews.credit": {
+    "defaultMessage": "<link>ModDex</link> topluluğu tarafından yazılan incelemeler."
+  },
   "moddexReviews.developer": {
     "defaultMessage": "Geliştirici"
+  },
+  "moddexReviews.developerResponse": {
+    "defaultMessage": "Geliştiricinin yanıtı:"
   },
   "moddexReviews.edited": {
     "defaultMessage": "Düzenlendi"
@@ -277,6 +283,9 @@
   },
   "spigotReviews.authorResponse": {
     "defaultMessage": "Geliştirici Yanıtı:"
+  },
+  "spigotReviews.credit": {
+    "defaultMessage": "<link>SpigotMC</link> topluluğu tarafından yazılan incelemeler."
   },
   "spigotReviews.empty": {
     "defaultMessage": "Henüz değerlendirme yok."

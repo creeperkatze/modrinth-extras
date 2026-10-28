@@ -125,12 +125,6 @@
   "feature.projectCardActions.title": {
     "defaultMessage": "Дії у картці проєкту"
   },
-  "feature.projectTypesPrimaryNav.description": {
-    "defaultMessage": "Перемістити моди, плагіни, пакети ресурсів та інші типи проєктів у головну панель навігації."
-  },
-  "feature.projectTypesPrimaryNav.title": {
-    "defaultMessage": "Типи проєктів у навігації"
-  },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K або / для пошуку у стилі палітри команд із фільтрами для завантажувачів, версій, категорій та типів."
   },
@@ -149,12 +143,6 @@
   "feature.reviews.title": {
     "defaultMessage": "Відгуки"
   },
-  "feature.searchBackground.description": {
-    "defaultMessage": "Відображати фоновий банер на сторінках перегляду."
-  },
-  "feature.searchBackground.title": {
-    "defaultMessage": "Фон у пошуку"
-  },
   "feature.telemetry.description": {
     "defaultMessage": "Допоможіть поліпшити роботу розширення, надаючи анонімні статистичні дані, такі як версія розширення та перелік увімкнених функцій. Дані Modrinth, інформація про активність або особисті дані не збиратимуться."
   },
@@ -163,9 +151,6 @@
   },
   "feature.telemetry.title": {
     "defaultMessage": "Телеметрія"
-  },
-  "feature.toolsSidebar.description": {
-    "defaultMessage": "Створюйте вбудовані коди та копіюйте команди встановлення для менеджера модифікацій."
   },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "Менеджер модів"
@@ -215,14 +200,8 @@
   "popup.footer.updateAvailable": {
     "defaultMessage": "Доступне оновлення"
   },
-  "popup.group.contentPages": {
-    "defaultMessage": "Сторінки контенту"
-  },
   "popup.group.extension": {
     "defaultMessage": "Розширення"
-  },
-  "popup.group.flags": {
-    "defaultMessage": "Прапорці"
   },
   "popup.group.general": {
     "defaultMessage": "Загальні"
