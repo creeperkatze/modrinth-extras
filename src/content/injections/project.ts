@@ -101,7 +101,7 @@ export function projectInjections(settings: SettingsGetter) {
 			const path = window.location.pathname
 			if (!/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/[^/?#]+/.test(path)) return false
 			const list = document.querySelector<HTMLElement>(
-				'.normal-page__sidebar [class*="[&>div]:items-center"]',
+				'.normal-page__sidebar [class*="[&>div>svg]:shrink-0"]',
 			)
 			if (!list) return false
 			container.style.display = 'contents'
