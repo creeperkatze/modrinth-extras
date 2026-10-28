@@ -10,6 +10,7 @@
 		:show-search-icon="showSearchIcon"
 		:select-search-text-on-focus="selectSearchTextOnFocus"
 		:max-height="maxHeight"
+		:show-icon-in-selected="showIconInSelected"
 		:no-options-message="noOptionsMessage"
 		trigger-class="compact-combobox-trigger"
 		dropdown-class="compact-combobox-dropdown"
@@ -39,6 +40,7 @@ const props = withDefaults(
 		selectSearchTextOnFocus?: boolean
 		maxHeight?: number
 		noOptionsMessage?: string
+		showIconInSelected?: boolean
 	}>(),
 	{
 		modelValue: undefined,
@@ -50,6 +52,7 @@ const props = withDefaults(
 		selectSearchTextOnFocus: false,
 		maxHeight: 240,
 		noOptionsMessage: undefined,
+		showIconInSelected: false,
 	},
 )
 
@@ -94,6 +97,7 @@ const compactOptions = computed<CompactComboboxEntry[]>(() =>
 }
 
 .compact-combobox svg.size-5,
+.compact-combobox-trigger svg.h-5,
 .compact-combobox-dropdown .compact-combobox-option svg {
 	width: 1rem;
 	height: 1rem;

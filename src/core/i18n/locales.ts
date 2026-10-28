@@ -39,3 +39,15 @@ export const LOCALES: LocaleDefinition[] = [
 	{ code: 'zh-CN', name: '简体中文' },
 	// { code: 'zh-TW', name: '繁體中文' },
 ]
+
+// Locales whose region code isn't the country to show, like Modrinth's language settings
+const FLAG_REGIONS: Record<string, string> = {
+	'es-419': 'mx',
+	'sr-CS': 'rs',
+}
+
+export function localeFlagUrl(code: string): string | undefined {
+	const region = FLAG_REGIONS[code] ?? code.split('-').at(-1)
+	if (!region || !/^[a-z]{2}$/i.test(region)) return undefined
+	return `https://flagcdn.com/${region.toLowerCase()}.svg`
+}

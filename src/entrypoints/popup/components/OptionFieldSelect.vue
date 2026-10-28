@@ -17,6 +17,7 @@
 				:show-search-icon="searchable"
 				:select-search-text-on-focus="searchable"
 				:max-height="240"
+				show-icon-in-selected
 				@update:model-value="$emit('update:modelValue', $event)"
 			>
 				<template v-if="hasSnapshots" #dropdown-footer>
@@ -42,13 +43,14 @@
 <script setup lang="ts">
 import { EyeIcon, EyeOffIcon } from '@modrinth/assets'
 import { defineMessages, useVIntl } from '@modrinth/ui'
-import { computed, onMounted, ref } from 'vue'
+import { type Component, computed, onMounted, ref } from 'vue'
 
 import CompactCombobox from '../../../components/ui/CompactCombobox.vue'
 
 export interface SelectItem {
 	label: string
 	value: string
+	icon?: Component
 	snapshot?: boolean
 }
 
@@ -98,7 +100,7 @@ const hasSnapshots = computed(() => sourceItems.value.some((item) => item.snapsh
 const allItems = computed(() => {
 	const items = sourceItems.value
 		.filter((item) => showSnapshots.value || !item.snapshot)
-		.map(({ label, value }) => ({ label, value }))
+		.map(({ label, value, icon }) => ({ label, value, icon }))
 	return props.includeAny ? [anyItem.value, ...items] : items
 })
 

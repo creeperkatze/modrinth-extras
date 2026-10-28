@@ -68,6 +68,7 @@
 								<CompactCombobox
 									:options="localeItems"
 									:model-value="selectedLocale"
+									show-icon-in-selected
 									@update:model-value="updateLocale"
 								/>
 							</div>
@@ -266,6 +267,7 @@ import {
 	CurrencyIcon,
 	CurseForgeIcon,
 	DiscordIcon,
+	getLoaderIcon,
 	GitGraphIcon,
 	ImageIcon,
 	LanguagesIcon,
@@ -282,6 +284,7 @@ import {
 import {
 	ButtonLink,
 	defineMessages,
+	formatLoader,
 	HorizontalRule,
 	IntlFormatted,
 	ScrollablePanel,
@@ -289,7 +292,7 @@ import {
 	useVIntl,
 } from '@modrinth/ui'
 import { storage } from '@wxt-dev/storage'
-import { type Component, computed, onMounted, reactive, ref, watch } from 'vue'
+import { type Component, computed, h, onMounted, reactive, ref, watch } from 'vue'
 import { browser } from 'wxt/browser'
 
 import { modrinthClient } from '../../api/client'
@@ -297,7 +300,7 @@ import KofiIcon from '../../assets/icons/kofi.svg?component'
 import ModsrcIcon from '../../assets/icons/modsrc.svg?component'
 import CompactCombobox from '../../components/ui/CompactCombobox.vue'
 import { detectBrowserLocale, i18n } from '../../core/i18n/i18n'
-import { LOCALES } from '../../core/i18n/locales'
+import { localeFlagUrl, LOCALES } from '../../core/i18n/locales'
 import { DEFAULTS, type ExtensionSettings, getSettings, saveSettings } from '../../core/settings'
 import { setTelemetryEnabled } from '../../core/telemetry'
 import { applyAccentColor } from '../../features/accent-color/apply'
@@ -636,7 +639,11 @@ async function fetchLoadersByType(...types: string[]): Promise<SelectItem[]> {
 	const data = await loadersRequest
 	return data
 		.filter((l) => types.some((type) => l.supported_project_types.includes(type)))
-		.map((l) => ({ label: l.name.charAt(0).toUpperCase() + l.name.slice(1), value: l.name }))
+		.map((l) => ({
+			label: formatLoader(formatMessage, l.name),
+			value: l.name,
+			icon: getLoaderIcon(l.name),
+		}))
 }
 
 async function fetchGameVersions(): Promise<SelectItem[]> {
@@ -952,8 +959,23 @@ function updateOption(
 
 window.addEventListener('pagehide', flushPendingSave)
 
+function flagIcon(url: string): Component {
+	return () =>
+		h('img', {
+			src: url,
+			alt: '',
+			'aria-hidden': 'true',
+			loading: 'lazy',
+			// Inline so it wins over the square icon size the dropdown gives every option icon
+			style: { width: '1.25rem', height: '0.875rem', objectFit: 'cover', borderRadius: '2px' },
+		})
+}
+
 const localeItems = computed<SelectItem[]>(() =>
-	LOCALES.map((l) => ({ label: l.name, value: l.code })),
+	LOCALES.map((l) => {
+		const flag = localeFlagUrl(l.code)
+		return { label: l.name, value: l.code, icon: flag ? flagIcon(flag) : undefined }
+	}),
 )
 
 const selectedLocale = computed(() => {
@@ -1037,6 +1059,6 @@ onMounted(async () => {
 
 <style scoped>
 .language-dropdown {
-	width: 8rem;
+	width: 9.5rem;
 }
 </style>
