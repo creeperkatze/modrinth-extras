@@ -131,12 +131,6 @@
   "feature.projectCardActions.title": {
     "defaultMessage": "Project card actions"
   },
-  "feature.projectTypesPrimaryNav.description": {
-    "defaultMessage": "Move mods, plugins, resource packs, and other project types into the main navigation bar."
-  },
-  "feature.projectTypesPrimaryNav.title": {
-    "defaultMessage": "Project type navigation"
-  },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K or / for a command palette style search with faceted tags for loaders, versions, categories, and types."
   },
@@ -154,12 +148,6 @@
   },
   "feature.reviews.title": {
     "defaultMessage": "Reviews"
-  },
-  "feature.searchBackground.description": {
-    "defaultMessage": "Show a banner background on the discover pages."
-  },
-  "feature.searchBackground.title": {
-    "defaultMessage": "Search background"
   },
   "feature.telemetry.description": {
     "defaultMessage": "Help improve the extension by anonymously sharing statistics like the extension version and which features are enabled. No Modrinth data, activity, or personal information is ever collected."
@@ -224,20 +212,17 @@
   "popup.footer.updateAvailable": {
     "defaultMessage": "Update available"
   },
-  "popup.group.contentPages": {
-    "defaultMessage": "Content Pages"
-  },
   "popup.group.extension": {
     "defaultMessage": "Extension"
-  },
-  "popup.group.flags": {
-    "defaultMessage": "Flags"
   },
   "popup.group.general": {
     "defaultMessage": "General"
   },
   "popup.group.sidebar": {
     "defaultMessage": "Sidebar"
+  },
+  "popup.tab.projects": {
+    "defaultMessage": "Projects"
   },
   "search.any": {
     "defaultMessage": "Any"

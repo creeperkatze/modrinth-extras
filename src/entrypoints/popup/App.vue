@@ -1,5 +1,5 @@
 <template>
-	<div class="flex h-[500px] w-[380px] flex-col">
+	<div class="flex h-[600px] w-[420px] flex-col">
 		<header class="flex shrink-0 items-center gap-3 px-4 py-3.5">
 			<a
 				href="https://github.com/creeperkatze/modrinth-extras"
@@ -23,91 +23,103 @@
 
 		<HorizontalRule class="shrink-0" />
 
-		<ScrollablePanel
-			v-if="settingsLoaded"
-			class="min-h-0 flex-1 [&>.scrollable-pane-wrapper]:h-full [&__.scrollable-pane]:max-h-none [&__.scrollable-pane]:!gap-0 [&__.scrollable-pane]:pt-4 [&__.wrapper-wrapper]:overflow-visible"
-		>
+		<div v-if="settingsLoaded" class="shrink-0 pt-3">
 			<DiscordCard />
 
 			<DonateCard />
 
-			<FeatureGroup :label="formatMessage(messages['popup.group.general'])">
-				<div class="rounded-xl transition-colors duration-200 hover:bg-surface-3">
-					<div class="flex items-center gap-3 px-2 py-2">
-						<LanguagesIcon aria-hidden="true" class="!size-6 shrink-0 text-secondary" />
-						<div class="min-w-0 flex-1">
-							<div class="text-sm font-semibold text-contrast">
-								{{ formatMessage(messages['settings.language']) }}
+			<div class="px-3">
+				<Tabs v-model:value="tab" :tabs="tabs" class="!w-full [&>button]:flex-1" />
+			</div>
+		</div>
+
+		<!-- Keyed by tab so switching starts at the top -->
+		<ScrollablePanel
+			v-if="settingsLoaded"
+			:key="tab"
+			class="min-h-0 flex-1 [&>.scrollable-pane-wrapper]:h-full [&__.scrollable-pane]:max-h-none [&__.scrollable-pane]:!gap-0 [&__.scrollable-pane]:pt-3 [&__.wrapper-wrapper]:overflow-visible"
+		>
+			<template v-if="tab === 'general'">
+				<FeatureGroup>
+					<div class="rounded-xl transition-colors duration-200 hover:bg-surface-3">
+						<div class="flex items-center gap-3 px-2 py-2">
+							<LanguagesIcon aria-hidden="true" class="!size-6 shrink-0 text-secondary" />
+							<div class="min-w-0 flex-1">
+								<div class="text-sm font-semibold text-contrast">
+									{{ formatMessage(messages['settings.language']) }}
+								</div>
+								<div class="text-xs text-secondary">
+									<IntlFormatted :message-id="messages['settings.language.description']">
+										<template #link="{ children }">
+											<a
+												href="https://crowdin.com/project/modrinth-extras"
+												target="_blank"
+												rel="noopener"
+												class="text-link"
+												@click.stop
+											>
+												<component :is="() => children" />
+											</a>
+										</template>
+									</IntlFormatted>
+								</div>
 							</div>
-							<div class="text-xs text-secondary">
-								<IntlFormatted :message-id="messages['settings.language.description']">
-									<template #link="{ children }">
-										<a
-											href="https://crowdin.com/project/modrinth-extras"
-											target="_blank"
-											rel="noopener"
-											class="text-link"
-											@click.stop
-										>
-											<component :is="() => children" />
-										</a>
-									</template>
-								</IntlFormatted>
+							<div class="language-dropdown">
+								<CompactCombobox
+									:options="localeItems"
+									:model-value="selectedLocale"
+									@update:model-value="updateLocale"
+								/>
 							</div>
-						</div>
-						<div class="language-dropdown">
-							<CompactCombobox
-								:options="localeItems"
-								:model-value="selectedLocale"
-								@update:model-value="updateLocale"
-							/>
 						</div>
 					</div>
-				</div>
-				<FeatureRow
-					v-for="f in generalFeatures"
-					:key="f.key"
-					:icon="f.icon"
-					:title="f.title"
-					:description="f.description"
-					:model-value="settings[f.key].enabled"
-					@update:model-value="updateEnabled(f.key, $event)"
-				>
-					<template v-if="f.options">
-						<template v-for="opt in f.options" :key="opt.key">
-							<OptionFieldColor
-								v-if="opt.type === 'color'"
-								:label="opt.label"
-								:model-value="(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''"
-								:default-color="opt.defaultColor"
-								@update:model-value="updateOption(f.key, opt.key, $event)"
-							/>
-							<OptionFieldToggle
-								v-else-if="opt.type === 'toggle'"
-								:label="opt.label"
-								:model-value="!!(settings[f.key] as unknown as Record<string, boolean>)[opt.key]"
-								@update:model-value="updateOption(f.key, opt.key, $event)"
-							/>
-							<OptionFieldSelect
-								v-else
-								:label="opt.label"
-								:model-value="(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''"
-								:items="opt.items"
-								:fetch-items="opt.fetchItems"
-								:searchable="opt.searchable"
-								@update:model-value="updateOption(f.key, opt.key, $event)"
-							/>
-						</template>
-					</template>
-				</FeatureRow>
-			</FeatureGroup>
-
-			<HorizontalRule />
-
-			<template v-for="group in pageFeatureGroups" :key="group.label">
-				<FeatureGroup :label="group.label">
 					<FeatureRow
-						v-for="f in group.features"
+						v-for="f in generalFeatures"
+						:key="f.key"
+						:icon="f.icon"
+						:title="f.title"
+						:description="f.description"
+						:model-value="settings[f.key].enabled"
+						@update:model-value="updateEnabled(f.key, $event)"
+					>
+						<template v-if="f.options">
+							<template v-for="opt in f.options" :key="opt.key">
+								<OptionFieldColor
+									v-if="opt.type === 'color'"
+									:label="opt.label"
+									:model-value="
+										(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''
+									"
+									:default-color="opt.defaultColor"
+									@update:model-value="updateOption(f.key, opt.key, $event)"
+								/>
+								<OptionFieldToggle
+									v-else-if="opt.type === 'toggle'"
+									:label="opt.label"
+									:model-value="!!(settings[f.key] as unknown as Record<string, boolean>)[opt.key]"
+									@update:model-value="updateOption(f.key, opt.key, $event)"
+								/>
+								<OptionFieldSelect
+									v-else
+									:label="opt.label"
+									:model-value="
+										(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''
+									"
+									:items="opt.items"
+									:fetch-items="opt.fetchItems"
+									:searchable="opt.searchable"
+									@update:model-value="updateOption(f.key, opt.key, $event)"
+								/>
+							</template>
+						</template>
+					</FeatureRow>
+				</FeatureGroup>
+			</template>
+
+			<template v-else-if="tab === 'projects' || tab === 'sidebar'">
+				<FeatureGroup>
+					<FeatureRow
+						v-for="f in pageFeatures"
 						:key="f.key"
 						:icon="f.icon"
 						:title="f.title"
@@ -162,25 +174,9 @@
 						</template>
 					</FeatureRow>
 				</FeatureGroup>
-
-				<HorizontalRule />
 			</template>
 
-			<FeatureGroup :label="formatMessage(messages['popup.group.flags'])">
-				<FeatureRow
-					v-for="f in flagFeatures"
-					:key="f.key"
-					:icon="f.icon"
-					:title="f.title"
-					:description="f.description"
-					:model-value="modrinthFlags[f.key]"
-					@update:model-value="updateModrinthFlag(f.key, $event)"
-				/>
-			</FeatureGroup>
-
-			<HorizontalRule />
-
-			<FeatureGroup :label="formatMessage(messages['popup.group.extension'])">
+			<FeatureGroup v-else>
 				<FeatureRow
 					v-for="f in extensionFeatures"
 					:key="f.key"
@@ -267,14 +263,12 @@ import {
 	ChartIcon,
 	CheckCircleIcon,
 	ClockIcon,
-	CompassIcon,
 	CurrencyIcon,
 	CurseForgeIcon,
 	DiscordIcon,
 	GitGraphIcon,
 	ImageIcon,
 	LanguagesIcon,
-	LayoutTemplateIcon,
 	LoaderCircleIcon,
 	MonitorIcon,
 	PackageIcon,
@@ -291,6 +285,7 @@ import {
 	HorizontalRule,
 	IntlFormatted,
 	ScrollablePanel,
+	Tabs,
 	useVIntl,
 } from '@modrinth/ui'
 import { storage } from '@wxt-dev/storage'
@@ -303,12 +298,6 @@ import ModsrcIcon from '../../assets/icons/modsrc.svg?component'
 import CompactCombobox from '../../components/ui/CompactCombobox.vue'
 import { detectBrowserLocale, i18n } from '../../core/i18n/i18n'
 import { LOCALES } from '../../core/i18n/locales'
-import {
-	getModrinthFlags,
-	MODRINTH_FLAG_DEFAULTS,
-	type ModrinthFlagKey,
-	setModrinthFlag,
-} from '../../core/modrinth-flags'
 import { DEFAULTS, type ExtensionSettings, getSettings, saveSettings } from '../../core/settings'
 import { setTelemetryEnabled } from '../../core/telemetry'
 import { applyAccentColor } from '../../features/accent-color/apply'
@@ -326,10 +315,10 @@ import OptionFieldToggle from './components/OptionFieldToggle.vue'
 const { formatMessage } = useVIntl()
 
 const messages = defineMessages({
+	// Short so all tabs fit on one row
+	'popup.tab.projects': { id: 'popup.tab.projects', defaultMessage: 'Projects' },
 	'popup.group.general': { id: 'popup.group.general', defaultMessage: 'General' },
-	'popup.group.contentPages': { id: 'popup.group.contentPages', defaultMessage: 'Content Pages' },
 	'popup.group.sidebar': { id: 'popup.group.sidebar', defaultMessage: 'Sidebar' },
-	'popup.group.flags': { id: 'popup.group.flags', defaultMessage: 'Flags' },
 	'popup.group.extension': { id: 'popup.group.extension', defaultMessage: 'Extension' },
 	'popup.footer.checking': { id: 'popup.footer.checking', defaultMessage: 'Checking' },
 	'popup.footer.latestVersion': {
@@ -503,23 +492,6 @@ const messages = defineMessages({
 	'feature.monetizationBadge.title': {
 		id: 'feature.monetizationBadge.title',
 		defaultMessage: 'Monetization badge',
-	},
-	'feature.searchBackground.title': {
-		id: 'feature.searchBackground.title',
-		defaultMessage: 'Search background',
-	},
-	'feature.searchBackground.description': {
-		id: 'feature.searchBackground.description',
-		defaultMessage: 'Show a banner background on the discover pages.',
-	},
-	'feature.projectTypesPrimaryNav.title': {
-		id: 'feature.projectTypesPrimaryNav.title',
-		defaultMessage: 'Project type navigation',
-	},
-	'feature.projectTypesPrimaryNav.description': {
-		id: 'feature.projectTypesPrimaryNav.description',
-		defaultMessage:
-			'Move mods, plugins, resource packs, and other project types into the main navigation bar.',
 	},
 	'feature.monetizationBadge.description': {
 		id: 'feature.monetizationBadge.description',
@@ -871,35 +843,39 @@ const sidebarFeatures = computed<FeatureDef[]>(() => [
 	},
 ])
 
-const pageFeatureGroups = computed(() => [
-	{
-		label: formatMessage(messages['popup.group.contentPages']),
-		features: contentPageFeatures.value,
-	},
-	{ label: formatMessage(messages['popup.group.sidebar']), features: sidebarFeatures.value },
+type PopupTab = 'general' | 'projects' | 'sidebar' | 'extension'
+
+const tabs = computed<{ value: PopupTab; label: string }[]>(() => [
+	{ value: 'general', label: formatMessage(messages['popup.group.general']) },
+	{ value: 'projects', label: formatMessage(messages['popup.tab.projects']) },
+	{ value: 'sidebar', label: formatMessage(messages['popup.group.sidebar']) },
+	{ value: 'extension', label: formatMessage(messages['popup.group.extension']) },
 ])
 
-interface FlagDef {
-	key: ModrinthFlagKey
-	icon: Component
-	title: string
-	description: string
+const TAB_STORAGE_KEY = 'popup-tab'
+
+function savedTab(): PopupTab {
+	try {
+		const saved = localStorage.getItem(TAB_STORAGE_KEY)
+		return tabs.value.some((t) => t.value === saved) ? (saved as PopupTab) : 'general'
+	} catch {
+		return 'general'
+	}
 }
 
-const flagFeatures = computed<FlagDef[]>(() => [
-	{
-		key: 'searchBackground',
-		icon: LayoutTemplateIcon,
-		title: formatMessage(messages['feature.searchBackground.title']),
-		description: formatMessage(messages['feature.searchBackground.description']),
-	},
-	{
-		key: 'projectTypesPrimaryNav',
-		icon: CompassIcon,
-		title: formatMessage(messages['feature.projectTypesPrimaryNav.title']),
-		description: formatMessage(messages['feature.projectTypesPrimaryNav.description']),
-	},
-])
+// Reopens on the tab that was open last
+const tab = ref<PopupTab>(savedTab())
+watch(tab, (value) => {
+	try {
+		localStorage.setItem(TAB_STORAGE_KEY, value)
+	} catch {
+		// Remembering the tab is optional
+	}
+})
+
+const pageFeatures = computed(() =>
+	tab.value === 'sidebar' ? sidebarFeatures.value : contentPageFeatures.value,
+)
 
 const extensionFeatures = computed<FeatureDef[]>(() => [
 	{
@@ -976,13 +952,6 @@ function updateOption(
 
 window.addEventListener('pagehide', flushPendingSave)
 
-const modrinthFlags = reactive({ ...MODRINTH_FLAG_DEFAULTS })
-
-async function updateModrinthFlag(key: ModrinthFlagKey, value: boolean) {
-	modrinthFlags[key] = value
-	await setModrinthFlag(key, value)
-}
-
 const localeItems = computed<SelectItem[]>(() =>
 	LOCALES.map((l) => ({ label: l.name, value: l.code })),
 )
@@ -1023,8 +992,6 @@ onMounted(async () => {
 	Object.assign(settings, loaded)
 	i18n.global.locale.value = loaded.locale?.value || detectBrowserLocale()
 	settingsLoaded.value = true
-
-	Object.assign(modrinthFlags, await getModrinthFlags())
 
 	const perms = await browser.permissions.getAll()
 	if ('data_collection' in perms) {
