@@ -1,6 +1,7 @@
 <template>
 	<!-- Hidden cards are faded but their controls are not -->
 	<div
+		v-if="!empty"
 		class="pointer-events-none absolute inset-0 z-10 rounded-2xl border-2 border-dashed"
 		:class="hidden ? 'border-surface-5' : 'border-brand'"
 		:style="
@@ -87,12 +88,22 @@ function updatePlacement() {
 	placement.value = room < OUTSIDE_WIDTH ? 'inside' : onRight ? 'right' : 'left'
 }
 
+// Cards with nothing to show on this page get no controls. Some only fill in after loading.
+const empty = ref(false)
+const resizeObserver = new ResizeObserver(() => {
+	empty.value = props.card.offsetHeight === 0
+})
+
 onMounted(() => {
 	updatePlacement()
 	window.addEventListener('resize', updatePlacement)
+	resizeObserver.observe(props.card)
 })
 
-onBeforeUnmount(() => window.removeEventListener('resize', updatePlacement))
+onBeforeUnmount(() => {
+	window.removeEventListener('resize', updatePlacement)
+	resizeObserver.disconnect()
+})
 
 function save() {
 	const sidebar = props.card.parentElement
