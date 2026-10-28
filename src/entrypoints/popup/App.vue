@@ -629,6 +629,13 @@ const DAY_RANGE_ITEMS = computed<SelectItem[]>(() =>
 	})),
 )
 
+// Colored per loader like Modrinth's search filters. Inline so it wins over the dropdown's icon color.
+function loaderIcon(loader: string): Component | undefined {
+	const icon = getLoaderIcon(loader)
+	if (!icon) return undefined
+	return () => h(icon, { style: { color: `var(--color-platform-${loader})` } })
+}
+
 let loadersRequest: Promise<Labrinth.Tags.v2.Loader[]> | undefined
 
 async function fetchLoadersByType(...types: string[]): Promise<SelectItem[]> {
@@ -642,7 +649,7 @@ async function fetchLoadersByType(...types: string[]): Promise<SelectItem[]> {
 		.map((l) => ({
 			label: formatLoader(formatMessage, l.name),
 			value: l.name,
-			icon: getLoaderIcon(l.name),
+			icon: loaderIcon(l.name),
 		}))
 }
 
