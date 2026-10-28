@@ -297,7 +297,7 @@
     "defaultMessage": "Готово"
   },
   "sidebarLayout.drag": {
-    "defaultMessage": "Потяните перестановки"
+    "defaultMessage": "Потяните для перестановки"
   },
   "sidebarLayout.hide": {
     "defaultMessage": "Скрыть"
@@ -367,6 +367,9 @@
   },
   "toolsSidebar.copyInstallCommand": {
     "defaultMessage": "Команда {manager}"
+  },
+  "toolsSidebar.decompileWith": {
+    "defaultMessage": "Декомпилировать в {tool}"
   },
   "toolsSidebar.generateEmbed": {
     "defaultMessage": "Создать код для вставки"
