@@ -92,6 +92,7 @@
 										(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''
 									"
 									:default-color="opt.defaultColor"
+									:warning="opt.warning?.()"
 									@update:model-value="updateOption(f.key, opt.key, $event)"
 								/>
 								<OptionFieldToggle
@@ -143,6 +144,7 @@
 										(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''
 									"
 									:default-color="opt.defaultColor"
+									:warning="opt.warning?.()"
 									@update:model-value="updateOption(f.key, opt.key, $event)"
 								/>
 								<OptionFieldToggle
@@ -304,6 +306,7 @@ import { localeFlagUrl, LOCALES } from '../../core/i18n/locales'
 import { DEFAULTS, type ExtensionSettings, getSettings, saveSettings } from '../../core/settings'
 import { setTelemetryEnabled } from '../../core/telemetry'
 import { applyAccentColor } from '../../features/accent-color/apply'
+import { accentColorIssue, readModrinthTheme } from '../../features/accent-color/contrast'
 import { isTranslationSupported } from '../../features/translation/translator'
 import Logo from '../../public/logo.svg?component'
 import DiscordCard from './components/DiscordCard.vue'
@@ -388,6 +391,14 @@ const messages = defineMessages({
 	'feature.accentColor.color': {
 		id: 'feature.accentColor.color',
 		defaultMessage: 'Color',
+	},
+	'feature.accentColor.lowContrast': {
+		id: 'feature.accentColor.lowContrast',
+		defaultMessage: 'This color is hard to see on your Modrinth theme.',
+	},
+	'feature.accentColor.unreadableButtons': {
+		id: 'feature.accentColor.unreadableButtons',
+		defaultMessage: 'Text on buttons in this color is hard to read on your Modrinth theme.',
 	},
 	'feature.activitySparkline.title': {
 		id: 'feature.activitySparkline.title',
@@ -594,6 +605,7 @@ interface FeatureOption {
 	searchable?: boolean
 	includeAny?: boolean
 	defaultColor?: string
+	warning?: () => string | undefined
 }
 
 const MOD_MANAGER_ITEMS: SelectItem[] = [
@@ -727,6 +739,7 @@ const generalFeatures = computed<FeatureDef[]>(() => [
 				type: 'color',
 				label: formatMessage(messages['feature.accentColor.color']),
 				defaultColor: DEFAULTS.accentColor.color,
+				warning: () => accentColorWarning.value,
 			},
 		],
 	},
@@ -1009,6 +1022,15 @@ const updateCheckCacheItem = storage.defineItem<{ tag: string; ts: number }>(
 
 const settings = reactive({ ...DEFAULTS })
 const settingsLoaded = ref(false)
+const modrinthTheme = ref('dark')
+
+const accentColorWarning = computed(() => {
+	const issue = accentColorIssue(settings.accentColor.color, modrinthTheme.value)
+	if (issue === 'background') return formatMessage(messages['feature.accentColor.lowContrast'])
+	if (issue === 'buttonText')
+		return formatMessage(messages['feature.accentColor.unreadableButtons'])
+	return undefined
+})
 
 watch(
 	() => settings.accentColor,
@@ -1021,6 +1043,7 @@ onMounted(async () => {
 	Object.assign(settings, loaded)
 	i18n.global.locale.value = loaded.locale?.value || detectBrowserLocale()
 	settingsLoaded.value = true
+	modrinthTheme.value = await readModrinthTheme()
 
 	const perms = await browser.permissions.getAll()
 	if ('data_collection' in perms) {

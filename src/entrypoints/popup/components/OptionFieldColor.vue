@@ -1,6 +1,12 @@
 <template>
 	<div class="option-field relative flex items-center gap-2" @click.stop>
 		<span class="text-sm text-secondary flex-1">{{ label }}</span>
+		<TriangleAlertIcon
+			v-if="warning"
+			v-tooltip="warning"
+			:aria-label="warning"
+			class="size-4 shrink-0 text-orange"
+		/>
 		<ColorPicker
 			:model-value="modelValue || defaultColor"
 			:label="label"
@@ -11,6 +17,7 @@
 </template>
 
 <script setup lang="ts">
+import { TriangleAlertIcon } from '@modrinth/assets'
 import { ColorPicker } from '@modrinth/ui'
 
 withDefaults(
@@ -18,9 +25,11 @@ withDefaults(
 		label: string
 		modelValue: string
 		defaultColor?: string
+		warning?: string
 	}>(),
 	{
 		defaultColor: '#1bd96a',
+		warning: undefined,
 	},
 )
 

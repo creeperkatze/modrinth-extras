@@ -5,8 +5,14 @@
   "feature.accentColor.description": {
     "defaultMessage": "Replace the Modrinth green with a custom accent color."
   },
+  "feature.accentColor.lowContrast": {
+    "defaultMessage": "This color is hard to see on your Modrinth theme."
+  },
   "feature.accentColor.title": {
     "defaultMessage": "Accent color"
+  },
+  "feature.accentColor.unreadableButtons": {
+    "defaultMessage": "Text on buttons in this color is hard to read on your Modrinth theme."
   },
   "feature.activitySparkline.days": {
     "defaultMessage": "{count, plural, one {# day} other {# days}}"
