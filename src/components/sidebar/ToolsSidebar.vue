@@ -64,7 +64,7 @@
 					rel="noopener"
 					class="min-w-0 flex-1 break-words leading-tight hover:underline"
 				>
-					{{ formatMessage(messages['toolsSidebar.decompileIn'], { tool: decompiler.label }) }}
+					{{ formatMessage(messages['toolsSidebar.decompileWith'], { tool: decompiler.label }) }}
 					<ExternalIcon
 						aria-hidden="true"
 						class="external-icon ml-1 inline !mb-0 align-[-0.125em]"
@@ -102,9 +102,9 @@ const messages = defineMessages({
 		defaultMessage: 'Copy {manager} command',
 	},
 	'toolsSidebar.copied': { id: 'toolsSidebar.copied', defaultMessage: 'Copied!' },
-	'toolsSidebar.decompileIn': {
-		id: 'toolsSidebar.decompileIn',
-		defaultMessage: 'Decompile in {tool}',
+	'toolsSidebar.decompileWith': {
+		id: 'toolsSidebar.decompileWith',
+		defaultMessage: 'Decompile with {tool}',
 	},
 })
 
