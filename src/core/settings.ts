@@ -39,6 +39,7 @@ export interface ExtensionSettings {
 	}
 	activitySparkline: { enabled: boolean; days: string }
 	toolsSidebar: { enabled: boolean; modManager: string; decompiler: string }
+	compareVersions: { enabled: boolean }
 	dependencySidebar: { enabled: boolean }
 	dependencyExplorer: { enabled: boolean }
 	githubSidebar: { enabled: boolean }
@@ -70,6 +71,7 @@ export const DEFAULTS: ExtensionSettings = {
 	},
 	activitySparkline: { enabled: true, days: '60' },
 	toolsSidebar: { enabled: true, modManager: 'packwiz', decompiler: 'slicer' },
+	compareVersions: { enabled: true },
 	dependencySidebar: { enabled: true },
 	dependencyExplorer: { enabled: true },
 	githubSidebar: { enabled: true },

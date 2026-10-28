@@ -291,6 +291,7 @@ import { browser } from 'wxt/browser'
 
 import { modrinthClient } from '../../api/client'
 import KofiIcon from '../../assets/icons/kofi.svg?component'
+import ModsrcIcon from '../../assets/icons/modsrc.svg?component'
 import CompactCombobox from '../../components/ui/CompactCombobox.vue'
 import { detectBrowserLocale, i18n } from '../../core/i18n/i18n'
 import { LOCALES } from '../../core/i18n/locales'
@@ -418,6 +419,14 @@ const messages = defineMessages({
 	'feature.toolsSidebar.decompiler': {
 		id: 'feature.toolsSidebar.decompiler',
 		defaultMessage: 'Decompiler',
+	},
+	'feature.compareVersions.title': {
+		id: 'feature.compareVersions.title',
+		defaultMessage: 'Compare versions',
+	},
+	'feature.compareVersions.description': {
+		id: 'feature.compareVersions.description',
+		defaultMessage: 'Compare the decompiled code of a version with the previous one in modsrc.',
 	},
 	'feature.dependencySidebar.title': {
 		id: 'feature.dependencySidebar.title',
@@ -782,6 +791,12 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 				includeAny: false,
 			},
 		],
+	},
+	{
+		key: 'compareVersions',
+		icon: ModsrcIcon,
+		title: formatMessage(messages['feature.compareVersions.title']),
+		description: formatMessage(messages['feature.compareVersions.description']),
 	},
 	{
 		key: 'dependencySidebar',

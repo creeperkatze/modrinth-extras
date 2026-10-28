@@ -1,4 +1,10 @@
 {
+  "compareVersions.label": {
+    "defaultMessage": "Compare with previous"
+  },
+  "compareVersions.tooltip": {
+    "defaultMessage": "Compare with {version} in modsrc"
+  },
   "dependencyExplorer.centerView": {
     "defaultMessage": "Center view"
   },

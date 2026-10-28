@@ -35,6 +35,12 @@
   "feature.browserNotifications.title": {
     "defaultMessage": "Browser notifications"
   },
+  "feature.compareVersions.description": {
+    "defaultMessage": "Compare the decompiled code of a version with the previous one in modsrc."
+  },
+  "feature.compareVersions.title": {
+    "defaultMessage": "Compare versions"
+  },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "Redirect CurseForge project pages to Modrinth when available."
   },

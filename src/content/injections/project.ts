@@ -1,4 +1,5 @@
 import ActivitySparkline from '../../components/project/ActivitySparkline.vue'
+import CompareVersionsButton from '../../components/project/CompareVersionsButton.vue'
 import GalleryBackground from '../../components/project/GalleryBackground.vue'
 import MonetizationBadge from '../../components/project/MonetizationBadge.vue'
 import ProjectReviews from '../../components/project/reviews/ProjectReviews.vue'
@@ -6,6 +7,9 @@ import TranslateDescription from '../../components/project/TranslateDescription.
 import { isTranslationSupported } from '../../features/translation/translator'
 import { createExtensionApp, createInjection, type SettingsGetter } from '../injection'
 import { PROJECT_TYPE_PATTERN } from '../page'
+
+const VERSION_PAGE_PATTERN =
+	/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/([^/?#]+)\/version\/([^/?#]+)/
 
 export function projectInjections(settings: SettingsGetter) {
 	const activitySparkline = createInjection({
@@ -141,11 +145,39 @@ export function projectInjections(settings: SettingsGetter) {
 		},
 	})
 
+	const compareVersions = createInjection({
+		id: 'modrinth-extras-compare-versions',
+		isEnabled: () => settings().compareVersions.enabled,
+		settingsKeys: ['compareVersions'],
+		persistent: false,
+		projectScoped: true,
+		scopeKey: () => window.location.pathname.match(VERSION_PAGE_PATTERN)?.[3] ?? '',
+		attach(container) {
+			if (!VERSION_PAGE_PATTERN.test(window.location.pathname)) return false
+			const actions = document.querySelector<HTMLElement>(
+				'.normal-page__content .flex.flex-wrap.gap-4.justify-between.items-center > .flex.gap-2.flex-wrap.items-center',
+			)
+			const download = actions?.firstElementChild
+			if (!download) return false
+			container.style.display = 'contents'
+			download.after(container)
+			return document.contains(container)
+		},
+		createApp() {
+			const [, , slug, version] = window.location.pathname.match(VERSION_PAGE_PATTERN) ?? []
+			return createExtensionApp(CompareVersionsButton, {
+				projectSlug: slug ?? '',
+				version: decodeURI(version ?? ''),
+			})
+		},
+	})
+
 	return [
 		activitySparkline,
 		galleryBackground,
 		monetizationBadge,
 		translateDescription,
 		projectReviews,
+		compareVersions,
 	]
 }
