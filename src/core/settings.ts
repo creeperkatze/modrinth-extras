@@ -4,19 +4,19 @@ type DeepPartial<T> = {
 	[P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P]
 }
 
+function isPlainObject(value: unknown): value is object {
+	return value != null && typeof value === 'object' && !Array.isArray(value)
+}
+
 // Keys missing from base are dropped, so settings removed in older versions don't linger.
+// Arrays are values, not objects to merge into.
 function deepMerge<T extends object>(base: T, override: DeepPartial<T>): T {
 	const result = { ...base }
 	for (const key of Object.keys(override) as (keyof T)[]) {
 		if (!(key in base)) continue
 		const baseVal = base[key]
 		const overrideVal = override[key]
-		if (
-			baseVal != null &&
-			typeof baseVal === 'object' &&
-			overrideVal != null &&
-			typeof overrideVal === 'object'
-		) {
+		if (isPlainObject(baseVal) && overrideVal != null && typeof overrideVal === 'object') {
 			result[key] = deepMerge(baseVal as object, overrideVal as object) as T[typeof key]
 		} else if (overrideVal !== undefined) {
 			result[key] = overrideVal as T[typeof key]
@@ -40,6 +40,7 @@ export interface ExtensionSettings {
 	activitySparkline: { enabled: boolean; days: string }
 	toolsSidebar: { enabled: boolean; modManager: string; decompiler: string }
 	compareVersions: { enabled: boolean }
+	sidebarLayout: { order: string[] }
 	dependencySidebar: { enabled: boolean }
 	dependencyExplorer: { enabled: boolean }
 	githubSidebar: { enabled: boolean }
@@ -72,6 +73,7 @@ export const DEFAULTS: ExtensionSettings = {
 	activitySparkline: { enabled: true, days: '60' },
 	toolsSidebar: { enabled: true, modManager: 'packwiz', decompiler: 'slicer' },
 	compareVersions: { enabled: false },
+	sidebarLayout: { order: [] },
 	dependencySidebar: { enabled: true },
 	dependencyExplorer: { enabled: true },
 	githubSidebar: { enabled: true },
@@ -114,13 +116,7 @@ function hasUnknownKeys(base: object, value: object): boolean {
 	return Object.entries(value).some(([key, val]) => {
 		if (!(key in base)) return true
 		const baseVal = (base as Record<string, unknown>)[key]
-		return (
-			val !== null &&
-			typeof val === 'object' &&
-			baseVal !== null &&
-			typeof baseVal === 'object' &&
-			hasUnknownKeys(baseVal, val)
-		)
+		return isPlainObject(val) && isPlainObject(baseVal) && hasUnknownKeys(baseVal, val)
 	})
 }
 
@@ -146,6 +142,11 @@ function startInit(): Promise<void> {
 export async function getSettings(): Promise<ExtensionSettings> {
 	await startInit()
 	return cache
+}
+
+// Returns a function that stops watching.
+export function watchSettings(callback: (settings: ExtensionSettings) => void): () => void {
+	return settingsItem.watch((value) => callback(deepMerge(DEFAULTS, value ?? {})))
 }
 
 export async function saveSettings(settings: ExtensionSettings): Promise<void> {

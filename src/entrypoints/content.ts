@@ -8,13 +8,14 @@ import { projectInjections } from '../content/injections/project'
 import { searchInjections } from '../content/injections/search'
 import { sidebarInjections } from '../content/injections/sidebar'
 import { siteInjections } from '../content/injections/site'
-import { getProjectSlug } from '../content/page'
+import { applySidebarOrder, getProjectSlug } from '../content/page'
 import { navigate } from '../content/page-router'
 import { detectBrowserLocale, i18n, loadSavedLocale } from '../core/i18n/i18n'
 import { DEFAULTS, type ExtensionSettings, getSettings, withoutSecrets } from '../core/settings'
 import { reportUncaughtErrors } from '../core/telemetry'
 import { applyAccentColor } from '../features/accent-color/apply'
 import { recolorBrandImages } from '../features/accent-color/images'
+import { sidebarOrder } from '../features/sidebar-layout/order'
 
 export default defineContentScript({
 	matches: ['https://modrinth.com/*'],
@@ -69,6 +70,7 @@ export default defineContentScript({
 			i18n.global.locale.value = newLocale || detectBrowserLocale()
 			applyAccentColor(settings)
 			remountForChangedSettings(injections, oldSettings, newSettings)
+			applySidebarOrder(sidebarOrder(settings))
 		}
 		browser.storage.onChanged.addListener(onStorageChanged)
 		ctx.onInvalidated(() => browser.storage.onChanged.removeListener(onStorageChanged))

@@ -104,59 +104,67 @@
 
 			<HorizontalRule />
 
-			<FeatureGroup :label="formatMessage(messages['popup.group.contentPages'])">
-				<FeatureRow
-					v-for="f in contentPageFeatures"
-					:key="f.key"
-					:icon="f.icon"
-					:title="f.title"
-					:description="f.description"
-					:model-value="
-						(typeof f.disabled === 'function' ? f.disabled() : f.disabled)
-							? false
-							: settings[f.key].enabled
-					"
-					:disabled="typeof f.disabled === 'function' ? f.disabled() : f.disabled"
-					:disabled-tooltip="f.disabledTooltip"
-					@update:model-value="updateEnabled(f.key, $event)"
-				>
-					<template v-if="f.options">
-						<template v-for="opt in f.options" :key="opt.key">
-							<OptionFieldColor
-								v-if="opt.type === 'color'"
-								:label="opt.label"
-								:model-value="(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''"
-								:default-color="opt.defaultColor"
-								@update:model-value="updateOption(f.key, opt.key, $event)"
-							/>
-							<OptionFieldToggle
-								v-else-if="opt.type === 'toggle'"
-								:label="opt.label"
-								:model-value="!!(settings[f.key] as unknown as Record<string, boolean>)[opt.key]"
-								@update:model-value="updateOption(f.key, opt.key, $event)"
-							/>
-							<OptionFieldText
-								v-else-if="opt.type === 'text'"
-								:label="opt.label"
-								:model-value="(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''"
-								@update:model-value="updateOption(f.key, opt.key, $event)"
-							/>
-							<OptionFieldSelect
-								v-else
-								:label="opt.label"
-								:model-value="(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''"
-								:items="opt.items"
-								:fetch-items="opt.fetchItems"
-								:searchable="opt.searchable"
-								:include-any="opt.includeAny ?? true"
-								@update:model-value="updateOption(f.key, opt.key, $event)"
-							/>
+			<template v-for="group in pageFeatureGroups" :key="group.label">
+				<FeatureGroup :label="group.label">
+					<FeatureRow
+						v-for="f in group.features"
+						:key="f.key"
+						:icon="f.icon"
+						:title="f.title"
+						:description="f.description"
+						:model-value="
+							(typeof f.disabled === 'function' ? f.disabled() : f.disabled)
+								? false
+								: settings[f.key].enabled
+						"
+						:disabled="typeof f.disabled === 'function' ? f.disabled() : f.disabled"
+						:disabled-tooltip="f.disabledTooltip"
+						@update:model-value="updateEnabled(f.key, $event)"
+					>
+						<template v-if="f.options">
+							<template v-for="opt in f.options" :key="opt.key">
+								<OptionFieldColor
+									v-if="opt.type === 'color'"
+									:label="opt.label"
+									:model-value="
+										(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''
+									"
+									:default-color="opt.defaultColor"
+									@update:model-value="updateOption(f.key, opt.key, $event)"
+								/>
+								<OptionFieldToggle
+									v-else-if="opt.type === 'toggle'"
+									:label="opt.label"
+									:model-value="!!(settings[f.key] as unknown as Record<string, boolean>)[opt.key]"
+									@update:model-value="updateOption(f.key, opt.key, $event)"
+								/>
+								<OptionFieldText
+									v-else-if="opt.type === 'text'"
+									:label="opt.label"
+									:model-value="
+										(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''
+									"
+									@update:model-value="updateOption(f.key, opt.key, $event)"
+								/>
+								<OptionFieldSelect
+									v-else
+									:label="opt.label"
+									:model-value="
+										(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''
+									"
+									:items="opt.items"
+									:fetch-items="opt.fetchItems"
+									:searchable="opt.searchable"
+									:include-any="opt.includeAny ?? true"
+									@update:model-value="updateOption(f.key, opt.key, $event)"
+								/>
+							</template>
 						</template>
-					</template>
-				</FeatureRow>
-			</FeatureGroup>
+					</FeatureRow>
+				</FeatureGroup>
 
-			<HorizontalRule />
+				<HorizontalRule />
+			</template>
 
 			<FeatureGroup :label="formatMessage(messages['popup.group.flags'])">
 				<FeatureRow
@@ -320,6 +328,7 @@ const { formatMessage } = useVIntl()
 const messages = defineMessages({
 	'popup.group.general': { id: 'popup.group.general', defaultMessage: 'General' },
 	'popup.group.contentPages': { id: 'popup.group.contentPages', defaultMessage: 'Content Pages' },
+	'popup.group.sidebar': { id: 'popup.group.sidebar', defaultMessage: 'Sidebar' },
 	'popup.group.flags': { id: 'popup.group.flags', defaultMessage: 'Flags' },
 	'popup.group.extension': { id: 'popup.group.extension', defaultMessage: 'Extension' },
 	'popup.footer.checking': { id: 'popup.footer.checking', defaultMessage: 'Checking' },
@@ -599,7 +608,7 @@ const messages = defineMessages({
 	},
 })
 
-type FeatureKey = Exclude<keyof ExtensionSettings, 'locale'>
+type FeatureKey = Exclude<keyof ExtensionSettings, 'locale' | 'sidebarLayout'>
 
 interface FeatureOption {
 	key: string
@@ -772,6 +781,35 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 		],
 	},
 	{
+		key: 'compareVersions',
+		icon: ModsrcIcon,
+		title: formatMessage(messages['feature.compareVersions.title']),
+		description: formatMessage(messages['feature.compareVersions.description']),
+	},
+	{
+		key: 'galleryBackground',
+		icon: ImageIcon,
+		title: formatMessage(messages['feature.galleryBackground.title']),
+		description: formatMessage(messages['feature.galleryBackground.description']),
+	},
+	{
+		key: 'monetizationBadge',
+		icon: CurrencyIcon,
+		title: formatMessage(messages['feature.monetizationBadge.title']),
+		description: formatMessage(messages['feature.monetizationBadge.description']),
+	},
+	{
+		key: 'translateDescription',
+		icon: LanguagesIcon,
+		title: formatMessage(messages['feature.translateDescription.title']),
+		description: formatMessage(messages['feature.translateDescription.description']),
+		disabled: () => !translationSupported,
+		disabledTooltip: formatMessage(messages['feature.translateDescription.disabledTooltip']),
+	},
+])
+
+const sidebarFeatures = computed<FeatureDef[]>(() => [
+	{
 		key: 'toolsSidebar',
 		icon: WrenchIcon,
 		title: formatMessage(messages['feature.toolsSidebar.title']),
@@ -792,12 +830,6 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 				includeAny: false,
 			},
 		],
-	},
-	{
-		key: 'compareVersions',
-		icon: ModsrcIcon,
-		title: formatMessage(messages['feature.compareVersions.title']),
-		description: formatMessage(messages['feature.compareVersions.description']),
 	},
 	{
 		key: 'dependencySidebar',
@@ -837,26 +869,14 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 		title: formatMessage(messages['feature.platformsSidebar.title']),
 		description: formatMessage(messages['feature.platformsSidebar.description']),
 	},
+])
+
+const pageFeatureGroups = computed(() => [
 	{
-		key: 'galleryBackground',
-		icon: ImageIcon,
-		title: formatMessage(messages['feature.galleryBackground.title']),
-		description: formatMessage(messages['feature.galleryBackground.description']),
+		label: formatMessage(messages['popup.group.contentPages']),
+		features: contentPageFeatures.value,
 	},
-	{
-		key: 'monetizationBadge',
-		icon: CurrencyIcon,
-		title: formatMessage(messages['feature.monetizationBadge.title']),
-		description: formatMessage(messages['feature.monetizationBadge.description']),
-	},
-	{
-		key: 'translateDescription',
-		icon: LanguagesIcon,
-		title: formatMessage(messages['feature.translateDescription.title']),
-		description: formatMessage(messages['feature.translateDescription.description']),
-		disabled: () => !translationSupported,
-		disabledTooltip: formatMessage(messages['feature.translateDescription.disabledTooltip']),
-	},
+	{ label: formatMessage(messages['popup.group.sidebar']), features: sidebarFeatures.value },
 ])
 
 interface FlagDef {

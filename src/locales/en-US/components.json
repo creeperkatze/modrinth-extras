@@ -290,6 +290,24 @@
   "reviewStars.rating": {
     "defaultMessage": "Rated {rating} out of 5"
   },
+  "sidebarLayout.customize": {
+    "defaultMessage": "Customize sidebar"
+  },
+  "sidebarLayout.done": {
+    "defaultMessage": "Done"
+  },
+  "sidebarLayout.drag": {
+    "defaultMessage": "Drag to reorder"
+  },
+  "sidebarLayout.hide": {
+    "defaultMessage": "Hide"
+  },
+  "sidebarLayout.revert": {
+    "defaultMessage": "Revert"
+  },
+  "sidebarLayout.show": {
+    "defaultMessage": "Show"
+  },
   "spigotReviews.authorResponse": {
     "defaultMessage": "Author response:"
   },

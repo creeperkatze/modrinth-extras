@@ -236,6 +236,9 @@
   "popup.group.general": {
     "defaultMessage": "General"
   },
+  "popup.group.sidebar": {
+    "defaultMessage": "Sidebar"
+  },
   "search.any": {
     "defaultMessage": "Any"
   },
