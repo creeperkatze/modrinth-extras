@@ -164,8 +164,11 @@
   "feature.telemetry.title": {
     "defaultMessage": "Telemetry"
   },
+  "feature.toolsSidebar.decompiler": {
+    "defaultMessage": "Decompiler"
+  },
   "feature.toolsSidebar.description": {
-    "defaultMessage": "Generate embeds, copy mod manager install commands, and decompile in slicer or modsrc."
+    "defaultMessage": "Generate embeds, copy mod manager install commands, and decompile mods."
   },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "Mod manager"

@@ -29,6 +29,7 @@ export function sidebarInjections(settings: SettingsGetter) {
 			createExtensionApp(ToolsSidebar, {
 				pageUrl: currentPageUrl(),
 				modManager: settings().toolsSidebar.modManager,
+				decompiler: settings().toolsSidebar.decompiler,
 			}),
 	})
 

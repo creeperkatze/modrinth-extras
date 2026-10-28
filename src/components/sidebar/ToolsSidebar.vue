@@ -54,18 +54,17 @@
 				</button>
 			</div>
 			<div
-				v-for="link in decompilerLinks"
-				:key="link.url"
+				v-if="decompilerUrl"
 				class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal"
 			>
-				<component :is="link.icon" aria-hidden="true" class="mt-0.5 shrink-0" />
+				<component :is="decompiler.icon" aria-hidden="true" class="mt-0.5 shrink-0" />
 				<a
-					:href="link.url"
+					:href="decompilerUrl"
 					target="_blank"
 					rel="noopener"
 					class="min-w-0 flex-1 break-words leading-tight hover:underline"
 				>
-					{{ formatMessage(messages['toolsSidebar.decompileIn'], { tool: link.label }) }}
+					{{ formatMessage(messages['toolsSidebar.decompileIn'], { tool: decompiler.label }) }}
 					<ExternalIcon
 						aria-hidden="true"
 						class="external-icon ml-1 inline !mb-0 align-[-0.125em]"
@@ -86,7 +85,7 @@ import {
 	TerminalSquareIcon,
 } from '@modrinth/assets'
 import { defineMessages, useVIntl } from '@modrinth/ui'
-import { computed, onMounted, ref } from 'vue'
+import { type Component, computed, onMounted, ref } from 'vue'
 
 import ModsrcIcon from '../../assets/icons/modsrc.svg?component'
 import { type DecompilerLinks, fetchDecompilerLinks } from '../../features/decompilers/links'
@@ -112,6 +111,7 @@ const messages = defineMessages({
 const props = defineProps<{
 	pageUrl: string
 	modManager: string
+	decompiler: string
 }>()
 
 const MOD_MANAGERS: Record<
@@ -127,6 +127,19 @@ const MOD_MANAGERS: Record<
 		command: (slug, type) =>
 			type === 'modpack' ? `ferium modpack add ${slug}` : `ferium add ${slug}`,
 	},
+	pakku: {
+		label: 'Pakku',
+		command: (slug) => `pakku add prj --mr ${slug}`,
+	},
+}
+
+const DECOMPILERS: Record<
+	'slicer' | 'modsrc',
+	{ label: string; icon: Component; url: (links: DecompilerLinks) => string | null }
+> = {
+	// slicer's logo is Lucide's coffee icon
+	slicer: { label: 'slicer', icon: CoffeeIcon, url: (links) => links.slicer },
+	modsrc: { label: 'modsrc', icon: ModsrcIcon, url: (links) => links.modsrc },
 }
 
 const modfolioUrl = computed(
@@ -163,14 +176,10 @@ async function copyInstallCommand() {
 
 const links = ref<DecompilerLinks | null>(null)
 
-const decompilerLinks = computed(() => {
-	if (!links.value) return []
-	return [
-		// slicer's logo is Lucide's coffee icon
-		{ label: 'slicer', url: links.value.slicer, icon: CoffeeIcon },
-		...(links.value.modsrc ? [{ label: 'modsrc', url: links.value.modsrc, icon: ModsrcIcon }] : []),
-	]
-})
+const decompiler = computed(
+	() => DECOMPILERS[props.decompiler as keyof typeof DECOMPILERS] ?? DECOMPILERS.slicer,
+)
+const decompilerUrl = computed(() => (links.value ? decompiler.value.url(links.value) : null))
 
 onMounted(async () => {
 	const { type, slug, version } = projectMatch.value ?? {}

@@ -409,12 +409,15 @@ const messages = defineMessages({
 	},
 	'feature.toolsSidebar.description': {
 		id: 'feature.toolsSidebar.description',
-		defaultMessage:
-			'Generate embeds, copy mod manager install commands, and decompile in slicer or modsrc.',
+		defaultMessage: 'Generate embeds, copy mod manager install commands, and decompile mods.',
 	},
 	'feature.toolsSidebar.modManager': {
 		id: 'feature.toolsSidebar.modManager',
 		defaultMessage: 'Mod manager',
+	},
+	'feature.toolsSidebar.decompiler': {
+		id: 'feature.toolsSidebar.decompiler',
+		defaultMessage: 'Decompiler',
 	},
 	'feature.dependencySidebar.title': {
 		id: 'feature.dependencySidebar.title',
@@ -602,6 +605,12 @@ interface FeatureOption {
 const MOD_MANAGER_ITEMS: SelectItem[] = [
 	{ label: 'Packwiz', value: 'packwiz' },
 	{ label: 'Ferium', value: 'ferium' },
+	{ label: 'Pakku', value: 'pakku' },
+]
+
+const DECOMPILER_ITEMS: SelectItem[] = [
+	{ label: 'slicer', value: 'slicer' },
+	{ label: 'modsrc', value: 'modsrc' },
 ]
 
 interface FeatureDef {
@@ -763,6 +772,13 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 				type: 'select',
 				label: formatMessage(messages['feature.toolsSidebar.modManager']),
 				items: MOD_MANAGER_ITEMS,
+				includeAny: false,
+			},
+			{
+				key: 'decompiler',
+				type: 'select',
+				label: formatMessage(messages['feature.toolsSidebar.decompiler']),
+				items: DECOMPILER_ITEMS,
 				includeAny: false,
 			},
 		],
