@@ -1,8 +1,8 @@
-diff --git a/dist/core/zip.mjs b/dist/core/zip.mjs
+diff --git a/dist/zip.mjs b/dist/zip.mjs
 index c66952573f6f87f7cb1503c2732d467a0ebb4188..94c782321897ebe50969f58e121dfeb4addc7535 100644
---- a/dist/core/zip.mjs
-+++ b/dist/core/zip.mjs	
-@@ -67,12 +67,26 @@ async function zip(config) {
+--- a/dist/zip.mjs
++++ b/dist/zip.mjs
+@@ -66,12 +66,26 @@ async function zip(config) {
  }
  async function zipDir(directory, outputPath, options) {
  	const archive = createZip({ level: wxt.config.zip.compressionLevel });
