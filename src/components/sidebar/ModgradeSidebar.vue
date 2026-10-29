@@ -44,7 +44,7 @@
 					rel="noopener"
 					class="flex w-full min-w-0 max-w-full items-start gap-2 font-normal hover:underline"
 				>
-					<ShieldIcon aria-hidden="true" class="mt-0.5 shrink-0" />
+					<ModgradeIcon aria-hidden="true" class="mt-0.5 shrink-0" />
 					<span class="min-w-0 flex-1 break-words leading-tight">
 						{{ formatMessage(messages.viewReport) }}
 						<ExternalIcon
@@ -74,6 +74,7 @@ import { type Component, computed, onMounted, ref } from 'vue'
 import { browser } from 'wxt/browser'
 
 import { modrinthClient } from '../../api/client'
+import ModgradeIcon from '../../assets/icons/modgrade.svg?component'
 import type { ModgradeProject, ModgradeResult } from '../../background/external/modgrade'
 
 const { formatMessage } = useVIntl()
