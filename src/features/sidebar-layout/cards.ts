@@ -8,6 +8,7 @@ export const SIDEBAR_CARD_IDS = {
 	platformsSidebar: 'modrinth-extras-platforms-sidebar',
 	githubSidebar: 'modrinth-extras-repository-sidebar',
 	discordSidebar: 'modrinth-extras-discord-sidebar',
+	modgradeSidebar: 'modrinth-extras-modgrade-sidebar',
 } as const satisfies Partial<Record<keyof ExtensionSettings, string>>
 
 export type SidebarCardSetting = keyof typeof SIDEBAR_CARD_IDS

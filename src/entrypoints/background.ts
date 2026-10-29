@@ -10,6 +10,7 @@ import {
 } from '../background/badge'
 import { fetchDiscordInvite } from '../background/external/discord'
 import { fetchModdexReviews } from '../background/external/moddex'
+import { fetchModgradeProject } from '../background/external/modgrade'
 import { findPlatformProjects, findPlatformUsers } from '../background/external/platforms'
 import { fetchSpigotReviews, type SpigotReviewSort } from '../background/external/platforms/spigot'
 import { fetchRepositoryStats } from '../background/external/repositories'
@@ -128,6 +129,15 @@ export default defineBackground(() => {
 				.catch((err) => {
 					console.error('[Modrinth Extras] Failed to fetch SpigotMC reviews:', err)
 					sendResponse({ ok: false, error: 'failed' })
+				})
+			return true
+		}
+		if (message.type === 'modgrade-project') {
+			fetchModgradeProject(message.projectId as string)
+				.then((result) => sendResponse({ ok: true, result }))
+				.catch((err) => {
+					console.error('[Modrinth Extras] Failed to fetch Modgrade project:', err)
+					sendResponse({ ok: false, error: err instanceof Error ? err.message : String(err) })
 				})
 			return true
 		}

@@ -279,6 +279,7 @@ import {
 	PaletteIcon,
 	PlayIcon,
 	SearchIcon,
+	ShieldCheckIcon,
 	StarIcon,
 	TagCategoryZapIcon,
 	WrenchIcon,
@@ -494,6 +495,14 @@ const messages = defineMessages({
 	'feature.platformsSidebar.description': {
 		id: 'feature.platformsSidebar.description',
 		defaultMessage: 'Find the same project or author on CurseForge, Hangar, and SpigotMC.',
+	},
+	'feature.modgradeSidebar.title': {
+		id: 'feature.modgradeSidebar.title',
+		defaultMessage: 'Modgrade sidebar',
+	},
+	'feature.modgradeSidebar.description': {
+		id: 'feature.modgradeSidebar.description',
+		defaultMessage: 'Show the Modgrade grade and security check results of a project.',
 	},
 	'feature.galleryBackground.title': {
 		id: 'feature.galleryBackground.title',
@@ -867,6 +876,12 @@ const sidebarFeatures = computed<FeatureDef[]>(() => [
 		icon: BoxesIcon,
 		title: formatMessage(messages['feature.platformsSidebar.title']),
 		description: formatMessage(messages['feature.platformsSidebar.description']),
+	},
+	{
+		key: 'modgradeSidebar',
+		icon: ShieldCheckIcon,
+		title: formatMessage(messages['feature.modgradeSidebar.title']),
+		description: formatMessage(messages['feature.modgradeSidebar.description']),
 	},
 ])
 

@@ -86,6 +86,12 @@
   "feature.githubSidebar.title": {
     "defaultMessage": "Repository sidebar"
   },
+  "feature.modgradeSidebar.description": {
+    "defaultMessage": "Show the Modgrade grade and security check results of a project."
+  },
+  "feature.modgradeSidebar.title": {
+    "defaultMessage": "Modgrade sidebar"
+  },
   "feature.modpacksSidebar.description": {
     "defaultMessage": "Show all the modpacks the mod is featured in."
   },

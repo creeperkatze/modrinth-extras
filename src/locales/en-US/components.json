@@ -158,6 +158,51 @@
   "moddexReviews.writeReview": {
     "defaultMessage": "Write a review"
   },
+  "modgradeSidebar.cannotCheck": {
+    "defaultMessage": "{count, plural, one {# file} other {# files}} can't be downloaded for checks"
+  },
+  "modgradeSidebar.checked": {
+    "defaultMessage": "{checked} of {total, plural, one {# latest file} other {# latest files}} checked"
+  },
+  "modgradeSidebar.gradeTooltip": {
+    "defaultMessage": "Grade {grade}"
+  },
+  "modgradeSidebar.loadError": {
+    "defaultMessage": "Failed to load Modgrade data"
+  },
+  "modgradeSidebar.malware": {
+    "defaultMessage": "Malware found"
+  },
+  "modgradeSidebar.malwareElsewhere": {
+    "defaultMessage": "Malware found on another platform only"
+  },
+  "modgradeSidebar.notChecked": {
+    "defaultMessage": "Not checked yet"
+  },
+  "modgradeSidebar.partlyChecked": {
+    "defaultMessage": "Partly checked"
+  },
+  "modgradeSidebar.passed": {
+    "defaultMessage": "No issues found"
+  },
+  "modgradeSidebar.possibleMalware": {
+    "defaultMessage": "Possible malware in an included project"
+  },
+  "modgradeSidebar.readInPart": {
+    "defaultMessage": "{count, plural, one {# file} other {# files}} only partly readable"
+  },
+  "modgradeSidebar.recentVersionsOnly": {
+    "defaultMessage": "Only files for recent Minecraft versions count"
+  },
+  "modgradeSidebar.someFiles": {
+    "defaultMessage": "Only some files are affected"
+  },
+  "modgradeSidebar.viewReport": {
+    "defaultMessage": "View on Modgrade"
+  },
+  "modgradeSidebar.warning": {
+    "defaultMessage": "Suspicious code found"
+  },
   "modpacksSidebar.title": {
     "defaultMessage": "Modpacks"
   },

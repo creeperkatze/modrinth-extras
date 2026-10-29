@@ -3,6 +3,7 @@ import { watch } from 'vue'
 import DependencySidebar from '../../components/sidebar/dependencies/DependencySidebar.vue'
 import DiscordSidebar from '../../components/sidebar/DiscordSidebar.vue'
 import SidebarLayoutControls from '../../components/sidebar/layout/SidebarLayoutControls.vue'
+import ModgradeSidebar from '../../components/sidebar/ModgradeSidebar.vue'
 import ModpacksSidebar from '../../components/sidebar/ModpacksSidebar.vue'
 import PlatformsSidebar from '../../components/sidebar/PlatformsSidebar.vue'
 import RepositorySidebar from '../../components/sidebar/RepositorySidebar.vue'
@@ -116,6 +117,16 @@ export function sidebarInjections(settings: SettingsGetter) {
 		createApp: () => createExtensionApp(DiscordSidebar, { pageUrl: currentPageUrl() }),
 	})
 
+	const modgradeSidebar = createInjection({
+		id: SIDEBAR_CARD_IDS.modgradeSidebar,
+		isEnabled: () => shown('modgradeSidebar'),
+		settingsKeys: ['modgradeSidebar'],
+		persistent: false,
+		projectScoped: true,
+		attach: attachInOrder,
+		createApp: () => createExtensionApp(ModgradeSidebar, { pageUrl: currentPageUrl() }),
+	})
+
 	// Always attached. The controls decide when to show.
 	const sidebarLayout = createInjection({
 		id: SIDEBAR_LAYOUT_ID,
@@ -134,6 +145,7 @@ export function sidebarInjections(settings: SettingsGetter) {
 		platformsSidebar,
 		repositorySidebar,
 		discordSidebar,
+		modgradeSidebar,
 	]
 
 	watch(editingSidebar, () => {
