@@ -39,6 +39,15 @@ function comparison(current: JarVersion, other: JarVersion): VersionComparison {
 	}
 }
 
+// Modrinth links the oldest version with a number by that number and later duplicates by ID
+function findLinkedVersion(versions: Version[], idOrNumber: string): Version | undefined {
+	const byId = versions.find((v) => v.id === idOrNumber)
+	if (byId) return byId
+	return versions
+		.filter((v) => v.version_number === idOrNumber)
+		.sort((a, b) => a.date_published.localeCompare(b.date_published))[0]
+}
+
 // Loader and game version branches are interleaved by date, so the previous version has to share them.
 export async function fetchVersionComparisons(
 	projectSlug: string,
@@ -48,9 +57,7 @@ export async function fetchVersionComparisons(
 		include_changelog: false,
 		apiVersion: 3,
 	})
-	const match =
-		versions.find((v) => v.id === versionIdOrNumber) ??
-		versions.find((v) => v.version_number === versionIdOrNumber)
+	const match = findLinkedVersion(versions, versionIdOrNumber)
 	const current = match && withJar(match)
 	if (!current) return { previous: null, all: [] }
 

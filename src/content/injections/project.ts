@@ -200,7 +200,9 @@ export function projectInjections(settings: SettingsGetter) {
 		targets: 'tr.version-row-link',
 		attach(row) {
 			if (!linkedVersion(row)) return null
-			const actions = row.querySelector('[data-no-row-click].justify-end')
+			const actions = row.querySelector<HTMLElement>('[data-no-row-click].justify-end')
+			// Right-aligned so rows without a compare button still line up
+			if (actions) actions.style.marginLeft = 'auto'
 			return insertAfter(actions?.firstElementChild)
 		},
 		createApp: (row) => createExtensionApp(CompareVersionsLink, { ...linkedVersion(row) }),
