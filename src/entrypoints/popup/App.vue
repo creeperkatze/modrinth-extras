@@ -279,7 +279,6 @@ import {
 	PaletteIcon,
 	PlayIcon,
 	SearchIcon,
-	ShieldCheckIcon,
 	StarIcon,
 	TagCategoryZapIcon,
 	WrenchIcon,
@@ -300,6 +299,7 @@ import { browser } from 'wxt/browser'
 
 import { modrinthClient } from '../../api/client'
 import KofiIcon from '../../assets/icons/kofi.svg?component'
+import ModgradeIcon from '../../assets/icons/modgrade.svg?component'
 import ModsrcIcon from '../../assets/icons/modsrc.svg?component'
 import CompactCombobox from '../../components/ui/CompactCombobox.vue'
 import { detectBrowserLocale, i18n } from '../../core/i18n/i18n'
@@ -879,7 +879,7 @@ const sidebarFeatures = computed<FeatureDef[]>(() => [
 	},
 	{
 		key: 'modgradeSidebar',
-		icon: ShieldCheckIcon,
+		icon: ModgradeIcon,
 		title: formatMessage(messages['feature.modgradeSidebar.title']),
 		description: formatMessage(messages['feature.modgradeSidebar.description']),
 	},
