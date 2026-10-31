@@ -81,8 +81,8 @@ jobs:
                   echo "chrome=$(ls .output/*-chrome.zip)" >> $GITHUB_OUTPUT
                   echo "firefox=$(ls .output/*-firefox.zip)" >> $GITHUB_OUTPUT
 
-            - name: Publish to the stores
-              uses: creeperkatze/extension-publish@67710e469fb1db85eac50c0cfe18779f9de5bdfb # v1.0.12
+            - name: Publish to stores
+              uses: creeperkatze/extension-publish@797030bc8a9f26541989b92ee174151f36e12975 # v1.1.1
               with:
                   chrome-client-id: ${{ inputs.chrome && secrets.CHROME_CLIENT_ID || '' }}
                   chrome-client-secret: ${{ inputs.chrome && secrets.CHROME_CLIENT_SECRET || '' }}
