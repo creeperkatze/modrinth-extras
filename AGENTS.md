@@ -1,4 +1,4 @@
-# Modrinth Extras 
+# Modrinth Extras
 
 Modrinth Extras is a browser extension that enhances the Modrinth website with extra features, built with WXT, Vue 3, TypeScript and Tailwind CSS.
 
@@ -8,7 +8,8 @@ This project uses pnpm workspaces. The Modrinth upstream packages (`@modrinth/ui
 
 - `pnpm build` builds for Chrome/Edge, `pnpm build:firefox` for Firefox.
 - `pnpm zip` packages a zip for Chrome/Edge, `pnpm zip:firefox` for Firefox.
-- `pnpm lint` lints and checks formatting, `pnpm lint:fix` auto-fixes both.
+- `pnpm lint` lints with oxlint, `pnpm lint:fix` lints and auto-fixes.
+- `pnpm fmt` formats with oxfmt, `pnpm fmt:check` checks formatting.
 - There is no automated test suite; testing is manual in the browser.
 
 ## Rules

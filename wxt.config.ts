@@ -1,7 +1,6 @@
 import { createRequire } from 'node:module'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-
 import svgLoader from 'vite-svg-loader'
 import { defineConfig, type WxtViteConfig } from 'wxt'
 

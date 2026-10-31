@@ -88,7 +88,6 @@ To install the extension manually:
 - **Chrome / Edge:** go to `chrome://extensions/`, enable **Developer mode**, then drag and drop the zip onto the page.
 - **Firefox:** go to `about:debugging#/runtime/this-firefox`, click **Load Temporary Add-on**, and select the zip. Note that Firefox removes the extension on browser restart since it is loaded as a temporary add-on.
 
-
 ## 👨‍💻 Development
 
 ### Setup
@@ -130,26 +129,26 @@ New translations are automatically pulled every Monday.
 
 ### Translators ❤️
 
-| Language | Translators |
-|----------|------------|
-| Italian | [EmanuelPlaysDev](https://github.com/EmanuelPlays) |
-| French | [maDU59_](https://github.com/maDU59), [Sertra](https://crowdin.com/profile/sertrafurr) |
-| Chinese Simplified | [xinyihl](https://crowdin.com/profile/xinyihl), [AlexYang](https://crowdin.com/profile/A012pyshjs210) |
-| Korean | [젠고](https://crowdin.com/profile/minejango2) |
-| Vietnamese | [Lê](https://crowdin.com/profile/suri-cutie) |
-| Japanese | [Finity 2010](https://crowdin.com/profile/finity2010) |
-| Russian | [vanapro1](https://crowdin.com/profile/vanapro1), [IceBan](https://crowdin.com/profile/iceban) |
-| Ukrainian | [Tenwoc](https://crowdin.com/profile/tenwoc), [CreativeTragern](https://crowdin.com/profile/creativetragern) |
-| Turkish | [penfflewithadot](https://crowdin.com/profile/penfflewithadot), [ErenTr4210](https://crowdin.com/profile/erentr4210), [Serkan Aynacı](https://crowdin.com/profile/serkanaynaci2007) |
-| Spanish, Latin America | [Dante Li Tao](https://crowdin.com/profile/heroxp) |
-| Arabic | [Hamad Alsayed](https://crowdin.com/profile/hamad_sayed) |
-| Spanish | [eh eh](https://crowdin.com/profile/ehuh) |
+| Language               | Translators                                                                                                                                                                         |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Italian                | [EmanuelPlaysDev](https://github.com/EmanuelPlays)                                                                                                                                  |
+| French                 | [maDU59_](https://github.com/maDU59), [Sertra](https://crowdin.com/profile/sertrafurr)                                                                                              |
+| Chinese Simplified     | [xinyihl](https://crowdin.com/profile/xinyihl), [AlexYang](https://crowdin.com/profile/A012pyshjs210)                                                                               |
+| Korean                 | [젠고](https://crowdin.com/profile/minejango2)                                                                                                                                      |
+| Vietnamese             | [Lê](https://crowdin.com/profile/suri-cutie)                                                                                                                                        |
+| Japanese               | [Finity 2010](https://crowdin.com/profile/finity2010)                                                                                                                               |
+| Russian                | [vanapro1](https://crowdin.com/profile/vanapro1), [IceBan](https://crowdin.com/profile/iceban)                                                                                      |
+| Ukrainian              | [Tenwoc](https://crowdin.com/profile/tenwoc), [CreativeTragern](https://crowdin.com/profile/creativetragern)                                                                        |
+| Turkish                | [penfflewithadot](https://crowdin.com/profile/penfflewithadot), [ErenTr4210](https://crowdin.com/profile/erentr4210), [Serkan Aynacı](https://crowdin.com/profile/serkanaynaci2007) |
+| Spanish, Latin America | [Dante Li Tao](https://crowdin.com/profile/heroxp)                                                                                                                                  |
+| Arabic                 | [Hamad Alsayed](https://crowdin.com/profile/hamad_sayed)                                                                                                                            |
+| Spanish                | [eh eh](https://crowdin.com/profile/ehuh)                                                                                                                                           |
 
 ## 🤝 Contributing
 
 Contributions are always welcome!
 
-Please ensure you run `pnpm lint:fix` before opening a pull request.
+Please ensure you run `pnpm lint:fix` and `pnpm fmt` before opening a pull request.
 
 ## 📜 License
 

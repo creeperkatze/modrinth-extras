@@ -7,6 +7,6 @@ When investigating components, icons, or types, read the submodule source direct
 **Never import from the submodule's internal path**, always use the package name:
 
 ```ts
-import { ButtonStyled } from '@modrinth/ui'
 import { BellIcon } from '@modrinth/assets'
+import { ButtonStyled } from '@modrinth/ui'
 ```

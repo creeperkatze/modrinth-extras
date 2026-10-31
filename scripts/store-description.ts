@@ -106,7 +106,10 @@ try {
 	} else if (platform === 'darwin') {
 		execSync('pbcopy', { input: description })
 	} else {
-		execSync('xclip -selection clipboard || xsel --clipboard --input', { input: description, shell: true })
+		execSync('xclip -selection clipboard || xsel --clipboard --input', {
+			input: description,
+			shell: true,
+		})
 	}
 	console.error('Copied to clipboard.')
 } catch {

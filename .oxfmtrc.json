@@ -11,5 +11,12 @@
 			["parent", "sibling", "index", "style"]
 		]
 	},
-	"ignorePatterns": ["src/locales/", "website/src/locales/", "website/.vitepress/shared/", "**/package.json"]
+	"ignorePatterns": [
+		"modrinth/",
+		"src/locales/",
+		"src/public/_locales/",
+		"website/src/locales/",
+		"website/.vitepress/shared/",
+		"**/package.json"
+	]
 }

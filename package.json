@@ -16,8 +16,10 @@
         "intl:prune": "node scripts/run.mjs prune-locales",
         "intl:extract": "formatjs extract \"src/entrypoints/**/*.{vue,ts}\" --ignore \"src/**/*.d.ts\" --out-file src/locales/en-US/popup.json --preserve-whitespace && formatjs extract \"src/components/**/*.vue\" --ignore \"src/**/*.d.ts\" --out-file src/locales/en-US/components.json --preserve-whitespace",
         "typecheck": "vue-tsc --noEmit",
-        "lint": "oxlint src website && oxfmt --check src website",
-        "lint:fix": "oxlint src website --fix && oxfmt src website",
+        "lint": "oxlint",
+        "lint:fix": "oxlint --fix",
+        "fmt": "oxfmt",
+        "fmt:check": "oxfmt --check",
         "release:patch": "pnpm version patch && git push && git push --tags",
         "release:minor": "pnpm version minor && git push && git push --tags",
         "release:major": "pnpm version major && git push && git push --tags"
