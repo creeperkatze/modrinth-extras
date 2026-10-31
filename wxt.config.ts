@@ -87,7 +87,7 @@ export default defineConfig({
 				},
 			}),
 			dropUnusedImages(),
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			// oxlint-disable-next-line typescript/no-explicit-any
 		] as any,
 		resolve: {
 			alias: {

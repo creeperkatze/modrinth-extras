@@ -1,7 +1,4 @@
-/* eslint-disable simple-import-sort/imports */
-
 import { browserStoreStats, createTheme, messagesFromGlob } from '../shared/theme'
-
 import Logo from './icons/logo.svg?skipsvgo'
 // Must come after the theme so the brand colors win
 import './custom.css'

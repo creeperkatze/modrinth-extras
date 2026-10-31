@@ -14,7 +14,7 @@ concurrency:
   group: i18n-management
 
 jobs:
-  push_translations:
+  push:
     name: Push sources to Crowdin
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'

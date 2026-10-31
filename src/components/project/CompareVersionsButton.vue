@@ -57,16 +57,14 @@ const options = computed<ButtonMenuOption[]>(() => [
 		id: 'compare-with',
 		label: formatMessage(messages['compareVersions.compareWith']),
 	},
-	...comparisons.value.all.map(
-		(comparison): ButtonMenuOption => ({
-			type: 'link',
-			id: comparison.url,
-			label: comparison.versionNumber,
-			href: comparison.url,
-			target: '_blank',
-			selected: comparison.url === comparisons.value.previous?.url,
-		}),
-	),
+	...comparisons.value.all.map((comparison): ButtonMenuOption => ({
+		type: 'link',
+		id: comparison.url,
+		label: comparison.versionNumber,
+		href: comparison.url,
+		target: '_blank',
+		selected: comparison.url === comparisons.value.previous?.url,
+	})),
 ])
 
 function openPrevious() {

@@ -8,7 +8,7 @@ This project uses pnpm workspaces. The Modrinth upstream packages (`@modrinth/ui
 
 - `pnpm build` builds for Chrome/Edge, `pnpm build:firefox` for Firefox.
 - `pnpm zip` packages a zip for Chrome/Edge, `pnpm zip:firefox` for Firefox.
-- `pnpm lint` lints, `pnpm lint:fix` lints and auto-fixes.
+- `pnpm lint` lints and checks formatting, `pnpm lint:fix` auto-fixes both.
 - There is no automated test suite; testing is manual in the browser.
 
 ## Rules

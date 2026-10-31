@@ -65,7 +65,7 @@ export function installI18n(app: App): void {
 	app.use(i18n)
 
 	const context: I18nContext = {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		// oxlint-disable-next-line typescript/no-explicit-any
 		locale: i18n.global.locale as any,
 		t: (key, values) => i18n.global.t(key, values ?? {}) as string,
 		setLocale: (newLocale) => {

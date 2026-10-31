@@ -22,7 +22,7 @@
 				size="sm"
 				type="quiet"
 				:disabled="!modelValue"
-				:label="actionLabel"
+				:label="actionLabel ?? title"
 				@click.stop="$emit('action')"
 			>
 				<component :is="actionIcon" />
@@ -33,7 +33,7 @@
 				:aria-label="title"
 				:disabled="disabled"
 				@click.stop
-				@update:model-value="$emit('update:modelValue', $event)"
+				@update:model-value="$emit('update:modelValue', !!$event)"
 			/>
 		</div>
 		<Collapsible :collapsed="!(modelValue && hasOptionsSlot)" overflow-visible>

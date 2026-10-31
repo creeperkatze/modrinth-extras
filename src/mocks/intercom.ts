@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
+/* oxlint-disable typescript/no-explicit-any */
 export const Intercom = (..._args: any[]) => {}
 export const boot = (..._args: any[]) => {}
 export const shutdown = () => {}

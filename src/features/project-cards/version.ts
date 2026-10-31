@@ -196,10 +196,7 @@ function matchesPreferredLoader(
 	if (!preferredLoader) return true
 	const loaders = getVersionLoaders(version, projectType)
 
-	if (
-		projectType === 'modpack' &&
-		(loaders.length === 0 || loaders.every((loader) => loader === 'mrpack'))
-	) {
+	if (projectType === 'modpack' && loaders.every((loader) => loader === 'mrpack')) {
 		return true
 	}
 

@@ -1,0 +1,15 @@
+{
+	"$schema": "./node_modules/oxfmt/configuration_schema.json",
+	"useTabs": true,
+	"singleQuote": true,
+	"semi": false,
+	"sortImports": {
+		"partitionByComment": true,
+		"groups": [
+			"side_effect",
+			["builtin", "external", "internal", "subpath", "unknown"],
+			["parent", "sibling", "index", "style"]
+		]
+	},
+	"ignorePatterns": ["src/locales/", "website/src/locales/", "website/.vitepress/shared/", "**/package.json"]
+}

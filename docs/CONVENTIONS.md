@@ -2,7 +2,7 @@
 
 ## Style
 
-Formatted with Prettier: tabs, single quotes, no semicolons, trailing commas, 100-character lines, LF line endings.
+Linted with oxlint and formatted with oxfmt (imports sorted automatically): tabs, single quotes, no semicolons, trailing commas, 100-character lines, LF line endings.
 
 ## API calls
 
