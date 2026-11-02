@@ -5,8 +5,14 @@
   "feature.accentColor.description": {
     "defaultMessage": "将 Modrinth 的标志性绿色替换为自定义强调色。"
   },
+  "feature.accentColor.lowContrast": {
+    "defaultMessage": "在你的 Modrinth 主题上，这种颜色很难看清。"
+  },
   "feature.accentColor.title": {
     "defaultMessage": "强调色"
+  },
+  "feature.accentColor.unreadableButtons": {
+    "defaultMessage": "在您的 Modrinth 主题中，这种颜色的按钮文字很难看清。"
   },
   "feature.activitySparkline.days": {
     "defaultMessage": "{count, plural, one {# 天} other {# 天}}"
@@ -34,6 +40,12 @@
   },
   "feature.browserNotifications.title": {
     "defaultMessage": "浏览器通知"
+  },
+  "feature.compareVersions.description": {
+    "defaultMessage": "从版本页、版本列表和更新日志比较不同版本的在 modsrc 中反编译后的代码。"
+  },
+  "feature.compareVersions.title": {
+    "defaultMessage": "比较版本"
   },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "在可用的情况下，将 CurseForge 项目页面重定向至 Modrinth。"
@@ -73,6 +85,12 @@
   },
   "feature.githubSidebar.title": {
     "defaultMessage": "仓库侧边栏"
+  },
+  "feature.modgradeSidebar.description": {
+    "defaultMessage": "展示项目的 Modgrade 等级和安全检查结果。"
+  },
+  "feature.modgradeSidebar.title": {
+    "defaultMessage": "Modgrade 侧边栏"
   },
   "feature.modpacksSidebar.description": {
     "defaultMessage": "显示包含该模组的所有整合包。"
@@ -152,6 +170,12 @@
   "feature.telemetry.title": {
     "defaultMessage": "遥测数据"
   },
+  "feature.toolsSidebar.decompiler": {
+    "defaultMessage": "反编译器"
+  },
+  "feature.toolsSidebar.description": {
+    "defaultMessage": "生成嵌入代码、复制模组管理器安装命令，以及反编译模组。"
+  },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "模组管理器"
   },
@@ -205,6 +229,12 @@
   },
   "popup.group.general": {
     "defaultMessage": "一般"
+  },
+  "popup.group.sidebar": {
+    "defaultMessage": "侧边栏"
+  },
+  "popup.tab.projects": {
+    "defaultMessage": "项目"
   },
   "search.any": {
     "defaultMessage": "任何"

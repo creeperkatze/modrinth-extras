@@ -86,6 +86,12 @@
   "feature.githubSidebar.title": {
     "defaultMessage": "Боковая панель репозитория"
   },
+  "feature.modgradeSidebar.description": {
+    "defaultMessage": "Показывать оценку Modgrade и итог проверки безопасности проекта."
+  },
+  "feature.modgradeSidebar.title": {
+    "defaultMessage": "Боковая панель Modgrade"
+  },
   "feature.modpacksSidebar.description": {
     "defaultMessage": "Показать все сборки с модом."
   },

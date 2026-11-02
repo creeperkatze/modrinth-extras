@@ -158,6 +158,51 @@
   "moddexReviews.writeReview": {
     "defaultMessage": "Написать отзыв"
   },
+  "modgradeSidebar.cannotCheck": {
+    "defaultMessage": "{count, plural, one {# файл} few {# файла} other {# файлов}} нельзя скачать на проверку"
+  },
+  "modgradeSidebar.checked": {
+    "defaultMessage": "Проверено {checked} из {total, plural, one {# файла} other {# файлов}}"
+  },
+  "modgradeSidebar.gradeTooltip": {
+    "defaultMessage": "Оценка: {grade}"
+  },
+  "modgradeSidebar.loadError": {
+    "defaultMessage": "Не удалось загрузить данные Modgrade"
+  },
+  "modgradeSidebar.malware": {
+    "defaultMessage": "Обнаружена угроза"
+  },
+  "modgradeSidebar.malwareElsewhere": {
+    "defaultMessage": "Угроза обнаружена лишь на другой платформе"
+  },
+  "modgradeSidebar.notChecked": {
+    "defaultMessage": "Не проверено"
+  },
+  "modgradeSidebar.partlyChecked": {
+    "defaultMessage": "Частично проверено"
+  },
+  "modgradeSidebar.passed": {
+    "defaultMessage": "Всё в порядке"
+  },
+  "modgradeSidebar.possibleMalware": {
+    "defaultMessage": "Возможная угроза во включённом проекте"
+  },
+  "modgradeSidebar.readInPart": {
+    "defaultMessage": "{count, plural, one {# файл} few {# файла} other {# файлов}} читаются лишь частично"
+  },
+  "modgradeSidebar.recentVersionsOnly": {
+    "defaultMessage": "Считаются только файлы для последних версий Minecraft"
+  },
+  "modgradeSidebar.someFiles": {
+    "defaultMessage": "Затронута лишь часть файлов"
+  },
+  "modgradeSidebar.viewReport": {
+    "defaultMessage": "Посмотреть на Modgrade"
+  },
+  "modgradeSidebar.warning": {
+    "defaultMessage": "Найден подозрительный код"
+  },
   "modpacksSidebar.title": {
     "defaultMessage": "Сборки"
   },
@@ -294,10 +339,10 @@
     "defaultMessage": "Настроить боковую панель"
   },
   "sidebarLayout.done": {
-    "defaultMessage": "Готово"
+    "defaultMessage": "Применить"
   },
   "sidebarLayout.drag": {
-    "defaultMessage": "Потяните для перестановки"
+    "defaultMessage": "Переместить"
   },
   "sidebarLayout.hide": {
     "defaultMessage": "Скрыть"
