@@ -4,8 +4,6 @@ export type ModgradeSecurity = 'passed' | 'partly_checked' | 'warning' | 'malwar
 
 export interface ModgradeProject {
 	url: string
-	grade: string | null
-	grade_note: string | null
 	security: ModgradeSecurity
 	malware_platforms: string[] | null
 	malware_confirmed: boolean | null
@@ -16,7 +14,6 @@ export interface ModgradeProject {
 		code_read: number
 		read_in_part: number
 		cannot_check: number
-		recent_versions_only: boolean
 	} | null
 }
 

@@ -502,7 +502,7 @@ const messages = defineMessages({
 	},
 	'feature.modgradeSidebar.description': {
 		id: 'feature.modgradeSidebar.description',
-		defaultMessage: 'Show the Modgrade grade and security check results of a project.',
+		defaultMessage: 'Show the Modgrade security check results of a project.',
 	},
 	'feature.galleryBackground.title': {
 		id: 'feature.galleryBackground.title',

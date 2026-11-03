@@ -1,16 +1,8 @@
 <template>
 	<div
 		v-if="project || error"
-		class="relative my-3 flex flex-col gap-3 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
+		class="my-3 flex flex-col gap-3 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
 	>
-		<div
-			v-if="project?.grade"
-			v-tooltip="formatMessage(messages.gradeTooltip, { grade: project.grade })"
-			class="absolute right-4 top-4 flex size-10 items-center justify-center rounded-xl text-2xl font-bold"
-			:class="gradeClass(project.grade)"
-		>
-			{{ project.grade }}
-		</div>
 		<h2 class="m-0 text-lg font-semibold text-contrast">Modgrade</h2>
 		<div class="flex min-w-0 max-w-full flex-col gap-3">
 			<div
@@ -80,7 +72,6 @@ import type { ModgradeProject, ModgradeResult } from '../../background/external/
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
 	loadError: { id: 'modgradeSidebar.loadError', defaultMessage: 'Failed to load Modgrade data' },
-	gradeTooltip: { id: 'modgradeSidebar.gradeTooltip', defaultMessage: 'Grade {grade}' },
 	passed: { id: 'modgradeSidebar.passed', defaultMessage: 'No issues found' },
 	partlyChecked: { id: 'modgradeSidebar.partlyChecked', defaultMessage: 'Partly checked' },
 	warning: { id: 'modgradeSidebar.warning', defaultMessage: 'Suspicious code found' },
@@ -102,10 +93,6 @@ const messages = defineMessages({
 		id: 'modgradeSidebar.checked',
 		defaultMessage:
 			'{checked} of {total, plural, one {# latest file} other {# latest files}} checked',
-	},
-	recentVersionsOnly: {
-		id: 'modgradeSidebar.recentVersionsOnly',
-		defaultMessage: 'Only files for recent Minecraft versions count',
 	},
 	readInPart: {
 		id: 'modgradeSidebar.readInPart',
@@ -132,12 +119,6 @@ interface Row {
 const project = ref<ModgradeProject | null>(null)
 const malwareOnModrinth = ref(false)
 const error = ref(false)
-
-function gradeClass(grade: string): string {
-	if (grade <= 'B') return 'bg-highlight-green text-green'
-	if (grade <= 'D') return 'bg-highlight-orange text-orange'
-	return 'bg-highlight-red text-red'
-}
 
 function securityRow(p: ModgradeProject): Row {
 	switch (p.security) {
@@ -186,10 +167,6 @@ const rows = computed<Row[]>(() => {
 	if (p.security === 'malware' && malwareOnModrinth.value && p.malware_scope === 'some_files') {
 		rows.push({ key: 'scope', icon: InfoIcon, text: formatMessage(messages.someFiles) })
 	}
-	// The note repeats the security result for malware
-	if (p.grade_note && p.security !== 'malware') {
-		rows.push({ key: 'note', icon: InfoIcon, text: p.grade_note })
-	}
 
 	const coverage = p.coverage
 	if (coverage && coverage.latest_files > 0) {
@@ -200,9 +177,6 @@ const rows = computed<Row[]>(() => {
 				checked: coverage.checked,
 				total: coverage.latest_files,
 			}),
-			tooltip: coverage.recent_versions_only
-				? formatMessage(messages.recentVersionsOnly)
-				: undefined,
 		})
 		if (coverage.read_in_part > 0) {
 			rows.push({

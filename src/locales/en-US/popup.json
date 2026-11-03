@@ -87,7 +87,7 @@
     "defaultMessage": "Repository sidebar"
   },
   "feature.modgradeSidebar.description": {
-    "defaultMessage": "Show the Modgrade grade and security check results of a project."
+    "defaultMessage": "Show the Modgrade security check results of a project."
   },
   "feature.modgradeSidebar.title": {
     "defaultMessage": "Modgrade sidebar"

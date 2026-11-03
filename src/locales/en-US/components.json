@@ -164,9 +164,6 @@
   "modgradeSidebar.checked": {
     "defaultMessage": "{checked} of {total, plural, one {# latest file} other {# latest files}} checked"
   },
-  "modgradeSidebar.gradeTooltip": {
-    "defaultMessage": "Grade {grade}"
-  },
   "modgradeSidebar.loadError": {
     "defaultMessage": "Failed to load Modgrade data"
   },
@@ -190,9 +187,6 @@
   },
   "modgradeSidebar.readInPart": {
     "defaultMessage": "{count, plural, one {# file} other {# files}} only partly readable"
-  },
-  "modgradeSidebar.recentVersionsOnly": {
-    "defaultMessage": "Only files for recent Minecraft versions count"
   },
   "modgradeSidebar.someFiles": {
     "defaultMessage": "Only some files are affected"
