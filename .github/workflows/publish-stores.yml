@@ -1,6 +1,8 @@
 name: Publish to Stores
 
 on:
+  release:
+    types: [published]
   workflow_dispatch:
     inputs:
       tag:
@@ -26,9 +28,10 @@ on:
 jobs:
   ci:
     name: CI
+    if: github.event_name == 'workflow_dispatch' || !github.event.release.prerelease
     uses: ./.github/workflows/ci.yml
     with:
-      ref: ${{ inputs.tag }}
+      ref: ${{ inputs.tag || github.event.release.tag_name }}
 
   build:
     name: Build
@@ -38,7 +41,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: ${{ inputs.tag }}
+          ref: ${{ inputs.tag || github.event.release.tag_name }}
           submodules: recursive
 
       - name: Set up pnpm
@@ -68,6 +71,11 @@ jobs:
     name: Submit to Stores
     needs: build
     runs-on: ubuntu-latest
+    env:
+      CHROME: ${{ github.event_name == 'release' || inputs.chrome }}
+      FIREFOX: ${{ github.event_name == 'release' || inputs.firefox }}
+      EDGE: ${{ github.event_name == 'release' || inputs.edge }}
+      PUBLISH: ${{ github.event_name == 'release' || !inputs.upload-only }}
     steps:
       - name: Download zips
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
@@ -84,24 +92,24 @@ jobs:
       - name: Publish to stores
         uses: creeperkatze/extension-publish@797030bc8a9f26541989b92ee174151f36e12975 # v1.1.1
         with:
-          chrome-client-id: ${{ inputs.chrome && secrets.CHROME_CLIENT_ID || '' }}
-          chrome-client-secret: ${{ inputs.chrome && secrets.CHROME_CLIENT_SECRET || '' }}
-          chrome-refresh-token: ${{ inputs.chrome && secrets.CHROME_REFRESH_TOKEN || '' }}
-          chrome-publisher-id: ${{ inputs.chrome && secrets.CHROME_PUBLISHER_ID || '' }}
-          chrome-extension-id: ${{ inputs.chrome && secrets.CHROME_EXTENSION_ID || '' }}
-          chrome-zip-path: ${{ inputs.chrome && steps.zips.outputs.chrome || '' }}
-          chrome-publish: ${{ inputs.upload-only && 'false' || 'true' }}
+          chrome-client-id: ${{ env.CHROME == 'true' && secrets.CHROME_CLIENT_ID || '' }}
+          chrome-client-secret: ${{ env.CHROME == 'true' && secrets.CHROME_CLIENT_SECRET || '' }}
+          chrome-refresh-token: ${{ env.CHROME == 'true' && secrets.CHROME_REFRESH_TOKEN || '' }}
+          chrome-publisher-id: ${{ env.CHROME == 'true' && secrets.CHROME_PUBLISHER_ID || '' }}
+          chrome-extension-id: ${{ env.CHROME == 'true' && secrets.CHROME_EXTENSION_ID || '' }}
+          chrome-zip-path: ${{ env.CHROME == 'true' && steps.zips.outputs.chrome || '' }}
+          chrome-publish: ${{ env.PUBLISH }}
 
-          firefox-api-key: ${{ inputs.firefox && secrets.FIREFOX_JWT_ISSUER || '' }}
-          firefox-api-secret: ${{ inputs.firefox && secrets.FIREFOX_JWT_SECRET || '' }}
-          firefox-extension-id: ${{ inputs.firefox && 'contact@creeperkatze.de' || '' }}
-          firefox-xpi-path: ${{ inputs.firefox && steps.zips.outputs.firefox || '' }}
+          firefox-api-key: ${{ env.FIREFOX == 'true' && secrets.FIREFOX_JWT_ISSUER || '' }}
+          firefox-api-secret: ${{ env.FIREFOX == 'true' && secrets.FIREFOX_JWT_SECRET || '' }}
+          firefox-extension-id: ${{ env.FIREFOX == 'true' && 'contact@creeperkatze.de' || '' }}
+          firefox-xpi-path: ${{ env.FIREFOX == 'true' && steps.zips.outputs.firefox || '' }}
           firefox-license: AGPL-3.0-only
           firefox-compatibility-firefox: true
           firefox-compatibility-android: true
 
-          edge-api-key: ${{ inputs.edge && secrets.EDGE_API_KEY || '' }}
-          edge-client-id: ${{ inputs.edge && secrets.EDGE_CLIENT_ID || '' }}
-          edge-product-id: ${{ inputs.edge && secrets.EDGE_PRODUCT_ID || '' }}
-          edge-zip-path: ${{ inputs.edge && steps.zips.outputs.chrome || '' }}
-          edge-publish: ${{ inputs.upload-only && 'false' || 'true' }}
+          edge-api-key: ${{ env.EDGE == 'true' && secrets.EDGE_API_KEY || '' }}
+          edge-client-id: ${{ env.EDGE == 'true' && secrets.EDGE_CLIENT_ID || '' }}
+          edge-product-id: ${{ env.EDGE == 'true' && secrets.EDGE_PRODUCT_ID || '' }}
+          edge-zip-path: ${{ env.EDGE == 'true' && steps.zips.outputs.chrome || '' }}
+          edge-publish: ${{ env.PUBLISH }}
