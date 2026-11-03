@@ -6,7 +6,7 @@ packages:
   - 'modrinth/packages/tooling-config'
   - 'modrinth/packages/blog'
 
-nodeOptions: '--max-old-space-size=4096'
+message: 'chore(release): v%s'
 
 allowBuilds:
   '@parcel/watcher': true
