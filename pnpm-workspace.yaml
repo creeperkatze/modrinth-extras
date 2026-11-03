@@ -6,8 +6,6 @@ packages:
   - 'modrinth/packages/tooling-config'
   - 'modrinth/packages/blog'
 
-message: 'chore(release): v%s'
-
 allowBuilds:
   '@parcel/watcher': true
   '@wxt-dev/analytics': false

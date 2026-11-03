@@ -20,9 +20,8 @@
         "lint:fix": "oxlint --fix",
         "fmt": "oxfmt",
         "fmt:check": "oxfmt --check",
-        "release:patch": "pnpm version patch && git push && git push --tags",
-        "release:minor": "pnpm version minor && git push && git push --tags",
-        "release:major": "pnpm version major && git push && git push --tags"
+        "release": "pnpm version -m \"chore(release): v%s\"",
+        "postversion": "git push --follow-tags"
     },
     "dependencies": {
         "@lucide/vue": "^1.62.0",
