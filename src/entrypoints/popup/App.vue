@@ -934,7 +934,7 @@ const extensionFeatures = computed<FeatureDef[]>(() => [
 		actionIcon: PlayIcon,
 		actionLabel: formatMessage(messages['feature.browserNotifications.sendTest']),
 		onAction: () => {
-			browser.notifications.create({
+			browser.notifications?.create({
 				type: 'basic',
 				iconUrl: browser.runtime.getURL('/icon-128.png'),
 				title: formatMessage(messages['feature.browserNotifications.exampleTitle']),
@@ -959,16 +959,14 @@ const extensionFeatures = computed<FeatureDef[]>(() => [
 ])
 
 async function updateEnabled(key: FeatureKey, enabled: boolean) {
+	// Firefox only shows the permission prompt if nothing was awaited since the click
+	if (key === 'desktopNotifications' && enabled) {
+		const granted = await browser.permissions.request({ permissions: ['notifications'] })
+		if (!granted) return
+	}
 	settings[key].enabled = enabled
 	await saveSettings(settings as ExtensionSettings)
 	if (key === 'telemetry') setTelemetryEnabled(enabled)
-	if (key === 'desktopNotifications' && enabled) {
-		const granted = await browser.permissions.request({ permissions: ['notifications'] })
-		if (!granted) {
-			settings.desktopNotifications.enabled = false
-			await saveSettings(settings as ExtensionSettings)
-		}
-	}
 }
 
 let pendingSave: ReturnType<typeof setTimeout> | undefined
