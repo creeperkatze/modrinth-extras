@@ -84,7 +84,9 @@ export default defineBackground(() => {
 			;(async () => {
 				const prevNotifs = await getPreviousNotifications(userId)
 				await applyNotifications(newNotifs, prevNotifs, userId)
-			})()
+			})().catch((err) => {
+				console.error('[Modrinth Extras] Failed to apply synced notifications:', err)
+			})
 		}
 		if (message.type === 'repository-stats') {
 			const platform = message.platform as RepositoryPlatform
