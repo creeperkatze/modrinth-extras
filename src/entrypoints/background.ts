@@ -135,7 +135,7 @@ export default defineBackground(() => {
 			return true
 		}
 		if (message.type === 'modgrade-project') {
-			fetchModgradeProject(message.projectId as string)
+			fetchModgradeProject(message.slug as string)
 				.then((result) => sendResponse({ ok: true, result }))
 				.catch((err) => {
 					console.error('[Modrinth Extras] Failed to fetch Modgrade project:', err)

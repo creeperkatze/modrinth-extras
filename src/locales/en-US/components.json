@@ -164,6 +164,9 @@
   "modgradeSidebar.checked": {
     "defaultMessage": "{checked} of {total, plural, one {# latest file} other {# latest files}} checked"
   },
+  "modgradeSidebar.lastChecked": {
+    "defaultMessage": "Last checked {time}"
+  },
   "modgradeSidebar.loadError": {
     "defaultMessage": "Failed to load Modgrade data"
   },
@@ -188,8 +191,95 @@
   "modgradeSidebar.readInPart": {
     "defaultMessage": "{count, plural, one {# file} other {# files}} only partly readable"
   },
+  "modgradeSidebar.reason.discordWebhook": {
+    "defaultMessage": "Sends data to a Discord webhook"
+  },
+  "modgradeSidebar.reason.disguisedFile": {
+    "defaultMessage": "Contains a file that is not what its name says"
+  },
+  "modgradeSidebar.reason.downloadsAndRunsCode": {
+    "defaultMessage": "Downloads and runs code without checking it"
+  },
+  "modgradeSidebar.reason.downloadsCodeHttp": {
+    "defaultMessage": "Downloads code without encryption"
+  },
+  "modgradeSidebar.reason.hiddenAddress": {
+    "defaultMessage": "Hides a web address in its code"
+  },
+  "modgradeSidebar.reason.installsProgram": {
+    "defaultMessage": "Downloads or carries a program and starts it"
+  },
+  "modgradeSidebar.reason.knownMalware": {
+    "defaultMessage": "Matches known malware"
+  },
+  "modgradeSidebar.reason.licenceUnlockedCode": {
+    "defaultMessage": "Downloads and runs code unlocked by a license key"
+  },
+  "modgradeSidebar.reason.loadsCodeAtStart": {
+    "defaultMessage": "Loads code from a fixed address at start"
+  },
+  "modgradeSidebar.reason.matchesSecurityReport": {
+    "defaultMessage": "Matches a public security report"
+  },
+  "modgradeSidebar.reason.miner": {
+    "defaultMessage": "Runs a hidden cryptocurrency miner"
+  },
+  "modgradeSidebar.reason.namesStartupPlaces": {
+    "defaultMessage": "Refers to places that start programs at login"
+  },
+  "modgradeSidebar.reason.readsBrowserHistory": {
+    "defaultMessage": "Reads the browser history"
+  },
+  "modgradeSidebar.reason.readsClipboardCrypto": {
+    "defaultMessage": "Reads crypto addresses from the clipboard"
+  },
+  "modgradeSidebar.reason.readsLoginData": {
+    "defaultMessage": "Reads the login data of other programs"
+  },
+  "modgradeSidebar.reason.recordsAndClipboard": {
+    "defaultMessage": "Records the microphone or screen and replaces the clipboard"
+  },
+  "modgradeSidebar.reason.remoteControl": {
+    "defaultMessage": "Lets others run commands on the computer or server"
+  },
+  "modgradeSidebar.reason.replacedProgram": {
+    "defaultMessage": "The newest file is a different program that hides its addresses"
+  },
+  "modgradeSidebar.reason.runsDownloadedCode": {
+    "defaultMessage": "Downloads hidden code and runs it"
+  },
+  "modgradeSidebar.reason.sendsClipboard": {
+    "defaultMessage": "Sends the clipboard contents"
+  },
+  "modgradeSidebar.reason.sendsComputerId": {
+    "defaultMessage": "Sends a computer identifier"
+  },
+  "modgradeSidebar.reason.sendsIpAddress": {
+    "defaultMessage": "Sends the IP address and location to Discord"
+  },
+  "modgradeSidebar.reason.sendsScreenshots": {
+    "defaultMessage": "Sends screenshots"
+  },
+  "modgradeSidebar.reason.sendsSessionToken": {
+    "defaultMessage": "Sends the Minecraft login token somewhere other than Mojang"
+  },
+  "modgradeSidebar.reason.startsAtLogin": {
+    "defaultMessage": "Installs itself to start at login"
+  },
+  "modgradeSidebar.reason.stealsLogins": {
+    "defaultMessage": "Steals logins, tokens or the game session"
+  },
+  "modgradeSidebar.reason.swapsCryptoAddresses": {
+    "defaultMessage": "Replaces crypto addresses copied to the clipboard"
+  },
   "modgradeSidebar.someFiles": {
     "defaultMessage": "Only some files are affected"
+  },
+  "modgradeSidebar.unknownMalwareReason": {
+    "defaultMessage": "Other malicious behavior"
+  },
+  "modgradeSidebar.unknownWarningReason": {
+    "defaultMessage": "Other suspicious behavior"
   },
   "modgradeSidebar.viewReport": {
     "defaultMessage": "View on Modgrade"

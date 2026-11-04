@@ -15,6 +15,8 @@ export interface ModgradeProject {
 		read_in_part: number
 		cannot_check: number
 	} | null
+	reasons: string[] | null
+	checked_at: string | null
 }
 
 export interface ModgradeResult {
@@ -23,8 +25,8 @@ export interface ModgradeResult {
 }
 
 // Lookups are cached by the browser for 5 minutes, so repeated visits don't count against the limit.
-export async function fetchModgradeProject(projectId: string): Promise<ModgradeResult | null> {
-	const res = await fetch(`${API_URL}?modrinth=${encodeURIComponent(projectId)}`)
+export async function fetchModgradeProject(slug: string): Promise<ModgradeResult | null> {
+	const res = await fetch(`${API_URL}?modrinth_slug=${encodeURIComponent(slug)}`)
 	if (!res.ok) {
 		const body = (await res.json().catch(() => null)) as { error?: string } | null
 		throw new Error(body?.error ?? res.statusText)
