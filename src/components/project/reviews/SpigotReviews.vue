@@ -22,8 +22,8 @@
 					</IntlFormatted>
 				</span>
 			</div>
-			<div v-if="page" class="flex flex-wrap items-center gap-2">
-				<ButtonLink :href="`${page.resourceUrl}reviews`" target="_blank" rel="noopener">
+			<div v-if="pageInfo" class="flex flex-wrap items-center gap-2">
+				<ButtonLink :href="`${pageInfo.resourceUrl}reviews`" target="_blank" rel="noopener">
 					{{ formatMessage(messages.writeReview) }}
 					<ExternalIcon aria-hidden="true" />
 				</ButtonLink>
@@ -31,33 +31,26 @@
 		</div>
 
 		<div
-			v-if="state === 'loading' && !reviews.length"
-			class="flex items-center gap-2 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4 text-secondary"
-		>
-			<LoaderCircleIcon aria-hidden="true" class="size-5 animate-spin" />
-			{{ formatMessage(messages.loading) }}
-		</div>
-
-		<div
-			v-else-if="state === 'error' || state === 'not-found'"
+			v-if="error"
 			class="flex items-center gap-2 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4 text-secondary"
 		>
 			<TriangleAlertIcon aria-hidden="true" class="size-5 shrink-0" />
-			{{ formatMessage(state === 'not-found' ? messages.notFound : messages.loadError) }}
+			{{ formatMessage(error === 'not-found' ? messages.notFound : messages.loadError) }}
 		</div>
 
-		<template v-else-if="page">
+		<template v-else>
+			<RatingSummarySkeleton v-if="loading && !pageInfo" />
 			<div
-				v-if="page.ratingCount > 0"
+				v-else-if="pageInfo && pageInfo.ratingCount > 0"
 				class="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
 			>
 				<span class="text-4xl font-bold leading-none text-contrast">
-					{{ page.average.toFixed(1) }}
+					{{ pageInfo.average.toFixed(1) }}
 				</span>
 				<div class="flex flex-col gap-1">
-					<ReviewStars :rating="page.average" size="large" />
+					<ReviewStars :rating="pageInfo.average" size="large" />
 					<span class="text-base text-secondary">
-						{{ formatMessage(messages.ratingsCount, { count: page.ratingCount }) }}
+						{{ formatMessage(messages.ratingsCount, { count: pageInfo.ratingCount }) }}
 					</span>
 				</div>
 			</div>
@@ -75,107 +68,122 @@
 					</template>
 				</Combobox>
 				<Pagination
-					:page="page.page"
-					:count="page.lastPage"
+					v-if="pageInfo"
+					:page="page"
+					:count="pageInfo.lastPage"
 					class="ml-auto"
 					@switch-page="switchPage"
 				/>
+				<PaginationSkeleton v-else class="ml-auto" />
 			</div>
 
-			<div
-				v-if="!reviews.length"
-				class="rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4 text-secondary"
-			>
-				{{ formatMessage(messages.empty) }}
-			</div>
+			<ReviewSkeletons
+				v-if="loading"
+				:count="pageInfo?.pageSize ?? DEFAULT_PAGE_SIZE"
+				:label="formatMessage(messages.loading)"
+			/>
 
-			<article
-				v-for="{ review, version } in reviewsWithVersions"
-				:key="review.key"
-				class="flex flex-col gap-3 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
-			>
-				<header class="flex items-start gap-3">
+			<template v-else-if="data">
+				<div
+					v-if="!data.reviews.length"
+					class="rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4 text-secondary"
+				>
+					{{ formatMessage(messages.empty) }}
+				</div>
+
+				<article
+					v-for="{ review, version } in reviewsWithVersions"
+					:key="review.key"
+					class="flex flex-col gap-3 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
+				>
+					<header class="flex items-start gap-3">
+						<div
+							class="relative flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-surface-5 text-lg font-bold text-contrast"
+							aria-hidden="true"
+						>
+							{{ authorName(review).charAt(0).toUpperCase() }}
+							<img
+								v-if="review.authorAvatarUrl"
+								:src="review.authorAvatarUrl"
+								alt=""
+								loading="lazy"
+								class="absolute inset-0 size-full object-cover"
+								@error="hideImage"
+							/>
+						</div>
+						<div class="flex min-w-0 flex-1 flex-col gap-0.5">
+							<a
+								:href="review.authorUrl"
+								target="_blank"
+								rel="noopener"
+								class="no-click-animation w-fit max-w-full truncate font-semibold text-contrast hover:underline"
+							>
+								{{ authorName(review) }}
+							</a>
+							<span class="text-base text-secondary" :title="formatDate(review.createdAt)">
+								{{ formatMessage(messages.posted, { time: formatRelativeTime(review.createdAt) }) }}
+							</span>
+						</div>
+						<div class="flex shrink-0 items-center gap-1.5">
+							<ReviewStars :rating="review.rating" />
+							<span class="text-base font-semibold text-contrast">{{
+								review.rating.toFixed(1)
+							}}</span>
+						</div>
+					</header>
+
+					<!-- eslint-disable vue/no-v-html -->
 					<div
-						class="relative flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-surface-5 text-lg font-bold text-contrast"
-						aria-hidden="true"
+						class="markdown-body break-words text-primary"
+						v-html="renderReview(review.message)"
+					/>
+
+					<PageHeaderMetadata v-if="version">
+						<PageHeaderMetadataItem :icon="VersionIcon">
+							<a
+								v-if="version.path"
+								:href="version.path"
+								class="no-click-animation hover:underline"
+								@click="openVersion($event, version.path)"
+							>
+								{{ formatMessage(messages.version, { version: version.label }) }}
+							</a>
+							<template v-else>
+								{{ formatMessage(messages.version, { version: version.label }) }}
+							</template>
+						</PageHeaderMetadataItem>
+					</PageHeaderMetadata>
+
+					<div
+						v-if="review.response"
+						class="flex flex-col gap-1 rounded-xl border border-solid border-surface-5 bg-surface-4 p-3 text-base"
 					>
-						{{ authorName(review).charAt(0).toUpperCase() }}
-						<img
-							v-if="review.authorAvatarUrl"
-							:src="review.authorAvatarUrl"
-							alt=""
-							loading="lazy"
-							class="absolute inset-0 size-full object-cover"
-							@error="hideImage"
+						<span class="font-semibold text-contrast">{{
+							formatMessage(messages.authorResponse)
+						}}</span>
+						<div
+							class="markdown-body break-words text-secondary"
+							v-html="renderReview(review.response)"
 						/>
 					</div>
-					<div class="flex min-w-0 flex-1 flex-col gap-0.5">
-						<a
-							:href="review.authorUrl"
-							target="_blank"
-							rel="noopener"
-							class="no-click-animation w-fit max-w-full truncate font-semibold text-contrast hover:underline"
-						>
-							{{ authorName(review) }}
-						</a>
-						<span class="text-base text-secondary" :title="formatDate(review.createdAt)">
-							{{ formatMessage(messages.posted, { time: formatRelativeTime(review.createdAt) }) }}
-						</span>
-					</div>
-					<div class="flex shrink-0 items-center gap-1.5">
-						<ReviewStars :rating="review.rating" />
-						<span class="text-base font-semibold text-contrast">{{
-							review.rating.toFixed(1)
-						}}</span>
-					</div>
-				</header>
-
-				<!-- eslint-disable vue/no-v-html -->
-				<div class="markdown-body break-words text-primary" v-html="renderReview(review.message)" />
-
-				<PageHeaderMetadata v-if="version">
-					<PageHeaderMetadataItem :icon="VersionIcon">
-						<a
-							v-if="version.path"
-							:href="version.path"
-							class="no-click-animation hover:underline"
-							@click="openVersion($event, version.path)"
-						>
-							{{ formatMessage(messages.version, { version: version.label }) }}
-						</a>
-						<template v-else>
-							{{ formatMessage(messages.version, { version: version.label }) }}
-						</template>
-					</PageHeaderMetadataItem>
-				</PageHeaderMetadata>
-
-				<div
-					v-if="review.response"
-					class="flex flex-col gap-1 rounded-xl border border-solid border-surface-5 bg-surface-4 p-3 text-base"
-				>
-					<span class="font-semibold text-contrast">{{
-						formatMessage(messages.authorResponse)
-					}}</span>
-					<div
-						class="markdown-body break-words text-secondary"
-						v-html="renderReview(review.response)"
-					/>
-				</div>
-				<!-- eslint-enable vue/no-v-html -->
-			</article>
+					<!-- eslint-enable vue/no-v-html -->
+				</article>
+			</template>
 
 			<Pagination
-				:page="page.page"
-				:count="page.lastPage"
+				v-if="pageInfo"
+				:page="page"
+				:count="pageInfo.lastPage"
 				class="justify-end"
 				@switch-page="switchPage"
 			/>
+			<PaginationSkeleton v-else class="justify-end" />
 		</template>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { ExternalIcon, LoaderCircleIcon, TriangleAlertIcon, VersionIcon } from '@modrinth/assets'
+import { ExternalIcon, TriangleAlertIcon, VersionIcon } from '@modrinth/assets'
 import {
 	ButtonLink,
 	Combobox,
@@ -195,12 +203,15 @@ import { modrinthClient } from '../../../api/client'
 import type {
 	SpigotReview,
 	SpigotReviewSort,
-	SpigotReviewsPage,
 	SpigotReviewsResult,
 } from '../../../background/external/platforms/spigot'
 import { navigate } from '../../../content/page-router'
 import { i18n } from '../../../core/i18n/i18n'
 import type { MatchableProject } from '../../../features/platforms/matching'
+import { usePagedReviews } from '../../../features/reviews/paged-reviews'
+import PaginationSkeleton from './PaginationSkeleton.vue'
+import RatingSummarySkeleton from './RatingSummarySkeleton.vue'
+import ReviewSkeletons from './ReviewSkeletons.vue'
 import ReviewStars from './ReviewStars.vue'
 
 const props = defineProps<{ project: MatchableProject }>()
@@ -257,12 +268,25 @@ const sortOptions = computed(() => [
 	{ value: 'lowest', label: formatMessage(messages.sortLowestRating) },
 ])
 
-type State = 'loading' | 'ready' | 'not-found' | 'error'
+// Spiget pages are requested at this size.
+const DEFAULT_PAGE_SIZE = 10
 
-const state = ref<State>('loading')
-const reviews = ref<SpigotReview[]>([])
-const page = ref<SpigotReviewsPage | null>(null)
 const sort = ref<ReviewSort>('newest')
+
+const { page, data, pageInfo, loading, error, switchPage } = usePagedReviews({
+	key: (pageNumber) => ['spigot-reviews', props.project.slug, sort.value, pageNumber],
+	fetchPage: (pageNumber) =>
+		browser.runtime.sendMessage({
+			type: 'spigot-reviews',
+			project: props.project,
+			sort: SORTS[sort.value],
+			page: pageNumber,
+		}) as Promise<SpigotReviewsResult | undefined>,
+	source: 'SpigotMC',
+})
+
+// Synchronous, so the new sort never gets requested for the old page.
+watch(sort, () => (page.value = 1), { flush: 'sync' })
 const PLUGIN_LOADERS = new Set(['bukkit', 'spigot', 'paper', 'purpur', 'folia'])
 
 interface ModrinthVersion {
@@ -273,7 +297,6 @@ interface ModrinthVersion {
 
 // Plugin builds come first, since a version number can have one build per loader.
 const modrinthVersions = ref<ModrinthVersion[]>([])
-let requestId = 0
 
 // Spigot version names are free text, like "[6.0.4.0]" or "v2.3.1".
 function normalizeVersion(name: string): string {
@@ -305,7 +328,7 @@ function resolveVersion(review: SpigotReview): { label: string; path: string | n
 }
 
 const reviewsWithVersions = computed(() =>
-	reviews.value.map((review) => ({ review, version: resolveVersion(review) })),
+	(data.value?.reviews ?? []).map((review) => ({ review, version: resolveVersion(review) })),
 )
 
 // Spigot smilies use relative image paths that would break here, so images go before sanitizing.
@@ -326,42 +349,6 @@ function formatDate(iso: string): string {
 		new Date(iso),
 	)
 }
-
-async function load(pageNumber: number) {
-	const id = ++requestId
-	state.value = 'loading'
-	try {
-		const result = (await browser.runtime.sendMessage({
-			type: 'spigot-reviews',
-			project: props.project,
-			sort: SORTS[sort.value],
-			page: pageNumber,
-		})) as SpigotReviewsResult | undefined
-		if (id !== requestId) return
-
-		if (!result) {
-			state.value = 'error'
-		} else if (!result.ok) {
-			state.value = result.error === 'failed' ? 'error' : result.error
-		} else {
-			reviews.value = result.data.reviews
-			page.value = result.data
-			state.value = 'ready'
-		}
-	} catch (err) {
-		console.error('[Modrinth Extras] Failed to load SpigotMC reviews:', err)
-		if (id === requestId) state.value = 'error'
-	}
-}
-
-function switchPage(pageNumber: number) {
-	if (state.value === 'loading') return
-	void load(pageNumber).then(() =>
-		document.getElementById('modrinth-extras-reviews-panel')?.scrollIntoView({ block: 'start' }),
-	)
-}
-
-watch(sort, () => void load(1))
 
 // Spigot and Modrinth name versions independently, so only matching names get a link.
 async function loadModrinthVersions() {
@@ -393,8 +380,5 @@ function openVersion(event: MouseEvent, path: string) {
 	navigate(path)
 }
 
-onMounted(() => {
-	void load(1)
-	void loadModrinthVersions()
-})
+onMounted(() => void loadModrinthVersions())
 </script>

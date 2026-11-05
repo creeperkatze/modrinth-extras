@@ -15,6 +15,7 @@ import {
 	namesMatch,
 	type PlatformMatch,
 } from '../../../features/platforms/matching'
+import { backgroundQueries } from '../../query'
 
 // Spiget's CORS rules reject a custom User-Agent, so it goes in the header Spiget allows instead.
 const spigetFetch: typeof globalThis.fetch = (input, init) => {
@@ -27,7 +28,6 @@ const client = new SpigetClient({ fetch: spigetFetch })
 
 const SEARCH_SIZE = 25
 const REVIEWS_PAGE_SIZE = 10
-const CACHE_TTL_MS = 5 * 60_000
 
 export type SpigotReviewSort = '-date' | '+date' | '-rating.average' | '+rating.average'
 
@@ -50,36 +50,12 @@ export interface SpigotReviewsPage {
 	ratingCount: number
 	page: number
 	lastPage: number
+	pageSize: number
 }
 
 export type SpigotReviewsResult =
 	| { ok: true; data: SpigotReviewsPage }
 	| { ok: false; error: 'not-found' | 'failed' }
-
-interface CacheEntry<T> {
-	expires: number
-	value: Promise<T>
-}
-
-const resourceCache = new Map<string, CacheEntry<Resource | null>>()
-const authorCache = new Map<number, CacheEntry<Author | null>>()
-
-// Paging through reviews repeats the same search and authors, so both are cached for a while.
-function cached<K, T>(cache: Map<K, CacheEntry<T>>, key: K, load: () => Promise<T>): Promise<T> {
-	const now = Date.now()
-	const hit = cache.get(key)
-	if (hit && hit.expires > now) return hit.value
-
-	for (const [staleKey, entry] of cache) {
-		if (entry.expires <= now) cache.delete(staleKey)
-	}
-	const value = load()
-	cache.set(key, { expires: now + CACHE_TTL_MS, value })
-	value.catch(() => {
-		if (cache.get(key)?.value === value) cache.delete(key)
-	})
-	return value
-}
 
 // The hosted icon is preferred over Spiget's inline base64 copy to keep the message small.
 function resolveIcon(icon: Icon | undefined): string | null {
@@ -136,40 +112,44 @@ function contributorNames(resource: Resource): string[] {
 }
 
 function findSpigotResource(project: MatchableProject): Promise<Resource | null> {
-	return cached(resourceCache, project.slug, async () => {
-		const resources = await searchResults(
-			client.resources.search(project.name, {
-				field: 'name',
-				size: SEARCH_SIZE,
-				sort: '-downloads',
-			}),
-		)
-		// Spiget only returns author ids, so names are looked up just for results with a fitting name.
-		// The uploader account is often renamed or differs from Modrinth, so contributors count too.
-		const candidates = await Promise.all(
-			resources
-				.filter((resource) => nameMatch(project, resource))
-				.map(async (resource) => ({
-					item: resource,
-					name: resource.name,
-					authors: [
-						(await getAuthor(resource.author.id))?.name ?? '',
-						...contributorNames(resource),
-					],
-				})),
-		)
-		return matchProject(project, candidates)
+	return backgroundQueries.fetchQuery({
+		queryKey: ['spigot-resource', project.slug],
+		queryFn: () => searchSpigotResource(project),
 	})
+}
+
+async function searchSpigotResource(project: MatchableProject): Promise<Resource | null> {
+	const resources = await searchResults(
+		client.resources.search(project.name, {
+			field: 'name',
+			size: SEARCH_SIZE,
+			sort: '-downloads',
+		}),
+	)
+	// Spiget only returns author ids, so names are looked up just for results with a fitting name.
+	// The uploader account is often renamed or differs from Modrinth, so contributors count too.
+	const candidates = await Promise.all(
+		resources
+			.filter((resource) => nameMatch(project, resource))
+			.map(async (resource) => ({
+				item: resource,
+				name: resource.name,
+				authors: [(await getAuthor(resource.author.id))?.name ?? '', ...contributorNames(resource)],
+			})),
+	)
+	return matchProject(project, candidates)
 }
 
 // Deleted members can't be looked up anymore, so they resolve to null instead of failing the page.
 function getAuthor(id: number): Promise<Author | null> {
-	return cached(authorCache, id, () =>
-		client.authors.get(id).catch((err) => {
-			if (err instanceof SpigetError && err.status === 404) return null
-			throw err
-		}),
-	)
+	return backgroundQueries.fetchQuery({
+		queryKey: ['spigot-author', id],
+		queryFn: () =>
+			client.authors.get(id).catch((err) => {
+				if (err instanceof SpigetError && err.status === 404) return null
+				throw err
+			}),
+	})
 }
 
 function decodeBase64(value: string): string {
@@ -230,6 +210,7 @@ export async function fetchSpigotReviews(
 			ratingCount: resource.rating.count,
 			page: response.pagination.index ?? page,
 			lastPage: response.pagination.count ?? page,
+			pageSize: REVIEWS_PAGE_SIZE,
 		},
 	}
 }

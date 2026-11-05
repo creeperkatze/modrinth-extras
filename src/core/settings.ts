@@ -51,7 +51,7 @@ export interface ExtensionSettings {
 	galleryBackground: { enabled: boolean }
 	monetizationBadge: { enabled: boolean }
 	translateDescription: { enabled: boolean }
-	reviews: { enabled: boolean; moddex: boolean; spigot: boolean }
+	reviews: { enabled: boolean; moddex: boolean; curseforge: boolean; spigot: boolean }
 	notificationBadge: { enabled: boolean }
 	desktopNotifications: { enabled: boolean }
 	curseforgeRedirect: { enabled: boolean }
@@ -85,7 +85,7 @@ export const DEFAULTS: ExtensionSettings = {
 	galleryBackground: { enabled: true },
 	monetizationBadge: { enabled: true },
 	translateDescription: { enabled: false },
-	reviews: { enabled: true, moddex: true, spigot: true },
+	reviews: { enabled: true, moddex: true, curseforge: true, spigot: true },
 	notificationBadge: { enabled: true },
 	desktopNotifications: { enabled: false },
 	curseforgeRedirect: { enabled: false },

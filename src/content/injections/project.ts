@@ -144,7 +144,8 @@ export function projectInjections(settings: SettingsGetter) {
 	const projectReviews = createInjection({
 		id: 'modrinth-extras-project-reviews',
 		isEnabled: () =>
-			settings().reviews.enabled && (settings().reviews.moddex || settings().reviews.spigot),
+			settings().reviews.enabled &&
+			(settings().reviews.moddex || settings().reviews.curseforge || settings().reviews.spigot),
 		settingsKeys: ['reviews'],
 		persistent: false,
 		projectScoped: true,
@@ -161,6 +162,7 @@ export function projectInjections(settings: SettingsGetter) {
 			return createExtensionApp(ProjectReviews, {
 				projectSlug: slug ?? '',
 				moddex: settings().reviews.moddex,
+				curseforge: settings().reviews.curseforge,
 				spigot: settings().reviews.spigot,
 			})
 		},

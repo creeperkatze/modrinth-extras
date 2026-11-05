@@ -17,13 +17,13 @@
 					</IntlFormatted>
 				</span>
 			</div>
-			<div v-if="page" class="flex flex-wrap items-center gap-2">
-				<ButtonLink :href="page.writeReviewUrl" target="_blank" rel="noopener">
+			<div v-if="pageInfo" class="flex flex-wrap items-center gap-2">
+				<ButtonLink :href="pageInfo.writeReviewUrl" target="_blank" rel="noopener">
 					{{ formatMessage(messages.writeReview) }}
 					<ExternalIcon aria-hidden="true" />
 				</ButtonLink>
 			</div>
-			<div v-else-if="state === 'not-found'" class="flex flex-wrap items-center gap-2">
+			<div v-else-if="error === 'not-found'" class="flex flex-wrap items-center gap-2">
 				<ButtonLink :href="MODDEX_URL" target="_blank" rel="noopener">
 					{{ formatMessage(messages.openModdex) }}
 					<ExternalIcon aria-hidden="true" />
@@ -32,23 +32,15 @@
 		</div>
 
 		<div
-			v-if="state === 'loading' && !reviews.length"
-			class="flex items-center gap-2 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4 text-secondary"
-		>
-			<LoaderCircleIcon aria-hidden="true" class="size-5 animate-spin" />
-			{{ formatMessage(messages.loading) }}
-		</div>
-
-		<div
-			v-else-if="state === 'error' || state === 'rate-limited'"
+			v-if="error === 'failed' || error === 'rate-limited'"
 			class="flex items-center gap-2 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4 text-secondary"
 		>
 			<TriangleAlertIcon aria-hidden="true" class="size-5 shrink-0" />
-			{{ formatMessage(state === 'rate-limited' ? messages.rateLimited : messages.loadError) }}
+			{{ formatMessage(error === 'rate-limited' ? messages.rateLimited : messages.loadError) }}
 		</div>
 
 		<div
-			v-else-if="state === 'not-found'"
+			v-else-if="error === 'not-found'"
 			class="flex items-center gap-2 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4 text-secondary"
 		>
 			<TriangleAlertIcon aria-hidden="true" class="size-5 shrink-0" />
@@ -56,8 +48,9 @@
 		</div>
 
 		<template v-else>
+			<RatingSummarySkeleton v-if="loading && !pageInfo" categories />
 			<div
-				v-if="summary && summary.totalRatings > 0"
+				v-else-if="summary && summary.totalRatings > 0"
 				class="flex flex-col gap-4 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
 			>
 				<div class="flex flex-wrap items-center gap-x-4 gap-y-2">
@@ -108,168 +101,178 @@
 					</template>
 				</Combobox>
 				<Pagination
-					v-if="page"
-					:page="page.page"
-					:count="page.lastPage"
+					v-if="pageInfo"
+					:page="page"
+					:count="pageInfo.lastPage"
 					class="ml-auto"
 					@switch-page="switchPage"
 				/>
+				<PaginationSkeleton v-else class="ml-auto" />
 			</div>
 
-			<div
-				v-if="!reviews.length"
-				class="rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4 text-secondary"
-			>
-				{{ formatMessage(messages.empty) }}
-			</div>
+			<ReviewSkeletons
+				v-if="loading"
+				:count="pageInfo?.pageSize ?? DEFAULT_PAGE_SIZE"
+				:label="formatMessage(messages.loading)"
+			/>
 
-			<article
-				v-for="review in reviews"
-				:key="review.id"
-				class="flex flex-col gap-3 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
-			>
-				<header class="flex items-start gap-3">
-					<div
-						class="relative flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-surface-5 text-lg font-bold text-contrast"
-						aria-hidden="true"
-					>
-						{{ review.author.name.charAt(0).toUpperCase() }}
-						<img
-							v-if="review.author.avatar_url"
-							:src="review.author.avatar_url"
-							alt=""
-							loading="lazy"
-							class="absolute inset-0 size-full object-cover"
-							@error="hideImage"
-						/>
-					</div>
-					<div class="flex min-w-0 flex-1 flex-col gap-0.5">
-						<div class="flex flex-wrap items-center gap-x-2 gap-y-0.5">
-							<a
-								v-if="review.author.profile_url"
-								:href="withRef(review.author.profile_url)"
-								target="_blank"
-								rel="noopener"
-								class="no-click-animation truncate font-semibold text-contrast hover:underline"
-							>
-								{{ review.author.name }}
-							</a>
-							<span v-else class="truncate font-semibold text-contrast">{{
-								review.author.name
-							}}</span>
-							<span
-								v-if="review.is_verified_developer"
-								class="inline-flex items-center gap-1 rounded-full bg-brand-highlight px-2 py-0.5 text-base font-semibold text-brand"
-							>
-								<ShieldCheckIcon aria-hidden="true" class="size-3.5" />
-								{{ formatMessage(messages.developer) }}
-							</span>
-						</div>
-						<div class="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-base text-secondary">
-							<span v-if="review.created_at" :title="formatDate(review.created_at)">
-								{{
-									formatMessage(messages.posted, {
-										time: formatRelativeTime(review.created_at),
-									})
-								}}
-							</span>
-							<span v-if="review.edited_at">· {{ formatMessage(messages.edited) }}</span>
-						</div>
-					</div>
-					<div class="flex shrink-0 items-center gap-1.5">
-						<ReviewStars :rating="review.rating" />
-						<span class="text-base font-semibold text-contrast">{{
-							review.rating.toFixed(1)
-						}}</span>
-					</div>
-				</header>
-
+			<template v-else-if="data">
 				<div
-					v-if="categoryRatings(review.categories).length"
-					class="grid grid-cols-1 gap-x-6 gap-y-1.5 sm:grid-cols-3"
+					v-if="!data.reviews.length"
+					class="rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4 text-secondary"
 				>
-					<div
-						v-for="cat in categoryRatings(review.categories)"
-						:key="cat.label"
-						class="flex flex-col gap-1"
-					>
-						<div class="flex items-center justify-between text-base text-secondary">
-							<span>{{ cat.label }}</span>
-							<span class="font-semibold text-contrast">{{ cat.value.toFixed(1) }}</span>
-						</div>
-						<div class="h-1.5 w-full overflow-hidden rounded-full bg-surface-5">
-							<div
-								class="h-full rounded-full"
-								:class="barColor(cat.value)"
-								:style="{ width: `${(cat.value / 5) * 100}%` }"
+					{{ formatMessage(messages.empty) }}
+				</div>
+
+				<article
+					v-for="review in data.reviews"
+					:key="review.id"
+					class="flex flex-col gap-3 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4"
+				>
+					<header class="flex items-start gap-3">
+						<div
+							class="relative flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-surface-5 text-lg font-bold text-contrast"
+							aria-hidden="true"
+						>
+							{{ review.author.name.charAt(0).toUpperCase() }}
+							<img
+								v-if="review.author.avatar_url"
+								:src="review.author.avatar_url"
+								alt=""
+								loading="lazy"
+								class="absolute inset-0 size-full object-cover"
+								@error="hideImage"
 							/>
 						</div>
-					</div>
-				</div>
+						<div class="flex min-w-0 flex-1 flex-col gap-0.5">
+							<div class="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+								<a
+									v-if="review.author.profile_url"
+									:href="withRef(review.author.profile_url)"
+									target="_blank"
+									rel="noopener"
+									class="no-click-animation truncate font-semibold text-contrast hover:underline"
+								>
+									{{ review.author.name }}
+								</a>
+								<span v-else class="truncate font-semibold text-contrast">{{
+									review.author.name
+								}}</span>
+								<span
+									v-if="review.is_verified_developer"
+									class="inline-flex items-center gap-1 rounded-full bg-brand-highlight px-2 py-0.5 text-base font-semibold text-brand"
+								>
+									<ShieldCheckIcon aria-hidden="true" class="size-3.5" />
+									{{ formatMessage(messages.developer) }}
+								</span>
+							</div>
+							<div class="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-base text-secondary">
+								<span v-if="review.created_at" :title="formatDate(review.created_at)">
+									{{
+										formatMessage(messages.posted, {
+											time: formatRelativeTime(review.created_at),
+										})
+									}}
+								</span>
+								<span v-if="review.edited_at">· {{ formatMessage(messages.edited) }}</span>
+							</div>
+						</div>
+						<div class="flex shrink-0 items-center gap-1.5">
+							<ReviewStars :rating="review.rating" />
+							<span class="text-base font-semibold text-contrast">{{
+								review.rating.toFixed(1)
+							}}</span>
+						</div>
+					</header>
 
-				<div v-if="review.title" class="text-base font-semibold text-contrast">
-					{{ review.title }}
-				</div>
-				<!-- eslint-disable vue/no-v-html -->
-				<div
-					v-if="review.content"
-					class="markdown-body break-words text-primary"
-					v-html="renderReview(review.content)"
-				/>
-				<!-- eslint-enable vue/no-v-html -->
-
-				<PageHeaderMetadata
-					v-if="review.minecraft_version || review.playtime_hours || review.helpful_votes > 0"
-				>
-					<PageHeaderMetadataTagsItem v-if="review.minecraft_version">
-						<TagItem
-							v-for="version in formatGameVersions(review.minecraft_version, gameVersionTags)"
-							:key="version"
+					<div
+						v-if="categoryRatings(review.categories).length"
+						class="grid grid-cols-1 gap-x-6 gap-y-1.5 sm:grid-cols-3"
+					>
+						<div
+							v-for="cat in categoryRatings(review.categories)"
+							:key="cat.label"
+							class="flex flex-col gap-1"
 						>
-							{{ version }}
-						</TagItem>
-					</PageHeaderMetadataTagsItem>
-					<PageHeaderMetadataItem v-if="review.playtime_hours" :icon="ClockIcon">
-						{{ formatMessage(messages.playtime, { hours: review.playtime_hours }) }}
-					</PageHeaderMetadataItem>
-					<PageHeaderMetadataItem v-if="review.helpful_votes > 0" :icon="HeartIcon">
-						{{ formatMessage(messages.helpful, { count: review.helpful_votes }) }}
-					</PageHeaderMetadataItem>
-				</PageHeaderMetadata>
+							<div class="flex items-center justify-between text-base text-secondary">
+								<span>{{ cat.label }}</span>
+								<span class="font-semibold text-contrast">{{ cat.value.toFixed(1) }}</span>
+							</div>
+							<div class="h-1.5 w-full overflow-hidden rounded-full bg-surface-5">
+								<div
+									class="h-full rounded-full"
+									:class="barColor(cat.value)"
+									:style="{ width: `${(cat.value / 5) * 100}%` }"
+								/>
+							</div>
+						</div>
+					</div>
 
-				<div
-					v-if="review.developer_response"
-					class="flex flex-col gap-1 rounded-xl border border-solid border-surface-5 bg-surface-4 p-3 text-base"
-				>
-					<span class="font-semibold text-contrast">{{
-						formatMessage(messages.developerResponse)
-					}}</span>
+					<div v-if="review.title" class="text-base font-semibold text-contrast">
+						{{ review.title }}
+					</div>
 					<!-- eslint-disable vue/no-v-html -->
 					<div
-						class="markdown-body break-words text-secondary"
-						v-html="renderReview(review.developer_response.content)"
+						v-if="review.content"
+						class="markdown-body break-words text-primary"
+						v-html="renderReview(review.content)"
 					/>
 					<!-- eslint-enable vue/no-v-html -->
-				</div>
 
-				<div
-					v-if="review.public_moderator_note"
-					class="rounded-xl border border-solid border-surface-5 bg-surface-4 p-3 text-base text-secondary"
-				>
-					<span class="font-semibold text-contrast">{{
-						formatMessage(messages.moderatorNote)
-					}}</span>
-					{{ review.public_moderator_note }}
-				</div>
-			</article>
+					<PageHeaderMetadata
+						v-if="review.minecraft_version || review.playtime_hours || review.helpful_votes > 0"
+					>
+						<PageHeaderMetadataTagsItem v-if="review.minecraft_version">
+							<TagItem
+								v-for="version in formatGameVersions(review.minecraft_version, gameVersionTags)"
+								:key="version"
+							>
+								{{ version }}
+							</TagItem>
+						</PageHeaderMetadataTagsItem>
+						<PageHeaderMetadataItem v-if="review.playtime_hours" :icon="ClockIcon">
+							{{ formatMessage(messages.playtime, { hours: review.playtime_hours }) }}
+						</PageHeaderMetadataItem>
+						<PageHeaderMetadataItem v-if="review.helpful_votes > 0" :icon="HeartIcon">
+							{{ formatMessage(messages.helpful, { count: review.helpful_votes }) }}
+						</PageHeaderMetadataItem>
+					</PageHeaderMetadata>
+
+					<div
+						v-if="review.developer_response"
+						class="flex flex-col gap-1 rounded-xl border border-solid border-surface-5 bg-surface-4 p-3 text-base"
+					>
+						<span class="font-semibold text-contrast">{{
+							formatMessage(messages.developerResponse)
+						}}</span>
+						<!-- eslint-disable vue/no-v-html -->
+						<div
+							class="markdown-body break-words text-secondary"
+							v-html="renderReview(review.developer_response.content)"
+						/>
+						<!-- eslint-enable vue/no-v-html -->
+					</div>
+
+					<div
+						v-if="review.public_moderator_note"
+						class="rounded-xl border border-solid border-surface-5 bg-surface-4 p-3 text-base text-secondary"
+					>
+						<span class="font-semibold text-contrast">{{
+							formatMessage(messages.moderatorNote)
+						}}</span>
+						{{ review.public_moderator_note }}
+					</div>
+				</article>
+			</template>
 
 			<Pagination
-				v-if="page"
-				:page="page.page"
-				:count="page.lastPage"
+				v-if="pageInfo"
+				:page="page"
+				:count="pageInfo.lastPage"
 				class="justify-end"
 				@switch-page="switchPage"
 			/>
+			<PaginationSkeleton v-else class="justify-end" />
 		</template>
 	</div>
 </template>
@@ -279,7 +282,6 @@ import {
 	ClockIcon,
 	ExternalIcon,
 	HeartIcon,
-	LoaderCircleIcon,
 	ShieldCheckIcon,
 	TriangleAlertIcon,
 } from '@modrinth/assets'
@@ -298,17 +300,17 @@ import {
 } from '@modrinth/ui'
 import type { GameVersionTag } from '@modrinth/utils'
 import { configuredXss, md } from '@modrinth/utils'
-import type { Review, ReviewCategories, ReviewSort } from 'moddex-js'
+import type { ReviewCategories, ReviewSort } from 'moddex-js'
 import { computed, onMounted, ref, watch } from 'vue'
 import { browser } from 'wxt/browser'
 
-import type {
-	ModdexReviewsPage,
-	ModdexReviewsResult,
-	ModdexSummary,
-} from '../../../background/external/moddex'
+import type { ModdexReviewsResult, ModdexSummary } from '../../../background/external/moddex'
 import { i18n } from '../../../core/i18n/i18n'
 import { formatGameVersions, loadGameVersionTags } from '../../../features/reviews/game-versions'
+import { usePagedReviews } from '../../../features/reviews/paged-reviews'
+import PaginationSkeleton from './PaginationSkeleton.vue'
+import RatingSummarySkeleton from './RatingSummarySkeleton.vue'
+import ReviewSkeletons from './ReviewSkeletons.vue'
 import ReviewStars from './ReviewStars.vue'
 
 // Reviews are untrusted, so raw HTML and images are off before Modrinth's sanitizer runs.
@@ -396,52 +398,32 @@ const sortOptions = computed<{ value: ReviewSort; label: string }[]>(() => [
 
 const props = defineProps<{ projectSlug: string }>()
 
-type State = 'loading' | 'ready' | 'not-found' | 'rate-limited' | 'error'
+// ModDex's usual page size stands in until the first page says otherwise.
+const DEFAULT_PAGE_SIZE = 20
 
 const gameVersionTags = ref<GameVersionTag[]>([])
-const state = ref<State>('loading')
-const reviews = ref<Review[]>([])
-const page = ref<ModdexReviewsPage | null>(null)
 const summary = ref<ModdexSummary | null>(null)
 const sort = ref<ReviewSort>('newest')
-let requestId = 0
 
-async function load(pageNumber: number) {
-	const id = ++requestId
-	state.value = 'loading'
-	try {
-		const result = (await browser.runtime.sendMessage({
+const { page, data, pageInfo, loading, error, switchPage } = usePagedReviews({
+	key: (pageNumber) => ['moddex-reviews', props.projectSlug, sort.value, pageNumber],
+	fetchPage: (pageNumber) =>
+		browser.runtime.sendMessage({
 			type: 'moddex-reviews',
 			slug: props.projectSlug,
 			sort: sort.value,
 			page: pageNumber,
-		})) as ModdexReviewsResult | undefined
-		if (id !== requestId) return
+		}) as Promise<ModdexReviewsResult | undefined>,
+	source: 'ModDex',
+})
 
-		if (!result) {
-			state.value = 'error'
-		} else if (!result.ok) {
-			state.value = result.error === 'failed' ? 'error' : result.error
-		} else {
-			reviews.value = result.data.reviews
-			page.value = result.data
-			if (result.data.summary) summary.value = result.data.summary
-			state.value = 'ready'
-		}
-	} catch (err) {
-		console.error('[Modrinth Extras] Failed to load ModDex reviews:', err)
-		if (id === requestId) state.value = 'error'
-	}
-}
+// Only the first page carries the summary, so it is kept while paging.
+watch(data, (current) => {
+	if (current?.summary) summary.value = current.summary
+})
 
-function switchPage(pageNumber: number) {
-	if (state.value === 'loading') return
-	void load(pageNumber).then(() =>
-		document.getElementById('modrinth-extras-reviews-panel')?.scrollIntoView({ block: 'start' }),
-	)
-}
-
-watch(sort, () => void load(1))
+// Synchronous, so the new sort never gets requested for the old page.
+watch(sort, () => (page.value = 1), { flush: 'sync' })
 
 function formatDate(iso: string): string {
 	return new Intl.DateTimeFormat(i18n.global.locale.value, { dateStyle: 'medium' }).format(
@@ -469,6 +451,5 @@ function hideImage(event: Event) {
 
 onMounted(() => {
 	void loadGameVersionTags().then((tags) => (gameVersionTags.value = tags))
-	void load(1)
 })
 </script>

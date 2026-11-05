@@ -540,11 +540,15 @@ const messages = defineMessages({
 	'feature.reviews.description': {
 		id: 'feature.reviews.description',
 		defaultMessage:
-			'Adds a Reviews tab to projects with community reviews from ModDex and SpigotMC.',
+			'Adds a Reviews tab to projects with community reviews from ModDex, CurseForge, and SpigotMC.',
 	},
 	'feature.reviews.moddex': {
 		id: 'feature.reviews.moddex',
 		defaultMessage: 'ModDex reviews',
+	},
+	'feature.reviews.curseforge': {
+		id: 'feature.reviews.curseforge',
+		defaultMessage: 'CurseForge comments',
 	},
 	'feature.reviews.spigot': {
 		id: 'feature.reviews.spigot',
@@ -765,6 +769,11 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 				key: 'moddex',
 				type: 'toggle',
 				label: formatMessage(messages['feature.reviews.moddex']),
+			},
+			{
+				key: 'curseforge',
+				type: 'toggle',
+				label: formatMessage(messages['feature.reviews.curseforge']),
 			},
 			{
 				key: 'spigot',

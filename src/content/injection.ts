@@ -2,6 +2,7 @@ import { installTooltipDirective, TooltipDirective } from '@modrinth/ui'
 import { type App, type Component, createApp, h } from 'vue'
 
 import { installI18n } from '../core/i18n/i18n'
+import { installQuery } from '../core/query'
 import type { ExtensionSettings } from '../core/settings'
 import { installErrorReporting } from '../core/telemetry'
 
@@ -28,6 +29,7 @@ export function createExtensionApp(component: Component, props?: Record<string, 
 	installTooltipDirective(app)
 	mountTooltipHost()
 	installI18n(app)
+	installQuery(app)
 	return app
 }
 

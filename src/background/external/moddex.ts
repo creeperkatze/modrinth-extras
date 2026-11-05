@@ -8,6 +8,8 @@ import ModDexClient, {
 } from 'moddex-js'
 import { browser } from 'wxt/browser'
 
+import { backgroundQueries } from '../query'
+
 const REF = 'modrinth-extras'
 
 const client = new ModDexClient({
@@ -25,6 +27,7 @@ export interface ModdexReviewsPage {
 	summary: ModdexSummary | null
 	page: number
 	lastPage: number
+	pageSize: number
 	writeReviewUrl: string
 }
 
@@ -45,6 +48,21 @@ function histogramAverage(histogram: RatingStep[]): number | null {
 }
 
 // The project is a Modrinth slug or ID, which ModDex resolves without needing the project type.
+function getModdexProject(project: string) {
+	return backgroundQueries.fetchQuery({
+		queryKey: ['moddex-project', project],
+		queryFn: () =>
+			client.lookup.get('modrinth', project, { include: ['ratings'] }).catch((err) => {
+				if (err instanceof ModDexNotFoundError) return null
+				throw err
+			}),
+	})
+}
+
+export async function hasModdexProject(project: string): Promise<boolean> {
+	return (await getModdexProject(project)) !== null
+}
+
 export async function fetchModdexReviews(
 	project: string,
 	sort: ReviewSort,
@@ -54,7 +72,7 @@ export async function fetchModdexReviews(
 		// The review list only carries the overall rating, so category ratings need the project too.
 		const [list, details] = await Promise.all([
 			client.lookup.listReviews('modrinth', project, { sort, page }),
-			page === 1 ? client.lookup.get('modrinth', project, { include: ['ratings'] }) : null,
+			page === 1 ? getModdexProject(project) : null,
 		])
 		const { rating, links } = list.meta.project
 		const categories = details?.data.ratings?.categories
@@ -76,6 +94,7 @@ export async function fetchModdexReviews(
 						: null,
 				page: list.meta.current_page,
 				lastPage: list.meta.last_page,
+				pageSize: list.meta.per_page,
 				writeReviewUrl: withRef(links.write_review),
 			},
 		}

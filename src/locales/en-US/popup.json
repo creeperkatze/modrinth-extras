@@ -149,8 +149,11 @@
   "feature.quickSearch.title": {
     "defaultMessage": "Quick search"
   },
+  "feature.reviews.curseforge": {
+    "defaultMessage": "CurseForge comments"
+  },
   "feature.reviews.description": {
-    "defaultMessage": "Adds a Reviews tab to projects with community reviews from ModDex and SpigotMC."
+    "defaultMessage": "Adds a Reviews tab to projects with community reviews from ModDex, CurseForge, and SpigotMC."
   },
   "feature.reviews.moddex": {
     "defaultMessage": "ModDex reviews"

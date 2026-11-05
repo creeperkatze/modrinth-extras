@@ -8,6 +8,48 @@
   "compareVersions.tooltip": {
     "defaultMessage": "Compare with {version} in modsrc"
   },
+  "curseforgeComments.author": {
+    "defaultMessage": "Author"
+  },
+  "curseforgeComments.commentCount": {
+    "defaultMessage": "{count, plural, one {# comment} other {# comments}}"
+  },
+  "curseforgeComments.credit": {
+    "defaultMessage": "Comments from <link>CurseForge</link>, written by its community."
+  },
+  "curseforgeComments.edited": {
+    "defaultMessage": "Edited"
+  },
+  "curseforgeComments.empty": {
+    "defaultMessage": "No comments yet."
+  },
+  "curseforgeComments.hideReplies": {
+    "defaultMessage": "{count, plural, one {Hide # reply} other {Hide # replies}}"
+  },
+  "curseforgeComments.loadError": {
+    "defaultMessage": "Failed to load comments from CurseForge"
+  },
+  "curseforgeComments.loading": {
+    "defaultMessage": "Loading comments…"
+  },
+  "curseforgeComments.notFound": {
+    "defaultMessage": "This project could not be found on CurseForge."
+  },
+  "curseforgeComments.pinned": {
+    "defaultMessage": "Pinned"
+  },
+  "curseforgeComments.posted": {
+    "defaultMessage": "Posted {time}"
+  },
+  "curseforgeComments.showReplies": {
+    "defaultMessage": "{count, plural, one {Show # reply} other {Show # replies}}"
+  },
+  "curseforgeComments.title": {
+    "defaultMessage": "Community comments"
+  },
+  "curseforgeComments.writeComment": {
+    "defaultMessage": "Write a comment"
+  },
   "dependencyExplorer.centerView": {
     "defaultMessage": "Center view"
   },
@@ -376,6 +418,15 @@
   },
   "projectCardActions.unfollow": {
     "defaultMessage": "Unfollow"
+  },
+  "projectReviews.loading": {
+    "defaultMessage": "Loading reviews…"
+  },
+  "projectReviews.notFoundDescription": {
+    "defaultMessage": "This project has no reviews on {sources}."
+  },
+  "projectReviews.notFoundTitle": {
+    "defaultMessage": "No reviews found"
   },
   "projectReviews.source": {
     "defaultMessage": "Review source"

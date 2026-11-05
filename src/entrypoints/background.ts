@@ -9,10 +9,18 @@ import {
 	updateBadge,
 } from '../background/badge'
 import { fetchDiscordInvite } from '../background/external/discord'
-import { fetchModdexReviews } from '../background/external/moddex'
+import { fetchModdexReviews, hasModdexProject } from '../background/external/moddex'
 import { fetchModgradeProject } from '../background/external/modgrade'
 import { findPlatformProjects, findPlatformUsers } from '../background/external/platforms'
-import { fetchSpigotReviews, type SpigotReviewSort } from '../background/external/platforms/spigot'
+import {
+	fetchCurseForgeComments,
+	hasCurseForgeComments,
+} from '../background/external/platforms/curseforge'
+import {
+	fetchSpigotReviews,
+	findSpigotProject,
+	type SpigotReviewSort,
+} from '../background/external/platforms/spigot'
 import { fetchRepositoryStats } from '../background/external/repositories'
 import { handleNotificationClick } from '../background/notifications'
 import {
@@ -130,6 +138,31 @@ export default defineBackground(() => {
 				.then((result) => sendResponse(result))
 				.catch((err) => {
 					console.error('[Modrinth Extras] Failed to fetch SpigotMC reviews:', err)
+					sendResponse({ ok: false, error: 'failed' })
+				})
+			return true
+		}
+		if (message.type === 'review-source-available') {
+			const project = message.project as MatchableProject
+			const lookup =
+				message.source === 'moddex'
+					? hasModdexProject(message.slug as string)
+					: message.source === 'curseforge'
+						? hasCurseForgeComments(project)
+						: findSpigotProject(project).then((match) => match !== null)
+			lookup
+				.then((available) => sendResponse(available))
+				.catch((err) => {
+					console.error(`[Modrinth Extras] Failed to look up ${message.source} reviews:`, err)
+					sendResponse(false)
+				})
+			return true
+		}
+		if (message.type === 'curseforge-comments') {
+			fetchCurseForgeComments(message.project as MatchableProject, message.page as number)
+				.then((result) => sendResponse(result))
+				.catch((err) => {
+					console.error('[Modrinth Extras] Failed to fetch CurseForge comments:', err)
 					sendResponse({ ok: false, error: 'failed' })
 				})
 			return true
