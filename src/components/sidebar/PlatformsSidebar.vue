@@ -68,13 +68,14 @@
 <script setup lang="ts">
 import { DownloadIcon, ExternalIcon, LoaderCircleIcon, TriangleAlertIcon } from '@modrinth/assets'
 import { defineMessages, useVIntl } from '@modrinth/ui'
-import { onMounted, ref } from 'vue'
-import { browser } from 'wxt/browser'
+import { useQuery } from '@tanstack/vue-query'
+import { computed } from 'vue'
 
 import { modrinthClient } from '../../api/client'
 import CurseForgeIcon from '../../assets/icons/platforms/curseforge.svg?component'
 import HangarIcon from '../../assets/icons/platforms/hangar.svg?component'
 import SpigotIcon from '../../assets/icons/platforms/spigot.svg?component'
+import { queryBackground } from '../../core/query'
 import {
 	getMatchableProject,
 	type Platform,
@@ -114,9 +115,28 @@ const projectSlug = path.match(PROJECT_PATTERN)?.[1]
 const username = path.match(USER_PATTERN)?.[1]
 const subject = projectSlug ?? username
 
-const matches = ref<PlatformMatch[]>([])
-const loading = ref(true)
-const error = ref(false)
+const platformsQuery = useQuery({
+	queryKey: ['platform-matches', projectSlug ? 'project' : 'user', subject],
+	queryFn: fetchMatches,
+	enabled: subject !== undefined,
+})
+const matches = computed(() => platformsQuery.data.value ?? [])
+const { isPending: loading, isError: error } = platformsQuery
+
+async function fetchMatches(): Promise<PlatformMatch[]> {
+	// Matching is name-based, so a project needs its Modrinth title resolved first.
+	const request = projectSlug
+		? {
+				type: 'platform-matches',
+				kind: 'project',
+				project: await getMatchableProject(
+					await modrinthClient.labrinth.projects_v3.get(projectSlug),
+				),
+			}
+		: { type: 'platform-matches', kind: 'user', username }
+	const { matches } = await queryBackground<{ matches: PlatformMatch[] }>(request)
+	return matches
+}
 
 const compactFormatter = new Intl.NumberFormat(undefined, {
 	notation: 'compact',
@@ -126,33 +146,4 @@ const compactFormatter = new Intl.NumberFormat(undefined, {
 function formatCompact(value: number): string {
 	return compactFormatter.format(value)
 }
-
-onMounted(async () => {
-	try {
-		if (!subject) return
-
-		// Matching is name-based, so a project needs its Modrinth title resolved first.
-		const request = projectSlug
-			? {
-					type: 'platform-matches',
-					kind: 'project',
-					project: await getMatchableProject(
-						await modrinthClient.labrinth.projects_v3.get(projectSlug),
-					),
-				}
-			: { type: 'platform-matches', kind: 'user', username }
-
-		const response = await browser.runtime.sendMessage(request)
-		if (!response?.ok) {
-			error.value = true
-			return
-		}
-		matches.value = response.matches as PlatformMatch[]
-	} catch (err) {
-		console.error('[Modrinth Extras] Failed to load other platforms:', err)
-		error.value = true
-	} finally {
-		loading.value = false
-	}
-})
 </script>

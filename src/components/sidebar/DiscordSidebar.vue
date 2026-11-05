@@ -92,10 +92,11 @@ import {
 	UsersIcon,
 } from '@modrinth/assets'
 import { Avatar, defineMessages, useVIntl } from '@modrinth/ui'
-import { onMounted, ref } from 'vue'
-import { browser } from 'wxt/browser'
+import { useQuery } from '@tanstack/vue-query'
+import { computed, onMounted, ref } from 'vue'
 
 import { modrinthClient } from '../../api/client'
+import { queryBackground } from '../../core/query'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
@@ -127,9 +128,24 @@ interface DiscordInvite {
 }
 
 const discordUrl = ref<string | null>(null)
-const invite = ref<DiscordInvite | null>(null)
-const loading = ref(true)
-const error = ref(false)
+const inviteCode = ref<string | null>(null)
+
+const inviteQuery = useQuery({
+	queryKey: computed(() => ['discord-invite', inviteCode.value]),
+	queryFn: () => fetchInvite(inviteCode.value as string),
+	enabled: computed(() => inviteCode.value !== null),
+})
+const invite = computed(() => inviteQuery.data.value ?? null)
+const { isPending: loading, isError: error } = inviteQuery
+
+async function fetchInvite(code: string): Promise<DiscordInvite> {
+	const { invite } = await queryBackground<{ invite?: DiscordInvite }>({
+		type: 'discord-invite',
+		code,
+	})
+	if (!invite) throw new Error('No Discord invite')
+	return invite
+}
 
 function formatNum(n: number): string {
 	if (n >= 1_000_000) return (n / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M'
@@ -152,18 +168,9 @@ onMounted(async () => {
 		if (!code) return
 
 		discordUrl.value = url
-
-		const response = await browser.runtime.sendMessage({ type: 'discord-invite', code })
-		if (!response?.ok || !response.invite) {
-			error.value = true
-			return
-		}
-		invite.value = response.invite
+		inviteCode.value = code
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to load Discord data:', err)
-		error.value = true
-	} finally {
-		loading.value = false
 	}
 })
 </script>

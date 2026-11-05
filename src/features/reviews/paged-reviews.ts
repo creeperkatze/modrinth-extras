@@ -13,7 +13,6 @@ interface PagedReviewsOptions<T, E extends string> {
 	// Called inside a computed, so reactive filters like the sort belong in the key.
 	key: (page: number) => readonly unknown[]
 	fetchPage: (page: number) => Promise<PagedResult<T, E> | undefined>
-	source: string
 	prefetchNext?: boolean
 }
 
@@ -24,14 +23,9 @@ export function usePagedReviews<T extends PageInfo, E extends string>(
 	const page = ref(1)
 
 	async function load(pageNumber: number): Promise<PagedResult<T, E>> {
-		try {
-			const result = await options.fetchPage(pageNumber)
-			if (!result) throw new Error('No response from the background')
-			return result
-		} catch (err) {
-			console.error(`[Modrinth Extras] Failed to load ${options.source} reviews:`, err)
-			throw err
-		}
+		const result = await options.fetchPage(pageNumber)
+		if (!result) throw new Error('No response from the background')
+		return result
 	}
 
 	const query = useQuery({

@@ -58,10 +58,11 @@ import {
 	TriangleAlertIcon,
 } from '@modrinth/assets'
 import { defineMessages, useVIntl } from '@modrinth/ui'
+import { useQuery } from '@tanstack/vue-query'
 import { computed, onMounted, ref } from 'vue'
-import { browser } from 'wxt/browser'
 
 import { modrinthClient } from '../../api/client'
+import { queryBackground } from '../../core/query'
 import {
 	detectRepository,
 	getRepositoryLinks,
@@ -104,9 +105,25 @@ interface RepositoryStats {
 }
 
 const repoInfo = ref<RepositoryInfo | null>(null)
-const stats = ref<RepositoryStats | null>(null)
-const loading = ref(true)
-const error = ref(false)
+
+// Kept between visits, since unauthenticated GitHub lookups are tightly rate limited.
+const statsQuery = useQuery({
+	queryKey: computed(() => ['repository-stats', repoInfo.value?.platform, repoInfo.value?.repo]),
+	queryFn: () => fetchStats(repoInfo.value as RepositoryInfo),
+	enabled: computed(() => repoInfo.value !== null),
+})
+const stats = computed(() => statsQuery.data.value ?? null)
+const { isPending: loading, isError: error } = statsQuery
+
+async function fetchStats(info: RepositoryInfo): Promise<RepositoryStats> {
+	const { stats } = await queryBackground<{ stats?: RepositoryStats }>({
+		type: 'repository-stats',
+		platform: info.platform,
+		repo: info.repo,
+	})
+	if (!stats) throw new Error('No repository stats')
+	return stats
+}
 
 const statRows = computed(() => {
 	if (!stats.value || !repoInfo.value) return []
@@ -163,25 +180,9 @@ onMounted(async () => {
 		const project = await modrinthClient.labrinth.projects_v3.get(slug)
 		const sourceUrl = project.link_urls.source?.url ?? ''
 
-		const info = detectRepository(sourceUrl)
-		if (!info) return
-		repoInfo.value = info
-
-		const response = await browser.runtime.sendMessage({
-			type: 'repository-stats',
-			platform: info.platform,
-			repo: info.repo,
-		})
-		if (!response?.ok || !response.stats) {
-			error.value = true
-			return
-		}
-		stats.value = response.stats
+		repoInfo.value = detectRepository(sourceUrl)
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to load repository data:', err)
-		error.value = true
-	} finally {
-		loading.value = false
 	}
 })
 </script>

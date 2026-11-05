@@ -414,7 +414,6 @@ const { page, data, pageInfo, loading, error, switchPage } = usePagedReviews({
 			sort: sort.value,
 			page: pageNumber,
 		}) as Promise<ModdexReviewsResult | undefined>,
-	source: 'ModDex',
 })
 
 // Only the first page carries the summary, so it is kept while paging.

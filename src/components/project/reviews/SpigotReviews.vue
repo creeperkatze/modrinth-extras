@@ -282,7 +282,6 @@ const { page, data, pageInfo, loading, error, switchPage } = usePagedReviews({
 			sort: SORTS[sort.value],
 			page: pageNumber,
 		}) as Promise<SpigotReviewsResult | undefined>,
-	source: 'SpigotMC',
 })
 
 // Synchronous, so the new sort never gets requested for the old page.

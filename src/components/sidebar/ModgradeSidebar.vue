@@ -72,11 +72,12 @@ import {
 	TriangleAlertIcon,
 } from '@modrinth/assets'
 import { defineMessages, useRelativeTime, useVIntl } from '@modrinth/ui'
-import { type Component, computed, onMounted, ref } from 'vue'
-import { browser } from 'wxt/browser'
+import { useQuery } from '@tanstack/vue-query'
+import { type Component, computed } from 'vue'
 
 import ModgradeIcon from '../../assets/icons/modgrade.svg?component'
 import type { ModgradeProject, ModgradeResult } from '../../background/external/modgrade'
+import { queryBackground } from '../../core/query'
 
 const { formatMessage } = useVIntl()
 const formatRelativeTime = useRelativeTime()
@@ -248,9 +249,20 @@ interface Row {
 	details?: string[]
 }
 
-const project = ref<ModgradeProject | null>(null)
-const malwareOnModrinth = ref(false)
-const error = ref(false)
+const slug = new URL(props.pageUrl).pathname.match(
+	/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/([^/]+)/,
+)?.[2]
+
+const modgradeQuery = useQuery({
+	queryKey: ['modgrade-project', slug],
+	queryFn: async () =>
+		(await queryBackground<{ result?: ModgradeResult | null }>({ type: 'modgrade-project', slug }))
+			.result ?? null,
+	enabled: slug !== undefined,
+})
+const project = computed(() => modgradeQuery.data.value?.project ?? null)
+const malwareOnModrinth = computed(() => modgradeQuery.data.value?.malwareOnModrinth ?? false)
+const error = modgradeQuery.isError
 
 function securityRow(p: ModgradeProject): Row {
 	switch (p.security) {
@@ -351,28 +363,5 @@ const rows = computed<Row[]>(() => {
 	}
 
 	return rows
-})
-
-onMounted(async () => {
-	try {
-		const slug = new URL(props.pageUrl).pathname.match(
-			/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/([^/]+)/,
-		)?.[2]
-		if (!slug) return
-
-		const response = (await browser.runtime.sendMessage({
-			type: 'modgrade-project',
-			slug,
-		})) as { ok: boolean; result?: ModgradeResult | null }
-		if (!response?.ok) {
-			error.value = true
-			return
-		}
-		project.value = response.result?.project ?? null
-		malwareOnModrinth.value = response.result?.malwareOnModrinth ?? false
-	} catch (err) {
-		console.error('[Modrinth Extras] Failed to load Modgrade data:', err)
-		error.value = true
-	}
 })
 </script>

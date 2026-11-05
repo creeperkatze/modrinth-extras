@@ -137,7 +137,6 @@ const { page, data, pageInfo, loading, error, switchPage } = usePagedReviews({
 			project: props.project,
 			page: pageNumber,
 		}) as Promise<CurseForgeCommentsResult | undefined>,
-	source: 'CurseForge',
 	prefetchNext: true,
 })
 </script>
