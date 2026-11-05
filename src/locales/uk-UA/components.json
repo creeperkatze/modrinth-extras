@@ -1,4 +1,13 @@
 {
+  "compareVersions.compareWith": {
+    "defaultMessage": "Порівняти з"
+  },
+  "compareVersions.label": {
+    "defaultMessage": "Порівняти з попередньою"
+  },
+  "compareVersions.tooltip": {
+    "defaultMessage": "Порівняти з {version} в modsrc"
+  },
   "dependencyExplorer.centerView": {
     "defaultMessage": "Центрувати перегляд"
   },
@@ -74,8 +83,14 @@
   "moddexReviews.aesthetics": {
     "defaultMessage": "Естетика"
   },
+  "moddexReviews.credit": {
+    "defaultMessage": "Відгуки від <link>ModDex</link>, написані його спільнотою."
+  },
   "moddexReviews.developer": {
     "defaultMessage": "Розробник"
+  },
+  "moddexReviews.developerResponse": {
+    "defaultMessage": "Відповідь розробника:"
   },
   "moddexReviews.edited": {
     "defaultMessage": "Відредаговано"
@@ -142,6 +157,51 @@
   },
   "moddexReviews.writeReview": {
     "defaultMessage": "Написати відгук"
+  },
+  "modgradeSidebar.cannotCheck": {
+    "defaultMessage": "{count, plural, one {# файл} few {# файли} many {# файлів} other {# файлів}} неможливо завантажити для перевірки"
+  },
+  "modgradeSidebar.checked": {
+    "defaultMessage": "Перевірено {checked} з {total, plural, one {# останнього файлу} few {# останніх файлів} many {# останніх файлів} other {# останніх файлів}}"
+  },
+  "modgradeSidebar.gradeTooltip": {
+    "defaultMessage": "Оцінка {grade}"
+  },
+  "modgradeSidebar.loadError": {
+    "defaultMessage": "Не вдалося завантажити дані Modgrade"
+  },
+  "modgradeSidebar.malware": {
+    "defaultMessage": "Виявлено шкідливе ПЗ"
+  },
+  "modgradeSidebar.malwareElsewhere": {
+    "defaultMessage": "Шкідливе ПЗ виявлено лише на іншій платформі"
+  },
+  "modgradeSidebar.notChecked": {
+    "defaultMessage": "Ще не перевірено"
+  },
+  "modgradeSidebar.partlyChecked": {
+    "defaultMessage": "Частково перевірено"
+  },
+  "modgradeSidebar.passed": {
+    "defaultMessage": "Проблем не виявлено"
+  },
+  "modgradeSidebar.possibleMalware": {
+    "defaultMessage": "Можлива наявність шкідливого ПЗ у доданому проєкті"
+  },
+  "modgradeSidebar.readInPart": {
+    "defaultMessage": "{count, plural, one {# файл} few {# файли} many {# файлів} other {# файлів}} читається лише частково"
+  },
+  "modgradeSidebar.recentVersionsOnly": {
+    "defaultMessage": "Враховуються лише файли для останніх версій Minecraft"
+  },
+  "modgradeSidebar.someFiles": {
+    "defaultMessage": "Це стосується лише деяких файлів"
+  },
+  "modgradeSidebar.viewReport": {
+    "defaultMessage": "Переглянути на Modgrade"
+  },
+  "modgradeSidebar.warning": {
+    "defaultMessage": "Виявлено підозрілий код"
   },
   "modpacksSidebar.title": {
     "defaultMessage": "Збірки"
@@ -275,8 +335,29 @@
   "reviewStars.rating": {
     "defaultMessage": "Оцінка: {rating} з 5"
   },
+  "sidebarLayout.customize": {
+    "defaultMessage": "Налаштувати бічну панель"
+  },
+  "sidebarLayout.done": {
+    "defaultMessage": "Зберегти"
+  },
+  "sidebarLayout.drag": {
+    "defaultMessage": "Перетягніть, щоби змінити порядок"
+  },
+  "sidebarLayout.hide": {
+    "defaultMessage": "Приховати"
+  },
+  "sidebarLayout.revert": {
+    "defaultMessage": "Відхилити"
+  },
+  "sidebarLayout.show": {
+    "defaultMessage": "Показати"
+  },
   "spigotReviews.authorResponse": {
     "defaultMessage": "Відповідь автора:"
+  },
+  "spigotReviews.credit": {
+    "defaultMessage": "Відгуки від <link>SpigotMC</link>, написані його спільнотою."
   },
   "spigotReviews.empty": {
     "defaultMessage": "Поки що немає відгуків."
@@ -331,6 +412,9 @@
   },
   "toolsSidebar.copyInstallCommand": {
     "defaultMessage": "Скопіювати команду {manager}"
+  },
+  "toolsSidebar.decompileWith": {
+    "defaultMessage": "Декомпілювати за допомогою {tool}"
   },
   "toolsSidebar.generateEmbed": {
     "defaultMessage": "Згенерувати код для вбудовування"
