@@ -419,7 +419,7 @@ const messages = defineMessages({
 	},
 	'feature.toolsSidebar.title': {
 		id: 'feature.toolsSidebar.title',
-		defaultMessage: 'Tools sidebar',
+		defaultMessage: 'Tools',
 	},
 	'feature.toolsSidebar.description': {
 		id: 'feature.toolsSidebar.description',
@@ -444,7 +444,7 @@ const messages = defineMessages({
 	},
 	'feature.dependencySidebar.title': {
 		id: 'feature.dependencySidebar.title',
-		defaultMessage: 'Dependency sidebar',
+		defaultMessage: 'Dependencies',
 	},
 	'feature.dependencySidebar.description': {
 		id: 'feature.dependencySidebar.description',
@@ -460,11 +460,11 @@ const messages = defineMessages({
 	},
 	'feature.dependencyExplorer.disabledTooltip': {
 		id: 'feature.dependencyExplorer.disabledTooltip',
-		defaultMessage: 'Requires the dependency sidebar to be enabled',
+		defaultMessage: 'Requires Dependencies to be enabled',
 	},
 	'feature.githubSidebar.title': {
 		id: 'feature.githubSidebar.title',
-		defaultMessage: 'Repository sidebar',
+		defaultMessage: 'Repository',
 	},
 	'feature.githubSidebar.description': {
 		id: 'feature.githubSidebar.description',
@@ -473,7 +473,7 @@ const messages = defineMessages({
 	},
 	'feature.discordSidebar.title': {
 		id: 'feature.discordSidebar.title',
-		defaultMessage: 'Discord sidebar',
+		defaultMessage: 'Discord',
 	},
 	'feature.discordSidebar.description': {
 		id: 'feature.discordSidebar.description',
@@ -482,7 +482,7 @@ const messages = defineMessages({
 	},
 	'feature.modpacksSidebar.title': {
 		id: 'feature.modpacksSidebar.title',
-		defaultMessage: 'Modpacks sidebar',
+		defaultMessage: 'Modpacks',
 	},
 	'feature.modpacksSidebar.description': {
 		id: 'feature.modpacksSidebar.description',
@@ -490,7 +490,7 @@ const messages = defineMessages({
 	},
 	'feature.platformsSidebar.title': {
 		id: 'feature.platformsSidebar.title',
-		defaultMessage: 'Other platforms sidebar',
+		defaultMessage: 'Other platforms',
 	},
 	'feature.platformsSidebar.description': {
 		id: 'feature.platformsSidebar.description',
@@ -498,7 +498,7 @@ const messages = defineMessages({
 	},
 	'feature.modgradeSidebar.title': {
 		id: 'feature.modgradeSidebar.title',
-		defaultMessage: 'Modgrade sidebar',
+		defaultMessage: 'Modgrade',
 	},
 	'feature.modgradeSidebar.description': {
 		id: 'feature.modgradeSidebar.description',

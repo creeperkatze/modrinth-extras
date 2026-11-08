@@ -57,7 +57,7 @@
     "defaultMessage": "Interactive graph for exploring the full dependency tree."
   },
   "feature.dependencyExplorer.disabledTooltip": {
-    "defaultMessage": "Requires the dependency sidebar to be enabled"
+    "defaultMessage": "Requires Dependencies to be enabled"
   },
   "feature.dependencyExplorer.title": {
     "defaultMessage": "Dependency explorer"
@@ -66,13 +66,13 @@
     "defaultMessage": "Collapsible dependency tree on project pages."
   },
   "feature.dependencySidebar.title": {
-    "defaultMessage": "Dependency sidebar"
+    "defaultMessage": "Dependencies"
   },
   "feature.discordSidebar.description": {
     "defaultMessage": "Server name, description, member count, and online count for linked Discord servers."
   },
   "feature.discordSidebar.title": {
-    "defaultMessage": "Discord sidebar"
+    "defaultMessage": "Discord"
   },
   "feature.galleryBackground.description": {
     "defaultMessage": "Display the featured gallery image as a background banner on project pages."
@@ -84,19 +84,19 @@
     "defaultMessage": "Stars, issues, pull requests, and forks for linked GitHub, GitLab, Codeberg, and Bitbucket repositories."
   },
   "feature.githubSidebar.title": {
-    "defaultMessage": "Repository sidebar"
+    "defaultMessage": "Repository"
   },
   "feature.modgradeSidebar.description": {
     "defaultMessage": "Show the Modgrade security check results of a project."
   },
   "feature.modgradeSidebar.title": {
-    "defaultMessage": "Modgrade sidebar"
+    "defaultMessage": "Modgrade"
   },
   "feature.modpacksSidebar.description": {
     "defaultMessage": "Show all the modpacks the mod is featured in."
   },
   "feature.modpacksSidebar.title": {
-    "defaultMessage": "Modpacks sidebar"
+    "defaultMessage": "Modpacks"
   },
   "feature.monetizationBadge.description": {
     "defaultMessage": "Show the monetization status of a project in the sidebar."
@@ -120,7 +120,7 @@
     "defaultMessage": "Find the same project or author on CurseForge, Hangar, and SpigotMC."
   },
   "feature.platformsSidebar.title": {
-    "defaultMessage": "Other platforms sidebar"
+    "defaultMessage": "Other platforms"
   },
   "feature.projectCardActions.description": {
     "defaultMessage": "Download, follow, and save projects right from their project cards."
@@ -183,7 +183,7 @@
     "defaultMessage": "Mod manager"
   },
   "feature.toolsSidebar.title": {
-    "defaultMessage": "Tools sidebar"
+    "defaultMessage": "Tools"
   },
   "feature.translateDescription.description": {
     "defaultMessage": "On-device translation of a project's description into your language, when it differs."
