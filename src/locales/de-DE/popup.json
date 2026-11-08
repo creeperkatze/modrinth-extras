@@ -86,6 +86,12 @@
   "feature.githubSidebar.title": {
     "defaultMessage": "Repository-Seitenleiste"
   },
+  "feature.modgradeSidebar.description": {
+    "defaultMessage": "Zeige die Ergebnisse der Modgrade-Sicherheitsprüfung für ein Projekt an."
+  },
+  "feature.modgradeSidebar.title": {
+    "defaultMessage": "Modgrade-Seitenleiste"
+  },
   "feature.modpacksSidebar.description": {
     "defaultMessage": "Zeige alle Modpacks an, in denen der Mod enthalten ist."
   },
@@ -143,8 +149,11 @@
   "feature.quickSearch.title": {
     "defaultMessage": "Schnellsuche"
   },
+  "feature.reviews.curseforge": {
+    "defaultMessage": "Kommentare von CurseForge"
+  },
   "feature.reviews.description": {
-    "defaultMessage": "Fügt Projekten einen Bewertungs-Tab mit Bewertungen aus der Community von ModDex und SpigotMC hinzu."
+    "defaultMessage": "Fügt Projekten einen Bewertungs-Tab mit Bewertungen aus der Community von ModDex, CurseForge und SpigotMC hinzu."
   },
   "feature.reviews.moddex": {
     "defaultMessage": "Bewertungen von ModDex"

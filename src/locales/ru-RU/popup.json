@@ -86,6 +86,12 @@
   "feature.githubSidebar.title": {
     "defaultMessage": "Боковая панель репозитория"
   },
+  "feature.modgradeSidebar.description": {
+    "defaultMessage": "Показывать результаты проверки безопасности проекта через Modgrade."
+  },
+  "feature.modgradeSidebar.title": {
+    "defaultMessage": "Боковая панель Modgrade"
+  },
   "feature.modpacksSidebar.description": {
     "defaultMessage": "Показать все сборки с модом."
   },
@@ -143,8 +149,11 @@
   "feature.quickSearch.title": {
     "defaultMessage": "Быстрый поиск"
   },
+  "feature.reviews.curseforge": {
+    "defaultMessage": "Комментарии CurseForge"
+  },
   "feature.reviews.description": {
-    "defaultMessage": "Добавляет вкладку отзывов в проекты с отзывами сообщества из ModDex и SpigotMC."
+    "defaultMessage": "Добавляет вкладку отзывов в проекты с отзывами сообщества из ModDex, CurseForge и SpigotMC."
   },
   "feature.reviews.moddex": {
     "defaultMessage": "Отзывы ModDex"
