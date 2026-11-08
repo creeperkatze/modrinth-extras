@@ -1,4 +1,13 @@
 {
+  "compareVersions.compareWith": {
+    "defaultMessage": "与...比较"
+  },
+  "compareVersions.label": {
+    "defaultMessage": "与先前版本相比"
+  },
+  "compareVersions.tooltip": {
+    "defaultMessage": "在 modsrc 中与 {version} 进行比较"
+  },
   "dependencyExplorer.centerView": {
     "defaultMessage": "居中视图"
   },
@@ -149,6 +158,45 @@
   "moddexReviews.writeReview": {
     "defaultMessage": "发表评论"
   },
+  "modgradeSidebar.cannotCheck": {
+    "defaultMessage": "{count, plural, other {# 文件}} 无法下载以进行检查"
+  },
+  "modgradeSidebar.checked": {
+    "defaultMessage": "{checked} of {total, plural, other {# 最新文件}} 已检查"
+  },
+  "modgradeSidebar.loadError": {
+    "defaultMessage": "加载 Modgrade 数据失败"
+  },
+  "modgradeSidebar.malware": {
+    "defaultMessage": "发现恶意软件"
+  },
+  "modgradeSidebar.malwareElsewhere": {
+    "defaultMessage": "仅在另一个平台上发现的恶意软件"
+  },
+  "modgradeSidebar.notChecked": {
+    "defaultMessage": "尚未检查"
+  },
+  "modgradeSidebar.partlyChecked": {
+    "defaultMessage": "部分已检查"
+  },
+  "modgradeSidebar.passed": {
+    "defaultMessage": "没有找到问题"
+  },
+  "modgradeSidebar.possibleMalware": {
+    "defaultMessage": "内置的项目中可能存在恶意软件"
+  },
+  "modgradeSidebar.readInPart": {
+    "defaultMessage": "{count, plural, other {# 文件}} 仅部分可读"
+  },
+  "modgradeSidebar.someFiles": {
+    "defaultMessage": "只有部分文件受到影响"
+  },
+  "modgradeSidebar.viewReport": {
+    "defaultMessage": "在 Modgrade 上查看"
+  },
+  "modgradeSidebar.warning": {
+    "defaultMessage": "发现可疑代码"
+  },
   "modpacksSidebar.title": {
     "defaultMessage": "整合包"
   },
@@ -281,6 +329,24 @@
   "reviewStars.rating": {
     "defaultMessage": "评分： {rating}，满分5分"
   },
+  "sidebarLayout.customize": {
+    "defaultMessage": "自定义侧边栏"
+  },
+  "sidebarLayout.done": {
+    "defaultMessage": "完成"
+  },
+  "sidebarLayout.drag": {
+    "defaultMessage": "拖拽以调整顺序"
+  },
+  "sidebarLayout.hide": {
+    "defaultMessage": "隐藏"
+  },
+  "sidebarLayout.revert": {
+    "defaultMessage": "撤销"
+  },
+  "sidebarLayout.show": {
+    "defaultMessage": "显示"
+  },
   "spigotReviews.authorResponse": {
     "defaultMessage": "作者回复："
   },
@@ -340,6 +406,9 @@
   },
   "toolsSidebar.copyInstallCommand": {
     "defaultMessage": "复制 {manager} 命令"
+  },
+  "toolsSidebar.decompileWith": {
+    "defaultMessage": "使用 {tool} 进行反编译"
   },
   "toolsSidebar.generateEmbed": {
     "defaultMessage": "生成嵌入代码"

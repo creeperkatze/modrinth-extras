@@ -8,6 +8,48 @@
   "compareVersions.tooltip": {
     "defaultMessage": "Сравнить с {version} в modsrc"
   },
+  "curseforgeComments.author": {
+    "defaultMessage": "Автор"
+  },
+  "curseforgeComments.commentCount": {
+    "defaultMessage": "{count, plural, one {# комментарий} few {# комментария} other {# комментариев}}"
+  },
+  "curseforgeComments.credit": {
+    "defaultMessage": "Комментарии из <link>CurseForge</link>, написанные его сообществом."
+  },
+  "curseforgeComments.edited": {
+    "defaultMessage": "Изменено"
+  },
+  "curseforgeComments.empty": {
+    "defaultMessage": "Комментариев ещё нет."
+  },
+  "curseforgeComments.hideReplies": {
+    "defaultMessage": "Скрыть {count, plural, one {# ответ} few {# ответа} other {# ответов}}"
+  },
+  "curseforgeComments.loadError": {
+    "defaultMessage": "Не удалось загрузить комментарии из CurseForge"
+  },
+  "curseforgeComments.loading": {
+    "defaultMessage": "Загрузка комментариев..."
+  },
+  "curseforgeComments.notFound": {
+    "defaultMessage": "Этот проект не найден на CurseForge."
+  },
+  "curseforgeComments.pinned": {
+    "defaultMessage": "Закреплено"
+  },
+  "curseforgeComments.posted": {
+    "defaultMessage": "Опубликовано {time}"
+  },
+  "curseforgeComments.showReplies": {
+    "defaultMessage": "Показать {count, plural, one {# ответ} few {# ответа} other {# ответов}}"
+  },
+  "curseforgeComments.title": {
+    "defaultMessage": "Комментарии сообщества"
+  },
+  "curseforgeComments.writeComment": {
+    "defaultMessage": "Написать комментарий"
+  },
   "dependencyExplorer.centerView": {
     "defaultMessage": "Центрировать"
   },
@@ -158,6 +200,135 @@
   "moddexReviews.writeReview": {
     "defaultMessage": "Написать отзыв"
   },
+  "modgradeSidebar.cannotCheck": {
+    "defaultMessage": "{count, plural, one {# файл} few {# файла} other {# файлов}} нельзя скачать на проверку"
+  },
+  "modgradeSidebar.checked": {
+    "defaultMessage": "Проверено {checked} из {total, plural, one {# файла} other {# файлов}}"
+  },
+  "modgradeSidebar.lastChecked": {
+    "defaultMessage": "Последняя проверка: {time}"
+  },
+  "modgradeSidebar.loadError": {
+    "defaultMessage": "Не удалось загрузить данные Modgrade"
+  },
+  "modgradeSidebar.malware": {
+    "defaultMessage": "Обнаружена угроза"
+  },
+  "modgradeSidebar.malwareElsewhere": {
+    "defaultMessage": "Угроза обнаружена лишь на другой платформе"
+  },
+  "modgradeSidebar.notChecked": {
+    "defaultMessage": "Не проверено"
+  },
+  "modgradeSidebar.partlyChecked": {
+    "defaultMessage": "Частично проверено"
+  },
+  "modgradeSidebar.passed": {
+    "defaultMessage": "Всё в порядке"
+  },
+  "modgradeSidebar.possibleMalware": {
+    "defaultMessage": "Возможная угроза во включённом проекте"
+  },
+  "modgradeSidebar.readInPart": {
+    "defaultMessage": "{count, plural, one {# файл} few {# файла} other {# файлов}} читаются лишь частично"
+  },
+  "modgradeSidebar.reason.discordWebhook": {
+    "defaultMessage": "Отправляет данные на вебхук Discord"
+  },
+  "modgradeSidebar.reason.disguisedFile": {
+    "defaultMessage": "Содержит файл с несоответствующим названием"
+  },
+  "modgradeSidebar.reason.downloadsAndRunsCode": {
+    "defaultMessage": "Скачивает и запускает код без проверки"
+  },
+  "modgradeSidebar.reason.downloadsCodeHttp": {
+    "defaultMessage": "Скачивает код без шифрования"
+  },
+  "modgradeSidebar.reason.hiddenAddress": {
+    "defaultMessage": "Скрывает веб-адрес в своём коде"
+  },
+  "modgradeSidebar.reason.installsProgram": {
+    "defaultMessage": "Скачивает или переносит программу и запускает её"
+  },
+  "modgradeSidebar.reason.knownMalware": {
+    "defaultMessage": "Совпадает с известной угрозой"
+  },
+  "modgradeSidebar.reason.licenceUnlockedCode": {
+    "defaultMessage": "Скачивает и запускает код, разблокированный лицензионным ключом"
+  },
+  "modgradeSidebar.reason.loadsCodeAtStart": {
+    "defaultMessage": "Загружает код с фиксированного адреса при запуске"
+  },
+  "modgradeSidebar.reason.matchesSecurityReport": {
+    "defaultMessage": "Совпадает с отчётом службы общественной безопасности"
+  },
+  "modgradeSidebar.reason.miner": {
+    "defaultMessage": "Запускает скрытый майнер"
+  },
+  "modgradeSidebar.reason.namesStartupPlaces": {
+    "defaultMessage": "Ссылается на места, запускающие программы при входе"
+  },
+  "modgradeSidebar.reason.readsBrowserHistory": {
+    "defaultMessage": "Читает историю браузера"
+  },
+  "modgradeSidebar.reason.readsClipboardCrypto": {
+    "defaultMessage": "Читает криптоадреса из буфера обмена"
+  },
+  "modgradeSidebar.reason.readsLoginData": {
+    "defaultMessage": "Читает данные входа других программ"
+  },
+  "modgradeSidebar.reason.recordsAndClipboard": {
+    "defaultMessage": "Записывает микрофон или экран и заменяет буфер обмена"
+  },
+  "modgradeSidebar.reason.remoteControl": {
+    "defaultMessage": "Позволяет другим выполнять команды на компьютере или сервере"
+  },
+  "modgradeSidebar.reason.replacedProgram": {
+    "defaultMessage": "Последний файл — другая программа, скрывающая свои адреса"
+  },
+  "modgradeSidebar.reason.runsDownloadedCode": {
+    "defaultMessage": "Скачивает и запускает скрытый код"
+  },
+  "modgradeSidebar.reason.sendsClipboard": {
+    "defaultMessage": "Отправляет содержимое буфера обмена"
+  },
+  "modgradeSidebar.reason.sendsComputerId": {
+    "defaultMessage": "Отправляет идентификатор компьютера"
+  },
+  "modgradeSidebar.reason.sendsIpAddress": {
+    "defaultMessage": "Отправляет IP-адрес и местоположение в Discord"
+  },
+  "modgradeSidebar.reason.sendsScreenshots": {
+    "defaultMessage": "Отправляет скриншоты"
+  },
+  "modgradeSidebar.reason.sendsSessionToken": {
+    "defaultMessage": "Отправляет токен входа Minecraft не Mojang"
+  },
+  "modgradeSidebar.reason.startsAtLogin": {
+    "defaultMessage": "Устанавливается так, чтобы запускаться при входе"
+  },
+  "modgradeSidebar.reason.stealsLogins": {
+    "defaultMessage": "Крадёт логины, токены или игровой сеанс"
+  },
+  "modgradeSidebar.reason.swapsCryptoAddresses": {
+    "defaultMessage": "Заменяет криптоадреса из буфера обмена"
+  },
+  "modgradeSidebar.someFiles": {
+    "defaultMessage": "Затронута лишь часть файлов"
+  },
+  "modgradeSidebar.unknownMalwareReason": {
+    "defaultMessage": "Другое вредоносное поведение"
+  },
+  "modgradeSidebar.unknownWarningReason": {
+    "defaultMessage": "Другое подозрительное поведение"
+  },
+  "modgradeSidebar.viewReport": {
+    "defaultMessage": "Посмотреть на Modgrade"
+  },
+  "modgradeSidebar.warning": {
+    "defaultMessage": "Найден подозрительный код"
+  },
   "modpacksSidebar.title": {
     "defaultMessage": "Сборки"
   },
@@ -248,6 +419,15 @@
   "projectCardActions.unfollow": {
     "defaultMessage": "Отписаться"
   },
+  "projectReviews.loading": {
+    "defaultMessage": "Загрузка отзывов..."
+  },
+  "projectReviews.notFoundDescription": {
+    "defaultMessage": "У этого проекта нет отзывов на {sources}."
+  },
+  "projectReviews.notFoundTitle": {
+    "defaultMessage": "Отзывы не найдены"
+  },
   "projectReviews.source": {
     "defaultMessage": "Источник отзывов"
   },
@@ -294,10 +474,10 @@
     "defaultMessage": "Настроить боковую панель"
   },
   "sidebarLayout.done": {
-    "defaultMessage": "Готово"
+    "defaultMessage": "Применить"
   },
   "sidebarLayout.drag": {
-    "defaultMessage": "Потяните для перестановки"
+    "defaultMessage": "Переместить"
   },
   "sidebarLayout.hide": {
     "defaultMessage": "Скрыть"

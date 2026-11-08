@@ -131,9 +131,6 @@
   "feature.quickSearch.title": {
     "defaultMessage": "Hızlı Arama"
   },
-  "feature.reviews.description": {
-    "defaultMessage": "Projeye, ModDex ve SpigotMC'den topluluk incelemelerini içeren bir İncelemeler sekmesi ekler."
-  },
   "feature.reviews.moddex": {
     "defaultMessage": "ModDex incelemeleri"
   },

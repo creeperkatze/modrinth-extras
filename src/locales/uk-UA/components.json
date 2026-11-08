@@ -1,4 +1,55 @@
 {
+  "compareVersions.compareWith": {
+    "defaultMessage": "Порівняти з"
+  },
+  "compareVersions.label": {
+    "defaultMessage": "Порівняти з попередньою"
+  },
+  "compareVersions.tooltip": {
+    "defaultMessage": "Порівняти з {version} в modsrc"
+  },
+  "curseforgeComments.author": {
+    "defaultMessage": "Автор"
+  },
+  "curseforgeComments.commentCount": {
+    "defaultMessage": "{count, plural, one {# коментар} few {# коментарі} many {# коментарів} other {# коментарів}}"
+  },
+  "curseforgeComments.credit": {
+    "defaultMessage": "Коментарі з <link>CurseForge</link>, написані його спільнотою."
+  },
+  "curseforgeComments.edited": {
+    "defaultMessage": "Відредаговано"
+  },
+  "curseforgeComments.empty": {
+    "defaultMessage": "Поки що немає коментарів."
+  },
+  "curseforgeComments.hideReplies": {
+    "defaultMessage": "{count, plural, one {Приховати # відповідь} few {Приховати # відповіді} many {Приховати # відповідей} other {Приховати # відповідей}}"
+  },
+  "curseforgeComments.loadError": {
+    "defaultMessage": "Не вдалося завантажити коментарі з CurseForge"
+  },
+  "curseforgeComments.loading": {
+    "defaultMessage": "Завантажуємо коментарі…"
+  },
+  "curseforgeComments.notFound": {
+    "defaultMessage": "Цей проєкт не вдалося знайти на CurseForge."
+  },
+  "curseforgeComments.pinned": {
+    "defaultMessage": "Закріплено"
+  },
+  "curseforgeComments.posted": {
+    "defaultMessage": "Опубліковано {time}"
+  },
+  "curseforgeComments.showReplies": {
+    "defaultMessage": "{count, plural, one {Показати # відповідь} few {Показати # відповіді} many {Показати # відповідей} other {Показати # відповідей}}"
+  },
+  "curseforgeComments.title": {
+    "defaultMessage": "Коментарі спільноти"
+  },
+  "curseforgeComments.writeComment": {
+    "defaultMessage": "Написати коментар"
+  },
   "dependencyExplorer.centerView": {
     "defaultMessage": "Центрувати перегляд"
   },
@@ -74,8 +125,14 @@
   "moddexReviews.aesthetics": {
     "defaultMessage": "Естетика"
   },
+  "moddexReviews.credit": {
+    "defaultMessage": "Відгуки від <link>ModDex</link>, написані його спільнотою."
+  },
   "moddexReviews.developer": {
     "defaultMessage": "Розробник"
+  },
+  "moddexReviews.developerResponse": {
+    "defaultMessage": "Відповідь розробника:"
   },
   "moddexReviews.edited": {
     "defaultMessage": "Відредаговано"
@@ -142,6 +199,135 @@
   },
   "moddexReviews.writeReview": {
     "defaultMessage": "Написати відгук"
+  },
+  "modgradeSidebar.cannotCheck": {
+    "defaultMessage": "{count, plural, one {# файл} few {# файли} many {# файлів} other {# файлів}} неможливо завантажити для перевірки"
+  },
+  "modgradeSidebar.checked": {
+    "defaultMessage": "Перевірено {checked} з {total, plural, one {# останнього файлу} few {# останніх файлів} many {# останніх файлів} other {# останніх файлів}}"
+  },
+  "modgradeSidebar.lastChecked": {
+    "defaultMessage": "Востаннє перевірено {time}"
+  },
+  "modgradeSidebar.loadError": {
+    "defaultMessage": "Не вдалося завантажити дані Modgrade"
+  },
+  "modgradeSidebar.malware": {
+    "defaultMessage": "Виявлено шкідливе ПЗ"
+  },
+  "modgradeSidebar.malwareElsewhere": {
+    "defaultMessage": "Шкідливе ПЗ виявлено лише на іншій платформі"
+  },
+  "modgradeSidebar.notChecked": {
+    "defaultMessage": "Ще не перевірено"
+  },
+  "modgradeSidebar.partlyChecked": {
+    "defaultMessage": "Частково перевірено"
+  },
+  "modgradeSidebar.passed": {
+    "defaultMessage": "Проблем не виявлено"
+  },
+  "modgradeSidebar.possibleMalware": {
+    "defaultMessage": "Можлива наявність шкідливого ПЗ у доданому проєкті"
+  },
+  "modgradeSidebar.readInPart": {
+    "defaultMessage": "{count, plural, one {# файл} few {# файли} many {# файлів} other {# файлів}} читається лише частково"
+  },
+  "modgradeSidebar.reason.discordWebhook": {
+    "defaultMessage": "Надсилає дані до вебхука Discord"
+  },
+  "modgradeSidebar.reason.disguisedFile": {
+    "defaultMessage": "Містить файл, який не відповідає своїй назві"
+  },
+  "modgradeSidebar.reason.downloadsAndRunsCode": {
+    "defaultMessage": "Завантажує та виконує код без його перевірки"
+  },
+  "modgradeSidebar.reason.downloadsCodeHttp": {
+    "defaultMessage": "Завантажує код без шифрування"
+  },
+  "modgradeSidebar.reason.hiddenAddress": {
+    "defaultMessage": "Приховує веб-адресу в своєму коді"
+  },
+  "modgradeSidebar.reason.installsProgram": {
+    "defaultMessage": "Завантажує або переносить програму та запускає її"
+  },
+  "modgradeSidebar.reason.knownMalware": {
+    "defaultMessage": "Збігається з відомим шкідливим ПО"
+  },
+  "modgradeSidebar.reason.licenceUnlockedCode": {
+    "defaultMessage": "Завантажує та виконує код, розблокований за допомогою ліцензійного ключа"
+  },
+  "modgradeSidebar.reason.loadsCodeAtStart": {
+    "defaultMessage": "Під час запуску завантажує код із фіксованої адреси"
+  },
+  "modgradeSidebar.reason.matchesSecurityReport": {
+    "defaultMessage": "Збігається зі звітностями органів громадської безпеки"
+  },
+  "modgradeSidebar.reason.miner": {
+    "defaultMessage": "Запускає прихований майнер криптовалюти"
+  },
+  "modgradeSidebar.reason.namesStartupPlaces": {
+    "defaultMessage": "Відноситься до місць, де програми запускаються під час входу в систему"
+  },
+  "modgradeSidebar.reason.readsBrowserHistory": {
+    "defaultMessage": "Зчитує історію браузера"
+  },
+  "modgradeSidebar.reason.readsClipboardCrypto": {
+    "defaultMessage": "Зчитує криптоадреси з буфера обміну"
+  },
+  "modgradeSidebar.reason.readsLoginData": {
+    "defaultMessage": "Зчитує дані для входу з інших програм"
+  },
+  "modgradeSidebar.reason.recordsAndClipboard": {
+    "defaultMessage": "Здійснює запис звуку з мікрофона або екрану та замінює вміст буфера обміну"
+  },
+  "modgradeSidebar.reason.remoteControl": {
+    "defaultMessage": "Дозволяє іншим виконувати команди на комп’ютері або сервері"
+  },
+  "modgradeSidebar.reason.replacedProgram": {
+    "defaultMessage": "Найновіший файл — це інша програма, яка приховує свої адреси"
+  },
+  "modgradeSidebar.reason.runsDownloadedCode": {
+    "defaultMessage": "Завантажує прихований код і виконує його"
+  },
+  "modgradeSidebar.reason.sendsClipboard": {
+    "defaultMessage": "Відправляє вміст буфера обміну"
+  },
+  "modgradeSidebar.reason.sendsComputerId": {
+    "defaultMessage": "Надсилає ідентифікатор комп’ютера"
+  },
+  "modgradeSidebar.reason.sendsIpAddress": {
+    "defaultMessage": "Надсилає IP-адресу та місцезнаходження до Discord"
+  },
+  "modgradeSidebar.reason.sendsScreenshots": {
+    "defaultMessage": "Надсилає скриншоти"
+  },
+  "modgradeSidebar.reason.sendsSessionToken": {
+    "defaultMessage": "Надсилає токен входу в Minecraft кудись, окрім Mojang"
+  },
+  "modgradeSidebar.reason.startsAtLogin": {
+    "defaultMessage": "Встановлюється так, щоб запускатися під час входу в систему"
+  },
+  "modgradeSidebar.reason.stealsLogins": {
+    "defaultMessage": "Викрадає логіни, токени або ігрову сесію"
+  },
+  "modgradeSidebar.reason.swapsCryptoAddresses": {
+    "defaultMessage": "Замінює криптоадреси, скопійовані в буфер обміну"
+  },
+  "modgradeSidebar.someFiles": {
+    "defaultMessage": "Це стосується лише деяких файлів"
+  },
+  "modgradeSidebar.unknownMalwareReason": {
+    "defaultMessage": "Інша зловмисна поведінка"
+  },
+  "modgradeSidebar.unknownWarningReason": {
+    "defaultMessage": "Інші підозрілі дії"
+  },
+  "modgradeSidebar.viewReport": {
+    "defaultMessage": "Переглянути на Modgrade"
+  },
+  "modgradeSidebar.warning": {
+    "defaultMessage": "Виявлено підозрілий код"
   },
   "modpacksSidebar.title": {
     "defaultMessage": "Збірки"
@@ -233,6 +419,15 @@
   "projectCardActions.unfollow": {
     "defaultMessage": "Відписатися"
   },
+  "projectReviews.loading": {
+    "defaultMessage": "Завантажуємо відгуки…"
+  },
+  "projectReviews.notFoundDescription": {
+    "defaultMessage": "Цей проєкт не має відгуків на {sources}."
+  },
+  "projectReviews.notFoundTitle": {
+    "defaultMessage": "Відгуків не знайдено"
+  },
   "projectReviews.source": {
     "defaultMessage": "Джерело відгуку"
   },
@@ -275,8 +470,29 @@
   "reviewStars.rating": {
     "defaultMessage": "Оцінка: {rating} з 5"
   },
+  "sidebarLayout.customize": {
+    "defaultMessage": "Налаштувати бічну панель"
+  },
+  "sidebarLayout.done": {
+    "defaultMessage": "Зберегти"
+  },
+  "sidebarLayout.drag": {
+    "defaultMessage": "Перетягніть, щоби змінити порядок"
+  },
+  "sidebarLayout.hide": {
+    "defaultMessage": "Приховати"
+  },
+  "sidebarLayout.revert": {
+    "defaultMessage": "Відхилити"
+  },
+  "sidebarLayout.show": {
+    "defaultMessage": "Показати"
+  },
   "spigotReviews.authorResponse": {
     "defaultMessage": "Відповідь автора:"
+  },
+  "spigotReviews.credit": {
+    "defaultMessage": "Відгуки від <link>SpigotMC</link>, написані його спільнотою."
   },
   "spigotReviews.empty": {
     "defaultMessage": "Поки що немає відгуків."
@@ -331,6 +547,9 @@
   },
   "toolsSidebar.copyInstallCommand": {
     "defaultMessage": "Скопіювати команду {manager}"
+  },
+  "toolsSidebar.decompileWith": {
+    "defaultMessage": "Декомпілювати за допомогою {tool}"
   },
   "toolsSidebar.generateEmbed": {
     "defaultMessage": "Згенерувати код для вбудовування"

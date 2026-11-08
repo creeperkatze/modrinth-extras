@@ -5,8 +5,14 @@
   "feature.accentColor.description": {
     "defaultMessage": "Замініть зелений колір Modrinth на власний акцентний колір."
   },
+  "feature.accentColor.lowContrast": {
+    "defaultMessage": "Цей колір важко розрізняється на поточній темі Modrinth."
+  },
   "feature.accentColor.title": {
     "defaultMessage": "Акцентний колір"
+  },
+  "feature.accentColor.unreadableButtons": {
+    "defaultMessage": "Текст на кнопках із цим кольором важко читається на поточній темі Modrinth."
   },
   "feature.activitySparkline.days": {
     "defaultMessage": "{count, plural, one {# день} few {# дні} many {# днів} other {# днів}}"
@@ -34,6 +40,12 @@
   },
   "feature.browserNotifications.title": {
     "defaultMessage": "Повідомлення у браузері"
+  },
+  "feature.compareVersions.description": {
+    "defaultMessage": "Порівнюйте декомпільований код версій у modsrc, на сторінках версій, у списку версій та в журналі змін."
+  },
+  "feature.compareVersions.title": {
+    "defaultMessage": "Порівняти версії"
   },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "За можливости переадресовувати сторінки проєктів CurseForge на Modrinth."
@@ -73,6 +85,12 @@
   },
   "feature.githubSidebar.title": {
     "defaultMessage": "Репозиторій на бічній панелі"
+  },
+  "feature.modgradeSidebar.description": {
+    "defaultMessage": "Показати результати перевірки безпеки проєкту від Modgrade."
+  },
+  "feature.modgradeSidebar.title": {
+    "defaultMessage": "Modgrade на бічній панелі"
   },
   "feature.modpacksSidebar.description": {
     "defaultMessage": "Показати всі збірки, до яких входить цей проєкт."
@@ -131,8 +149,11 @@
   "feature.quickSearch.title": {
     "defaultMessage": "Швидкий пошук"
   },
+  "feature.reviews.curseforge": {
+    "defaultMessage": "Коментарі CurseForge"
+  },
   "feature.reviews.description": {
-    "defaultMessage": "Додає вкладку «Відгуки» до проєктів, на якій відображаються відгуки спільнот з ModDex та SpigotMC."
+    "defaultMessage": "Додає вкладку «Відгуки» до проєктів, на якій відображаються відгуки спільнот з ModDex, CurseForge та SpigotMC."
   },
   "feature.reviews.moddex": {
     "defaultMessage": "Відгуки ModDex"
@@ -151,6 +172,12 @@
   },
   "feature.telemetry.title": {
     "defaultMessage": "Телеметрія"
+  },
+  "feature.toolsSidebar.decompiler": {
+    "defaultMessage": "Декомпілятор"
+  },
+  "feature.toolsSidebar.description": {
+    "defaultMessage": "Створення кодів вбудовування, копіювання команд встановлення для менеджера модів та декомпіляція модів."
   },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "Менеджер модів"
@@ -205,6 +232,12 @@
   },
   "popup.group.general": {
     "defaultMessage": "Загальні"
+  },
+  "popup.group.sidebar": {
+    "defaultMessage": "Бічна панель"
+  },
+  "popup.tab.projects": {
+    "defaultMessage": "Проєкти"
   },
   "search.any": {
     "defaultMessage": "Будь-який"

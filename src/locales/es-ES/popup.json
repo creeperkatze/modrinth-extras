@@ -131,9 +131,6 @@
   "feature.quickSearch.title": {
     "defaultMessage": "Búsqueda rápida"
   },
-  "feature.reviews.description": {
-    "defaultMessage": "Añade una pestaña de Reseñas a proyectos con reseñas de la comunidad de ModDex y SpigotMC."
-  },
   "feature.reviews.moddex": {
     "defaultMessage": "Reseñas de ModDex"
   },

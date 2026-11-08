@@ -8,6 +8,48 @@
   "compareVersions.tooltip": {
     "defaultMessage": "Mit {version} in modsrc vergleichen"
   },
+  "curseforgeComments.author": {
+    "defaultMessage": "Autor"
+  },
+  "curseforgeComments.commentCount": {
+    "defaultMessage": "{count, plural, one {# Kommentar} other {# Kommentare}}"
+  },
+  "curseforgeComments.credit": {
+    "defaultMessage": "Kommentare von <link>CurseForge</link>, verfasst von der Community."
+  },
+  "curseforgeComments.edited": {
+    "defaultMessage": "Bearbeitet"
+  },
+  "curseforgeComments.empty": {
+    "defaultMessage": "Noch keine Kommentare."
+  },
+  "curseforgeComments.hideReplies": {
+    "defaultMessage": "{count, plural, one {# Antwort ausblenden} other {# Antworten ausblenden}}"
+  },
+  "curseforgeComments.loadError": {
+    "defaultMessage": "Kommentare von CurseForge konnten nicht geladen werden"
+  },
+  "curseforgeComments.loading": {
+    "defaultMessage": "Kommentare werden geladen…"
+  },
+  "curseforgeComments.notFound": {
+    "defaultMessage": "Dieses Projekt konnte nicht auf CurseForge gefunden werden."
+  },
+  "curseforgeComments.pinned": {
+    "defaultMessage": "Angepinnt"
+  },
+  "curseforgeComments.posted": {
+    "defaultMessage": "Veröffentlicht {time}"
+  },
+  "curseforgeComments.showReplies": {
+    "defaultMessage": "{count, plural, one {# Antwort anzeigen} other {# Antworten anzeigen}}"
+  },
+  "curseforgeComments.title": {
+    "defaultMessage": "Kommentare von der Community"
+  },
+  "curseforgeComments.writeComment": {
+    "defaultMessage": "Schreibe einen Kommentar"
+  },
   "dependencyExplorer.centerView": {
     "defaultMessage": "Ansicht zentrieren"
   },
@@ -158,6 +200,135 @@
   "moddexReviews.writeReview": {
     "defaultMessage": "Schreibe eine Bewertung"
   },
+  "modgradeSidebar.cannotCheck": {
+    "defaultMessage": "{count, plural, one {# Datei} other {# Dateien}} konnten nicht zur Überprüfung heruntergeladen werden"
+  },
+  "modgradeSidebar.checked": {
+    "defaultMessage": "{checked} von {total, plural, one {# neueste Datei} other {# neueste Dateien}} überprüft"
+  },
+  "modgradeSidebar.lastChecked": {
+    "defaultMessage": "Zuletzt überprüft {time}"
+  },
+  "modgradeSidebar.loadError": {
+    "defaultMessage": "Daten von Modgrade konnten nicht geladen werden"
+  },
+  "modgradeSidebar.malware": {
+    "defaultMessage": "Malware gefunden"
+  },
+  "modgradeSidebar.malwareElsewhere": {
+    "defaultMessage": "Malware, die nur auf einer anderen Plattform gefunden wurde"
+  },
+  "modgradeSidebar.notChecked": {
+    "defaultMessage": "Noch nicht überprüft"
+  },
+  "modgradeSidebar.partlyChecked": {
+    "defaultMessage": "Teilweise überprüft"
+  },
+  "modgradeSidebar.passed": {
+    "defaultMessage": "Keine Probleme gefunden"
+  },
+  "modgradeSidebar.possibleMalware": {
+    "defaultMessage": "Mögliche Malware in einem enthaltenen Projekt"
+  },
+  "modgradeSidebar.readInPart": {
+    "defaultMessage": "{count, plural, one {# Datei} other {# Dateien}} nur teilweise lesbar"
+  },
+  "modgradeSidebar.reason.discordWebhook": {
+    "defaultMessage": "Sendet Daten an einen Discord-Webhook"
+  },
+  "modgradeSidebar.reason.disguisedFile": {
+    "defaultMessage": "Enthält eine Datei, deren Inhalt nicht dem Dateinamen entspricht"
+  },
+  "modgradeSidebar.reason.downloadsAndRunsCode": {
+    "defaultMessage": "Lädt Code herunter und führt ihn aus, ohne ihn zu überprüfen"
+  },
+  "modgradeSidebar.reason.downloadsCodeHttp": {
+    "defaultMessage": "Lädt Code ohne Verschlüsselung herunter"
+  },
+  "modgradeSidebar.reason.hiddenAddress": {
+    "defaultMessage": "Versteckt eine Webadresse in seinem Code"
+  },
+  "modgradeSidebar.reason.installsProgram": {
+    "defaultMessage": "Lädt ein Programm herunter oder führt es aus und startet es"
+  },
+  "modgradeSidebar.reason.knownMalware": {
+    "defaultMessage": "Stimmt mit bekannter Malware überein"
+  },
+  "modgradeSidebar.reason.licenceUnlockedCode": {
+    "defaultMessage": "Lädt und führt Code aus, der durch einen Lizenzschlüssel freigeschaltet wurde"
+  },
+  "modgradeSidebar.reason.loadsCodeAtStart": {
+    "defaultMessage": "Lädt beim Start Code von einer festen Adresse"
+  },
+  "modgradeSidebar.reason.matchesSecurityReport": {
+    "defaultMessage": "Stimmt mit einem öffentlichen Sicherheitsbericht überein"
+  },
+  "modgradeSidebar.reason.miner": {
+    "defaultMessage": "Führt einen versteckten Kryptowährungs-Miner aus"
+  },
+  "modgradeSidebar.reason.namesStartupPlaces": {
+    "defaultMessage": "Bezieht sich auf Orte, an denen Programme bei der Anmeldung gestartet werden"
+  },
+  "modgradeSidebar.reason.readsBrowserHistory": {
+    "defaultMessage": "Liest den Browserverlauf"
+  },
+  "modgradeSidebar.reason.readsClipboardCrypto": {
+    "defaultMessage": "Liest Krypto-Adressen aus der Zwischenablage"
+  },
+  "modgradeSidebar.reason.readsLoginData": {
+    "defaultMessage": "Liest die Anmeldedaten anderer Programme"
+  },
+  "modgradeSidebar.reason.recordsAndClipboard": {
+    "defaultMessage": "Nimmt das Mikrofon oder den Bildschirm auf und ersetzt die Zwischenablage"
+  },
+  "modgradeSidebar.reason.remoteControl": {
+    "defaultMessage": "Ermöglicht anderen, Befehle auf dem Computer oder Server auszuführen"
+  },
+  "modgradeSidebar.reason.replacedProgram": {
+    "defaultMessage": "Die neueste Datei ist ein anderes Programm, das seine Adressen verbirgt"
+  },
+  "modgradeSidebar.reason.runsDownloadedCode": {
+    "defaultMessage": "Lädt versteckten Code herunter und führt ihn aus"
+  },
+  "modgradeSidebar.reason.sendsClipboard": {
+    "defaultMessage": "Sendet den Inhalt der Zwischenablage"
+  },
+  "modgradeSidebar.reason.sendsComputerId": {
+    "defaultMessage": "Sendet eine Kennung des Computers"
+  },
+  "modgradeSidebar.reason.sendsIpAddress": {
+    "defaultMessage": "Sendet die IP-Adresse und den Standort an Discord"
+  },
+  "modgradeSidebar.reason.sendsScreenshots": {
+    "defaultMessage": "Sendet Screenshots"
+  },
+  "modgradeSidebar.reason.sendsSessionToken": {
+    "defaultMessage": "Sendet den Minecraft-Anmeldetoken an eine andere Stelle als Mojang"
+  },
+  "modgradeSidebar.reason.startsAtLogin": {
+    "defaultMessage": "Installiert sich so, dass es beim Anmelden gestartet wird"
+  },
+  "modgradeSidebar.reason.stealsLogins": {
+    "defaultMessage": "Stiehlt Anmeldedaten, Tokens oder die Spielsitzung"
+  },
+  "modgradeSidebar.reason.swapsCryptoAddresses": {
+    "defaultMessage": "Ersetzt in die Zwischenablage kopierte Krypto-Adressen"
+  },
+  "modgradeSidebar.someFiles": {
+    "defaultMessage": "Nur manche Dateien sind betroffen"
+  },
+  "modgradeSidebar.unknownMalwareReason": {
+    "defaultMessage": "Sonstiges böswilliges Verhalten"
+  },
+  "modgradeSidebar.unknownWarningReason": {
+    "defaultMessage": "Sonstiges verdächtiges Verhalten"
+  },
+  "modgradeSidebar.viewReport": {
+    "defaultMessage": "Auf Modgrade anzeigen"
+  },
+  "modgradeSidebar.warning": {
+    "defaultMessage": "Verdächtiger Code gefunden"
+  },
   "modpacksSidebar.title": {
     "defaultMessage": "Modpacks"
   },
@@ -247,6 +418,15 @@
   },
   "projectCardActions.unfollow": {
     "defaultMessage": "Entfolgen"
+  },
+  "projectReviews.loading": {
+    "defaultMessage": "Bewertungen werden geladen…"
+  },
+  "projectReviews.notFoundDescription": {
+    "defaultMessage": "Dieses Projekt hat keine Bewertungen auf {sources}."
+  },
+  "projectReviews.notFoundTitle": {
+    "defaultMessage": "Keine Bewertungen gefunden"
   },
   "projectReviews.source": {
     "defaultMessage": "Quelle der Bewertungen"
