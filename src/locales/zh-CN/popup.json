@@ -56,23 +56,14 @@
   "feature.dependencyExplorer.description": {
     "defaultMessage": "用于探查完整依赖树的交互式图表。"
   },
-  "feature.dependencyExplorer.disabledTooltip": {
-    "defaultMessage": "需要先启用依赖侧边栏"
-  },
   "feature.dependencyExplorer.title": {
     "defaultMessage": "依赖关系浏览器"
   },
   "feature.dependencySidebar.description": {
     "defaultMessage": "项目页面上的可折叠依赖树。"
   },
-  "feature.dependencySidebar.title": {
-    "defaultMessage": "依赖关系侧边栏"
-  },
   "feature.discordSidebar.description": {
     "defaultMessage": "已关联 Discord 服务器的名称、描述、成员数量及在线人数。"
-  },
-  "feature.discordSidebar.title": {
-    "defaultMessage": "Discord 侧边栏"
   },
   "feature.galleryBackground.description": {
     "defaultMessage": "在项目页面上将精选图库图片显示为背景横幅。"
@@ -83,20 +74,11 @@
   "feature.githubSidebar.description": {
     "defaultMessage": "显示已关联的 GitHub、GitLab、Codeberg 和 Bitbucket 仓库的 Star、Issue、Pull Request 及 Fork 数量。"
   },
-  "feature.githubSidebar.title": {
-    "defaultMessage": "仓库侧边栏"
-  },
   "feature.modgradeSidebar.description": {
     "defaultMessage": "展示项目的 Modgrade 安全检查结果。"
   },
-  "feature.modgradeSidebar.title": {
-    "defaultMessage": "Modgrade 侧边栏"
-  },
   "feature.modpacksSidebar.description": {
     "defaultMessage": "显示包含该模组的所有整合包。"
-  },
-  "feature.modpacksSidebar.title": {
-    "defaultMessage": "整合包侧边栏"
   },
   "feature.monetizationBadge.description": {
     "defaultMessage": "在侧边栏中显示项目的盈利状态。"
@@ -118,9 +100,6 @@
   },
   "feature.platformsSidebar.description": {
     "defaultMessage": "在CurseForge、Hangar和SpigotMC上找到同一个项目或作者。"
-  },
-  "feature.platformsSidebar.title": {
-    "defaultMessage": "其他平台侧边栏"
   },
   "feature.projectCardActions.description": {
     "defaultMessage": "直接从项目卡片下载、关注和保存项目。"
@@ -175,9 +154,6 @@
   },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "模组管理器"
-  },
-  "feature.toolsSidebar.title": {
-    "defaultMessage": "工具侧边栏"
   },
   "feature.translateDescription.description": {
     "defaultMessage": "当项目简介语言与你的语言不同时，在本地设备上将其翻译为你的语言。"

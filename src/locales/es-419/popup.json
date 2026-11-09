@@ -17,23 +17,14 @@
   "feature.dependencyExplorer.description": {
     "defaultMessage": "Gráfico interactivo para explorar el árbol completo de dependencias."
   },
-  "feature.dependencyExplorer.disabledTooltip": {
-    "defaultMessage": "Requiere que la barra lateral de dependencias esté habilitada"
-  },
   "feature.dependencyExplorer.title": {
     "defaultMessage": "Explorador de dependencias"
   },
   "feature.dependencySidebar.description": {
     "defaultMessage": "Árbol de dependencias plegable en las páginas de los proyectos."
   },
-  "feature.dependencySidebar.title": {
-    "defaultMessage": "Barra lateral de dependencias"
-  },
   "feature.discordSidebar.description": {
     "defaultMessage": "Nombre del servidor, descripción, número de miembros y número de usuarios en línea de los servidores de Discord vinculados."
-  },
-  "feature.discordSidebar.title": {
-    "defaultMessage": "Barra lateral de Discord"
   },
   "feature.galleryBackground.description": {
     "defaultMessage": "Muestra la imagen destacada de la galería como un banner de fondo en las páginas de los proyectos."
@@ -88,9 +79,6 @@
   },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "Administrador de mods"
-  },
-  "feature.toolsSidebar.title": {
-    "defaultMessage": "Barra lateral"
   },
   "popup.donatePrompt.dismiss": {
     "defaultMessage": "Cerrar"

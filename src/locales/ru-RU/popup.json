@@ -57,7 +57,7 @@
     "defaultMessage": "Интерактивный график для просмотра полного древа зависимостей."
   },
   "feature.dependencyExplorer.disabledTooltip": {
-    "defaultMessage": "Требуется включённая боковая панель зависимостей"
+    "defaultMessage": "Требуется включить «Зависимости»"
   },
   "feature.dependencyExplorer.title": {
     "defaultMessage": "Карта зависимостей"
@@ -66,13 +66,13 @@
     "defaultMessage": "Сворачиваемое древо зависимостей на страницах проектов."
   },
   "feature.dependencySidebar.title": {
-    "defaultMessage": "Боковая панель зависимостей"
+    "defaultMessage": "Зависимости"
   },
   "feature.discordSidebar.description": {
     "defaultMessage": "Название, описание, количество участников и онлайн для связанных серверов Discord."
   },
   "feature.discordSidebar.title": {
-    "defaultMessage": "Боковая панель Discord"
+    "defaultMessage": "Discord"
   },
   "feature.galleryBackground.description": {
     "defaultMessage": "Отображать обложку как фоновый баннер на страницах проектов."
@@ -84,19 +84,19 @@
     "defaultMessage": "Звёзды, проблемы, запросы на слияние и форки для привязанных репозиториев на GitHub, GitLab, Codeberg и Bitbucket."
   },
   "feature.githubSidebar.title": {
-    "defaultMessage": "Боковая панель репозитория"
+    "defaultMessage": "Репозиторий"
   },
   "feature.modgradeSidebar.description": {
     "defaultMessage": "Показывать результаты проверки безопасности проекта через Modgrade."
   },
   "feature.modgradeSidebar.title": {
-    "defaultMessage": "Боковая панель Modgrade"
+    "defaultMessage": "Modgrade"
   },
   "feature.modpacksSidebar.description": {
     "defaultMessage": "Показать все сборки с модом."
   },
   "feature.modpacksSidebar.title": {
-    "defaultMessage": "Боковая панель сборок"
+    "defaultMessage": "Сборки"
   },
   "feature.monetizationBadge.description": {
     "defaultMessage": "Показать статус монетизации проекта в боковой панели."
@@ -120,7 +120,7 @@
     "defaultMessage": "Найти тот же проект или автора на CurseForge, Hangar и SpigotMC."
   },
   "feature.platformsSidebar.title": {
-    "defaultMessage": "Боковая панель других платформ"
+    "defaultMessage": "Другие платформы"
   },
   "feature.projectCardActions.description": {
     "defaultMessage": "Скачивайте, подписывайтесь и сохраняйте проекты прямо из карточек проектов."
@@ -183,7 +183,7 @@
     "defaultMessage": "Менеджер модов"
   },
   "feature.toolsSidebar.title": {
-    "defaultMessage": "Боковая панель инструментов"
+    "defaultMessage": "Инструменты"
   },
   "feature.translateDescription.description": {
     "defaultMessage": "Перевод описания проекта на ваш язык прямо на устройстве, если он отличается."

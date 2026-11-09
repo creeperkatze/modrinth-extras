@@ -44,23 +44,14 @@
   "feature.dependencyExplorer.description": {
     "defaultMessage": "Bağımlılık ağacının tamamını incelemek için etkileşimli grafik."
   },
-  "feature.dependencyExplorer.disabledTooltip": {
-    "defaultMessage": "Bağımlılık kenar çubuğunun etkinleştirilmesi gerekiyor"
-  },
   "feature.dependencyExplorer.title": {
     "defaultMessage": "Bağımlılık Gezgini"
   },
   "feature.dependencySidebar.description": {
     "defaultMessage": "Proje sayfalarında katlanabilir bağımlılık ağacı."
   },
-  "feature.dependencySidebar.title": {
-    "defaultMessage": "Bağımlılık kenar çubuğu"
-  },
   "feature.discordSidebar.description": {
     "defaultMessage": "Bağlı Discord sunucularının sunucu adı, açıklaması, üye sayısı ve çevrim içi sayısı."
-  },
-  "feature.discordSidebar.title": {
-    "defaultMessage": "Discord kenar çubuğu"
   },
   "feature.galleryBackground.description": {
     "defaultMessage": "Öne çıkan galeri görselini proje sayfalarında arka plan başlığı olarak görüntüleyin."
@@ -71,14 +62,8 @@
   "feature.githubSidebar.description": {
     "defaultMessage": "Bağlantılı GitHub, GitLab, Codeberg ve Bitbucket repo'larına ait star'lar, issue'lar, pull request'ler ve fork'lar."
   },
-  "feature.githubSidebar.title": {
-    "defaultMessage": "Depo kenar çubuğu"
-  },
   "feature.modpacksSidebar.description": {
     "defaultMessage": "Bu modun yer aldığı tüm mod paketlerini göster."
-  },
-  "feature.modpacksSidebar.title": {
-    "defaultMessage": "Mod paketleri kenar çubuğu"
   },
   "feature.monetizationBadge.description": {
     "defaultMessage": "Bir projenin gelir elde etme durumunu kenar çubuğunda göster."
@@ -100,9 +85,6 @@
   },
   "feature.platformsSidebar.description": {
     "defaultMessage": "CurseForge, Hangar ve SpigotMC üzerinde aynı projeyi veya geliştiriciyi bulun."
-  },
-  "feature.platformsSidebar.title": {
-    "defaultMessage": "Diğer platformlar kenar çubuğu"
   },
   "feature.projectCardActions.description": {
     "defaultMessage": "Projeleri doğrudan proje kartlarından kolayca indirin, takip edin ve kaydedin."
@@ -151,9 +133,6 @@
   },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "Mod yöneticisi"
-  },
-  "feature.toolsSidebar.title": {
-    "defaultMessage": "Araçlar kenar çubuğu"
   },
   "feature.translateDescription.description": {
     "defaultMessage": "Bir projenin açıklaması, kendi dilinizden farklıysa, cihaz üzerinde kendi dilinize çevrilir."

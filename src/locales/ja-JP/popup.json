@@ -14,9 +14,6 @@
   "feature.browserNotifications.title": {
     "defaultMessage": "ブラウザーの通知"
   },
-  "feature.discordSidebar.title": {
-    "defaultMessage": "Discordサイドバー"
-  },
   "feature.galleryBackground.title": {
     "defaultMessage": "ギャラリーの背景"
   },
@@ -32,9 +29,6 @@
   "feature.platformsSidebar.description": {
     "defaultMessage": "CurseForge、Hangar、とSpigotMCで同じのプロジェクトや開発者を見つけます。"
   },
-  "feature.platformsSidebar.title": {
-    "defaultMessage": "他のプラットフォームのサイドバー"
-  },
   "feature.projectCardActions.gameVersion": {
     "defaultMessage": "ゲームバージョン"
   },
@@ -43,9 +37,6 @@
   },
   "feature.telemetry.title": {
     "defaultMessage": "テレメンタラリー"
-  },
-  "feature.toolsSidebar.title": {
-    "defaultMessage": "ツールのサイドバー"
   },
   "feature.translateDescription.title": {
     "defaultMessage": "概要を翻訳"
