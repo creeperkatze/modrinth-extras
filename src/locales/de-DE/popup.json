@@ -57,7 +57,7 @@
     "defaultMessage": "Interaktiver Graph, um den vollständigen Abhängigkeitsbaum zu erkunden."
   },
   "feature.dependencyExplorer.disabledTooltip": {
-    "defaultMessage": "Erfordert die Aktivierung der Abhängigkeits-Seitenleiste"
+    "defaultMessage": "Abhängigkeiten müssen aktiviert sein"
   },
   "feature.dependencyExplorer.title": {
     "defaultMessage": "Abhängigkeits-Explorer"
@@ -66,13 +66,13 @@
     "defaultMessage": "Klappbarer Abhängigkeitsbaum auf Projektseiten."
   },
   "feature.dependencySidebar.title": {
-    "defaultMessage": "Abhängigkeits-Seitenleiste"
+    "defaultMessage": "Abhängigkeiten"
   },
   "feature.discordSidebar.description": {
     "defaultMessage": "Servername, Beschreibung, Mitgliederzahl und Anzahl der aktiven Nutzer für verknüpfte Discordserver."
   },
   "feature.discordSidebar.title": {
-    "defaultMessage": "Discord-Seitenleiste"
+    "defaultMessage": "Discord"
   },
   "feature.galleryBackground.description": {
     "defaultMessage": "Zeigt das vorgestellte Galeriebild als Hintergrundbanner auf Projektseiten an."
@@ -84,19 +84,19 @@
     "defaultMessage": "Sterne, Issues, Pull-Requests und Forks für verknüpfte Repos auf GitHub, GitLab, Codeberg und Bitbucket."
   },
   "feature.githubSidebar.title": {
-    "defaultMessage": "Repository-Seitenleiste"
+    "defaultMessage": "Repository"
   },
   "feature.modgradeSidebar.description": {
     "defaultMessage": "Zeige die Ergebnisse der Modgrade-Sicherheitsprüfung für ein Projekt an."
   },
   "feature.modgradeSidebar.title": {
-    "defaultMessage": "Modgrade-Seitenleiste"
+    "defaultMessage": "Modgrade"
   },
   "feature.modpacksSidebar.description": {
     "defaultMessage": "Zeige alle Modpacks an, in denen der Mod enthalten ist."
   },
   "feature.modpacksSidebar.title": {
-    "defaultMessage": "Modpack-Seitenleiste"
+    "defaultMessage": "Modpacks"
   },
   "feature.monetizationBadge.description": {
     "defaultMessage": "Zeigt den Monetarisierungsstatus eines Projekts in der Seitenleiste an."
@@ -120,7 +120,7 @@
     "defaultMessage": "Finde dasselbe Projekt oder denselben Autor auf CurseForge, Hangar und SpigotMC."
   },
   "feature.platformsSidebar.title": {
-    "defaultMessage": "Andere Plattformen-Seitenleiste"
+    "defaultMessage": "Andere Plattformen"
   },
   "feature.projectCardActions.description": {
     "defaultMessage": "Projekte direkt über ihre Projektkarten herunterladen, folgen und speichern."
@@ -183,7 +183,7 @@
     "defaultMessage": "Mod-Manager"
   },
   "feature.toolsSidebar.title": {
-    "defaultMessage": "Werkzeug-Seitenleiste"
+    "defaultMessage": "Werkzeuge"
   },
   "feature.translateDescription.description": {
     "defaultMessage": "Die Übersetzung der Projektbeschreibung direkt auf dem Gerät in deine Sprache, falls diese abweicht."

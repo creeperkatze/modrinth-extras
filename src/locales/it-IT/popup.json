@@ -14,9 +14,6 @@
   "feature.discordSidebar.description": {
     "defaultMessage": "Nome del server, descrizione, numero di membri e numero di utenti online per i server Discord collegati."
   },
-  "feature.discordSidebar.title": {
-    "defaultMessage": "Barra laterale di Discord"
-  },
   "feature.notificationBadge.description": {
     "defaultMessage": "Numero di notifiche non lette aggiornate come distintivo sull'icona dell'estensione."
   },
@@ -55,9 +52,6 @@
   },
   "feature.telemetry.title": {
     "defaultMessage": "Telemetria"
-  },
-  "feature.toolsSidebar.title": {
-    "defaultMessage": "Barra laterale degli strumenti"
   },
   "popup.footer.checking": {
     "defaultMessage": "Controllo in corso"

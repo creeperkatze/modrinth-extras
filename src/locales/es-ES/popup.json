@@ -44,23 +44,14 @@
   "feature.dependencyExplorer.description": {
     "defaultMessage": "Gráfico interactivo para explorar el árbol de dependencias."
   },
-  "feature.dependencyExplorer.disabledTooltip": {
-    "defaultMessage": "Requiere la barra lateral de dependencias que esté activado"
-  },
   "feature.dependencyExplorer.title": {
     "defaultMessage": "Explorador de dependencias"
   },
   "feature.dependencySidebar.description": {
     "defaultMessage": "Árbol desplegable en las páginas de proyecto."
   },
-  "feature.dependencySidebar.title": {
-    "defaultMessage": "Barra lateral de dependencias"
-  },
   "feature.discordSidebar.description": {
     "defaultMessage": "Nombre del servidor, descripción, número de miembros, y el cuento online para servidores de Discord vinculados."
-  },
-  "feature.discordSidebar.title": {
-    "defaultMessage": "Barra lateral de Discord"
   },
   "feature.galleryBackground.description": {
     "defaultMessage": "Mostrar la imagen destacada como un fondo en las páginas de proyectos."
@@ -71,14 +62,8 @@
   "feature.githubSidebar.description": {
     "defaultMessage": "Estrellas, problemas, solicitudes de cambios abiertos, y copias para repositorios de GitHub, GitLab, Codeberg y Bitbucket vinculados."
   },
-  "feature.githubSidebar.title": {
-    "defaultMessage": "Barra lateral del repositorio"
-  },
   "feature.modpacksSidebar.description": {
     "defaultMessage": "Mostrar todos los modpacks en los que aparece el mod."
-  },
-  "feature.modpacksSidebar.title": {
-    "defaultMessage": "Barra lateral de modpacks"
   },
   "feature.monetizationBadge.description": {
     "defaultMessage": "Ver el estado de monetización de un proyecto en la barra lateral."
@@ -100,9 +85,6 @@
   },
   "feature.platformsSidebar.description": {
     "defaultMessage": "Encuentre el mismo proyecto o autor en CurseForge, Hangar y SpigotMC."
-  },
-  "feature.platformsSidebar.title": {
-    "defaultMessage": "Barra lateral de otras plataformas"
   },
   "feature.projectCardActions.description": {
     "defaultMessage": "Descargar, seguir, y guardar proyectos directamente de sus fichas."
@@ -151,9 +133,6 @@
   },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "Gestor de mods"
-  },
-  "feature.toolsSidebar.title": {
-    "defaultMessage": "Barra lateral de herramientas"
   },
   "feature.translateDescription.description": {
     "defaultMessage": "Traducción en tu dispositivo de una descripción de proyecto a tu idioma, cuando sea diferente."

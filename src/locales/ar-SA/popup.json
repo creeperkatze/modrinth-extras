@@ -17,23 +17,14 @@
   "feature.dependencyExplorer.description": {
     "defaultMessage": "رسم بياني تفاعلي لاستكشاف شجرة التوابع الكاملة."
   },
-  "feature.dependencyExplorer.disabledTooltip": {
-    "defaultMessage": "يتطلب تمكين الشريط الجانبي للتوابع"
-  },
   "feature.dependencyExplorer.title": {
     "defaultMessage": "مستكشف التوابع"
   },
   "feature.dependencySidebar.description": {
     "defaultMessage": "شجرة التوابع القابلة للطي في صفحات المشروع."
   },
-  "feature.dependencySidebar.title": {
-    "defaultMessage": "الشريط الجانبي للملحقات"
-  },
   "feature.discordSidebar.description": {
     "defaultMessage": "اسم الخادم، الوصف، عدد الأعضاء، والعد عبر الإنترنت لخوادم Discord المرتبطة."
-  },
-  "feature.discordSidebar.title": {
-    "defaultMessage": "الشريط الجانبي لDiscord"
   },
   "feature.galleryBackground.description": {
     "defaultMessage": "عرض صورة معرض الصور المميزة كلافتة خلفية على صفحات المشروع."
@@ -88,9 +79,6 @@
   },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "مدير التعديلات"
-  },
-  "feature.toolsSidebar.title": {
-    "defaultMessage": "شريط الأدوات الجانبي"
   },
   "popup.donatePrompt.dismiss": {
     "defaultMessage": "تجاهل"

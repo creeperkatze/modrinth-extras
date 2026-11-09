@@ -20,9 +20,6 @@
   "feature.discordSidebar.description": {
     "defaultMessage": "Nom du serveur, description, nombre de membres et nombre de personnes en ligne pour les serveurs Discord liés."
   },
-  "feature.discordSidebar.title": {
-    "defaultMessage": "Barre latérale Discord"
-  },
   "feature.galleryBackground.description": {
     "defaultMessage": "Afficher l'image de la galerie en vedette en tant que bannière d'arrière-plan sur les pages de projet."
   },
@@ -67,9 +64,6 @@
   },
   "feature.telemetry.title": {
     "defaultMessage": "Télémétrie"
-  },
-  "feature.toolsSidebar.title": {
-    "defaultMessage": "Barre latérale d'outils"
   },
   "popup.footer.checking": {
     "defaultMessage": "Vérification"

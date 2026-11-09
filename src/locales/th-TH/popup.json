@@ -2,9 +2,6 @@
   "feature.accentColor.color": {
     "defaultMessage": "สี"
   },
-  "feature.toolsSidebar.title": {
-    "defaultMessage": "แถบเครื่องมือ"
-  },
   "popup.discordPrompt.dismiss": {
     "defaultMessage": "ปิด"
   },
