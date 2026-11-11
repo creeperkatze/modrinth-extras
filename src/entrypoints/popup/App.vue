@@ -29,7 +29,11 @@
 			<DonateCard />
 
 			<div class="px-3">
-				<Tabs v-model:value="tab" :tabs="tabs" class="!w-full [&>button]:flex-1" />
+				<Tabs
+					v-model:value="tab"
+					:tabs="tabs"
+					class="!w-full [&>button]:min-w-0 [&>button]:flex-auto [&>button]:px-2 [&_span]:truncate"
+				/>
 			</div>
 		</div>
 
