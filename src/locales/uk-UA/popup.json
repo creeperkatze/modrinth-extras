@@ -56,14 +56,23 @@
   "feature.dependencyExplorer.description": {
     "defaultMessage": "Інтерактивний граф для дослідження повного дерева залежностей."
   },
+  "feature.dependencyExplorer.disabledTooltip": {
+    "defaultMessage": "Для цього потрібно увімкнути залежності"
+  },
   "feature.dependencyExplorer.title": {
     "defaultMessage": "Оглядач залежностей"
   },
   "feature.dependencySidebar.description": {
     "defaultMessage": "Згортуване дерево залежностей на сторінках проєктів."
   },
+  "feature.dependencySidebar.title": {
+    "defaultMessage": "Залежності"
+  },
   "feature.discordSidebar.description": {
     "defaultMessage": "Назва сервера, опис, кількість учасників та онлайн, для пов'язаних серверів Discord."
+  },
+  "feature.discordSidebar.title": {
+    "defaultMessage": "Discord"
   },
   "feature.galleryBackground.description": {
     "defaultMessage": "Відображати обране зображення з галереї як фоновий банер на сторінках проєктів."
@@ -74,11 +83,20 @@
   "feature.githubSidebar.description": {
     "defaultMessage": "Зірки, проблеми, запити на злиття та форки для пов’язаних репозиторіїв GitHub, GitLab, Codeberg та Bitbucket."
   },
+  "feature.githubSidebar.title": {
+    "defaultMessage": "Репозиторій"
+  },
   "feature.modgradeSidebar.description": {
     "defaultMessage": "Показати результати перевірки безпеки проєкту від Modgrade."
   },
+  "feature.modgradeSidebar.title": {
+    "defaultMessage": "Modgrade"
+  },
   "feature.modpacksSidebar.description": {
     "defaultMessage": "Показати всі збірки, до яких входить цей проєкт."
+  },
+  "feature.modpacksSidebar.title": {
+    "defaultMessage": "Збірки"
   },
   "feature.monetizationBadge.description": {
     "defaultMessage": "Відобразити стан монетизації проєкту на бічній панелі."
@@ -100,6 +118,9 @@
   },
   "feature.platformsSidebar.description": {
     "defaultMessage": "Знаходити цей самий проєкт або автора на CurseForge, Hangar та SpigotMC."
+  },
+  "feature.platformsSidebar.title": {
+    "defaultMessage": "Інші платформи"
   },
   "feature.projectCardActions.description": {
     "defaultMessage": "Завантажуйте, підписуйтесь та зберігайте проєкти прямо з їхніх карток."
@@ -160,6 +181,9 @@
   },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "Менеджер модів"
+  },
+  "feature.toolsSidebar.title": {
+    "defaultMessage": "Інструменти"
   },
   "feature.translateDescription.description": {
     "defaultMessage": "Переклад опису проєкту на вашу мову безпосередньо на пристрої, якщо він відрізняється."
