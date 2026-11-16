@@ -1,4 +1,43 @@
 {
+  "compareVersions.compareWith": {
+    "defaultMessage": "Porównaj z"
+  },
+  "compareVersions.label": {
+    "defaultMessage": "Porównaj z poprzednim"
+  },
+  "compareVersions.tooltip": {
+    "defaultMessage": "Porównaj z {version} w modsrc"
+  },
+  "curseforgeComments.author": {
+    "defaultMessage": "Autor"
+  },
+  "curseforgeComments.edited": {
+    "defaultMessage": "Edytowane"
+  },
+  "curseforgeComments.empty": {
+    "defaultMessage": "Nie ma jeszcze komentarzy."
+  },
+  "curseforgeComments.loadError": {
+    "defaultMessage": "Nie udało się załadować komentarzy z CurseForge"
+  },
+  "curseforgeComments.loading": {
+    "defaultMessage": "Ładowanie komentarzy…"
+  },
+  "curseforgeComments.notFound": {
+    "defaultMessage": "Nie udało się znaleźć tego projektu na CurseForge."
+  },
+  "curseforgeComments.pinned": {
+    "defaultMessage": "Przypięty"
+  },
+  "curseforgeComments.posted": {
+    "defaultMessage": "Opublikowano {time}"
+  },
+  "curseforgeComments.title": {
+    "defaultMessage": "Komentarze społeczności"
+  },
+  "curseforgeComments.writeComment": {
+    "defaultMessage": "Napisz komentarz"
+  },
   "dependencyExplorer.centerView": {
     "defaultMessage": "Wyśrodkuj widok"
   },
@@ -71,11 +110,20 @@
   "moddexReviews.developer": {
     "defaultMessage": "Autor"
   },
+  "moddexReviews.developerResponse": {
+    "defaultMessage": "Odpowiedź dewelopera:"
+  },
   "moddexReviews.edited": {
     "defaultMessage": "Edytowane"
   },
   "moddexReviews.empty": {
     "defaultMessage": "Brak recenzji. Napisz pierwszą!"
+  },
+  "moddexReviews.gameplay": {
+    "defaultMessage": "Rozgrywka"
+  },
+  "moddexReviews.loadError": {
+    "defaultMessage": "Nie udało się załadować recenzji z ModDex"
   },
   "moddexReviews.loading": {
     "defaultMessage": "Ładowanie recenzji…"
@@ -83,8 +131,14 @@
   "moddexReviews.moderatorNote": {
     "defaultMessage": "Uwaga moderatora:"
   },
+  "moddexReviews.notFound": {
+    "defaultMessage": "Nie udało się znaleźć tego projektu na ModDex."
+  },
   "moddexReviews.openModdex": {
     "defaultMessage": "Otwórz ModDex"
+  },
+  "moddexReviews.performance": {
+    "defaultMessage": "Wydajność"
   },
   "moddexReviews.playtime": {
     "defaultMessage": "Grano przez {hours, number} godz."
@@ -116,6 +170,138 @@
   "moddexReviews.writeReview": {
     "defaultMessage": "Napisz recenzję"
   },
+  "modgradeSidebar.lastChecked": {
+    "defaultMessage": "Ostatnio sprawdzone {time}"
+  },
+  "modgradeSidebar.loadError": {
+    "defaultMessage": "Nie udało się załadować danych Modgrade"
+  },
+  "modgradeSidebar.malware": {
+    "defaultMessage": "Wykryto złośliwe oprogramowanie"
+  },
+  "modgradeSidebar.malwareElsewhere": {
+    "defaultMessage": "Złośliwe oprogramowanie wykryte wyłącznie na innej platformie"
+  },
+  "modgradeSidebar.notChecked": {
+    "defaultMessage": "Jeszcze nie sprawdzone"
+  },
+  "modgradeSidebar.partlyChecked": {
+    "defaultMessage": "Częściowo sprawdzone"
+  },
+  "modgradeSidebar.passed": {
+    "defaultMessage": "Nie znaleziono problemów"
+  },
+  "modgradeSidebar.possibleMalware": {
+    "defaultMessage": "Możliwe złośliwe oprogramowanie w dołączonym projekcie"
+  },
+  "modgradeSidebar.reason.discordWebhook": {
+    "defaultMessage": "Wysyła dane do webhooka Discorda"
+  },
+  "modgradeSidebar.reason.disguisedFile": {
+    "defaultMessage": "Zawiera plik, który nie jest tym, co sugeruje jego nazwa"
+  },
+  "modgradeSidebar.reason.downloadsAndRunsCode": {
+    "defaultMessage": "Pobiera i uruchamia kod bez sprawdzania go"
+  },
+  "modgradeSidebar.reason.downloadsCodeHttp": {
+    "defaultMessage": "Pobiera kod bez szyfrowania"
+  },
+  "modgradeSidebar.reason.hiddenAddress": {
+    "defaultMessage": "Ukrywa adres internetowy w swoim kodzie"
+  },
+  "modgradeSidebar.reason.installsProgram": {
+    "defaultMessage": "Pobiera lub przenosi program i go uruchamia"
+  },
+  "modgradeSidebar.reason.licenceUnlockedCode": {
+    "defaultMessage": "Pobiera i uruchamia kod odblokowany za pomocą klucza licencyjnego"
+  },
+  "modgradeSidebar.reason.matchesSecurityReport": {
+    "defaultMessage": "Pasuje do raportu bezpieczeństwa publicznego"
+  },
+  "modgradeSidebar.reason.miner": {
+    "defaultMessage": "Uruchamia ukrytego górnika kryptowalut"
+  },
+  "modgradeSidebar.reason.sendsScreenshots": {
+    "defaultMessage": "Wysyła zrzuty ekranu"
+  },
+  "modgradeSidebar.someFiles": {
+    "defaultMessage": "Dotyczy to tylko niektórych plików"
+  },
+  "modgradeSidebar.unknownMalwareReason": {
+    "defaultMessage": "Inne złośliwe działania"
+  },
+  "modgradeSidebar.unknownWarningReason": {
+    "defaultMessage": "Inne podejrzane działania"
+  },
+  "modgradeSidebar.viewReport": {
+    "defaultMessage": "Zobacz na Modgrade"
+  },
+  "modgradeSidebar.warning": {
+    "defaultMessage": "Znaleziono podejrzany kod"
+  },
+  "modpacksSidebar.title": {
+    "defaultMessage": "Modpaki"
+  },
+  "monetizationBadge.forceDemonetized": {
+    "defaultMessage": "Monetyzacja wyłączona"
+  },
+  "monetizationBadge.monetized": {
+    "defaultMessage": "Monetyzowane"
+  },
+  "notificationsIndicator.acceptInvite": {
+    "defaultMessage": "Zaakceptuj zaproszenie"
+  },
+  "notificationsIndicator.declineInvite": {
+    "defaultMessage": "Odrzuć zaproszenie"
+  },
+  "notificationsIndicator.label": {
+    "defaultMessage": "Powiadomienia"
+  },
+  "notificationsIndicator.markAllAsRead": {
+    "defaultMessage": "Oznacz wszystkie jako przeczytanie"
+  },
+  "notificationsIndicator.markAsRead": {
+    "defaultMessage": "Oznacz jako przeczytane"
+  },
+  "notificationsIndicator.noUnread": {
+    "defaultMessage": "Brak nowych powiadomień"
+  },
+  "notificationsIndicator.projectUpdated": {
+    "defaultMessage": "{title} Został zaktualizowany"
+  },
+  "notificationsIndicator.viewAll": {
+    "defaultMessage": "Zobacz wszystko"
+  },
+  "notificationsIndicator.viewHistory": {
+    "defaultMessage": "Zobacz historię"
+  },
+  "platformsSidebar.loadError": {
+    "defaultMessage": "Nie udało się załadować innych platform"
+  },
+  "platformsSidebar.loading": {
+    "defaultMessage": "Ładowanie"
+  },
+  "platformsSidebar.title": {
+    "defaultMessage": "Inne platformy"
+  },
+  "projectCardActions.checkingDownload": {
+    "defaultMessage": "Sprawdzanie dostępnej wersji..."
+  },
+  "projectCardActions.copied": {
+    "defaultMessage": "Skopiowano!"
+  },
+  "projectCardActions.copyLink": {
+    "defaultMessage": "Skopiuj link"
+  },
+  "projectCardActions.download": {
+    "defaultMessage": "Pobierz"
+  },
+  "projectCardActions.newCollection": {
+    "defaultMessage": "Utwórz nową kolekcję"
+  },
+  "projectCardActions.noCollections": {
+    "defaultMessage": "Nie znaleziono żadnych kolekcji."
+  },
   "projectCardActions.save": {
     "defaultMessage": "Zapisz"
   },
@@ -128,11 +314,32 @@
   "projectCardActions.unfollow": {
     "defaultMessage": "Przestań obserwować"
   },
+  "projectReviews.loading": {
+    "defaultMessage": "Ładowanie recenzji…"
+  },
+  "projectReviews.notFoundDescription": {
+    "defaultMessage": "Ten projekt nie ma recenzji na {sources}."
+  },
+  "projectReviews.notFoundTitle": {
+    "defaultMessage": "Nie znaleziono recenzji"
+  },
+  "projectReviews.source": {
+    "defaultMessage": "Źródło recenzji"
+  },
   "projectReviews.tab": {
     "defaultMessage": "Recenzje"
   },
+  "quickSearch.clearRecent": {
+    "defaultMessage": "Wyczyść ostatnie"
+  },
   "quickSearch.examples": {
     "defaultMessage": "Przykłady"
+  },
+  "quickSearch.recent": {
+    "defaultMessage": "Ostatnie"
+  },
+  "quickSearch.search": {
+    "defaultMessage": "Szukaj"
   },
   "repositorySidebar.loading": {
     "defaultMessage": "Ładowanie"
@@ -145,6 +352,15 @@
   },
   "reviewStars.rating": {
     "defaultMessage": "Oceniono na {rating} z 5"
+  },
+  "sidebarLayout.drag": {
+    "defaultMessage": "Przeciągnij, aby zmienić kolejność"
+  },
+  "sidebarLayout.hide": {
+    "defaultMessage": "Ukryj"
+  },
+  "sidebarLayout.show": {
+    "defaultMessage": "Pokaż"
   },
   "spigotReviews.authorResponse": {
     "defaultMessage": "Odpowiedź autora:"
@@ -199,6 +415,9 @@
   },
   "toolsSidebar.copied": {
     "defaultMessage": "Skopiowano!"
+  },
+  "toolsSidebar.copyInstallCommand": {
+    "defaultMessage": "Skopiuj polecenie {manager}"
   },
   "toolsSidebar.title": {
     "defaultMessage": "Narzędzia"

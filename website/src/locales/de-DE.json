@@ -1,6 +1,34 @@
 {
 	"meta": {
-		"summary": "Eine Browser-Erweiterung, die Modrinth auf der Website und darüber hinaus erweitert."
+		"summary": "Eine Browser-Erweiterung, die Modrinth auf der Website und darüber hinaus erweitert.",
+		"feature": {
+			"popup": {
+				"title": "Jede Funktion ist nur ein Klick entfernt"
+			},
+			"cardActions": {
+				"title": "Handle, ohne die Liste zu verlassen",
+				"description": "Downloade, Folge, speicher und kopiere Links für Projekte direkt von der Beschreibungskarte, ohne das man jede Seite einzeln öffnen muss."
+			},
+			"galleryBackground": {
+				"title": "Eine Seite, die zum Projekt passt",
+				"description": "Zeige das vorgestellte Galeriebild eines Projekts als Vollbild Banner Hintergrund, damit Shader und Ressourcenpakete passend aussehen."
+			},
+			"notifications": {
+				"title": "Benachrichtigungen, direkt im Header"
+			},
+			"dependencyExplorer": {
+				"title": "Entdecke den gesamten Abhängigkeitsbaum"
+			},
+			"quickSearch": {
+				"title": "Finde alles in Sekunden"
+			},
+			"sparkline": {
+				"title": "Finde heraus, wie aktiv ein Projekt wirklich ist"
+			},
+			"sidebar": {
+				"title": "Das Vollbild direkt in der Seitenleiste rechts"
+			}
+		}
 	},
 	"nav": {
 		"translate": "Übersetzen"
@@ -9,6 +37,7 @@
 		"users": "{browser} Benutzer"
 	},
 	"footer": {
+		"notAffiliated": "Nicht mit Modrinth assoziiert",
 		"privacy": "Privatsphäre"
 	}
 }
