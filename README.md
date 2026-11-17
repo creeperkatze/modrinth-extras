@@ -132,17 +132,21 @@ New translations are automatically pulled every Monday.
 | Language               | Translators                                                                                                                                                                         |
 | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Italian                | [EmanuelPlaysDev](https://github.com/EmanuelPlays)                                                                                                                                  |
-| French                 | [maDU59_](https://github.com/maDU59), [Sertra](https://crowdin.com/profile/sertrafurr)                                                                                              |
-| Chinese Simplified     | [xinyihl](https://crowdin.com/profile/xinyihl), [AlexYang](https://crowdin.com/profile/A012pyshjs210)                                                                               |
+| French                 | [maDU59_](https://github.com/maDU59), [Sertra](https://crowdin.com/profile/sertrafurr), [Crazy10061](https://crowdin.com/profile/crazy10061)                                        |
+| Chinese Simplified     | [xinyihl](https://crowdin.com/profile/xinyihl), [AlexYang](https://crowdin.com/profile/A012pyshjs210), [Ethan Caldwell](https://crowdin.com/profile/ethan-caldwell)                 |
 | Korean                 | [젠고](https://crowdin.com/profile/minejango2)                                                                                                                                      |
 | Vietnamese             | [Lê](https://crowdin.com/profile/suri-cutie)                                                                                                                                        |
 | Japanese               | [Finity 2010](https://crowdin.com/profile/finity2010)                                                                                                                               |
-| Russian                | [vanapro1](https://crowdin.com/profile/vanapro1), [IceBan](https://crowdin.com/profile/iceban)                                                                                      |
+| Russian                | [vanapro1](https://crowdin.com/profile/vanapro1), [IceBan](https://crowdin.com/profile/iceban), [knowtion](https://crowdin.com/profile/knowtion)                                    |
 | Ukrainian              | [Tenwoc](https://crowdin.com/profile/tenwoc), [CreativeTragern](https://crowdin.com/profile/creativetragern)                                                                        |
 | Turkish                | [penfflewithadot](https://crowdin.com/profile/penfflewithadot), [ErenTr4210](https://crowdin.com/profile/erentr4210), [Serkan Aynacı](https://crowdin.com/profile/serkanaynaci2007) |
 | Spanish, Latin America | [Dante Li Tao](https://crowdin.com/profile/heroxp)                                                                                                                                  |
 | Arabic                 | [Hamad Alsayed](https://crowdin.com/profile/hamad_sayed)                                                                                                                            |
 | Spanish                | [eh eh](https://crowdin.com/profile/ehuh)                                                                                                                                           |
+| Polish                 | [lumiscosity](https://crowdin.com/profile/lumiscosity), [mai](https://crowdin.com/profile/chanjustin67), [Unndee](https://crowdin.com/profile/unndee)                               |
+| German                 | [Johan](https://crowdin.com/profile/myxoraptor), [An Otte](https://crowdin.com/profile/a_otte)                                                                                      |
+| Dutch                  | [Jethro](https://crowdin.com/profile/jethromeow)                                                                                                                                    |
+| Thai                   | [Cathrinth](https://crowdin.com/profile/fryrvo)                                                                                                                                     |
 
 ## 🤝 Contributing
 
