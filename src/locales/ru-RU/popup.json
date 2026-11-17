@@ -99,7 +99,7 @@
     "defaultMessage": "Сборки"
   },
   "feature.monetizationBadge.description": {
-    "defaultMessage": "Показать статус монетизации проекта в боковой панели."
+    "defaultMessage": "Показывать статус монетизации проекта в боковой панели."
   },
   "feature.monetizationBadge.title": {
     "defaultMessage": "Значок монетизации"
@@ -228,13 +228,13 @@
     "defaultMessage": "Обновить"
   },
   "popup.group.extension": {
-    "defaultMessage": "Расширение"
+    "defaultMessage": "Браузер"
   },
   "popup.group.general": {
-    "defaultMessage": "Основное"
+    "defaultMessage": "Общее"
   },
   "popup.group.sidebar": {
-    "defaultMessage": "Боковая панель"
+    "defaultMessage": "Панель"
   },
   "popup.tab.projects": {
     "defaultMessage": "Проекты"
