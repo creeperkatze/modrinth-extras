@@ -18,6 +18,11 @@ This project uses pnpm workspaces. The Modrinth upstream packages (`@modrinth/ui
 - Never import from the `modrinth/` submodule's internal path; always import from the package name, e.g. `import { ButtonStyled } from '@modrinth/ui'`.
 - Only write a comment when the code can't explain something itself. Keep it short and simple: no em dashes, no semicolons, no nested clauses.
 
+## Changelog
+
+- Add every user-facing change to `## [Unreleased]` in `CHANGELOG.md`, under `### Added`, `### Changed`, `### Fixed` or `### Security`, written for users. Never edit released sections.
+- `pnpm release patch|minor|major` moves those entries into the new version, and that section becomes the GitHub release notes. It refuses to run while Unreleased is empty.
+
 For the content-script worlds, background worker and injection helpers, see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 For code style, API/settings access and logging conventions, see [docs/CONVENTIONS.md](docs/CONVENTIONS.md).
 For the full i18n / locale workflow, see [docs/LOCALES.md](docs/LOCALES.md).
