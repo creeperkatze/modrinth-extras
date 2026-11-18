@@ -629,6 +629,7 @@ const MOD_MANAGER_ITEMS: SelectItem[] = [
 	{ label: 'packwiz', value: 'packwiz' },
 	{ label: 'Ferium', value: 'ferium' },
 	{ label: 'Pakku', value: 'pakku' },
+	{ label: 'Lucy', value: 'lucy' },
 ]
 
 const DECOMPILER_ITEMS: SelectItem[] = [

@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Lucy as a mod manager option for the copy install command in the Tools sidebar card.
+
 ### Changed
 
 - Updated translations.

@@ -131,6 +131,11 @@ const MOD_MANAGERS: Record<
 		label: 'Pakku',
 		command: (slug) => `pakku add prj --mr ${slug}`,
 	},
+	lucy: {
+		label: 'Lucy',
+		command: (slug, type) =>
+			type === 'modpack' ? `lucy import modrinth:${slug}` : `lucy add modrinth:${slug}`,
+	},
 }
 
 const DECOMPILERS: Record<
