@@ -10,8 +10,9 @@ function isPlainObject(value: unknown): value is object {
 
 // Keys missing from base are dropped, so settings removed in older versions don't linger.
 // Arrays are values, not objects to merge into.
+// Cloned so edits to the result never leak into DEFAULTS.
 function deepMerge<T extends object>(base: T, override: DeepPartial<T>): T {
-	const result = { ...base }
+	const result = structuredClone(base)
 	for (const key of Object.keys(override) as (keyof T)[]) {
 		if (!(key in base)) continue
 		const baseVal = base[key]
@@ -135,7 +136,7 @@ function startInit(): Promise<void> {
 		// Old versions can leave secrets like API tokens behind under keys nothing reads anymore.
 		if (data && hasUnknownKeys(DEFAULTS, data)) await settingsItem.setValue(cache)
 		settingsItem.watch((newValue) => {
-			if (newValue) cache = deepMerge(DEFAULTS, newValue)
+			cache = deepMerge(DEFAULTS, newValue ?? {})
 		})
 	})()
 	return init
@@ -149,6 +150,12 @@ export async function getSettings(): Promise<ExtensionSettings> {
 // Returns a function that stops watching.
 export function watchSettings(callback: (settings: ExtensionSettings) => void): () => void {
 	return settingsItem.watch((value) => callback(deepMerge(DEFAULTS, value ?? {})))
+}
+
+// Every setting falls back to its default
+export async function clearSettings(): Promise<void> {
+	cache = structuredClone(DEFAULTS)
+	await settingsItem.removeValue()
 }
 
 export async function saveSettings(settings: ExtensionSettings): Promise<void> {

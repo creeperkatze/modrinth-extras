@@ -201,6 +201,7 @@
 					@update:model-value="updateEnabled(f.key, $event)"
 					@action="f.onAction?.()"
 				/>
+				<ResetSettingsCard @reset="resetSettings" />
 			</FeatureGroup>
 		</ScrollablePanel>
 
@@ -307,7 +308,13 @@ import ModsrcIcon from '../../assets/icons/modsrc.svg?component'
 import CompactCombobox from '../../components/ui/CompactCombobox.vue'
 import { detectBrowserLocale, i18n } from '../../core/i18n/i18n'
 import { localeFlagUrl, LOCALES } from '../../core/i18n/locales'
-import { DEFAULTS, type ExtensionSettings, getSettings, saveSettings } from '../../core/settings'
+import {
+	clearSettings,
+	DEFAULTS,
+	type ExtensionSettings,
+	getSettings,
+	saveSettings,
+} from '../../core/settings'
 import { setTelemetryEnabled } from '../../core/telemetry'
 import { applyAccentColor } from '../../features/accent-color/apply'
 import { accentColorIssue, readModrinthTheme } from '../../features/accent-color/contrast'
@@ -321,6 +328,7 @@ import OptionFieldColor from './components/OptionFieldColor.vue'
 import OptionFieldSelect, { type SelectItem } from './components/OptionFieldSelect.vue'
 import OptionFieldText from './components/OptionFieldText.vue'
 import OptionFieldToggle from './components/OptionFieldToggle.vue'
+import ResetSettingsCard from './components/ResetSettingsCard.vue'
 
 const { formatMessage } = useVIntl()
 
@@ -583,7 +591,7 @@ const messages = defineMessages({
 	},
 	'feature.browserNotifications.sendTest': {
 		id: 'feature.browserNotifications.sendTest',
-		defaultMessage: 'Send test notification',
+		defaultMessage: 'Send test',
 	},
 	'feature.curseforgeRedirect.title': {
 		id: 'feature.curseforgeRedirect.title',
@@ -1035,6 +1043,15 @@ async function updateLocale(value: string) {
 	i18n.global.locale.value = value
 }
 
+async function resetSettings() {
+	clearTimeout(pendingSave)
+	pendingSave = undefined
+	await clearSettings()
+	Object.assign(settings, structuredClone(DEFAULTS))
+	i18n.global.locale.value = detectBrowserLocale()
+	setTelemetryEnabled(settings.telemetry.enabled && !firefoxControlsTelemetry.value)
+}
+
 const version = browser.runtime.getManifest().version
 const latestVersion = ref<string | null>(null)
 const isLatest = ref(false)
@@ -1046,7 +1063,7 @@ const updateCheckCacheItem = storage.defineItem<{ tag: string; ts: number }>(
 	'local:updateCheckCache',
 )
 
-const settings = reactive({ ...DEFAULTS })
+const settings = reactive(structuredClone(DEFAULTS))
 const settingsLoaded = ref(false)
 const modrinthTheme = ref('dark')
 
