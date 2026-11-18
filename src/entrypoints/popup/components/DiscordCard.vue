@@ -15,7 +15,7 @@
 					rel="noopener"
 					type="colored"
 					size="sm"
-					class="mt-3 w-fit !text-white no-underline"
+					class="mt-3 w-fit no-underline"
 					style="--button-color: #5865f2"
 					@click="dismiss"
 				>
