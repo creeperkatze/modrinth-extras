@@ -229,7 +229,7 @@
 					href="https://github.com/creeperkatze/modrinth-extras/releases/latest"
 					target="_blank"
 					rel="noopener"
-					class="flex min-w-0 items-center gap-1 text-xs text-yellow-500 no-underline transition-colors hover:text-yellow-400"
+					class="flex min-w-0 items-center gap-1 text-xs text-yellow no-underline transition-[filter] hover:brightness-125"
 				>
 					<ClockIcon class="!size-3.5 shrink-0" aria-hidden="true" />
 					<span class="truncate">{{
@@ -250,7 +250,7 @@
 				href="https://github.com/creeperkatze/modrinth-extras"
 				target="_blank"
 				rel="noopener"
-				class="flex shrink-0 items-center gap-1 text-xs text-yellow-500 no-underline transition-colors hover:text-yellow-400"
+				class="flex shrink-0 items-center gap-1 text-xs text-yellow no-underline transition-[filter] hover:brightness-125"
 			>
 				<Star class="!size-3.5 shrink-0" aria-hidden="true" />
 				<span>{{ formatMessage(messages['popup.footer.starOnGitHub']) }}</span>
