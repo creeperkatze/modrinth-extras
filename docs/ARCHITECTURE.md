@@ -24,7 +24,11 @@ Owns the extension badge, browser notifications, and background polling.
 
 ## Popup
 
-The extension's settings UI is a standalone entrypoint, independent of the content scripts.
+A standalone entrypoint, independent of the content scripts. `App.vue` is only the header, tabs and footer. Each tab is a view in `popup/views/`: Search, Creator and the settings behind the header button. Views share state through `popup/state/`, like the loaded settings and the signed in account.
+
+- The popup reads the `auth-token` cookie through the cookies API, since an extension page only sees its own cookies.
+- It starts from scratch every time it opens, so `useCachedResource` keeps the last result in extension storage to show right away while it refreshes.
+- Links open in the current tab through the content script's `navigate` message when it is on Modrinth, and in a new tab otherwise.
 
 ## Injection helpers
 

@@ -46,7 +46,7 @@ export default defineConfig({
 			48: '/icon-48.png',
 			128: '/icon-128.png',
 		},
-		permissions: ['cookies', 'storage', 'alarms'],
+		permissions: ['cookies', 'storage', 'alarms', 'activeTab'],
 		optional_permissions: ['notifications'],
 		host_permissions: [
 			'https://modrinth.com/*',

@@ -39,6 +39,24 @@ export async function findHangarProject(project: MatchableProject): Promise<Plat
 	return match ? toMatch(match) : null
 }
 
+// The Hangar project behind a page, for finding it on Modrinth.
+export async function getHangarSource(
+	owner: string,
+	slug: string,
+): Promise<MatchableProject | null> {
+	try {
+		const project = await client.projects.get(owner, slug)
+		return {
+			name: project.name,
+			slug: project.namespace.slug,
+			authors: [project.namespace.owner, ...(project.memberNames ?? [])],
+		}
+	} catch (err) {
+		if (err instanceof HangarError && err.status === 404) return null
+		throw err
+	}
+}
+
 export async function findHangarUser(username: string): Promise<PlatformMatch | null> {
 	try {
 		const user = await client.users.get(username)

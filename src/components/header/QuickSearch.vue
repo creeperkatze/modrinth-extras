@@ -144,11 +144,11 @@ import {
 	XIcon,
 } from '@modrinth/assets'
 import { defineMessages, IconButton, useVIntl } from '@modrinth/ui'
-import { storage } from '@wxt-dev/storage'
 import { type Component, computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
 import { modrinthClient } from '../../api/client'
 import { navigate } from '../../content/page-router'
+import { recentSearchesItem, withRecentSearch } from '../../features/search/recent-searches'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
@@ -207,12 +207,6 @@ const SERVER_SORT_OPTIONS = [
 ]
 const ENV_OPTIONS = ['client', 'server']
 
-const MAX_RECENT_SEARCHES = 6
-
-const recentSearchesItem = storage.defineItem<Example[]>('local:recentSearches', {
-	defaultValue: [],
-})
-
 const recentSearches = ref<Example[]>([])
 
 async function loadRecentSearches() {
@@ -234,10 +228,7 @@ async function clearRecentSearches() {
 }
 
 async function saveRecentSearch(entry: Example) {
-	const updated = [entry, ...recentSearches.value.filter((r) => r.label !== entry.label)].slice(
-		0,
-		MAX_RECENT_SEARCHES,
-	)
+	const updated = withRecentSearch(recentSearches.value, entry)
 	recentSearches.value = updated
 	try {
 		await recentSearchesItem.setValue(updated)

@@ -7,10 +7,14 @@
 - Lucy as a mod manager option for the copy install command in the Tools sidebar card.
 - Reset order button when customizing the sidebar, which puts the cards back in their default order.
 - Option in the Extension tab to reset all settings to their defaults.
+- Search tab in the popup for quickly searching Modrinth, with a download button on every result and the same recent searches as the quick search on the site.
+- "Also on Modrinth" card in the popup when you're on a CurseForge, SpigotMC or Hangar project that's also on Modrinth.
+- Creator tab in the popup with your revenue balance and upcoming payouts, and the same stat cards and charts as Modrinth's analytics dashboard for views, downloads and revenue over 7, 30 or 90 days.
 
 ### Changed
 
 - Redesigned the popup settings to match Modrinth's own settings, with each feature in its own card.
+- Moved the popup settings behind the new settings button in the popup header.
 - Updated translations.
 
 ## [1.9.1] - 2026-11-12

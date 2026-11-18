@@ -22,6 +22,7 @@ import {
 	type SpigotReviewSort,
 } from '../background/external/platforms/spigot'
 import { fetchRepositoryStats } from '../background/external/repositories'
+import { findModrinthMatch } from '../background/modrinth-match'
 import { handleNotificationClick } from '../background/notifications'
 import {
 	analytics,
@@ -31,6 +32,7 @@ import {
 } from '../core/telemetry'
 import type { Notification } from '../features/notifications/notifications'
 import type { MatchableProject } from '../features/platforms/matching'
+import type { PlatformPage } from '../features/platforms/pages'
 import type { RepositoryPlatform } from '../features/repository/links'
 
 const ALARM_NAME = 'modrinth-extras-poll'
@@ -116,6 +118,15 @@ export default defineBackground(() => {
 				.then((matches) => sendResponse({ ok: true, matches }))
 				.catch((err) => {
 					console.error('[Modrinth Extras] Failed to fetch platform matches:', err)
+					sendResponse({ ok: false, error: err instanceof Error ? err.message : String(err) })
+				})
+			return true
+		}
+		if (message.type === 'modrinth-match') {
+			findModrinthMatch(message.page as PlatformPage)
+				.then((match) => sendResponse({ ok: true, match }))
+				.catch((err) => {
+					console.error('[Modrinth Extras] Failed to find the project on Modrinth:', err)
 					sendResponse({ ok: false, error: err instanceof Error ? err.message : String(err) })
 				})
 			return true

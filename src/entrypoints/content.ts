@@ -44,8 +44,15 @@ export default defineContentScript({
 
 		ctx.addEventListener(window, 'modrinth-extras:router-ready', markHydrated, { once: true })
 
-		function onRuntimeMessage(message: { type?: string; path?: string }) {
-			if (message.type === 'navigate') navigate(message.path as string)
+		// Answers so the popup knows the page handled it and doesn't open a new tab
+		function onRuntimeMessage(
+			message: { type?: string; path?: string },
+			_sender: unknown,
+			sendResponse: (response: { ok: boolean }) => void,
+		) {
+			if (message.type !== 'navigate') return
+			navigate(message.path as string)
+			sendResponse({ ok: true })
 		}
 		browser.runtime.onMessage.addListener(onRuntimeMessage)
 		ctx.onInvalidated(() => browser.runtime.onMessage.removeListener(onRuntimeMessage))

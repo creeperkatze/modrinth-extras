@@ -1,5 +1,5 @@
 <template>
-	<div v-if="visible" class="px-3 pb-2">
+	<div v-if="visible">
 		<div class="donation-card relative flex gap-3 rounded-2xl border border-solid p-3 pr-10">
 			<KofiIcon class="!size-6 shrink-0 text-[#FF5E5B]" aria-hidden="true" />
 			<div class="min-w-0 flex-1">

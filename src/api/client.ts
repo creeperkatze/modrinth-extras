@@ -16,6 +16,11 @@ export function getAuthToken(): string {
 	return cookie ? decodeURIComponent(cookie.split('=').slice(1).join('=')) : ''
 }
 
+// Extension pages like the popup have their own cookies, not modrinth.com's
+function isExtensionPage(): boolean {
+	return typeof location !== 'undefined' && location.protocol.endsWith('-extension:')
+}
+
 const requestCache = new RequestCacheFeature()
 let lastToken: string | null = null
 
@@ -35,7 +40,9 @@ export const modrinthClient = new GenericModrinthClient({
 		new AuthFeature({
 			token: async () =>
 				trackToken(
-					typeof document === 'undefined' ? await getBackgroundAuthToken() : getAuthToken(),
+					typeof document === 'undefined' || isExtensionPage()
+						? await getBackgroundAuthToken()
+						: getAuthToken(),
 				),
 			tokenPrefix: '',
 		} as AuthConfig),

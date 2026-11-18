@@ -151,6 +151,14 @@ export async function findCurseForgeProject(
 	return mod ? toMatch(mod) : null
 }
 
+// The CurseForge project behind a page, for finding it on Modrinth.
+export async function getCurseForgeSource(slug: string): Promise<MatchableProject | null> {
+	const response = await client.mods.search({ gameId: GameId.Minecraft, slug })
+	const mod = (response.data ?? []).find((candidate) => candidate.slug === slug)
+	if (!mod) return null
+	return { name: mod.name, slug: mod.slug, authors: mod.authors.map((author) => author.name) }
+}
+
 export async function hasCurseForgeComments(project: MatchableProject): Promise<boolean> {
 	const mod = await findCurseForgeMod(project)
 	return mod?.hasCommentsEnabled ?? false

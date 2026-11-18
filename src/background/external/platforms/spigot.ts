@@ -175,6 +175,23 @@ export async function findSpigotProject(project: MatchableProject): Promise<Plat
 	return resource ? toResourceMatch(resource) : null
 }
 
+// The SpigotMC resource behind a page, for finding it on Modrinth.
+export async function getSpigotSource(id: number): Promise<MatchableProject | null> {
+	let resource: Resource
+	try {
+		resource = await client.resources.get(id)
+	} catch (err) {
+		if (err instanceof SpigetError && err.status === 404) return null
+		throw err
+	}
+	const author = await getAuthor(resource.author.id)
+	return {
+		name: resource.name,
+		slug: resource.name,
+		authors: [author?.name ?? '', ...contributorNames(resource)].filter(Boolean),
+	}
+}
+
 export async function findSpigotUser(username: string): Promise<PlatformMatch | null> {
 	const authors = await searchResults(
 		client.authors.search(username, { field: 'name', size: SEARCH_SIZE }),

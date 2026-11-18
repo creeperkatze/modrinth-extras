@@ -194,6 +194,60 @@
   "feature.translateDescription.title": {
     "defaultMessage": "Translate description"
   },
+  "popup.creator.analytics": {
+    "defaultMessage": "Analytics"
+  },
+  "popup.creator.availableNow": {
+    "defaultMessage": "Available now"
+  },
+  "popup.creator.balance": {
+    "defaultMessage": "Balance"
+  },
+  "popup.creator.createProject": {
+    "defaultMessage": "Create a project"
+  },
+  "popup.creator.downloads": {
+    "defaultMessage": "Downloads"
+  },
+  "popup.creator.estimated": {
+    "defaultMessage": "Estimated {date}"
+  },
+  "popup.creator.failed": {
+    "defaultMessage": "Analytics could not be loaded"
+  },
+  "popup.creator.fullAnalytics": {
+    "defaultMessage": "Open full analytics"
+  },
+  "popup.creator.loading": {
+    "defaultMessage": "Loading your projects..."
+  },
+  "popup.creator.noProjectsDescription": {
+    "defaultMessage": "Once you publish a project, its views, downloads and revenue show up here."
+  },
+  "popup.creator.noProjectsTitle": {
+    "defaultMessage": "No projects yet"
+  },
+  "popup.creator.previousPeriod": {
+    "defaultMessage": "Previous period"
+  },
+  "popup.creator.processing": {
+    "defaultMessage": "Processing"
+  },
+  "popup.creator.rangeDays": {
+    "defaultMessage": "{days}d"
+  },
+  "popup.creator.revenue": {
+    "defaultMessage": "Revenue"
+  },
+  "popup.creator.total": {
+    "defaultMessage": "Total"
+  },
+  "popup.creator.views": {
+    "defaultMessage": "Views"
+  },
+  "popup.creator.vsPrevShort": {
+    "defaultMessage": "vs prev."
+  },
   "popup.discordPrompt.dismiss": {
     "defaultMessage": "Dismiss"
   },
@@ -218,6 +272,15 @@
   "popup.donatePrompt.title": {
     "defaultMessage": "Support the extension"
   },
+  "popup.download.failed": {
+    "defaultMessage": "Download failed"
+  },
+  "popup.download.label": {
+    "defaultMessage": "Download"
+  },
+  "popup.download.unavailable": {
+    "defaultMessage": "No version matches your game version and loader"
+  },
   "popup.footer.checking": {
     "defaultMessage": "Checking"
   },
@@ -233,6 +296,12 @@
   "popup.footer.updateAvailable": {
     "defaultMessage": "Update available"
   },
+  "popup.found.looking": {
+    "defaultMessage": "Looking for this project on Modrinth..."
+  },
+  "popup.found.title": {
+    "defaultMessage": "Also on Modrinth"
+  },
   "popup.group.extension": {
     "defaultMessage": "Extension"
   },
@@ -241,6 +310,18 @@
   },
   "popup.group.sidebar": {
     "defaultMessage": "Sidebar"
+  },
+  "popup.nav.back": {
+    "defaultMessage": "Back"
+  },
+  "popup.nav.creator": {
+    "defaultMessage": "Creator"
+  },
+  "popup.nav.search": {
+    "defaultMessage": "Search"
+  },
+  "popup.nav.settings": {
+    "defaultMessage": "Settings"
   },
   "popup.resetSettings.button": {
     "defaultMessage": "Reset"
@@ -259,6 +340,42 @@
   },
   "popup.resetSettings.title": {
     "defaultMessage": "Reset settings"
+  },
+  "popup.search.clear": {
+    "defaultMessage": "Clear search"
+  },
+  "popup.search.clearRecent": {
+    "defaultMessage": "Clear recent searches"
+  },
+  "popup.search.failed": {
+    "defaultMessage": "Search failed. Try again in a moment."
+  },
+  "popup.search.noResults": {
+    "defaultMessage": "No projects found"
+  },
+  "popup.search.openOnModrinth": {
+    "defaultMessage": "Open on Modrinth"
+  },
+  "popup.search.placeholder": {
+    "defaultMessage": "Search Modrinth"
+  },
+  "popup.search.recent": {
+    "defaultMessage": "Recent searches"
+  },
+  "popup.search.results": {
+    "defaultMessage": "Results"
+  },
+  "popup.search.searching": {
+    "defaultMessage": "Searching..."
+  },
+  "popup.signIn.button": {
+    "defaultMessage": "Sign in"
+  },
+  "popup.signIn.description": {
+    "defaultMessage": "Sign in on modrinth.com and this tab fills in by itself."
+  },
+  "popup.signIn.title": {
+    "defaultMessage": "Sign in to Modrinth"
   },
   "popup.tab.projects": {
     "defaultMessage": "Projects"
