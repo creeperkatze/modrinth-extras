@@ -482,6 +482,9 @@
   "sidebarLayout.hide": {
     "defaultMessage": "Hide"
   },
+  "sidebarLayout.resetOrder": {
+    "defaultMessage": "Reset order"
+  },
   "sidebarLayout.revert": {
     "defaultMessage": "Revert"
   },

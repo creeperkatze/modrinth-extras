@@ -14,6 +14,15 @@
 					<CheckIcon aria-hidden="true" />
 					{{ formatMessage(messages['sidebarLayout.done']) }}
 				</Button>
+				<Button
+					v-if="customOrder"
+					type="quiet"
+					class="col-span-2 w-full"
+					@click="resetSidebarOrder"
+				>
+					<RotateCounterClockwiseIcon aria-hidden="true" />
+					{{ formatMessage(messages['sidebarLayout.resetOrder']) }}
+				</Button>
 			</div>
 		</template>
 		<Teleport v-for="card in editableCards" :key="card.element.id" :to="card.target">
@@ -23,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { CheckIcon, EditIcon, UndoIcon } from '@modrinth/assets'
+import { CheckIcon, EditIcon, RotateCounterClockwiseIcon, UndoIcon } from '@modrinth/assets'
 import { Button, defineMessages, useVIntl } from '@modrinth/ui'
 import { onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue'
 
@@ -37,9 +46,11 @@ import {
 import {
 	editingSidebar,
 	finishSidebarEditing,
+	resetSidebarOrder,
 	revertSidebarEditing,
 	startSidebarEditing,
 } from '../../../features/sidebar-layout/editing'
+import { isDefaultSidebarOrder } from '../../../features/sidebar-layout/order'
 import SidebarCardOverlay from './SidebarCardOverlay.vue'
 
 const { formatMessage } = useVIntl()
@@ -50,6 +61,7 @@ const messages = defineMessages({
 	},
 	'sidebarLayout.revert': { id: 'sidebarLayout.revert', defaultMessage: 'Revert' },
 	'sidebarLayout.done': { id: 'sidebarLayout.done', defaultMessage: 'Done' },
+	'sidebarLayout.resetOrder': { id: 'sidebarLayout.resetOrder', defaultMessage: 'Reset order' },
 })
 
 interface EditableCard {
@@ -64,6 +76,7 @@ const root = ref<HTMLElement | null>(null)
 const hasCards = ref(false)
 // Lets the editor open when every card is hidden, so they can be shown again
 const anyHidden = ref(false)
+const customOrder = ref(false)
 const editableCards = shallowRef<EditableCard[]>([])
 
 let sidebar: HTMLElement | null = null
@@ -72,6 +85,7 @@ let stopWatchingSettings: (() => void) | null = null
 
 function updateHidden(settings: ExtensionSettings) {
 	anyHidden.value = SIDEBAR_CARD_SETTINGS.some((setting) => !settings[setting].enabled)
+	customOrder.value = !isDefaultSidebarOrder(settings)
 }
 
 function editableCard(element: HTMLElement): EditableCard | null {

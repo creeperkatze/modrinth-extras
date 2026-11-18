@@ -8,6 +8,11 @@ export function sidebarOrder(settings: ExtensionSettings): string[] {
 	return [...saved, ...defaults.filter((id) => !saved.includes(id))]
 }
 
+export function isDefaultSidebarOrder(settings: ExtensionSettings): boolean {
+	const defaults: string[] = Object.values(SIDEBAR_CARD_IDS)
+	return sidebarOrder(settings).every((id, index) => id === defaults[index])
+}
+
 // Only some cards show on a page, so the others keep their slots in the saved order.
 export function mergeVisibleOrder(order: string[], visible: string[]): string[] {
 	const queue = [...visible]

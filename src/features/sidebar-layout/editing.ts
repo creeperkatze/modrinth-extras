@@ -47,6 +47,10 @@ export async function saveSidebarOrder(sidebar: Element): Promise<void> {
 	}))
 }
 
+export async function resetSidebarOrder(): Promise<void> {
+	await updateSettings(() => ({ sidebarLayout: { order: [] } }))
+}
+
 export async function setSidebarCardEnabled(
 	setting: SidebarCardSetting,
 	enabled: boolean,

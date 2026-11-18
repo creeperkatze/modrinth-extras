@@ -5,6 +5,7 @@
 ### Added
 
 - Lucy as a mod manager option for the copy install command in the Tools sidebar card.
+- Reset order button when customizing the sidebar, which puts the cards back in their default order.
 
 ### Changed
 
