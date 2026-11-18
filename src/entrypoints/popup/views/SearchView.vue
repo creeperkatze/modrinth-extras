@@ -1,6 +1,7 @@
 <template>
-	<div class="flex min-h-0 flex-1 flex-col">
-		<div class="shrink-0 px-3 pt-3">
+	<div>
+		<!-- Above the tabs, so their background doesn't cut off the focus ring -->
+		<div data-sticky-header class="sticky top-[var(--popup-nav-height)] z-30 bg-bg px-3 pb-3">
 			<Input
 				ref="searchInput"
 				v-model="query"
@@ -15,7 +16,7 @@
 			/>
 		</div>
 
-		<PopupScroll>
+		<div class="flex flex-col gap-4 px-3 pb-3">
 			<PopupSection v-if="searching" :title="formatMessage(messages['popup.search.results'])">
 				<template #actions>
 					<Button size="xs" type="quiet" @click="openSearchPage">
@@ -87,7 +88,7 @@
 					</button>
 				</PopupSection>
 			</template>
-		</PopupScroll>
+		</div>
 	</div>
 </template>
 
@@ -109,7 +110,6 @@ import {
 	recentSearchesItem,
 	withRecentSearch,
 } from '../../../features/search/recent-searches'
-import PopupScroll from '../components/PopupScroll.vue'
 import PopupSection from '../components/PopupSection.vue'
 import ProjectRow from '../components/ProjectRow.vue'
 import QuickDownloadButton from '../components/QuickDownloadButton.vue'

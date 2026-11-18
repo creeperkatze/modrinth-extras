@@ -1,5 +1,5 @@
 <template>
-	<PopupScroll>
+	<div class="flex flex-col gap-4 px-3 pb-3">
 		<SignInCard v-if="accountLoaded && !account" />
 
 		<template v-else-if="account">
@@ -97,7 +97,7 @@
 				<RevenueCard v-if="balance && (hasProjects || hasRevenue)" :balance="balance" />
 			</template>
 		</template>
-	</PopupScroll>
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -140,7 +140,6 @@ import AnalyticsChartTooltip, {
 import RevenueCard from '../components/creator/RevenueCard.vue'
 import StatCard from '../components/creator/StatCard.vue'
 import EmptyState from '../components/EmptyState.vue'
-import PopupScroll from '../components/PopupScroll.vue'
 import SignInCard from '../components/SignInCard.vue'
 import { useCachedResource } from '../composables/cached'
 import { account, accountLoaded } from '../state/account'
