@@ -45,37 +45,36 @@
 		>
 			<template v-if="tab === 'general'">
 				<FeatureGroup>
-					<div class="rounded-xl transition-colors duration-200 hover:bg-surface-3">
-						<div class="flex items-center gap-3 px-2 py-2">
-							<LanguagesIcon aria-hidden="true" class="!size-6 shrink-0 text-secondary" />
-							<div class="min-w-0 flex-1">
-								<div class="text-sm font-semibold text-contrast">
-									{{ formatMessage(messages['settings.language']) }}
-								</div>
-								<div class="text-xs text-secondary">
-									<IntlFormatted :message-id="messages['settings.language.description']">
-										<template #link="{ children }">
-											<a
-												href="https://crowdin.com/project/modrinth-extras"
-												target="_blank"
-												rel="noopener"
-												class="text-link"
-												@click.stop
-											>
-												<component :is="() => children" />
-											</a>
-										</template>
-									</IntlFormatted>
-								</div>
-							</div>
-							<div class="language-dropdown">
-								<CompactCombobox
-									:options="localeItems"
-									:model-value="selectedLocale"
-									show-icon-in-selected
-									@update:model-value="updateLocale"
-								/>
-							</div>
+					<div
+						class="flex items-center justify-between gap-4 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-3"
+					>
+						<div class="min-w-0">
+							<h3 class="m-0 flex items-center gap-2 text-sm font-semibold text-contrast">
+								<LanguagesIcon aria-hidden="true" class="size-4 shrink-0 text-primary" />
+								{{ formatMessage(messages['settings.language']) }}
+							</h3>
+							<p class="m-0 mt-1 text-xs leading-normal text-secondary">
+								<IntlFormatted :message-id="messages['settings.language.description']">
+									<template #link="{ children }">
+										<a
+											href="https://crowdin.com/project/modrinth-extras"
+											target="_blank"
+											rel="noopener"
+											class="text-link"
+										>
+											<component :is="() => children" />
+										</a>
+									</template>
+								</IntlFormatted>
+							</p>
+						</div>
+						<div class="language-dropdown shrink-0">
+							<CompactCombobox
+								:options="localeItems"
+								:model-value="selectedLocale"
+								show-icon-in-selected
+								@update:model-value="updateLocale"
+							/>
 						</div>
 					</div>
 					<FeatureRow

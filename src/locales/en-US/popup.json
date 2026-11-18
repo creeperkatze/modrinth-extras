@@ -197,6 +197,9 @@
   "popup.discordPrompt.dismiss": {
     "defaultMessage": "Dismiss"
   },
+  "popup.discordPrompt.join": {
+    "defaultMessage": "Join server"
+  },
   "popup.discordPrompt.message": {
     "defaultMessage": "Get help, share feedback, and follow updates on the Discord server."
   },
@@ -205,6 +208,9 @@
   },
   "popup.donatePrompt.dismiss": {
     "defaultMessage": "Dismiss"
+  },
+  "popup.donatePrompt.donate": {
+    "defaultMessage": "Donate"
   },
   "popup.donatePrompt.message": {
     "defaultMessage": "Modrinth Extras will always be free, open source, and ad-free. If you find it useful, consider supporting its development with a small donation."

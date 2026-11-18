@@ -1,24 +1,20 @@
 <template>
-	<div class="option-field relative flex items-center gap-2" @click.stop>
-		<span class="text-sm text-secondary flex-1">{{ label }}</span>
-		<TriangleAlertIcon
-			v-if="warning"
-			v-tooltip="warning"
-			:aria-label="warning"
-			class="size-4 shrink-0 text-orange"
-		/>
-		<ColorPicker
-			:model-value="modelValue || defaultColor"
-			:label="label"
-			size="sm"
-			@update:model-value="emit('update:modelValue', $event)"
-		/>
+	<div class="flex flex-col gap-2">
+		<div class="flex items-center justify-between gap-4">
+			<span class="font-semibold text-contrast">{{ label }}</span>
+			<ColorPicker
+				:model-value="modelValue || defaultColor"
+				:label="label"
+				size="sm"
+				@update:model-value="emit('update:modelValue', $event)"
+			/>
+		</div>
+		<SettingsInlineWarning v-if="warning">{{ warning }}</SettingsInlineWarning>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { TriangleAlertIcon } from '@modrinth/assets'
-import { ColorPicker } from '@modrinth/ui'
+import { ColorPicker, SettingsInlineWarning } from '@modrinth/ui'
 
 withDefaults(
 	defineProps<{
@@ -37,26 +33,3 @@ const emit = defineEmits<{
 	'update:modelValue': [value: string]
 }>()
 </script>
-
-<style scoped>
-.option-field::before {
-	content: '';
-	position: absolute;
-	left: -1.75rem;
-	top: 0;
-	height: 50%;
-	width: 0.5rem;
-	border-left: 2px solid var(--surface-5);
-	border-bottom: 2px solid var(--surface-5);
-	border-bottom-left-radius: 2px;
-}
-
-.option-field:not(:last-child)::after {
-	content: '';
-	position: absolute;
-	left: -1.75rem;
-	top: 50%;
-	bottom: -0.5rem;
-	border-left: 2px solid var(--surface-5);
-}
-</style>

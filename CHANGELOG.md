@@ -9,6 +9,7 @@
 
 ### Changed
 
+- Redesigned the popup settings to match Modrinth's own settings, with each feature in its own card.
 - Updated translations.
 
 ## [1.9.1] - 2026-11-12

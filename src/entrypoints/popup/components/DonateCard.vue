@@ -1,23 +1,29 @@
 <template>
 	<div v-if="visible" class="px-3 pb-2">
-		<Card class="donation-card relative !mb-0 !p-0">
-			<a
-				href="https://ko-fi.com/creeperkatze"
-				target="_blank"
-				rel="noopener"
-				class="flex items-center gap-3 px-2 py-2 pr-10 no-underline"
-				@click="dismiss"
-			>
-				<KofiIcon class="!size-6 shrink-0 text-[#FF5E5B]" aria-hidden="true" />
-				<div class="min-w-0 flex-1">
-					<div class="text-sm font-semibold text-contrast">
-						{{ formatMessage(messages['popup.donatePrompt.title']) }}
-					</div>
-					<div class="text-xs text-secondary">
-						{{ formatMessage(messages['popup.donatePrompt.message']) }}
-					</div>
-				</div>
-			</a>
+		<div class="donation-card relative flex gap-3 rounded-2xl border border-solid p-3 pr-10">
+			<KofiIcon class="!size-6 shrink-0 text-[#FF5E5B]" aria-hidden="true" />
+			<div class="min-w-0 flex-1">
+				<h3 class="m-0 text-sm font-semibold text-contrast">
+					{{ formatMessage(messages['popup.donatePrompt.title']) }}
+				</h3>
+				<p class="m-0 mt-1 text-xs leading-normal text-secondary">
+					{{ formatMessage(messages['popup.donatePrompt.message']) }}
+				</p>
+				<ButtonLink
+					href="https://ko-fi.com/creeperkatze"
+					target="_blank"
+					rel="noopener"
+					type="colored"
+					size="sm"
+					class="mt-3 w-fit !text-white no-underline"
+					style="--button-color: #ff5e5b"
+					@click="dismiss"
+				>
+					<KofiIcon aria-hidden="true" />
+					{{ formatMessage(messages['popup.donatePrompt.donate']) }}
+					<ArrowUpRightIcon aria-hidden="true" />
+				</ButtonLink>
+			</div>
 			<div class="absolute right-2 top-2">
 				<IconButton
 					v-tooltip="formatMessage(messages['popup.donatePrompt.dismiss'])"
@@ -29,13 +35,13 @@
 					<XIcon aria-hidden="true" />
 				</IconButton>
 			</div>
-		</Card>
+		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { XIcon } from '@modrinth/assets'
-import { Card, defineMessages, IconButton, useVIntl } from '@modrinth/ui'
+import { ArrowUpRightIcon, XIcon } from '@modrinth/assets'
+import { ButtonLink, defineMessages, IconButton, useVIntl } from '@modrinth/ui'
 import { storage } from '@wxt-dev/storage'
 import { onMounted, ref } from 'vue'
 
@@ -52,6 +58,10 @@ const messages = defineMessages({
 		id: 'popup.donatePrompt.message',
 		defaultMessage:
 			'Modrinth Extras will always be free, open source, and ad-free. If you find it useful, consider supporting its development with a small donation.',
+	},
+	'popup.donatePrompt.donate': {
+		id: 'popup.donatePrompt.donate',
+		defaultMessage: 'Donate',
 	},
 	'popup.donatePrompt.dismiss': {
 		id: 'popup.donatePrompt.dismiss',
@@ -83,10 +93,5 @@ onMounted(async () => {
 .donation-card {
 	border-color: rgb(255 94 91 / 30%);
 	background-color: rgb(255 94 91 / 10%);
-	transition: background-color 150ms ease;
-}
-
-.donation-card:hover {
-	background-color: rgb(255 94 91 / 18%);
 }
 </style>

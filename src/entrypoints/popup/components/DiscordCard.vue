@@ -1,23 +1,29 @@
 <template>
 	<div v-if="visible" class="px-3 pb-2">
-		<Card class="discord-card relative !mb-0 !p-0">
-			<a
-				href="https://link.creeperkatze.dev/discord"
-				target="_blank"
-				rel="noopener"
-				class="flex items-center gap-3 px-2 py-2 pr-10 no-underline"
-				@click="dismiss"
-			>
-				<DiscordIcon class="!size-6 shrink-0 text-[#5865F2]" aria-hidden="true" />
-				<div class="min-w-0 flex-1">
-					<div class="text-sm font-semibold text-contrast">
-						{{ formatMessage(messages['popup.discordPrompt.title']) }}
-					</div>
-					<div class="text-xs text-secondary">
-						{{ formatMessage(messages['popup.discordPrompt.message']) }}
-					</div>
-				</div>
-			</a>
+		<div class="discord-card relative flex gap-3 rounded-2xl border border-solid p-3 pr-10">
+			<DiscordIcon class="!size-6 shrink-0 text-[#5865F2]" aria-hidden="true" />
+			<div class="min-w-0 flex-1">
+				<h3 class="m-0 text-sm font-semibold text-contrast">
+					{{ formatMessage(messages['popup.discordPrompt.title']) }}
+				</h3>
+				<p class="m-0 mt-1 text-xs leading-normal text-secondary">
+					{{ formatMessage(messages['popup.discordPrompt.message']) }}
+				</p>
+				<ButtonLink
+					href="https://link.creeperkatze.dev/discord"
+					target="_blank"
+					rel="noopener"
+					type="colored"
+					size="sm"
+					class="mt-3 w-fit !text-white no-underline"
+					style="--button-color: #5865f2"
+					@click="dismiss"
+				>
+					<DiscordIcon aria-hidden="true" />
+					{{ formatMessage(messages['popup.discordPrompt.join']) }}
+					<ArrowUpRightIcon aria-hidden="true" />
+				</ButtonLink>
+			</div>
 			<div class="absolute right-2 top-2">
 				<IconButton
 					v-tooltip="formatMessage(messages['popup.discordPrompt.dismiss'])"
@@ -29,13 +35,13 @@
 					<XIcon aria-hidden="true" />
 				</IconButton>
 			</div>
-		</Card>
+		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { DiscordIcon, XIcon } from '@modrinth/assets'
-import { Card, defineMessages, IconButton, useVIntl } from '@modrinth/ui'
+import { ArrowUpRightIcon, DiscordIcon, XIcon } from '@modrinth/assets'
+import { ButtonLink, defineMessages, IconButton, useVIntl } from '@modrinth/ui'
 import { storage } from '@wxt-dev/storage'
 import { onMounted, ref } from 'vue'
 
@@ -49,6 +55,10 @@ const messages = defineMessages({
 	'popup.discordPrompt.message': {
 		id: 'popup.discordPrompt.message',
 		defaultMessage: 'Get help, share feedback, and follow updates on the Discord server.',
+	},
+	'popup.discordPrompt.join': {
+		id: 'popup.discordPrompt.join',
+		defaultMessage: 'Join server',
 	},
 	'popup.discordPrompt.dismiss': {
 		id: 'popup.discordPrompt.dismiss',
@@ -80,10 +90,5 @@ onMounted(async () => {
 .discord-card {
 	border-color: rgb(88 101 242 / 30%);
 	background-color: rgb(88 101 242 / 10%);
-	transition: background-color 150ms ease;
-}
-
-.discord-card:hover {
-	background-color: rgb(88 101 242 / 18%);
 }
 </style>

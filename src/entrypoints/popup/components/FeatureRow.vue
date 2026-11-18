@@ -1,51 +1,39 @@
 <template>
-	<div
-		v-tooltip="disabled ? disabledTooltip : undefined"
-		:class="['rounded-xl transition-colors duration-200', disabled ? '' : 'hover:bg-surface-3']"
-	>
-		<div
-			:class="[
-				'flex items-center gap-3 px-2 py-2',
-				disabled ? 'cursor-not-allowed opacity-60' : 'cursor-pointer',
-			]"
-			@click="!disabled && $emit('update:modelValue', !modelValue)"
-		>
-			<component :is="icon" aria-hidden="true" class="!size-6 shrink-0 text-secondary" />
-			<div class="min-w-0 flex-1">
-				<div class="text-sm font-semibold text-contrast">{{ title }}</div>
-				<div class="text-xs text-secondary">
-					<slot name="description">{{ description }}</slot>
-				</div>
+	<div class="overflow-clip rounded-2xl border border-solid border-surface-4 bg-surface-3">
+		<div class="flex items-center justify-between gap-4 p-3">
+			<div class="min-w-0">
+				<h3 class="m-0 flex items-center gap-2 text-sm font-semibold text-contrast">
+					<component :is="icon" class="size-4 shrink-0 text-primary" aria-hidden="true" />
+					{{ title }}
+				</h3>
+				<p class="m-0 mt-1 text-xs leading-normal text-secondary">{{ description }}</p>
 			</div>
-			<IconButton
-				v-if="actionIcon"
-				size="sm"
-				type="quiet"
-				:disabled="!modelValue"
-				:label="actionLabel ?? title"
-				@click.stop="$emit('action')"
-			>
-				<component :is="actionIcon" />
-			</IconButton>
-			<Toggle
-				small
-				:model-value="modelValue"
-				:aria-label="title"
-				:disabled="disabled"
-				@click.stop
-				@update:model-value="$emit('update:modelValue', !!$event)"
-			/>
+			<span v-tooltip="disabled ? disabledTooltip : undefined" class="inline-flex shrink-0">
+				<Toggle
+					small
+					:model-value="modelValue"
+					:disabled="disabled"
+					:aria-label="title"
+					@update:model-value="$emit('update:modelValue', !!$event)"
+				/>
+			</span>
 		</div>
-		<Collapsible :collapsed="!(modelValue && hasOptionsSlot)" overflow-visible>
-			<div class="flex flex-col gap-2 p-2 pl-11">
+		<Collapsible v-if="hasOptionsSlot || actionIcon" :collapsed="!modelValue">
+			<div
+				class="flex flex-col gap-3 border-0 border-t border-solid border-surface-4 bg-surface-2 p-3 text-sm"
+			>
 				<slot />
+				<Button v-if="actionIcon" size="sm" class="w-fit" @click="$emit('action')">
+					<component :is="actionIcon" aria-hidden="true" />
+					{{ actionLabel }}
+				</Button>
 			</div>
 		</Collapsible>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { Collapsible, IconButton, Toggle } from '@modrinth/ui'
+import { Button, Collapsible, Toggle } from '@modrinth/ui'
 import { Comment, type Component, computed, useSlots } from 'vue'
 
 defineProps<{
