@@ -658,6 +658,19 @@ const generalFeatures = computed<FeatureDef[]>(() => [
 		],
 	},
 	{
+		key: 'themes',
+		icon: PaintbrushIcon,
+		title: formatMessage(messages['feature.themes.title']),
+		description: formatMessage(messages['feature.themes.description']),
+		options: [
+			{
+				key: 'presets',
+				type: 'toggle',
+				label: formatMessage(messages['feature.themes.presets']),
+			},
+		],
+	},
+	{
 		key: 'accentColor',
 		icon: PaletteIcon,
 		title: formatMessage(messages['feature.accentColor.title']),
@@ -669,19 +682,6 @@ const generalFeatures = computed<FeatureDef[]>(() => [
 				label: formatMessage(messages['feature.accentColor.color']),
 				defaultColor: DEFAULTS.accentColor.color,
 				warning: () => accentColorWarning.value,
-			},
-		],
-	},
-	{
-		key: 'themes',
-		icon: PaintbrushIcon,
-		title: formatMessage(messages['feature.themes.title']),
-		description: formatMessage(messages['feature.themes.description']),
-		options: [
-			{
-				key: 'presets',
-				type: 'toggle',
-				label: formatMessage(messages['feature.themes.presets']),
 			},
 		],
 	},
