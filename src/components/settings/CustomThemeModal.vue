@@ -9,6 +9,7 @@
 		max-width="580px"
 		scrollable
 		max-content-height="70vh"
+		actions-divider
 	>
 		<div v-if="draft" class="flex flex-col gap-6">
 			<div
