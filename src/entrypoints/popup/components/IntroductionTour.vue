@@ -79,14 +79,18 @@ import {
 } from '@modrinth/ui'
 import { computed, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue'
 
-import { markTourStepsSeen, popupTourItem, type PopupTourState } from '../../../features/tour/state'
+import {
+	markTourStepsSeen,
+	introductionTourItem,
+	type IntroductionTourState,
+} from '../../../features/tour/state'
 
-export type TourTarget = 'search' | 'notifications' | 'creator' | 'settings'
+export type IntroductionTourTarget = 'search' | 'notifications' | 'creator' | 'settings'
 
-interface TourStep {
+interface IntroductionTourStep {
 	// Stored once seen, so never rename one
 	id: string
-	target: TourTarget
+	target: IntroductionTourTarget
 	title: MessageDescriptor
 	description: MessageDescriptor
 	updatedDescription?: MessageDescriptor
@@ -96,7 +100,7 @@ interface TourStep {
 
 const props = defineProps<{
 	active: boolean
-	resolveTarget: (target: TourTarget) => HTMLElement | null | undefined
+	resolveTarget: (target: IntroductionTourTarget) => HTMLElement | null | undefined
 }>()
 
 const SPOTLIGHT_PADDING = 4
@@ -109,54 +113,54 @@ const { formatMessage } = useVIntl()
 
 const messages = defineMessages({
 	progress: {
-		id: 'popup.tour.progress',
+		id: 'popup.introductionTour.progress',
 		defaultMessage: '{current} of {total}',
 	},
 	skip: {
-		id: 'popup.tour.skip',
+		id: 'popup.introductionTour.skip',
 		defaultMessage: 'Skip',
 	},
 	searchTitle: {
-		id: 'popup.tour.search.title',
+		id: 'popup.introductionTour.search.title',
 		defaultMessage: 'Search',
 	},
 	searchDescription: {
-		id: 'popup.tour.search.description',
+		id: 'popup.introductionTour.search.description',
 		defaultMessage: 'Find mods, modpacks, servers and more without opening Modrinth.',
 	},
 	notificationsTitle: {
-		id: 'popup.tour.notifications.title',
+		id: 'popup.introductionTour.notifications.title',
 		defaultMessage: 'Notifications',
 	},
 	notificationsDescription: {
-		id: 'popup.tour.notifications.description',
+		id: 'popup.introductionTour.notifications.description',
 		defaultMessage: 'Read your notifications and accept invites right from here.',
 	},
 	creatorTitle: {
-		id: 'popup.tour.creator.title',
+		id: 'popup.introductionTour.creator.title',
 		defaultMessage: 'Creator',
 	},
 	creatorDescription: {
-		id: 'popup.tour.creator.description',
+		id: 'popup.introductionTour.creator.description',
 		defaultMessage: 'Keep an eye on the views, downloads and revenue of your projects.',
 	},
 	settingsTitle: {
-		id: 'popup.tour.settings.title',
+		id: 'popup.introductionTour.settings.title',
 		defaultMessage: 'Settings',
 	},
 	settingsDescription: {
-		id: 'popup.tour.settings.description',
+		id: 'popup.introductionTour.settings.description',
 		defaultMessage: 'Customize everything Modrinth Extras has to offer.',
 	},
 	settingsUpdatedDescription: {
-		id: 'popup.tour.settings.updatedDescription',
+		id: 'popup.introductionTour.settings.updatedDescription',
 		defaultMessage:
 			'The settings have moved here. This is where you customize everything Modrinth Extras has to offer.',
 	},
 })
 
 // Settings come first because configuring the extension matters more than the popup tabs
-const STEPS: TourStep[] = [
+const STEPS: IntroductionTourStep[] = [
 	{
 		id: 'settings-button',
 		target: 'settings',
@@ -187,9 +191,9 @@ const STEPS: TourStep[] = [
 	},
 ]
 
-const state = ref<PopupTourState>({ updated: false, seenSteps: [] })
+const state = ref<IntroductionTourState>({ updated: false, seenSteps: [] })
 // Picked once so the progress count stays the same while clicking through
-const steps = shallowRef<TourStep[]>([])
+const steps = shallowRef<IntroductionTourStep[]>([])
 const index = ref(0)
 
 const step = computed(() => (props.active ? steps.value[index.value] : undefined))
@@ -253,7 +257,7 @@ watch(
 
 onMounted(async () => {
 	try {
-		state.value = await popupTourItem.getValue()
+		state.value = await introductionTourItem.getValue()
 		steps.value = STEPS.filter((s) => !state.value.seenSteps.includes(s.id))
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to load the tour:', err)

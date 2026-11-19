@@ -75,7 +75,10 @@
 
 		<PopupFooter />
 
-		<TourOverlay :active="settingsLoaded && view !== 'settings'" :resolve-target="tourTarget" />
+		<IntroductionTour
+			:active="settingsLoaded && view !== 'settings'"
+			:resolve-target="introductionTourTarget"
+		/>
 	</div>
 </template>
 
@@ -103,8 +106,8 @@ import { applyThemeSettings } from '../../features/themes/themes'
 import Logo from '../../public/logo.svg?component'
 import DiscordCard from './components/DiscordCard.vue'
 import DonateCard from './components/DonateCard.vue'
+import IntroductionTour, { type IntroductionTourTarget } from './components/IntroductionTour.vue'
 import PopupFooter from './components/PopupFooter.vue'
-import TourOverlay, { type TourTarget } from './components/TourOverlay.vue'
 import { loadAccount } from './state/account'
 import { loadPopupSettings, settings, settingsLoaded } from './state/settings'
 import CreatorView from './views/CreatorView.vue'
@@ -208,7 +211,7 @@ onBeforeUnmount(() => layoutObserver?.disconnect())
 const tabBar = useTemplateRef<HTMLElement>('tabBar')
 const settingsButton = useTemplateRef<InstanceType<typeof IconButton>>('settingsButton')
 
-function tourTarget(target: TourTarget): HTMLElement | null | undefined {
+function introductionTourTarget(target: IntroductionTourTarget): HTMLElement | null | undefined {
 	if (target === 'settings') return settingsButton.value?.$el as HTMLElement | undefined
 	return tabBar.value?.querySelectorAll<HTMLElement>('[role="tab"]')[MAIN_TABS.indexOf(target)]
 }
