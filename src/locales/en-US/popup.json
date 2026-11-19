@@ -224,6 +224,9 @@
   "popup.creator.fullAnalytics": {
     "defaultMessage": "Open full analytics"
   },
+  "popup.creator.fullRevenue": {
+    "defaultMessage": "Open full revenue"
+  },
   "popup.creator.loading": {
     "defaultMessage": "Loading your projects..."
   },

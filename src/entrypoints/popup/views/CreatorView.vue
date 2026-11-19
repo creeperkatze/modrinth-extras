@@ -24,22 +24,19 @@
 					</Button>
 				</EmptyState>
 
-				<section v-else class="flex flex-col gap-2">
-					<div class="flex min-h-8 items-center justify-between gap-2 px-1">
-						<h2 class="m-0 flex items-center gap-1 text-sm font-semibold text-contrast">
-							{{ formatMessage(messages['popup.creator.analytics']) }}
-							<IconButton
-								v-tooltip="formatMessage(messages['popup.creator.fullAnalytics'])"
-								size="xs"
-								type="quiet"
-								:label="formatMessage(messages['popup.creator.fullAnalytics'])"
-								@click="openModrinth('/dashboard/analytics')"
-							>
-								<ArrowUpRightIcon aria-hidden="true" />
-							</IconButton>
-						</h2>
+				<PopupSection v-else :title="formatMessage(messages['popup.creator.analytics'])" bare>
+					<template #actions>
 						<Tabs v-model:value="days" :tabs="rangeTabs" class="shrink-0" />
-					</div>
+						<IconButton
+							v-tooltip="formatMessage(messages['popup.creator.fullAnalytics'])"
+							size="sm"
+							type="quiet"
+							:label="formatMessage(messages['popup.creator.fullAnalytics'])"
+							@click="openModrinth('/dashboard/analytics')"
+						>
+							<ArrowUpRightIcon aria-hidden="true" />
+						</IconButton>
+					</template>
 
 					<div class="grid grid-cols-3 gap-2">
 						<StatCard
@@ -92,9 +89,26 @@
 							</div>
 						</div>
 					</div>
-				</section>
+				</PopupSection>
 
-				<RevenueCard v-if="balance && (hasProjects || hasRevenue)" :balance="balance" />
+				<PopupSection
+					v-if="balance && (hasProjects || hasRevenue)"
+					:title="formatMessage(messages['popup.creator.revenue'])"
+					bare
+				>
+					<template #actions>
+						<IconButton
+							v-tooltip="formatMessage(messages['popup.creator.fullRevenue'])"
+							size="sm"
+							type="quiet"
+							:label="formatMessage(messages['popup.creator.fullRevenue'])"
+							@click="openModrinth('/dashboard/revenue')"
+						>
+							<ArrowUpRightIcon aria-hidden="true" />
+						</IconButton>
+					</template>
+					<RevenueCard :balance="balance" />
+				</PopupSection>
 			</template>
 		</template>
 	</div>
@@ -140,6 +154,7 @@ import AnalyticsChartTooltip, {
 import RevenueCard from '../components/creator/RevenueCard.vue'
 import StatCard from '../components/creator/StatCard.vue'
 import EmptyState from '../components/EmptyState.vue'
+import PopupSection from '../components/PopupSection.vue'
 import SignInCard from '../components/SignInCard.vue'
 import { useCachedResource } from '../composables/cached'
 import { account, accountLoaded } from '../state/account'
@@ -205,6 +220,10 @@ const messages = defineMessages({
 	'popup.creator.fullAnalytics': {
 		id: 'popup.creator.fullAnalytics',
 		defaultMessage: 'Open full analytics',
+	},
+	'popup.creator.fullRevenue': {
+		id: 'popup.creator.fullRevenue',
+		defaultMessage: 'Open full revenue',
 	},
 	'popup.creator.views': {
 		id: 'popup.creator.views',
