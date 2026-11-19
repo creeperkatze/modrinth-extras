@@ -9,7 +9,11 @@
 				<slot name="actions" />
 			</div>
 		</div>
+		<div v-if="bare" class="flex flex-col gap-2">
+			<slot />
+		</div>
 		<div
+			v-else
 			class="flex flex-col overflow-clip rounded-2xl border border-solid border-surface-4 bg-surface-3 [&>*+*]:border-0 [&>*+*]:border-t [&>*+*]:border-solid [&>*+*]:border-surface-4"
 		>
 			<slot />
@@ -23,5 +27,7 @@ import type { Component } from 'vue'
 defineProps<{
 	title: string
 	icon?: Component
+	// For content that brings its own cards
+	bare?: boolean
 }>()
 </script>

@@ -8,7 +8,10 @@ export interface ModrinthMatch {
 	slug: string
 	name: string
 	iconUrl: string | null
+	summary: string
+	author?: string
 	downloads: number
+	categories: string[]
 	projectType: string
 }
 

@@ -278,15 +278,6 @@
   "popup.donatePrompt.title": {
     "defaultMessage": "Support the extension"
   },
-  "popup.download.failed": {
-    "defaultMessage": "Download failed"
-  },
-  "popup.download.label": {
-    "defaultMessage": "Download"
-  },
-  "popup.download.unavailable": {
-    "defaultMessage": "No version matches your game version and loader"
-  },
   "popup.footer.checking": {
     "defaultMessage": "Checking"
   },
@@ -329,6 +320,27 @@
   "popup.nav.settings": {
     "defaultMessage": "Settings"
   },
+  "popup.project.by": {
+    "defaultMessage": "by {author}"
+  },
+  "popup.project.environment.client": {
+    "defaultMessage": "Client"
+  },
+  "popup.project.environment.clientAndServer": {
+    "defaultMessage": "Client and server"
+  },
+  "popup.project.environment.clientOrServer": {
+    "defaultMessage": "Client or server"
+  },
+  "popup.project.environment.dedicatedServer": {
+    "defaultMessage": "Dedicated server"
+  },
+  "popup.project.environment.server": {
+    "defaultMessage": "Server"
+  },
+  "popup.project.environment.singleplayer": {
+    "defaultMessage": "Singleplayer"
+  },
   "popup.resetSettings.button": {
     "defaultMessage": "Reset"
   },
@@ -350,29 +362,44 @@
   "popup.search.clear": {
     "defaultMessage": "Clear search"
   },
-  "popup.search.clearRecent": {
-    "defaultMessage": "Clear recent searches"
-  },
   "popup.search.failed": {
     "defaultMessage": "Search failed. Try again in a moment."
   },
   "popup.search.noResults": {
     "defaultMessage": "No projects found"
   },
-  "popup.search.openOnModrinth": {
-    "defaultMessage": "Open on Modrinth"
-  },
   "popup.search.placeholder": {
     "defaultMessage": "Search Modrinth"
   },
-  "popup.search.recent": {
-    "defaultMessage": "Recent searches"
-  },
-  "popup.search.results": {
-    "defaultMessage": "Results"
-  },
   "popup.search.searching": {
     "defaultMessage": "Searching..."
+  },
+  "popup.search.type.all": {
+    "defaultMessage": "All"
+  },
+  "popup.search.type.datapack": {
+    "defaultMessage": "Data Packs"
+  },
+  "popup.search.type.label": {
+    "defaultMessage": "Project type"
+  },
+  "popup.search.type.mod": {
+    "defaultMessage": "Mods"
+  },
+  "popup.search.type.modpack": {
+    "defaultMessage": "Modpacks"
+  },
+  "popup.search.type.plugin": {
+    "defaultMessage": "Plugins"
+  },
+  "popup.search.type.resourcepack": {
+    "defaultMessage": "Resource Packs"
+  },
+  "popup.search.type.server": {
+    "defaultMessage": "Servers"
+  },
+  "popup.search.type.shader": {
+    "defaultMessage": "Shaders"
   },
   "popup.signIn.button": {
     "defaultMessage": "Sign in"

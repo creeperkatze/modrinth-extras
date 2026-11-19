@@ -38,7 +38,9 @@ async function findBySlug(source: MatchableProject): Promise<ModrinthMatch | nul
 			slug: project.slug,
 			name: project.name,
 			iconUrl: project.icon_url ?? null,
+			summary: project.summary,
 			downloads: project.downloads,
+			categories: [...project.categories, ...project.loaders],
 			projectType: project.project_types[0] ?? 'mod',
 		}
 	} catch (err) {
@@ -60,7 +62,10 @@ async function findBySearch(source: MatchableProject): Promise<ModrinthMatch | n
 			slug: hit.slug,
 			name: hit.name,
 			iconUrl: hit.icon_url,
+			summary: hit.summary,
+			author: hit.author,
 			downloads: hit.downloads,
+			categories: [...hit.display_categories, ...hit.loaders],
 			projectType: hit.project_types[0] ?? 'mod',
 		}
 	}

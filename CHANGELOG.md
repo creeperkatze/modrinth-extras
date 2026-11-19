@@ -7,8 +7,7 @@
 - Lucy as a mod manager option for the copy install command in the Tools sidebar card.
 - Reset order button when customizing the sidebar, which puts the cards back in their default order.
 - Option in the Extension tab to reset all settings to their defaults.
-- Search tab in the popup for quickly searching Modrinth, with a download button on every result and the same recent searches as the quick search on the site.
-- "Also on Modrinth" card in the popup when you're on a CurseForge, SpigotMC or Hangar project that's also on Modrinth.
+- Search tab in the popup for quickly searching Modrinth, with a project type picker that includes servers. Without a search, it shows the most popular projects of the picked type.
 - Creator tab in the popup with your revenue balance and upcoming payouts, and the same stat cards and charts as Modrinth's analytics dashboard for views, downloads and revenue over 7, 30 or 90 days.
 - More themes in Modrinth's color theme settings: Catppuccin Mocha and Latte, Gruvbox Dark, Rosé Pine and Rosé Pine Dawn, Solarized Dark and Light, and Synthwave '84. You can also create your own custom themes with every color adjustable, and share them as JSON files. Themes bring their own accent color, which a custom accent color still overrides, and can be turned off in the popup.
 
