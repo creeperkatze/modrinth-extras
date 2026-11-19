@@ -19,16 +19,8 @@
 		</div>
 
 		<div class="flex flex-col gap-2 px-3 pb-3">
-			<!-- Wraps when a long page range doesn't fit next to the type picker -->
-			<div class="flex flex-wrap items-center gap-2">
+			<div class="flex">
 				<ProjectTypeSelect v-model="projectType" @update:model-value="searchInput?.focus()" />
-				<Pagination
-					v-if="pageCount > 1"
-					class="ml-auto"
-					:page="page"
-					:count="pageCount"
-					@switch-page="goToPage"
-				/>
 			</div>
 			<div
 				v-if="resultsLoading && results.length === 0"
