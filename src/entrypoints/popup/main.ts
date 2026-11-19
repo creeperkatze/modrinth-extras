@@ -10,7 +10,7 @@ import {
 	applyThemeClass,
 	readModrinthTheme,
 	systemTheme,
-} from '../../features/theme/modrinth-theme'
+} from '../../features/themes/website-theme'
 import App from './App.vue'
 
 reportUncaughtErrors()
