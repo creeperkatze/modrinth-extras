@@ -239,6 +239,18 @@
   "extraThemes.newTheme": {
     "defaultMessage": "My theme"
   },
+  "extraThemes.section.classics": {
+    "defaultMessage": "Classics"
+  },
+  "extraThemes.section.custom": {
+    "defaultMessage": "Custom"
+  },
+  "extraThemes.section.minecraft": {
+    "defaultMessage": "Minecraft"
+  },
+  "extraThemes.section.modrinth": {
+    "defaultMessage": "Modrinth"
+  },
   "moddexReviews.aesthetics": {
     "defaultMessage": "Aesthetics"
   },

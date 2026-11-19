@@ -1,67 +1,96 @@
 <template>
-	<ThemeCard
-		v-for="theme in EXTRA_THEMES"
-		:id="theme.id"
-		:key="theme.id"
-		:name="theme.name"
-		:base="theme.base"
-		:selected="selected === theme.id"
-		@select="select(theme)"
-	/>
-	<div v-for="theme in customThemes" :key="theme.id" class="custom-theme relative">
-		<ThemeCard
-			:id="theme.id"
-			:name="theme.name"
-			:base="theme.base"
-			:selected="selected === theme.id"
-			has-actions
-			@select="select(theme)"
-		/>
-		<!-- Wrapped, since the buttons set their own position -->
-		<div class="absolute bottom-1 right-1.5 flex items-center gap-1">
-			<IconButton
-				v-tooltip="formatMessage(messages['extraThemes.edit'])"
-				type="quiet"
-				size="sm"
-				:label="formatMessage(messages['extraThemes.edit'])"
-				@click="edit(theme)"
-			>
-				<EditIcon aria-hidden="true" />
-			</IconButton>
-			<IconButton
-				v-tooltip="formatMessage(messages['extraThemes.delete'])"
-				type="quiet"
-				color="red"
-				size="sm"
-				:label="formatMessage(messages['extraThemes.delete'])"
-				@click="remove(theme.id)"
-			>
-				<TrashIcon aria-hidden="true" />
-			</IconButton>
-		</div>
-	</div>
-	<div
-		class="flex min-h-36 flex-col items-center justify-center gap-2 rounded-[var(--radius-md)] border-2 border-dashed border-surface-5 p-4"
-	>
-		<Button @click="create">
-			<PlusIcon aria-hidden="true" />
-			{{ formatMessage(messages['extraThemes.create']) }}
-		</Button>
-		<Button type="quiet" @click="fileInput?.click()">
-			<UploadIcon aria-hidden="true" />
-			{{ formatMessage(messages['extraThemes.import']) }}
-		</Button>
-		<input
-			ref="fileInput"
-			type="file"
-			accept=".json,application/json"
-			multiple
-			class="hidden"
-			@change="importFiles"
-		/>
-	</div>
+	<div ref="root" class="theme-sections mt-4 flex flex-col gap-3">
+		<ThemeSection
+			:title="formatMessage(messages['extraThemes.section.modrinth'])"
+			:count="modrinthCount"
+			open-by-default
+		>
+			<div ref="modrinthSlot"></div>
+		</ThemeSection>
 
-	<CustomThemeModal ref="customModal" @save="saveTheme" @delete="remove" />
+		<ThemeSection
+			v-for="category in THEME_CATEGORIES"
+			:key="category.id"
+			:title="categoryTitle(category)"
+			:count="category.themes.length"
+			:open-by-default="openSection === category.id"
+		>
+			<div class="theme-grid">
+				<ThemeCard
+					v-for="theme in category.themes"
+					:id="theme.id"
+					:key="theme.id"
+					:name="theme.name"
+					:base="theme.base"
+					:selected="selected === theme.id"
+					@select="select(theme)"
+				/>
+			</div>
+		</ThemeSection>
+
+		<ThemeSection
+			:title="formatMessage(messages['extraThemes.section.custom'])"
+			:count="customThemes.length"
+			:open-by-default="openSection === CUSTOM_SECTION"
+		>
+			<div class="theme-grid">
+				<div v-for="theme in customThemes" :key="theme.id" class="custom-theme relative">
+					<ThemeCard
+						:id="theme.id"
+						:name="theme.name"
+						:base="theme.base"
+						:selected="selected === theme.id"
+						has-actions
+						@select="select(theme)"
+					/>
+					<!-- Wrapped, since the buttons set their own position -->
+					<div class="absolute bottom-1 right-1.5 flex items-center gap-1">
+						<IconButton
+							v-tooltip="formatMessage(messages['extraThemes.edit'])"
+							type="quiet"
+							size="sm"
+							:label="formatMessage(messages['extraThemes.edit'])"
+							@click="edit(theme)"
+						>
+							<EditIcon aria-hidden="true" />
+						</IconButton>
+						<IconButton
+							v-tooltip="formatMessage(messages['extraThemes.delete'])"
+							type="quiet"
+							color="red"
+							size="sm"
+							:label="formatMessage(messages['extraThemes.delete'])"
+							@click="remove(theme.id)"
+						>
+							<TrashIcon aria-hidden="true" />
+						</IconButton>
+					</div>
+				</div>
+				<div
+					class="flex min-h-36 flex-col items-center justify-center gap-2 rounded-[var(--radius-md)] border-2 border-dashed border-surface-5 p-4"
+				>
+					<Button @click="create">
+						<PlusIcon aria-hidden="true" />
+						{{ formatMessage(messages['extraThemes.create']) }}
+					</Button>
+					<Button type="quiet" @click="fileInput?.click()">
+						<UploadIcon aria-hidden="true" />
+						{{ formatMessage(messages['extraThemes.import']) }}
+					</Button>
+					<input
+						ref="fileInput"
+						type="file"
+						accept=".json,application/json"
+						multiple
+						class="hidden"
+						@change="importFiles"
+					/>
+				</div>
+			</div>
+		</ThemeSection>
+
+		<CustomThemeModal ref="customModal" @save="saveTheme" @delete="remove" />
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -72,26 +101,40 @@ import { onBeforeUnmount, onMounted, ref, shallowRef, useTemplateRef, watch } fr
 import { showNotification } from '../../content/notifications'
 import { getSettings, type NamedTheme, saveSettings } from '../../core/settings'
 import {
-	applyExtraTheme,
-	createCustomTheme,
-	EXTRA_THEMES,
-	importThemeFile,
 	MODRINTH_THEMES,
-} from '../../features/themes/themes'
+	type ThemeCategory,
+	THEME_CATEGORIES,
+} from '../../features/themes/presets'
+import { applyExtraTheme, createCustomTheme, importThemeFile } from '../../features/themes/themes'
 import CustomThemeModal from './CustomThemeModal.vue'
 import ThemeCard from './ThemeCard.vue'
+import ThemeSection from './ThemeSection.vue'
 
 const props = defineProps<{
 	savedSelected: string
 	savedCustom: NamedTheme[]
-	containerId: string
 }>()
+
+const CUSTOM_SECTION = 'custom'
 
 const SELECTED_ATTRIBUTE = 'data-modrinth-extras-theme-selected'
 
 const { formatMessage } = useVIntl()
 
 const messages = defineMessages({
+	'extraThemes.section.modrinth': {
+		id: 'extraThemes.section.modrinth',
+		defaultMessage: 'Modrinth',
+	},
+	'extraThemes.section.minecraft': {
+		id: 'extraThemes.section.minecraft',
+		defaultMessage: 'Minecraft',
+	},
+	'extraThemes.section.classics': {
+		id: 'extraThemes.section.classics',
+		defaultMessage: 'Classics',
+	},
+	'extraThemes.section.custom': { id: 'extraThemes.section.custom', defaultMessage: 'Custom' },
 	'extraThemes.create': { id: 'extraThemes.create', defaultMessage: 'Create theme' },
 	'extraThemes.import': { id: 'extraThemes.import', defaultMessage: 'Import' },
 	'extraThemes.edit': { id: 'extraThemes.edit', defaultMessage: 'Edit theme' },
@@ -116,10 +159,31 @@ const messages = defineMessages({
 const selected = ref(props.savedSelected)
 const customThemes = shallowRef<NamedTheme[]>(structuredClone(props.savedCustom))
 
+// Families like Catppuccin keep their own name
+const categoryMessages: Partial<Record<string, (typeof messages)[keyof typeof messages]>> = {
+	minecraft: messages['extraThemes.section.minecraft'],
+	classics: messages['extraThemes.section.classics'],
+}
+
+function categoryTitle(category: ThemeCategory): string {
+	const message = categoryMessages[category.id]
+	return message ? formatMessage(message) : category.name
+}
+
+// Only the section with the theme in use starts open
+const openSection = props.savedCustom.some((theme) => theme.id === props.savedSelected)
+	? CUSTOM_SECTION
+	: THEME_CATEGORIES.find((category) =>
+			category.themes.some((theme) => theme.id === props.savedSelected),
+		)?.id
+
 const customModal = useTemplateRef<InstanceType<typeof CustomThemeModal>>('customModal')
 const fileInput = useTemplateRef<HTMLInputElement>('fileInput')
 
 let grid: HTMLElement | null = null
+const root = useTemplateRef<HTMLElement>('root')
+const modrinthSlot = useTemplateRef<HTMLElement>('modrinthSlot')
+const modrinthCount = ref(0)
 
 watch([selected, customThemes], async ([id, themes]) => {
 	applyExtraTheme(id, themes)
@@ -207,18 +271,32 @@ function onGridClick(event: MouseEvent) {
 watch(selected, (id) => grid?.toggleAttribute(SELECTED_ATTRIBUTE, id !== ''))
 
 onMounted(() => {
-	grid = document.getElementById(props.containerId)?.parentElement ?? null
+	grid = document.querySelector<HTMLElement>('.theme-options')
+	// The website's own themes move into the Modrinth section
+	if (grid) {
+		modrinthSlot.value?.append(grid)
+		modrinthCount.value = grid.childElementCount
+	}
 	grid?.toggleAttribute(SELECTED_ATTRIBUTE, selected.value !== '')
 	grid?.addEventListener('click', onGridClick, true)
 })
 
 onBeforeUnmount(() => {
+	// Put back where the website had it, right before the injection
+	if (grid) root.value?.parentElement?.before(grid)
 	grid?.removeAttribute(SELECTED_ATTRIBUTE)
 	grid?.removeEventListener('click', onGridClick, true)
 })
 </script>
 
 <style scoped>
+/* Laid out like the website's own theme grid, with every card the same width */
+.theme-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+	gap: var(--gap-lg);
+}
+
 /* Pressing the card shrinks it together with its buttons, which sit outside the card itself */
 .custom-theme {
 	transition: scale 0.05s ease-in-out;
@@ -235,6 +313,11 @@ onBeforeUnmount(() => {
 </style>
 
 <style lang="scss">
+// The section header already spaces it from the title
+.theme-sections .theme-options {
+	margin-top: 0;
+}
+
 // The website still marks the base theme as selected while one of ours is, so it is drawn unselected
 .theme-options[data-modrinth-extras-theme-selected] > .preview-radio.selected {
 	color: var(--color-base);

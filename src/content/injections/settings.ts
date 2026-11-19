@@ -12,16 +12,14 @@ export function settingsInjections(settings: SettingsGetter) {
 		attach(container) {
 			const grid = document.querySelector<HTMLElement>('.theme-options')
 			if (!grid) return false
-			// The cards become items of the website's own grid
-			container.style.display = 'contents'
-			grid.appendChild(container)
+			// The sections go below the website's own themes
+			grid.after(container)
 			return true
 		},
 		createApp: () =>
 			createExtensionApp(ExtraThemeOptions, {
 				savedSelected: settings().themes.selected,
 				savedCustom: settings().themes.custom,
-				containerId: EXTRA_THEMES_ID,
 			}),
 	})
 

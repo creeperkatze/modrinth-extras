@@ -11,7 +11,7 @@
 - Creator tab in the popup with your revenue balance and upcoming payouts, and the same stat cards and charts as Modrinth's analytics dashboard for views, downloads and revenue over 7, 30 or 90 days.
 - Notifications tab in the popup with your unread Modrinth notifications, the same as the notifications dropdown on the website. You can accept or decline invites and mark notifications as read without opening Modrinth.
 - A short tour the first time you open the popup that shows where everything is. If you updated, it points out what's new and where the settings moved.
-- More themes in Modrinth's color theme settings: Catppuccin Mocha and Latte, Gruvbox Dark, Rosé Pine and Rosé Pine Dawn, Solarized Dark and Light, and Synthwave '84. You can also create your own custom themes with every color adjustable, and share them as JSON files. Themes bring their own accent color, which a custom accent color still overrides, and can be turned off in the popup.
+- More themes in Modrinth's color theme settings, sorted into collapsible sections. There are Minecraft themes like Cherry Grove, Pale Garden, Deep Dark, Nether and The End, classics like Nord, Dracula, One Dark, Kanagawa and Synthwave '84, and the Catppuccin, Rosé Pine, Tokyo Night, Gruvbox, Everforest and Solarized families. In the Custom section you can create your own themes with every color adjustable, and share them as JSON files. Themes bring their own accent color, which a custom accent color still overrides, and can be turned off in the popup.
 
 ### Changed
 
