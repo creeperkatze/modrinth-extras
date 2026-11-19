@@ -49,11 +49,11 @@ const { formatMessage } = useVIntl()
 const messages = defineMessages({
 	'popup.resetSettings.title': {
 		id: 'popup.resetSettings.title',
-		defaultMessage: 'Reset settings',
+		defaultMessage: 'Reset all settings',
 	},
 	'popup.resetSettings.description': {
 		id: 'popup.resetSettings.description',
-		defaultMessage: 'Turn every setting back to its default.',
+		defaultMessage: 'Turn every setting back to its default and delete your custom themes.',
 	},
 	'popup.resetSettings.button': {
 		id: 'popup.resetSettings.button',
@@ -61,12 +61,12 @@ const messages = defineMessages({
 	},
 	'popup.resetSettings.confirmTitle': {
 		id: 'popup.resetSettings.confirmTitle',
-		defaultMessage: 'Reset settings?',
+		defaultMessage: 'Reset all settings?',
 	},
 	'popup.resetSettings.confirmMessage': {
 		id: 'popup.resetSettings.confirmMessage',
 		defaultMessage:
-			'All settings go back to their defaults, including the language and sidebar layout. This cannot be undone.',
+			'All settings go back to their defaults, including the language and sidebar layout, and your custom themes are deleted. This cannot be undone.',
 	},
 	'popup.resetSettings.cancel': {
 		id: 'popup.resetSettings.cancel',
