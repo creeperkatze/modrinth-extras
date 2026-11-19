@@ -170,7 +170,7 @@ import {
 import { computed, ref, shallowRef, useTemplateRef } from 'vue'
 
 import type { NamedTheme, ThemeColors } from '../../core/settings'
-import { EXTRA_THEMES, MODRINTH_THEMES } from '../../features/themes/presets'
+import { MODRINTH_THEMES, PRESET_THEMES } from '../../features/themes/presets'
 import { exportThemeFile, themeFileName, themeVariables } from '../../features/themes/themes'
 
 const emit = defineEmits<{
@@ -273,7 +273,7 @@ const previewTags = computed(() => [
 	},
 ])
 
-const presets = [...MODRINTH_THEMES, ...EXTRA_THEMES]
+const presets = [...MODRINTH_THEMES, ...PRESET_THEMES]
 const presetOptions = presets.map((preset) => ({ label: preset.name, value: preset.id }))
 
 // Keeps the theme's own id and name, only the colors are copied

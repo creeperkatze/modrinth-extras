@@ -383,7 +383,7 @@ export const THEME_CATEGORIES: ThemeCategory[] = [
 	{ id: 'minecraft', name: 'Minecraft', themes: MINECRAFT_THEMES },
 ]
 
-export const EXTRA_THEMES: NamedTheme[] = THEME_CATEGORIES.flatMap((category) => category.themes)
+export const PRESET_THEMES: NamedTheme[] = THEME_CATEGORIES.flatMap((category) => category.themes)
 
 // Modrinth's own themes, as starting points for custom themes
 export const MODRINTH_THEMES: NamedTheme[] = [

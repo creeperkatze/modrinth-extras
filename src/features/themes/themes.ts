@@ -1,7 +1,7 @@
 import { colord } from 'colord'
 
 import type { ExtensionSettings, NamedTheme, ThemeColors } from '../../core/settings'
-import { EXTRA_THEMES } from './presets'
+import { PRESET_THEMES } from './presets'
 
 // An attribute, since the website rewrites the root element's classes when its theme changes
 export const THEME_ATTRIBUTE = 'data-modrinth-extras-theme'
@@ -117,22 +117,22 @@ function styleElement(id: string): HTMLStyleElement {
 }
 
 // Every custom theme gets a rule, so the picker can preview all of them
-export function applyExtraTheme(id: string, customThemes: NamedTheme[], showPresets: boolean) {
+export function applyTheme(id: string, customThemes: NamedTheme[], showPresets: boolean) {
 	const presets = styleElement(STYLE_ID)
-	if (!presets.textContent) presets.textContent = EXTRA_THEMES.map(themeRule).join('\n')
+	if (!presets.textContent) presets.textContent = PRESET_THEMES.map(themeRule).join('\n')
 	styleElement(CUSTOM_STYLE_ID).textContent = customThemes.map(themeRule).join('\n')
 
-	const themes = showPresets ? [...EXTRA_THEMES, ...customThemes] : customThemes
+	const themes = showPresets ? [...PRESET_THEMES, ...customThemes] : customThemes
 	const theme = themes.find((candidate) => candidate.id === id)
 	if (theme) document.documentElement.setAttribute(THEME_ATTRIBUTE, id)
 	else document.documentElement.removeAttribute(THEME_ATTRIBUTE)
 	setBase(theme?.base ?? null)
 }
 
-export function applyThemeSettings(settings: Pick<ExtensionSettings, 'extraThemes' | 'themes'>) {
-	const { selected, custom } = settings.themes
-	const { enabled, presets } = settings.extraThemes
-	applyExtraTheme(enabled ? selected : '', custom, presets)
+export function applyThemeSettings(settings: Pick<ExtensionSettings, 'themes' | 'themeLibrary'>) {
+	const { selected, custom } = settings.themeLibrary
+	const { enabled, presets } = settings.themes
+	applyTheme(enabled ? selected : '', custom, presets)
 }
 
 export function createCustomTheme(name: string, colors: ThemeColors): NamedTheme {

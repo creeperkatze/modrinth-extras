@@ -306,17 +306,16 @@ const messages = defineMessages({
 		id: 'feature.accentColor.unreadableButtons',
 		defaultMessage: 'Text on buttons in this color is hard to read on your Modrinth theme.',
 	},
-	'feature.extraThemes.title': {
-		id: 'feature.extraThemes.title',
-		defaultMessage: 'More themes',
+	'feature.themes.title': {
+		id: 'feature.themes.title',
+		defaultMessage: 'Themes',
 	},
-	'feature.extraThemes.description': {
-		id: 'feature.extraThemes.description',
-		defaultMessage:
-			"Adds more color themes to Modrinth's settings, from Minecraft biomes to Catppuccin and Nord, and lets you create and import your own.",
+	'feature.themes.description': {
+		id: 'feature.themes.description',
+		defaultMessage: 'More color themes for Modrinth, plus your own.',
 	},
-	'feature.extraThemes.presets': {
-		id: 'feature.extraThemes.presets',
+	'feature.themes.presets': {
+		id: 'feature.themes.presets',
 		defaultMessage: 'Include preset themes',
 	},
 	'feature.activitySparkline.title': {
@@ -674,15 +673,15 @@ const generalFeatures = computed<FeatureDef[]>(() => [
 		],
 	},
 	{
-		key: 'extraThemes',
+		key: 'themes',
 		icon: PaintbrushIcon,
-		title: formatMessage(messages['feature.extraThemes.title']),
-		description: formatMessage(messages['feature.extraThemes.description']),
+		title: formatMessage(messages['feature.themes.title']),
+		description: formatMessage(messages['feature.themes.description']),
 		options: [
 			{
 				key: 'presets',
 				type: 'toggle',
-				label: formatMessage(messages['feature.extraThemes.presets']),
+				label: formatMessage(messages['feature.themes.presets']),
 			},
 		],
 	},

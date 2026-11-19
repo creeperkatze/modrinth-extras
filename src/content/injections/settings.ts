@@ -1,13 +1,13 @@
-import ExtraThemeOptions from '../../components/settings/ExtraThemeOptions.vue'
+import ThemeOptions from '../../components/settings/ThemeOptions.vue'
 import { createExtensionApp, createInjection, type SettingsGetter } from '../injection'
 
-const EXTRA_THEMES_ID = 'modrinth-extras-extra-themes'
+const THEME_OPTIONS_ID = 'modrinth-extras-theme-options'
 
 export function settingsInjections(settings: SettingsGetter) {
-	const extraThemes = createInjection({
-		id: EXTRA_THEMES_ID,
-		isEnabled: () => settings().extraThemes.enabled,
-		settingsKeys: ['extraThemes'],
+	const themeOptions = createInjection({
+		id: THEME_OPTIONS_ID,
+		isEnabled: () => settings().themes.enabled,
+		settingsKeys: ['themes'],
 		persistent: false,
 		attach(container) {
 			const grid = document.querySelector<HTMLElement>('.theme-options')
@@ -17,12 +17,12 @@ export function settingsInjections(settings: SettingsGetter) {
 			return true
 		},
 		createApp: () =>
-			createExtensionApp(ExtraThemeOptions, {
-				savedSelected: settings().themes.selected,
-				savedCustom: settings().themes.custom,
-				showPresets: settings().extraThemes.presets,
+			createExtensionApp(ThemeOptions, {
+				savedSelected: settings().themeLibrary.selected,
+				savedCustom: settings().themeLibrary.custom,
+				showPresets: settings().themes.presets,
 			}),
 	})
 
-	return [extraThemes]
+	return [themeOptions]
 }

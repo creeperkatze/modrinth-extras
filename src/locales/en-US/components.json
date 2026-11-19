@@ -215,42 +215,6 @@
   "errorNotice.message": {
     "defaultMessage": "This error might be related to Modrinth Extras. Try disabling the extension and refreshing the page before reporting this to Modrinth. If the error goes away, please report it <link>here</link>."
   },
-  "extraThemes.create": {
-    "defaultMessage": "Create theme"
-  },
-  "extraThemes.delete": {
-    "defaultMessage": "Delete theme"
-  },
-  "extraThemes.edit": {
-    "defaultMessage": "Edit theme"
-  },
-  "extraThemes.import": {
-    "defaultMessage": "Import"
-  },
-  "extraThemes.importFailed": {
-    "defaultMessage": "Couldn't import {file}"
-  },
-  "extraThemes.importInvalid": {
-    "defaultMessage": "This file isn't a valid theme."
-  },
-  "extraThemes.importNewer": {
-    "defaultMessage": "This theme was made with a newer version of Modrinth Extras. Update the extension to import it."
-  },
-  "extraThemes.newTheme": {
-    "defaultMessage": "My theme"
-  },
-  "extraThemes.section.classics": {
-    "defaultMessage": "Classics"
-  },
-  "extraThemes.section.custom": {
-    "defaultMessage": "Custom"
-  },
-  "extraThemes.section.minecraft": {
-    "defaultMessage": "Minecraft"
-  },
-  "extraThemes.section.modrinth": {
-    "defaultMessage": "Modrinth"
-  },
   "moddexReviews.aesthetics": {
     "defaultMessage": "Aesthetics"
   },
@@ -673,6 +637,42 @@
   },
   "spigotReviews.writeReview": {
     "defaultMessage": "Write a review"
+  },
+  "themes.create": {
+    "defaultMessage": "Create theme"
+  },
+  "themes.delete": {
+    "defaultMessage": "Delete theme"
+  },
+  "themes.edit": {
+    "defaultMessage": "Edit theme"
+  },
+  "themes.import": {
+    "defaultMessage": "Import"
+  },
+  "themes.importFailed": {
+    "defaultMessage": "Couldn't import {file}"
+  },
+  "themes.importInvalid": {
+    "defaultMessage": "This file isn't a valid theme."
+  },
+  "themes.importNewer": {
+    "defaultMessage": "This theme was made with a newer version of Modrinth Extras. Update the extension to import it."
+  },
+  "themes.newTheme": {
+    "defaultMessage": "My theme"
+  },
+  "themes.section.classics": {
+    "defaultMessage": "Classics"
+  },
+  "themes.section.custom": {
+    "defaultMessage": "Custom"
+  },
+  "themes.section.minecraft": {
+    "defaultMessage": "Minecraft"
+  },
+  "themes.section.modrinth": {
+    "defaultMessage": "Modrinth"
   },
   "toolsSidebar.copied": {
     "defaultMessage": "Copied!"

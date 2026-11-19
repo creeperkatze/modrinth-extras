@@ -1,7 +1,7 @@
 <template>
 	<div ref="root" class="theme-sections mt-4 flex flex-col gap-3">
 		<ThemeSection
-			:title="formatMessage(messages['extraThemes.section.modrinth'])"
+			:title="formatMessage(messages['themes.section.modrinth'])"
 			:count="modrinthCount"
 			open-by-default
 		>
@@ -29,7 +29,7 @@
 		</ThemeSection>
 
 		<ThemeSection
-			:title="formatMessage(messages['extraThemes.section.custom'])"
+			:title="formatMessage(messages['themes.section.custom'])"
 			:count="customThemes.length"
 			:open-by-default="openSection === CUSTOM_SECTION"
 		>
@@ -46,20 +46,20 @@
 					<!-- Wrapped, since the buttons set their own position -->
 					<div class="absolute bottom-1 right-1.5 flex items-center gap-1">
 						<IconButton
-							v-tooltip="formatMessage(messages['extraThemes.edit'])"
+							v-tooltip="formatMessage(messages['themes.edit'])"
 							type="quiet"
 							size="sm"
-							:label="formatMessage(messages['extraThemes.edit'])"
+							:label="formatMessage(messages['themes.edit'])"
 							@click="edit(theme)"
 						>
 							<EditIcon aria-hidden="true" />
 						</IconButton>
 						<IconButton
-							v-tooltip="formatMessage(messages['extraThemes.delete'])"
+							v-tooltip="formatMessage(messages['themes.delete'])"
 							type="quiet"
 							color="red"
 							size="sm"
-							:label="formatMessage(messages['extraThemes.delete'])"
+							:label="formatMessage(messages['themes.delete'])"
 							@click="remove(theme.id)"
 						>
 							<TrashIcon aria-hidden="true" />
@@ -71,11 +71,11 @@
 				>
 					<Button @click="create">
 						<PlusIcon aria-hidden="true" />
-						{{ formatMessage(messages['extraThemes.create']) }}
+						{{ formatMessage(messages['themes.create']) }}
 					</Button>
 					<Button type="quiet" @click="fileInput?.click()">
 						<UploadIcon aria-hidden="true" />
-						{{ formatMessage(messages['extraThemes.import']) }}
+						{{ formatMessage(messages['themes.import']) }}
 					</Button>
 					<input
 						ref="fileInput"
@@ -101,12 +101,12 @@ import { onBeforeUnmount, onMounted, ref, shallowRef, useTemplateRef, watch } fr
 import { showNotification } from '../../content/notifications'
 import { getSettings, type NamedTheme, saveSettings } from '../../core/settings'
 import {
-	EXTRA_THEMES,
+	PRESET_THEMES,
 	MODRINTH_THEMES,
 	type ThemeCategory,
 	THEME_CATEGORIES,
 } from '../../features/themes/presets'
-import { applyExtraTheme, createCustomTheme, importThemeFile } from '../../features/themes/themes'
+import { applyTheme, createCustomTheme, importThemeFile } from '../../features/themes/themes'
 import CustomThemeModal from './CustomThemeModal.vue'
 import ThemeCard from './ThemeCard.vue'
 import ThemeSection from './ThemeSection.vue'
@@ -124,34 +124,34 @@ const SELECTED_ATTRIBUTE = 'data-modrinth-extras-theme-selected'
 const { formatMessage } = useVIntl()
 
 const messages = defineMessages({
-	'extraThemes.section.modrinth': {
-		id: 'extraThemes.section.modrinth',
+	'themes.section.modrinth': {
+		id: 'themes.section.modrinth',
 		defaultMessage: 'Modrinth',
 	},
-	'extraThemes.section.minecraft': {
-		id: 'extraThemes.section.minecraft',
+	'themes.section.minecraft': {
+		id: 'themes.section.minecraft',
 		defaultMessage: 'Minecraft',
 	},
-	'extraThemes.section.classics': {
-		id: 'extraThemes.section.classics',
+	'themes.section.classics': {
+		id: 'themes.section.classics',
 		defaultMessage: 'Classics',
 	},
-	'extraThemes.section.custom': { id: 'extraThemes.section.custom', defaultMessage: 'Custom' },
-	'extraThemes.create': { id: 'extraThemes.create', defaultMessage: 'Create theme' },
-	'extraThemes.import': { id: 'extraThemes.import', defaultMessage: 'Import' },
-	'extraThemes.edit': { id: 'extraThemes.edit', defaultMessage: 'Edit theme' },
-	'extraThemes.delete': { id: 'extraThemes.delete', defaultMessage: 'Delete theme' },
-	'extraThemes.newTheme': { id: 'extraThemes.newTheme', defaultMessage: 'My theme' },
-	'extraThemes.importFailed': {
-		id: 'extraThemes.importFailed',
+	'themes.section.custom': { id: 'themes.section.custom', defaultMessage: 'Custom' },
+	'themes.create': { id: 'themes.create', defaultMessage: 'Create theme' },
+	'themes.import': { id: 'themes.import', defaultMessage: 'Import' },
+	'themes.edit': { id: 'themes.edit', defaultMessage: 'Edit theme' },
+	'themes.delete': { id: 'themes.delete', defaultMessage: 'Delete theme' },
+	'themes.newTheme': { id: 'themes.newTheme', defaultMessage: 'My theme' },
+	'themes.importFailed': {
+		id: 'themes.importFailed',
 		defaultMessage: "Couldn't import {file}",
 	},
-	'extraThemes.importInvalid': {
-		id: 'extraThemes.importInvalid',
+	'themes.importInvalid': {
+		id: 'themes.importInvalid',
 		defaultMessage: "This file isn't a valid theme.",
 	},
-	'extraThemes.importNewer': {
-		id: 'extraThemes.importNewer',
+	'themes.importNewer': {
+		id: 'themes.importNewer',
 		defaultMessage:
 			'This theme was made with a newer version of Modrinth Extras. Update the extension to import it.',
 	},
@@ -163,8 +163,8 @@ const customThemes = shallowRef<NamedTheme[]>(structuredClone(props.savedCustom)
 
 // Families like Catppuccin keep their own name
 const categoryMessages: Partial<Record<string, (typeof messages)[keyof typeof messages]>> = {
-	minecraft: messages['extraThemes.section.minecraft'],
-	classics: messages['extraThemes.section.classics'],
+	minecraft: messages['themes.section.minecraft'],
+	classics: messages['themes.section.classics'],
 }
 
 function categoryTitle(category: ThemeCategory): string {
@@ -189,10 +189,10 @@ const modrinthSlot = useTemplateRef<HTMLElement>('modrinthSlot')
 const modrinthCount = ref(0)
 
 watch([selected, customThemes], async ([id, themes]) => {
-	applyExtraTheme(id, themes, props.showPresets)
+	applyTheme(id, themes, props.showPresets)
 	try {
 		const settings = await getSettings()
-		await saveSettings({ ...settings, themes: { selected: id, custom: themes } })
+		await saveSettings({ ...settings, themeLibrary: { selected: id, custom: themes } })
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to save the themes:', err)
 	}
@@ -206,7 +206,7 @@ function select(theme: Pick<NamedTheme, 'id'>) {
 // A hidden preset stays saved but doesn't apply, so the website's theme still counts as picked
 function isAvailable(id: string): boolean {
 	if (customThemes.value.some((theme) => theme.id === id)) return true
-	return props.showPresets && EXTRA_THEMES.some((theme) => theme.id === id)
+	return props.showPresets && PRESET_THEMES.some((theme) => theme.id === id)
 }
 
 function uniqueName(name: string): string {
@@ -220,7 +220,7 @@ function uniqueName(name: string): string {
 // New themes start from Modrinth's own dark theme and only appear once saved
 function create() {
 	const theme = createCustomTheme(
-		uniqueName(formatMessage(messages['extraThemes.newTheme'])),
+		uniqueName(formatMessage(messages['themes.newTheme'])),
 		MODRINTH_THEMES[0]!,
 	)
 	customModal.value?.open(theme, true)
@@ -251,11 +251,9 @@ async function importFiles(event: Event) {
 		}
 		showNotification({
 			type: 'error',
-			title: formatMessage(messages['extraThemes.importFailed'], { file: file.name }),
+			title: formatMessage(messages['themes.importFailed'], { file: file.name }),
 			text: formatMessage(
-				messages[
-					result.error === 'newer' ? 'extraThemes.importNewer' : 'extraThemes.importInvalid'
-				],
+				messages[result.error === 'newer' ? 'themes.importNewer' : 'themes.importInvalid'],
 			),
 		})
 	}

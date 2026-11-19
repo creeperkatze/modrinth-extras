@@ -234,7 +234,7 @@ watch(
 )
 
 watch(
-	() => [settings.extraThemes, settings.themes],
+	() => [settings.themes, settings.themeLibrary],
 	() => applyThemeSettings(settings),
 	{ deep: true, immediate: true },
 )
