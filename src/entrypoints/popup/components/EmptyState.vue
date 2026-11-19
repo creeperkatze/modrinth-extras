@@ -1,22 +1,31 @@
 <template>
-	<div
-		class="flex flex-col items-center gap-2 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-4 text-center"
-	>
-		<component :is="icon" v-if="icon" class="size-6 text-secondary" aria-hidden="true" />
-		<h3 class="m-0 text-sm font-semibold text-contrast">{{ title }}</h3>
-		<p v-if="description" class="m-0 text-xs leading-normal text-secondary">{{ description }}</p>
-		<div v-if="$slots.default" class="mt-1">
-			<slot />
-		</div>
-	</div>
+	<!-- Modrinth's empty state with a smaller illustration, the full size one barely fits the popup -->
+	<EmptyState :type="type" :heading="heading" :description="description" class="[&>svg]:h-[140px]">
+		<template v-if="$slots.actions" #actions>
+			<slot name="actions" />
+		</template>
+	</EmptyState>
 </template>
 
 <script setup lang="ts">
-import type { Component } from 'vue'
+import { EmptyState } from '@modrinth/ui'
 
 defineProps<{
-	title: string
+	// Leaves out 'empty', a cropped copy of 'empty-inbox' that renders twice as large
+	type:
+		| 'done'
+		| 'empty-inbox'
+		| 'error'
+		| 'no-connection'
+		| 'no-credit-card'
+		| 'no-documents'
+		| 'no-gps'
+		| 'no-images'
+		| 'no-items-cart'
+		| 'no-messages'
+		| 'no-search-result'
+		| 'no-tasks'
+	heading: string
 	description?: string
-	icon?: Component
 }>()
 </script>

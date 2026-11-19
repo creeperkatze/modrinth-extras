@@ -44,165 +44,17 @@
 				</div>
 				<ScrollablePanel style="--_fade-height: 1rem" class="[&__.scrollable-pane]:max-h-[500px]">
 					<div class="flex flex-col gap-2">
-						<SmartClickable v-for="notif in paginatedNotifications" :key="notif.id" class="w-full">
-							<template #clickable>
-								<a
-									:href="resolveLink(notif.link)"
-									class="no-outline no-click-animation rounded-xl"
-									@click.prevent="handleNotificationClick(notif)"
-								></a>
-							</template>
-							<div
-								class="smart-clickable:outline-on-focus smart-clickable:highlight-on-hover group flex gap-2 rounded-2xl border-[1px] border-solid border-surface-4 bg-bg !p-4 transition-all"
-							>
-								<DoubleIcon class="flex-shrink-0">
-									<template #primary>
-										<a
-											v-if="notif.extra_data?.project"
-											:href="
-												resolveLink(
-													`/project/${(notif.extra_data as NotificationExtraData).project!.slug}`,
-												)
-											"
-											tabindex="-1"
-											class="smart-clickable:allow-pointer-events"
-											@click.stop.prevent="
-												navigate(
-													`/project/${(notif.extra_data as NotificationExtraData).project!.slug}`,
-												)
-											"
-										>
-											<Avatar
-												size="xs"
-												:src="(notif.extra_data as NotificationExtraData).project!.icon_url"
-												aria-hidden="true"
-											/>
-										</a>
-										<a
-											v-else-if="notif.extra_data?.organization"
-											:href="
-												resolveLink(
-													`/organization/${(notif.extra_data as NotificationExtraData).organization!.slug}`,
-												)
-											"
-											tabindex="-1"
-											class="smart-clickable:allow-pointer-events"
-											@click.stop.prevent="
-												navigate(
-													`/organization/${(notif.extra_data as NotificationExtraData).organization!.slug}`,
-												)
-											"
-										>
-											<Avatar
-												size="xs"
-												:src="(notif.extra_data as NotificationExtraData).organization!.icon_url"
-												aria-hidden="true"
-											/>
-										</a>
-										<a
-											v-else-if="notif.extra_data?.user"
-											:href="
-												resolveLink(
-													`/user/${(notif.extra_data as NotificationExtraData).user!.username}`,
-												)
-											"
-											tabindex="-1"
-											class="smart-clickable:allow-pointer-events"
-											@click.stop.prevent="
-												navigate(
-													`/user/${(notif.extra_data as NotificationExtraData).user!.username}`,
-												)
-											"
-										>
-											<Avatar
-												size="xs"
-												:src="(notif.extra_data as NotificationExtraData).user!.avatar_url"
-												aria-hidden="true"
-											/>
-										</a>
-										<Avatar v-else size="xs" aria-hidden="true" />
-									</template>
-									<template #secondary>
-										<ScaleIcon
-											v-if="notif.type === 'moderator_message' || notif.type === 'status_change'"
-											class="text-[var(--color-orange)]"
-										/>
-										<UserPlusIcon
-											v-else-if="notif.type === 'team_invite' && notif.extra_data?.project"
-											class="text-[var(--color-blue)]"
-										/>
-										<UserPlusIcon
-											v-else-if="
-												notif.type === 'organization_invite' && notif.extra_data?.organization
-											"
-											class="text-[var(--color-blue)]"
-										/>
-										<VersionIcon
-											v-else-if="
-												notif.type === 'project_update' &&
-												notif.extra_data?.project &&
-												notif.extra_data?.version
-											"
-											class="text-contrast"
-										/>
-										<BellIcon v-else class="text-contrast" />
-									</template>
-								</DoubleIcon>
-								<div class="w-0 min-w-0 flex-1 pr-2">
-									<div class="break-words font-semibold text-contrast">
-										{{
-											notif.type === 'project_update' && notif.extra_data?.project
-												? formatMessage(messages['notificationsIndicator.projectUpdated'], {
-														title: (notif.extra_data as NotificationExtraData).project!.name,
-													})
-												: notif.title
-										}}
-									</div>
-									<div class="mt-1 flex items-center gap-1 text-sm text-secondary">
-										<CalendarIcon aria-hidden="true" />
-										{{ formatRelativeTime(notif.created) }}
-									</div>
-								</div>
-								<div
-									class="smart-clickable:allow-pointer-events flex items-center gap-2 self-stretch"
-								>
-									<IconButton
-										v-if="
-											(notif.type === 'team_invite' || notif.type === 'organization_invite') &&
-											!notif.read
-										"
-										type="colored"
-										color="brand"
-										:circular="false"
-										:label="formatMessage(messages['notificationsIndicator.acceptInvite'])"
-										@click.stop.prevent="handleAcceptInvite(notif)"
-									>
-										<CheckIcon />
-									</IconButton>
-									<IconButton
-										v-if="
-											(notif.type === 'team_invite' || notif.type === 'organization_invite') &&
-											!notif.read
-										"
-										type="colored"
-										color="red"
-										:circular="false"
-										:label="formatMessage(messages['notificationsIndicator.declineInvite'])"
-										@click.stop.prevent="handleDeclineInvite(notif)"
-									>
-										<XIcon />
-									</IconButton>
-									<IconButton
-										v-else-if="!notif.read"
-										:circular="false"
-										:label="formatMessage(messages['notificationsIndicator.markAsRead'])"
-										@click.stop.prevent="handleMarkAsRead(notif)"
-									>
-										<CheckIcon />
-									</IconButton>
-								</div>
-							</div>
-						</SmartClickable>
+						<NotificationCard
+							v-for="notif in paginatedNotifications"
+							:key="notif.id"
+							:notification="notif"
+							:resolve-href="resolveLink"
+							@open="handleNotificationClick(notif)"
+							@navigate="navigate"
+							@accept="acceptInvite(notif)"
+							@decline="declineInvite(notif)"
+							@mark-read="markAsRead([notif])"
+						/>
 					</div>
 				</ScrollablePanel>
 				<div v-if="totalPages > 1" class="mt-2 flex justify-end">
@@ -215,45 +67,28 @@
 
 <script setup lang="ts">
 import type { Labrinth } from '@modrinth/api-client'
+import { BellIcon, CheckCheckIcon, DropdownIcon, HistoryIcon } from '@modrinth/assets'
 import {
-	BellIcon,
-	CalendarIcon,
-	CheckCheckIcon,
-	CheckIcon,
-	DropdownIcon,
-	HistoryIcon,
-	ScaleIcon,
-	UserPlusIcon,
-	VersionIcon,
-	XIcon,
-} from '@modrinth/assets'
-import {
-	Avatar,
 	Button,
 	defineMessages,
-	DoubleIcon,
-	IconButton,
 	Pagination,
 	ScrollablePanel,
-	SmartClickable,
 	TeleportPopoutMenu,
 	useVIntl,
 } from '@modrinth/ui'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { browser } from 'wxt/browser'
 
 import { getAuthToken, modrinthClient } from '../../api/client'
 import { navigate, resolveLink } from '../../content/page-router'
+import { useNotificationActions } from '../../features/notifications/actions'
 import {
 	fetchExtraNotificationData,
 	fetchNotifications,
 	groupNotifications,
-	markNotificationsAsRead,
 	type Notification,
-	type NotificationExtraData,
 	syncToBackground,
 } from '../../features/notifications/notifications'
-import { acceptTeamInvite, removeSelfFromTeam } from '../../features/notifications/teams'
+import NotificationCard from '../notifications/NotificationCard.vue'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
@@ -273,43 +108,11 @@ const messages = defineMessages({
 		id: 'notificationsIndicator.noUnread',
 		defaultMessage: 'No unread notifications',
 	},
-	'notificationsIndicator.projectUpdated': {
-		id: 'notificationsIndicator.projectUpdated',
-		defaultMessage: '{title} has been updated',
-	},
 	'notificationsIndicator.label': {
 		id: 'notificationsIndicator.label',
 		defaultMessage: 'Notifications',
 	},
-	'notificationsIndicator.acceptInvite': {
-		id: 'notificationsIndicator.acceptInvite',
-		defaultMessage: 'Accept invite',
-	},
-	'notificationsIndicator.declineInvite': {
-		id: 'notificationsIndicator.declineInvite',
-		defaultMessage: 'Decline invite',
-	},
-	'notificationsIndicator.markAsRead': {
-		id: 'notificationsIndicator.markAsRead',
-		defaultMessage: 'Mark as read',
-	},
 })
-
-const rtf = new Intl.RelativeTimeFormat('en-US', { numeric: 'auto', style: 'long' })
-function formatRelativeTime(value: Date | number | string | null | undefined): string {
-	if (value == null) return ''
-	const date = value instanceof Date ? value : new Date(value)
-	if (Number.isNaN(date.getTime())) return ''
-	const diff = date.getTime() - Date.now()
-	const abs = Math.abs(diff)
-	if (abs < 60_000) return rtf.format(Math.round(diff / 1000), 'second')
-	if (abs < 3_600_000) return rtf.format(Math.round(diff / 60_000), 'minute')
-	if (abs < 86_400_000) return rtf.format(Math.round(diff / 3_600_000), 'hour')
-	if (abs < 604_800_000) return rtf.format(Math.round(diff / 86_400_000), 'day')
-	if (abs < 2_629_746_000) return rtf.format(Math.round(diff / 604_800_000), 'week')
-	if (abs < 31_556_952_000) return rtf.format(Math.round(diff / 2_629_746_000), 'month')
-	return rtf.format(Math.round(diff / 31_556_952_000), 'year')
-}
 
 // Auth state
 const userId = ref<string | null | false>(null)
@@ -329,7 +132,7 @@ async function refreshNotifications() {
 		if (userId.value !== id) return
 		notificationsData.value = unread
 	} catch (err) {
-		console.warn('[Modrinth Extras] Failed to fetch notifications:', err)
+		console.error('[Modrinth Extras] Failed to fetch notifications:', err)
 	}
 }
 
@@ -425,73 +228,18 @@ onBeforeUnmount(() => {
 	if (refreshInterval) clearInterval(refreshInterval)
 })
 
-function syncBadgeCount() {
-	browser.runtime.sendMessage({ type: 'badge-count', count: unreadCount.value }).catch(() => {})
-}
-
-async function handleAcceptInvite(notif: Notification) {
-	try {
-		if (notificationsData.value) {
-			const n = notificationsData.value.find((n) => n.id === notif.id)
-			if (n) n.read = true
+const { markAsRead, acceptInvite, declineInvite } = useNotificationActions({
+	userId: () => userId.value || null,
+	dismiss: (ids) => {
+		for (const notification of notificationsData.value ?? []) {
+			if (ids.includes(notification.id)) notification.read = true
 		}
-		syncBadgeCount()
-		await acceptTeamInvite(notif.body.team_id as string)
-		markNotificationsAsRead([notif.id]).catch((err) =>
-			console.warn('[Modrinth Extras] Error marking as read:', err),
-		)
-	} catch (err) {
-		console.warn('[Modrinth Extras] Error accepting invite:', err)
-	}
-}
+	},
+	unreadCount: () => unreadCount.value,
+})
 
-async function handleDeclineInvite(notif: Notification) {
-	try {
-		if (notificationsData.value) {
-			const n = notificationsData.value.find((n) => n.id === notif.id)
-			if (n) n.read = true
-		}
-		syncBadgeCount()
-		await removeSelfFromTeam(notif.body.team_id as string, userId.value as string)
-		markNotificationsAsRead([notif.id]).catch((err) =>
-			console.warn('[Modrinth Extras] Error marking as read:', err),
-		)
-	} catch (err) {
-		console.warn('[Modrinth Extras] Error declining invite:', err)
-	}
-}
-
-async function handleMarkAsRead(notif: Notification) {
-	try {
-		const ids = [notif.id, ...(notif.grouped_notifs?.map((n) => n.id) ?? [])]
-		if (notificationsData.value) {
-			for (const id of ids) {
-				const n = notificationsData.value.find((n) => n.id === id)
-				if (n) n.read = true
-			}
-		}
-		syncBadgeCount()
-		markNotificationsAsRead(ids).catch((err) =>
-			console.warn('[Modrinth Extras] Error marking as read:', err),
-		)
-	} catch (err) {
-		console.warn('[Modrinth Extras] Error marking as read:', err)
-	}
-}
-
-async function handleMarkAllAsRead() {
-	try {
-		const ids = notificationsData.value?.filter((n) => !n.read).map((n) => n.id) ?? []
-		if (notificationsData.value) {
-			for (const n of notificationsData.value) n.read = true
-		}
-		syncBadgeCount()
-		markNotificationsAsRead(ids).catch((err) =>
-			console.warn('[Modrinth Extras] Error marking all as read:', err),
-		)
-	} catch (err) {
-		console.warn('[Modrinth Extras] Error marking all as read:', err)
-	}
+function handleMarkAllAsRead() {
+	void markAsRead(recentNotifications.value)
 }
 
 function handleViewAllNotifications() {
@@ -506,7 +254,7 @@ function handleViewHistory() {
 
 async function handleNotificationClick(notif: Notification) {
 	notificationsPopout.value?.close()
-	if (!notif.read) handleMarkAsRead(notif)
+	if (!notif.read) void markAsRead([notif])
 	navigate(notif.link)
 }
 </script>

@@ -1,6 +1,9 @@
 <template>
 	<div class="flex flex-col gap-4 px-3 pb-3">
-		<SignInCard v-if="accountLoaded && !account" />
+		<SignInCard
+			v-if="accountLoaded && !account"
+			:description="formatMessage(messages['popup.creator.signIn'])"
+		/>
 
 		<template v-else-if="account">
 			<div
@@ -14,14 +17,16 @@
 			<template v-else-if="projects">
 				<EmptyState
 					v-if="!hasProjects"
-					:icon="DashboardIcon"
-					:title="formatMessage(messages['popup.creator.noProjectsTitle'])"
+					type="no-documents"
+					:heading="formatMessage(messages['popup.creator.noProjectsTitle'])"
 					:description="formatMessage(messages['popup.creator.noProjectsDescription'])"
 				>
-					<Button size="sm" @click="openModrinth('/dashboard/projects')">
-						<PlusIcon aria-hidden="true" />
-						{{ formatMessage(messages['popup.creator.createProject']) }}
-					</Button>
+					<template #actions>
+						<Button type="colored" color="brand" @click="openModrinth('/dashboard/projects')">
+							<PlusIcon aria-hidden="true" />
+							{{ formatMessage(messages['popup.creator.createProject']) }}
+						</Button>
+					</template>
 				</EmptyState>
 
 				<PopupSection v-else :title="formatMessage(messages['popup.creator.analytics'])" bare>
@@ -118,7 +123,6 @@
 import {
 	ArrowUpRightIcon,
 	CurrencyIcon,
-	DashboardIcon,
 	DownloadIcon,
 	EyeIcon,
 	PlusIcon,
@@ -197,6 +201,10 @@ const formatNumber = useFormatNumber()
 const formatMoney = useFormatMoney()
 
 const messages = defineMessages({
+	'popup.creator.signIn': {
+		id: 'popup.creator.signIn',
+		defaultMessage: 'Sign in to see your analytics and revenue here.',
+	},
 	'popup.creator.loading': {
 		id: 'popup.creator.loading',
 		defaultMessage: 'Loading your projects...',

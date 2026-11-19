@@ -28,12 +28,23 @@
 				<SpinnerIcon class="size-4 animate-spin" aria-hidden="true" />
 				{{ formatMessage(messages['popup.search.searching']) }}
 			</div>
-			<div v-else-if="resultsFailed" class="p-6 text-center text-sm text-secondary">
-				{{ formatMessage(messages['popup.search.failed']) }}
-			</div>
-			<div v-else-if="results.length === 0" class="p-6 text-center text-sm text-secondary">
-				{{ formatMessage(messages['popup.search.noResults']) }}
-			</div>
+			<EmptyState
+				v-else-if="resultsFailed"
+				type="error"
+				:heading="formatMessage(messages['popup.search.failedHeading'])"
+			>
+				<template #actions>
+					<Button @click="retrySearch">
+						<RefreshCwIcon aria-hidden="true" />
+						{{ formatMessage(commonMessages.retryButton) }}
+					</Button>
+				</template>
+			</EmptyState>
+			<EmptyState
+				v-else-if="results.length === 0"
+				type="no-search-result"
+				:heading="formatMessage(messages['popup.search.noResults'])"
+			/>
 			<CompactProjectCard
 				v-for="(hit, index) in results"
 				:key="hit.project_id"
@@ -54,11 +65,12 @@
 
 <script setup lang="ts">
 import type { Labrinth } from '@modrinth/api-client'
-import { SearchIcon, SpinnerIcon } from '@modrinth/assets'
-import { defineMessages, Input, useVIntl } from '@modrinth/ui'
+import { RefreshCwIcon, SearchIcon, SpinnerIcon } from '@modrinth/assets'
+import { Button, commonMessages, defineMessages, Input, useVIntl } from '@modrinth/ui'
 import { computed, nextTick, onMounted, ref, shallowRef, useTemplateRef, watch } from 'vue'
 
 import CompactProjectCard from '../components/CompactProjectCard.vue'
+import EmptyState from '../components/EmptyState.vue'
 import { type ProjectType, SERVER_TYPE } from '../search/project-types'
 import { hitPath, hitType, searchPageUrl, searchProjects } from '../search/search'
 import { openModrinth } from '../utils/tabs'
@@ -82,9 +94,9 @@ const messages = defineMessages({
 		id: 'popup.search.searching',
 		defaultMessage: 'Searching...',
 	},
-	'popup.search.failed': {
-		id: 'popup.search.failed',
-		defaultMessage: 'Search failed. Try again in a moment.',
+	'popup.search.failedHeading': {
+		id: 'popup.search.failedHeading',
+		defaultMessage: 'Search failed',
 	},
 	'popup.search.noResults': {
 		id: 'popup.search.noResults',
@@ -134,6 +146,12 @@ async function runSearch(value: string, type: ProjectType | null) {
 	} finally {
 		if (id === searchId) resultsLoading.value = false
 	}
+}
+
+function retrySearch() {
+	resultsFailed.value = false
+	resultsLoading.value = true
+	void runSearch(trimmedQuery.value, projectType.value)
 }
 
 function projectStats(hit: Labrinth.Search.v3.ResultSearchProject) {

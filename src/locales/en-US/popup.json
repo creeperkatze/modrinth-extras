@@ -248,6 +248,9 @@
   "popup.creator.revenue": {
     "defaultMessage": "Revenue"
   },
+  "popup.creator.signIn": {
+    "defaultMessage": "Sign in to see your analytics and revenue here."
+  },
   "popup.creator.total": {
     "defaultMessage": "Total"
   },
@@ -317,11 +320,41 @@
   "popup.nav.creator": {
     "defaultMessage": "Creator"
   },
+  "popup.nav.notifications": {
+    "defaultMessage": "Notifications"
+  },
   "popup.nav.search": {
     "defaultMessage": "Search"
   },
   "popup.nav.settings": {
     "defaultMessage": "Settings"
+  },
+  "popup.notifications.emptyDescription": {
+    "defaultMessage": "Project updates, invites and messages from moderators show up here."
+  },
+  "popup.notifications.emptyTitle": {
+    "defaultMessage": "No unread notifications"
+  },
+  "popup.notifications.failed": {
+    "defaultMessage": "Notifications could not be loaded"
+  },
+  "popup.notifications.loading": {
+    "defaultMessage": "Loading your notifications..."
+  },
+  "popup.notifications.markAllAsRead": {
+    "defaultMessage": "Mark all as read"
+  },
+  "popup.notifications.signIn": {
+    "defaultMessage": "Sign in to see your notifications here."
+  },
+  "popup.notifications.unread": {
+    "defaultMessage": "Unread"
+  },
+  "popup.notifications.viewAll": {
+    "defaultMessage": "View all"
+  },
+  "popup.notifications.viewHistory": {
+    "defaultMessage": "View history"
   },
   "popup.project.by": {
     "defaultMessage": "by {author}"
@@ -365,8 +398,8 @@
   "popup.search.clear": {
     "defaultMessage": "Clear search"
   },
-  "popup.search.failed": {
-    "defaultMessage": "Search failed. Try again in a moment."
+  "popup.search.failedHeading": {
+    "defaultMessage": "Search failed"
   },
   "popup.search.noResults": {
     "defaultMessage": "No projects found"
@@ -406,9 +439,6 @@
   },
   "popup.signIn.button": {
     "defaultMessage": "Sign in"
-  },
-  "popup.signIn.description": {
-    "defaultMessage": "Sign in on modrinth.com and this tab fills in by itself."
   },
   "popup.signIn.title": {
     "defaultMessage": "Sign in to Modrinth"

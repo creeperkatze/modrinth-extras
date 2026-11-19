@@ -62,6 +62,7 @@
 				>
 					<div ref="content">
 						<SearchView v-if="view === 'search'" key="search" />
+						<NotificationsView v-else-if="view === 'notifications'" key="notifications" />
 						<CreatorView v-else key="creator" />
 					</div>
 				</div>
@@ -78,6 +79,7 @@
 <script setup lang="ts">
 import {
 	ArrowUpRightIcon,
+	BellIcon,
 	DashboardIcon,
 	LeftArrowIcon,
 	SearchIcon,
@@ -102,6 +104,7 @@ import PopupFooter from './components/PopupFooter.vue'
 import { loadAccount } from './state/account'
 import { loadPopupSettings, settings, settingsLoaded } from './state/settings'
 import CreatorView from './views/CreatorView.vue'
+import NotificationsView from './views/NotificationsView.vue'
 import SearchView from './views/SearchView.vue'
 import SettingsView from './views/SettingsView.vue'
 
@@ -109,19 +112,28 @@ const { formatMessage } = useVIntl()
 
 const messages = defineMessages({
 	'popup.nav.search': { id: 'popup.nav.search', defaultMessage: 'Search' },
+	'popup.nav.notifications': {
+		id: 'popup.nav.notifications',
+		defaultMessage: 'Notifications',
+	},
 	'popup.nav.creator': { id: 'popup.nav.creator', defaultMessage: 'Creator' },
 	'popup.nav.settings': { id: 'popup.nav.settings', defaultMessage: 'Settings' },
 	'popup.nav.back': { id: 'popup.nav.back', defaultMessage: 'Back' },
 })
 
-type MainTab = 'search' | 'creator'
+type MainTab = 'search' | 'notifications' | 'creator'
 type PopupView = MainTab | 'settings'
 
-const MAIN_TABS: MainTab[] = ['search', 'creator']
+const MAIN_TABS: MainTab[] = ['search', 'notifications', 'creator']
 const VIEW_STORAGE_KEY = 'popup-view'
 
 const tabs = computed(() => [
 	{ value: 'search', label: formatMessage(messages['popup.nav.search']), icon: SearchIcon },
+	{
+		value: 'notifications',
+		label: formatMessage(messages['popup.nav.notifications']),
+		icon: BellIcon,
+	},
 	{ value: 'creator', label: formatMessage(messages['popup.nav.creator']), icon: DashboardIcon },
 ])
 
