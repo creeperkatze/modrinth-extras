@@ -1,20 +1,15 @@
 <template>
-	<div
-		class="flex items-center justify-between gap-4 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-3"
+	<SettingCard
+		:icon="RotateCounterClockwiseIcon"
+		:title="formatMessage(messages['popup.resetSettings.title'])"
+		:description="formatMessage(messages['popup.resetSettings.description'])"
 	>
-		<div class="min-w-0">
-			<h3 class="m-0 flex items-center gap-2 text-sm font-semibold text-contrast">
-				<RotateCounterClockwiseIcon aria-hidden="true" class="size-4 shrink-0 text-primary" />
-				{{ formatMessage(messages['popup.resetSettings.title']) }}
-			</h3>
-			<p class="m-0 mt-1 text-xs leading-normal text-secondary">
-				{{ formatMessage(messages['popup.resetSettings.description']) }}
-			</p>
-		</div>
-		<Button type="colored" color="red" size="sm" class="shrink-0" @click="modal?.show()">
-			{{ formatMessage(messages['popup.resetSettings.button']) }}
-		</Button>
-	</div>
+		<template #control>
+			<Button type="colored" color="red" @click="modal?.show()">
+				{{ formatMessage(messages['popup.resetSettings.button']) }}
+			</Button>
+		</template>
+	</SettingCard>
 
 	<NewModal
 		ref="modal"
@@ -42,6 +37,8 @@
 import { RotateCounterClockwiseIcon, XIcon } from '@modrinth/assets'
 import { Button, defineMessages, NewModal, useVIntl } from '@modrinth/ui'
 import { useTemplateRef } from 'vue'
+
+import SettingCard from './SettingCard.vue'
 
 const emit = defineEmits<{
 	reset: []

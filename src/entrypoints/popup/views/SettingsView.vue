@@ -15,38 +15,32 @@
 		>
 			<template v-if="tab === 'general'">
 				<FeatureGroup>
-					<div
-						class="flex items-center justify-between gap-4 rounded-2xl border border-solid border-surface-4 bg-surface-3 p-3"
-					>
-						<div class="min-w-0">
-							<h3 class="m-0 flex items-center gap-2 text-sm font-semibold text-contrast">
-								<LanguagesIcon aria-hidden="true" class="size-4 shrink-0 text-primary" />
-								{{ formatMessage(messages['settings.language']) }}
-							</h3>
-							<p class="m-0 mt-1 text-xs leading-normal text-secondary">
-								<IntlFormatted :message-id="messages['settings.language.description']">
-									<template #link="{ children }">
-										<a
-											href="https://crowdin.com/project/modrinth-extras"
-											target="_blank"
-											rel="noopener"
-											class="text-link"
-										>
-											<component :is="() => children" />
-										</a>
-									</template>
-								</IntlFormatted>
-							</p>
-						</div>
-						<div class="language-dropdown shrink-0">
-							<CompactCombobox
-								:options="localeItems"
-								:model-value="selectedLocale"
-								show-icon-in-selected
-								@update:model-value="updateLocale"
-							/>
-						</div>
-					</div>
+					<SettingCard :icon="LanguagesIcon" :title="formatMessage(messages['settings.language'])">
+						<template #description>
+							<IntlFormatted :message-id="messages['settings.language.description']">
+								<template #link="{ children }">
+									<a
+										href="https://crowdin.com/project/modrinth-extras"
+										target="_blank"
+										rel="noopener"
+										class="text-link"
+									>
+										<component :is="() => children" />
+									</a>
+								</template>
+							</IntlFormatted>
+						</template>
+						<template #control>
+							<div class="language-dropdown">
+								<CompactCombobox
+									:options="localeItems"
+									:model-value="selectedLocale"
+									show-icon-in-selected
+									@update:model-value="updateLocale"
+								/>
+							</div>
+						</template>
+					</SettingCard>
 					<FeatureRow
 						v-for="f in generalFeatures"
 						:key="f.key"
@@ -230,6 +224,7 @@ import OptionFieldSelect, { type SelectItem } from '../components/OptionFieldSel
 import OptionFieldText from '../components/OptionFieldText.vue'
 import OptionFieldToggle from '../components/OptionFieldToggle.vue'
 import ResetSettingsCard from '../components/ResetSettingsCard.vue'
+import SettingCard from '../components/SettingCard.vue'
 import {
 	type FeatureKey,
 	firefoxControlsTelemetry,
