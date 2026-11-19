@@ -6,17 +6,20 @@ import { createApp, h } from 'vue'
 
 import { installI18n, loadSavedLocale } from '../../core/i18n/i18n'
 import { installErrorReporting, reportUncaughtErrors } from '../../core/telemetry'
+import {
+	applyThemeClass,
+	readModrinthTheme,
+	systemTheme,
+} from '../../features/theme/modrinth-theme'
 import App from './App.vue'
 
 reportUncaughtErrors()
 
-function applyTheme(dark: boolean) {
-	document.documentElement.classList.toggle('dark-mode', dark)
-	document.documentElement.classList.toggle('light-mode', !dark)
-}
-const darkQuery = window.matchMedia('(prefers-color-scheme: dark)')
-applyTheme(darkQuery.matches)
-darkQuery.addEventListener('change', (e) => applyTheme(e.matches))
+// The device theme shows right away, Modrinth's own theme follows once its cookie is read
+applyThemeClass(systemTheme())
+const syncTheme = () => readModrinthTheme().then(applyThemeClass)
+void syncTheme()
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => void syncTheme())
 
 void (async () => {
 	await loadSavedLocale()

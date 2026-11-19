@@ -15,6 +15,7 @@
 
 - Redesigned the popup settings to match Modrinth's own settings, with each feature in its own card.
 - Moved the popup settings behind the new settings button in the popup header.
+- The popup now uses your Modrinth theme, including OLED and Retro, instead of only light or dark.
 - Updated translations.
 
 ## [1.9.1] - 2026-11-12

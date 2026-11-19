@@ -336,7 +336,7 @@ const statCards = computed(() =>
 	}),
 )
 
-const palette = document.documentElement.classList.contains('dark-mode')
+const palette = !document.documentElement.classList.contains('light-mode')
 	? DARK_PALETTE
 	: LIGHT_PALETTE
 

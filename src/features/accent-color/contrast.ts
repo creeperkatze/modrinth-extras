@@ -1,6 +1,5 @@
 import { colord, extend } from 'colord'
 import a11yPlugin from 'colord/plugins/a11y'
-import { browser } from 'wxt/browser'
 
 extend([a11yPlugin])
 
@@ -32,16 +31,4 @@ export function accentColorIssue(color: string, theme: string): AccentColorIssue
 	if (accent.contrast(surface) < MIN_CONTRAST) return 'background'
 	if (accent.contrast(buttonText) < MIN_CONTRAST) return 'buttonText'
 	return null
-}
-
-// Modrinth keeps the active theme in its color-mode cookie and defaults to dark
-export async function readModrinthTheme(): Promise<string> {
-	try {
-		const cookie = await browser.cookies.get({ url: 'https://modrinth.com', name: 'color-mode' })
-		const theme = cookie?.value ? JSON.parse(decodeURIComponent(cookie.value)).value : undefined
-		return typeof theme === 'string' ? theme : 'dark'
-	} catch (err) {
-		console.error('[Modrinth Extras] Failed to read Modrinth theme:', err)
-		return 'dark'
-	}
 }
