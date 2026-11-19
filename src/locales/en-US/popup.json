@@ -75,7 +75,10 @@
     "defaultMessage": "Discord"
   },
   "feature.extraThemes.description": {
-    "defaultMessage": "Adds Catppuccin, Gruvbox, Rosé Pine, Solarized and Synthwave '84 to the color themes in Modrinth's settings, and lets you create your own."
+    "defaultMessage": "Adds more color themes to Modrinth's settings, from Minecraft biomes to Catppuccin and Nord, and lets you create and import your own."
+  },
+  "feature.extraThemes.presets": {
+    "defaultMessage": "Include preset themes"
   },
   "feature.extraThemes.title": {
     "defaultMessage": "More themes"

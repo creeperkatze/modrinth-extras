@@ -20,6 +20,7 @@ export function settingsInjections(settings: SettingsGetter) {
 			createExtensionApp(ExtraThemeOptions, {
 				savedSelected: settings().themes.selected,
 				savedCustom: settings().themes.custom,
+				showPresets: settings().extraThemes.presets,
 			}),
 	})
 

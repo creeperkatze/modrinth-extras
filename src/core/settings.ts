@@ -76,7 +76,7 @@ export interface ExtensionSettings {
 	desktopNotifications: { enabled: boolean }
 	curseforgeRedirect: { enabled: boolean }
 	accentColor: { enabled: boolean; color: string }
-	extraThemes: { enabled: boolean }
+	extraThemes: { enabled: boolean; presets: boolean }
 	// Kept apart from the toggle, so picking or editing a theme doesn't remount the theme picker
 	themes: { selected: string; custom: NamedTheme[] }
 	telemetry: { enabled: boolean }
@@ -113,7 +113,7 @@ export const DEFAULTS: ExtensionSettings = {
 	desktopNotifications: { enabled: false },
 	curseforgeRedirect: { enabled: false },
 	accentColor: { enabled: false, color: '#1bd96a' },
-	extraThemes: { enabled: true },
+	extraThemes: { enabled: true, presets: true },
 	themes: { selected: '', custom: [] },
 	telemetry: { enabled: true },
 }

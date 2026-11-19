@@ -9,7 +9,7 @@
 		</ThemeSection>
 
 		<ThemeSection
-			v-for="category in THEME_CATEGORIES"
+			v-for="category in categories"
 			:key="category.id"
 			:title="categoryTitle(category)"
 			:count="category.themes.length"
@@ -101,6 +101,7 @@ import { onBeforeUnmount, onMounted, ref, shallowRef, useTemplateRef, watch } fr
 import { showNotification } from '../../content/notifications'
 import { getSettings, type NamedTheme, saveSettings } from '../../core/settings'
 import {
+	EXTRA_THEMES,
 	MODRINTH_THEMES,
 	type ThemeCategory,
 	THEME_CATEGORIES,
@@ -113,6 +114,7 @@ import ThemeSection from './ThemeSection.vue'
 const props = defineProps<{
 	savedSelected: string
 	savedCustom: NamedTheme[]
+	showPresets: boolean
 }>()
 
 const CUSTOM_SECTION = 'custom'
@@ -170,12 +172,13 @@ function categoryTitle(category: ThemeCategory): string {
 	return message ? formatMessage(message) : category.name
 }
 
+const categories = props.showPresets ? THEME_CATEGORIES : []
+
 // Only the section with the theme in use starts open
 const openSection = props.savedCustom.some((theme) => theme.id === props.savedSelected)
 	? CUSTOM_SECTION
-	: THEME_CATEGORIES.find((category) =>
-			category.themes.some((theme) => theme.id === props.savedSelected),
-		)?.id
+	: categories.find((category) => category.themes.some((theme) => theme.id === props.savedSelected))
+			?.id
 
 const customModal = useTemplateRef<InstanceType<typeof CustomThemeModal>>('customModal')
 const fileInput = useTemplateRef<HTMLInputElement>('fileInput')
@@ -186,7 +189,7 @@ const modrinthSlot = useTemplateRef<HTMLElement>('modrinthSlot')
 const modrinthCount = ref(0)
 
 watch([selected, customThemes], async ([id, themes]) => {
-	applyExtraTheme(id, themes)
+	applyExtraTheme(id, themes, props.showPresets)
 	try {
 		const settings = await getSettings()
 		await saveSettings({ ...settings, themes: { selected: id, custom: themes } })
@@ -198,6 +201,12 @@ watch([selected, customThemes], async ([id, themes]) => {
 // The website's own setting is left alone, so no save button shows up for it
 function select(theme: Pick<NamedTheme, 'id'>) {
 	selected.value = theme.id
+}
+
+// A hidden preset stays saved but doesn't apply, so the website's theme still counts as picked
+function isAvailable(id: string): boolean {
+	if (customThemes.value.some((theme) => theme.id === id)) return true
+	return props.showPresets && EXTRA_THEMES.some((theme) => theme.id === id)
 }
 
 function uniqueName(name: string): string {
@@ -268,7 +277,7 @@ function onGridClick(event: MouseEvent) {
 }
 
 // Marks the grid so the website's base theme is drawn unselected next to ours
-watch(selected, (id) => grid?.toggleAttribute(SELECTED_ATTRIBUTE, id !== ''))
+watch(selected, (id) => grid?.toggleAttribute(SELECTED_ATTRIBUTE, isAvailable(id)))
 
 onMounted(() => {
 	grid = document.querySelector<HTMLElement>('.theme-options')
@@ -277,7 +286,7 @@ onMounted(() => {
 		modrinthSlot.value?.append(grid)
 		modrinthCount.value = grid.childElementCount
 	}
-	grid?.toggleAttribute(SELECTED_ATTRIBUTE, selected.value !== '')
+	grid?.toggleAttribute(SELECTED_ATTRIBUTE, isAvailable(selected.value))
 	grid?.addEventListener('click', onGridClick, true)
 })
 

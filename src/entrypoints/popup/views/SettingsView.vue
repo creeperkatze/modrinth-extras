@@ -313,7 +313,11 @@ const messages = defineMessages({
 	'feature.extraThemes.description': {
 		id: 'feature.extraThemes.description',
 		defaultMessage:
-			"Adds Catppuccin, Gruvbox, Rosé Pine, Solarized and Synthwave '84 to the color themes in Modrinth's settings, and lets you create your own.",
+			"Adds more color themes to Modrinth's settings, from Minecraft biomes to Catppuccin and Nord, and lets you create and import your own.",
+	},
+	'feature.extraThemes.presets': {
+		id: 'feature.extraThemes.presets',
+		defaultMessage: 'Include preset themes',
 	},
 	'feature.activitySparkline.title': {
 		id: 'feature.activitySparkline.title',
@@ -674,6 +678,13 @@ const generalFeatures = computed<FeatureDef[]>(() => [
 		icon: PaintbrushIcon,
 		title: formatMessage(messages['feature.extraThemes.title']),
 		description: formatMessage(messages['feature.extraThemes.description']),
+		options: [
+			{
+				key: 'presets',
+				type: 'toggle',
+				label: formatMessage(messages['feature.extraThemes.presets']),
+			},
+		],
 	},
 ])
 

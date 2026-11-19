@@ -117,12 +117,13 @@ function styleElement(id: string): HTMLStyleElement {
 }
 
 // Every custom theme gets a rule, so the picker can preview all of them
-export function applyExtraTheme(id: string, customThemes: NamedTheme[]) {
+export function applyExtraTheme(id: string, customThemes: NamedTheme[], showPresets: boolean) {
 	const presets = styleElement(STYLE_ID)
 	if (!presets.textContent) presets.textContent = EXTRA_THEMES.map(themeRule).join('\n')
 	styleElement(CUSTOM_STYLE_ID).textContent = customThemes.map(themeRule).join('\n')
 
-	const theme = [...EXTRA_THEMES, ...customThemes].find((candidate) => candidate.id === id)
+	const themes = showPresets ? [...EXTRA_THEMES, ...customThemes] : customThemes
+	const theme = themes.find((candidate) => candidate.id === id)
 	if (theme) document.documentElement.setAttribute(THEME_ATTRIBUTE, id)
 	else document.documentElement.removeAttribute(THEME_ATTRIBUTE)
 	setBase(theme?.base ?? null)
@@ -130,7 +131,8 @@ export function applyExtraTheme(id: string, customThemes: NamedTheme[]) {
 
 export function applyThemeSettings(settings: Pick<ExtensionSettings, 'extraThemes' | 'themes'>) {
 	const { selected, custom } = settings.themes
-	applyExtraTheme(settings.extraThemes.enabled ? selected : '', custom)
+	const { enabled, presets } = settings.extraThemes
+	applyExtraTheme(enabled ? selected : '', custom, presets)
 }
 
 export function createCustomTheme(name: string, colors: ThemeColors): NamedTheme {
