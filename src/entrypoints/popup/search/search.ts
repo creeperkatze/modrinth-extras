@@ -15,13 +15,15 @@ export async function searchProjects(
 	query: string,
 	type: ProjectType | null,
 	limit: number,
-): Promise<SearchHit[]> {
+	offset = 0,
+): Promise<{ hits: SearchHit[]; total: number }> {
 	const results = await modrinthClient.labrinth.projects_v3.search({
 		query,
 		new_filters: typeFilter(type),
 		limit,
+		offset,
 	})
-	return results.hits
+	return { hits: results.hits, total: results.total_hits }
 }
 
 // A project can have several types, so the picked one wins for links and downloads

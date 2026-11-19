@@ -20,15 +20,17 @@
 					<div class="flex min-w-0 flex-col gap-0.5">
 						<div class="flex min-w-0 items-baseline gap-1.5">
 							<span
-								class="truncate text-sm font-semibold text-contrast smart-clickable:underline-on-hover"
+								class="truncate text-[15px] font-semibold text-contrast smart-clickable:underline-on-hover"
 							>
 								{{ name }}
 							</span>
-							<span v-if="author" class="shrink-0 truncate text-xs text-secondary">
+							<span v-if="author" class="shrink-0 truncate text-[13px] text-secondary">
 								{{ formatMessage(messages.by, { author }) }}
 							</span>
 						</div>
-						<span v-if="summary" class="line-clamp-2 text-xs text-secondary">{{ summary }}</span>
+						<span v-if="summary" class="line-clamp-2 text-[13px] leading-snug text-secondary">{{
+							summary
+						}}</span>
 					</div>
 					<div v-if="pills.length > 0" class="flex flex-wrap items-center gap-1.5">
 						<TagItem

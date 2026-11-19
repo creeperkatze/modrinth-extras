@@ -440,6 +440,27 @@
   "popup.search.placeholder": {
     "defaultMessage": "Search Modrinth"
   },
+  "popup.search.placeholder.datapack": {
+    "defaultMessage": "Search data packs"
+  },
+  "popup.search.placeholder.mod": {
+    "defaultMessage": "Search mods"
+  },
+  "popup.search.placeholder.modpack": {
+    "defaultMessage": "Search modpacks"
+  },
+  "popup.search.placeholder.plugin": {
+    "defaultMessage": "Search plugins"
+  },
+  "popup.search.placeholder.resourcepack": {
+    "defaultMessage": "Search resource packs"
+  },
+  "popup.search.placeholder.server": {
+    "defaultMessage": "Search servers"
+  },
+  "popup.search.placeholder.shader": {
+    "defaultMessage": "Search shaders"
+  },
   "popup.search.searching": {
     "defaultMessage": "Searching..."
   },
@@ -448,9 +469,6 @@
   },
   "popup.search.type.datapack": {
     "defaultMessage": "Data Packs"
-  },
-  "popup.search.type.label": {
-    "defaultMessage": "Project type"
   },
   "popup.search.type.mod": {
     "defaultMessage": "Mods"

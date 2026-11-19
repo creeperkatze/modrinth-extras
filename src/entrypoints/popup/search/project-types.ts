@@ -39,6 +39,34 @@ const messages = defineMessages({
 		id: 'popup.search.type.server',
 		defaultMessage: 'Servers',
 	},
+	modPlaceholder: {
+		id: 'popup.search.placeholder.mod',
+		defaultMessage: 'Search mods',
+	},
+	resourcepackPlaceholder: {
+		id: 'popup.search.placeholder.resourcepack',
+		defaultMessage: 'Search resource packs',
+	},
+	datapackPlaceholder: {
+		id: 'popup.search.placeholder.datapack',
+		defaultMessage: 'Search data packs',
+	},
+	shaderPlaceholder: {
+		id: 'popup.search.placeholder.shader',
+		defaultMessage: 'Search shaders',
+	},
+	modpackPlaceholder: {
+		id: 'popup.search.placeholder.modpack',
+		defaultMessage: 'Search modpacks',
+	},
+	pluginPlaceholder: {
+		id: 'popup.search.placeholder.plugin',
+		defaultMessage: 'Search plugins',
+	},
+	serverPlaceholder: {
+		id: 'popup.search.placeholder.server',
+		defaultMessage: 'Search servers',
+	},
 })
 
 export interface ProjectType {
@@ -48,6 +76,8 @@ export interface ProjectType {
 	searchType: string
 	discoverPath: string
 	label: MessageDescriptor
+	// Shown in the search bar while this type is picked
+	placeholder: MessageDescriptor
 	icon: Component
 }
 
@@ -57,6 +87,7 @@ export const MOD_TYPE: ProjectType = {
 	searchType: 'mod',
 	discoverPath: '/discover/mods',
 	label: messages.mod,
+	placeholder: messages.modPlaceholder,
 	icon: BoxIcon,
 }
 
@@ -65,6 +96,7 @@ export const SERVER_TYPE: ProjectType = {
 	searchType: 'minecraft_java_server',
 	discoverPath: '/discover/servers',
 	label: messages.server,
+	placeholder: messages.serverPlaceholder,
 	icon: ServerIcon,
 }
 
@@ -76,6 +108,7 @@ export const PROJECT_TYPES: ProjectType[] = [
 		searchType: 'resourcepack',
 		discoverPath: '/discover/resourcepacks',
 		label: messages.resourcepack,
+		placeholder: messages.resourcepackPlaceholder,
 		icon: PaintbrushIcon,
 	},
 	{
@@ -83,6 +116,7 @@ export const PROJECT_TYPES: ProjectType[] = [
 		searchType: 'datapack',
 		discoverPath: '/discover/datapacks',
 		label: messages.datapack,
+		placeholder: messages.datapackPlaceholder,
 		icon: BracesIcon,
 	},
 	{
@@ -90,6 +124,7 @@ export const PROJECT_TYPES: ProjectType[] = [
 		searchType: 'shader',
 		discoverPath: '/discover/shaders',
 		label: messages.shader,
+		placeholder: messages.shaderPlaceholder,
 		icon: GlassesIcon,
 	},
 	{
@@ -97,6 +132,7 @@ export const PROJECT_TYPES: ProjectType[] = [
 		searchType: 'modpack',
 		discoverPath: '/discover/modpacks',
 		label: messages.modpack,
+		placeholder: messages.modpackPlaceholder,
 		icon: PackageOpenIcon,
 	},
 	{
@@ -104,6 +140,7 @@ export const PROJECT_TYPES: ProjectType[] = [
 		searchType: 'plugin',
 		discoverPath: '/discover/plugins',
 		label: messages.plugin,
+		placeholder: messages.pluginPlaceholder,
 		icon: PlugIcon,
 	},
 	SERVER_TYPE,
