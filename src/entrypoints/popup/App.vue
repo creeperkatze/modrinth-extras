@@ -41,32 +41,31 @@
 
 		<template v-if="settingsLoaded">
 			<SettingsView v-if="view === 'settings'" />
-			<!-- One scroll area, so the banners scroll away and the tabs stick at the top -->
-			<div v-else class="flex min-h-0 flex-1 flex-col overflow-hidden" :style="fadeMask">
+			<template v-else>
+				<div class="flex shrink-0 flex-col gap-2 px-3 pt-3 empty:hidden">
+					<DiscordCard />
+					<DonateCard />
+				</div>
+				<div class="shrink-0 p-3">
+					<Tabs
+						:value="view"
+						:tabs="tabs"
+						class="!w-full [&>button]:min-w-0 [&>button]:flex-auto [&>button]:px-2 [&_span]:truncate"
+						@update:value="selectTab"
+					/>
+				</div>
 				<div
 					ref="scroller"
 					class="min-h-0 flex-1 overflow-y-auto"
-					:style="{ '--popup-nav-height': `${navHeight}px` }"
+					:style="fadeMask"
 					@scroll="updateFade"
 				>
-					<div ref="banners" class="flex flex-col gap-2 px-3 [&>*:first-child]:mt-3">
-						<DiscordCard />
-						<DonateCard />
-					</div>
-					<div ref="nav" data-sticky-header class="sticky top-0 z-20 bg-bg px-3 py-3">
-						<Tabs
-							:value="view"
-							:tabs="tabs"
-							class="!w-full [&>button]:min-w-0 [&>button]:flex-auto [&>button]:px-2 [&_span]:truncate"
-							@update:value="selectTab"
-						/>
-					</div>
 					<div ref="content">
 						<SearchView v-if="view === 'search'" key="search" />
 						<CreatorView v-else key="creator" />
 					</div>
 				</div>
-			</div>
+			</template>
 		</template>
 		<div v-else class="min-h-0 flex-1" />
 
@@ -148,32 +147,23 @@ watch(lastTab, (value) => {
 })
 
 const scroller = useTemplateRef<HTMLElement>('scroller')
-const banners = useTemplateRef<HTMLElement>('banners')
-const nav = useTemplateRef<HTMLElement>('nav')
 const content = useTemplateRef<HTMLElement>('content')
-const navHeight = ref(0)
 
-// Same fade as Modrinth's scrollable panels, but starting below whatever is stuck at the top
+// Same fade as Modrinth's scrollable panels, starting below a view's stuck header
 const FADE_HEIGHT = 48
 const fade = reactive({ start: 0, top: false, bottom: false })
 
 function updateFade() {
 	const element = scroller.value
 	if (!element) return
-	const bannersHeight = banners.value?.offsetHeight ?? 0
+	fade.top = element.scrollTop > 0
 	fade.bottom = Math.ceil(element.scrollTop + element.clientHeight) < element.scrollHeight
-
-	if (element.scrollTop < bannersHeight) {
-		fade.start = 0
-		fade.top = element.scrollTop > 0
-		return
-	}
 	const scrollerTop = element.getBoundingClientRect().top
-	const headerBottoms = [...element.querySelectorAll('[data-sticky-header]')].map(
-		(header) => header.getBoundingClientRect().bottom - scrollerTop,
-	)
-	fade.start = Math.max(0, ...headerBottoms)
-	fade.top = element.scrollTop > bannersHeight
+	const stuckBottoms = [...element.querySelectorAll('[data-sticky-header]')]
+		.map((header) => header.getBoundingClientRect())
+		.filter((rect) => rect.top - scrollerTop <= 1)
+		.map((rect) => rect.bottom - scrollerTop)
+	fade.start = Math.max(0, ...stuckBottoms)
 }
 
 const fadeMask = computed(() => {
@@ -188,17 +178,13 @@ const fadeMask = computed(() => {
 
 let layoutObserver: ResizeObserver | undefined
 
-// Views stick their own header right below the tabs, and loading content changes the fade
-watch([scroller, nav], ([scrollerElement, navElement]) => {
+// Loading content changes whether there is anything left to scroll to
+watch([scroller, content], ([scrollerElement, contentElement]) => {
 	layoutObserver?.disconnect()
-	if (!scrollerElement || !navElement) return
-	layoutObserver = new ResizeObserver(() => {
-		navHeight.value = navElement.offsetHeight
-		updateFade()
-	})
-	for (const element of [scrollerElement, navElement, banners.value, content.value]) {
-		if (element) layoutObserver.observe(element)
-	}
+	if (!scrollerElement || !contentElement) return
+	layoutObserver = new ResizeObserver(updateFade)
+	layoutObserver.observe(scrollerElement)
+	layoutObserver.observe(contentElement)
 })
 
 onBeforeUnmount(() => layoutObserver?.disconnect())
@@ -207,10 +193,7 @@ function selectTab(value: string | number) {
 	if (!MAIN_TABS.includes(value as MainTab)) return
 	lastTab.value = value as MainTab
 	view.value = lastTab.value
-	// The new tab starts at its top, without bringing the scrolled away banners back
-	if (scroller.value && banners.value) {
-		scroller.value.scrollTop = Math.min(scroller.value.scrollTop, banners.value.offsetHeight)
-	}
+	if (scroller.value) scroller.value.scrollTop = 0
 }
 
 function toggleSettings() {

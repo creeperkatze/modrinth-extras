@@ -43,6 +43,7 @@
 								v-tooltip="icon.label"
 								:aria-label="icon.label"
 								:style="icon.color ? { color: icon.color } : undefined"
+								:class="icon.color ? '' : 'my-px !size-3.5'"
 							/>
 						</TagItem>
 					</div>
@@ -167,6 +168,7 @@ const messages = defineMessages({
 	},
 })
 
+// Only loader icons are colored, and their drawings leave more margin than the line icons
 interface PillIcon {
 	id: string
 	icon: Component

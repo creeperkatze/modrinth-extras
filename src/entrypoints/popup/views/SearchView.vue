@@ -1,11 +1,11 @@
 <template>
 	<div>
-		<div class="px-3 pb-3">
+		<div class="px-3 pb-2">
 			<ProjectTypeGrid v-model="projectType" @update:model-value="searchInput?.focus()" />
 		</div>
 
-		<!-- Above the tabs, so their background doesn't cut off the focus ring -->
-		<div data-sticky-header class="sticky top-[var(--popup-nav-height)] z-30 bg-bg px-3 pb-3">
+		<!-- The top padding keeps the focus ring visible once it sticks to the top -->
+		<div data-sticky-header class="sticky top-0 z-10 bg-bg px-3 pb-3 pt-1">
 			<Input
 				ref="searchInput"
 				v-model="query"
@@ -46,7 +46,7 @@
 				:tags="[...hit.display_categories, ...hit.loaders]"
 				:environment="hit.project_loader_fields?.environment?.[0]"
 				:selected="index === selectedIndex"
-				class="scroll-mt-[calc(var(--popup-nav-height)+4rem)]"
+				class="scroll-mt-16"
 			/>
 		</div>
 	</div>
