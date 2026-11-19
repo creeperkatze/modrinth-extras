@@ -34,6 +34,7 @@ import type { Notification } from '../features/notifications/notifications'
 import type { MatchableProject } from '../features/platforms/matching'
 import type { PlatformPage } from '../features/platforms/pages'
 import type { RepositoryPlatform } from '../features/repository/links'
+import { markExtensionUpdated } from '../features/tour/state'
 
 const ALARM_NAME = 'modrinth-extras-poll'
 const POLL_INTERVAL_MINUTES = 5
@@ -204,6 +205,9 @@ export default defineBackground(() => {
 			void analytics.track('extension_installed')
 		} else if (details.reason === 'update') {
 			void analytics.track('extension_updated', { from_extension_version: details.previousVersion })
+			markExtensionUpdated().catch((err) =>
+				console.error('[Modrinth Extras] Failed to save the extension update:', err),
+			)
 		}
 	})
 

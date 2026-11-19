@@ -446,6 +446,39 @@
   "popup.tab.projects": {
     "defaultMessage": "Projects"
   },
+  "popup.tour.creator.description": {
+    "defaultMessage": "Keep an eye on the views, downloads and revenue of your projects."
+  },
+  "popup.tour.creator.title": {
+    "defaultMessage": "Creator"
+  },
+  "popup.tour.notifications.description": {
+    "defaultMessage": "Read your notifications and accept invites right from here."
+  },
+  "popup.tour.notifications.title": {
+    "defaultMessage": "Notifications"
+  },
+  "popup.tour.progress": {
+    "defaultMessage": "{current} of {total}"
+  },
+  "popup.tour.search.description": {
+    "defaultMessage": "Find mods, modpacks, servers and more without opening Modrinth."
+  },
+  "popup.tour.search.title": {
+    "defaultMessage": "Search"
+  },
+  "popup.tour.settings.description": {
+    "defaultMessage": "Customize everything Modrinth Extras has to offer."
+  },
+  "popup.tour.settings.title": {
+    "defaultMessage": "Settings"
+  },
+  "popup.tour.settings.updatedDescription": {
+    "defaultMessage": "The settings have moved here. This is where you customize everything Modrinth Extras has to offer."
+  },
+  "popup.tour.skip": {
+    "defaultMessage": "Skip"
+  },
   "search.any": {
     "defaultMessage": "Any"
   },

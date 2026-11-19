@@ -10,6 +10,7 @@
 - Search tab in the popup for quickly searching Modrinth, with a project type picker that includes servers. Without a search, it shows the most popular projects of the picked type.
 - Creator tab in the popup with your revenue balance and upcoming payouts, and the same stat cards and charts as Modrinth's analytics dashboard for views, downloads and revenue over 7, 30 or 90 days.
 - Notifications tab in the popup with your unread Modrinth notifications, the same as the notifications dropdown on the website. You can accept or decline invites and mark notifications as read without opening Modrinth.
+- A short tour the first time you open the popup that shows where everything is. If you updated, it points out what's new and where the settings moved.
 - More themes in Modrinth's color theme settings: Catppuccin Mocha and Latte, Gruvbox Dark, Rosé Pine and Rosé Pine Dawn, Solarized Dark and Light, and Synthwave '84. You can also create your own custom themes with every color adjustable, and share them as JSON files. Themes bring their own accent color, which a custom accent color still overrides, and can be turned off in the popup.
 
 ### Changed

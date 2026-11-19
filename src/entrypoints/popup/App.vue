@@ -10,6 +10,7 @@
 				<Logo role="img" aria-label="Modrinth Extras" class="!h-10 !w-auto text-brand" />
 			</a>
 			<IconButton
+				ref="settingsButton"
 				v-tooltip="
 					view === 'settings'
 						? formatMessage(messages['popup.nav.back'])
@@ -46,7 +47,7 @@
 					<DiscordCard />
 					<DonateCard />
 				</div>
-				<div class="shrink-0 p-3">
+				<div ref="tabBar" class="shrink-0 p-3">
 					<Tabs
 						:value="view"
 						:tabs="tabs"
@@ -73,6 +74,8 @@
 		<HorizontalRule class="shrink-0" />
 
 		<PopupFooter />
+
+		<TourOverlay :active="settingsLoaded && view !== 'settings'" :resolve-target="tourTarget" />
 	</div>
 </template>
 
@@ -101,6 +104,7 @@ import Logo from '../../public/logo.svg?component'
 import DiscordCard from './components/DiscordCard.vue'
 import DonateCard from './components/DonateCard.vue'
 import PopupFooter from './components/PopupFooter.vue'
+import TourOverlay, { type TourTarget } from './components/TourOverlay.vue'
 import { loadAccount } from './state/account'
 import { loadPopupSettings, settings, settingsLoaded } from './state/settings'
 import CreatorView from './views/CreatorView.vue'
@@ -200,6 +204,14 @@ watch([scroller, content], ([scrollerElement, contentElement]) => {
 })
 
 onBeforeUnmount(() => layoutObserver?.disconnect())
+
+const tabBar = useTemplateRef<HTMLElement>('tabBar')
+const settingsButton = useTemplateRef<InstanceType<typeof IconButton>>('settingsButton')
+
+function tourTarget(target: TourTarget): HTMLElement | null | undefined {
+	if (target === 'settings') return settingsButton.value?.$el as HTMLElement | undefined
+	return tabBar.value?.querySelectorAll<HTMLElement>('[role="tab"]')[MAIN_TABS.indexOf(target)]
+}
 
 function selectTab(value: string | number) {
 	if (!MAIN_TABS.includes(value as MainTab)) return
