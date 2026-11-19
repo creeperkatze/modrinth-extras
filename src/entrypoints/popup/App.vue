@@ -95,6 +95,7 @@ import {
 import { computed, onBeforeUnmount, onMounted, reactive, ref, useTemplateRef, watch } from 'vue'
 
 import { applyAccentColor } from '../../features/accent-color/apply'
+import { applyThemeSettings } from '../../features/themes/themes'
 import Logo from '../../public/logo.svg?component'
 import DiscordCard from './components/DiscordCard.vue'
 import DonateCard from './components/DonateCard.vue'
@@ -219,6 +220,12 @@ function toggleSettings() {
 watch(
 	() => settings.accentColor,
 	() => applyAccentColor(settings),
+	{ deep: true, immediate: true },
+)
+
+watch(
+	() => [settings.extraThemes, settings.themes],
+	() => applyThemeSettings(settings),
 	{ deep: true, immediate: true },
 )
 

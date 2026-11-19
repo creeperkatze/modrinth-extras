@@ -50,6 +50,99 @@
   "curseforgeComments.writeComment": {
     "defaultMessage": "Write a comment"
   },
+  "customTheme.accent": {
+    "defaultMessage": "Accent"
+  },
+  "customTheme.accentColor": {
+    "defaultMessage": "Accent color"
+  },
+  "customTheme.accentText": {
+    "defaultMessage": "Text on accent"
+  },
+  "customTheme.base": {
+    "defaultMessage": "Base"
+  },
+  "customTheme.blue": {
+    "defaultMessage": "Blue"
+  },
+  "customTheme.body": {
+    "defaultMessage": "Body text"
+  },
+  "customTheme.cancel": {
+    "defaultMessage": "Cancel"
+  },
+  "customTheme.colors": {
+    "defaultMessage": "Colors"
+  },
+  "customTheme.createTitle": {
+    "defaultMessage": "Create theme"
+  },
+  "customTheme.dark": {
+    "defaultMessage": "Dark"
+  },
+  "customTheme.delete": {
+    "defaultMessage": "Delete"
+  },
+  "customTheme.divider": {
+    "defaultMessage": "Dividers"
+  },
+  "customTheme.editTitle": {
+    "defaultMessage": "Edit theme"
+  },
+  "customTheme.export": {
+    "defaultMessage": "Export"
+  },
+  "customTheme.headings": {
+    "defaultMessage": "Headings"
+  },
+  "customTheme.light": {
+    "defaultMessage": "Light"
+  },
+  "customTheme.name": {
+    "defaultMessage": "Name"
+  },
+  "customTheme.namePlaceholder": {
+    "defaultMessage": "My theme"
+  },
+  "customTheme.orange": {
+    "defaultMessage": "Orange"
+  },
+  "customTheme.previewButton": {
+    "defaultMessage": "Download"
+  },
+  "customTheme.previewDescription": {
+    "defaultMessage": "This is how your theme looks on Modrinth."
+  },
+  "customTheme.previewTitle": {
+    "defaultMessage": "Example project"
+  },
+  "customTheme.purple": {
+    "defaultMessage": "Purple"
+  },
+  "customTheme.red": {
+    "defaultMessage": "Red"
+  },
+  "customTheme.save": {
+    "defaultMessage": "Save"
+  },
+  "customTheme.secondary": {
+    "defaultMessage": "Secondary text"
+  },
+  "customTheme.startFrom": {
+    "defaultMessage": "Start from"
+  },
+  "customTheme.startFromPlaceholder": {
+    "defaultMessage": "Choose a theme"
+  },
+  "customTheme.surfaces": {
+    "defaultMessage": "Surfaces"
+  },
+  "customTheme.surfacesDescription": {
+    "defaultMessage": "From the page background on the left to borders on the right."
+  },
+  "customTheme.text": {
+    "defaultMessage": "Text"
+  },
   "dependencyExplorer.centerView": {
     "defaultMessage": "Center view"
   },
@@ -121,6 +214,24 @@
   },
   "errorNotice.message": {
     "defaultMessage": "This error might be related to Modrinth Extras. Try disabling the extension and refreshing the page before reporting this to Modrinth. If the error goes away, please report it <link>here</link>."
+  },
+  "extraThemes.create": {
+    "defaultMessage": "Create theme"
+  },
+  "extraThemes.delete": {
+    "defaultMessage": "Delete theme"
+  },
+  "extraThemes.edit": {
+    "defaultMessage": "Edit theme"
+  },
+  "extraThemes.import": {
+    "defaultMessage": "Import"
+  },
+  "extraThemes.importFailed": {
+    "defaultMessage": "Some files couldn't be imported because they aren't valid themes."
+  },
+  "extraThemes.newTheme": {
+    "defaultMessage": "My theme"
   },
   "moddexReviews.aesthetics": {
     "defaultMessage": "Aesthetics"

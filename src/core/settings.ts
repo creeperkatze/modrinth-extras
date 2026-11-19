@@ -26,6 +26,25 @@ function deepMerge<T extends object>(base: T, override: DeepPartial<T>): T {
 	return result
 }
 
+// Every color of a theme, from the page background to the accent
+export interface ThemeColors {
+	// The Modrinth theme it is drawn on top of
+	base: 'light' | 'dark'
+	// From the page background to borders, like Modrinth's surface-1 to surface-5
+	surfaces: [string, string, string, string, string, string, string]
+	text: { primary: string; default: string; tertiary: string }
+	divider: string
+	accent: string
+	accentContrast: string
+	// Green follows the accent, since Modrinth uses green as its brand color
+	colors: { red: string; orange: string; blue: string; purple: string }
+}
+
+export interface NamedTheme extends ThemeColors {
+	id: string
+	name: string
+}
+
 export interface ExtensionSettings {
 	locale: { value: string }
 	notificationsIndicator: { enabled: boolean }
@@ -57,6 +76,9 @@ export interface ExtensionSettings {
 	desktopNotifications: { enabled: boolean }
 	curseforgeRedirect: { enabled: boolean }
 	accentColor: { enabled: boolean; color: string }
+	extraThemes: { enabled: boolean }
+	// Kept apart from the toggle, so picking or editing a theme doesn't remount the theme picker
+	themes: { selected: string; custom: NamedTheme[] }
 	telemetry: { enabled: boolean }
 }
 
@@ -91,6 +113,8 @@ export const DEFAULTS: ExtensionSettings = {
 	desktopNotifications: { enabled: false },
 	curseforgeRedirect: { enabled: false },
 	accentColor: { enabled: false, color: '#1bd96a' },
+	extraThemes: { enabled: true },
+	themes: { selected: '', custom: [] },
 	telemetry: { enabled: true },
 }
 

@@ -194,6 +194,7 @@ import {
 	LanguagesIcon,
 	MonitorIcon,
 	PackageIcon,
+	PaintbrushIcon,
 	PaletteIcon,
 	PlayIcon,
 	SearchIcon,
@@ -309,6 +310,15 @@ const messages = defineMessages({
 	'feature.accentColor.unreadableButtons': {
 		id: 'feature.accentColor.unreadableButtons',
 		defaultMessage: 'Text on buttons in this color is hard to read on your Modrinth theme.',
+	},
+	'feature.extraThemes.title': {
+		id: 'feature.extraThemes.title',
+		defaultMessage: 'More themes',
+	},
+	'feature.extraThemes.description': {
+		id: 'feature.extraThemes.description',
+		defaultMessage:
+			"Adds Catppuccin, Dracula, Gruvbox, Rosé Pine and Solarized to the color themes in Modrinth's settings, and lets you create your own.",
 	},
 	'feature.activitySparkline.title': {
 		id: 'feature.activitySparkline.title',
@@ -663,6 +673,12 @@ const generalFeatures = computed<FeatureDef[]>(() => [
 				warning: () => accentColorWarning.value,
 			},
 		],
+	},
+	{
+		key: 'extraThemes',
+		icon: PaintbrushIcon,
+		title: formatMessage(messages['feature.extraThemes.title']),
+		description: formatMessage(messages['feature.extraThemes.description']),
 	},
 ])
 

@@ -6,6 +6,7 @@ import { pageState, remountForChangedSettings } from '../content/injection'
 import { headerInjections } from '../content/injections/header'
 import { projectInjections } from '../content/injections/project'
 import { searchInjections } from '../content/injections/search'
+import { settingsInjections } from '../content/injections/settings'
 import { sidebarInjections } from '../content/injections/sidebar'
 import { siteInjections } from '../content/injections/site'
 import { applySidebarOrder, getProjectSlug } from '../content/page'
@@ -16,6 +17,7 @@ import { reportUncaughtErrors } from '../core/telemetry'
 import { applyAccentColor } from '../features/accent-color/apply'
 import { recolorBrandImages } from '../features/accent-color/images'
 import { sidebarOrder } from '../features/sidebar-layout/order'
+import { applyThemeSettings } from '../features/themes/themes'
 
 export default defineContentScript({
 	matches: ['https://modrinth.com/*'],
@@ -34,6 +36,7 @@ export default defineContentScript({
 			...projectInjections(getCurrentSettings),
 			...siteInjections(),
 			...searchInjections(getCurrentSettings),
+			...settingsInjections(getCurrentSettings),
 		]
 
 		function markHydrated() {
@@ -62,6 +65,7 @@ export default defineContentScript({
 			settings = s
 			console.log('[Modrinth Extras] Settings loaded:', JSON.stringify(withoutSecrets(s)))
 			applyAccentColor(settings)
+			applyThemeSettings(settings)
 			for (const inj of injections) {
 				if (inj.config.settingsKeys.length > 0) inj.unmount()
 				inj.schedule()
@@ -76,6 +80,7 @@ export default defineContentScript({
 			const newLocale = newSettings?.locale?.value
 			i18n.global.locale.value = newLocale || detectBrowserLocale()
 			applyAccentColor(settings)
+			applyThemeSettings(settings)
 			remountForChangedSettings(injections, oldSettings, newSettings)
 			applySidebarOrder(sidebarOrder(settings))
 		}

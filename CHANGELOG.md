@@ -10,6 +10,7 @@
 - Search tab in the popup for quickly searching Modrinth, with a download button on every result and the same recent searches as the quick search on the site.
 - "Also on Modrinth" card in the popup when you're on a CurseForge, SpigotMC or Hangar project that's also on Modrinth.
 - Creator tab in the popup with your revenue balance and upcoming payouts, and the same stat cards and charts as Modrinth's analytics dashboard for views, downloads and revenue over 7, 30 or 90 days.
+- More themes in Modrinth's color theme settings: Catppuccin Mocha and Latte, Dracula, Gruvbox Dark, Rosé Pine and Rosé Pine Dawn, and Solarized Dark and Light. You can also create your own custom themes with every color adjustable, and share them as JSON files. Themes bring their own accent color, which a custom accent color still overrides, and can be turned off in the popup.
 
 ### Changed
 

@@ -11,7 +11,7 @@ import {
 } from '../../../core/settings'
 import { setTelemetryEnabled } from '../../../core/telemetry'
 
-export type FeatureKey = Exclude<keyof ExtensionSettings, 'locale' | 'sidebarLayout'>
+export type FeatureKey = Exclude<keyof ExtensionSettings, 'locale' | 'sidebarLayout' | 'themes'>
 
 // Shared by every popup view, so they all edit the same copy
 export const settings = reactive(structuredClone(DEFAULTS))
