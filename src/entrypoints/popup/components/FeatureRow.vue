@@ -3,6 +3,7 @@
 		<template #control>
 			<span v-tooltip="disabled ? disabledTooltip : undefined" class="inline-flex">
 				<Toggle
+					small
 					:model-value="modelValue"
 					:disabled="disabled"
 					:aria-label="title"
@@ -12,7 +13,7 @@
 		</template>
 		<Collapsible v-if="hasOptionsSlot || actionIcon" :collapsed="!modelValue">
 			<div
-				class="flex flex-col gap-3 border-0 border-t border-solid border-surface-4 bg-surface-2 px-4 py-3 text-sm"
+				class="flex flex-col gap-3 border-0 border-t border-solid border-surface-4 bg-surface-2 p-3 text-sm"
 			>
 				<slot />
 				<Button v-if="actionIcon" size="sm" class="w-fit" @click="$emit('action')">

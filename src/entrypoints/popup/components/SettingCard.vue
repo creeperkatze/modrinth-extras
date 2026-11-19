@@ -1,13 +1,13 @@
 <template>
 	<div class="overflow-clip rounded-2xl border border-solid border-surface-4 bg-surface-3">
-		<div class="flex items-center justify-between gap-4 p-4">
+		<div class="flex items-center justify-between gap-4 p-3">
 			<div class="flex min-w-0 gap-3">
-				<component :is="icon" class="mt-0.5 size-5 shrink-0 text-primary" aria-hidden="true" />
+				<component :is="icon" class="size-5 shrink-0 text-primary" aria-hidden="true" />
 				<div class="min-w-0">
-					<h3 class="m-0 text-base font-semibold leading-6 text-contrast">{{ title }}</h3>
+					<h3 class="m-0 text-[15px] font-semibold leading-5 text-contrast">{{ title }}</h3>
 					<p
 						v-if="description || $slots.description"
-						class="m-0 mt-0.5 text-sm leading-snug text-secondary"
+						class="m-0 mt-0.5 text-[13px] leading-snug text-secondary"
 					>
 						<slot name="description">{{ description }}</slot>
 					</p>

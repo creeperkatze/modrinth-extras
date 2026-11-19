@@ -1,6 +1,6 @@
 <template>
 	<div class="flex items-center justify-between gap-4">
-		<span class="min-w-0 font-semibold text-contrast">{{ label }}</span>
+		<span class="min-w-0 text-sm font-medium text-contrast">{{ label }}</span>
 		<div :class="dropdownClass ?? 'w-40 shrink-0'">
 			<CompactCombobox
 				:options="allItems"

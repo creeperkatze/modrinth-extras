@@ -1,7 +1,7 @@
 <template>
 	<div class="flex flex-col gap-2">
 		<div class="flex items-center justify-between gap-4">
-			<span class="font-semibold text-contrast">{{ label }}</span>
+			<span class="text-sm font-medium text-contrast">{{ label }}</span>
 			<ColorPicker
 				:model-value="modelValue || defaultColor"
 				:label="label"
