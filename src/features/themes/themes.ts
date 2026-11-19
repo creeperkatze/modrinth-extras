@@ -26,17 +26,6 @@ export const EXTRA_THEMES: NamedTheme[] = [
 		colors: { red: '#d20f39', orange: '#fe640b', blue: '#1e66f5', purple: '#8839ef' },
 	},
 	{
-		id: 'dracula',
-		name: 'Dracula',
-		base: 'dark',
-		surfaces: ['#191a21', '#1e1f28', '#21222c', '#252632', '#282a36', '#343746', '#44475a'],
-		text: { primary: '#f8f8f2', default: '#cfcfc9', tertiary: '#8b93b8' },
-		divider: '#6272a4',
-		accent: '#bd93f9',
-		accentContrast: '#282a36',
-		colors: { red: '#ff5555', orange: '#ffb86c', blue: '#8be9fd', purple: '#bd93f9' },
-	},
-	{
 		id: 'gruvbox-dark',
 		name: 'Gruvbox Dark',
 		base: 'dark',
@@ -90,6 +79,17 @@ export const EXTRA_THEMES: NamedTheme[] = [
 		accent: '#2aa198',
 		accentContrast: '#fdf6e3',
 		colors: { red: '#dc322f', orange: '#cb4b16', blue: '#268bd2', purple: '#6c71c4' },
+	},
+	{
+		id: 'synthwave-84',
+		name: "Synthwave '84",
+		base: 'dark',
+		surfaces: ['#1a1625', '#1e1a2b', '#211c30', '#241f34', '#262335', '#34294f', '#463465'],
+		text: { primary: '#ffffff', default: '#e0d8f0', tertiary: '#a99fc5' },
+		divider: '#848bbd',
+		accent: '#ff7edb',
+		accentContrast: '#262335',
+		colors: { red: '#fe4450', orange: '#ff8b39', blue: '#36f9f6', purple: '#b893ce' },
 	},
 ]
 
@@ -171,9 +171,55 @@ function themeRule(theme: NamedTheme): string {
 	const declarations = Object.entries(themeVariables(theme))
 		.map(([name, value]) => `\n\t${name}: ${value};`)
 		.join('')
-	return `html:root.${theme.base}-mode[${THEME_ATTRIBUTE}='${id}'],
+	return `html:root[${THEME_ATTRIBUTE}='${id}'],
 .${THEME_PREVIEW_CLASS}[${THEME_ATTRIBUTE}='${id}'] {${declarations}
 }`
+}
+
+const MODE_CLASSES = ['light-mode', 'dark-mode', 'oled-mode', 'retro-mode']
+
+// Modrinth's styles are built on the root element's theme class, so an active theme swaps in its
+// own base there without touching the website's saved theme, and puts the website's class back after
+let activeBase: ThemeColors['base'] | null = null
+let addedBaseClass = false
+let websiteClass: string | null = null
+let classObserver: MutationObserver | null = null
+
+function enforceBase() {
+	if (!activeBase) return
+	const root = document.documentElement
+	const baseClass = `${activeBase}-mode`
+	for (const name of MODE_CLASSES) {
+		if (name === baseClass || !root.classList.contains(name)) continue
+		websiteClass = name
+		root.classList.remove(name)
+	}
+	if (!root.classList.contains(baseClass)) {
+		root.classList.add(baseClass)
+		addedBaseClass = true
+	}
+}
+
+function releaseBase() {
+	classObserver?.disconnect()
+	classObserver = null
+	const root = document.documentElement
+	if (activeBase && addedBaseClass) root.classList.remove(`${activeBase}-mode`)
+	if (websiteClass) root.classList.add(websiteClass)
+	activeBase = null
+	addedBaseClass = false
+	websiteClass = null
+}
+
+function setBase(base: ThemeColors['base'] | null) {
+	if (base === activeBase) return
+	releaseBase()
+	if (!base) return
+	activeBase = base
+	enforceBase()
+	// The website rewrites the class when its own theme changes, so ours is put back each time
+	classObserver = new MutationObserver(enforceBase)
+	classObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
 }
 
 function styleElement(id: string): HTMLStyleElement {
@@ -186,16 +232,16 @@ function styleElement(id: string): HTMLStyleElement {
 	return style
 }
 
-// Only shows while the website itself is on the theme's base, light or dark.
-// Every custom theme gets a rule, so the picker can preview all of them.
+// Every custom theme gets a rule, so the picker can preview all of them
 export function applyExtraTheme(id: string, customThemes: NamedTheme[]) {
 	const presets = styleElement(STYLE_ID)
 	if (!presets.textContent) presets.textContent = EXTRA_THEMES.map(themeRule).join('\n')
 	styleElement(CUSTOM_STYLE_ID).textContent = customThemes.map(themeRule).join('\n')
 
-	const known = [...EXTRA_THEMES, ...customThemes].some((theme) => theme.id === id)
-	if (known) document.documentElement.setAttribute(THEME_ATTRIBUTE, id)
+	const theme = [...EXTRA_THEMES, ...customThemes].find((candidate) => candidate.id === id)
+	if (theme) document.documentElement.setAttribute(THEME_ATTRIBUTE, id)
 	else document.documentElement.removeAttribute(THEME_ATTRIBUTE)
+	setBase(theme?.base ?? null)
 }
 
 export function applyThemeSettings(settings: Pick<ExtensionSettings, 'extraThemes' | 'themes'>) {
@@ -218,9 +264,12 @@ export function themeFileName(name: string): string {
 	return `${slug || 'theme'}.json`
 }
 
+// Raised when the file layout changes, so older files can be recognised and converted
+export const THEME_FILE_VERSION = 1
+
 export function exportThemeFile(theme: NamedTheme): string {
-	const { id: _id, ...file } = theme
-	return JSON.stringify(file, null, '\t')
+	const { id: _id, ...colors } = theme
+	return JSON.stringify({ version: THEME_FILE_VERSION, ...colors }, null, '\t')
 }
 
 function isColor(value: unknown): value is string {
@@ -238,22 +287,35 @@ function hasColors<K extends string>(
 	)
 }
 
+export type ThemeImportResult = { theme: NamedTheme } | { error: 'invalid' | 'newer' }
+
 // Imported files are checked field by field, so a broken one can't break the page
-export function importThemeFile(contents: string, fallbackName: string): NamedTheme | null {
-	let value: Partial<Record<keyof NamedTheme, unknown>>
+export function importThemeFile(contents: string, fallbackName: string): ThemeImportResult {
+	let value: Partial<Record<keyof NamedTheme | 'version', unknown>>
 	try {
 		value = JSON.parse(contents)
 	} catch {
-		return null
+		return { error: 'invalid' }
 	}
-	if (typeof value !== 'object' || value === null) return null
+	if (typeof value !== 'object' || value === null) return { error: 'invalid' }
+	const { version } = value
+	if (typeof version !== 'number' || !Number.isInteger(version)) return { error: 'invalid' }
+	if (version > THEME_FILE_VERSION) return { error: 'newer' }
+
 	const { name, base, surfaces, text, divider, accent, accentContrast, colors } = value
-	if (base !== 'light' && base !== 'dark') return null
-	if (!Array.isArray(surfaces) || surfaces.length !== 7 || !surfaces.every(isColor)) return null
-	if (!hasColors(text, ['primary', 'default', 'tertiary'] as const)) return null
-	if (!hasColors(colors, ['red', 'orange', 'blue', 'purple'] as const)) return null
-	if (!isColor(divider) || !isColor(accent) || !isColor(accentContrast)) return null
-	return createCustomTheme(typeof name === 'string' && name.trim() ? name.trim() : fallbackName, {
+	if (base !== 'light' && base !== 'dark') return { error: 'invalid' }
+	if (!Array.isArray(surfaces) || surfaces.length !== 7 || !surfaces.every(isColor)) {
+		return { error: 'invalid' }
+	}
+	if (!hasColors(text, ['primary', 'default', 'tertiary'] as const)) return { error: 'invalid' }
+	if (!hasColors(colors, ['red', 'orange', 'blue', 'purple'] as const)) {
+		return { error: 'invalid' }
+	}
+	if (!isColor(divider) || !isColor(accent) || !isColor(accentContrast)) {
+		return { error: 'invalid' }
+	}
+	const fileName = typeof name === 'string' && name.trim() ? name.trim() : fallbackName
+	const theme = createCustomTheme(fileName, {
 		base,
 		surfaces: surfaces as ThemeColors['surfaces'],
 		text: { primary: text.primary, default: text.default, tertiary: text.tertiary },
@@ -262,4 +324,5 @@ export function importThemeFile(contents: string, fallbackName: string): NamedTh
 		accentContrast,
 		colors: { red: colors.red, orange: colors.orange, blue: colors.blue, purple: colors.purple },
 	})
+	return { theme }
 }

@@ -318,7 +318,7 @@ const messages = defineMessages({
 	'feature.extraThemes.description': {
 		id: 'feature.extraThemes.description',
 		defaultMessage:
-			"Adds Catppuccin, Dracula, Gruvbox, Rosé Pine and Solarized to the color themes in Modrinth's settings, and lets you create your own.",
+			"Adds Catppuccin, Gruvbox, Rosé Pine, Solarized and Synthwave '84 to the color themes in Modrinth's settings, and lets you create your own.",
 	},
 	'feature.activitySparkline.title': {
 		id: 'feature.activitySparkline.title',

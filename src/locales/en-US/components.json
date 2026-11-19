@@ -228,7 +228,13 @@
     "defaultMessage": "Import"
   },
   "extraThemes.importFailed": {
-    "defaultMessage": "Some files couldn't be imported because they aren't valid themes."
+    "defaultMessage": "Couldn't import {file}"
+  },
+  "extraThemes.importInvalid": {
+    "defaultMessage": "This file isn't a valid theme."
+  },
+  "extraThemes.importNewer": {
+    "defaultMessage": "This theme was made with a newer version of Modrinth Extras. Update the extension to import it."
   },
   "extraThemes.newTheme": {
     "defaultMessage": "My theme"

@@ -1,5 +1,4 @@
 <template>
-	<HorizontalRule class="col-span-full" />
 	<ThemeCard
 		v-for="theme in EXTRA_THEMES"
 		:id="theme.id"
@@ -9,7 +8,7 @@
 		:selected="selected === theme.id"
 		@select="select(theme)"
 	/>
-	<div v-for="theme in customThemes" :key="theme.id" class="relative">
+	<div v-for="theme in customThemes" :key="theme.id" class="custom-theme relative">
 		<ThemeCard
 			:id="theme.id"
 			:name="theme.name"
@@ -61,26 +60,17 @@
 			@change="importFiles"
 		/>
 	</div>
-	<SettingsInlineWarning v-if="importFailed" class="col-span-full">
-		{{ formatMessage(messages['extraThemes.importFailed']) }}
-	</SettingsInlineWarning>
 
 	<CustomThemeModal ref="customModal" @save="saveTheme" @delete="remove" />
 </template>
 
 <script setup lang="ts">
 import { EditIcon, PlusIcon, TrashIcon, UploadIcon } from '@modrinth/assets'
-import {
-	Button,
-	defineMessages,
-	HorizontalRule,
-	IconButton,
-	SettingsInlineWarning,
-	useVIntl,
-} from '@modrinth/ui'
+import { Button, defineMessages, IconButton, useVIntl } from '@modrinth/ui'
 import { onBeforeUnmount, onMounted, ref, shallowRef, useTemplateRef, watch } from 'vue'
 
-import { getSettings, type NamedTheme, saveSettings, type ThemeColors } from '../../core/settings'
+import { showNotification } from '../../content/notifications'
+import { getSettings, type NamedTheme, saveSettings } from '../../core/settings'
 import {
 	applyExtraTheme,
 	createCustomTheme,
@@ -97,6 +87,8 @@ const props = defineProps<{
 	containerId: string
 }>()
 
+const SELECTED_ATTRIBUTE = 'data-modrinth-extras-theme-selected'
+
 const { formatMessage } = useVIntl()
 
 const messages = defineMessages({
@@ -107,20 +99,27 @@ const messages = defineMessages({
 	'extraThemes.newTheme': { id: 'extraThemes.newTheme', defaultMessage: 'My theme' },
 	'extraThemes.importFailed': {
 		id: 'extraThemes.importFailed',
-		defaultMessage: "Some files couldn't be imported because they aren't valid themes.",
+		defaultMessage: "Couldn't import {file}",
+	},
+	'extraThemes.importInvalid': {
+		id: 'extraThemes.importInvalid',
+		defaultMessage: "This file isn't a valid theme.",
+	},
+	'extraThemes.importNewer': {
+		id: 'extraThemes.importNewer',
+		defaultMessage:
+			'This theme was made with a newer version of Modrinth Extras. Update the extension to import it.',
 	},
 })
 
 // Only the extension stores these, like the accent color, so they apply and save right away
 const selected = ref(props.savedSelected)
 const customThemes = shallowRef<NamedTheme[]>(structuredClone(props.savedCustom))
-const importFailed = ref(false)
 
 const customModal = useTemplateRef<InstanceType<typeof CustomThemeModal>>('customModal')
 const fileInput = useTemplateRef<HTMLInputElement>('fileInput')
 
 let grid: HTMLElement | null = null
-let selectingBase = false
 
 watch([selected, customThemes], async ([id, themes]) => {
 	applyExtraTheme(id, themes)
@@ -132,28 +131,9 @@ watch([selected, customThemes], async ([id, themes]) => {
 	}
 })
 
-// The website's own buttons sit next to ours in the grid, starting with "Sync with system"
-function baseButton(base: ThemeColors['base']): HTMLElement | undefined {
-	const websiteButtons = grid
-		? [...grid.querySelectorAll<HTMLElement>(':scope > button.preview-radio')]
-		: []
-	return websiteButtons
-		.slice(1)
-		.find((button) => button.querySelector('.preview')?.classList.contains(`${base}-mode`))
-}
-
-// The base theme is what Modrinth saves for the site and the app, through its own save button
-function selectBase(base: ThemeColors['base']) {
-	const button = baseButton(base)
-	if (!button || button.classList.contains('selected')) return
-	selectingBase = true
-	button.click()
-	selectingBase = false
-}
-
-function select(theme: Pick<NamedTheme, 'id' | 'base'>) {
+// The website's own setting is left alone, so no save button shows up for it
+function select(theme: Pick<NamedTheme, 'id'>) {
 	selected.value = theme.id
-	selectBase(theme.base)
 }
 
 function uniqueName(name: string): string {
@@ -189,12 +169,22 @@ async function importFiles(event: Event) {
 	const input = event.target as HTMLInputElement
 	const files = [...(input.files ?? [])]
 	input.value = ''
-	importFailed.value = false
 	const imported: NamedTheme[] = []
 	for (const file of files) {
-		const theme = importThemeFile(await file.text(), file.name.replace(/\.json$/i, ''))
-		if (theme) imported.push(theme)
-		else importFailed.value = true
+		const result = importThemeFile(await file.text(), file.name.replace(/\.json$/i, ''))
+		if ('theme' in result) {
+			imported.push(result.theme)
+			continue
+		}
+		showNotification({
+			type: 'error',
+			title: formatMessage(messages['extraThemes.importFailed'], { file: file.name }),
+			text: formatMessage(
+				messages[
+					result.error === 'newer' ? 'extraThemes.importNewer' : 'extraThemes.importInvalid'
+				],
+			),
+		})
 	}
 	for (const theme of imported) {
 		customThemes.value = [...customThemes.value, { ...theme, name: uniqueName(theme.name) }]
@@ -209,15 +199,60 @@ function remove(id: string) {
 }
 
 function onGridClick(event: MouseEvent) {
-	if (selectingBase) return
 	const button = (event.target as Element | null)?.closest('button.preview-radio')
 	if (button && button.parentElement === grid) selected.value = ''
 }
 
+// Marks the grid so the website's base theme is drawn unselected next to ours
+watch(selected, (id) => grid?.toggleAttribute(SELECTED_ATTRIBUTE, id !== ''))
+
 onMounted(() => {
 	grid = document.getElementById(props.containerId)?.parentElement ?? null
+	grid?.toggleAttribute(SELECTED_ATTRIBUTE, selected.value !== '')
 	grid?.addEventListener('click', onGridClick, true)
 })
 
-onBeforeUnmount(() => grid?.removeEventListener('click', onGridClick, true))
+onBeforeUnmount(() => {
+	grid?.removeAttribute(SELECTED_ATTRIBUTE)
+	grid?.removeEventListener('click', onGridClick, true)
+})
 </script>
+
+<style scoped>
+/* Pressing the card shrinks it together with its buttons, which sit outside the card itself */
+.custom-theme {
+	transition: scale 0.05s ease-in-out;
+}
+
+.custom-theme:has(> .preview-radio:active) {
+	scale: 0.95;
+}
+
+/* Repeated class, so this always outranks Modrinth's own press rule */
+.custom-theme > .preview-radio.preview-radio:active {
+	scale: 1;
+}
+</style>
+
+<style lang="scss">
+// The website still marks the base theme as selected while one of ours is, so it is drawn unselected
+.theme-options[data-modrinth-extras-theme-selected] > .preview-radio.selected {
+	color: var(--color-base);
+
+	.label .radio {
+		display: none;
+	}
+
+	// Modrinth's unchecked radio icon
+	.label::before {
+		content: '';
+		flex-shrink: 0;
+		width: 1em;
+		height: 1em;
+		margin-right: 0.5rem;
+		background-color: currentColor;
+		mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8s8 3.58 8 8s-3.58 8-8 8z'/%3E%3C/svg%3E")
+			center / contain no-repeat;
+	}
+}
+</style>

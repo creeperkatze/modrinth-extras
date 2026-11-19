@@ -18,7 +18,7 @@
 				<div class="example-text-2"></div>
 			</div>
 		</div>
-		<div class="label" :class="{ 'pr-20': hasActions }">
+		<div class="label" :class="{ '!pr-20': hasActions }">
 			<RadioButtonCheckedIcon v-if="selected" class="radio shrink-0" aria-hidden="true" />
 			<RadioButtonIcon v-else class="radio shrink-0" aria-hidden="true" />
 			<span class="min-w-0 truncate">{{ name }}</span>

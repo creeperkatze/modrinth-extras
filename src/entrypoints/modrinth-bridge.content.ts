@@ -51,6 +51,56 @@ export default defineContentScript({
 			}
 		})
 
+		type VNode = {
+			component?: { provides: Record<symbol, unknown>; subTree?: VNode } | null
+			suspense?: { activeBranch?: VNode | null } | null
+			children?: unknown
+		}
+		type NotificationManager = { addNotification: (notification: object) => void }
+
+		// The same key Modrinth's components inject the manager with
+		const NOTIFICATION_MANAGER_KEY = Symbol.for('modrinth:notificationManager')
+		let notificationManager: NotificationManager | null = null
+
+		// The website provides its toast manager from a component, not the app, so the tree is searched
+		function findNotificationManager(): NotificationManager | null {
+			if (notificationManager) return notificationManager
+			// Vue keeps the root vnode on its mount element, even in production builds
+			const nuxtEl = document.getElementById('__nuxt') as (HTMLElement & { _vnode?: VNode }) | null
+			const queue: unknown[] = [nuxtEl?._vnode]
+			for (let steps = 0; queue.length > 0 && steps < 5000; steps++) {
+				const vnode = queue.shift() as VNode | null | undefined
+				if (!vnode || typeof vnode !== 'object') continue
+				const instance = vnode.component
+				if (instance) {
+					const provided = instance.provides[NOTIFICATION_MANAGER_KEY] as
+						| NotificationManager
+						| undefined
+					if (provided) {
+						notificationManager = provided
+						return provided
+					}
+					queue.push(instance.subTree)
+					continue
+				}
+				if (vnode.suspense) queue.push(vnode.suspense.activeBranch)
+				if (Array.isArray(vnode.children)) queue.push(...vnode.children)
+			}
+			return null
+		}
+
+		window.addEventListener('message', (e: MessageEvent) => {
+			if (e.origin !== window.location.origin) return
+			if (e.data?.type !== 'modrinth-extras:notify') return
+			const manager = findNotificationManager()
+			if (!manager) {
+				console.error('[Modrinth Extras] Failed to find the website notification manager')
+				return
+			}
+			const { title, text, notificationType } = e.data
+			manager.addNotification({ title, text, type: notificationType })
+		})
+
 		function dispatchReady() {
 			window.dispatchEvent(new CustomEvent('modrinth-extras:router-ready'))
 		}
