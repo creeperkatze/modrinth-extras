@@ -1,7 +1,7 @@
 <template>
-	<!-- Combobox is full width by default, which would squeeze the search bar -->
+	<!-- Combobox is full width by default, but this should only be as wide as its label -->
 	<Combobox
-		class="!w-auto max-w-40"
+		class="!w-auto"
 		:options="options"
 		:model-value="selected.id"
 		:dropdown-min-width="200"

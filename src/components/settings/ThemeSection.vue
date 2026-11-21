@@ -24,7 +24,7 @@
 			</button>
 		</div>
 		<Accordion :open-by-default="open" overflow-visible class="w-full">
-			<div class="pb-2 pt-3">
+			<div class="pt-3">
 				<slot />
 			</div>
 		</Accordion>

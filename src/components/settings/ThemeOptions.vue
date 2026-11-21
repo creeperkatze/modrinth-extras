@@ -1,13 +1,6 @@
 <template>
-	<div ref="root" class="theme-sections mt-4 flex flex-col gap-3">
-		<ThemeSection
-			:title="formatMessage(messages['themes.section.modrinth'])"
-			:count="modrinthCount"
-			open-by-default
-		>
-			<div ref="modrinthSlot"></div>
-		</ThemeSection>
-
+	<!-- Padding, since the website resets the top margin of a card's first child -->
+	<div class="flex flex-col gap-3 pt-2">
 		<ThemeSection
 			v-for="category in categories"
 			:key="category.id"
@@ -124,10 +117,6 @@ const SELECTED_ATTRIBUTE = 'data-modrinth-extras-theme-selected'
 const { formatMessage } = useVIntl()
 
 const messages = defineMessages({
-	'themes.section.modrinth': {
-		id: 'themes.section.modrinth',
-		defaultMessage: 'Modrinth',
-	},
 	'themes.section.minecraft': {
 		id: 'themes.section.minecraft',
 		defaultMessage: 'Minecraft',
@@ -184,9 +173,6 @@ const customModal = useTemplateRef<InstanceType<typeof CustomThemeModal>>('custo
 const fileInput = useTemplateRef<HTMLInputElement>('fileInput')
 
 let grid: HTMLElement | null = null
-const root = useTemplateRef<HTMLElement>('root')
-const modrinthSlot = useTemplateRef<HTMLElement>('modrinthSlot')
-const modrinthCount = ref(0)
 
 watch([selected, customThemes], async ([id, themes]) => {
 	applyTheme(id, themes, props.showPresets)
@@ -279,18 +265,11 @@ watch(selected, (id) => grid?.toggleAttribute(SELECTED_ATTRIBUTE, isAvailable(id
 
 onMounted(() => {
 	grid = document.querySelector<HTMLElement>('.theme-options')
-	// The website's own themes move into the Modrinth section
-	if (grid) {
-		modrinthSlot.value?.append(grid)
-		modrinthCount.value = grid.childElementCount
-	}
 	grid?.toggleAttribute(SELECTED_ATTRIBUTE, isAvailable(selected.value))
 	grid?.addEventListener('click', onGridClick, true)
 })
 
 onBeforeUnmount(() => {
-	// Put back where the website had it, right before the injection
-	if (grid) root.value?.parentElement?.before(grid)
 	grid?.removeAttribute(SELECTED_ATTRIBUTE)
 	grid?.removeEventListener('click', onGridClick, true)
 })
@@ -320,11 +299,6 @@ onBeforeUnmount(() => {
 </style>
 
 <style lang="scss">
-// The section header already spaces it from the title
-.theme-sections .theme-options {
-	margin-top: 0;
-}
-
 // The website still marks the base theme as selected while one of ours is, so it is drawn unselected
 .theme-options[data-modrinth-extras-theme-selected] > .preview-radio.selected {
 	color: var(--color-base);
