@@ -1,6 +1,7 @@
 import { colord } from 'colord'
 
 import type { ExtensionSettings, NamedTheme, ThemeColors } from '../../core/settings'
+import { fileSlug } from '../../utils/download'
 import { setThemeAccent } from '../accent-color/apply'
 import { accentBackground, accentVariables } from '../accent-color/variables'
 import { PRESET_THEMES } from './presets'
@@ -48,7 +49,7 @@ function paletteVariables(theme: ThemeColors): Record<string, string> {
 const LANDING_IMAGES = 'https://cdn.modrinth.com/landing-new'
 
 // The home page hardcodes its own backgrounds and maze images per base, so they follow the theme's
-// page background instead. The maze images get a layer of it on top, which LANDING_RULES blends in.
+// page background instead. The maze images get a layer of it on top, which SHARED_RULES blends in.
 function landingVariables(theme: ThemeColors): Record<string, string> {
 	const [surface1, , surface2, , surface3, surface4] = theme.surfaces
 	const dark = theme.base === 'dark'
@@ -77,13 +78,26 @@ function landingVariables(theme: ThemeColors): Record<string, string> {
 	}
 }
 
+// Modrinth's modal backdrop is a fixed dark teal, so it takes the page background's hue instead.
+// It keeps Modrinth's lightness and opacity, so it stays dark on light themes too.
+function overlayVariables(theme: ThemeColors): Record<string, string> {
+	const { h, s } = colord(theme.surfaces[0]).toHsl()
+	const shade = (l: number, alpha: number) => colord({ h, s, l }).alpha(alpha).toRgbString()
+	return {
+		'--modrinth-extras-modal-overlay': `linear-gradient(to bottom, ${shade(15, 0.52)} 0%, ${shade(8, 0.95)} 100%)`,
+	}
+}
+
 // Multiplying tints the near white light images, but would turn the dark ones black, so those
 // take only the tint's hue and keep their own shading
-const LANDING_RULES = `html:root.light-mode[${THEME_ATTRIBUTE}] :is(.landing-hero, .users-section) {
+const SHARED_RULES = `html:root.light-mode[${THEME_ATTRIBUTE}] :is(.landing-hero, .users-section) {
 	background-blend-mode: multiply;
 }
 html:root.dark-mode[${THEME_ATTRIBUTE}] :is(.landing-hero, .users-section) {
 	background-blend-mode: color;
+}
+html:root[${THEME_ATTRIBUTE}] .modal-overlay.standard {
+	background: var(--modrinth-extras-modal-overlay);
 }`
 
 // Previews aren't painted by the accent color feature, so they carry the accent themselves
@@ -104,7 +118,7 @@ function declarations(variables: Record<string, string>): string {
 // CSS.escape keeps a theme id from breaking out of the selector
 function themeRules(theme: NamedTheme): string {
 	const id = CSS.escape(theme.id)
-	return `html:root[${THEME_ATTRIBUTE}='${id}'] {${declarations({ ...paletteVariables(theme), ...landingVariables(theme) })}
+	return `html:root[${THEME_ATTRIBUTE}='${id}'] {${declarations({ ...paletteVariables(theme), ...landingVariables(theme), ...overlayVariables(theme) })}
 }
 .${THEME_PREVIEW_CLASS}[${THEME_ATTRIBUTE}='${id}'] {${declarations(themeVariables(theme))}
 }`
@@ -170,7 +184,7 @@ function styleElement(id: string): HTMLStyleElement {
 export function applyTheme(id: string, customThemes: NamedTheme[], showPresets: boolean) {
 	const presets = styleElement(STYLE_ID)
 	if (!presets.textContent) {
-		presets.textContent = [LANDING_RULES, ...PRESET_THEMES.map(themeRules)].join('\n')
+		presets.textContent = [SHARED_RULES, ...PRESET_THEMES.map(themeRules)].join('\n')
 	}
 	styleElement(CUSTOM_STYLE_ID).textContent = customThemes.map(themeRules).join('\n')
 
@@ -194,13 +208,7 @@ export function createCustomTheme(name: string, colors: ThemeColors): NamedTheme
 
 // "Example theme" is saved as example-theme.json
 export function themeFileName(name: string): string {
-	const slug = name
-		.toLowerCase()
-		.normalize('NFKD')
-		.replace(/[\u0300-\u036f]/g, '')
-		.replace(/[^a-z0-9]+/g, '-')
-		.replace(/^-+|-+$/g, '')
-	return `${slug || 'theme'}.json`
+	return `${fileSlug(name, 'theme')}.json`
 }
 
 // Raised when the file layout changes, so older files can be recognised and converted
