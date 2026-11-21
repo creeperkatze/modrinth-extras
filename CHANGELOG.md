@@ -4,21 +4,25 @@
 
 ### Added
 
-- Lucy as a mod manager option for the copy install command in the Tools sidebar card.
-- Reset order button when customizing the sidebar, which puts the cards back in their default order.
-- Option in the Extension tab to reset all settings to their defaults.
-- Search tab in the popup for quickly searching Modrinth, with a project type picker that includes servers. Without a search, it shows the most popular projects of the picked type.
-- Creator tab in the popup with your revenue balance and upcoming payouts, and the same stat cards and charts as Modrinth's analytics dashboard for views, downloads and revenue over 7, 30 or 90 days.
-- Notifications tab in the popup with your unread Modrinth notifications, the same as the notifications dropdown on the website. You can accept or decline invites and mark notifications as read without opening Modrinth.
-- A short tour the first time you open the popup that shows where everything is. If you updated, it points out what's new and where the settings moved.
-- More themes in Modrinth's color theme settings, sorted into collapsible sections. There are Minecraft themes like Cherry Grove, Pale Garden, Deep Dark, Nether and The End, classics like Nord, Dracula, One Dark, Kanagawa and Synthwave '84, and the Catppuccin, Rosé Pine, Tokyo Night, Gruvbox, Everforest and Solarized families. In the Custom section you can create your own themes with every color adjustable, and share them as JSON files. If you only want your own themes, you can hide the preset ones in the popup. Themes bring their own accent color, which a custom accent color still overrides, and can be turned off in the popup.
+- Lots of new color themes in Modrinth's appearance settings, sorted into collapsible sections. There are Minecraft themes like Cherry Grove, Deep Dark and The End, classics like Nord, Dracula and Synthwave '84, and the Catppuccin, Rosé Pine, Tokyo Night, Gruvbox, Everforest and Solarized families.
+- Custom themes, with every color adjustable. You can share them as JSON files, and hide the preset themes in the popup if you only want your own.
+- Search tab in the popup for searching Modrinth, including servers. Without a search, it shows the most popular projects.
+- Creator tab in the popup with your revenue balance, upcoming payouts and charts of your views, downloads and revenue.
+- Notifications tab in the popup, where you can read your notifications, accept or decline invites and mark them as read.
+- A short tour the first time you open the popup, which also points out what's new after an update.
+- Lucy as a mod manager option for the copy install command in the Tools card.
+- Reset order button when customizing the sidebar.
+- Option to reset all settings to their defaults.
 
 ### Changed
 
-- Redesigned the popup settings to match Modrinth's own settings, with each feature in its own card.
-- Moved the popup settings behind the new settings button in the popup header.
-- The popup now uses your Modrinth theme, including OLED and Retro, instead of only light or dark.
+- Redesigned the popup settings to match Modrinth's own settings. They now open from the settings button in the popup header.
+- The popup now follows your Modrinth theme.
 - Updated translations.
+
+### Fixed
+
+- Fixed the text color of the buttons on the Discord and donate banners in the popup.
 
 ## [1.9.1] - 2026-11-12
 
