@@ -2,21 +2,15 @@ import { type Colord, colord } from 'colord'
 
 import type { ExtensionSettings } from '../../core/settings'
 import { setImageAccent } from './images'
+import { accentBackground, accentVariables, mix, rgba } from './variables'
 
 const STYLE_ID = 'modrinth-extras-accent-color'
 
-const rgba = (color: Colord, alpha: number) => color.alpha(alpha).toRgbString()
-
-function mix(color: Colord, base: number, amount: number) {
-	const { r, g, b } = color.toRgb()
-	const channel = (c: number) => Math.round(c * amount + base * (1 - amount))
-	return colord({ r: channel(r), g: channel(g), b: channel(b) })
-}
-
-// The brand gradients are defined per theme upstream, so they need theme-scoped rules
-function gradientStyles(color: Colord) {
+// These are defined per theme upstream, so they need theme-scoped rules
+function themeStyles(accent: string, color: Colord) {
 	return `
 html:root {
+	--color-green-bg: ${accentBackground(accent, 'light')};
 	--brand-gradient-bg: linear-gradient(0deg, ${rgba(color, 0.175)} 0%, ${rgba(color, 0.125)} 100%);
 	--brand-gradient-border: ${rgba(mix(color, 0, 0.3), 0.15)};
 	--landing-green-label: ${rgba(mix(color, 0, 0.78), 1)};
@@ -26,6 +20,7 @@ html:root:not(.retro-mode) {
 	--brand-gradient-strong-bg: linear-gradient(270deg, ${rgba(color, 0.175)} 0%, ${rgba(color, 0.12)} 100%);
 }
 html:root:is(.dark-mode, .oled-mode, .retro-mode) {
+	--color-green-bg: ${accentBackground(accent, 'dark')};
 	--brand-gradient-bg: linear-gradient(0deg, ${rgba(mix(color, 0, 0.16), 0.2)} 0%, ${rgba(mix(color, 0, 0.63), 0.1)} 100%);
 	--brand-gradient-border: ${rgba(mix(color, 255, 0.5), 0.08)};
 	--landing-green-label: ${rgba(color, 1)};
@@ -58,40 +53,49 @@ function hardcodedOverrides(color: Colord) {
 `
 }
 
-export function applyAccentColor(settings: Pick<ExtensionSettings, 'accentColor'>) {
-	const root = document.documentElement.style
-	const color = colord(settings.accentColor.color)
+// The rest is set inline, so it wins over every theme's own rules
+let inlineNames: string[] = []
 
-	if (!settings.accentColor.enabled || !color.isValid()) {
-		root.removeProperty('--color-brand')
-		root.removeProperty('--color-brand-highlight')
-		root.removeProperty('--color-brand-shadow')
-		root.removeProperty('--color-green')
-		root.removeProperty('--color-green-highlight')
-		root.removeProperty('--color-green-bg')
-		root.removeProperty('--loading-bar-gradient')
+function paint(accent: string | null) {
+	const root = document.documentElement.style
+	for (const name of inlineNames) root.removeProperty(name)
+	inlineNames = []
+	setImageAccent(accent)
+	if (!accent) {
 		document.getElementById(STYLE_ID)?.remove()
-		setImageAccent(null)
 		return
 	}
-
-	root.setProperty('--color-brand', settings.accentColor.color)
-	root.setProperty('--color-brand-highlight', rgba(color, 0.25))
-	root.setProperty('--color-brand-shadow', rgba(color, 0.7))
-	root.setProperty('--color-green', settings.accentColor.color)
-	root.setProperty('--color-green-highlight', rgba(color, 0.25))
-	root.setProperty('--color-green-bg', rgba(color, 0.1))
-	root.setProperty(
-		'--loading-bar-gradient',
-		`linear-gradient(to right, ${settings.accentColor.color} 0%, ${rgba(color, 0.5)} 100%)`,
-	)
-
+	for (const [name, value] of Object.entries(accentVariables(accent))) {
+		root.setProperty(name, value)
+		inlineNames.push(name)
+	}
 	let style = document.getElementById(STYLE_ID)
 	if (!style) {
 		style = document.createElement('style')
 		style.id = STYLE_ID
 		document.head.append(style)
 	}
-	style.textContent = gradientStyles(color) + hardcodedOverrides(color)
-	setImageAccent(settings.accentColor.color)
+	const color = colord(accent)
+	style.textContent = themeStyles(accent, color) + hardcodedOverrides(color)
+}
+
+// A custom accent color wins over the active theme's own accent
+const sources: Record<'custom' | 'theme', string | null> = { custom: null, theme: null }
+let painted: string | null = null
+
+function setAccent(source: keyof typeof sources, accent: string | null) {
+	sources[source] = accent
+	const next = sources.custom ?? sources.theme
+	if (next === painted) return
+	painted = next
+	paint(next)
+}
+
+export function applyAccentColor(settings: Pick<ExtensionSettings, 'accentColor'>) {
+	const { enabled, color } = settings.accentColor
+	setAccent('custom', enabled && colord(color).isValid() ? color : null)
+}
+
+export function setThemeAccent(accent: string | null) {
+	setAccent('theme', accent)
 }

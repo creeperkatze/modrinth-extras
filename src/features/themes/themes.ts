@@ -1,6 +1,8 @@
 import { colord } from 'colord'
 
 import type { ExtensionSettings, NamedTheme, ThemeColors } from '../../core/settings'
+import { setThemeAccent } from '../accent-color/apply'
+import { accentBackground, accentVariables } from '../accent-color/variables'
 import { PRESET_THEMES } from './presets'
 
 // An attribute, since the website rewrites the root element's classes when its theme changes
@@ -15,18 +17,16 @@ function rgba(color: string, alpha: number): string {
 	return colord(color).alpha(alpha).toRgbString()
 }
 
-// The same variables Modrinth's own themes set. A custom accent color is set inline, so it still wins.
-// Each color also gets the tints Modrinth derives from it, with its own opacities per base.
-export function themeVariables(theme: ThemeColors): Record<string, string> {
+// The same variables Modrinth's own themes set, except the accent, which the accent color feature
+// paints across the whole page. Each color also gets the tints Modrinth derives from it per base.
+function paletteVariables(theme: ThemeColors): Record<string, string> {
 	const [surface1, surface15, surface2, surface25, surface3, surface4, surface5] = theme.surfaces
 	const bgAlpha = theme.base === 'dark' ? 0.2 : 0.1
-	const colors = Object.entries({ ...theme.colors, green: theme.accent }).flatMap(
-		([name, color]) => [
-			[`--color-${name}`, color],
-			[`--color-${name}-highlight`, rgba(color, 0.25)],
-			[`--color-${name}-bg`, rgba(color, bgAlpha)],
-		],
-	)
+	const colors = Object.entries(theme.colors).flatMap(([name, color]) => [
+		[`--color-${name}`, color],
+		[`--color-${name}-highlight`, rgba(color, 0.25)],
+		[`--color-${name}-bg`, rgba(color, bgAlpha)],
+	])
 	return {
 		'--surface-1': surface1,
 		'--surface-1-5': surface15,
@@ -40,23 +40,32 @@ export function themeVariables(theme: ThemeColors): Record<string, string> {
 		'--color-text-tertiary': theme.text.tertiary,
 		'--color-divider-dark': theme.divider,
 		'--color-gradient-button-bg': `linear-gradient(180deg, ${surface4} 0%, ${surface5} 100%)`,
-		'--color-brand': theme.accent,
-		'--color-brand-highlight': rgba(theme.accent, 0.25),
-		'--color-brand-shadow': rgba(theme.accent, 0.7),
 		'--color-accent-contrast': theme.accentContrast,
-		'--loading-bar-gradient': `linear-gradient(to right, ${theme.accent} 0%, ${rgba(theme.accent, 0.5)} 100%)`,
 		...Object.fromEntries(colors),
 	}
 }
 
-// CSS.escape keeps a theme id from breaking out of the selector
-function themeRule(theme: NamedTheme): string {
-	const id = CSS.escape(theme.id)
-	const declarations = Object.entries(themeVariables(theme))
+// Previews aren't painted by the accent color feature, so they carry the accent themselves
+export function themeVariables(theme: ThemeColors): Record<string, string> {
+	return {
+		...paletteVariables(theme),
+		...accentVariables(theme.accent),
+		'--color-green-bg': accentBackground(theme.accent, theme.base),
+	}
+}
+
+function declarations(variables: Record<string, string>): string {
+	return Object.entries(variables)
 		.map(([name, value]) => `\n\t${name}: ${value};`)
 		.join('')
-	return `html:root[${THEME_ATTRIBUTE}='${id}'],
-.${THEME_PREVIEW_CLASS}[${THEME_ATTRIBUTE}='${id}'] {${declarations}
+}
+
+// CSS.escape keeps a theme id from breaking out of the selector
+function themeRules(theme: NamedTheme): string {
+	const id = CSS.escape(theme.id)
+	return `html:root[${THEME_ATTRIBUTE}='${id}'] {${declarations(paletteVariables(theme))}
+}
+.${THEME_PREVIEW_CLASS}[${THEME_ATTRIBUTE}='${id}'] {${declarations(themeVariables(theme))}
 }`
 }
 
@@ -119,14 +128,15 @@ function styleElement(id: string): HTMLStyleElement {
 // Every custom theme gets a rule, so the picker can preview all of them
 export function applyTheme(id: string, customThemes: NamedTheme[], showPresets: boolean) {
 	const presets = styleElement(STYLE_ID)
-	if (!presets.textContent) presets.textContent = PRESET_THEMES.map(themeRule).join('\n')
-	styleElement(CUSTOM_STYLE_ID).textContent = customThemes.map(themeRule).join('\n')
+	if (!presets.textContent) presets.textContent = PRESET_THEMES.map(themeRules).join('\n')
+	styleElement(CUSTOM_STYLE_ID).textContent = customThemes.map(themeRules).join('\n')
 
 	const themes = showPresets ? [...PRESET_THEMES, ...customThemes] : customThemes
 	const theme = themes.find((candidate) => candidate.id === id)
 	if (theme) document.documentElement.setAttribute(THEME_ATTRIBUTE, id)
 	else document.documentElement.removeAttribute(THEME_ATTRIBUTE)
 	setBase(theme?.base ?? null)
+	setThemeAccent(theme?.accent ?? null)
 }
 
 export function applyThemeSettings(settings: Pick<ExtensionSettings, 'themes' | 'themeLibrary'>) {

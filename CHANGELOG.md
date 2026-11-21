@@ -23,6 +23,7 @@
 ### Fixed
 
 - Fixed the text color of the buttons on the Discord and donate banners in the popup.
+- Fixed highlighted backgrounds being fainter than Modrinth's own with a custom accent color in dark mode.
 
 ## [1.9.1] - 2026-11-12
 
