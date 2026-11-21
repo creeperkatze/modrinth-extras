@@ -23,21 +23,17 @@
 			<div class="w-fit max-w-full truncate text-xl font-semibold leading-none text-contrast">
 				{{ value }}
 			</div>
-			<div v-if="change" class="flex items-center gap-1 text-xs">
-				<span
-					class="inline-flex items-center gap-1 font-semibold"
-					:class="{
-						'text-green': trend > 0,
-						'text-red': trend < 0,
-						'text-primary': trend === 0,
-					}"
-				>
-					<component :is="trendIcon" v-if="trend !== 0" aria-hidden="true" class="size-3" />
-					{{ change }}
-				</span>
-				<span class="mt-px text-primary">
-					{{ formatMessage(messages['popup.creator.vsPrevShort']) }}
-				</span>
+			<div
+				v-if="change"
+				class="flex items-center gap-1 text-xs font-semibold"
+				:class="{
+					'text-green': trend > 0,
+					'text-red': trend < 0,
+					'text-primary': trend === 0,
+				}"
+			>
+				<component :is="trendIcon" v-if="trend !== 0" aria-hidden="true" class="size-3" />
+				{{ change }}
 			</div>
 		</div>
 	</button>
@@ -46,7 +42,6 @@
 <script setup lang="ts">
 // Adapted from the stat cards of Modrinth's website analytics dashboard
 import { TrendingDownIcon, TrendingUpIcon } from '@modrinth/assets'
-import { defineMessages, useVIntl } from '@modrinth/ui'
 import { type Component, computed } from 'vue'
 
 const props = defineProps<{
@@ -62,15 +57,6 @@ const props = defineProps<{
 const emit = defineEmits<{
 	click: []
 }>()
-
-const { formatMessage } = useVIntl()
-
-const messages = defineMessages({
-	'popup.creator.vsPrevShort': {
-		id: 'popup.creator.vsPrevShort',
-		defaultMessage: 'vs prev.',
-	},
-})
 
 const trendIcon = computed(() => (props.trend >= 0 ? TrendingUpIcon : TrendingDownIcon))
 </script>

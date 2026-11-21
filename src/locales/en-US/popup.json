@@ -260,9 +260,6 @@
   "popup.creator.views": {
     "defaultMessage": "Views"
   },
-  "popup.creator.vsPrevShort": {
-    "defaultMessage": "vs prev."
-  },
   "popup.discordPrompt.dismiss": {
     "defaultMessage": "Dismiss"
   },
