@@ -35,12 +35,6 @@ export type ModdexReviewsResult =
 	| { ok: true; data: ModdexReviewsPage }
 	| { ok: false; error: 'not-found' | 'rate-limited' | 'failed' }
 
-function withRef(link: string): string {
-	const url = new URL(link)
-	url.searchParams.set('ref', REF)
-	return url.href
-}
-
 function histogramAverage(histogram: RatingStep[]): number | null {
 	const count = histogram.reduce((sum, step) => sum + step.count, 0)
 	if (!count) return null
@@ -95,7 +89,7 @@ export async function fetchModdexReviews(
 				page: list.meta.current_page,
 				lastPage: list.meta.last_page,
 				pageSize: list.meta.per_page,
-				writeReviewUrl: withRef(links.write_review),
+				writeReviewUrl: withSearchParam(links.write_review, 'ref', REF),
 			},
 		}
 	} catch (err) {

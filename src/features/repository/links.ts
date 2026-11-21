@@ -1,3 +1,5 @@
+import { parseUrl } from '../../utils/url'
+
 export type RepositoryPlatform = 'github' | 'gitlab' | 'codeberg' | 'bitbucket'
 
 export interface RepositoryInfo {
@@ -17,12 +19,8 @@ const SEGMENT = /^[A-Za-z0-9_.-]+$/
 
 // Source URLs often point at a branch/file view rather than the repo root, so only the leading path segments are used.
 export function detectRepository(sourceUrl: string): RepositoryInfo | null {
-	let url: URL
-	try {
-		url = new URL(sourceUrl)
-	} catch {
-		return null
-	}
+	const url = parseUrl(sourceUrl)
+	if (!url) return null
 
 	const host = url.hostname.replace(/^www\./, '')
 	const platform = (Object.keys(HOSTS) as RepositoryPlatform[]).find((p) => HOSTS[p] === host)

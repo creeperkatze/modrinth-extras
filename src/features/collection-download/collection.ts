@@ -2,6 +2,7 @@ import type { Labrinth } from '@modrinth/api-client'
 
 import { chunkIdsForQuery } from '../../api/chunk-ids'
 import { modrinthClient } from '../../api/client'
+import { fetchGameVersionTags } from '../../api/tags'
 
 // What an instance can hold, each in its own folder
 export type ContentKind = 'mod' | 'resourcepack' | 'shader' | 'datapack'
@@ -91,10 +92,7 @@ export function mightSupport(project: CollectionProject, selection: Selection): 
 }
 
 export async function fetchReleaseVersions(): Promise<string[]> {
-	const versions = await modrinthClient.request<Labrinth.Tags.v2.GameVersion[]>(
-		'/tag/game_version',
-		{ api: 'labrinth', version: 2 },
-	)
+	const versions = await fetchGameVersionTags()
 	return versions.filter((version) => version.version_type === 'release').map((v) => v.version)
 }
 

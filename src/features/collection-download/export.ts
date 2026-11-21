@@ -1,6 +1,6 @@
 import { strToU8, type Zippable, zipSync } from 'fflate'
 
-import { fileSlug } from '../../utils/download'
+import { slugify } from '../../utils/strings'
 import { KIND_FOLDERS, type Selection } from './collection'
 import { latestLoaderVersion, MRPACK_LOADER_KEYS } from './loader-versions'
 import type { ResolvedEntry } from './resolve'
@@ -14,7 +14,7 @@ function entryPath(entry: ResolvedEntry): string {
 }
 
 export function exportFileName(name: string, format: ExportFormat): string {
-	return `${fileSlug(name, 'collection')}.${format}`
+	return `${slugify(name, 'collection')}.${format}`
 }
 
 export class MissingLoaderVersionError extends Error {}

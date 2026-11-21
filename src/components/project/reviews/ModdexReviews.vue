@@ -148,7 +148,7 @@
 							<div class="flex flex-wrap items-center gap-x-2 gap-y-0.5">
 								<a
 									v-if="review.author.profile_url"
-									:href="withRef(review.author.profile_url)"
+									:href="withSearchParam(review.author.profile_url, 'ref', 'modrinth-extras')"
 									target="_blank"
 									rel="noopener"
 									class="no-click-animation truncate font-semibold text-contrast hover:underline"
@@ -308,6 +308,7 @@ import type { ModdexReviewsResult, ModdexSummary } from '../../../background/ext
 import { i18n } from '../../../core/i18n/i18n'
 import { formatGameVersions, loadGameVersionTags } from '../../../features/reviews/game-versions'
 import { usePagedReviews } from '../../../features/reviews/paged-reviews'
+import { withSearchParam } from '../../../utils/url'
 import PaginationSkeleton from './PaginationSkeleton.vue'
 import RatingSummarySkeleton from './RatingSummarySkeleton.vue'
 import ReviewSkeletons from './ReviewSkeletons.vue'
@@ -328,12 +329,6 @@ function renderReview(content: string): string {
 }
 
 const MODDEX_URL = 'https://moddex.gg/?ref=modrinth-extras'
-
-function withRef(link: string): string {
-	const url = new URL(link)
-	url.searchParams.set('ref', 'modrinth-extras')
-	return url.href
-}
 
 const { formatMessage } = useVIntl()
 const formatRelativeTime = useRelativeTime()

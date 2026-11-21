@@ -148,6 +148,7 @@ import {
 	type MetricKind,
 } from '../../../features/creator/analytics'
 import { fetchRevenueBalance } from '../../../features/creator/revenue'
+import { daysBefore } from '../../../utils/time'
 import AnalyticsChart, {
 	type ChartDataset,
 	type ChartHoverPayload,
@@ -388,7 +389,7 @@ const chartLabels = computed(() => {
 	})
 	return Array.from({ length: days.value }, (_, index) => {
 		const daysAgo = days.value - 1 - index
-		return formatter.format(new Date(Date.now() - daysAgo * 24 * 60 * 60_000))
+		return formatter.format(daysBefore(Date.now(), daysAgo))
 	})
 })
 

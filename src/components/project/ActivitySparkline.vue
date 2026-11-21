@@ -65,6 +65,7 @@
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
 import { modrinthClient } from '../../api/client'
+import { DAY_MS } from '../../utils/time'
 
 const props = defineProps<{ projectSlug: string; days: number }>()
 
@@ -136,7 +137,7 @@ onMounted(async () => {
 
 	try {
 		const now = Date.now()
-		const cutoff = now - DAYS * 24 * 60 * 60 * 1000
+		const cutoff = now - DAYS * DAY_MS
 
 		const versions = await modrinthClient.labrinth.versions_v3.getProjectVersions(
 			props.projectSlug,
@@ -148,7 +149,7 @@ onMounted(async () => {
 		for (const v of versions) {
 			const t = new Date(v.date_published).getTime()
 			if (t < cutoff) continue
-			const dayIndex = Math.floor((t - cutoff) / (24 * 60 * 60 * 1000))
+			const dayIndex = Math.floor((t - cutoff) / DAY_MS)
 			if (dayIndex >= 0 && dayIndex < DAYS) counts[dayIndex]++
 		}
 

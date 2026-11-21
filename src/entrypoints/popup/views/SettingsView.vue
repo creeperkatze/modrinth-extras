@@ -173,7 +173,6 @@
 
 <script setup lang="ts">
 import { GitBranch, Network } from '@lucide/vue'
-import type { Labrinth } from '@modrinth/api-client'
 import {
 	BellIcon,
 	BellRingIcon,
@@ -208,7 +207,7 @@ import {
 import { type Component, computed, h, onMounted, ref, watch } from 'vue'
 import { browser } from 'wxt/browser'
 
-import { modrinthClient } from '../../../api/client'
+import { fetchGameVersionTags, fetchLoaderTags } from '../../../api/tags'
 import ModgradeIcon from '../../../assets/icons/modgrade.svg?component'
 import ModsrcIcon from '../../../assets/icons/modsrc.svg?component'
 import CompactCombobox from '../../../components/ui/CompactCombobox.vue'
@@ -587,14 +586,8 @@ function loaderIcon(loader: string): Component | undefined {
 	return () => h(icon, { style: { color: `var(--color-platform-${loader})` } })
 }
 
-let loadersRequest: Promise<Labrinth.Tags.v2.Loader[]> | undefined
-
 async function fetchLoadersByType(...types: string[]): Promise<SelectItem[]> {
-	loadersRequest ??= modrinthClient.request<Labrinth.Tags.v2.Loader[]>('/tag/loader', {
-		api: 'labrinth',
-		version: 3,
-	})
-	const data = await loadersRequest
+	const data = await fetchLoaderTags()
 	return data
 		.filter((l) => types.some((type) => l.supported_project_types.includes(type)))
 		.map((l) => ({
@@ -605,10 +598,7 @@ async function fetchLoadersByType(...types: string[]): Promise<SelectItem[]> {
 }
 
 async function fetchGameVersions(): Promise<SelectItem[]> {
-	const data = await modrinthClient.request<Labrinth.Tags.v2.GameVersion[]>('/tag/game_version', {
-		api: 'labrinth',
-		version: 2,
-	})
+	const data = await fetchGameVersionTags()
 	return data.map((v) => ({
 		label: v.version,
 		value: v.version,

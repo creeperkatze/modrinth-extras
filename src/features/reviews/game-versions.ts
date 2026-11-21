@@ -1,13 +1,11 @@
-import type { Labrinth } from '@modrinth/api-client'
 import { formatVersionsForDisplay, type GameVersionTag } from '@modrinth/utils'
 
-import { modrinthClient } from '../../api/client'
+import { fetchGameVersionTags } from '../../api/tags'
 
 let tagsPromise: Promise<GameVersionTag[]> | null = null
 
 export function loadGameVersionTags(): Promise<GameVersionTag[]> {
-	tagsPromise ??= modrinthClient
-		.request<Labrinth.Tags.v2.GameVersion[]>('/tag/game_version', { api: 'labrinth', version: 2 })
+	tagsPromise ??= fetchGameVersionTags()
 		.then((tags) => tags as GameVersionTag[])
 		.catch((err) => {
 			console.error('[Modrinth Extras] Failed to fetch game versions:', err)

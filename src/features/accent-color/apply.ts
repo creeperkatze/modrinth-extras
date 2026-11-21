@@ -1,8 +1,9 @@
 import { type Colord, colord } from 'colord'
 
 import type { ExtensionSettings } from '../../core/settings'
+import { mix, rgba } from '../../utils/color'
 import { setImageAccent } from './images'
-import { accentBackground, accentVariables, mix, rgba } from './variables'
+import { accentBackground, accentVariables } from './variables'
 
 const STYLE_ID = 'modrinth-extras-accent-color'
 

@@ -1,7 +1,8 @@
 import { colord } from 'colord'
 
 import type { ExtensionSettings, NamedTheme, ThemeColors } from '../../core/settings'
-import { fileSlug } from '../../utils/download'
+import { rgba } from '../../utils/color'
+import { slugify } from '../../utils/strings'
 import { setThemeAccent } from '../accent-color/apply'
 import { accentBackground, accentVariables } from '../accent-color/variables'
 import { PRESET_THEMES } from './presets'
@@ -13,10 +14,6 @@ export const THEME_PREVIEW_CLASS = 'modrinth-extras-theme-preview'
 
 const STYLE_ID = 'modrinth-extras-themes'
 const CUSTOM_STYLE_ID = 'modrinth-extras-custom-themes'
-
-function rgba(color: string, alpha: number): string {
-	return colord(color).alpha(alpha).toRgbString()
-}
 
 // The same variables Modrinth's own themes set, except the accent, which the accent color feature
 // paints across the whole page. Each color also gets the tints Modrinth derives from it per base.
@@ -208,7 +205,7 @@ export function createCustomTheme(name: string, colors: ThemeColors): NamedTheme
 
 // "Example theme" is saved as example-theme.json
 export function themeFileName(name: string): string {
-	return `${fileSlug(name, 'theme')}.json`
+	return `${slugify(name, 'theme')}.json`
 }
 
 // Raised when the file layout changes, so older files can be recognised and converted

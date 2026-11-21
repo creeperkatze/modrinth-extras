@@ -8,6 +8,7 @@ import {
 import type { App } from 'vue'
 import { createI18n } from 'vue-i18n'
 
+import { baseLanguage } from '../../utils/strings'
 import { getSettings } from '../settings'
 import { LOCALES } from './locales'
 
@@ -45,8 +46,7 @@ export function detectBrowserLocale(): string {
 	for (const lang of langs) {
 		const exact = LOCALES.find((l) => l.code.toLowerCase() === lang.toLowerCase())
 		if (exact) return exact.code
-		const prefix = lang.split('-')[0].toLowerCase()
-		const match = LOCALES.find((l) => l.code.split('-')[0].toLowerCase() === prefix)
+		const match = LOCALES.find((l) => baseLanguage(l.code) === baseLanguage(lang))
 		if (match) return match.code
 	}
 	return 'en-US'

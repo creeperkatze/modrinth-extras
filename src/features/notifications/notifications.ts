@@ -3,6 +3,7 @@ import { browser } from 'wxt/browser'
 
 import { chunkIdsForQuery } from '../../api/chunk-ids'
 import { modrinthClient } from '../../api/client'
+import { chunk } from '../../utils/array'
 
 export type NotificationExtraData = {
 	project?: Labrinth.Projects.v3.Project
@@ -138,10 +139,8 @@ export async function fetchExtraNotificationData(
 }
 
 export async function markNotificationsAsRead(ids: string[]): Promise<void> {
-	const unique = [...new Set(ids)]
 	const BATCH_SIZE = 50
-	for (let i = 0; i < unique.length; i += BATCH_SIZE) {
-		const batch = unique.slice(i, i + BATCH_SIZE)
+	for (const batch of chunk([...new Set(ids)], BATCH_SIZE)) {
 		await modrinthClient.labrinth.notifications_v2.markMultipleAsRead(batch)
 	}
 }

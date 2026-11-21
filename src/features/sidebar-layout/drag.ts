@@ -1,3 +1,4 @@
+import { prefersReducedMotion } from '../../utils/dom'
 import { sidebarCards } from './cards'
 
 const SNAP_DURATION = 200
@@ -6,10 +7,6 @@ const SCROLL_SPEED = 14
 const INDICATOR_HEIGHT = 3
 // Where the line sits when there is no card on one side of it
 const EDGE_GAP = 6
-
-function prefersReducedMotion(): boolean {
-	return window.matchMedia('(prefers-reduced-motion: reduce)').matches
-}
 
 // Cards that render nothing on this page can't be dropped against
 function visibleCards(sidebar: Element, except?: HTMLElement): HTMLElement[] {

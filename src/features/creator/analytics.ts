@@ -1,6 +1,8 @@
 import type { Labrinth } from '@modrinth/api-client'
 
 import { modrinthClient } from '../../api/client'
+import { chunk } from '../../utils/array'
+import { daysBefore } from '../../utils/time'
 
 export type MetricKind = 'downloads' | 'views' | 'revenue'
 
@@ -80,15 +82,10 @@ export async function fetchAnalyticsRange(
 ): Promise<AnalyticsRange> {
 	const slices = days * 2
 	const end = new Date()
-	const start = new Date(end.getTime() - slices * 24 * 60 * 60_000)
-
-	const batches: string[][] = []
-	for (let i = 0; i < projectIds.length; i += PROJECT_IDS_PER_REQUEST) {
-		batches.push(projectIds.slice(i, i + PROJECT_IDS_PER_REQUEST))
-	}
+	const start = daysBefore(end, slices)
 
 	const responses = await Promise.all(
-		batches.map((batch) =>
+		chunk(projectIds, PROJECT_IDS_PER_REQUEST).map((batch) =>
 			modrinthClient.labrinth.analytics_v3.fetch({
 				time_range: {
 					start: start.toISOString(),

@@ -1,3 +1,5 @@
+import { baseLanguage } from '../../utils/strings'
+
 interface LanguageDetectorResult {
 	detectedLanguage: string
 	confidence: number
@@ -69,8 +71,7 @@ export function detectTranslationCandidate(
 			if (!top || top.confidence < MIN_DETECTION_CONFIDENCE) return null
 
 			const sourceLanguage = top.detectedLanguage
-			if (sourceLanguage.split('-')[0].toLowerCase() === targetLanguage.split('-')[0].toLowerCase())
-				return null
+			if (baseLanguage(sourceLanguage) === baseLanguage(targetLanguage)) return null
 
 			return { sourceLanguage }
 		} catch (err) {

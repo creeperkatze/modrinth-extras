@@ -130,7 +130,6 @@
 </template>
 
 <script setup lang="ts">
-import type { Labrinth } from '@modrinth/api-client'
 import {
 	ArrowUpDownIcon,
 	CpuIcon,
@@ -146,7 +145,7 @@ import {
 import { defineMessages, IconButton, useVIntl } from '@modrinth/ui'
 import { type Component, computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
-import { modrinthClient } from '../../api/client'
+import { fetchCategoryTags, fetchGameVersionTags, fetchLoaderTags } from '../../api/tags'
 import { navigate } from '../../content/page-router'
 import { recentSearchesItem, withRecentSearch } from '../../features/search/recent-searches'
 
@@ -694,18 +693,9 @@ onMounted(async () => {
 
 	try {
 		const [loadersRes, categoriesRes, versionsRes] = await Promise.all([
-			modrinthClient.request<Labrinth.Tags.v2.Loader[]>('/tag/loader', {
-				api: 'labrinth',
-				version: 2,
-			}),
-			modrinthClient.request<Labrinth.Tags.v2.Category[]>('/tag/category', {
-				api: 'labrinth',
-				version: 2,
-			}),
-			modrinthClient.request<Labrinth.Tags.v2.GameVersion[]>('/tag/game_version', {
-				api: 'labrinth',
-				version: 2,
-			}),
+			fetchLoaderTags(),
+			fetchCategoryTags(),
+			fetchGameVersionTags(),
 		])
 		loaders.value = loadersRes.map((l) => l.name)
 		const allCats = categoriesRes.filter((c) => c.project_type !== 'minecraft_java_server')

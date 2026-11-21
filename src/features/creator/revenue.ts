@@ -1,4 +1,5 @@
 import { modrinthClient } from '../../api/client'
+import { daysBefore } from '../../utils/time'
 
 export interface RevenueBalance {
 	available: number
@@ -36,7 +37,7 @@ export function splitPendingRevenue(
 
 	const processing =
 		upcoming.find(({ date }) => {
-			const earned = new Date(new Date(date).getTime() - DAYS_UNTIL_AVAILABLE * 24 * 60 * 60_000)
+			const earned = daysBefore(new Date(date), DAYS_UNTIL_AVAILABLE)
 			return utcMonth(earned) === utcMonth(now)
 		}) ?? null
 

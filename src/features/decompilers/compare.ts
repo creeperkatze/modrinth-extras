@@ -1,4 +1,5 @@
 import { modrinthClient } from '../../api/client'
+import { overlaps } from '../../utils/array'
 import { primaryJar, type Version } from './jars'
 import { modsrcUrl } from './urls'
 
@@ -21,10 +22,6 @@ interface JarVersion {
 function withJar(version: Version): JarVersion | null {
 	const fileId = primaryJar(version)?.id
 	return fileId ? { version, fileId } : null
-}
-
-function sharesAny(a: string[], b: string[]): boolean {
-	return a.some((value) => b.includes(value))
 }
 
 // Older version on the left so the diff reads forward in time.
@@ -63,12 +60,12 @@ export async function fetchVersionComparisons(
 
 	const { loaders, game_versions, date_published } = current.version
 	const others = versions
-		.filter((v) => v.id !== current.version.id && sharesAny(v.loaders, loaders))
+		.filter((v) => v.id !== current.version.id && overlaps(v.loaders, loaders))
 		.sort((a, b) => b.date_published.localeCompare(a.date_published))
 		.flatMap((v) => withJar(v) ?? [])
 	const earlier = others.filter((o) => o.version.date_published < date_published)
 	const previous =
-		earlier.find((o) => sharesAny(o.version.game_versions, game_versions)) ?? earlier[0]
+		earlier.find((o) => overlaps(o.version.game_versions, game_versions)) ?? earlier[0]
 
 	return {
 		previous: previous ? comparison(current, previous) : null,

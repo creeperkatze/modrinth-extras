@@ -227,7 +227,7 @@ import {
 	MissingLoaderVersionError,
 } from '../../features/collection-download/export'
 import { type Resolution, resolveCollection } from '../../features/collection-download/resolve'
-import { saveBlob } from '../../utils/download'
+import { saveBlob } from '../../utils/dom'
 
 const props = defineProps<{
 	collectionId: string

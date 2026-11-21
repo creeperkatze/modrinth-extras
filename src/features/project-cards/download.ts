@@ -1,6 +1,6 @@
 import type { Labrinth } from '@modrinth/api-client'
 
-import { saveBlob } from '../../utils/download'
+import { saveBlob } from '../../utils/dom'
 
 export async function saveFiles(files: Labrinth.Versions.v3.VersionFile[]) {
 	const blobs = await Promise.all(

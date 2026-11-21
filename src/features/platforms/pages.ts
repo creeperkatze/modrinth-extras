@@ -1,3 +1,5 @@
+import { parseUrl } from '../../utils/url'
+
 export type PlatformPage =
 	| { platform: 'curseforge'; slug: string }
 	| { platform: 'hangar'; owner: string; slug: string }
@@ -32,12 +34,8 @@ const HANGAR_RESERVED = new Set([
 ])
 
 export function parsePlatformPage(url: string): PlatformPage | null {
-	let parsed: URL
-	try {
-		parsed = new URL(url)
-	} catch {
-		return null
-	}
+	const parsed = parseUrl(url)
+	if (!parsed) return null
 
 	if (parsed.hostname === 'www.curseforge.com') {
 		const slug = parsed.pathname.match(CURSEFORGE_PATTERN)?.[1]

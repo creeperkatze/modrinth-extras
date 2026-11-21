@@ -11,13 +11,6 @@ export function saveBlob(blob: Blob, filename: string) {
 	setTimeout(() => URL.revokeObjectURL(url), 60_000)
 }
 
-// "Example Name" becomes example-name
-export function fileSlug(name: string, fallback: string): string {
-	const slug = name
-		.toLowerCase()
-		.normalize('NFKD')
-		.replace(/\p{Diacritic}/gu, '')
-		.replace(/[^a-z0-9]+/g, '-')
-		.replace(/^-+|-+$/g, '')
-	return slug || fallback
+export function prefersReducedMotion(): boolean {
+	return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }

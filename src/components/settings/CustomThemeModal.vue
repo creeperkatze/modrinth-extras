@@ -172,7 +172,7 @@ import { computed, ref, shallowRef, useTemplateRef } from 'vue'
 import type { NamedTheme, ThemeColors } from '../../core/settings'
 import { MODRINTH_THEMES, PRESET_THEMES } from '../../features/themes/presets'
 import { exportThemeFile, themeFileName, themeVariables } from '../../features/themes/themes'
-import { saveBlob } from '../../utils/download'
+import { saveBlob } from '../../utils/dom'
 
 const emit = defineEmits<{
 	save: [theme: NamedTheme]
