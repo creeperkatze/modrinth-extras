@@ -45,6 +45,47 @@ function paletteVariables(theme: ThemeColors): Record<string, string> {
 	}
 }
 
+const LANDING_IMAGES = 'https://cdn.modrinth.com/landing-new'
+
+// The home page hardcodes its own backgrounds and maze images per base, so they follow the theme's
+// page background instead. The maze images get a layer of it on top, which LANDING_RULES blends in.
+function landingVariables(theme: ThemeColors): Record<string, string> {
+	const [surface1, , surface2, , surface3, surface4] = theme.surfaces
+	const dark = theme.base === 'dark'
+	const tint = `linear-gradient(${surface1}, ${surface1})`
+	const [hero, lower] = dark
+		? ['landing.webp', 'landing-lower.webp']
+		: ['landing-light.webp', 'landing-lower-light.webp']
+	const border = theme.text.tertiary
+	return {
+		'--landing-raw-bg': surface1,
+		'--landing-maze-bg': `${tint}, url('${LANDING_IMAGES}/${hero}')`,
+		'--landing-maze-gradient-bg': `${tint}, url('${LANDING_IMAGES}/${lower}')`,
+		'--landing-maze-outer-bg': surface1,
+		'--landing-transition-gradient-start': rgba(surface1, 0),
+		'--landing-transition-gradient-end': surface1,
+		'--landing-creator-gradient': `linear-gradient(180deg, ${surface1} 0%, ${surface2} 100%)`,
+		'--landing-hover-card-gradient': `radial-gradient(50% 50% at 50% 50%, ${surface4} 0%, ${rgba(surface2, 0.77)} 100%)`,
+		'--landing-blob-gradient': `radial-gradient(50% 50% at 50% 50%, ${rgba(surface4, 0.35)} 0%, ${rgba(surface3, 0.27)} 100%)`,
+		'--landing-blob-shadow': `2px 2px 12px rgba(0, 0, 0, 0.16), inset 2px 2px 64px ${rgba(surface4, 0.45)}`,
+		'--landing-card-bg': rgba(surface4, dark ? 0.15 : 0.8),
+		'--landing-border-color': rgba(border, 0.55),
+		'--landing-border-gradient': `linear-gradient(to bottom right, ${rgba(border, 0.75)} 0%, ${rgba(border, dark ? 0.18 : 0.34)} 100%)`,
+		'--landing-color-heading': theme.text.primary,
+		'--landing-color-subheading': theme.text.default,
+		'--medal-promotion-bg': surface1,
+	}
+}
+
+// Multiplying tints the near white light images, but would turn the dark ones black, so those
+// take only the tint's hue and keep their own shading
+const LANDING_RULES = `html:root.light-mode[${THEME_ATTRIBUTE}] :is(.landing-hero, .users-section) {
+	background-blend-mode: multiply;
+}
+html:root.dark-mode[${THEME_ATTRIBUTE}] :is(.landing-hero, .users-section) {
+	background-blend-mode: color;
+}`
+
 // Previews aren't painted by the accent color feature, so they carry the accent themselves
 export function themeVariables(theme: ThemeColors): Record<string, string> {
 	return {
@@ -63,7 +104,7 @@ function declarations(variables: Record<string, string>): string {
 // CSS.escape keeps a theme id from breaking out of the selector
 function themeRules(theme: NamedTheme): string {
 	const id = CSS.escape(theme.id)
-	return `html:root[${THEME_ATTRIBUTE}='${id}'] {${declarations(paletteVariables(theme))}
+	return `html:root[${THEME_ATTRIBUTE}='${id}'] {${declarations({ ...paletteVariables(theme), ...landingVariables(theme) })}
 }
 .${THEME_PREVIEW_CLASS}[${THEME_ATTRIBUTE}='${id}'] {${declarations(themeVariables(theme))}
 }`
@@ -128,7 +169,9 @@ function styleElement(id: string): HTMLStyleElement {
 // Every custom theme gets a rule, so the picker can preview all of them
 export function applyTheme(id: string, customThemes: NamedTheme[], showPresets: boolean) {
 	const presets = styleElement(STYLE_ID)
-	if (!presets.textContent) presets.textContent = PRESET_THEMES.map(themeRules).join('\n')
+	if (!presets.textContent) {
+		presets.textContent = [LANDING_RULES, ...PRESET_THEMES.map(themeRules)].join('\n')
+	}
 	styleElement(CUSTOM_STYLE_ID).textContent = customThemes.map(themeRules).join('\n')
 
 	const themes = showPresets ? [...PRESET_THEMES, ...customThemes] : customThemes
