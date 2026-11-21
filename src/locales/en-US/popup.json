@@ -41,6 +41,12 @@
   "feature.browserNotifications.title": {
     "defaultMessage": "Browser notifications"
   },
+  "feature.collectionDownload.description": {
+    "defaultMessage": "Download a collection as a modpack or zip file, with every project that supports your game version and loader."
+  },
+  "feature.collectionDownload.title": {
+    "defaultMessage": "Collection download"
+  },
   "feature.compareVersions.description": {
     "defaultMessage": "Compare the decompiled code of versions in modsrc, from version pages, the versions list and the changelog."
   },

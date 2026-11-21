@@ -3,6 +3,7 @@ import '../assets/tailwind.css'
 import { browser } from 'wxt/browser'
 
 import { pageState, remountForChangedSettings } from '../content/injection'
+import { collectionInjections } from '../content/injections/collection'
 import { headerInjections } from '../content/injections/header'
 import { projectInjections } from '../content/injections/project'
 import { searchInjections } from '../content/injections/search'
@@ -37,6 +38,7 @@ export default defineContentScript({
 			...siteInjections(),
 			...searchInjections(getCurrentSettings),
 			...settingsInjections(getCurrentSettings),
+			...collectionInjections(getCurrentSettings),
 		]
 
 		function markHydrated() {

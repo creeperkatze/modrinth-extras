@@ -172,6 +172,7 @@ import { computed, ref, shallowRef, useTemplateRef } from 'vue'
 import type { NamedTheme, ThemeColors } from '../../core/settings'
 import { MODRINTH_THEMES, PRESET_THEMES } from '../../features/themes/presets'
 import { exportThemeFile, themeFileName, themeVariables } from '../../features/themes/themes'
+import { saveBlob } from '../../utils/download'
 
 const emit = defineEmits<{
 	save: [theme: NamedTheme]
@@ -286,15 +287,7 @@ function copyFrom(presetId: string) {
 function exportTheme() {
 	if (!draft.value) return
 	const blob = new Blob([exportThemeFile(draft.value)], { type: 'application/json' })
-	const url = URL.createObjectURL(blob)
-	const anchor = document.createElement('a')
-	anchor.href = url
-	anchor.download = themeFileName(draft.value.name)
-	anchor.style.display = 'none'
-	document.body.appendChild(anchor)
-	anchor.click()
-	anchor.remove()
-	setTimeout(() => URL.revokeObjectURL(url), 60_000)
+	saveBlob(blob, themeFileName(draft.value.name))
 }
 
 function save() {

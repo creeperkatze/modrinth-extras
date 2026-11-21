@@ -9,6 +9,7 @@
 - Search tab in the popup for searching Modrinth, including servers. Without a search, it shows the most popular projects.
 - Creator tab in the popup with your revenue balance, upcoming payouts and charts of your views, downloads and revenue.
 - Notifications tab in the popup, where you can read your notifications, accept or decline invites and mark them as read.
+- Download button on collections, which bundles every project that supports your game version and loader into a modpack (.mrpack) or zip file, with their required dependencies.
 - A short tour the first time you open the popup, which also points out what's new after an update.
 - Lucy as a mod manager option for the copy install command in the Tools card.
 - Reset order button when customizing the sidebar.

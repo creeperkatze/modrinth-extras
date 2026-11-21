@@ -179,6 +179,7 @@ import {
 	BellRingIcon,
 	BoxesIcon,
 	ChartIcon,
+	CollectionIcon,
 	CurrencyIcon,
 	CurseForgeIcon,
 	DiscordIcon,
@@ -358,6 +359,15 @@ const messages = defineMessages({
 		id: 'feature.compareVersions.description',
 		defaultMessage:
 			'Compare the decompiled code of versions in modsrc, from version pages, the versions list and the changelog.',
+	},
+	'feature.collectionDownload.title': {
+		id: 'feature.collectionDownload.title',
+		defaultMessage: 'Collection download',
+	},
+	'feature.collectionDownload.description': {
+		id: 'feature.collectionDownload.description',
+		defaultMessage:
+			'Download a collection as a modpack or zip file, with every project that supports your game version and loader.',
 	},
 	'feature.dependencySidebar.title': {
 		id: 'feature.dependencySidebar.title',
@@ -731,6 +741,12 @@ const contentPageFeatures = computed<FeatureDef[]>(() => [
 		icon: ModsrcIcon,
 		title: formatMessage(messages['feature.compareVersions.title']),
 		description: formatMessage(messages['feature.compareVersions.description']),
+	},
+	{
+		key: 'collectionDownload',
+		icon: CollectionIcon,
+		title: formatMessage(messages['feature.collectionDownload.title']),
+		description: formatMessage(messages['feature.collectionDownload.description']),
 	},
 	{
 		key: 'galleryBackground',
