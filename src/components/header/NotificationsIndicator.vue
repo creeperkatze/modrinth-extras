@@ -66,7 +66,6 @@
 </template>
 
 <script setup lang="ts">
-import type { Labrinth } from '@modrinth/api-client'
 import { BellIcon, CheckCheckIcon, DropdownIcon, HistoryIcon } from '@modrinth/assets'
 import {
 	Button,
@@ -138,10 +137,7 @@ async function refreshNotifications() {
 
 async function fetchUserId(): Promise<string | null> {
 	try {
-		const user = await modrinthClient.request<Labrinth.Users.v2.User>('/user', {
-			api: 'labrinth',
-			version: 2,
-		})
+		const user = await modrinthClient.labrinth.users_v3.getAuthenticated()
 		return user.id
 	} catch {
 		return null

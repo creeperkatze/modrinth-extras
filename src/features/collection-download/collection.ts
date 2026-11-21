@@ -69,10 +69,7 @@ async function collectionProjectIds(collectionId: string): Promise<string[]> {
 	if (collectionId !== 'following') {
 		return (await modrinthClient.labrinth.collections.get(collectionId)).projects
 	}
-	const user = await modrinthClient.request<Labrinth.Users.v2.User>('/user', {
-		api: 'labrinth',
-		version: 2,
-	})
+	const user = await modrinthClient.labrinth.users_v3.getAuthenticated()
 	const follows = await modrinthClient.request<Labrinth.Projects.v2.Project[]>(
 		`/user/${user.id}/follows`,
 		{ api: 'labrinth', version: 2 },

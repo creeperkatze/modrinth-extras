@@ -1,4 +1,3 @@
-import type { Labrinth } from '@modrinth/api-client'
 import { storage } from '@wxt-dev/storage'
 import { browser } from 'wxt/browser'
 
@@ -87,10 +86,7 @@ export async function updateBadge() {
 			return
 		}
 
-		const user = await modrinthClient.request<Labrinth.Users.v2.User>('/user', {
-			api: 'labrinth',
-			version: 2,
-		})
+		const user = await modrinthClient.labrinth.users_v3.getAuthenticated()
 		if (!user?.id) throw new Error('Failed to fetch user')
 
 		const notifs = await fetchNotifications(user.id)

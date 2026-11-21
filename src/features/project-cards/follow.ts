@@ -1,4 +1,3 @@
-import type { Labrinth } from '@modrinth/api-client'
 import { ref } from 'vue'
 
 import { modrinthClient } from '../../api/client'
@@ -13,10 +12,7 @@ export async function initFollowState(): Promise<void> {
 	if (initPromise) return initPromise
 	initPromise = (async () => {
 		try {
-			const user = await modrinthClient.request<Labrinth.Users.v2.User>('/user', {
-				api: 'labrinth',
-				version: 2,
-			})
+			const user = await modrinthClient.labrinth.users_v3.getAuthenticated()
 			followUserId.value = user?.id ?? null
 			if (!followUserId.value) return
 		} catch (err) {
@@ -33,4 +29,15 @@ export async function initFollowState(): Promise<void> {
 		}
 	})()
 	return initPromise
+}
+
+export async function toggleFollow(projectSlug: string): Promise<void> {
+	const following = followedSlugs.value?.has(projectSlug) ?? false
+	await modrinthClient.request(`/project/${projectSlug}/follow`, {
+		api: 'labrinth',
+		version: 2,
+		method: following ? 'DELETE' : 'POST',
+	})
+	if (following) followedSlugs.value?.delete(projectSlug)
+	else followedSlugs.value?.add(projectSlug)
 }

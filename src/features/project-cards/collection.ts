@@ -12,10 +12,7 @@ export async function initCollections(): Promise<void> {
 	if (initPromise) return initPromise
 	initPromise = (async () => {
 		try {
-			const user = await modrinthClient.request<Labrinth.Users.v2.User>('/user', {
-				api: 'labrinth',
-				version: 2,
-			})
+			const user = await modrinthClient.labrinth.users_v3.getAuthenticated()
 			if (!user?.id) {
 				collections.value = []
 				return

@@ -135,7 +135,7 @@ import {
 } from '@modrinth/ui'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
-import { getAuthToken, modrinthClient } from '../../api/client'
+import { getAuthToken } from '../../api/client'
 import { navigate } from '../../content/page-router'
 import {
 	collections,
@@ -144,7 +144,7 @@ import {
 } from '../../features/project-cards/collection'
 import { getRequiredDependencyFiles } from '../../features/project-cards/dependencies'
 import { saveFiles } from '../../features/project-cards/download'
-import { followedSlugs } from '../../features/project-cards/follow'
+import { followedSlugs, toggleFollow } from '../../features/project-cards/follow'
 import { getQuickDownload, type QuickDownloadSettings } from '../../features/project-cards/version'
 
 const { formatMessage } = useVIntl()
@@ -342,21 +342,7 @@ async function handleFollow() {
 	if (followLoading.value) return
 	followLoading.value = true
 	try {
-		if (isFollowed.value) {
-			await modrinthClient.request(`/project/${props.projectSlug}/follow`, {
-				api: 'labrinth',
-				version: 2,
-				method: 'DELETE',
-			})
-			followedSlugs.value?.delete(props.projectSlug)
-		} else {
-			await modrinthClient.request(`/project/${props.projectSlug}/follow`, {
-				api: 'labrinth',
-				version: 2,
-				method: 'POST',
-			})
-			followedSlugs.value?.add(props.projectSlug)
-		}
+		await toggleFollow(props.projectSlug)
 	} catch (err) {
 		console.error('[Modrinth Extras] Follow action failed:', err)
 	} finally {

@@ -1,4 +1,4 @@
-import { type Labrinth, ModrinthApiError } from '@modrinth/api-client'
+import { ModrinthApiError } from '@modrinth/api-client'
 import { storage } from '@wxt-dev/storage'
 import { ref } from 'vue'
 
@@ -30,10 +30,7 @@ export async function loadAccount() {
 		account.value = await accountItem.getValue()
 		if (account.value) accountLoaded.value = true
 
-		const user = await modrinthClient.request<Labrinth.Users.v2.User>('/user', {
-			api: 'labrinth',
-			version: 2,
-		})
+		const user = await modrinthClient.labrinth.users_v3.getAuthenticated()
 		account.value = { id: user.id, username: user.username, avatarUrl: user.avatar_url ?? null }
 		await accountItem.setValue(account.value)
 	} catch (err) {

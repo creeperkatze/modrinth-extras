@@ -64,8 +64,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
-import { modrinthClient } from '../../api/client'
-import { DAY_MS } from '../../utils/time'
+import { cachedDailyReleases, fetchDailyReleases } from '../../features/activity/releases'
 
 const props = defineProps<{ projectSlug: string; days: number }>()
 
@@ -73,8 +72,6 @@ const DAYS = props.days
 const PAD_TOP = 10
 const PAD_BOTTOM = 10
 const SMOOTH_SIGMA = 0.8
-
-const dataCache = new Map<string, { counts: number[]; hasData: boolean }>()
 
 const wrapperEl = ref<HTMLElement | null>(null)
 const svgWidth = ref(0)
@@ -124,11 +121,9 @@ onMounted(async () => {
 		resizeObserver.observe(wrapperEl.value)
 	}
 
-	const cacheKey = `${props.projectSlug}:${DAYS}`
-	const cached = dataCache.get(cacheKey)
+	const cached = cachedDailyReleases(props.projectSlug, DAYS)
 	if (cached) {
-		dailyCounts.value = cached.counts
-		hasAnyData.value = cached.hasData
+		show(cached)
 		loaded.value = true
 		// Show immediately without animation on re-mount
 		animated.value = true
@@ -136,32 +131,18 @@ onMounted(async () => {
 	}
 
 	try {
-		const now = Date.now()
-		const cutoff = now - DAYS * DAY_MS
-
-		const versions = await modrinthClient.labrinth.versions_v3.getProjectVersions(
-			props.projectSlug,
-			{ include_changelog: false, apiVersion: 3 },
-		)
-		if (!Array.isArray(versions)) return
-
-		const counts = Array(DAYS).fill(0)
-		for (const v of versions) {
-			const t = new Date(v.date_published).getTime()
-			if (t < cutoff) continue
-			const dayIndex = Math.floor((t - cutoff) / DAY_MS)
-			if (dayIndex >= 0 && dayIndex < DAYS) counts[dayIndex]++
-		}
-
-		dailyCounts.value = counts
-		hasAnyData.value = counts.some((c) => c > 0)
-		dataCache.set(cacheKey, { counts, hasData: hasAnyData.value })
+		show(await fetchDailyReleases(props.projectSlug, DAYS))
 	} catch (err) {
-		console.warn('[Modrinth Extras] Failed to load activity data:', err)
+		console.error('[Modrinth Extras] Failed to load activity data:', err)
 	} finally {
 		loaded.value = true
 	}
 })
+
+function show(counts: number[]) {
+	dailyCounts.value = counts
+	hasAnyData.value = counts.some((count) => count > 0)
+}
 
 onUnmounted(() => {
 	resizeObserver?.disconnect()
