@@ -168,6 +168,7 @@ overrides:
   '@modrinth/utils': workspace:*
   '@modrinth/assets': workspace:*
   '@modrinth/tooling-config': workspace:*
+  vue3-apexcharts: 1.11.1
 
 patchedDependencies:
   wxt@0.21.5: 60ffe44f31a470c5f2c51a699e4ca260fef13d1659358c456e5d13c1057cd2b5
@@ -589,8 +590,8 @@ importers:
         specifier: ^2.2.4
         version: 2.2.4(ace-builds@1.45.2)(vue@3.5.46(typescript@5.9.3))
       vue3-apexcharts:
-        specifier: ^1.5.2
-        version: 1.11.3(apexcharts@4.7.0)(vue@3.5.46(typescript@5.9.3))
+        specifier: 1.11.1
+        version: 1.11.1(apexcharts@4.7.0)(vue@3.5.46(typescript@5.9.3))
       xss:
         specifier: ^1.0.14
         version: 1.0.17
@@ -7093,8 +7094,8 @@ packages:
       ace-builds: '*'
       vue: ^3
 
-  vue3-apexcharts@1.11.3:
-    resolution: {integrity: sha512-YmXi+cslU5XYg3uNF30R3B2MS7TfHsx1bcemi389GipELpzS4jGCs/iZjeXm8R3Brgrlp/ZqOpwemd39AmGWVQ==}
+  vue3-apexcharts@1.11.1:
+    resolution: {integrity: sha512-MbN3vg8bMG19wc0Lm1HkeQvODgLm56DgpIxtNUO0xpf/JCzYWVGE4jzXp2JISzy2s3Kul1yOxNQUYsLvKQ5L9g==}
     peerDependencies:
       apexcharts: '>=5.10.0'
       vue: '>=3.0.0'
@@ -13515,7 +13516,7 @@ snapshots:
       resize-observer-polyfill: 1.5.1
       vue: 3.5.46(typescript@5.9.3)
 
-  vue3-apexcharts@1.11.3(apexcharts@4.7.0)(vue@3.5.46(typescript@5.9.3)):
+  vue3-apexcharts@1.11.1(apexcharts@4.7.0)(vue@3.5.46(typescript@5.9.3)):
     dependencies:
       apexcharts: 4.7.0
       vue: 3.5.46(typescript@5.9.3)

@@ -25,6 +25,7 @@ overrides:
   '@modrinth/utils': 'workspace:*'
   '@modrinth/assets': 'workspace:*'
   '@modrinth/tooling-config': 'workspace:*'
+  vue3-apexcharts: 1.11.1
 
 patchedDependencies:
   wxt@0.21.5: patches/wxt@0.21.5.patch
