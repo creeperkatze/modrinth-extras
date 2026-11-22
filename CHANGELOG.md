@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-11-22
+
 ### Added
 
 - Lots of new color themes in Modrinth's appearance settings, sorted into collapsible sections. There are Minecraft themes like Cherry Grove, Deep Dark and The End, classics like Nord, Dracula and Synthwave '84, and the Catppuccin, Rosé Pine, Tokyo Night, Gruvbox, Everforest and Solarized families.
@@ -672,7 +674,8 @@ Thanks for using Modrinth Extras, and a big thank you to everyone helping transl
 
 Initial release
 
-[Unreleased]: https://github.com/creeperkatze/modrinth-extras/compare/v1.9.1...HEAD
+[Unreleased]: https://github.com/creeperkatze/modrinth-extras/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/creeperkatze/modrinth-extras/compare/v1.9.1...v2.0.0
 [1.9.1]: https://github.com/creeperkatze/modrinth-extras/compare/v1.9.0...v1.9.1
 [1.9.0]: https://github.com/creeperkatze/modrinth-extras/compare/v1.8.3...v1.9.0
 [1.8.3]: https://github.com/creeperkatze/modrinth-extras/compare/v1.8.2...v1.8.3
