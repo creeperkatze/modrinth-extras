@@ -39,7 +39,6 @@ export async function findHangarProject(project: MatchableProject): Promise<Plat
 	return match ? toMatch(match) : null
 }
 
-// The Hangar project behind a page, for finding it on Modrinth.
 export async function getHangarSource(
 	owner: string,
 	slug: string,

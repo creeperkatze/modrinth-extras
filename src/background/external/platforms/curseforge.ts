@@ -9,7 +9,7 @@ import {
 } from '../../../features/platforms/matching'
 import { backgroundQueries } from '../../query'
 
-// CurseForge's API needs a key that cannot ship in a public extension; api.curse.tools mirrors it keylessly.
+// api.curse.tools mirrors CurseForge's API without the key, which can't ship in an extension
 const client = new CurseForgeClient({
 	baseUrl: 'https://api.curse.tools',
 	userAgent: USER_AGENT,
@@ -151,7 +151,6 @@ export async function findCurseForgeProject(
 	return mod ? toMatch(mod) : null
 }
 
-// The CurseForge project behind a page, for finding it on Modrinth.
 export async function getCurseForgeSource(slug: string): Promise<MatchableProject | null> {
 	const response = await client.mods.search({ gameId: GameId.Minecraft, slug })
 	const mod = (response.data ?? []).find((candidate) => candidate.slug === slug)

@@ -17,8 +17,7 @@ export const THEME_PREVIEW_CLASS = 'modrinth-extras-theme-preview'
 const STYLE_ID = 'modrinth-extras-themes'
 const CUSTOM_STYLE_ID = 'modrinth-extras-custom-themes'
 
-// The same variables Modrinth's own themes set, except the accent, which the accent color feature
-// paints across the whole page. Each color also gets the tints Modrinth derives from it per base.
+// Modrinth's theme variables and their per base tints. The accent is left to the accent color feature.
 function paletteVariables(theme: ThemeColors): Record<string, string> {
 	const [surface1, surface15, surface2, surface25, surface3, surface4, surface5] = theme.surfaces
 	const bgAlpha = theme.base === 'dark' ? 0.2 : 0.1
@@ -47,8 +46,7 @@ function paletteVariables(theme: ThemeColors): Record<string, string> {
 
 const LANDING_IMAGES = 'https://cdn.modrinth.com/landing-new'
 
-// The home page hardcodes its own backgrounds and maze images per base, so they follow the theme's
-// page background instead. The maze images get a layer of it on top, which SHARED_RULES blends in.
+// The home page hardcodes its backgrounds per base, so they take the theme's page background instead
 function landingVariables(theme: ThemeColors): Record<string, string> {
 	const [surface1, , surface2, , surface3, surface4] = theme.surfaces
 	const dark = theme.base === 'dark'
@@ -77,8 +75,7 @@ function landingVariables(theme: ThemeColors): Record<string, string> {
 	}
 }
 
-// Modrinth's modal backdrop is a fixed dark teal, so it takes the page background's hue instead.
-// It keeps Modrinth's lightness and opacity, so it stays dark on light themes too.
+// Modrinth's backdrop is a fixed dark teal, so it takes the theme's hue but stays dark
 function overlayVariables(theme: ThemeColors): Record<string, string> {
 	const { h, s } = colord(theme.surfaces[0]).toHsl()
 	const shade = (l: number, alpha: number) => colord({ h, s, l }).alpha(alpha).toRgbString()
@@ -87,8 +84,7 @@ function overlayVariables(theme: ThemeColors): Record<string, string> {
 	}
 }
 
-// Multiplying tints the near white light images, but would turn the dark ones black, so those
-// take only the tint's hue and keep their own shading
+// Multiplying would turn the dark images black, so those only take the hue
 const SHARED_RULES = `html:root.light-mode[${THEME_ATTRIBUTE}] :is(.landing-hero, .users-section) {
 	background-blend-mode: multiply;
 }
@@ -125,8 +121,7 @@ function themeRules(theme: NamedTheme): string {
 
 const MODE_CLASSES = ['light-mode', 'dark-mode', 'oled-mode', 'retro-mode']
 
-// Modrinth's styles are built on the root element's theme class, so an active theme swaps in its
-// own base there without touching the website's saved theme, and puts the website's class back after
+// Swaps in the theme's base class on the root element without touching the website's saved theme
 let activeBase: ThemeColors['base'] | null = null
 let addedBaseClass = false
 let websiteClass: string | null = null

@@ -10,7 +10,6 @@ export interface VersionComparison {
 
 export interface VersionComparisons {
 	previous: VersionComparison | null
-	// Every other version sharing a loader, newest first
 	all: VersionComparison[]
 }
 

@@ -1,9 +1,7 @@
 import { storage } from '@wxt-dev/storage'
 
 export interface IntroductionTourState {
-	// People who updated get told what changed instead of a plain introduction
 	updated: boolean
-	// Steps added in later versions still show up for people who saw the earlier ones
 	seenSteps: string[]
 }
 

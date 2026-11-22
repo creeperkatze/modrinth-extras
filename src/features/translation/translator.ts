@@ -35,7 +35,7 @@ function getTranslator(): TranslatorStatic | undefined {
 	return (globalThis as unknown as { Translator?: TranslatorStatic }).Translator
 }
 
-// Chrome's on-device Translator/LanguageDetector APIs; unavailable in Firefox.
+// Chrome's on-device translation APIs, which Firefox doesn't have
 export function isTranslationSupported(): boolean {
 	return getLanguageDetector() !== undefined && getTranslator() !== undefined
 }
@@ -48,7 +48,7 @@ export interface TranslationCandidate {
 
 const candidateCache = new Map<string, Promise<TranslationCandidate | null>>()
 
-// Null means translation doesn't apply here (unsupported, or already in the target language).
+// Null when unsupported or already in the target language
 export function detectTranslationCandidate(
 	cacheKey: string,
 	text: string,

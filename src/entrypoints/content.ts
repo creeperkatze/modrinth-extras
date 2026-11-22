@@ -137,8 +137,7 @@ export default defineContentScript({
 		domObserver.observe(document.documentElement, { childList: true, subtree: true })
 		ctx.onInvalidated(() => domObserver.disconnect())
 
-		// A newer instance of this content script has taken over, for example after an extension
-		// update while this tab stayed open. Our injected UI is removed so it doesn't linger.
+		// A newer copy of this script took over, like after an update, so our UI is removed
 		ctx.onInvalidated(() => {
 			for (const inj of injections) inj.unmount()
 		})

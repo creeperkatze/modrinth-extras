@@ -113,7 +113,6 @@ const messages = defineMessages({
 	},
 })
 
-// Auth state
 const userId = ref<string | null | false>(null)
 
 const notificationsData = ref<Notification[] | null>(null)

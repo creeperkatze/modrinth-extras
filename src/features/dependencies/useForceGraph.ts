@@ -62,7 +62,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 	const panning = ref(false)
 	const draggingNodeId = ref<string | null>(null)
 
-	// Non-reactive; kept in sync with their reactive counterparts via addNode/addEdge
+	// Kept in sync with the reactive lists by addNode and addEdge
 	const nodeById = new Map<string, GraphNode>()
 	const edgeKeys = new Set<string>()
 	const nodeElements = new Map<string, SVGGElement>()
@@ -74,8 +74,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 	let dragStartMouse = { x: 0, y: 0 }
 	let dragStartNode = { x: 0, y: 0 }
 	let dragMoved = false
-	// While set, the viewport refits on every tick so the whole graph stays framed as it
-	// settles. Cleared when the simulation ends or the user pans/zooms/drags.
+	// Refits the view on every tick until the simulation ends or the user moves the view
 	let autoFit = false
 	let zoomBehavior: ZoomBehavior<SVGSVGElement, unknown> | null = null
 	// Not reactive so panning and zooming don't re-render the whole graph
@@ -83,7 +82,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 	let zoom = 1
 	let viewportEl: SVGGElement | null = null
 
-	// Subset of nodes/edges the simulation and view act on; the consumer can narrow it.
+	// The consumer can narrow what the simulation and view act on
 	let activeNodes: () => GraphNode[] = () => nodes.value
 	let activeEdges: () => GraphEdge[] = () => edges.value
 
@@ -134,7 +133,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		return `M ${x1} ${y1} L ${x2} ${y2}`
 	}
 
-	// Direction-independent key for an edge's node pair
+	// The same for both directions
 	function pairKey(edge: GraphEdge): string {
 		return edge.source < edge.target
 			? `${edge.source}|||${edge.target}`
@@ -180,7 +179,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 	function startSimulation(alpha = 1) {
 		simulation?.stop()
 
-		// Incident-edge count per node, busier deps get a wider ring
+		// Busier nodes get a wider ring
 		const degree = new Map<string, number>()
 		for (const edge of activeEdges()) {
 			degree.set(edge.source, (degree.get(edge.source) ?? 0) + 1)
@@ -189,8 +188,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		const deg = (node: GraphNode) => degree.get(node.id) ?? 0
 		const maxDepth = activeNodes().reduce((max, n) => Math.max(max, n.depth), 0)
 
-		// Pin the root so the tree radiates from a fixed point; an existing pin
-		// (e.g. after the user dragged the root) stays where it is.
+		// The tree radiates from the pinned root, which keeps a pin from being dragged
 		for (const node of activeNodes()) {
 			if (node.isRoot && node.fx === null) {
 				node.fx = node.x
@@ -206,7 +204,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 				'link',
 				forceLink<GraphNode, D3Link>(getD3Links())
 					.id((n) => n.id)
-					// Fixed gap per edge; busier endpoints get a roomier ring (bubble)
+					// Busier endpoints get a roomier ring
 					.distance((l) => {
 						const s = l.source as GraphNode
 						const t = l.target as GraphNode
@@ -220,7 +218,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 					.radius((n) => getNodeRadius(n) + 26)
 					.strength(1),
 			)
-			// Concentric rings by depth; the pinned root anchors the graph, so no centring force
+			// Rings by depth. The pinned root anchors the graph, so there is no centering force
 			.force(
 				'radial',
 				forceRadial<GraphNode>((n) => n.depth * 250, 0, 0).strength((n) =>
@@ -368,7 +366,7 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 
 	function onMouseUp() {
 		if (draggingNode) {
-			// The root stays pinned wherever it's dropped; other nodes rejoin the sim.
+			// The root stays pinned where it's dropped, other nodes rejoin the simulation
 			if (!draggingNode.isRoot) {
 				draggingNode.fx = null
 				draggingNode.fy = null

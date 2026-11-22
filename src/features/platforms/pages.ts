@@ -5,7 +5,6 @@ export type PlatformPage =
 	| { platform: 'hangar'; owner: string; slug: string }
 	| { platform: 'spigot'; id: number }
 
-// The Modrinth project found for a project page on another platform.
 export interface ModrinthMatch {
 	slug: string
 	name: string

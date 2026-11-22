@@ -12,8 +12,7 @@ export function systemTheme(): ModrinthTheme {
 	return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
-// Resolved like the website does. The color-mode cookie holds the chosen theme, or "system"
-// to follow the device, where dark means the dark theme that was used last.
+// The color-mode cookie holds the theme or "system". Dark then means the last used dark theme.
 export async function readModrinthTheme(): Promise<ModrinthTheme> {
 	try {
 		const cookie = await browser.cookies.get({ url: 'https://modrinth.com', name: 'color-mode' })

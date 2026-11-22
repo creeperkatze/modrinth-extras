@@ -65,7 +65,7 @@ export function defineSyncedList<T extends { id: string }>(name: string) {
 
 	async function save() {
 		await load()
-		// Firefox's structured clone doesn't support Vue reactive proxies, serialize first.
+		// Firefox can't structured clone Vue's reactive proxies
 		const next = JSON.parse(JSON.stringify(state)) as SyncedListState<T>
 		const before = new Map(saved.items.map((item) => [item.id, JSON.stringify(item)]))
 		const set: { key: `sync:${string}`; value: unknown }[] = []

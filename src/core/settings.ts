@@ -222,7 +222,7 @@ export async function clearSettings(): Promise<void> {
 
 export async function saveSettings(settings: ExtensionSettings): Promise<void> {
 	await startInit()
-	// Firefox's structured clone doesn't support Vue reactive proxies, serialize first.
+	// Firefox can't structured clone Vue's reactive proxies
 	const plain = JSON.parse(JSON.stringify(settings)) as ExtensionSettings
 	const next = split(plain)
 	const current = split(cache)

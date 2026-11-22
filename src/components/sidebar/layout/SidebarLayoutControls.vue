@@ -70,7 +70,6 @@ const messages = defineMessages({
 
 interface EditableCard {
 	element: HTMLElement
-	// Where the overlay is teleported, inside the card's container
 	target: HTMLElement
 	setting: SidebarCardSetting
 }

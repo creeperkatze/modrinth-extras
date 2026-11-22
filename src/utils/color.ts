@@ -1,6 +1,5 @@
 import { type Colord, colord } from 'colord'
 
-// The color as an rgba() string with the given opacity
 export function rgba(color: string | Colord, alpha: number): string {
 	return (typeof color === 'string' ? colord(color) : color).alpha(alpha).toRgbString()
 }

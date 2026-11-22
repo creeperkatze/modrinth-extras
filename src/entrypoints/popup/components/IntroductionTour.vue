@@ -94,7 +94,6 @@ interface IntroductionTourStep {
 	title: MessageDescriptor
 	description: MessageDescriptor
 	updatedDescription?: MessageDescriptor
-	// Shows a New badge for people who updated
 	newFeature?: boolean
 }
 

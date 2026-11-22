@@ -175,7 +175,6 @@ export async function findSpigotProject(project: MatchableProject): Promise<Plat
 	return resource ? toResourceMatch(resource) : null
 }
 
-// The SpigotMC resource behind a page, for finding it on Modrinth.
 export async function getSpigotSource(id: number): Promise<MatchableProject | null> {
 	let resource: Resource
 	try {

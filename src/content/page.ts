@@ -8,7 +8,7 @@ export function getProjectSlug(): string | null {
 	return match?.[2] ?? null
 }
 
-// The current page URL without its query or hash.
+// Without the query or hash
 export function currentPageUrl(): string {
 	return window.location.origin + window.location.pathname
 }
@@ -22,7 +22,6 @@ function findVisibleElement(...selectors: string[]): HTMLElement | null {
 	return null
 }
 
-// Returns the sidebar container to append into, or null if not on a supported page.
 function findSidebarParent(): HTMLElement | null {
 	const path = window.location.pathname
 

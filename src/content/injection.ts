@@ -39,9 +39,7 @@ interface InjectionConfig {
 	attach: (container: HTMLElement) => boolean
 	createApp: () => App
 	persistent: boolean
-	// Keeps the injection mounted across tab navigations within the same project
 	projectScoped?: boolean
-	// Remounts the injection when this key changes between navigations within the same project
 	scopeKey?: () => string
 }
 

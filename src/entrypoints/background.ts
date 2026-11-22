@@ -230,14 +230,12 @@ export default defineBackground(() => {
 		}
 	})
 
-	// Ensure the service worker wakes immediately on browser start
 	browser.runtime.onStartup.addListener(() => {
 		void trackExtensionStarted()
 		showCachedBadge()
 		void refreshAccountAndBadge()
 	})
 
-	// React instantly when the user signs in or out
 	browser.cookies.onChanged.addListener((changeInfo) => {
 		if (changeInfo.cookie.name === 'auth-token' && changeInfo.cookie.domain.includes('modrinth')) {
 			void refreshAccountAndBadge()

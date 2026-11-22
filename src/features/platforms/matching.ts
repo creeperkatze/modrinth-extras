@@ -4,7 +4,6 @@ import { modrinthClient } from '../../api/client'
 
 export type Platform = 'curseforge' | 'hangar' | 'spigot'
 
-// A project or author located on another platform.
 export interface PlatformMatch {
 	platform: Platform
 	name: string
@@ -13,14 +12,12 @@ export interface PlatformMatch {
 	downloads?: number
 }
 
-// A Modrinth project as other platforms are matched against it.
 export interface MatchableProject {
 	name: string
 	slug: string
 	authors: string[]
 }
 
-// A search result from another platform.
 export interface MatchCandidate<T> {
 	item: T
 	name: string

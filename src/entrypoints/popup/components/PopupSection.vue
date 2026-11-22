@@ -27,7 +27,6 @@ import type { Component } from 'vue'
 defineProps<{
 	title: string
 	icon?: Component
-	// For content that brings its own cards
 	bare?: boolean
 }>()
 </script>

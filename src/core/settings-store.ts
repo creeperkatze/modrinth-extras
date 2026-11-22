@@ -28,7 +28,6 @@ export async function loadSettingsStore(): Promise<ExtensionSettings> {
 	return store
 }
 
-// Returns a function that stops following
 export function followSettingsChanges(onChange: () => void): () => void {
 	return watchSettings((settings) => {
 		assignChanged(store, settings)

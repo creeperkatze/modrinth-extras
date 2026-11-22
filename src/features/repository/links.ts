@@ -17,7 +17,7 @@ const HOSTS: Record<RepositoryPlatform, string> = {
 
 const SEGMENT = /^[A-Za-z0-9_.-]+$/
 
-// Source URLs often point at a branch/file view rather than the repo root, so only the leading path segments are used.
+// Source URLs often point at a file view, so only the leading path segments are kept
 export function detectRepository(sourceUrl: string): RepositoryInfo | null {
 	const url = parseUrl(sourceUrl)
 	if (!url) return null

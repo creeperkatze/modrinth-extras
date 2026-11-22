@@ -10,8 +10,7 @@ function storageKey(key: string): `local:${string}` {
 	return `local:popupCache:${key}`
 }
 
-// The popup starts from scratch every time it opens, so the last result is shown right away
-// and only refreshed once it is older than maxAge. A null key means there is nothing to load.
+// Shows the last result right away and refreshes it once older than maxAge. A null key loads nothing.
 export function useCachedResource<T>(
 	key: () => string | null,
 	load: () => Promise<T>,

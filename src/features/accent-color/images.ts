@@ -4,9 +4,7 @@ type Rect = [number, number, number, number]
 
 interface BrandImage {
 	match: string
-	// Normalized area to leave alone, like a green server icon
 	exclude?: Rect
-	// Wider hue window for images that use a green to teal gradient
 	hue?: { center: number; range: number }
 }
 

@@ -4,7 +4,6 @@ import { daysBefore } from '../../utils/time'
 export interface RevenueBalance {
 	available: number
 	pending: number
-	// Pending revenue by the date it becomes available
 	dates: Record<string, number>
 }
 
@@ -24,8 +23,7 @@ function utcMonth(date: Date): string {
 	return `${date.getUTCFullYear()}-${date.getUTCMonth()}`
 }
 
-// Same split as the website's revenue page. Revenue becomes available 60 days after the end
-// of the month it was earned in, so the payout earned this month is still being processed.
+// Like the website, revenue becomes available 60 days after the end of the month it was earned in
 export function splitPendingRevenue(
 	balance: RevenueBalance,
 	now = new Date(),

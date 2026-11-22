@@ -70,13 +70,10 @@ const messages = defineMessages({
 })
 
 export interface ProjectType {
-	// Used in project links, like /mod/sodium
 	id: string
-	// The project type in search filters and results
 	searchType: string
 	discoverPath: string
 	label: MessageDescriptor
-	// Shown in the search bar while this type is picked
 	placeholder: MessageDescriptor
 	icon: Component
 }

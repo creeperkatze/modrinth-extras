@@ -115,7 +115,6 @@ import type { Notification } from '../../features/notifications/notifications'
 const props = defineProps<{
 	notification: Notification
 	resolveHref: (path: string) => string
-	// For cards that sit directly on the page background
 	raised?: boolean
 }>()
 

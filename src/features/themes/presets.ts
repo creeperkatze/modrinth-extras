@@ -2,7 +2,6 @@ import type { NamedTheme } from './library'
 
 export interface ThemeCategory {
 	id: string
-	// Shown as is when the settings have no translated title for the category
 	name: string
 	themes: NamedTheme[]
 }

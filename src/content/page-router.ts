@@ -1,19 +1,9 @@
-/**
- * Navigation helpers for the ISOLATED world content script.
- *
- * The actual Nuxt router lives in the MAIN world and is accessed via
- * the router-bridge content script through CustomEvents.
- */
-
-// Resolve a relative path to an absolute URL on the current origin
 export function resolveLink(link: string): string {
 	if (link.startsWith('http')) return link
 	return window.location.origin + link
 }
 
-// Navigate using the page router (SPA) via the MAIN world bridge.
-// Uses postMessage instead of CustomEvent because Firefox's Xray
-// wrappers strip event.detail when crossing the ISOLATED > MAIN boundary.
+// Goes through the MAIN world bridge with postMessage, since Firefox strips CustomEvent details
 export function navigate(path: string): void {
 	if (path.startsWith('http')) {
 		try {
@@ -25,7 +15,7 @@ export function navigate(path: string): void {
 				return
 			}
 		} catch {
-			// invalid URL, treat as relative path
+			// Not a valid URL, so it is treated as a path
 		}
 	}
 

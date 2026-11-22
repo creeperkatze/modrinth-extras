@@ -2,7 +2,6 @@ import { storage } from '@wxt-dev/storage'
 
 interface PromptState {
 	dismissed: boolean
-	// Missing for people who installed before it was saved
 	installedAt?: number
 }
 

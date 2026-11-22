@@ -17,7 +17,6 @@ export interface ResolvedEntry {
 	kind: ContentKind
 	versionNumber: string
 	file: Labrinth.Versions.v3.VersionFile
-	// Pulled in by another project rather than being part of the collection
 	dependency: boolean
 }
 

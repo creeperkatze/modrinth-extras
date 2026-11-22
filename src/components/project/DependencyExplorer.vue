@@ -276,7 +276,7 @@ import {
 	useForceGraph,
 } from '../../features/dependencies/useForceGraph'
 
-// Cast: duplicate `vue` instances under pnpm make `@modrinth/assets`/`@modrinth/ui` `Component` types nominally unrelated.
+// Duplicate vue copies under pnpm make the Modrinth packages' Component types incompatible
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const searchIcon = SearchIcon as any
 
@@ -382,11 +382,9 @@ const {
 	getDragMoved,
 } = useForceGraph(() => svgRef.value)
 
-// Deepest depth in the graph; how many levels the slider shows.
 const maxDepth = computed(() => nodes.value.reduce((max, node) => Math.max(max, node.depth), 0))
 const depthLimit = ref(0)
 
-// Rebuild the simulation over the current visible set so the layout reorganizes.
 function refreshSimulation(fit: boolean) {
 	if (fit) setAutoFit(true)
 	startSimulation(0.4)
@@ -441,7 +439,6 @@ const visibleNodeIds = computed(() => {
 
 const visibleNodes = computed(() => nodes.value.filter((node) => visibleNodeIds.value.has(node.id)))
 
-// Edges whose endpoints both survived the prune.
 const visibleEdges = computed(() =>
 	typeVisibleEdges.value.filter(
 		(edge) => visibleNodeIds.value.has(edge.source) && visibleNodeIds.value.has(edge.target),
@@ -453,11 +450,10 @@ setActiveAccessors(
 	() => visibleEdges.value,
 )
 
-// Not read in the template; applyHoverState updates DOM classes directly to avoid re-rendering.
+// Not read in the template, applyHoverState sets DOM classes directly to avoid re-rendering
 const hoveredNodeId = ref<string | null>(null)
 const searchQuery = ref('')
 
-// Visible nodes whose name matches the search query; empty while the query has no matches.
 const searchMatches = computed(() => {
 	const query = searchQuery.value.trim().toLowerCase()
 	if (!query) return []
@@ -492,8 +488,7 @@ function applyHoverState() {
 	const nodeId = hoveredNodeId.value
 	const searchMatchIds = searching ? new Set(searchMatches.value.map((node) => node.id)) : null
 
-	// Highlighted means search matches, plus the hovered node and whatever it points to, so
-	// hovering still works normally while searching, without sticking once the hover ends.
+	// Search matches plus the hovered node and what it points to, so hovering still works while searching
 	let highlighted: Set<string> | null = searchMatchIds ? new Set(searchMatchIds) : null
 	if (nodeId) {
 		highlighted ??= new Set()
@@ -525,7 +520,6 @@ function applyHoverState() {
 	appliedDimmedEdgeKeys = nextDimmedEdges
 }
 
-// Batches hover updates onto a single frame.
 function scheduleHoverUpdate() {
 	if (hoverFrame !== null) return
 	hoverFrame = window.requestAnimationFrame(() => {
@@ -568,7 +562,6 @@ function onCanvasMouseLeave() {
 
 watch(hoveredNodeId, scheduleHoverUpdate)
 
-// Clear the hover if its node left view, and re-apply on structural changes.
 watch([visibleNodeIds, visibleEdges], () => {
 	if (hoveredNodeId.value && !visibleNodeIds.value.has(hoveredNodeId.value)) {
 		hoveredNodeId.value = null

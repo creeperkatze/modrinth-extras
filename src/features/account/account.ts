@@ -9,7 +9,6 @@ export interface Account {
 	avatarUrl: string | null
 }
 
-// The signed in Modrinth account, null when signed out
 export const accountItem = storage.defineItem<Account | null>('local:account', {
 	defaultValue: null,
 })

@@ -1,4 +1,3 @@
-// Null for anything that isn't a valid absolute URL
 export function parseUrl(url: string): URL | null {
 	try {
 		return new URL(url)

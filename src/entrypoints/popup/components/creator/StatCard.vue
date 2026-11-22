@@ -48,7 +48,6 @@ const props = defineProps<{
 	label: string
 	value: string
 	icon: Component
-	// Already formatted, like "+12.5%"
 	change: string | null
 	trend: number
 	active?: boolean

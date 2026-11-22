@@ -124,12 +124,10 @@ const props = defineProps<{
 	iconUrl?: string | null
 	author?: string
 	summary?: string
-	// Categories and loaders mixed, like a project's tags on the website
 	tags?: string[]
 	environment?: Labrinth.Projects.v3.Environment
 	downloads?: number
 	followers?: number
-	// Servers show these instead of downloads and follows
 	serverOnlinePlayers?: number
 	serverStatusOnline?: boolean
 	serverRecentPlays?: number

@@ -4,7 +4,6 @@ import { chunkIdsForQuery } from '../../api/chunk-ids'
 import { modrinthClient } from '../../api/client'
 import { fetchGameVersionTags } from '../../api/tags'
 
-// What an instance can hold, each in its own folder
 export type ContentKind = 'mod' | 'resourcepack' | 'shader' | 'datapack'
 
 export const KIND_FOLDERS: Record<ContentKind, string> = {
@@ -24,7 +23,6 @@ export interface CollectionProject {
 	slug: string
 	name: string
 	iconUrl: string | null
-	// Null for plugins and modpacks, which don't go into an instance
 	kind: ContentKind | null
 	loaders: string[]
 	gameVersions: string[]
