@@ -1,7 +1,7 @@
 import { colord, extend } from 'colord'
 import a11yPlugin from 'colord/plugins/a11y'
 
-import type { ThemeColors } from '../../core/settings'
+import type { ThemeColors } from '../themes/library'
 
 extend([a11yPlugin])
 

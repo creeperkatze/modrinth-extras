@@ -95,14 +95,8 @@ import { Button, defineMessages, IconButton, useVIntl } from '@modrinth/ui'
 import { computed, onBeforeUnmount, onMounted, toRaw, useTemplateRef, watch } from 'vue'
 
 import { showNotification } from '../../content/notifications'
-import {
-	type ExtensionSettings,
-	getSettings,
-	MAX_CUSTOM_THEMES,
-	type NamedTheme,
-	saveSettings,
-} from '../../core/settings'
 import { useSettings } from '../../core/settings-store'
+import { MAX_CUSTOM_THEMES, type NamedTheme, themeLibrary } from '../../features/themes/library'
 import {
 	PRESET_THEMES,
 	MODRINTH_THEMES,
@@ -161,26 +155,24 @@ const messages = defineMessages({
 	},
 })
 
-// Only the extension stores these, like the accent color, so they apply and save right away
-async function save(change: Partial<ExtensionSettings['themeLibrary']>) {
-	Object.assign(settings.themeLibrary, change)
-	applyThemeSettings(settings)
-	try {
-		const saved = await getSettings()
-		await saveSettings({ ...saved, themeLibrary: settings.themeLibrary })
-	} catch (err) {
-		console.error('[Modrinth Extras] Failed to save the themes:', err)
-	}
+const library = themeLibrary.state
+
+function save(change: Partial<typeof library>) {
+	Object.assign(library, change)
+	applyThemeSettings(settings, library)
+	themeLibrary
+		.save()
+		.catch((err) => console.error('[Modrinth Extras] Failed to save the themes:', err))
 }
 
 const selected = computed({
-	get: () => settings.themeLibrary.selected,
-	set: (id) => void save({ selected: id }),
+	get: () => library.selected,
+	set: (id) => save({ selected: id }),
 })
 // structuredClone can't copy reactive proxies
 const customThemes = computed<NamedTheme[]>({
-	get: () => toRaw(settings.themeLibrary.custom),
-	set: (themes) => void save({ custom: themes }),
+	get: () => toRaw(library.items),
+	set: (items) => save({ items }),
 })
 const full = computed(() => customThemes.value.length >= MAX_CUSTOM_THEMES)
 
@@ -197,7 +189,6 @@ function categoryTitle(category: ThemeCategory): string {
 
 const categories = computed(() => (showPresets.value ? THEME_CATEGORIES : []))
 
-// Only the section with the theme in use starts open
 const openSection = customThemes.value.some((theme) => theme.id === selected.value)
 	? CUSTOM_SECTION
 	: THEME_CATEGORIES.find((category) =>

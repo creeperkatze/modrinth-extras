@@ -1,5 +1,5 @@
-import type { ThemeColors } from '../../core/settings'
 import { rgba } from '../../utils/color'
+import type { ThemeColors } from '../themes/library'
 
 // The variables Modrinth derives from its brand green that are the same on every base
 export function accentVariables(accent: string): Record<string, string> {

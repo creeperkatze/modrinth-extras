@@ -224,6 +224,7 @@ import {
 	themeContrastColors,
 	websiteContrastColors,
 } from '../../../features/accent-color/contrast'
+import { themeLibrary } from '../../../features/themes/library'
 import { activeTheme } from '../../../features/themes/themes'
 import { readModrinthTheme } from '../../../features/themes/website-theme'
 import { isTranslationSupported } from '../../../features/translation/translator'
@@ -937,7 +938,7 @@ const modrinthTheme = ref('dark')
 
 // Checked against the theme in use, which is Modrinth's own when none of ours is picked
 const accentColorWarning = computed(() => {
-	const theme = activeTheme(settings)
+	const theme = activeTheme(settings, themeLibrary.state)
 	const against = theme ? themeContrastColors(theme) : websiteContrastColors(modrinthTheme.value)
 	const issue = accentColorIssue(settings.themes.accentColor, against)
 	if (issue === 'background') return formatMessage(messages['feature.themes.accentLowContrast'])

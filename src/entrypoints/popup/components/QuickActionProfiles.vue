@@ -8,7 +8,7 @@
 				<div class="w-40 shrink-0">
 					<CompactCombobox
 						:options="profileItems"
-						:model-value="settings.quickActionProfiles.selected"
+						:model-value="quickActionProfiles.state.selected"
 						@update:model-value="selectQuickActionProfile"
 					/>
 				</div>
@@ -64,7 +64,10 @@ import { Button, defineMessages, formatLoader, Input, useVIntl } from '@modrinth
 import { computed, nextTick, ref, useTemplateRef, watch } from 'vue'
 
 import CompactCombobox from '../../../components/ui/CompactCombobox.vue'
-import { MAX_QUICK_ACTION_PROFILES } from '../../../core/settings'
+import {
+	MAX_QUICK_ACTION_PROFILES,
+	quickActionProfiles,
+} from '../../../features/quick-actions/profiles'
 import {
 	createQuickActionProfile,
 	deleteQuickActionProfile,
@@ -101,7 +104,7 @@ const messages = defineMessages({
 	},
 })
 
-const profiles = computed(() => settings.quickActionProfiles.profiles)
+const profiles = computed(() => quickActionProfiles.state.items)
 const full = computed(() => profiles.value.length >= MAX_QUICK_ACTION_PROFILES)
 const selected = computed(() => selectedQuickActionProfile())
 

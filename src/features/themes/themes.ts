@@ -1,10 +1,12 @@
 import { colord } from 'colord'
 
-import type { ExtensionSettings, NamedTheme, ThemeColors } from '../../core/settings'
+import type { ExtensionSettings } from '../../core/settings'
+import type { SyncedListState } from '../../core/synced-list'
 import { rgba } from '../../utils/color'
 import { slugify } from '../../utils/strings'
 import { setThemeAccent } from '../accent-color/apply'
 import { accentBackground, accentVariables } from '../accent-color/variables'
+import type { NamedTheme, ThemeColors } from './library'
 import { PRESET_THEMES } from './presets'
 
 // An attribute, since the website rewrites the root element's classes when its theme changes
@@ -186,12 +188,14 @@ export function findTheme(
 	return themes.find((candidate) => candidate.id === id)
 }
 
+type ThemeSettings = Pick<ExtensionSettings, 'themes'>
+
 export function activeTheme(
-	settings: Pick<ExtensionSettings, 'themes' | 'themeLibrary'>,
+	settings: ThemeSettings,
+	library: SyncedListState<NamedTheme>,
 ): NamedTheme | undefined {
-	const { selected, custom } = settings.themeLibrary
 	const { enabled, presets } = settings.themes
-	return enabled ? findTheme(selected, custom, presets) : undefined
+	return enabled ? findTheme(library.selected, library.items, presets) : undefined
 }
 
 // Every custom theme gets a rule, so the picker can preview all of them
@@ -209,10 +213,9 @@ export function applyTheme(id: string, customThemes: NamedTheme[], showPresets: 
 	setThemeAccent(theme?.accent ?? null)
 }
 
-export function applyThemeSettings(settings: Pick<ExtensionSettings, 'themes' | 'themeLibrary'>) {
-	const { selected, custom } = settings.themeLibrary
+export function applyThemeSettings(settings: ThemeSettings, library: SyncedListState<NamedTheme>) {
 	const { enabled, presets } = settings.themes
-	applyTheme(enabled ? selected : '', custom, presets)
+	applyTheme(enabled ? library.selected : '', library.items, presets)
 }
 
 export function createCustomTheme(name: string, colors: ThemeColors): NamedTheme {

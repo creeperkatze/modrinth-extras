@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import { RadioButtonCheckedIcon, RadioButtonIcon } from '@modrinth/assets'
 
-import type { ThemeColors } from '../../core/settings'
+import type { ThemeColors } from '../../features/themes/library'
 import { THEME_ATTRIBUTE, THEME_PREVIEW_CLASS } from '../../features/themes/themes'
 
 defineProps<{

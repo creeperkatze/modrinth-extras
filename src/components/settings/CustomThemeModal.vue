@@ -169,7 +169,7 @@ import {
 } from '@modrinth/ui'
 import { computed, ref, shallowRef, useTemplateRef } from 'vue'
 
-import type { NamedTheme, ThemeColors } from '../../core/settings'
+import type { NamedTheme, ThemeColors } from '../../features/themes/library'
 import { MODRINTH_THEMES, PRESET_THEMES } from '../../features/themes/presets'
 import { exportThemeFile, themeFileName, themeVariables } from '../../features/themes/themes'
 import { saveBlob } from '../../utils/dom'

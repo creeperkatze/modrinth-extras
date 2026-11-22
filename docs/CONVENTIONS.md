@@ -12,7 +12,9 @@ Use the shared `modrinthClient` from `src/api/client.ts` rather than calling `fe
 
 Components read settings with `useSettings()` from `src/core/settings-store.ts`. It returns one reactive copy that follows storage, so a component updates in place when an option changes. Never pass a setting to an injected component as a prop. An injection only mounts or unmounts when its `isEnabled()` changes. Code outside components uses `getSettings()`. Never read extension storage directly.
 
-Settings are saved to sync storage, which allows 8 KB per item and about two writes a second. A list the user adds to goes in `LISTS`, which saves each entry as its own item and needs a limit. A setting tied to the browser, like a permission, goes in `LOCAL_SETTINGS`.
+Settings are saved to sync storage, which allows 8 KB per item and about two writes a second. A setting tied to the browser, like a permission, goes in `LOCAL_SETTINGS`.
+
+Things the user makes, like custom themes, aren't settings. Each gets its own list from `defineSyncedList()` in `src/core/synced-list.ts`, with a limit, so they never reach telemetry, logs or `withoutSecrets()`.
 
 Any setting that holds a credential, like an API token, must be listed in `SECRET_SETTINGS`. Use `withoutSecrets()` whenever settings are logged or sent anywhere.
 

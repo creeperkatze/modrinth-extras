@@ -3,7 +3,6 @@ import { browser } from 'wxt/browser'
 
 import { detectBrowserLocale, i18n } from '../../../core/i18n/i18n'
 import {
-	type QuickActionProfile,
 	clearSettings,
 	DEFAULTS,
 	type ExtensionSettings,
@@ -11,19 +10,27 @@ import {
 } from '../../../core/settings'
 import { loadSettingsStore, useSettings } from '../../../core/settings-store'
 import { setTelemetryEnabled } from '../../../core/telemetry'
+import {
+	type QuickActionProfile,
+	quickActionProfiles,
+} from '../../../features/quick-actions/profiles'
+import { themeLibrary } from '../../../features/themes/library'
 
-export type FeatureKey = Exclude<
-	keyof ExtensionSettings,
-	'locale' | 'sidebarLayout' | 'themeLibrary' | 'quickActionProfiles'
->
+export type FeatureKey = Exclude<keyof ExtensionSettings, 'locale' | 'sidebarLayout'>
 
 // The popup edits the store directly and saves it, so it doesn't follow storage itself
 export const settings = useSettings()
 export const settingsLoaded = ref(false)
 export const firefoxControlsTelemetry = ref(false)
 
+const profiles = quickActionProfiles.state
+
 export async function loadPopupSettings() {
-	const loaded = await loadSettingsStore()
+	const [loaded] = await Promise.all([
+		loadSettingsStore(),
+		themeLibrary.load(),
+		quickActionProfiles.load(),
+	])
 	i18n.global.locale.value = loaded.locale?.value || detectBrowserLocale()
 	settingsLoaded.value = true
 
@@ -59,8 +66,8 @@ function flushPendingSave() {
 	if (!pendingSave) return
 	clearTimeout(pendingSave)
 	pendingSave = undefined
-	saveSettings(settings as ExtensionSettings).catch((err) =>
-		console.error('[Modrinth Extras] Failed to save settings:', err),
+	Promise.all([saveSettings(settings as ExtensionSettings), quickActionProfiles.save()]).catch(
+		(err) => console.error('[Modrinth Extras] Failed to save settings:', err),
 	)
 }
 
@@ -84,13 +91,12 @@ export function updateOption(
 }
 
 export function selectedQuickActionProfile(): QuickActionProfile | undefined {
-	const { selected, profiles } = settings.quickActionProfiles
-	return profiles.find((profile) => profile.id === selected)
+	return profiles.items.find((profile) => profile.id === profiles.selected)
 }
 
 export function selectQuickActionProfile(id: string) {
-	const profile = settings.quickActionProfiles.profiles.find((p) => p.id === id)
-	settings.quickActionProfiles.selected = profile?.id ?? ''
+	const profile = profiles.items.find((p) => p.id === id)
+	profiles.selected = profile?.id ?? ''
 	if (profile) {
 		const { id: _id, name: _name, ...downloadSettings } = profile
 		Object.assign(settings.projectCardActions, downloadSettings)
@@ -98,28 +104,25 @@ export function selectQuickActionProfile(id: string) {
 	scheduleSave()
 }
 
-// Starts from the options in use, so saving what is set up now is one click
 export function createQuickActionProfile(name: string): string {
 	const { enabled: _enabled, ...downloadSettings } = settings.projectCardActions
 	const id = `profile-${crypto.randomUUID()}`
-	settings.quickActionProfiles.profiles.push({ ...downloadSettings, id, name })
-	settings.quickActionProfiles.selected = id
+	profiles.items.push({ ...downloadSettings, id, name })
+	profiles.selected = id
 	scheduleSave()
 	return id
 }
 
 export function renameQuickActionProfile(id: string, name: string) {
-	const profile = settings.quickActionProfiles.profiles.find((p) => p.id === id)
+	const profile = profiles.items.find((p) => p.id === id)
 	if (!profile) return
 	profile.name = name
 	scheduleSave()
 }
 
-// The options stay as they are, only the profile is gone
 export function deleteQuickActionProfile(id: string) {
-	const { profiles, selected } = settings.quickActionProfiles
-	settings.quickActionProfiles.profiles = profiles.filter((profile) => profile.id !== id)
-	if (selected === id) settings.quickActionProfiles.selected = ''
+	profiles.items = profiles.items.filter((profile) => profile.id !== id)
+	if (profiles.selected === id) profiles.selected = ''
 	scheduleSave()
 }
 
@@ -134,7 +137,8 @@ export async function updateLocale(value: string) {
 export async function resetSettings() {
 	clearTimeout(pendingSave)
 	pendingSave = undefined
-	await clearSettings()
+	// Custom themes and profiles go too, as the confirmation says
+	await Promise.all([clearSettings(), themeLibrary.clear(), quickActionProfiles.clear()])
 	Object.assign(settings, structuredClone(DEFAULTS))
 	i18n.global.locale.value = detectBrowserLocale()
 	setTelemetryEnabled(settings.telemetry.enabled && !firefoxControlsTelemetry.value)

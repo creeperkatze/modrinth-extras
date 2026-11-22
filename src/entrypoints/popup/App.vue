@@ -102,6 +102,7 @@ import {
 import { computed, onBeforeUnmount, onMounted, reactive, ref, useTemplateRef, watch } from 'vue'
 
 import { applyAccentColor } from '../../features/accent-color/apply'
+import { themeLibrary } from '../../features/themes/library'
 import { applyThemeSettings } from '../../features/themes/themes'
 import Logo from '../../public/logo.svg?component'
 import DiscordCard from './components/DiscordCard.vue'
@@ -234,8 +235,8 @@ watch(
 )
 
 watch(
-	() => [settings.themes, settings.themeLibrary],
-	() => applyThemeSettings(settings),
+	() => [settings.themes, themeLibrary.state],
+	() => applyThemeSettings(settings, themeLibrary.state),
 	{ deep: true, immediate: true },
 )
 

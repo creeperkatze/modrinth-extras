@@ -1,5 +1,6 @@
 import '../assets/tailwind.css'
 
+import { watch } from 'vue'
 import { browser } from 'wxt/browser'
 
 import { pageState } from '../content/injection'
@@ -19,6 +20,7 @@ import { reportUncaughtErrors } from '../core/telemetry'
 import { applyAccentColor } from '../features/accent-color/apply'
 import { recolorBrandImages } from '../features/accent-color/images'
 import { sidebarOrder } from '../features/sidebar-layout/order'
+import { themeLibrary } from '../features/themes/library'
 import { applyThemeSettings } from '../features/themes/themes'
 
 export default defineContentScript({
@@ -66,15 +68,22 @@ export default defineContentScript({
 		// Mounted components follow the store themselves, so only turned on or off ones change here
 		function applySettings() {
 			applyAccentColor(settings)
-			applyThemeSettings(settings)
+			applyThemeSettings(settings, themeLibrary.state)
 			for (const inj of injections) inj.refresh()
 		}
 
-		loadSettingsStore().then(() => {
+		Promise.all([loadSettingsStore(), themeLibrary.load()]).then(() => {
 			if (ctx.isInvalid) return
 			console.log('[Modrinth Extras] Settings loaded:', JSON.stringify(withoutSecrets(settings)))
 			applySettings()
 		})
+
+		const stopFollowingThemes = watch(
+			themeLibrary.state,
+			() => applyThemeSettings(settings, themeLibrary.state),
+			{ deep: true },
+		)
+		ctx.onInvalidated(stopFollowingThemes)
 
 		const stopFollowingSettings = followSettingsChanges(() => {
 			i18n.global.locale.value = settings.locale.value || detectBrowserLocale()

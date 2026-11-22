@@ -1,4 +1,4 @@
-import type { NamedTheme } from '../../core/settings'
+import type { NamedTheme } from './library'
 
 export interface ThemeCategory {
 	id: string
