@@ -65,7 +65,6 @@ export interface ExtensionSettings {
 	notificationsIndicator: { enabled: boolean }
 	quickSearch: { enabled: boolean }
 	projectCardActions: { enabled: boolean } & QuickDownloadSettings
-	// Kept apart, so renaming a profile doesn't remount every quick actions bar
 	quickActionProfiles: { selected: string; profiles: QuickActionProfile[] }
 	activitySparkline: { enabled: boolean; days: string }
 	toolsSidebar: { enabled: boolean; modManager: string; decompiler: string }
@@ -87,7 +86,6 @@ export interface ExtensionSettings {
 	desktopNotifications: { enabled: boolean }
 	curseforgeRedirect: { enabled: boolean }
 	themes: { enabled: boolean; presets: boolean; customAccent: boolean; accentColor: string }
-	// Kept apart from the toggle, so picking or editing a theme doesn't remount the theme picker
 	themeLibrary: { selected: string; custom: NamedTheme[] }
 	telemetry: { enabled: boolean }
 }
@@ -150,14 +148,6 @@ export function withoutSecrets(
 	return safe
 }
 
-function hasUnknownKeys(base: object, value: object): boolean {
-	return Object.entries(value).some(([key, val]) => {
-		if (!(key in base)) return true
-		const baseVal = (base as Record<string, unknown>)[key]
-		return isPlainObject(val) && isPlainObject(baseVal) && hasUnknownKeys(baseVal, val)
-	})
-}
-
 // Keeps keys from a newer version on another device
 function keepUnknown(stored: object, value: object): object {
 	const result = { ...stored } as Record<string, unknown>
@@ -174,15 +164,10 @@ const LOCAL_SETTINGS: (keyof ExtensionSettings)[] = ['desktopNotifications']
 export const MAX_CUSTOM_THEMES = 100
 export const MAX_QUICK_ACTION_PROFILES = 30
 
-// Synced as a list of ids, with each entry in its own item to stay under 8 KB per item
+// Each entry gets its own sync item to stay under 8 KB per item
 const LISTS = [
-	{ setting: 'themeLibrary', field: 'custom', prefix: 'theme:', max: MAX_CUSTOM_THEMES },
-	{
-		setting: 'quickActionProfiles',
-		field: 'profiles',
-		prefix: 'profile:',
-		max: MAX_QUICK_ACTION_PROFILES,
-	},
+	{ setting: 'themeLibrary', field: 'custom', prefix: 'theme:' },
+	{ setting: 'quickActionProfiles', field: 'profiles', prefix: 'profile:' },
 ] as const
 
 type SyncedList = (typeof LISTS)[number]
@@ -238,7 +223,6 @@ async function readSynced(): Promise<StoredSettings | null> {
 	return result
 }
 
-// Only entries that changed are written
 async function writeSynced(next: StoredSettings, prev: StoredSettings): Promise<void> {
 	const set: { key: `sync:${string}`; value: unknown }[] = []
 	const remove: `sync:${string}`[] = []
@@ -260,42 +244,24 @@ async function writeSynced(next: StoredSettings, prev: StoredSettings): Promise<
 	if (remove.length) await storage.removeItems(remove)
 }
 
-// Adds this browser's themes and profiles to the ones another browser synced
-function joinLists(synced: StoredSettings, old: StoredSettings): StoredSettings {
-	const joined: StoredSettings = {}
-	for (const list of LISTS) {
-		const kept = entries(synced, list)
-		const ids = new Set(kept.map((entry) => entry.id))
-		const added = entries(old, list).filter((entry) => !ids.has(entry.id))
-		joined[list.setting] = { [list.field]: [...kept, ...added].slice(0, list.max) }
-	}
-	return joined
-}
-
-// Returns what stays local. Merging first drops keys nothing reads anymore.
-async function moveToSync(value: StoredSettings): Promise<StoredSettings> {
-	const old = split(deepMerge(DEFAULTS, value as DeepPartial<ExtensionSettings>))
-	const synced = await readSynced()
-	const next = synced
-		? (keepUnknown(synced, joinLists(synced, old.synced)) as StoredSettings)
-		: old.synced
-	await writeSynced(next, synced ?? {})
-	return old.local
-}
-
 const localItem = storage.defineItem<StoredSettings>('local:settings', {
-	version: 3,
+	version: 2,
 	migrations: {
-		// The accent color moved from its own feature into themes
-		2: (value: StoredSettings) => {
-			const { accentColor, ...rest } = value
-			if (!accentColor) return rest
-			const themes = { ...rest.themes }
-			if (typeof accentColor.enabled === 'boolean') themes.customAccent = accentColor.enabled
-			if (typeof accentColor.color === 'string') themes.accentColor = accentColor.color
-			return { ...rest, themes }
+		// Moves settings to sync and the accent color into themes
+		2: async ({ accentColor, ...value }: StoredSettings) => {
+			const themes = {
+				...value.themes,
+				customAccent: accentColor?.enabled,
+				accentColor: accentColor?.color,
+			}
+			// Drops old keys that may hold secrets
+			const { synced, local } = split(
+				deepMerge(DEFAULTS, { ...value, themes } as DeepPartial<ExtensionSettings>),
+			)
+			// Another browser may have moved its settings first
+			if (!(await syncedItem.getValue())) await writeSynced(synced, {})
+			return local
 		},
-		3: moveToSync,
 	},
 })
 
@@ -331,16 +297,8 @@ function isSyncedKey(key: string): boolean {
 
 function startInit(): Promise<void> {
 	init ??= (async () => {
-		// Local first, so its migration has filled sync storage
-		let local = (await localItem.getValue()) ?? {}
-		// Old versions can leave synced settings here, or secrets under keys nothing reads anymore
-		const misplaced = Object.keys(local).some(
-			(key) => !LOCAL_SETTINGS.includes(key as keyof ExtensionSettings),
-		)
-		if (misplaced || hasUnknownKeys(DEFAULTS, local)) {
-			local = await moveToSync(local)
-			await localItem.setValue(local)
-		}
+		// Local first, since its migration fills sync storage
+		const local = (await localItem.getValue()) ?? {}
 		stored = { synced: (await readSynced()) ?? {}, local }
 		cache = mergeStored()
 		browser.storage.onChanged.addListener((changes, area) => {

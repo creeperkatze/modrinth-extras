@@ -1,4 +1,3 @@
-import { storage } from '@wxt-dev/storage'
 import type { ReviewSort } from 'moddex-js'
 import { browser } from 'wxt/browser'
 
@@ -218,10 +217,6 @@ export default defineBackground(() => {
 			void analytics.track('extension_installed')
 		} else if (details.reason === 'update') {
 			void analytics.track('extension_updated', { from_extension_version: details.previousVersion })
-			// Replaced by the shared account
-			storage
-				.removeItem('local:popupAccount')
-				.catch((err) => console.error('[Modrinth Extras] Failed to remove the old account:', err))
 			markExtensionUpdated().catch((err) =>
 				console.error('[Modrinth Extras] Failed to save the extension update:', err),
 			)

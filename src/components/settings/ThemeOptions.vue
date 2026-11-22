@@ -177,7 +177,7 @@ const selected = computed({
 	get: () => settings.themeLibrary.selected,
 	set: (id) => void save({ selected: id }),
 })
-// Raw, since the theme modal clones them and structuredClone can't copy reactive proxies
+// structuredClone can't copy reactive proxies
 const customThemes = computed<NamedTheme[]>({
 	get: () => toRaw(settings.themeLibrary.custom),
 	set: (themes) => void save({ custom: themes }),
