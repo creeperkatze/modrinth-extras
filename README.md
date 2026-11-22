@@ -48,16 +48,16 @@ Prefer to build from source? See [🔒 Building from source](#-building-from-sou
 <td width="50%"><h3>Modrinth, from any tab</h3>Search for projects and servers, read your notifications, accept invites, and check your creator revenue and stats, all from the extension popup.</td>
 </tr>
 <tr>
+<td width="50%"><h3>A whole collection in one download</h3>Turn any collection into a modpack or zip file with every project that supports your game version and loader, required dependencies included.</td>
+<td width="50%"><img src="website/public/screenshots/collection-download.png"></td>
+</tr>
+<tr>
+<td width="50%"><img src="website/public/screenshots/notifications.png"></td>
+<td width="50%"><h3>Notifications, right in the header</h3>View, manage, and clear unread notifications without leaving the page you're on, with optional browser notifications and an unread badge on the extension icon.</td>
+</tr>
+<tr>
 <td width="50%"><h3>Find anything in seconds</h3>Press Ctrl+K or / to open a command palette style search, with faceted tags for loaders, versions, categories, and types built right into your query.</td>
 <td width="50%"><img src="website/public/screenshots/quick-search.png"></td>
-</tr>
-<tr>
-<td width="50%"><img src="website/public/screenshots/collection-download.png"></td>
-<td width="50%"><h3>A whole collection in one download</h3>Turn any collection into a modpack or zip file with every project that supports your game version and loader, required dependencies included.</td>
-</tr>
-<tr>
-<td width="50%"><h3>Notifications, right in the header</h3>View, manage, and clear unread notifications without leaving the page you're on, with optional browser notifications and an unread badge on the extension icon.</td>
-<td width="50%"><img src="website/public/screenshots/notifications.png"></td>
 </tr>
 </table>
 <!-- features:end -->

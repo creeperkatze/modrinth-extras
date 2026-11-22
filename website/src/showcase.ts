@@ -6,7 +6,7 @@ export const showcase = [
 	{ key: 'quickActions', image: 'quick-actions.png', emoji: '⚡' },
 	{ key: 'dependencyExplorer', image: 'dependency-explorer.png', emoji: '🌳' },
 	{ key: 'popupTabs', image: 'popup-creator.png', emoji: '🧩' },
-	{ key: 'quickSearch', image: 'quick-search.png', emoji: '🔍' },
 	{ key: 'collectionDownload', image: 'collection-download.png', emoji: '📦' },
 	{ key: 'notifications', image: 'notifications.png', emoji: '🔔' },
+	{ key: 'quickSearch', image: 'quick-search.png', emoji: '🔍' },
 ]
