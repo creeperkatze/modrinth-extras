@@ -102,7 +102,7 @@
 					<TagItem v-else class="border-surface-3 bg-surface-3">{{ included.length }}</TagItem>
 				</div>
 				<div v-if="resolving" class="flex items-center gap-2 text-sm text-secondary">
-					{{ formatMessage(messages['collectionDownload.resolving']) }}
+					{{ formatMessage(messages['collectionDownload.resolvingProgress'], progress) }}
 				</div>
 				<span v-else-if="included.length === 0" class="text-sm text-secondary">
 					{{ formatMessage(messages['collectionDownload.noneIncluded']) }}
@@ -285,9 +285,9 @@ const messages = defineMessages({
 		id: 'collectionDownload.included',
 		defaultMessage: 'Included',
 	},
-	'collectionDownload.resolving': {
-		id: 'collectionDownload.resolving',
-		defaultMessage: 'Finding the right versions…',
+	'collectionDownload.resolvingProgress': {
+		id: 'collectionDownload.resolvingProgress',
+		defaultMessage: 'Finding the right versions… {done, number} of {total, number}',
 	},
 	'collectionDownload.noneIncluded': {
 		id: 'collectionDownload.noneIncluded',
@@ -360,6 +360,7 @@ const format = ref<ExportFormat>('mrpack')
 const withDependencies = ref(true)
 const resolution = shallowRef<Resolution | null>(null)
 const resolving = ref(false)
+const progress = ref({ done: 0, total: 0 })
 const exporting = ref(false)
 const exported = ref(0)
 
@@ -485,7 +486,15 @@ watch([selection, withDependencies], async ([next, dependencies]) => {
 	controller = current
 	resolving.value = true
 	try {
-		const result = await resolveCollection(projects.value, next, dependencies, current.signal)
+		const result = await resolveCollection(
+			projects.value,
+			next,
+			dependencies,
+			current.signal,
+			(done, total) => {
+				if (controller === current) progress.value = { done, total }
+			},
+		)
 		if (current.signal.aborted) return
 		resolution.value = result
 	} catch (err) {

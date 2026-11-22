@@ -74,8 +74,8 @@
   "collectionDownload.projectCount": {
     "defaultMessage": "{count, plural, one {# compatible project} other {# compatible projects}}"
   },
-  "collectionDownload.resolving": {
-    "defaultMessage": "Finding the right versions…"
+  "collectionDownload.resolvingProgress": {
+    "defaultMessage": "Finding the right versions… {done, number} of {total, number}"
   },
   "collectionDownload.resourcepack": {
     "defaultMessage": "Resource pack"

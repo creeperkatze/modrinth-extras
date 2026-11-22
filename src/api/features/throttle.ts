@@ -1,10 +1,10 @@
 import { AbstractFeature, ModrinthApiError, type RequestContext } from '@modrinth/api-client'
 
 const MAX_CONCURRENT = 4
-const RATE_LIMIT_PAUSE_MS = 30_000
+export const RATE_LIMIT_PAUSE_MS = 30_000
 
 // A 429 without CORS headers reaches the page as a failure without a status.
-function isRateLimited(error: unknown): boolean {
+export function isRateLimited(error: unknown): boolean {
 	if (!(error instanceof ModrinthApiError)) return false
 	return error.statusCode === 429 || error.statusCode === undefined
 }

@@ -26,6 +26,8 @@ export interface CollectionProject {
 	kind: ContentKind | null
 	loaders: string[]
 	gameVersions: string[]
+	// Anyone can see these, so they can be looked up without the auth header and its CORS preflight
+	public: boolean
 }
 
 export interface Selection {
@@ -42,6 +44,8 @@ function contentKind(types: string[]): ContentKind | null {
 	return null
 }
 
+const PUBLIC_STATUSES = new Set<string>(['approved', 'archived', 'unlisted'])
+
 export function toCollectionProject(project: Labrinth.Projects.v3.Project): CollectionProject {
 	const gameVersions = project.game_versions
 	return {
@@ -52,6 +56,7 @@ export function toCollectionProject(project: Labrinth.Projects.v3.Project): Coll
 		kind: contentKind(project.project_types),
 		loaders: project.loaders,
 		gameVersions: Array.isArray(gameVersions) ? (gameVersions as string[]) : [],
+		public: PUBLIC_STATUSES.has(project.status),
 	}
 }
 
