@@ -1,7 +1,7 @@
 import type { Labrinth } from '@modrinth/api-client'
 
 import { modrinthClient } from '../../api/client'
-import { getPrimaryFile, listProjectVersions } from '../project-cards/version'
+import { getPrimaryFile, listProjectVersions } from '../quick-actions/version'
 import {
 	type CollectionProject,
 	type ContentKind,

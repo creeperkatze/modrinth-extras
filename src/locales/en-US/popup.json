@@ -128,26 +128,26 @@
   "feature.platformsSidebar.title": {
     "defaultMessage": "Other platforms"
   },
-  "feature.projectCardActions.description": {
+  "feature.quickActions.description": {
     "defaultMessage": "Download, follow, and save projects right from their project cards."
   },
-  "feature.projectCardActions.downloadDependencies": {
+  "feature.quickActions.downloadDependencies": {
     "defaultMessage": "Download dependencies"
   },
-  "feature.projectCardActions.gameVersion": {
+  "feature.quickActions.gameVersion": {
     "defaultMessage": "Game version"
   },
-  "feature.projectCardActions.modLoader": {
+  "feature.quickActions.modLoader": {
     "defaultMessage": "Mod loader"
   },
-  "feature.projectCardActions.pluginLoader": {
+  "feature.quickActions.pluginLoader": {
     "defaultMessage": "Plugin loader"
   },
-  "feature.projectCardActions.shaderLoader": {
+  "feature.quickActions.shaderLoader": {
     "defaultMessage": "Shader loader"
   },
-  "feature.projectCardActions.title": {
-    "defaultMessage": "Project card actions"
+  "feature.quickActions.title": {
+    "defaultMessage": "Quick actions"
   },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K or / for a command palette style search with faceted tags for loaders, versions, categories, and types."
@@ -502,6 +502,27 @@
   },
   "popup.tab.projects": {
     "defaultMessage": "Projects"
+  },
+  "quickActionProfiles.defaultName": {
+    "defaultMessage": "Profile"
+  },
+  "quickActionProfiles.delete": {
+    "defaultMessage": "Delete profile"
+  },
+  "quickActionProfiles.name": {
+    "defaultMessage": "Name"
+  },
+  "quickActionProfiles.none": {
+    "defaultMessage": "None"
+  },
+  "quickActionProfiles.profile": {
+    "defaultMessage": "Profile"
+  },
+  "quickActionProfiles.save": {
+    "defaultMessage": "Save as profile"
+  },
+  "quickActionProfiles.saveAsNew": {
+    "defaultMessage": "Save as new profile"
   },
   "search.any": {
     "defaultMessage": "Any"

@@ -1,13 +1,13 @@
 import type { Labrinth } from '@modrinth/api-client'
 
 import { modrinthClient } from '../../api/client'
+import type { QuickDownloadSettings } from '../../core/settings'
 import {
 	getPreferredLoader,
 	getPrimaryFile,
 	getVersionLoaders,
 	knownVersions,
 	listProjectVersions,
-	type QuickDownloadSettings,
 } from './version'
 
 export async function getRequiredDependencyFiles(

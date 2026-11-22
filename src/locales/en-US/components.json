@@ -578,42 +578,6 @@
   "platformsSidebar.title": {
     "defaultMessage": "Other platforms"
   },
-  "projectCardActions.checkingDownload": {
-    "defaultMessage": "Checking available version..."
-  },
-  "projectCardActions.copied": {
-    "defaultMessage": "Copied!"
-  },
-  "projectCardActions.copyLink": {
-    "defaultMessage": "Copy link"
-  },
-  "projectCardActions.download": {
-    "defaultMessage": "Download"
-  },
-  "projectCardActions.downloadUnavailable": {
-    "defaultMessage": "{loader, select, none {No version available for {version}} other {No version available for {loader} {version}}}"
-  },
-  "projectCardActions.follow": {
-    "defaultMessage": "Follow"
-  },
-  "projectCardActions.newCollection": {
-    "defaultMessage": "Create new collection"
-  },
-  "projectCardActions.noCollections": {
-    "defaultMessage": "No collections found."
-  },
-  "projectCardActions.save": {
-    "defaultMessage": "Save"
-  },
-  "projectCardActions.saved": {
-    "defaultMessage": "Saved"
-  },
-  "projectCardActions.searchPlaceholder": {
-    "defaultMessage": "Search..."
-  },
-  "projectCardActions.unfollow": {
-    "defaultMessage": "Unfollow"
-  },
   "projectReviews.loading": {
     "defaultMessage": "Loading reviews…"
   },
@@ -628,6 +592,42 @@
   },
   "projectReviews.tab": {
     "defaultMessage": "Reviews"
+  },
+  "quickActions.checkingDownload": {
+    "defaultMessage": "Checking available version..."
+  },
+  "quickActions.copied": {
+    "defaultMessage": "Copied!"
+  },
+  "quickActions.copyLink": {
+    "defaultMessage": "Copy link"
+  },
+  "quickActions.download": {
+    "defaultMessage": "Download"
+  },
+  "quickActions.downloadUnavailable": {
+    "defaultMessage": "{loader, select, none {No version available for {version}} other {No version available for {loader} {version}}}"
+  },
+  "quickActions.follow": {
+    "defaultMessage": "Follow"
+  },
+  "quickActions.newCollection": {
+    "defaultMessage": "Create new collection"
+  },
+  "quickActions.noCollections": {
+    "defaultMessage": "No collections found."
+  },
+  "quickActions.save": {
+    "defaultMessage": "Save"
+  },
+  "quickActions.saved": {
+    "defaultMessage": "Saved"
+  },
+  "quickActions.searchPlaceholder": {
+    "defaultMessage": "Search..."
+  },
+  "quickActions.unfollow": {
+    "defaultMessage": "Unfollow"
   },
   "quickSearch.clearRecent": {
     "defaultMessage": "Clear recent"

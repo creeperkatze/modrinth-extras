@@ -35,28 +35,28 @@
   "platformsSidebar.title": {
     "defaultMessage": "แพลตฟอร์มอื่นๆ"
   },
-  "projectCardActions.copied": {
+  "quickActions.copied": {
     "defaultMessage": "คัดลอกแล้ว"
   },
-  "projectCardActions.copyLink": {
+  "quickActions.copyLink": {
     "defaultMessage": "คัดลอกลิงก์"
   },
-  "projectCardActions.download": {
+  "quickActions.download": {
     "defaultMessage": "ดาวน์โหลด"
   },
-  "projectCardActions.follow": {
+  "quickActions.follow": {
     "defaultMessage": "ติดตาม"
   },
-  "projectCardActions.save": {
+  "quickActions.save": {
     "defaultMessage": "บันทึก"
   },
-  "projectCardActions.saved": {
+  "quickActions.saved": {
     "defaultMessage": "บันทึกแล้ว"
   },
-  "projectCardActions.searchPlaceholder": {
+  "quickActions.searchPlaceholder": {
     "defaultMessage": "ค้นหา..."
   },
-  "projectCardActions.unfollow": {
+  "quickActions.unfollow": {
     "defaultMessage": "เลิกติดตาม"
   },
   "quickSearch.examples": {

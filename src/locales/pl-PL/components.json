@@ -284,36 +284,6 @@
   "platformsSidebar.title": {
     "defaultMessage": "Inne platformy"
   },
-  "projectCardActions.checkingDownload": {
-    "defaultMessage": "Sprawdzanie dostępnej wersji..."
-  },
-  "projectCardActions.copied": {
-    "defaultMessage": "Skopiowano!"
-  },
-  "projectCardActions.copyLink": {
-    "defaultMessage": "Skopiuj link"
-  },
-  "projectCardActions.download": {
-    "defaultMessage": "Pobierz"
-  },
-  "projectCardActions.newCollection": {
-    "defaultMessage": "Utwórz nową kolekcję"
-  },
-  "projectCardActions.noCollections": {
-    "defaultMessage": "Nie znaleziono żadnych kolekcji."
-  },
-  "projectCardActions.save": {
-    "defaultMessage": "Zapisz"
-  },
-  "projectCardActions.saved": {
-    "defaultMessage": "Zapisano"
-  },
-  "projectCardActions.searchPlaceholder": {
-    "defaultMessage": "Szukaj..."
-  },
-  "projectCardActions.unfollow": {
-    "defaultMessage": "Przestań obserwować"
-  },
   "projectReviews.loading": {
     "defaultMessage": "Ładowanie recenzji…"
   },
@@ -328,6 +298,36 @@
   },
   "projectReviews.tab": {
     "defaultMessage": "Recenzje"
+  },
+  "quickActions.checkingDownload": {
+    "defaultMessage": "Sprawdzanie dostępnej wersji..."
+  },
+  "quickActions.copied": {
+    "defaultMessage": "Skopiowano!"
+  },
+  "quickActions.copyLink": {
+    "defaultMessage": "Skopiuj link"
+  },
+  "quickActions.download": {
+    "defaultMessage": "Pobierz"
+  },
+  "quickActions.newCollection": {
+    "defaultMessage": "Utwórz nową kolekcję"
+  },
+  "quickActions.noCollections": {
+    "defaultMessage": "Nie znaleziono żadnych kolekcji."
+  },
+  "quickActions.save": {
+    "defaultMessage": "Zapisz"
+  },
+  "quickActions.saved": {
+    "defaultMessage": "Zapisano"
+  },
+  "quickActions.searchPlaceholder": {
+    "defaultMessage": "Szukaj..."
+  },
+  "quickActions.unfollow": {
+    "defaultMessage": "Przestań obserwować"
   },
   "quickSearch.clearRecent": {
     "defaultMessage": "Wyczyść ostatnie"

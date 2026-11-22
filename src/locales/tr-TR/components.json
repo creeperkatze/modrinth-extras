@@ -203,47 +203,47 @@
   "platformsSidebar.title": {
     "defaultMessage": "Diğer platformlar"
   },
-  "projectCardActions.checkingDownload": {
-    "defaultMessage": "Mevcut sürüm kontrol ediliyor..."
-  },
-  "projectCardActions.copied": {
-    "defaultMessage": "Kopyalandı!"
-  },
-  "projectCardActions.copyLink": {
-    "defaultMessage": "Bağlantıyı kopyala"
-  },
-  "projectCardActions.download": {
-    "defaultMessage": "İndir"
-  },
-  "projectCardActions.downloadUnavailable": {
-    "defaultMessage": "{loader, select, none {{version} için uygun sürüm yok} other {{loader} {version} için uygun sürüm yok}}"
-  },
-  "projectCardActions.follow": {
-    "defaultMessage": "Takip et"
-  },
-  "projectCardActions.newCollection": {
-    "defaultMessage": "Yeni koleksiyon oluştur"
-  },
-  "projectCardActions.noCollections": {
-    "defaultMessage": "Hiç koleksiyon bulunmadı."
-  },
-  "projectCardActions.save": {
-    "defaultMessage": "Kaydet"
-  },
-  "projectCardActions.saved": {
-    "defaultMessage": "Kaydedildi"
-  },
-  "projectCardActions.searchPlaceholder": {
-    "defaultMessage": "Ara..."
-  },
-  "projectCardActions.unfollow": {
-    "defaultMessage": "Takibi bırak"
-  },
   "projectReviews.source": {
     "defaultMessage": "Değerlendirme Kaynağı"
   },
   "projectReviews.tab": {
     "defaultMessage": "Değerlendirmeler"
+  },
+  "quickActions.checkingDownload": {
+    "defaultMessage": "Mevcut sürüm kontrol ediliyor..."
+  },
+  "quickActions.copied": {
+    "defaultMessage": "Kopyalandı!"
+  },
+  "quickActions.copyLink": {
+    "defaultMessage": "Bağlantıyı kopyala"
+  },
+  "quickActions.download": {
+    "defaultMessage": "İndir"
+  },
+  "quickActions.downloadUnavailable": {
+    "defaultMessage": "{loader, select, none {{version} için uygun sürüm yok} other {{loader} {version} için uygun sürüm yok}}"
+  },
+  "quickActions.follow": {
+    "defaultMessage": "Takip et"
+  },
+  "quickActions.newCollection": {
+    "defaultMessage": "Yeni koleksiyon oluştur"
+  },
+  "quickActions.noCollections": {
+    "defaultMessage": "Hiç koleksiyon bulunmadı."
+  },
+  "quickActions.save": {
+    "defaultMessage": "Kaydet"
+  },
+  "quickActions.saved": {
+    "defaultMessage": "Kaydedildi"
+  },
+  "quickActions.searchPlaceholder": {
+    "defaultMessage": "Ara..."
+  },
+  "quickActions.unfollow": {
+    "defaultMessage": "Takibi bırak"
   },
   "quickSearch.clearRecent": {
     "defaultMessage": "Son ögeleri temizle"

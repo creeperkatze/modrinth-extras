@@ -29,34 +29,34 @@
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "Voir l'historique"
   },
-  "projectCardActions.copied": {
+  "quickActions.copied": {
     "defaultMessage": "Copié !"
   },
-  "projectCardActions.copyLink": {
+  "quickActions.copyLink": {
     "defaultMessage": "Copier le lien"
   },
-  "projectCardActions.download": {
+  "quickActions.download": {
     "defaultMessage": "Télécharger"
   },
-  "projectCardActions.follow": {
+  "quickActions.follow": {
     "defaultMessage": "Suivre"
   },
-  "projectCardActions.newCollection": {
+  "quickActions.newCollection": {
     "defaultMessage": "Créer une nouvelle collection"
   },
-  "projectCardActions.noCollections": {
+  "quickActions.noCollections": {
     "defaultMessage": "Aucune collection trouvée."
   },
-  "projectCardActions.save": {
+  "quickActions.save": {
     "defaultMessage": "Enregistrer"
   },
-  "projectCardActions.saved": {
+  "quickActions.saved": {
     "defaultMessage": "Enregistré"
   },
-  "projectCardActions.searchPlaceholder": {
+  "quickActions.searchPlaceholder": {
     "defaultMessage": "Rechercher..."
   },
-  "projectCardActions.unfollow": {
+  "quickActions.unfollow": {
     "defaultMessage": "Ne plus suivre"
   },
   "quickSearch.examples": {

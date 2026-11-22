@@ -50,6 +50,7 @@
 						:model-value="settings[f.key].enabled"
 						@update:model-value="updateEnabled(f.key, $event)"
 					>
+						<QuickActionProfiles v-if="f.key === 'projectCardActions'" />
 						<template v-if="f.options">
 							<template v-for="opt in f.options" :key="opt.key">
 								<OptionFieldColor
@@ -68,8 +69,10 @@
 									:model-value="!!(settings[f.key] as unknown as Record<string, boolean>)[opt.key]"
 									@update:model-value="updateOption(f.key, opt.key, $event)"
 								/>
+								<!-- Keyed by value, so a picked profile's game version shows up as a snapshot when it is one -->
 								<OptionFieldSelect
 									v-else
+									:key="`${opt.key}-${(settings[f.key] as unknown as Record<string, string>)[opt.key]}`"
 									:label="opt.label"
 									:model-value="
 										(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''
@@ -223,6 +226,7 @@ import OptionFieldColor from '../components/OptionFieldColor.vue'
 import OptionFieldSelect, { type SelectItem } from '../components/OptionFieldSelect.vue'
 import OptionFieldText from '../components/OptionFieldText.vue'
 import OptionFieldToggle from '../components/OptionFieldToggle.vue'
+import QuickActionProfiles from '../components/QuickActionProfiles.vue'
 import ResetSettingsCard from '../components/ResetSettingsCard.vue'
 import SettingCard from '../components/SettingCard.vue'
 import {
@@ -258,32 +262,32 @@ const messages = defineMessages({
 		defaultMessage:
 			'Ctrl+K or / for a command palette style search with faceted tags for loaders, versions, categories, and types.',
 	},
-	'feature.projectCardActions.title': {
-		id: 'feature.projectCardActions.title',
-		defaultMessage: 'Project card actions',
+	'feature.quickActions.title': {
+		id: 'feature.quickActions.title',
+		defaultMessage: 'Quick actions',
 	},
-	'feature.projectCardActions.description': {
-		id: 'feature.projectCardActions.description',
+	'feature.quickActions.description': {
+		id: 'feature.quickActions.description',
 		defaultMessage: 'Download, follow, and save projects right from their project cards.',
 	},
-	'feature.projectCardActions.modLoader': {
-		id: 'feature.projectCardActions.modLoader',
+	'feature.quickActions.modLoader': {
+		id: 'feature.quickActions.modLoader',
 		defaultMessage: 'Mod loader',
 	},
-	'feature.projectCardActions.pluginLoader': {
-		id: 'feature.projectCardActions.pluginLoader',
+	'feature.quickActions.pluginLoader': {
+		id: 'feature.quickActions.pluginLoader',
 		defaultMessage: 'Plugin loader',
 	},
-	'feature.projectCardActions.shaderLoader': {
-		id: 'feature.projectCardActions.shaderLoader',
+	'feature.quickActions.shaderLoader': {
+		id: 'feature.quickActions.shaderLoader',
 		defaultMessage: 'Shader loader',
 	},
-	'feature.projectCardActions.gameVersion': {
-		id: 'feature.projectCardActions.gameVersion',
+	'feature.quickActions.gameVersion': {
+		id: 'feature.quickActions.gameVersion',
 		defaultMessage: 'Game version',
 	},
-	'feature.projectCardActions.downloadDependencies': {
-		id: 'feature.projectCardActions.downloadDependencies',
+	'feature.quickActions.downloadDependencies': {
+		id: 'feature.quickActions.downloadDependencies',
 		defaultMessage: 'Download dependencies',
 	},
 	'feature.accentColor.title': {
@@ -622,38 +626,38 @@ const generalFeatures = computed<FeatureDef[]>(() => [
 	{
 		key: 'projectCardActions',
 		icon: TagCategoryZapIcon,
-		title: formatMessage(messages['feature.projectCardActions.title']),
-		description: formatMessage(messages['feature.projectCardActions.description']),
+		title: formatMessage(messages['feature.quickActions.title']),
+		description: formatMessage(messages['feature.quickActions.description']),
 		options: [
 			{
 				key: 'gameVersion',
 				type: 'select',
-				label: formatMessage(messages['feature.projectCardActions.gameVersion']),
+				label: formatMessage(messages['feature.quickActions.gameVersion']),
 				fetchItems: fetchGameVersions,
 				searchable: true,
 			},
 			{
 				key: 'modLoader',
 				type: 'select',
-				label: formatMessage(messages['feature.projectCardActions.modLoader']),
+				label: formatMessage(messages['feature.quickActions.modLoader']),
 				fetchItems: () => fetchLoadersByType('mod', 'modpack'),
 			},
 			{
 				key: 'pluginLoader',
 				type: 'select',
-				label: formatMessage(messages['feature.projectCardActions.pluginLoader']),
+				label: formatMessage(messages['feature.quickActions.pluginLoader']),
 				fetchItems: () => fetchLoadersByType('plugin'),
 			},
 			{
 				key: 'shaderLoader',
 				type: 'select',
-				label: formatMessage(messages['feature.projectCardActions.shaderLoader']),
+				label: formatMessage(messages['feature.quickActions.shaderLoader']),
 				fetchItems: () => fetchLoadersByType('shader'),
 			},
 			{
 				key: 'downloadDependencies',
 				type: 'toggle',
-				label: formatMessage(messages['feature.projectCardActions.downloadDependencies']),
+				label: formatMessage(messages['feature.quickActions.downloadDependencies']),
 			},
 		],
 	},

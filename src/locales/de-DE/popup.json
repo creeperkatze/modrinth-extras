@@ -122,26 +122,23 @@
   "feature.platformsSidebar.title": {
     "defaultMessage": "Andere Plattformen"
   },
-  "feature.projectCardActions.description": {
+  "feature.quickActions.description": {
     "defaultMessage": "Projekte direkt über ihre Projektkarten herunterladen, folgen und speichern."
   },
-  "feature.projectCardActions.downloadDependencies": {
+  "feature.quickActions.downloadDependencies": {
     "defaultMessage": "Abhängigkeiten herunterladen"
   },
-  "feature.projectCardActions.gameVersion": {
+  "feature.quickActions.gameVersion": {
     "defaultMessage": "Spielversion"
   },
-  "feature.projectCardActions.modLoader": {
+  "feature.quickActions.modLoader": {
     "defaultMessage": "Mod-Loader"
   },
-  "feature.projectCardActions.pluginLoader": {
+  "feature.quickActions.pluginLoader": {
     "defaultMessage": "Plugin-Loader"
   },
-  "feature.projectCardActions.shaderLoader": {
+  "feature.quickActions.shaderLoader": {
     "defaultMessage": "Shader-Loader"
-  },
-  "feature.projectCardActions.title": {
-    "defaultMessage": "Projektkarten-Aktionen"
   },
   "feature.quickSearch.description": {
     "defaultMessage": "Strg+K oder / für eine Suche im Stil einer Befehlspalette mit gefilterten Tags für Loader, Versionen, Kategorien und Typen."

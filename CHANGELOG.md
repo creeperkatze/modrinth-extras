@@ -14,11 +14,13 @@
 - Lucy as a mod manager option for the copy install command in the Tools card.
 - Reset order button when customizing the sidebar.
 - Option to reset all settings to their defaults.
+- Profiles for quick actions. Save your game version, loaders and dependency option as a named profile and switch between them in the popup.
 
 ### Changed
 
 - Redesigned the popup settings to match Modrinth's own settings. They now open from the settings button in the popup header.
 - The popup now follows your Modrinth theme.
+- Project card actions are now called quick actions.
 - Updated translations.
 
 ### Fixed

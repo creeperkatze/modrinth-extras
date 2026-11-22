@@ -44,23 +44,20 @@
   "feature.notifications.title": {
     "defaultMessage": "الإشعارات"
   },
-  "feature.projectCardActions.description": {
+  "feature.quickActions.description": {
     "defaultMessage": "قم بتنزيل المشاريع ومتابعتها وحفظها مباشرةً من بطاقات المشاريع الخاصة بها."
   },
-  "feature.projectCardActions.gameVersion": {
+  "feature.quickActions.gameVersion": {
     "defaultMessage": "إصدار اللعبة"
   },
-  "feature.projectCardActions.modLoader": {
+  "feature.quickActions.modLoader": {
     "defaultMessage": "محمل التعديلات"
   },
-  "feature.projectCardActions.pluginLoader": {
+  "feature.quickActions.pluginLoader": {
     "defaultMessage": "محمل المكونات الإضافية"
   },
-  "feature.projectCardActions.shaderLoader": {
+  "feature.quickActions.shaderLoader": {
     "defaultMessage": "محمل الـshaders"
-  },
-  "feature.projectCardActions.title": {
-    "defaultMessage": "إجراءات بطاقة المشروع"
   },
   "feature.quickSearch.description": {
     "defaultMessage": "استخدم Ctrl+K أو / لإجراء بحث على غرار لوحة الأوامر باستخدام علامات تصنيفية للمعالجات, الإصدارات, الفئات والأنواع."

@@ -11,10 +11,10 @@
   "feature.activitySparkline.days": {
     "defaultMessage": "{count, plural, one {# dzień} few {# dni} other {# dni}}"
   },
-  "feature.projectCardActions.pluginLoader": {
+  "feature.quickActions.pluginLoader": {
     "defaultMessage": "Loader pluginów"
   },
-  "feature.projectCardActions.shaderLoader": {
+  "feature.quickActions.shaderLoader": {
     "defaultMessage": "Loader shaderów"
   },
   "feature.quickSearch.title": {

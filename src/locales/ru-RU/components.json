@@ -383,42 +383,6 @@
   "platformsSidebar.title": {
     "defaultMessage": "Другие платформы"
   },
-  "projectCardActions.checkingDownload": {
-    "defaultMessage": "Поиск доступной версии..."
-  },
-  "projectCardActions.copied": {
-    "defaultMessage": "Скопировано!"
-  },
-  "projectCardActions.copyLink": {
-    "defaultMessage": "Копировать ссылку"
-  },
-  "projectCardActions.download": {
-    "defaultMessage": "Скачать"
-  },
-  "projectCardActions.downloadUnavailable": {
-    "defaultMessage": "{loader, select, none {Нет доступных версий для {version}} other {Нет доступных версий для {loader} {version}}}"
-  },
-  "projectCardActions.follow": {
-    "defaultMessage": "Подписаться"
-  },
-  "projectCardActions.newCollection": {
-    "defaultMessage": "Создать новую коллекцию"
-  },
-  "projectCardActions.noCollections": {
-    "defaultMessage": "Коллекции не найдены."
-  },
-  "projectCardActions.save": {
-    "defaultMessage": "Сохранить"
-  },
-  "projectCardActions.saved": {
-    "defaultMessage": "Сохранено"
-  },
-  "projectCardActions.searchPlaceholder": {
-    "defaultMessage": "Поиск..."
-  },
-  "projectCardActions.unfollow": {
-    "defaultMessage": "Отписаться"
-  },
   "projectReviews.loading": {
     "defaultMessage": "Загрузка отзывов..."
   },
@@ -433,6 +397,42 @@
   },
   "projectReviews.tab": {
     "defaultMessage": "Отзывы"
+  },
+  "quickActions.checkingDownload": {
+    "defaultMessage": "Поиск доступной версии..."
+  },
+  "quickActions.copied": {
+    "defaultMessage": "Скопировано!"
+  },
+  "quickActions.copyLink": {
+    "defaultMessage": "Копировать ссылку"
+  },
+  "quickActions.download": {
+    "defaultMessage": "Скачать"
+  },
+  "quickActions.downloadUnavailable": {
+    "defaultMessage": "{loader, select, none {Нет доступных версий для {version}} other {Нет доступных версий для {loader} {version}}}"
+  },
+  "quickActions.follow": {
+    "defaultMessage": "Подписаться"
+  },
+  "quickActions.newCollection": {
+    "defaultMessage": "Создать новую коллекцию"
+  },
+  "quickActions.noCollections": {
+    "defaultMessage": "Коллекции не найдены."
+  },
+  "quickActions.save": {
+    "defaultMessage": "Сохранить"
+  },
+  "quickActions.saved": {
+    "defaultMessage": "Сохранено"
+  },
+  "quickActions.searchPlaceholder": {
+    "defaultMessage": "Поиск..."
+  },
+  "quickActions.unfollow": {
+    "defaultMessage": "Отписаться"
   },
   "quickSearch.clearRecent": {
     "defaultMessage": "Очистить недавние"

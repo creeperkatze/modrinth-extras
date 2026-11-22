@@ -101,26 +101,23 @@
   "feature.platformsSidebar.description": {
     "defaultMessage": "在CurseForge、Hangar和SpigotMC上找到同一个项目或作者。"
   },
-  "feature.projectCardActions.description": {
+  "feature.quickActions.description": {
     "defaultMessage": "直接从项目卡片下载、关注和保存项目。"
   },
-  "feature.projectCardActions.downloadDependencies": {
+  "feature.quickActions.downloadDependencies": {
     "defaultMessage": "下载依赖项"
   },
-  "feature.projectCardActions.gameVersion": {
+  "feature.quickActions.gameVersion": {
     "defaultMessage": "游戏版本"
   },
-  "feature.projectCardActions.modLoader": {
+  "feature.quickActions.modLoader": {
     "defaultMessage": "模组加载器"
   },
-  "feature.projectCardActions.pluginLoader": {
+  "feature.quickActions.pluginLoader": {
     "defaultMessage": "插件加载器"
   },
-  "feature.projectCardActions.shaderLoader": {
+  "feature.quickActions.shaderLoader": {
     "defaultMessage": "光影包加载器"
-  },
-  "feature.projectCardActions.title": {
-    "defaultMessage": "项目卡片操作"
   },
   "feature.quickSearch.description": {
     "defaultMessage": "按 Ctrl+K 或 / 键，即可使用类似命令面板的搜索功能，支持按加载器、版本、类别和类型进行多维标签搜索。"

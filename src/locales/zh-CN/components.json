@@ -251,47 +251,47 @@
   "platformsSidebar.title": {
     "defaultMessage": "其他平台"
   },
-  "projectCardActions.checkingDownload": {
-    "defaultMessage": "正在检查可用版本……"
-  },
-  "projectCardActions.copied": {
-    "defaultMessage": "已复制！"
-  },
-  "projectCardActions.copyLink": {
-    "defaultMessage": "复制链接"
-  },
-  "projectCardActions.download": {
-    "defaultMessage": "下载"
-  },
-  "projectCardActions.downloadUnavailable": {
-    "defaultMessage": "{loader, select, none {未找到适用于 {version} 的版本} other {未找到适用于 {loader} {version} 的版本}}"
-  },
-  "projectCardActions.follow": {
-    "defaultMessage": "关注"
-  },
-  "projectCardActions.newCollection": {
-    "defaultMessage": "创建新收藏"
-  },
-  "projectCardActions.noCollections": {
-    "defaultMessage": "还没有收藏夹。"
-  },
-  "projectCardActions.save": {
-    "defaultMessage": "保存"
-  },
-  "projectCardActions.saved": {
-    "defaultMessage": "已保存"
-  },
-  "projectCardActions.searchPlaceholder": {
-    "defaultMessage": "搜索……"
-  },
-  "projectCardActions.unfollow": {
-    "defaultMessage": "取消关注"
-  },
   "projectReviews.source": {
     "defaultMessage": "评论来源"
   },
   "projectReviews.tab": {
     "defaultMessage": "评论"
+  },
+  "quickActions.checkingDownload": {
+    "defaultMessage": "正在检查可用版本……"
+  },
+  "quickActions.copied": {
+    "defaultMessage": "已复制！"
+  },
+  "quickActions.copyLink": {
+    "defaultMessage": "复制链接"
+  },
+  "quickActions.download": {
+    "defaultMessage": "下载"
+  },
+  "quickActions.downloadUnavailable": {
+    "defaultMessage": "{loader, select, none {未找到适用于 {version} 的版本} other {未找到适用于 {loader} {version} 的版本}}"
+  },
+  "quickActions.follow": {
+    "defaultMessage": "关注"
+  },
+  "quickActions.newCollection": {
+    "defaultMessage": "创建新收藏"
+  },
+  "quickActions.noCollections": {
+    "defaultMessage": "还没有收藏夹。"
+  },
+  "quickActions.save": {
+    "defaultMessage": "保存"
+  },
+  "quickActions.saved": {
+    "defaultMessage": "已保存"
+  },
+  "quickActions.searchPlaceholder": {
+    "defaultMessage": "搜索……"
+  },
+  "quickActions.unfollow": {
+    "defaultMessage": "取消关注"
   },
   "quickSearch.clearRecent": {
     "defaultMessage": "清除最近搜索"

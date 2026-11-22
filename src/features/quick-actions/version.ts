@@ -2,14 +2,7 @@ import type { Labrinth } from '@modrinth/api-client'
 
 import { chunkIdsForQuery } from '../../api/chunk-ids'
 import { modrinthClient } from '../../api/client'
-
-export interface QuickDownloadSettings {
-	modLoader: string
-	pluginLoader: string
-	shaderLoader: string
-	gameVersion: string
-	downloadDependencies: boolean
-}
+import type { QuickDownloadSettings } from '../../core/settings'
 
 export interface QuickDownloadResult {
 	projectId: string

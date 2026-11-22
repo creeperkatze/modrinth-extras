@@ -29,7 +29,7 @@
   "feature.platformsSidebar.description": {
     "defaultMessage": "CurseForge、Hangar、とSpigotMCで同じのプロジェクトや開発者を見つけます。"
   },
-  "feature.projectCardActions.gameVersion": {
+  "feature.quickActions.gameVersion": {
     "defaultMessage": "ゲームバージョン"
   },
   "feature.telemetry.disabledTooltip": {

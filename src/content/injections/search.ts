@@ -1,5 +1,5 @@
-import ProjectCardActions from '../../components/search/ProjectCardActions.vue'
-import { initFollowState } from '../../features/project-cards/follow'
+import QuickActions from '../../components/search/QuickActions.vue'
+import { initFollowState } from '../../features/quick-actions/follow'
 import { createDynamicInjection, createExtensionApp, type SettingsGetter } from '../injection'
 import { PROJECT_TYPE_PATTERN } from '../page'
 
@@ -7,7 +7,7 @@ function getCardHref(card: HTMLElement): string {
 	return card.parentElement?.querySelector<HTMLAnchorElement>('a[href]')?.getAttribute('href') ?? ''
 }
 
-function attachCardActions(card: HTMLElement): HTMLElement | null {
+function attachQuickActions(card: HTMLElement): HTMLElement | null {
 	if (!getCardHref(card).match(PROJECT_TYPE_PATTERN)) return null
 
 	const listCardDiv = card.querySelector<HTMLElement>('.grid-project-card-list')
@@ -43,18 +43,18 @@ function attachCardActions(card: HTMLElement): HTMLElement | null {
 }
 
 export function searchInjections(settings: SettingsGetter) {
-	const projectCardActions = createDynamicInjection({
+	const quickActions = createDynamicInjection({
 		settingsKeys: ['projectCardActions'],
 		persistent: false,
 		isEnabled: () => settings().projectCardActions.enabled,
 		targets: '.project-card-container',
 		onSchedule: () => initFollowState(),
-		attach: attachCardActions,
+		attach: attachQuickActions,
 		createApp(target) {
 			const [, projectType, projectSlug] = getCardHref(target).match(PROJECT_TYPE_PATTERN) ?? []
 			const { modLoader, pluginLoader, shaderLoader, gameVersion, downloadDependencies } =
 				settings().projectCardActions
-			return createExtensionApp(ProjectCardActions, {
+			return createExtensionApp(QuickActions, {
 				projectSlug: projectSlug ?? '',
 				projectType: projectType ?? '',
 				downloadSettings: {
@@ -68,5 +68,5 @@ export function searchInjections(settings: SettingsGetter) {
 		},
 	})
 
-	return [projectCardActions]
+	return [quickActions]
 }

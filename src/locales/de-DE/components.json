@@ -383,42 +383,6 @@
   "platformsSidebar.title": {
     "defaultMessage": "Andere Plattformen"
   },
-  "projectCardActions.checkingDownload": {
-    "defaultMessage": "Überprüfe auf verfügbare Version..."
-  },
-  "projectCardActions.copied": {
-    "defaultMessage": "Kopiert!"
-  },
-  "projectCardActions.copyLink": {
-    "defaultMessage": "Link kopieren"
-  },
-  "projectCardActions.download": {
-    "defaultMessage": "Herunterladen"
-  },
-  "projectCardActions.downloadUnavailable": {
-    "defaultMessage": "{loader, select, none {Keine Version verfügbar für {version}} other {Keine Version verfügbar für {loader} {version}}}"
-  },
-  "projectCardActions.follow": {
-    "defaultMessage": "Folgen"
-  },
-  "projectCardActions.newCollection": {
-    "defaultMessage": "Neue Kollektion erstellen"
-  },
-  "projectCardActions.noCollections": {
-    "defaultMessage": "Keine Kollektionen gefunden."
-  },
-  "projectCardActions.save": {
-    "defaultMessage": "Speichern"
-  },
-  "projectCardActions.saved": {
-    "defaultMessage": "Gespeichert"
-  },
-  "projectCardActions.searchPlaceholder": {
-    "defaultMessage": "Suchen..."
-  },
-  "projectCardActions.unfollow": {
-    "defaultMessage": "Entfolgen"
-  },
   "projectReviews.loading": {
     "defaultMessage": "Bewertungen werden geladen…"
   },
@@ -433,6 +397,42 @@
   },
   "projectReviews.tab": {
     "defaultMessage": "Bewertungen"
+  },
+  "quickActions.checkingDownload": {
+    "defaultMessage": "Überprüfe auf verfügbare Version..."
+  },
+  "quickActions.copied": {
+    "defaultMessage": "Kopiert!"
+  },
+  "quickActions.copyLink": {
+    "defaultMessage": "Link kopieren"
+  },
+  "quickActions.download": {
+    "defaultMessage": "Herunterladen"
+  },
+  "quickActions.downloadUnavailable": {
+    "defaultMessage": "{loader, select, none {Keine Version verfügbar für {version}} other {Keine Version verfügbar für {loader} {version}}}"
+  },
+  "quickActions.follow": {
+    "defaultMessage": "Folgen"
+  },
+  "quickActions.newCollection": {
+    "defaultMessage": "Neue Kollektion erstellen"
+  },
+  "quickActions.noCollections": {
+    "defaultMessage": "Keine Kollektionen gefunden."
+  },
+  "quickActions.save": {
+    "defaultMessage": "Speichern"
+  },
+  "quickActions.saved": {
+    "defaultMessage": "Gespeichert"
+  },
+  "quickActions.searchPlaceholder": {
+    "defaultMessage": "Suchen..."
+  },
+  "quickActions.unfollow": {
+    "defaultMessage": "Entfolgen"
   },
   "quickSearch.clearRecent": {
     "defaultMessage": "Kürzliche löschen"

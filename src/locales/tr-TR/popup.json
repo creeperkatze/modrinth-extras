@@ -86,26 +86,23 @@
   "feature.platformsSidebar.description": {
     "defaultMessage": "CurseForge, Hangar ve SpigotMC üzerinde aynı projeyi veya geliştiriciyi bulun."
   },
-  "feature.projectCardActions.description": {
+  "feature.quickActions.description": {
     "defaultMessage": "Projeleri doğrudan proje kartlarından kolayca indirin, takip edin ve kaydedin."
   },
-  "feature.projectCardActions.downloadDependencies": {
+  "feature.quickActions.downloadDependencies": {
     "defaultMessage": "Bağımlılıkları indir"
   },
-  "feature.projectCardActions.gameVersion": {
+  "feature.quickActions.gameVersion": {
     "defaultMessage": "Oyun sürümü"
   },
-  "feature.projectCardActions.modLoader": {
+  "feature.quickActions.modLoader": {
     "defaultMessage": "Mod yükleyicisi"
   },
-  "feature.projectCardActions.pluginLoader": {
+  "feature.quickActions.pluginLoader": {
     "defaultMessage": "Eklenti yükleyicisi"
   },
-  "feature.projectCardActions.shaderLoader": {
+  "feature.quickActions.shaderLoader": {
     "defaultMessage": "Shader yükleyici"
-  },
-  "feature.projectCardActions.title": {
-    "defaultMessage": "Proje kartı eylemleri"
   },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K veya / tuşlarına basarak, yükleyiciler, sürümler, kategoriler ve türler için filtrelenmiş etiketlere sahip komut paleti tarzı bir arama yapabilirsiniz."

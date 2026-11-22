@@ -8,21 +8,21 @@
 			@click.stop="handleDownload"
 		>
 			<DownloadIcon />
-			{{ formatMessage(messages['projectCardActions.download']) }}
+			{{ formatMessage(messages['quickActions.download']) }}
 		</Button>
 	</span>
 	<IconButton
 		v-tooltip="
 			isFollowed
-				? formatMessage(messages['projectCardActions.unfollow'])
-				: formatMessage(messages['projectCardActions.follow'])
+				? formatMessage(messages['quickActions.unfollow'])
+				: formatMessage(messages['quickActions.follow'])
 		"
 		:color="isFollowed ? 'brand' : undefined"
 		:loading="followLoading"
 		:label="
 			isFollowed
-				? formatMessage(messages['projectCardActions.unfollow'])
-				: formatMessage(messages['projectCardActions.follow'])
+				? formatMessage(messages['quickActions.unfollow'])
+				: formatMessage(messages['quickActions.follow'])
 		"
 		@click.stop="handleFollow"
 	>
@@ -30,9 +30,9 @@
 	</IconButton>
 	<IconButton
 		v-if="!isLoggedIn"
-		v-tooltip="formatMessage(messages['projectCardActions.save'])"
+		v-tooltip="formatMessage(messages['quickActions.save'])"
 		:color="isSaved ? 'brand' : undefined"
-		:label="formatMessage(messages['projectCardActions.save'])"
+		:label="formatMessage(messages['quickActions.save'])"
 		@click.stop="navigate('/auth/sign-in')"
 	>
 		<BookmarkIcon fill="none" aria-hidden="true" />
@@ -42,14 +42,14 @@
 			icon-only
 			:tooltip="
 				isSaved
-					? formatMessage(messages['projectCardActions.saved'])
-					: formatMessage(messages['projectCardActions.save'])
+					? formatMessage(messages['quickActions.saved'])
+					: formatMessage(messages['quickActions.save'])
 			"
 			:color="isSaved ? 'brand' : undefined"
 			:label="
 				isSaved
-					? formatMessage(messages['projectCardActions.saved'])
-					: formatMessage(messages['projectCardActions.save'])
+					? formatMessage(messages['quickActions.saved'])
+					: formatMessage(messages['quickActions.save'])
 			"
 			placement="bottom-end"
 		>
@@ -65,7 +65,7 @@
 				<template v-else>
 					<Input
 						v-model="collectionsSearch"
-						:placeholder="formatMessage(messages['projectCardActions.searchPlaceholder'])"
+						:placeholder="formatMessage(messages['quickActions.searchPlaceholder'])"
 						wrapper-class="menu-search"
 					/>
 					<div v-if="filteredCollections.length > 0" class="collections-list">
@@ -81,13 +81,13 @@
 					</div>
 					<div v-else class="menu-text">
 						<p class="popout-text">
-							{{ formatMessage(messages['projectCardActions.noCollections']) }}
+							{{ formatMessage(messages['quickActions.noCollections']) }}
 						</p>
 					</div>
 					<div class="collection-button">
 						<Button @click.stop="handleNewCollection">
 							<PlusIcon />
-							{{ formatMessage(messages['projectCardActions.newCollection']) }}
+							{{ formatMessage(messages['quickActions.newCollection']) }}
 						</Button>
 					</div>
 				</template>
@@ -97,14 +97,14 @@
 	<IconButton
 		v-tooltip="
 			copied
-				? formatMessage(messages['projectCardActions.copied'])
-				: formatMessage(messages['projectCardActions.copyLink'])
+				? formatMessage(messages['quickActions.copied'])
+				: formatMessage(messages['quickActions.copyLink'])
 		"
 		type="quiet"
 		:label="
 			copied
-				? formatMessage(messages['projectCardActions.copied'])
-				: formatMessage(messages['projectCardActions.copyLink'])
+				? formatMessage(messages['quickActions.copied'])
+				: formatMessage(messages['quickActions.copyLink'])
 		"
 		@click.stop="handleCopyLink"
 	>
@@ -137,52 +137,53 @@ import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import { getAuthToken } from '../../api/client'
 import { navigate } from '../../content/page-router'
+import type { QuickDownloadSettings } from '../../core/settings'
 import {
 	collections,
 	initCollections,
 	toggleProjectInCollection,
-} from '../../features/project-cards/collection'
-import { getRequiredDependencyFiles } from '../../features/project-cards/dependencies'
-import { saveFiles } from '../../features/project-cards/download'
-import { followedSlugs, toggleFollow } from '../../features/project-cards/follow'
-import { getQuickDownload, type QuickDownloadSettings } from '../../features/project-cards/version'
+} from '../../features/quick-actions/collection'
+import { getRequiredDependencyFiles } from '../../features/quick-actions/dependencies'
+import { saveFiles } from '../../features/quick-actions/download'
+import { followedSlugs, toggleFollow } from '../../features/quick-actions/follow'
+import { getQuickDownload } from '../../features/quick-actions/version'
 
 const { formatMessage } = useVIntl()
 const messages = defineMessages({
-	'projectCardActions.download': {
-		id: 'projectCardActions.download',
+	'quickActions.download': {
+		id: 'quickActions.download',
 		defaultMessage: 'Download',
 	},
-	'projectCardActions.follow': { id: 'projectCardActions.follow', defaultMessage: 'Follow' },
-	'projectCardActions.unfollow': {
-		id: 'projectCardActions.unfollow',
+	'quickActions.follow': { id: 'quickActions.follow', defaultMessage: 'Follow' },
+	'quickActions.unfollow': {
+		id: 'quickActions.unfollow',
 		defaultMessage: 'Unfollow',
 	},
-	'projectCardActions.save': { id: 'projectCardActions.save', defaultMessage: 'Save' },
-	'projectCardActions.saved': { id: 'projectCardActions.saved', defaultMessage: 'Saved' },
-	'projectCardActions.searchPlaceholder': {
-		id: 'projectCardActions.searchPlaceholder',
+	'quickActions.save': { id: 'quickActions.save', defaultMessage: 'Save' },
+	'quickActions.saved': { id: 'quickActions.saved', defaultMessage: 'Saved' },
+	'quickActions.searchPlaceholder': {
+		id: 'quickActions.searchPlaceholder',
 		defaultMessage: 'Search...',
 	},
-	'projectCardActions.noCollections': {
-		id: 'projectCardActions.noCollections',
+	'quickActions.noCollections': {
+		id: 'quickActions.noCollections',
 		defaultMessage: 'No collections found.',
 	},
-	'projectCardActions.newCollection': {
-		id: 'projectCardActions.newCollection',
+	'quickActions.newCollection': {
+		id: 'quickActions.newCollection',
 		defaultMessage: 'Create new collection',
 	},
-	'projectCardActions.copyLink': {
-		id: 'projectCardActions.copyLink',
+	'quickActions.copyLink': {
+		id: 'quickActions.copyLink',
 		defaultMessage: 'Copy link',
 	},
-	'projectCardActions.copied': { id: 'projectCardActions.copied', defaultMessage: 'Copied!' },
-	'projectCardActions.checkingDownload': {
-		id: 'projectCardActions.checkingDownload',
+	'quickActions.copied': { id: 'quickActions.copied', defaultMessage: 'Copied!' },
+	'quickActions.checkingDownload': {
+		id: 'quickActions.checkingDownload',
 		defaultMessage: 'Checking available version...',
 	},
-	'projectCardActions.downloadUnavailable': {
-		id: 'projectCardActions.downloadUnavailable',
+	'quickActions.downloadUnavailable': {
+		id: 'quickActions.downloadUnavailable',
 		defaultMessage:
 			'{loader, select, none {No version available for {version}} other {No version available for {loader} {version}}}',
 	},
@@ -221,11 +222,11 @@ const downloadDisabled = computed(
 
 const downloadTooltip = computed(() => {
 	if (downloadAvailabilityLoading.value) {
-		return formatMessage(messages['projectCardActions.checkingDownload'])
+		return formatMessage(messages['quickActions.checkingDownload'])
 	}
 	if (downloadAvailabilityChecked.value && !downloadFile.value) {
 		const loader = getSelectedLoader()
-		return formatMessage(messages['projectCardActions.downloadUnavailable'], {
+		return formatMessage(messages['quickActions.downloadUnavailable'], {
 			loader: loader ? loader.charAt(0).toUpperCase() + loader.slice(1) : 'none',
 			version: props.downloadSettings.gameVersion,
 		})

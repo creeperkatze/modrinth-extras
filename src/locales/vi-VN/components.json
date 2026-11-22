@@ -23,34 +23,34 @@
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "Xem lịch sử"
   },
-  "projectCardActions.copied": {
+  "quickActions.copied": {
     "defaultMessage": "Đã sao chép!"
   },
-  "projectCardActions.copyLink": {
+  "quickActions.copyLink": {
     "defaultMessage": "Sao chép liên kết"
   },
-  "projectCardActions.download": {
+  "quickActions.download": {
     "defaultMessage": "Tải xuống"
   },
-  "projectCardActions.follow": {
+  "quickActions.follow": {
     "defaultMessage": "Theo dõi"
   },
-  "projectCardActions.newCollection": {
+  "quickActions.newCollection": {
     "defaultMessage": "Tạo bộ sưu tập mới"
   },
-  "projectCardActions.noCollections": {
+  "quickActions.noCollections": {
     "defaultMessage": "Không tìm thấy bộ sưu tập."
   },
-  "projectCardActions.save": {
+  "quickActions.save": {
     "defaultMessage": "Lưu"
   },
-  "projectCardActions.saved": {
+  "quickActions.saved": {
     "defaultMessage": "Đã lưu"
   },
-  "projectCardActions.searchPlaceholder": {
+  "quickActions.searchPlaceholder": {
     "defaultMessage": "Tìm kiếm..."
   },
-  "projectCardActions.unfollow": {
+  "quickActions.unfollow": {
     "defaultMessage": "Bỏ theo dõi"
   },
   "quickSearch.examples": {

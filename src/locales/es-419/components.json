@@ -74,40 +74,40 @@
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "Ver historial"
   },
-  "projectCardActions.checkingDownload": {
+  "quickActions.checkingDownload": {
     "defaultMessage": "Verificando la versión disponible..."
   },
-  "projectCardActions.copied": {
+  "quickActions.copied": {
     "defaultMessage": "¡Copiado!"
   },
-  "projectCardActions.copyLink": {
+  "quickActions.copyLink": {
     "defaultMessage": "Copiar enlace"
   },
-  "projectCardActions.download": {
+  "quickActions.download": {
     "defaultMessage": "Descargar"
   },
-  "projectCardActions.downloadUnavailable": {
+  "quickActions.downloadUnavailable": {
     "defaultMessage": "{loader, select, none {No hay versión disponible para {version}} other {No hay versión disponible para {loader} {version}}}"
   },
-  "projectCardActions.follow": {
+  "quickActions.follow": {
     "defaultMessage": "Seguir"
   },
-  "projectCardActions.newCollection": {
+  "quickActions.newCollection": {
     "defaultMessage": "Crear nueva colección"
   },
-  "projectCardActions.noCollections": {
+  "quickActions.noCollections": {
     "defaultMessage": "No se encontraron colecciones."
   },
-  "projectCardActions.save": {
+  "quickActions.save": {
     "defaultMessage": "Guardar"
   },
-  "projectCardActions.saved": {
+  "quickActions.saved": {
     "defaultMessage": "Guardado"
   },
-  "projectCardActions.searchPlaceholder": {
+  "quickActions.searchPlaceholder": {
     "defaultMessage": "Buscar..."
   },
-  "projectCardActions.unfollow": {
+  "quickActions.unfollow": {
     "defaultMessage": "Dejar de seguir"
   },
   "quickSearch.clearRecent": {

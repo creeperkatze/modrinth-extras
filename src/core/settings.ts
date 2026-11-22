@@ -45,18 +45,27 @@ export interface NamedTheme extends ThemeColors {
 	name: string
 }
 
+// What the quick actions download button looks for
+export interface QuickDownloadSettings {
+	modLoader: string
+	pluginLoader: string
+	shaderLoader: string
+	gameVersion: string
+	downloadDependencies: boolean
+}
+
+export interface QuickActionProfile extends QuickDownloadSettings {
+	id: string
+	name: string
+}
+
 export interface ExtensionSettings {
 	locale: { value: string }
 	notificationsIndicator: { enabled: boolean }
 	quickSearch: { enabled: boolean }
-	projectCardActions: {
-		enabled: boolean
-		modLoader: string
-		pluginLoader: string
-		shaderLoader: string
-		gameVersion: string
-		downloadDependencies: boolean
-	}
+	projectCardActions: { enabled: boolean } & QuickDownloadSettings
+	// Kept apart, so renaming a profile doesn't remount every quick actions bar
+	quickActionProfiles: { selected: string; profiles: QuickActionProfile[] }
 	activitySparkline: { enabled: boolean; days: string }
 	toolsSidebar: { enabled: boolean; modManager: string; decompiler: string }
 	compareVersions: { enabled: boolean }
@@ -95,6 +104,7 @@ export const DEFAULTS: ExtensionSettings = {
 		gameVersion: '',
 		downloadDependencies: false,
 	},
+	quickActionProfiles: { selected: '', profiles: [] },
 	activitySparkline: { enabled: true, days: '60' },
 	toolsSidebar: { enabled: true, modManager: 'packwiz', decompiler: 'slicer' },
 	compareVersions: { enabled: false },

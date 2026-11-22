@@ -122,26 +122,23 @@
   "feature.platformsSidebar.title": {
     "defaultMessage": "Другие платформы"
   },
-  "feature.projectCardActions.description": {
+  "feature.quickActions.description": {
     "defaultMessage": "Скачивайте, подписывайтесь и сохраняйте проекты прямо из карточек проектов."
   },
-  "feature.projectCardActions.downloadDependencies": {
+  "feature.quickActions.downloadDependencies": {
     "defaultMessage": "Скачивание зависимостей"
   },
-  "feature.projectCardActions.gameVersion": {
+  "feature.quickActions.gameVersion": {
     "defaultMessage": "Версия игры"
   },
-  "feature.projectCardActions.modLoader": {
+  "feature.quickActions.modLoader": {
     "defaultMessage": "Загрузчик модов"
   },
-  "feature.projectCardActions.pluginLoader": {
+  "feature.quickActions.pluginLoader": {
     "defaultMessage": "Загрузчик плагинов"
   },
-  "feature.projectCardActions.shaderLoader": {
+  "feature.quickActions.shaderLoader": {
     "defaultMessage": "Загрузчик шейдеров"
-  },
-  "feature.projectCardActions.title": {
-    "defaultMessage": "Действия в карточке проекта"
   },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K или / для поиска в стиле командной палитры с фильтрами по загрузчикам, версиям, категориям и типам."

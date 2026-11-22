@@ -122,26 +122,23 @@
   "feature.platformsSidebar.title": {
     "defaultMessage": "Інші платформи"
   },
-  "feature.projectCardActions.description": {
+  "feature.quickActions.description": {
     "defaultMessage": "Завантажуйте, підписуйтесь та зберігайте проєкти прямо з їхніх карток."
   },
-  "feature.projectCardActions.downloadDependencies": {
+  "feature.quickActions.downloadDependencies": {
     "defaultMessage": "Завантажити залежності"
   },
-  "feature.projectCardActions.gameVersion": {
+  "feature.quickActions.gameVersion": {
     "defaultMessage": "Версія гри"
   },
-  "feature.projectCardActions.modLoader": {
+  "feature.quickActions.modLoader": {
     "defaultMessage": "Завантажувач модів"
   },
-  "feature.projectCardActions.pluginLoader": {
+  "feature.quickActions.pluginLoader": {
     "defaultMessage": "Завантажувач плагінів"
   },
-  "feature.projectCardActions.shaderLoader": {
+  "feature.quickActions.shaderLoader": {
     "defaultMessage": "Завантажувач шейдерів"
-  },
-  "feature.projectCardActions.title": {
-    "defaultMessage": "Дії у картці проєкту"
   },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K або / для пошуку у стилі палітри команд із фільтрами для завантажувачів, версій, категорій та типів."
