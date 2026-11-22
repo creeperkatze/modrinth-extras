@@ -42,10 +42,10 @@
 <script setup lang="ts">
 import { ArrowUpRightIcon, XIcon } from '@modrinth/assets'
 import { ButtonLink, defineMessages, IconButton, useVIntl } from '@modrinth/ui'
-import { storage } from '@wxt-dev/storage'
 import { onMounted, ref } from 'vue'
 
 import KofiIcon from '../../../assets/icons/kofi.svg?component'
+import { dismissPrompt, donatePrompt, shouldShowPrompt } from '../../../features/prompts/state'
 
 const { formatMessage } = useVIntl()
 
@@ -69,23 +69,15 @@ const messages = defineMessages({
 	},
 })
 
-interface DonatePromptState {
-	dismissed: boolean
-}
-
-const donatePromptItem = storage.defineItem<DonatePromptState>('local:donatePrompt')
-
 const visible = ref(false)
 
 async function dismiss(): Promise<void> {
 	visible.value = false
-	await donatePromptItem.setValue({ dismissed: true })
+	await dismissPrompt(donatePrompt)
 }
 
 onMounted(async () => {
-	const existing = await donatePromptItem.getValue()
-	if (existing?.dismissed) return
-	visible.value = true
+	visible.value = await shouldShowPrompt(donatePrompt)
 })
 </script>
 

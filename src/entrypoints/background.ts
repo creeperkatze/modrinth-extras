@@ -34,6 +34,7 @@ import { refreshAccount } from '../features/account/account'
 import type { Notification } from '../features/notifications/notifications'
 import type { MatchableProject } from '../features/platforms/matching'
 import type { PlatformPage } from '../features/platforms/pages'
+import { movePromptsToSync, saveInstallDate } from '../features/prompts/state'
 import type { RepositoryPlatform } from '../features/repository/links'
 import { markExtensionUpdated } from '../features/tour/state'
 
@@ -215,10 +216,16 @@ export default defineBackground(() => {
 		void refreshAccountAndBadge()
 		if (details.reason === 'install') {
 			void analytics.track('extension_installed')
+			saveInstallDate().catch((err) =>
+				console.error('[Modrinth Extras] Failed to save the install date:', err),
+			)
 		} else if (details.reason === 'update') {
 			void analytics.track('extension_updated', { from_extension_version: details.previousVersion })
 			markExtensionUpdated().catch((err) =>
 				console.error('[Modrinth Extras] Failed to save the extension update:', err),
+			)
+			movePromptsToSync().catch((err) =>
+				console.error('[Modrinth Extras] Failed to move the prompts to sync:', err),
 			)
 		}
 	})

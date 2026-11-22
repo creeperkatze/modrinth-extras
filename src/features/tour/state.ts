@@ -8,15 +8,16 @@ export interface IntroductionTourState {
 }
 
 export const introductionTourItem = storage.defineItem<IntroductionTourState>(
-	'local:introductionTour',
+	'sync:introductionTour',
 	{
 		defaultValue: { updated: false, seenSteps: [] },
 	},
 )
 
+// Writing only once keeps the steps another browser saved
 export async function markExtensionUpdated() {
 	const state = await introductionTourItem.getValue()
-	await introductionTourItem.setValue({ ...state, updated: true })
+	if (!state.updated) await introductionTourItem.setValue({ ...state, updated: true })
 }
 
 export async function markTourStepsSeen(ids: string[]) {

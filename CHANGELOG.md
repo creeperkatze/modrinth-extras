@@ -10,7 +10,7 @@
 - Creator tab in the popup with your revenue balance, upcoming payouts and charts of your views, downloads and revenue.
 - Notifications tab in the popup, where you can read your notifications, accept or decline invites and mark them as read.
 - Download button on collections, which bundles every project that supports your game version and loader into a modpack (.mrpack) or zip file, with their required dependencies.
-- Your settings, custom themes and quick action profiles now follow you to your other browsers when browser sync is on. You can have up to 100 custom themes and 30 profiles.
+- Your settings, custom themes and quick action profiles now follow you to your other browsers when browser sync is on, along with the tour and the Discord and donate banners you closed. You can have up to 100 custom themes and 30 profiles.
 - A short tour the first time you open the popup, which also points out what's new after an update.
 - Lucy as a mod manager option for the copy install command in the Tools card.
 - Reset order button when customizing the sidebar.
@@ -24,6 +24,7 @@
 - Project card actions are now called quick actions.
 - The custom accent color is now an option under Themes in the popup, and works on top of any theme. Your color carries over.
 - Changing an option in the popup now updates the page in place, instead of reloading the cards and buttons it affects.
+- The donate banner in the popup now only shows once you've had the extension for 3 days, and the Discord banner after a week.
 - Updated translations.
 
 ### Fixed

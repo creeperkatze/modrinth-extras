@@ -42,8 +42,9 @@
 <script setup lang="ts">
 import { ArrowUpRightIcon, DiscordIcon, XIcon } from '@modrinth/assets'
 import { ButtonLink, defineMessages, IconButton, useVIntl } from '@modrinth/ui'
-import { storage } from '@wxt-dev/storage'
 import { onMounted, ref } from 'vue'
+
+import { dismissPrompt, discordPrompt, shouldShowPrompt } from '../../../features/prompts/state'
 
 const { formatMessage } = useVIntl()
 
@@ -66,23 +67,15 @@ const messages = defineMessages({
 	},
 })
 
-interface DiscordPromptState {
-	dismissed: boolean
-}
-
-const discordPromptItem = storage.defineItem<DiscordPromptState>('local:discordPrompt')
-
 const visible = ref(false)
 
 async function dismiss(): Promise<void> {
 	visible.value = false
-	await discordPromptItem.setValue({ dismissed: true })
+	await dismissPrompt(discordPrompt)
 }
 
 onMounted(async () => {
-	const existing = await discordPromptItem.getValue()
-	if (existing?.dismissed) return
-	visible.value = true
+	visible.value = await shouldShowPrompt(discordPrompt)
 })
 </script>
 
