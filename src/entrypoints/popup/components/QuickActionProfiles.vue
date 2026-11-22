@@ -30,7 +30,7 @@
 			</div>
 		</template>
 		<div class="flex flex-wrap gap-2">
-			<Button size="sm" class="w-fit" @click="create">
+			<Button size="sm" class="w-fit" :disabled="full" @click="create">
 				<PlusIcon aria-hidden="true" />
 				{{
 					formatMessage(
@@ -51,6 +51,9 @@
 				{{ formatMessage(messages['quickActionProfiles.delete']) }}
 			</Button>
 		</div>
+		<span v-if="full" class="text-sm text-secondary">
+			{{ formatMessage(messages['quickActionProfiles.limit'], { max: MAX_QUICK_ACTION_PROFILES }) }}
+		</span>
 		<hr class="m-0 border-0 border-t border-solid border-surface-4" />
 	</div>
 </template>
@@ -61,6 +64,7 @@ import { Button, defineMessages, formatLoader, Input, useVIntl } from '@modrinth
 import { computed, nextTick, ref, useTemplateRef, watch } from 'vue'
 
 import CompactCombobox from '../../../components/ui/CompactCombobox.vue'
+import { MAX_QUICK_ACTION_PROFILES } from '../../../core/settings'
 import {
 	createQuickActionProfile,
 	deleteQuickActionProfile,
@@ -91,9 +95,14 @@ const messages = defineMessages({
 		id: 'quickActionProfiles.defaultName',
 		defaultMessage: 'Profile',
 	},
+	'quickActionProfiles.limit': {
+		id: 'quickActionProfiles.limit',
+		defaultMessage: 'You can save up to {max} profiles.',
+	},
 })
 
 const profiles = computed(() => settings.quickActionProfiles.profiles)
+const full = computed(() => profiles.value.length >= MAX_QUICK_ACTION_PROFILES)
 const selected = computed(() => selectedQuickActionProfile())
 
 const profileItems = computed(() => [

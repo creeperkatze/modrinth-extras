@@ -1,4 +1,5 @@
 import { storage } from '@wxt-dev/storage'
+import { browser } from 'wxt/browser'
 
 type DeepPartial<T> = {
 	[P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P]
@@ -157,10 +158,133 @@ function hasUnknownKeys(base: object, value: object): boolean {
 	})
 }
 
+// Keeps keys from a newer version on another device
+function keepUnknown(stored: object, value: object): object {
+	const result = { ...stored } as Record<string, unknown>
+	for (const [key, val] of Object.entries(value)) {
+		const prev = result[key]
+		result[key] = isPlainObject(prev) && isPlainObject(val) ? keepUnknown(prev, val) : val
+	}
+	return result
+}
+
+// Tied to this browser
+const LOCAL_SETTINGS: (keyof ExtensionSettings)[] = ['desktopNotifications']
+
+export const MAX_CUSTOM_THEMES = 50
+export const MAX_QUICK_ACTION_PROFILES = 20
+
+// Synced as a list of ids, with each entry in its own item to stay under 8 KB per item
+const LISTS = [
+	{ setting: 'themeLibrary', field: 'custom', prefix: 'theme:', max: MAX_CUSTOM_THEMES },
+	{
+		setting: 'quickActionProfiles',
+		field: 'profiles',
+		prefix: 'profile:',
+		max: MAX_QUICK_ACTION_PROFILES,
+	},
+] as const
+
+type SyncedList = (typeof LISTS)[number]
+
+interface Entry {
+	id: string
+}
+
 type StoredSettings = Record<string, Record<string, unknown> | undefined>
 
-const settingsItem = storage.defineItem<DeepPartial<ExtensionSettings>>('local:settings', {
-	version: 2,
+function split(settings: object): { synced: StoredSettings; local: StoredSettings } {
+	const synced: StoredSettings = {}
+	const local: StoredSettings = {}
+	for (const [key, value] of Object.entries(settings)) {
+		if (LOCAL_SETTINGS.includes(key as keyof ExtensionSettings)) local[key] = value
+		else synced[key] = value
+	}
+	return { synced, local }
+}
+
+function entries(settings: StoredSettings, list: SyncedList): Entry[] {
+	const value = settings[list.setting]?.[list.field]
+	return Array.isArray(value) ? (value as Entry[]) : []
+}
+
+function entryKey(list: SyncedList, id: string): `sync:${string}` {
+	return `sync:${list.prefix}${id}`
+}
+
+function withIds(settings: StoredSettings): StoredSettings {
+	const result = { ...settings }
+	for (const list of LISTS) {
+		const ids = entries(settings, list).map((entry) => entry.id)
+		result[list.setting] = { ...settings[list.setting], [list.field]: ids }
+	}
+	return result
+}
+
+const syncedItem = storage.defineItem<StoredSettings>('sync:settings')
+
+async function readSynced(): Promise<StoredSettings | null> {
+	const value = await syncedItem.getValue()
+	if (!value) return null
+	const result = { ...value }
+	for (const list of LISTS) {
+		const ids = value[list.setting]?.[list.field]
+		if (!Array.isArray(ids)) continue
+		const items = await storage.getItems(ids.map((id: string) => entryKey(list, id)))
+		const byKey = new Map(items.map((item) => [item.key, item.value as Entry | null]))
+		const found = ids.map((id: string) => byKey.get(entryKey(list, id))).filter(Boolean)
+		result[list.setting] = { ...value[list.setting], [list.field]: found }
+	}
+	return result
+}
+
+// Only entries that changed are written
+async function writeSynced(next: StoredSettings, prev: StoredSettings): Promise<void> {
+	const set: { key: `sync:${string}`; value: unknown }[] = []
+	const remove: `sync:${string}`[] = []
+	for (const list of LISTS) {
+		const before = new Map(entries(prev, list).map((entry) => [entry.id, JSON.stringify(entry)]))
+		for (const entry of entries(next, list)) {
+			if (before.get(entry.id) !== JSON.stringify(entry)) {
+				set.push({ key: entryKey(list, entry.id), value: entry })
+			}
+			before.delete(entry.id)
+		}
+		for (const id of before.keys()) remove.push(entryKey(list, id))
+	}
+	const settings = withIds(next)
+	if (JSON.stringify(settings) !== JSON.stringify(withIds(prev))) {
+		set.push({ key: 'sync:settings', value: settings })
+	}
+	if (set.length) await storage.setItems(set)
+	if (remove.length) await storage.removeItems(remove)
+}
+
+// Adds this browser's themes and profiles to the ones another browser synced
+function joinLists(synced: StoredSettings, old: StoredSettings): StoredSettings {
+	const joined: StoredSettings = {}
+	for (const list of LISTS) {
+		const kept = entries(synced, list)
+		const ids = new Set(kept.map((entry) => entry.id))
+		const added = entries(old, list).filter((entry) => !ids.has(entry.id))
+		joined[list.setting] = { [list.field]: [...kept, ...added].slice(0, list.max) }
+	}
+	return joined
+}
+
+// Returns what stays local. Merging first drops keys nothing reads anymore.
+async function moveToSync(value: StoredSettings): Promise<StoredSettings> {
+	const old = split(deepMerge(DEFAULTS, value as DeepPartial<ExtensionSettings>))
+	const synced = await readSynced()
+	const next = synced
+		? (keepUnknown(synced, joinLists(synced, old.synced)) as StoredSettings)
+		: old.synced
+	await writeSynced(next, synced ?? {})
+	return old.local
+}
+
+const localItem = storage.defineItem<StoredSettings>('local:settings', {
+	version: 3,
 	migrations: {
 		// The accent color moved from its own feature into themes
 		2: (value: StoredSettings) => {
@@ -171,21 +295,60 @@ const settingsItem = storage.defineItem<DeepPartial<ExtensionSettings>>('local:s
 			if (typeof accentColor.color === 'string') themes.accentColor = accentColor.color
 			return { ...rest, themes }
 		},
+		3: moveToSync,
 	},
 })
 
+let stored: { synced: StoredSettings; local: StoredSettings } = { synced: {}, local: {} }
 let cache: ExtensionSettings = structuredClone(DEFAULTS)
 let init: Promise<void> | null = null
+let reloads = 0
+const listeners = new Set<(settings: ExtensionSettings) => void>()
+
+function mergeStored(): ExtensionSettings {
+	return deepMerge(DEFAULTS, {
+		...stored.synced,
+		...stored.local,
+	} as DeepPartial<ExtensionSettings>)
+}
+
+function onStoredChange() {
+	cache = mergeStored()
+	for (const listener of listeners) listener(cache)
+}
+
+async function reloadSynced() {
+	const reload = ++reloads
+	const synced = (await readSynced()) ?? {}
+	if (reload !== reloads) return
+	stored.synced = synced
+	onStoredChange()
+}
+
+function isSyncedKey(key: string): boolean {
+	return key === 'settings' || LISTS.some((list) => key.startsWith(list.prefix))
+}
 
 function startInit(): Promise<void> {
-	if (init) return init
-	init = (async () => {
-		const data = await settingsItem.getValue()
-		cache = deepMerge(DEFAULTS, data ?? {})
-		// Old versions can leave secrets like API tokens behind under keys nothing reads anymore.
-		if (data && hasUnknownKeys(DEFAULTS, data)) await settingsItem.setValue(cache)
-		settingsItem.watch((newValue) => {
-			cache = deepMerge(DEFAULTS, newValue ?? {})
+	init ??= (async () => {
+		// Local first, so its migration has filled sync storage
+		let local = (await localItem.getValue()) ?? {}
+		// Old versions can leave synced settings here, or secrets under keys nothing reads anymore
+		const misplaced = Object.keys(local).some(
+			(key) => !LOCAL_SETTINGS.includes(key as keyof ExtensionSettings),
+		)
+		if (misplaced || hasUnknownKeys(DEFAULTS, local)) {
+			local = await moveToSync(local)
+			await localItem.setValue(local)
+		}
+		stored = { synced: (await readSynced()) ?? {}, local }
+		cache = mergeStored()
+		browser.storage.onChanged.addListener((changes, area) => {
+			if (area === 'sync' && Object.keys(changes).some(isSyncedKey)) void reloadSynced()
+		})
+		localItem.watch((value) => {
+			stored.local = value ?? {}
+			onStoredChange()
 		})
 	})()
 	return init
@@ -198,18 +361,38 @@ export async function getSettings(): Promise<ExtensionSettings> {
 
 // Returns a function that stops watching.
 export function watchSettings(callback: (settings: ExtensionSettings) => void): () => void {
-	return settingsItem.watch((value) => callback(deepMerge(DEFAULTS, value ?? {})))
+	listeners.add(callback)
+	void startInit()
+	return () => {
+		listeners.delete(callback)
+	}
 }
 
 // Every setting falls back to its default
 export async function clearSettings(): Promise<void> {
+	const prev = stored.synced
+	stored = { synced: {}, local: {} }
 	cache = structuredClone(DEFAULTS)
-	await settingsItem.removeValue()
+	await Promise.all([writeSynced({}, prev), localItem.removeValue()])
+	await syncedItem.removeValue()
 }
 
 export async function saveSettings(settings: ExtensionSettings): Promise<void> {
+	await startInit()
 	// Firefox's structured clone doesn't support Vue reactive proxies, serialize first.
 	const plain = JSON.parse(JSON.stringify(settings)) as ExtensionSettings
+	const next = split(plain)
+	const current = split(cache)
+	const writes: Promise<void>[] = []
+	if (JSON.stringify(next.synced) !== JSON.stringify(current.synced)) {
+		const synced = keepUnknown(stored.synced, next.synced) as StoredSettings
+		writes.push(writeSynced(synced, stored.synced))
+		stored.synced = synced
+	}
+	if (JSON.stringify(next.local) !== JSON.stringify(current.local)) {
+		stored.local = next.local
+		writes.push(localItem.setValue(stored.local))
+	}
 	cache = plain
-	await settingsItem.setValue(plain)
+	await Promise.all(writes)
 }

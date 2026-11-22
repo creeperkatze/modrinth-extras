@@ -761,6 +761,9 @@
   "themes.importNewer": {
     "defaultMessage": "This theme was made with a newer version of Modrinth Extras. Update the extension to import it."
   },
+  "themes.limit": {
+    "defaultMessage": "You can have up to {max} custom themes."
+  },
   "themes.newTheme": {
     "defaultMessage": "My theme"
   },

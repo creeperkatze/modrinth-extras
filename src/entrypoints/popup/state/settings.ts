@@ -64,9 +64,9 @@ function flushPendingSave() {
 	)
 }
 
-// Dragging the color picker fires an update per frame, so batch the storage writes
+// Sync storage allows two writes a second
 function scheduleSave() {
-	pendingSave ??= setTimeout(flushPendingSave, 100)
+	pendingSave ??= setTimeout(flushPendingSave, 500)
 }
 
 export function updateOption(

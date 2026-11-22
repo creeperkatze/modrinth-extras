@@ -506,6 +506,9 @@
   "quickActionProfiles.delete": {
     "defaultMessage": "Delete profile"
   },
+  "quickActionProfiles.limit": {
+    "defaultMessage": "You can save up to {max} profiles."
+  },
   "quickActionProfiles.name": {
     "defaultMessage": "Name"
   },

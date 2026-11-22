@@ -62,11 +62,11 @@
 				<div
 					class="flex min-h-36 flex-col items-center justify-center gap-2 rounded-[var(--radius-md)] border-2 border-dashed border-surface-5 p-4"
 				>
-					<Button @click="create">
+					<Button :disabled="full" @click="create">
 						<PlusIcon aria-hidden="true" />
 						{{ formatMessage(messages['themes.create']) }}
 					</Button>
-					<Button type="quiet" @click="fileInput?.click()">
+					<Button type="quiet" :disabled="full" @click="fileInput?.click()">
 						<UploadIcon aria-hidden="true" />
 						{{ formatMessage(messages['themes.import']) }}
 					</Button>
@@ -78,6 +78,9 @@
 						class="hidden"
 						@change="importFiles"
 					/>
+					<span v-if="full" class="text-center text-sm text-secondary">
+						{{ formatMessage(messages['themes.limit'], { max: MAX_CUSTOM_THEMES }) }}
+					</span>
 				</div>
 			</div>
 		</ThemeSection>
@@ -89,10 +92,16 @@
 <script setup lang="ts">
 import { EditIcon, PlusIcon, TrashIcon, UploadIcon } from '@modrinth/assets'
 import { Button, defineMessages, IconButton, useVIntl } from '@modrinth/ui'
-import { computed, onBeforeUnmount, onMounted, ref, shallowRef, useTemplateRef, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, toRaw, useTemplateRef, watch } from 'vue'
 
 import { showNotification } from '../../content/notifications'
-import { getSettings, type NamedTheme, saveSettings } from '../../core/settings'
+import {
+	type ExtensionSettings,
+	getSettings,
+	MAX_CUSTOM_THEMES,
+	type NamedTheme,
+	saveSettings,
+} from '../../core/settings'
 import { useSettings } from '../../core/settings-store'
 import {
 	PRESET_THEMES,
@@ -100,15 +109,14 @@ import {
 	type ThemeCategory,
 	THEME_CATEGORIES,
 } from '../../features/themes/presets'
-import { applyTheme, createCustomTheme, importThemeFile } from '../../features/themes/themes'
+import {
+	applyThemeSettings,
+	createCustomTheme,
+	importThemeFile,
+} from '../../features/themes/themes'
 import CustomThemeModal from './CustomThemeModal.vue'
 import ThemeCard from './ThemeCard.vue'
 import ThemeSection from './ThemeSection.vue'
-
-const props = defineProps<{
-	savedSelected: string
-	savedCustom: NamedTheme[]
-}>()
 
 const settings = useSettings()
 const showPresets = computed(() => settings.themes.presets)
@@ -142,6 +150,10 @@ const messages = defineMessages({
 		id: 'themes.importInvalid',
 		defaultMessage: "This file isn't a valid theme.",
 	},
+	'themes.limit': {
+		id: 'themes.limit',
+		defaultMessage: 'You can have up to {max} custom themes.',
+	},
 	'themes.importNewer': {
 		id: 'themes.importNewer',
 		defaultMessage:
@@ -150,8 +162,27 @@ const messages = defineMessages({
 })
 
 // Only the extension stores these, like the accent color, so they apply and save right away
-const selected = ref(props.savedSelected)
-const customThemes = shallowRef<NamedTheme[]>(structuredClone(props.savedCustom))
+async function save(change: Partial<ExtensionSettings['themeLibrary']>) {
+	Object.assign(settings.themeLibrary, change)
+	applyThemeSettings(settings)
+	try {
+		const saved = await getSettings()
+		await saveSettings({ ...saved, themeLibrary: settings.themeLibrary })
+	} catch (err) {
+		console.error('[Modrinth Extras] Failed to save the themes:', err)
+	}
+}
+
+const selected = computed({
+	get: () => settings.themeLibrary.selected,
+	set: (id) => void save({ selected: id }),
+})
+// Raw, since the theme modal clones them and structuredClone can't copy reactive proxies
+const customThemes = computed<NamedTheme[]>({
+	get: () => toRaw(settings.themeLibrary.custom),
+	set: (themes) => void save({ custom: themes }),
+})
+const full = computed(() => customThemes.value.length >= MAX_CUSTOM_THEMES)
 
 // Families like Catppuccin keep their own name
 const categoryMessages: Partial<Record<string, (typeof messages)[keyof typeof messages]>> = {
@@ -167,26 +198,16 @@ function categoryTitle(category: ThemeCategory): string {
 const categories = computed(() => (showPresets.value ? THEME_CATEGORIES : []))
 
 // Only the section with the theme in use starts open
-const openSection = props.savedCustom.some((theme) => theme.id === props.savedSelected)
+const openSection = customThemes.value.some((theme) => theme.id === selected.value)
 	? CUSTOM_SECTION
 	: THEME_CATEGORIES.find((category) =>
-			category.themes.some((theme) => theme.id === props.savedSelected),
+			category.themes.some((theme) => theme.id === selected.value),
 		)?.id
 
 const customModal = useTemplateRef<InstanceType<typeof CustomThemeModal>>('customModal')
 const fileInput = useTemplateRef<HTMLInputElement>('fileInput')
 
 let grid: HTMLElement | null = null
-
-watch([selected, customThemes], async ([id, themes]) => {
-	applyTheme(id, themes, showPresets.value)
-	try {
-		const saved = await getSettings()
-		await saveSettings({ ...saved, themeLibrary: { selected: id, custom: themes } })
-	} catch (err) {
-		console.error('[Modrinth Extras] Failed to save the themes:', err)
-	}
-})
 
 // The website's own setting is left alone, so no save button shows up for it
 function select(theme: Pick<NamedTheme, 'id'>) {
@@ -234,17 +255,23 @@ async function importFiles(event: Event) {
 	input.value = ''
 	const imported: NamedTheme[] = []
 	for (const file of files) {
-		const result = importThemeFile(await file.text(), file.name.replace(/\.json$/i, ''))
+		const result =
+			customThemes.value.length + imported.length >= MAX_CUSTOM_THEMES
+				? { error: 'limit' as const }
+				: importThemeFile(await file.text(), file.name.replace(/\.json$/i, ''))
 		if ('theme' in result) {
 			imported.push(result.theme)
 			continue
 		}
+		const reasons = {
+			limit: formatMessage(messages['themes.limit'], { max: MAX_CUSTOM_THEMES }),
+			newer: formatMessage(messages['themes.importNewer']),
+			invalid: formatMessage(messages['themes.importInvalid']),
+		}
 		showNotification({
 			type: 'error',
 			title: formatMessage(messages['themes.importFailed'], { file: file.name }),
-			text: formatMessage(
-				messages[result.error === 'newer' ? 'themes.importNewer' : 'themes.importInvalid'],
-			),
+			text: reasons[result.error],
 		})
 	}
 	for (const theme of imported) {

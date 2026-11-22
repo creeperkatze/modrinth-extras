@@ -15,11 +15,7 @@ export function settingsInjections(settings: SettingsGetter) {
 			grid.after(container)
 			return true
 		},
-		createApp: () =>
-			createExtensionApp(ThemeOptions, {
-				savedSelected: settings().themeLibrary.selected,
-				savedCustom: settings().themeLibrary.custom,
-			}),
+		createApp: () => createExtensionApp(ThemeOptions),
 	})
 
 	return [themeOptions]
