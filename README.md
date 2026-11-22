@@ -25,40 +25,42 @@ Prefer to build from source? See [🔒 Building from source](#-building-from-sou
 
 ## ✨ Features
 
+<!-- features:start -->
 <table>
 <tr>
-<td width="50%"><img src=".github/assets/screenshots/extension.png"></td>
-<td width="50%"><h3>Every feature, one click away</h3>Every feature can be individually toggled from the extension popup, so you can build the exact Modrinth experience you want.</td>
-</tr>
-<tr>
-<td width="50%"><h3>Act without leaving the list</h3>Download, follow, save, and copy links for projects directly from their cards, no need to open each page.</td>
-<td width="50%"><img src=".github/assets/screenshots/project-card-actions.png"></td>
-</tr>
-<tr>
-<td width="50%"><img src=".github/assets/screenshots/gallery-background.png"></td>
+<td width="50%"><img src="website/public/screenshots/gallery-background.png"></td>
 <td width="50%"><h3>A page that matches the project</h3>Display a project's featured gallery image as a full banner background, so shaders and resource packs look the part.</td>
 </tr>
 <tr>
-<td width="50%"><h3>Notifications, right in the header</h3>View, manage, and clear unread notifications without leaving the page you're on, with optional browser notifications and an unread badge on the extension icon.</td>
-<td width="50%"><img src=".github/assets/screenshots/notifications.png"></td>
+<td width="50%"><h3>Make Modrinth your own</h3>Pick from dozens of new color themes, from Cherry Grove and The End to Catppuccin, Nord and Dracula. Or build your own with every color adjustable, and share it with friends.</td>
+<td width="50%"><img src="website/public/screenshots/themes.png"></td>
 </tr>
 <tr>
-<td width="50%"><img src=".github/assets/screenshots/dependency-explorer.png"></td>
+<td width="50%"><img src="website/public/screenshots/quick-actions.png"></td>
+<td width="50%"><h3>Straight from the search results</h3>Download, follow, and save projects right from their cards. Save your game version and loaders as profiles, and switch between them from the popup.</td>
+</tr>
+<tr>
 <td width="50%"><h3>Explore the full dependency tree</h3>An interactive graph lets you dig through a project's required, optional, and embedded dependencies, as deep as you want to go.</td>
+<td width="50%"><img src="website/public/screenshots/dependency-explorer.png"></td>
+</tr>
+<tr>
+<td width="50%"><img src="website/public/screenshots/popup.png"></td>
+<td width="50%"><h3>Modrinth, from any tab</h3>Search for projects and servers, read your notifications, accept invites, and check your creator revenue and stats, all from the extension popup.</td>
 </tr>
 <tr>
 <td width="50%"><h3>Find anything in seconds</h3>Press Ctrl+K or / to open a command palette style search, with faceted tags for loaders, versions, categories, and types built right into your query.</td>
-<td width="50%"><img src=".github/assets/screenshots/quicksearch.gif"></td>
+<td width="50%"><img src="website/public/screenshots/quicksearch.png"></td>
 </tr>
 <tr>
-<td width="50%"><img src=".github/assets/screenshots/sparkline.png"></td>
-<td width="50%"><h3>See how active a project really is</h3>A release activity sparkline on every project page shows update frequency at a glance, before you even scroll down.</td>
+<td width="50%"><img src="website/public/screenshots/project-page.png"></td>
+<td width="50%"><h3>The full picture on every project</h3>See how often a project updates at a glance, along with its repository stats, Discord server, security checks, the modpacks it's in, and where else it's published.</td>
 </tr>
 <tr>
-<td width="50%"><h3>The full picture, right in the sidebar</h3>Repository stars, issues, and pull requests. Discord member counts. Every modpack a mod is featured in. All shown right in the sidebar.</td>
-<td width="50%"><img src=".github/assets/screenshots/sidebar.png"></td>
+<td width="50%"><h3>A whole collection in one download</h3>Turn any collection into a modpack or zip file with every project that supports your game version and loader, required dependencies included.</td>
+<td width="50%"><img src="website/public/screenshots/collection-download.png"></td>
 </tr>
 </table>
+<!-- features:end -->
 
 ## 🔒 Building from source
 

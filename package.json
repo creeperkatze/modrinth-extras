@@ -22,7 +22,7 @@
         "fmt:check": "oxfmt --check",
         "preversion": "node scripts/changelog.js notes Unreleased",
         "release": "pnpm version -m \"chore(release): v%s\"",
-        "version": "node scripts/changelog.js release && git add CHANGELOG.md",
+        "version": "node scripts/changelog.js release && node scripts/run.mjs readme-features && git add CHANGELOG.md README.md",
         "postversion": "git push --follow-tags"
     },
     "dependencies": {
