@@ -125,7 +125,7 @@
 								font-weight="bold"
 								class="fill-secondary pointer-events-none select-none"
 							>
-								{{ (node.project?.name ?? node.id)[0].toUpperCase() }}
+								{{ (node.project?.name ?? node.id).charAt(0).toUpperCase() }}
 							</text>
 
 							<image
@@ -429,7 +429,7 @@ const visibleNodeIds = computed(() => {
 	const queue = [root.id]
 	reachable.add(root.id)
 	for (let i = 0; i < queue.length; i++) {
-		for (const neighbour of adjacency.get(queue[i]) ?? []) {
+		for (const neighbour of adjacency.get(queue[i]!) ?? []) {
 			if (reachable.has(neighbour)) continue
 			if ((nodeById.get(neighbour)?.depth ?? 0) > depthLimit.value) continue
 			reachable.add(neighbour)

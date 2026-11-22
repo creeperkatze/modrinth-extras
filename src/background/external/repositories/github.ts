@@ -21,7 +21,7 @@ export async function fetchGitHubStats(repo: string): Promise<RepositoryStats> {
 		const prData = (await prRes.json()) as unknown[]
 		const link = prRes.headers.get('Link')
 		const lastPage = link?.match(/[?&]page=(\d+)>; rel="last"/)
-		prCount = lastPage ? parseInt(lastPage[1]) : prData.length
+		prCount = lastPage?.[1] ? parseInt(lastPage[1]) : prData.length
 	}
 
 	return {

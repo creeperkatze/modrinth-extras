@@ -327,7 +327,7 @@ function startAnimation(immediate = false) {
 			animatedText.value = ''
 			return
 		}
-		const target = PLACEHOLDER_EXAMPLES[exIdx]
+		const target = PLACEHOLDER_EXAMPLES[exIdx] ?? ''
 		if (!deleting) {
 			charIdx++
 			animatedText.value = target.slice(0, charIdx)
@@ -658,10 +658,12 @@ function onKeydown(e: KeyboardEvent) {
 		if (!inExamples) suggestionEls.value[selectedIndex.value]?.scrollIntoView({ block: 'nearest' })
 	} else if (e.key === 'Enter') {
 		e.preventDefault()
-		if (inExamples) {
-			applyExample(displayedList[selectedIndex.value])
-		} else if (suggestions.value.length > 0) {
-			selectSuggestion(suggestions.value[selectedIndex.value])
+		const example = displayedList[selectedIndex.value]
+		const suggestion = suggestions.value[selectedIndex.value]
+		if (inExamples && example) {
+			applyExample(example)
+		} else if (!inExamples && suggestion) {
+			selectSuggestion(suggestion)
 		} else {
 			executeSearch()
 		}

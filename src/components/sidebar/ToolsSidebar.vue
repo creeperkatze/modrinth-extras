@@ -113,8 +113,10 @@ const props = defineProps<{ pageUrl: string }>()
 
 const settings = useSettings()
 
+type ModManagerId = 'packwiz' | 'ferium' | 'pakku' | 'lucy'
+
 const MOD_MANAGERS: Record<
-	string,
+	ModManagerId,
 	{ label: string; command: (slug: string, type: string) => string }
 > = {
 	packwiz: {
@@ -155,7 +157,7 @@ const projectMatch = computed(() => {
 		const match = new URL(props.pageUrl).pathname.match(
 			/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/([^/]+)(?:\/version\/([^/?#]+))?/,
 		)
-		return match ? { type: match[1], slug: match[2], version: match[3] } : null
+		return match ? { type: match[1]!, slug: match[2]!, version: match[3] } : null
 	} catch {
 		return null
 	}
@@ -164,7 +166,7 @@ const projectMatch = computed(() => {
 const projectSlug = computed(() => projectMatch.value?.slug ?? null)
 
 const modManager = computed(
-	() => MOD_MANAGERS[settings.toolsSidebar.modManager] ?? MOD_MANAGERS.packwiz,
+	() => MOD_MANAGERS[settings.toolsSidebar.modManager as ModManagerId] ?? MOD_MANAGERS.packwiz,
 )
 const modManagerLabel = computed(() => modManager.value.label)
 

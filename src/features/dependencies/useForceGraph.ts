@@ -242,8 +242,9 @@ export function useForceGraph(svgRef: () => SVGSVGElement | null) {
 		if (viewportEl) viewportEl.style.transform = `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`
 	}
 
-	function setViewportEl(el: Element | null) {
-		viewportEl = el as SVGGElement | null
+	// Takes what Vue passes to a function ref
+	function setViewportEl(el: unknown) {
+		viewportEl = el instanceof SVGGElement ? el : null
 		applyViewportTransform()
 	}
 

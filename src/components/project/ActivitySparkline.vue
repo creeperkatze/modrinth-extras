@@ -106,8 +106,8 @@ function gaussianSmooth(data: number[], sigma: number): number[] {
 		for (let k = -radius; k <= radius; k++) {
 			const j = i + k
 			if (j >= 0 && j < data.length) {
-				sum += data[j] * kernel[k + radius]
-				weight += kernel[k + radius]
+				sum += data[j]! * kernel[k + radius]!
+				weight += kernel[k + radius]!
 			}
 		}
 		return sum / weight
@@ -116,9 +116,10 @@ function gaussianSmooth(data: number[], sigma: number): number[] {
 
 onMounted(async () => {
 	if (wrapperEl.value) {
-		resizeObserver = new ResizeObserver((entries) => {
-			svgWidth.value = entries[0].contentRect.width
-			svgHeight.value = entries[0].contentRect.height
+		resizeObserver = new ResizeObserver(([entry]) => {
+			if (!entry) return
+			svgWidth.value = entry.contentRect.width
+			svgHeight.value = entry.contentRect.height
 		})
 		resizeObserver.observe(wrapperEl.value)
 	}
@@ -171,13 +172,14 @@ const points = computed<[number, number][]>(() => {
 })
 
 function catmullRomPath(pts: [number, number][]): string {
-	if (pts.length < 2) return ''
-	let d = `M ${pts[0][0].toFixed(2)} ${pts[0][1].toFixed(2)}`
+	const start = pts[0]
+	if (!start || pts.length < 2) return ''
+	let d = `M ${start[0].toFixed(2)} ${start[1].toFixed(2)}`
 	for (let i = 1; i < pts.length; i++) {
-		const p0 = pts[Math.max(0, i - 2)]
-		const p1 = pts[i - 1]
-		const p2 = pts[i]
-		const p3 = pts[Math.min(pts.length - 1, i + 1)]
+		const p0 = pts[Math.max(0, i - 2)]!
+		const p1 = pts[i - 1]!
+		const p2 = pts[i]!
+		const p3 = pts[Math.min(pts.length - 1, i + 1)]!
 		const t = 1 / 6
 		const cp1x = p1[0] + (p2[0] - p0[0]) * t
 		const cp1y = p1[1] + (p2[1] - p0[1]) * t
@@ -191,10 +193,10 @@ function catmullRomPath(pts: [number, number][]): string {
 const linePath = computed(() => catmullRomPath(points.value))
 
 const areaPath = computed(() => {
-	if (!points.value.length) return ''
-	const b = baseline.value.toFixed(2)
 	const first = points.value[0]
-	const last = points.value[points.value.length - 1]
+	const last = points.value.at(-1)
+	if (!first || !last) return ''
+	const b = baseline.value.toFixed(2)
 	return `${linePath.value} L ${last[0].toFixed(2)} ${b} L ${first[0].toFixed(2)} ${b} Z`
 })
 </script>

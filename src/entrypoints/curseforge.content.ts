@@ -68,7 +68,7 @@ function getCurseForgeAuthor(): string {
 function getCurseForgeTitle(): string {
 	const og = document.querySelector<HTMLMetaElement>('meta[property="og:title"]')?.content
 	if (og?.trim()) return og.trim()
-	return document.title.split(' - ')[0].trim()
+	return (document.title.split(' - ')[0] ?? '').trim()
 }
 
 function waitForTitleChange(oldTitle: string): Promise<void> {
@@ -100,9 +100,9 @@ async function tryRedirect(waitForDom = false): Promise<void> {
 	const match = window.location.pathname.match(
 		/^\/minecraft\/(?:mc-mods|modpacks|shaders|bukkit-plugins|texture-packs|data-packs)\/([^/]+)/,
 	)
-	if (!match) return
+	const slug = match?.[1]
+	if (!slug) return
 
-	const slug = match[1]
 	console.log(`[Modrinth Extras] CurseForge redirect: Trying slug "${slug}"`)
 
 	const direct = await getProjectBySlug(slug)

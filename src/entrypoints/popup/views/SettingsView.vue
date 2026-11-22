@@ -929,7 +929,7 @@ const localeItems = computed<SelectItem[]>(() =>
 
 const selectedLocale = computed(() => {
 	const val = settings.locale.value || detectBrowserLocale()
-	return localeItems.value.some((i) => i.value === val) ? val : localeItems.value[0].value
+	return localeItems.value.some((i) => i.value === val) ? val : (localeItems.value[0]?.value ?? '')
 })
 
 const translationSupported = isTranslationSupported()
