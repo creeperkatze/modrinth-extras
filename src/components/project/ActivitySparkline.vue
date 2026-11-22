@@ -64,11 +64,13 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
+import { useSettings } from '../../core/settings-store'
 import { cachedDailyReleases, fetchDailyReleases } from '../../features/activity/releases'
 
-const props = defineProps<{ projectSlug: string; days: number }>()
+const props = defineProps<{ projectSlug: string }>()
 
-const DAYS = props.days
+const settings = useSettings()
+const days = computed(() => Number(settings.activitySparkline.days))
 const PAD_TOP = 10
 const PAD_BOTTOM = 10
 const SMOOTH_SIGMA = 0.8
@@ -78,7 +80,7 @@ const svgWidth = ref(0)
 const svgHeight = ref(0)
 let resizeObserver: ResizeObserver | null = null
 
-const dailyCounts = ref<number[]>(Array(DAYS).fill(0))
+const dailyCounts = ref<number[]>(Array(days.value).fill(0))
 const hasAnyData = ref(false)
 const loaded = ref(false)
 const animated = ref(false)
@@ -120,8 +122,15 @@ onMounted(async () => {
 		})
 		resizeObserver.observe(wrapperEl.value)
 	}
+	await load()
+})
 
-	const cached = cachedDailyReleases(props.projectSlug, DAYS)
+// Picking another range in the popup redraws this one in place
+watch(days, () => void load())
+
+async function load() {
+	const range = days.value
+	const cached = cachedDailyReleases(props.projectSlug, range)
 	if (cached) {
 		show(cached)
 		loaded.value = true
@@ -131,13 +140,14 @@ onMounted(async () => {
 	}
 
 	try {
-		show(await fetchDailyReleases(props.projectSlug, DAYS))
+		const counts = await fetchDailyReleases(props.projectSlug, range)
+		if (range === days.value) show(counts)
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to load activity data:', err)
 	} finally {
 		loaded.value = true
 	}
-})
+}
 
 function show(counts: number[]) {
 	dailyCounts.value = counts
@@ -157,7 +167,7 @@ const points = computed<[number, number][]>(() => {
 	const w = svgWidth.value
 	const bottom = baseline.value
 	const range = bottom - PAD_TOP
-	return smoothed.map((c, i) => [(i / (DAYS - 1)) * w, bottom - (c / max) * range])
+	return smoothed.map((c, i) => [(i / (smoothed.length - 1)) * w, bottom - (c / max) * range])
 })
 
 function catmullRomPath(pts: [number, number][]): string {

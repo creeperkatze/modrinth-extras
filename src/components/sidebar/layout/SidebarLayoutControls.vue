@@ -26,7 +26,11 @@
 			</div>
 		</template>
 		<Teleport v-for="card in editableCards" :key="card.element.id" :to="card.target">
-			<SidebarCardOverlay :card="card.element" :setting="card.setting" :hidden="card.hidden" />
+			<SidebarCardOverlay
+				:card="card.element"
+				:setting="card.setting"
+				:hidden="!settings[card.setting].enabled"
+			/>
 		</Teleport>
 	</div>
 </template>
@@ -34,9 +38,9 @@
 <script setup lang="ts">
 import { CheckIcon, EditIcon, RotateCounterClockwiseIcon, UndoIcon } from '@modrinth/assets'
 import { Button, defineMessages, useVIntl } from '@modrinth/ui'
-import { onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue'
 
-import { type ExtensionSettings, getSettings, watchSettings } from '../../../core/settings'
+import { useSettings } from '../../../core/settings-store'
 import {
 	SIDEBAR_CARD_SETTINGS,
 	sidebarCards,
@@ -69,24 +73,20 @@ interface EditableCard {
 	// Where the overlay is teleported, inside the card's container
 	target: HTMLElement
 	setting: SidebarCardSetting
-	hidden: boolean
 }
 
+const settings = useSettings()
 const root = ref<HTMLElement | null>(null)
 const hasCards = ref(false)
 // Lets the editor open when every card is hidden, so they can be shown again
-const anyHidden = ref(false)
-const customOrder = ref(false)
+const anyHidden = computed(() =>
+	SIDEBAR_CARD_SETTINGS.some((setting) => !settings[setting].enabled),
+)
+const customOrder = computed(() => !isDefaultSidebarOrder(settings))
 const editableCards = shallowRef<EditableCard[]>([])
 
 let sidebar: HTMLElement | null = null
 let observer: MutationObserver | null = null
-let stopWatchingSettings: (() => void) | null = null
-
-function updateHidden(settings: ExtensionSettings) {
-	anyHidden.value = SIDEBAR_CARD_SETTINGS.some((setting) => !settings[setting].enabled)
-	customOrder.value = !isDefaultSidebarOrder(settings)
-}
 
 function editableCard(element: HTMLElement): EditableCard | null {
 	const setting = sidebarCardSetting(element)
@@ -94,7 +94,7 @@ function editableCard(element: HTMLElement): EditableCard | null {
 	const target = document.createElement('div')
 	element.style.position = 'relative'
 	element.appendChild(target)
-	return { element, target, setting, hidden: element.hasAttribute('data-hidden') }
+	return { element, target, setting }
 }
 
 function removeOverlay(card: EditableCard) {
@@ -124,10 +124,6 @@ function onKeydown(event: KeyboardEvent) {
 watch(editingSidebar, syncCards)
 
 onMounted(() => {
-	getSettings()
-		.then(updateHidden)
-		.catch((err) => console.error('[Modrinth Extras] Failed to load settings:', err))
-	stopWatchingSettings = watchSettings(updateHidden)
 	window.addEventListener('keydown', onKeydown)
 
 	// The root sits in this app's own container, which is a child of the sidebar
@@ -139,7 +135,6 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-	stopWatchingSettings?.()
 	observer?.disconnect()
 	window.removeEventListener('keydown', onKeydown)
 	for (const card of editableCards.value) removeOverlay(card)

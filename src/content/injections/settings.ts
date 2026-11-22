@@ -7,7 +7,6 @@ export function settingsInjections(settings: SettingsGetter) {
 	const themeOptions = createInjection({
 		id: THEME_OPTIONS_ID,
 		isEnabled: () => settings().themes.enabled,
-		settingsKeys: ['themes'],
 		persistent: false,
 		attach(container) {
 			const grid = document.querySelector<HTMLElement>('.theme-options')
@@ -20,7 +19,6 @@ export function settingsInjections(settings: SettingsGetter) {
 			createExtensionApp(ThemeOptions, {
 				savedSelected: settings().themeLibrary.selected,
 				savedCustom: settings().themeLibrary.custom,
-				showPresets: settings().themes.presets,
 			}),
 	})
 

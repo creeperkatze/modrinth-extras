@@ -11,7 +11,6 @@ export function collectionInjections(settings: SettingsGetter) {
 	const collectionDownload = createInjection({
 		id: 'modrinth-extras-collection-download',
 		isEnabled: () => settings().collectionDownload.enabled,
-		settingsKeys: ['collectionDownload'],
 		persistent: false,
 		attach(container) {
 			if (!COLLECTION_PATTERN.test(window.location.pathname)) return false

@@ -21,6 +21,8 @@
 - Redesigned the popup settings to match Modrinth's own settings. They now open from the settings button in the popup header.
 - The popup now follows your Modrinth theme.
 - Project card actions are now called quick actions.
+- The custom accent color is now an option under Themes in the popup, and works on top of any theme. Your color carries over.
+- Changing an option in the popup now updates the page in place, instead of reloading the cards and buttons it affects.
 - Updated translations.
 
 ### Fixed

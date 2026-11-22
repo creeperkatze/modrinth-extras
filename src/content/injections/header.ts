@@ -6,7 +6,6 @@ export function headerInjections(settings: SettingsGetter) {
 	const notifications = createInjection({
 		id: 'modrinth-extras-notifications',
 		isEnabled: () => settings().notificationsIndicator.enabled,
-		settingsKeys: ['notificationsIndicator'],
 		persistent: true,
 		attach(container) {
 			const header = document.querySelector('header')
@@ -37,7 +36,6 @@ export function headerInjections(settings: SettingsGetter) {
 	const quickSearch = createInjection({
 		id: 'modrinth-extras-quick-search',
 		isEnabled: () => settings().quickSearch.enabled,
-		settingsKeys: ['quickSearch'],
 		persistent: true,
 		attach(container) {
 			document.body.appendChild(container)

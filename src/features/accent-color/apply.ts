@@ -92,9 +92,10 @@ function setAccent(source: keyof typeof sources, accent: string | null) {
 	paint(next)
 }
 
-export function applyAccentColor(settings: Pick<ExtensionSettings, 'accentColor'>) {
-	const { enabled, color } = settings.accentColor
-	setAccent('custom', enabled && colord(color).isValid() ? color : null)
+export function applyAccentColor(settings: Pick<ExtensionSettings, 'themes'>) {
+	const { enabled, customAccent, accentColor } = settings.themes
+	const active = enabled && customAccent && colord(accentColor).isValid()
+	setAccent('custom', active ? accentColor : null)
 }
 
 export function setThemeAccent(accent: string | null) {

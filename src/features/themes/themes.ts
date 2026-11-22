@@ -177,6 +177,23 @@ function styleElement(id: string): HTMLStyleElement {
 	return style
 }
 
+export function findTheme(
+	id: string,
+	customThemes: NamedTheme[],
+	showPresets: boolean,
+): NamedTheme | undefined {
+	const themes = showPresets ? [...PRESET_THEMES, ...customThemes] : customThemes
+	return themes.find((candidate) => candidate.id === id)
+}
+
+export function activeTheme(
+	settings: Pick<ExtensionSettings, 'themes' | 'themeLibrary'>,
+): NamedTheme | undefined {
+	const { selected, custom } = settings.themeLibrary
+	const { enabled, presets } = settings.themes
+	return enabled ? findTheme(selected, custom, presets) : undefined
+}
+
 // Every custom theme gets a rule, so the picker can preview all of them
 export function applyTheme(id: string, customThemes: NamedTheme[], showPresets: boolean) {
 	const presets = styleElement(STYLE_ID)
@@ -185,8 +202,7 @@ export function applyTheme(id: string, customThemes: NamedTheme[], showPresets: 
 	}
 	styleElement(CUSTOM_STYLE_ID).textContent = customThemes.map(themeRules).join('\n')
 
-	const themes = showPresets ? [...PRESET_THEMES, ...customThemes] : customThemes
-	const theme = themes.find((candidate) => candidate.id === id)
+	const theme = findTheme(id, customThemes, showPresets)
 	if (theme) document.documentElement.setAttribute(THEME_ATTRIBUTE, id)
 	else document.documentElement.removeAttribute(THEME_ATTRIBUTE)
 	setBase(theme?.base ?? null)

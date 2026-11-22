@@ -138,6 +138,7 @@ import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { getAuthToken } from '../../api/client'
 import { navigate } from '../../content/page-router'
 import type { QuickDownloadSettings } from '../../core/settings'
+import { useSettings } from '../../core/settings-store'
 import {
 	collections,
 	initCollections,
@@ -192,8 +193,14 @@ const messages = defineMessages({
 const props = defineProps<{
 	projectSlug: string
 	projectType: string
-	downloadSettings: QuickDownloadSettings
 }>()
+
+const settings = useSettings()
+// A plain copy, since queued version lookups read it later
+const downloadSettings = computed<QuickDownloadSettings>(() => {
+	const { enabled: _enabled, ...download } = settings.projectCardActions
+	return download
+})
 
 const isLoggedIn = !!getAuthToken()
 const isFollowed = computed(() => followedSlugs.value?.has(props.projectSlug) ?? false)
@@ -228,7 +235,7 @@ const downloadTooltip = computed(() => {
 		const loader = getSelectedLoader()
 		return formatMessage(messages['quickActions.downloadUnavailable'], {
 			loader: loader ? loader.charAt(0).toUpperCase() + loader.slice(1) : 'none',
-			version: props.downloadSettings.gameVersion,
+			version: downloadSettings.value.gameVersion,
 		})
 	}
 	return undefined
@@ -238,11 +245,11 @@ function getSelectedLoader(): string {
 	switch (props.projectType) {
 		case 'mod':
 		case 'modpack':
-			return props.downloadSettings.modLoader
+			return downloadSettings.value.modLoader
 		case 'plugin':
-			return props.downloadSettings.pluginLoader
+			return downloadSettings.value.pluginLoader
 		case 'shader':
-			return props.downloadSettings.shaderLoader
+			return downloadSettings.value.shaderLoader
 		default:
 			return ''
 	}
@@ -265,10 +272,10 @@ watch(
 	() => [
 		props.projectSlug,
 		props.projectType,
-		props.downloadSettings.modLoader,
-		props.downloadSettings.pluginLoader,
-		props.downloadSettings.shaderLoader,
-		props.downloadSettings.gameVersion,
+		downloadSettings.value.modLoader,
+		downloadSettings.value.pluginLoader,
+		downloadSettings.value.shaderLoader,
+		downloadSettings.value.gameVersion,
 	],
 	() => {
 		void refreshDownloadAvailability()
@@ -282,11 +289,11 @@ async function handleDownload() {
 		if (!downloadFile.value) await refreshDownloadAvailability()
 		if (!downloadFile.value || !downloadVersionId.value) return
 
-		const dependencyFiles = props.downloadSettings.downloadDependencies
+		const dependencyFiles = downloadSettings.value.downloadDependencies
 			? await getRequiredDependencyFiles(
 					downloadVersionId.value,
 					props.projectType,
-					props.downloadSettings,
+					downloadSettings.value,
 				)
 			: []
 		if (dependencyFiles.length === 0) {
@@ -317,7 +324,7 @@ async function refreshDownloadAvailability() {
 		const result = await getQuickDownload(
 			props.projectSlug,
 			props.projectType,
-			props.downloadSettings,
+			downloadSettings.value,
 			controller.signal,
 		)
 		if (controller.signal.aborted) return

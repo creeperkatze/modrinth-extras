@@ -85,8 +85,7 @@ export interface ExtensionSettings {
 	notificationBadge: { enabled: boolean }
 	desktopNotifications: { enabled: boolean }
 	curseforgeRedirect: { enabled: boolean }
-	accentColor: { enabled: boolean; color: string }
-	themes: { enabled: boolean; presets: boolean }
+	themes: { enabled: boolean; presets: boolean; customAccent: boolean; accentColor: string }
 	// Kept apart from the toggle, so picking or editing a theme doesn't remount the theme picker
 	themeLibrary: { selected: string; custom: NamedTheme[] }
 	telemetry: { enabled: boolean }
@@ -124,8 +123,7 @@ export const DEFAULTS: ExtensionSettings = {
 	notificationBadge: { enabled: true },
 	desktopNotifications: { enabled: false },
 	curseforgeRedirect: { enabled: false },
-	accentColor: { enabled: false, color: '#1bd96a' },
-	themes: { enabled: true, presets: true },
+	themes: { enabled: true, presets: true, customAccent: false, accentColor: '#1bd96a' },
 	themeLibrary: { selected: '', custom: [] },
 	telemetry: { enabled: true },
 }
@@ -159,7 +157,22 @@ function hasUnknownKeys(base: object, value: object): boolean {
 	})
 }
 
-const settingsItem = storage.defineItem<DeepPartial<ExtensionSettings>>('local:settings')
+type StoredSettings = Record<string, Record<string, unknown> | undefined>
+
+const settingsItem = storage.defineItem<DeepPartial<ExtensionSettings>>('local:settings', {
+	version: 2,
+	migrations: {
+		// The accent color moved from its own feature into themes
+		2: (value: StoredSettings) => {
+			const { accentColor, ...rest } = value
+			if (!accentColor) return rest
+			const themes = { ...rest.themes }
+			if (typeof accentColor.enabled === 'boolean') themes.customAccent = accentColor.enabled
+			if (typeof accentColor.color === 'string') themes.accentColor = accentColor.color
+			return { ...rest, themes }
+		},
+	},
+})
 
 let cache: ExtensionSettings = structuredClone(DEFAULTS)
 let init: Promise<void> | null = null

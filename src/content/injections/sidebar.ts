@@ -12,7 +12,6 @@ import {
 	SIDEBAR_CARD_IDS,
 	SIDEBAR_LAYOUT_ID,
 	type SidebarCardSetting,
-	sidebarCardSetting,
 } from '../../features/sidebar-layout/cards'
 import { editingSidebar } from '../../features/sidebar-layout/editing'
 import { sidebarOrder } from '../../features/sidebar-layout/order'
@@ -30,34 +29,23 @@ export function sidebarInjections(settings: SettingsGetter) {
 	// Hidden cards still mount while editing the layout, so they can be shown again
 	const shown = (setting: SidebarCardSetting) => settings()[setting].enabled || editingSidebar.value
 
-	// Marks hidden cards so the layout editor can fade them
-	const attachInOrder = (container: HTMLElement) => {
-		const setting = sidebarCardSetting(container)
-		container.toggleAttribute('data-hidden', !!setting && !settings()[setting].enabled)
-		return attachToSidebar(container, sidebarOrder(settings()))
-	}
+	const attachInOrder = (container: HTMLElement) =>
+		attachToSidebar(container, sidebarOrder(settings()))
 
 	const toolsSidebar = createInjection({
 		id: SIDEBAR_CARD_IDS.toolsSidebar,
 		isEnabled: () => shown('toolsSidebar'),
-		settingsKeys: ['toolsSidebar'],
 		persistent: false,
 		projectScoped: true,
 		scopeKey: () =>
 			window.location.pathname.match(PROJECT_DEP_PATTERN)?.slice(2, 4).join('/') ?? '',
 		attach: attachInOrder,
-		createApp: () =>
-			createExtensionApp(ToolsSidebar, {
-				pageUrl: currentPageUrl(),
-				modManager: settings().toolsSidebar.modManager,
-				decompiler: settings().toolsSidebar.decompiler,
-			}),
+		createApp: () => createExtensionApp(ToolsSidebar, { pageUrl: currentPageUrl() }),
 	})
 
 	const dependencySidebar = createInjection({
 		id: SIDEBAR_CARD_IDS.dependencySidebar,
 		isEnabled: () => shown('dependencySidebar'),
-		settingsKeys: ['dependencySidebar', 'dependencyExplorer'],
 		persistent: false,
 		projectScoped: true,
 		scopeKey: () =>
@@ -71,7 +59,6 @@ export function sidebarInjections(settings: SettingsGetter) {
 			return createExtensionApp(DependencySidebar, {
 				projectSlug: match?.[2] ?? '',
 				versionNumber: match?.[3],
-				showExplorer: settings().dependencyExplorer.enabled,
 			})
 		},
 	})
@@ -79,7 +66,6 @@ export function sidebarInjections(settings: SettingsGetter) {
 	const modpacksSidebar = createInjection({
 		id: SIDEBAR_CARD_IDS.modpacksSidebar,
 		isEnabled: () => shown('modpacksSidebar'),
-		settingsKeys: ['modpacksSidebar'],
 		persistent: false,
 		projectScoped: true,
 		attach: attachInOrder,
@@ -89,7 +75,6 @@ export function sidebarInjections(settings: SettingsGetter) {
 	const platformsSidebar = createInjection({
 		id: SIDEBAR_CARD_IDS.platformsSidebar,
 		isEnabled: () => shown('platformsSidebar'),
-		settingsKeys: ['platformsSidebar'],
 		persistent: false,
 		projectScoped: true,
 		scopeKey: () => window.location.pathname.match(PLATFORM_SUBJECT_PATTERN)?.[0] ?? '',
@@ -100,7 +85,6 @@ export function sidebarInjections(settings: SettingsGetter) {
 	const repositorySidebar = createInjection({
 		id: SIDEBAR_CARD_IDS.githubSidebar,
 		isEnabled: () => shown('githubSidebar'),
-		settingsKeys: ['githubSidebar'],
 		persistent: false,
 		projectScoped: true,
 		attach: attachInOrder,
@@ -110,7 +94,6 @@ export function sidebarInjections(settings: SettingsGetter) {
 	const discordSidebar = createInjection({
 		id: SIDEBAR_CARD_IDS.discordSidebar,
 		isEnabled: () => shown('discordSidebar'),
-		settingsKeys: ['discordSidebar'],
 		persistent: false,
 		projectScoped: true,
 		attach: attachInOrder,
@@ -120,7 +103,6 @@ export function sidebarInjections(settings: SettingsGetter) {
 	const modgradeSidebar = createInjection({
 		id: SIDEBAR_CARD_IDS.modgradeSidebar,
 		isEnabled: () => shown('modgradeSidebar'),
-		settingsKeys: ['modgradeSidebar'],
 		persistent: false,
 		projectScoped: true,
 		attach: attachInOrder,
@@ -131,7 +113,6 @@ export function sidebarInjections(settings: SettingsGetter) {
 	const sidebarLayout = createInjection({
 		id: SIDEBAR_LAYOUT_ID,
 		isEnabled: () => true,
-		settingsKeys: [],
 		persistent: false,
 		projectScoped: true,
 		attach: attachInOrder,
@@ -149,10 +130,7 @@ export function sidebarInjections(settings: SettingsGetter) {
 	]
 
 	watch(editingSidebar, () => {
-		for (const card of cards) {
-			if (card.config.isEnabled()) card.schedule()
-			else card.unmount()
-		}
+		for (const card of cards) card.refresh()
 	})
 
 	return [...cards, sidebarLayout]

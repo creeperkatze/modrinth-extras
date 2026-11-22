@@ -1,4 +1,4 @@
-import { reactive, ref } from 'vue'
+import { ref } from 'vue'
 import { browser } from 'wxt/browser'
 
 import { detectBrowserLocale, i18n } from '../../../core/i18n/i18n'
@@ -7,9 +7,9 @@ import {
 	clearSettings,
 	DEFAULTS,
 	type ExtensionSettings,
-	getSettings,
 	saveSettings,
 } from '../../../core/settings'
+import { loadSettingsStore, useSettings } from '../../../core/settings-store'
 import { setTelemetryEnabled } from '../../../core/telemetry'
 
 export type FeatureKey = Exclude<
@@ -17,14 +17,13 @@ export type FeatureKey = Exclude<
 	'locale' | 'sidebarLayout' | 'themeLibrary' | 'quickActionProfiles'
 >
 
-// Shared by every popup view, so they all edit the same copy
-export const settings = reactive(structuredClone(DEFAULTS))
+// The popup edits the store directly and saves it, so it doesn't follow storage itself
+export const settings = useSettings()
 export const settingsLoaded = ref(false)
 export const firefoxControlsTelemetry = ref(false)
 
 export async function loadPopupSettings() {
-	const loaded = await getSettings()
-	Object.assign(settings, loaded)
+	const loaded = await loadSettingsStore()
 	i18n.global.locale.value = loaded.locale?.value || detectBrowserLocale()
 	settingsLoaded.value = true
 

@@ -10,7 +10,7 @@ Use the shared `modrinthClient` from `src/api/client.ts` rather than calling `fe
 
 ## Settings
 
-Read settings through the shared `getSettings()` helper. Never read extension storage directly from components.
+Components read settings with `useSettings()` from `src/core/settings-store.ts`. It returns one reactive copy that follows storage, so a component updates in place when an option changes. Never pass a setting to an injected component as a prop. An injection only mounts or unmounts when its `isEnabled()` changes. Code outside components uses `getSettings()`. Never read extension storage directly.
 
 Any setting that holds a credential, like an API token, must be listed in `SECRET_SETTINGS`. Use `withoutSecrets()` whenever settings are logged or sent anywhere.
 

@@ -2,7 +2,7 @@ import '../assets/tailwind.css'
 
 import { browser } from 'wxt/browser'
 
-import { pageState, remountForChangedSettings } from '../content/injection'
+import { pageState } from '../content/injection'
 import { collectionInjections } from '../content/injections/collection'
 import { headerInjections } from '../content/injections/header'
 import { projectInjections } from '../content/injections/project'
@@ -13,7 +13,8 @@ import { siteInjections } from '../content/injections/site'
 import { applySidebarOrder, getProjectSlug } from '../content/page'
 import { navigate } from '../content/page-router'
 import { detectBrowserLocale, i18n, loadSavedLocale } from '../core/i18n/i18n'
-import { DEFAULTS, type ExtensionSettings, getSettings, withoutSecrets } from '../core/settings'
+import { withoutSecrets } from '../core/settings'
+import { followSettingsChanges, loadSettingsStore, useSettings } from '../core/settings-store'
 import { reportUncaughtErrors } from '../core/telemetry'
 import { applyAccentColor } from '../features/accent-color/apply'
 import { recolorBrandImages } from '../features/accent-color/images'
@@ -28,7 +29,7 @@ export default defineContentScript({
 		console.log('[Modrinth Extras] Content script loaded')
 		reportUncaughtErrors()
 		loadSavedLocale().catch(() => {})
-		let settings: ExtensionSettings = { ...DEFAULTS }
+		const settings = useSettings()
 		const getCurrentSettings = () => settings
 
 		const injections = [
@@ -62,32 +63,25 @@ export default defineContentScript({
 		browser.runtime.onMessage.addListener(onRuntimeMessage)
 		ctx.onInvalidated(() => browser.runtime.onMessage.removeListener(onRuntimeMessage))
 
-		getSettings().then((s) => {
-			if (ctx.isInvalid) return
-			settings = s
-			console.log('[Modrinth Extras] Settings loaded:', JSON.stringify(withoutSecrets(s)))
+		// Mounted components follow the store themselves, so only turned on or off ones change here
+		function applySettings() {
 			applyAccentColor(settings)
 			applyThemeSettings(settings)
-			for (const inj of injections) {
-				if (inj.config.settingsKeys.length > 0) inj.unmount()
-				inj.schedule()
-			}
+			for (const inj of injections) inj.refresh()
+		}
+
+		loadSettingsStore().then(() => {
+			if (ctx.isInvalid) return
+			console.log('[Modrinth Extras] Settings loaded:', JSON.stringify(withoutSecrets(settings)))
+			applySettings()
 		})
 
-		function onStorageChanged(changes: Record<string, { oldValue?: unknown; newValue?: unknown }>) {
-			if (!('settings' in changes)) return
-			const oldSettings = changes['settings']?.oldValue as ExtensionSettings | undefined
-			const newSettings = changes['settings']?.newValue as ExtensionSettings | undefined
-			Object.assign(settings, newSettings ?? {})
-			const newLocale = newSettings?.locale?.value
-			i18n.global.locale.value = newLocale || detectBrowserLocale()
-			applyAccentColor(settings)
-			applyThemeSettings(settings)
-			remountForChangedSettings(injections, oldSettings, newSettings)
+		const stopFollowingSettings = followSettingsChanges(() => {
+			i18n.global.locale.value = settings.locale.value || detectBrowserLocale()
+			applySettings()
 			applySidebarOrder(sidebarOrder(settings))
-		}
-		browser.storage.onChanged.addListener(onStorageChanged)
-		ctx.onInvalidated(() => browser.storage.onChanged.removeListener(onStorageChanged))
+		})
+		ctx.onInvalidated(stopFollowingSettings)
 
 		let prevProjectSlug: string | null = null
 		const prevScopeKeys = new Map<string, string>()

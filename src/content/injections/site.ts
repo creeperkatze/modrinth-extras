@@ -19,7 +19,6 @@ export function siteInjections() {
 	const errorNotice = createInjection({
 		id: 'modrinth-extras-error-notice',
 		isEnabled: () => true,
-		settingsKeys: [],
 		persistent: false,
 		attach(container) {
 			const errorBox = document.querySelector('.error-box')
@@ -35,7 +34,6 @@ export function siteInjections() {
 	const footerBadge = createInjection({
 		id: 'modrinth-extras-footer-badge',
 		isEnabled: () => true,
-		settingsKeys: [],
 		persistent: true,
 		attach(container) {
 			const link = document.querySelector<HTMLAnchorElement>(

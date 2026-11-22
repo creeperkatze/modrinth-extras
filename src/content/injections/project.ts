@@ -36,7 +36,6 @@ export function projectInjections(settings: SettingsGetter) {
 	const activitySparkline = createInjection({
 		id: 'modrinth-extras-activity-sparkline',
 		isEnabled: () => settings().activitySparkline.enabled,
-		settingsKeys: ['activitySparkline'],
 		persistent: false,
 		projectScoped: true,
 		attach(container) {
@@ -58,17 +57,13 @@ export function projectInjections(settings: SettingsGetter) {
 			const slug = window.location.pathname.match(
 				/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/([^/]+)/,
 			)?.[2]
-			return createExtensionApp(ActivitySparkline, {
-				projectSlug: slug ?? '',
-				days: Number(settings().activitySparkline.days),
-			})
+			return createExtensionApp(ActivitySparkline, { projectSlug: slug ?? '' })
 		},
 	})
 
 	const galleryBackground = createInjection({
 		id: 'modrinth-extras-gallery-background',
 		isEnabled: () => settings().galleryBackground.enabled,
-		settingsKeys: ['galleryBackground'],
 		persistent: false,
 		projectScoped: true,
 		attach(container) {
@@ -94,7 +89,6 @@ export function projectInjections(settings: SettingsGetter) {
 	const monetizationBadge = createInjection({
 		id: 'modrinth-extras-monetization-badge',
 		isEnabled: () => settings().monetizationBadge.enabled,
-		settingsKeys: ['monetizationBadge'],
 		persistent: false,
 		projectScoped: true,
 		attach(container) {
@@ -119,7 +113,6 @@ export function projectInjections(settings: SettingsGetter) {
 	const translateDescription = createInjection({
 		id: 'modrinth-extras-translate-description',
 		isEnabled: () => settings().translateDescription.enabled && isTranslationSupported(),
-		settingsKeys: ['translateDescription'],
 		persistent: false,
 		projectScoped: true,
 		scopeKey: () => window.location.pathname,
@@ -146,7 +139,6 @@ export function projectInjections(settings: SettingsGetter) {
 		isEnabled: () =>
 			settings().reviews.enabled &&
 			(settings().reviews.moddex || settings().reviews.curseforge || settings().reviews.spigot),
-		settingsKeys: ['reviews'],
 		persistent: false,
 		projectScoped: true,
 		attach(container) {
@@ -159,19 +151,13 @@ export function projectInjections(settings: SettingsGetter) {
 		},
 		createApp() {
 			const [, , slug] = window.location.pathname.match(PROJECT_TYPE_PATTERN) ?? []
-			return createExtensionApp(ProjectReviews, {
-				projectSlug: slug ?? '',
-				moddex: settings().reviews.moddex,
-				curseforge: settings().reviews.curseforge,
-				spigot: settings().reviews.spigot,
-			})
+			return createExtensionApp(ProjectReviews, { projectSlug: slug ?? '' })
 		},
 	})
 
 	const compareVersions = createInjection({
 		id: 'modrinth-extras-compare-versions',
 		isEnabled: () => settings().compareVersions.enabled,
-		settingsKeys: ['compareVersions'],
 		persistent: false,
 		projectScoped: true,
 		scopeKey: () => window.location.pathname.match(VERSION_PAGE_PATTERN)?.[3] ?? '',
@@ -196,7 +182,6 @@ export function projectInjections(settings: SettingsGetter) {
 	})
 
 	const compareVersionRows = createDynamicInjection({
-		settingsKeys: ['compareVersions'],
 		persistent: false,
 		isEnabled: () => settings().compareVersions.enabled,
 		targets: 'tr.version-row-link',
@@ -211,7 +196,6 @@ export function projectInjections(settings: SettingsGetter) {
 	})
 
 	const compareChangelogEntries = createDynamicInjection({
-		settingsKeys: ['compareVersions'],
 		persistent: false,
 		isEnabled: () => settings().compareVersions.enabled,
 		targets: '.changelog-item',

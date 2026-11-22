@@ -89,10 +89,11 @@
 <script setup lang="ts">
 import { EditIcon, PlusIcon, TrashIcon, UploadIcon } from '@modrinth/assets'
 import { Button, defineMessages, IconButton, useVIntl } from '@modrinth/ui'
-import { onBeforeUnmount, onMounted, ref, shallowRef, useTemplateRef, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, shallowRef, useTemplateRef, watch } from 'vue'
 
 import { showNotification } from '../../content/notifications'
 import { getSettings, type NamedTheme, saveSettings } from '../../core/settings'
+import { useSettings } from '../../core/settings-store'
 import {
 	PRESET_THEMES,
 	MODRINTH_THEMES,
@@ -107,8 +108,10 @@ import ThemeSection from './ThemeSection.vue'
 const props = defineProps<{
 	savedSelected: string
 	savedCustom: NamedTheme[]
-	showPresets: boolean
 }>()
+
+const settings = useSettings()
+const showPresets = computed(() => settings.themes.presets)
 
 const CUSTOM_SECTION = 'custom'
 
@@ -161,13 +164,14 @@ function categoryTitle(category: ThemeCategory): string {
 	return message ? formatMessage(message) : category.name
 }
 
-const categories = props.showPresets ? THEME_CATEGORIES : []
+const categories = computed(() => (showPresets.value ? THEME_CATEGORIES : []))
 
 // Only the section with the theme in use starts open
 const openSection = props.savedCustom.some((theme) => theme.id === props.savedSelected)
 	? CUSTOM_SECTION
-	: categories.find((category) => category.themes.some((theme) => theme.id === props.savedSelected))
-			?.id
+	: THEME_CATEGORIES.find((category) =>
+			category.themes.some((theme) => theme.id === props.savedSelected),
+		)?.id
 
 const customModal = useTemplateRef<InstanceType<typeof CustomThemeModal>>('customModal')
 const fileInput = useTemplateRef<HTMLInputElement>('fileInput')
@@ -175,10 +179,10 @@ const fileInput = useTemplateRef<HTMLInputElement>('fileInput')
 let grid: HTMLElement | null = null
 
 watch([selected, customThemes], async ([id, themes]) => {
-	applyTheme(id, themes, props.showPresets)
+	applyTheme(id, themes, showPresets.value)
 	try {
-		const settings = await getSettings()
-		await saveSettings({ ...settings, themeLibrary: { selected: id, custom: themes } })
+		const saved = await getSettings()
+		await saveSettings({ ...saved, themeLibrary: { selected: id, custom: themes } })
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to save the themes:', err)
 	}
@@ -192,7 +196,7 @@ function select(theme: Pick<NamedTheme, 'id'>) {
 // A hidden preset stays saved but doesn't apply, so the website's theme still counts as picked
 function isAvailable(id: string): boolean {
 	if (customThemes.value.some((theme) => theme.id === id)) return true
-	return props.showPresets && PRESET_THEMES.some((theme) => theme.id === id)
+	return showPresets.value && PRESET_THEMES.some((theme) => theme.id === id)
 }
 
 function uniqueName(name: string): string {
@@ -261,7 +265,7 @@ function onGridClick(event: MouseEvent) {
 }
 
 // Marks the grid so the website's base theme is drawn unselected next to ours
-watch(selected, (id) => grid?.toggleAttribute(SELECTED_ATTRIBUTE, isAvailable(id)))
+watch([selected, showPresets], ([id]) => grid?.toggleAttribute(SELECTED_ATTRIBUTE, isAvailable(id)))
 
 onMounted(() => {
 	grid = document.querySelector<HTMLElement>('.theme-options')

@@ -228,7 +228,7 @@ function toggleSettings() {
 }
 
 watch(
-	() => settings.accentColor,
+	() => settings.themes,
 	() => applyAccentColor(settings),
 	{ deep: true, immediate: true },
 )

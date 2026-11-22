@@ -70,6 +70,7 @@ import { LoaderCircleIcon, TriangleAlertIcon, XIcon } from '@modrinth/assets'
 import { defineMessages, IconButton, ScrollablePanel, useVIntl } from '@modrinth/ui'
 import { computed, onMounted, ref } from 'vue'
 
+import { useSettings } from '../../../core/settings-store'
 import { type EnrichedDep, fetchDependencyTree } from '../../../features/dependencies/graph'
 import DependencyExplorer from '../../project/DependencyExplorer.vue'
 import DependencyNode from './DependencyNode.vue'
@@ -92,8 +93,10 @@ const messages = defineMessages({
 const props = defineProps<{
 	projectSlug: string
 	versionNumber?: string
-	showExplorer?: boolean
 }>()
+
+const settings = useSettings()
+const showExplorer = computed(() => settings.dependencyExplorer.enabled)
 
 const explorerRef = ref<InstanceType<typeof DependencyExplorer> | null>(null)
 const roots = ref<EnrichedDep[]>([])

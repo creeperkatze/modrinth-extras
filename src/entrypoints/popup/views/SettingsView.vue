@@ -52,7 +52,10 @@
 					>
 						<QuickActionProfiles v-if="f.key === 'projectCardActions'" />
 						<template v-if="f.options">
-							<template v-for="opt in f.options" :key="opt.key">
+							<template
+								v-for="opt in f.options.filter((o) => o.visible?.() ?? true)"
+								:key="opt.key"
+							>
 								<OptionFieldColor
 									v-if="opt.type === 'color'"
 									:label="opt.label"
@@ -192,7 +195,6 @@ import {
 	MonitorIcon,
 	PackageIcon,
 	PaintbrushIcon,
-	PaletteIcon,
 	PlayIcon,
 	SearchIcon,
 	StarIcon,
@@ -217,7 +219,12 @@ import CompactCombobox from '../../../components/ui/CompactCombobox.vue'
 import { detectBrowserLocale } from '../../../core/i18n/i18n'
 import { localeFlagUrl, LOCALES } from '../../../core/i18n/locales'
 import { DEFAULTS, type ExtensionSettings } from '../../../core/settings'
-import { accentColorIssue } from '../../../features/accent-color/contrast'
+import {
+	accentColorIssue,
+	themeContrastColors,
+	websiteContrastColors,
+} from '../../../features/accent-color/contrast'
+import { activeTheme } from '../../../features/themes/themes'
 import { readModrinthTheme } from '../../../features/themes/website-theme'
 import { isTranslationSupported } from '../../../features/translation/translator'
 import FeatureGroup from '../components/FeatureGroup.vue'
@@ -290,26 +297,6 @@ const messages = defineMessages({
 		id: 'feature.quickActions.downloadDependencies',
 		defaultMessage: 'Download dependencies',
 	},
-	'feature.accentColor.title': {
-		id: 'feature.accentColor.title',
-		defaultMessage: 'Accent color',
-	},
-	'feature.accentColor.description': {
-		id: 'feature.accentColor.description',
-		defaultMessage: 'Replace the Modrinth green with a custom accent color.',
-	},
-	'feature.accentColor.color': {
-		id: 'feature.accentColor.color',
-		defaultMessage: 'Color',
-	},
-	'feature.accentColor.lowContrast': {
-		id: 'feature.accentColor.lowContrast',
-		defaultMessage: 'This color is hard to see on your Modrinth theme.',
-	},
-	'feature.accentColor.unreadableButtons': {
-		id: 'feature.accentColor.unreadableButtons',
-		defaultMessage: 'Text on buttons in this color is hard to read on your Modrinth theme.',
-	},
 	'feature.themes.title': {
 		id: 'feature.themes.title',
 		defaultMessage: 'Themes',
@@ -321,6 +308,22 @@ const messages = defineMessages({
 	'feature.themes.presets': {
 		id: 'feature.themes.presets',
 		defaultMessage: 'Include preset themes',
+	},
+	'feature.themes.customAccent': {
+		id: 'feature.themes.customAccent',
+		defaultMessage: 'Custom accent color',
+	},
+	'feature.themes.accentColor': {
+		id: 'feature.themes.accentColor',
+		defaultMessage: 'Accent color',
+	},
+	'feature.themes.accentLowContrast': {
+		id: 'feature.themes.accentLowContrast',
+		defaultMessage: 'This color is hard to see on your theme.',
+	},
+	'feature.themes.accentUnreadableButtons': {
+		id: 'feature.themes.accentUnreadableButtons',
+		defaultMessage: 'Text on buttons in this color is hard to read on your theme.',
 	},
 	'feature.activitySparkline.title': {
 		id: 'feature.activitySparkline.title',
@@ -547,6 +550,7 @@ interface FeatureOption {
 	includeAny?: boolean
 	defaultColor?: string
 	warning?: () => string | undefined
+	visible?: () => boolean
 }
 
 const MOD_MANAGER_ITEMS: SelectItem[] = [
@@ -672,20 +676,18 @@ const generalFeatures = computed<FeatureDef[]>(() => [
 				type: 'toggle',
 				label: formatMessage(messages['feature.themes.presets']),
 			},
-		],
-	},
-	{
-		key: 'accentColor',
-		icon: PaletteIcon,
-		title: formatMessage(messages['feature.accentColor.title']),
-		description: formatMessage(messages['feature.accentColor.description']),
-		options: [
 			{
-				key: 'color',
+				key: 'customAccent',
+				type: 'toggle',
+				label: formatMessage(messages['feature.themes.customAccent']),
+			},
+			{
+				key: 'accentColor',
 				type: 'color',
-				label: formatMessage(messages['feature.accentColor.color']),
-				defaultColor: DEFAULTS.accentColor.color,
+				label: formatMessage(messages['feature.themes.accentColor']),
+				defaultColor: DEFAULTS.themes.accentColor,
 				warning: () => accentColorWarning.value,
+				visible: () => settings.themes.customAccent,
 			},
 		],
 	},
@@ -933,11 +935,14 @@ const selectedLocale = computed(() => {
 const translationSupported = isTranslationSupported()
 const modrinthTheme = ref('dark')
 
+// Checked against the theme in use, which is Modrinth's own when none of ours is picked
 const accentColorWarning = computed(() => {
-	const issue = accentColorIssue(settings.accentColor.color, modrinthTheme.value)
-	if (issue === 'background') return formatMessage(messages['feature.accentColor.lowContrast'])
+	const theme = activeTheme(settings)
+	const against = theme ? themeContrastColors(theme) : websiteContrastColors(modrinthTheme.value)
+	const issue = accentColorIssue(settings.themes.accentColor, against)
+	if (issue === 'background') return formatMessage(messages['feature.themes.accentLowContrast'])
 	if (issue === 'buttonText')
-		return formatMessage(messages['feature.accentColor.unreadableButtons'])
+		return formatMessage(messages['feature.themes.accentUnreadableButtons'])
 	return undefined
 })
 

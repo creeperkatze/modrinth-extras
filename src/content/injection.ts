@@ -36,7 +36,6 @@ export function createExtensionApp(component: Component, props?: Record<string, 
 interface InjectionConfig {
 	id: string
 	isEnabled: () => boolean
-	settingsKeys: (keyof ExtensionSettings)[]
 	attach: (container: HTMLElement) => boolean
 	createApp: () => App
 	persistent: boolean
@@ -100,12 +99,16 @@ export function createInjection(config: InjectionConfig) {
 		return false
 	}
 
-	return { unmount, schedule, checkDetached, config }
+	function refresh() {
+		if (config.isEnabled()) schedule()
+		else unmount()
+	}
+
+	return { unmount, schedule, refresh, checkDetached, config }
 }
 
 interface DynamicInjectionConfig {
 	id?: string
-	settingsKeys: (keyof ExtensionSettings)[]
 	persistent: boolean
 	projectScoped?: boolean
 	scopeKey?: () => string
@@ -172,26 +175,9 @@ export function createDynamicInjection(config: DynamicInjectionConfig) {
 		return any
 	}
 
-	return { unmount, schedule, checkDetached, config }
+	return { unmount, schedule, refresh: schedule, checkDetached, config }
 }
 
 export type Injection =
 	| ReturnType<typeof createInjection>
 	| ReturnType<typeof createDynamicInjection>
-
-export function remountForChangedSettings(
-	injections: Injection[],
-	oldSettings: ExtensionSettings | undefined,
-	newSettings: ExtensionSettings | undefined,
-) {
-	for (const inj of injections) {
-		if (inj.config.settingsKeys.length === 0) continue
-		const changed = inj.config.settingsKeys.some(
-			(key) => JSON.stringify(oldSettings?.[key]) !== JSON.stringify(newSettings?.[key]),
-		)
-		if (changed) {
-			inj.unmount()
-			inj.schedule()
-		}
-	}
-}

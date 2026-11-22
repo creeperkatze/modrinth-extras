@@ -88,6 +88,7 @@ import { defineMessages, useVIntl } from '@modrinth/ui'
 import { type Component, computed, onMounted, ref } from 'vue'
 
 import ModsrcIcon from '../../assets/icons/modsrc.svg?component'
+import { useSettings } from '../../core/settings-store'
 import { type DecompilerLinks, fetchDecompilerLinks } from '../../features/decompilers/links'
 
 const { formatMessage } = useVIntl()
@@ -108,11 +109,9 @@ const messages = defineMessages({
 	},
 })
 
-const props = defineProps<{
-	pageUrl: string
-	modManager: string
-	decompiler: string
-}>()
+const props = defineProps<{ pageUrl: string }>()
+
+const settings = useSettings()
 
 const MOD_MANAGERS: Record<
 	string,
@@ -164,7 +163,9 @@ const projectMatch = computed(() => {
 
 const projectSlug = computed(() => projectMatch.value?.slug ?? null)
 
-const modManager = computed(() => MOD_MANAGERS[props.modManager] ?? MOD_MANAGERS.packwiz)
+const modManager = computed(
+	() => MOD_MANAGERS[settings.toolsSidebar.modManager] ?? MOD_MANAGERS.packwiz,
+)
 const modManagerLabel = computed(() => modManager.value.label)
 
 const installCommandCopied = ref(false)
@@ -182,7 +183,8 @@ async function copyInstallCommand() {
 const links = ref<DecompilerLinks | null>(null)
 
 const decompiler = computed(
-	() => DECOMPILERS[props.decompiler as keyof typeof DECOMPILERS] ?? DECOMPILERS.slicer,
+	() =>
+		DECOMPILERS[settings.toolsSidebar.decompiler as keyof typeof DECOMPILERS] ?? DECOMPILERS.slicer,
 )
 const decompilerUrl = computed(() => (links.value ? decompiler.value.url(links.value) : null))
 

@@ -56,7 +56,7 @@
 <script setup lang="ts">
 import { MessagesSquareIcon } from '@modrinth/assets'
 import { defineMessages, Tabs, type TabsTab, useVIntl } from '@modrinth/ui'
-import { type Component, computed, onMounted, onUnmounted, ref, shallowRef } from 'vue'
+import { type Component, computed, onMounted, onUnmounted, ref, shallowRef, watch } from 'vue'
 import { browser } from 'wxt/browser'
 
 import { modrinthClient } from '../../../api/client'
@@ -64,6 +64,7 @@ import CurseForgeIcon from '../../../assets/icons/curseforge.svg?component'
 import ModdexLogo from '../../../assets/icons/moddex.svg?component'
 import SpigotIcon from '../../../assets/icons/spigot.svg?component'
 import { i18n } from '../../../core/i18n/i18n'
+import { useSettings } from '../../../core/settings-store'
 import { getMatchableProject, type MatchableProject } from '../../../features/platforms/matching'
 import CurseForgeComments from './CurseForgeComments.vue'
 import ModdexReviews from './ModdexReviews.vue'
@@ -71,6 +72,8 @@ import ReviewSkeletons from './ReviewSkeletons.vue'
 import SpigotReviews from './SpigotReviews.vue'
 
 type ReviewSource = 'moddex' | 'curseforge' | 'spigot'
+
+const SOURCES: ReviewSource[] = ['moddex', 'curseforge', 'spigot']
 
 const SOURCE_TABS: Record<ReviewSource, { label: string; icon: Component }> = {
 	moddex: { label: 'ModDex', icon: ModdexLogo },
@@ -91,12 +94,10 @@ const messages = defineMessages({
 	},
 })
 
-const props = defineProps<{
-	projectSlug: string
-	moddex: boolean
-	curseforge: boolean
-	spigot: boolean
-}>()
+const props = defineProps<{ projectSlug: string }>()
+
+const settings = useSettings()
+const enabledSources = computed(() => SOURCES.filter((value) => settings.reviews[value]))
 
 const CONTENT_SELECTOR = '.normal-page__content'
 const ACTIVE_CONTENT_CLASS = 'modrinth-extras-reviews-active'
@@ -110,22 +111,25 @@ const active = ref(false)
 const panelTarget = ref<HTMLElement | null>(null)
 const source = ref<ReviewSource | null>(null)
 // The tab is there from the start, so the panel waits here until every source has been checked.
-const checking = ref(true)
+const pendingChecks = ref(0)
+const checking = computed(() => pendingChecks.value > 0)
 
-const sources = computed(() => {
-	const list: ReviewSource[] = []
-	if (props.moddex && moddexAvailable.value) list.push('moddex')
-	if (props.curseforge && curseforgeProject.value) list.push('curseforge')
-	if (props.spigot && spigotProject.value) list.push('spigot')
-	return list
-})
+const found: Record<ReviewSource, () => boolean> = {
+	moddex: () => moddexAvailable.value,
+	curseforge: () => !!curseforgeProject.value,
+	spigot: () => !!spigotProject.value,
+}
 
-const currentSource = computed(() => source.value ?? sources.value[0] ?? null)
+const sources = computed(() => enabledSources.value.filter((value) => found[value]()))
+
+// The picked source can be turned off in the popup while it is open
+const currentSource = computed(() =>
+	source.value && sources.value.includes(source.value) ? source.value : (sources.value[0] ?? null),
+)
 
 const enabledSourceNames = computed(() => {
-	const enabled = (['moddex', 'curseforge', 'spigot'] as const).filter((value) => props[value])
 	return new Intl.ListFormat(i18n.global.locale.value, { type: 'disjunction' }).format(
-		enabled.map((value) => SOURCE_TABS[value].label),
+		enabledSources.value.map((value) => SOURCE_TABS[value].label),
 	)
 })
 
@@ -219,42 +223,55 @@ async function isAvailable(
 	}
 }
 
-async function loadPlatformProjects() {
-	try {
-		const project = await modrinthClient.labrinth.projects_v3.get(props.projectSlug)
-		// SpigotMC only hosts plugins, so other projects would only find unrelated namesakes.
-		const spigot = props.spigot && project.project_types.includes('plugin')
-		if (!spigot && !props.curseforge) return
+// Shared by CurseForge and SpigotMC, so the project is only fetched once
+let platformProject: Promise<{ plugin: boolean; matchable: MatchableProject }> | null = null
 
-		const matchable = await getMatchableProject(project)
-		await Promise.all([
-			spigot &&
-				isAvailable('spigot', { project: matchable }).then((found) => {
-					if (found) spigotProject.value = matchable
-				}),
-			props.curseforge &&
-				isAvailable('curseforge', { project: matchable }).then((found) => {
-					if (found) curseforgeProject.value = matchable
-				}),
-		])
+function loadPlatformProject() {
+	platformProject ??= modrinthClient.labrinth.projects_v3
+		.get(props.projectSlug)
+		.then(async (project) => ({
+			plugin: project.project_types.includes('plugin'),
+			matchable: await getMatchableProject(project),
+		}))
+	return platformProject
+}
+
+async function lookUpPlatform(source: 'curseforge' | 'spigot') {
+	try {
+		const { plugin, matchable } = await loadPlatformProject()
+		// SpigotMC only hosts plugins, so other projects would only find unrelated namesakes.
+		if (source === 'spigot' && !plugin) return
+		if (!(await isAvailable(source, { project: matchable }))) return
+		if (source === 'spigot') spigotProject.value = matchable
+		else curseforgeProject.value = matchable
 	} catch (err) {
 		console.error('[Modrinth Extras] Failed to load project for platform reviews:', err)
 	}
 }
 
-async function checkSources() {
-	await Promise.all([
-		props.moddex &&
-			isAvailable('moddex', { slug: props.projectSlug }).then(
-				(found) => (moddexAvailable.value = found),
-			),
-		(props.spigot || props.curseforge) && loadPlatformProjects(),
-	])
-	checking.value = false
+async function checkSource(source: ReviewSource) {
+	pendingChecks.value++
+	if (source === 'moddex')
+		moddexAvailable.value = await isAvailable('moddex', { slug: props.projectSlug })
+	else await lookUpPlatform(source)
+	pendingChecks.value--
 }
 
+// A source turned on in the popup later is checked then
+const checked = new Set<ReviewSource>()
+watch(
+	enabledSources,
+	(enabled) => {
+		for (const source of enabled) {
+			if (checked.has(source)) continue
+			checked.add(source)
+			void checkSource(source)
+		}
+	},
+	{ immediate: true },
+)
+
 onMounted(() => {
-	void checkSources()
 	document.addEventListener('click', onNavClick, true)
 	window.addEventListener('modrinth-extras:before-navigate', deactivate)
 })

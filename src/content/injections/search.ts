@@ -44,7 +44,6 @@ function attachQuickActions(card: HTMLElement): HTMLElement | null {
 
 export function searchInjections(settings: SettingsGetter) {
 	const quickActions = createDynamicInjection({
-		settingsKeys: ['projectCardActions'],
 		persistent: false,
 		isEnabled: () => settings().projectCardActions.enabled,
 		targets: '.project-card-container',
@@ -52,18 +51,9 @@ export function searchInjections(settings: SettingsGetter) {
 		attach: attachQuickActions,
 		createApp(target) {
 			const [, projectType, projectSlug] = getCardHref(target).match(PROJECT_TYPE_PATTERN) ?? []
-			const { modLoader, pluginLoader, shaderLoader, gameVersion, downloadDependencies } =
-				settings().projectCardActions
 			return createExtensionApp(QuickActions, {
 				projectSlug: projectSlug ?? '',
 				projectType: projectType ?? '',
-				downloadSettings: {
-					modLoader,
-					pluginLoader,
-					shaderLoader,
-					gameVersion,
-					downloadDependencies,
-				},
 			})
 		},
 	})
