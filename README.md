@@ -28,7 +28,7 @@ Prefer to build from source? See [🔒 Building from source](#-building-from-sou
 <!-- features:start -->
 <table>
 <tr>
-<td width="50%"><img src="website/public/screenshots/gallery-background.png"></td>
+<td width="50%"><img src="website/public/screenshots/project.png"></td>
 <td width="50%"><h3>A page that matches the project</h3>Display a project's featured gallery image as a full banner background, so shaders and resource packs look the part.</td>
 </tr>
 <tr>
@@ -44,20 +44,20 @@ Prefer to build from source? See [🔒 Building from source](#-building-from-sou
 <td width="50%"><img src="website/public/screenshots/dependency-explorer.png"></td>
 </tr>
 <tr>
-<td width="50%"><img src="website/public/screenshots/popup.png"></td>
+<td width="50%"><img src="website/public/screenshots/popup-creator.png"></td>
 <td width="50%"><h3>Modrinth, from any tab</h3>Search for projects and servers, read your notifications, accept invites, and check your creator revenue and stats, all from the extension popup.</td>
 </tr>
 <tr>
 <td width="50%"><h3>Find anything in seconds</h3>Press Ctrl+K or / to open a command palette style search, with faceted tags for loaders, versions, categories, and types built right into your query.</td>
-<td width="50%"><img src="website/public/screenshots/quicksearch.png"></td>
+<td width="50%"><img src="website/public/screenshots/quick-search.png"></td>
 </tr>
 <tr>
-<td width="50%"><img src="website/public/screenshots/project-page.png"></td>
-<td width="50%"><h3>The full picture on every project</h3>See how often a project updates at a glance, along with its repository stats, Discord server, security checks, the modpacks it's in, and where else it's published.</td>
-</tr>
-<tr>
-<td width="50%"><h3>A whole collection in one download</h3>Turn any collection into a modpack or zip file with every project that supports your game version and loader, required dependencies included.</td>
 <td width="50%"><img src="website/public/screenshots/collection-download.png"></td>
+<td width="50%"><h3>A whole collection in one download</h3>Turn any collection into a modpack or zip file with every project that supports your game version and loader, required dependencies included.</td>
+</tr>
+<tr>
+<td width="50%"><h3>Notifications, right in the header</h3>View, manage, and clear unread notifications without leaving the page you're on, with optional browser notifications and an unread badge on the extension icon.</td>
+<td width="50%"><img src="website/public/screenshots/notifications.png"></td>
 </tr>
 </table>
 <!-- features:end -->

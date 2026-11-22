@@ -22,10 +22,6 @@
 				"title": "Find anything in seconds",
 				"description": "Press Ctrl+K or / to open a command palette style search, with faceted tags for loaders, versions, categories, and types built right into your query."
 			},
-			"projectPage": {
-				"title": "The full picture on every project",
-				"description": "See how often a project updates at a glance, along with its repository stats, Discord server, security checks, the modpacks it's in, and where else it's published."
-			},
 			"quickActions": {
 				"title": "Straight from the search results",
 				"description": "Download, follow, and save projects right from their cards. Save your game version and loaders as profiles, and switch between them from the popup."
@@ -33,6 +29,10 @@
 			"collectionDownload": {
 				"title": "A whole collection in one download",
 				"description": "Turn any collection into a modpack or zip file with every project that supports your game version and loader, required dependencies included."
+			},
+			"notifications": {
+				"title": "Notifications, right in the header",
+				"description": "View, manage, and clear unread notifications without leaving the page you're on, with optional browser notifications and an unread badge on the extension icon."
 			}
 		}
 	},
