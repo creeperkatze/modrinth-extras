@@ -22,6 +22,7 @@
 - Redesigned the popup settings to match Modrinth's own settings. They now open from the settings button in the popup header.
 - The popup now follows your Modrinth theme.
 - Project card actions are now called quick actions.
+- The activity sparkline now shows the last 90 days by default, instead of 60.
 - The custom accent color is now an option under Themes in the popup, and works on top of any theme. Your color carries over.
 - Changing an option in the popup now updates the page in place, instead of reloading the cards and buttons it affects.
 - The donate banner in the popup now only shows once you've had the extension for 3 days, and the Discord banner after a week.

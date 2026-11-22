@@ -74,7 +74,7 @@ export const DEFAULTS: ExtensionSettings = {
 		gameVersion: '',
 		downloadDependencies: false,
 	},
-	activitySparkline: { enabled: true, days: '60' },
+	activitySparkline: { enabled: true, days: '90' },
 	toolsSidebar: { enabled: true, modManager: 'packwiz', decompiler: 'slicer' },
 	compareVersions: { enabled: false },
 	collectionDownload: { enabled: true },
