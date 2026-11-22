@@ -1,21 +1,6 @@
 {
-  "feature.accentColor.color": {
-    "defaultMessage": "Kolor"
-  },
-  "feature.accentColor.description": {
-    "defaultMessage": "Zamień zieleń Modrinth na własny kolor akcentu."
-  },
-  "feature.accentColor.title": {
-    "defaultMessage": "Kolor akcentu"
-  },
   "feature.activitySparkline.days": {
     "defaultMessage": "{count, plural, one {# dzień} few {# dni} other {# dni}}"
-  },
-  "feature.quickActions.pluginLoader": {
-    "defaultMessage": "Loader pluginów"
-  },
-  "feature.quickActions.shaderLoader": {
-    "defaultMessage": "Loader shaderów"
   },
   "feature.quickSearch.title": {
     "defaultMessage": "Szybkie wyszukiwanie"

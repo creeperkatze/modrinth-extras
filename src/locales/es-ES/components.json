@@ -203,42 +203,6 @@
   "projectReviews.tab": {
     "defaultMessage": "Reseñas"
   },
-  "quickActions.checkingDownload": {
-    "defaultMessage": "Comprobando la versión disponible..."
-  },
-  "quickActions.copied": {
-    "defaultMessage": "¡Copiado!"
-  },
-  "quickActions.copyLink": {
-    "defaultMessage": "Copiar link"
-  },
-  "quickActions.download": {
-    "defaultMessage": "Descargar"
-  },
-  "quickActions.downloadUnavailable": {
-    "defaultMessage": "{loader, select, none {No hay una versión disponible para {version}} other {No versión disponible para {loader} {version}}}"
-  },
-  "quickActions.follow": {
-    "defaultMessage": "Seguir"
-  },
-  "quickActions.newCollection": {
-    "defaultMessage": "Crear nueva colección"
-  },
-  "quickActions.noCollections": {
-    "defaultMessage": "No se encontraron colecciones."
-  },
-  "quickActions.save": {
-    "defaultMessage": "Guardar"
-  },
-  "quickActions.saved": {
-    "defaultMessage": "Guardado"
-  },
-  "quickActions.searchPlaceholder": {
-    "defaultMessage": "Buscar..."
-  },
-  "quickActions.unfollow": {
-    "defaultMessage": "Dejar de seguir"
-  },
   "quickSearch.clearRecent": {
     "defaultMessage": "Borrar reciente"
   },

@@ -1,13 +1,4 @@
 {
-  "feature.accentColor.color": {
-    "defaultMessage": "Renk"
-  },
-  "feature.accentColor.description": {
-    "defaultMessage": "Modrinth yeşilini özel bir vurgu rengiyle değiştirin."
-  },
-  "feature.accentColor.title": {
-    "defaultMessage": "Vurgu rengi"
-  },
   "feature.activitySparkline.days": {
     "defaultMessage": "{count, plural, one {# gün} other {# gün}}"
   },
@@ -29,11 +20,11 @@
   "feature.browserNotifications.exampleTitle": {
     "defaultMessage": "Örnek bildirim"
   },
-  "feature.browserNotifications.sendTest": {
-    "defaultMessage": "Test bildirimi gönder"
-  },
   "feature.browserNotifications.title": {
     "defaultMessage": "Tarayıcı bildirimleri"
+  },
+  "feature.compareVersions.title": {
+    "defaultMessage": "Sürümleri karşılaştır"
   },
   "feature.curseforgeRedirect.description": {
     "defaultMessage": "Mevcut olduğunda CurseForge proje sayfalarını Modrinth'e yönlendir."
@@ -52,6 +43,9 @@
   },
   "feature.discordSidebar.description": {
     "defaultMessage": "Bağlı Discord sunucularının sunucu adı, açıklaması, üye sayısı ve çevrim içi sayısı."
+  },
+  "feature.discordSidebar.title": {
+    "defaultMessage": "Discord"
   },
   "feature.galleryBackground.description": {
     "defaultMessage": "Öne çıkan galeri görselini proje sayfalarında arka plan başlığı olarak görüntüleyin."
@@ -86,23 +80,8 @@
   "feature.platformsSidebar.description": {
     "defaultMessage": "CurseForge, Hangar ve SpigotMC üzerinde aynı projeyi veya geliştiriciyi bulun."
   },
-  "feature.quickActions.description": {
-    "defaultMessage": "Projeleri doğrudan proje kartlarından kolayca indirin, takip edin ve kaydedin."
-  },
-  "feature.quickActions.downloadDependencies": {
-    "defaultMessage": "Bağımlılıkları indir"
-  },
-  "feature.quickActions.gameVersion": {
-    "defaultMessage": "Oyun sürümü"
-  },
-  "feature.quickActions.modLoader": {
-    "defaultMessage": "Mod yükleyicisi"
-  },
-  "feature.quickActions.pluginLoader": {
-    "defaultMessage": "Eklenti yükleyicisi"
-  },
-  "feature.quickActions.shaderLoader": {
-    "defaultMessage": "Shader yükleyici"
+  "feature.platformsSidebar.title": {
+    "defaultMessage": "Diğer platformlar"
   },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K veya / tuşlarına basarak, yükleyiciler, sürümler, kategoriler ve türler için filtrelenmiş etiketlere sahip komut paleti tarzı bir arama yapabilirsiniz."
@@ -128,6 +107,9 @@
   "feature.telemetry.title": {
     "defaultMessage": "Telemetri"
   },
+  "feature.themes.title": {
+    "defaultMessage": "Temalar"
+  },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "Mod yöneticisi"
   },
@@ -140,6 +122,18 @@
   "feature.translateDescription.title": {
     "defaultMessage": "Açıklamayı çevir"
   },
+  "popup.creator.downloads": {
+    "defaultMessage": "İndirmeler"
+  },
+  "popup.creator.rangeDays": {
+    "defaultMessage": "{days}g"
+  },
+  "popup.creator.total": {
+    "defaultMessage": "Toplam"
+  },
+  "popup.creator.views": {
+    "defaultMessage": "Görüntülenmeler"
+  },
   "popup.discordPrompt.dismiss": {
     "defaultMessage": "Vazgeç"
   },
@@ -151,6 +145,9 @@
   },
   "popup.donatePrompt.dismiss": {
     "defaultMessage": "Vazgeç"
+  },
+  "popup.donatePrompt.donate": {
+    "defaultMessage": "Bağış yap"
   },
   "popup.donatePrompt.message": {
     "defaultMessage": "Modrinth Extras her zaman ücretsiz, açık kaynaklı ve reklamsız olacaktır. Eğer bu uygulamayı faydalı bulursanız, küçük bir bağışla geliştirilmesine destek olmayı düşünün."
@@ -178,6 +175,63 @@
   },
   "popup.group.general": {
     "defaultMessage": "Genel"
+  },
+  "popup.introductionTour.creator.title": {
+    "defaultMessage": "Yapımcı"
+  },
+  "popup.introductionTour.settings.title": {
+    "defaultMessage": "Ayarlar"
+  },
+  "popup.nav.creator": {
+    "defaultMessage": "Yapımcı"
+  },
+  "popup.nav.notifications": {
+    "defaultMessage": "Bildirimler"
+  },
+  "popup.nav.search": {
+    "defaultMessage": "Ara"
+  },
+  "popup.nav.settings": {
+    "defaultMessage": "Ayarlar"
+  },
+  "popup.notifications.markAllAsRead": {
+    "defaultMessage": "Tümünü okundu olarak işaretle"
+  },
+  "popup.notifications.unread": {
+    "defaultMessage": "Okunmamış"
+  },
+  "popup.project.environment.server": {
+    "defaultMessage": "Sunucu"
+  },
+  "popup.resetSettings.cancel": {
+    "defaultMessage": "İptal"
+  },
+  "popup.search.searching": {
+    "defaultMessage": "Aranıyor..."
+  },
+  "popup.search.type.all": {
+    "defaultMessage": "Tümü"
+  },
+  "popup.search.type.mod": {
+    "defaultMessage": "Modlar"
+  },
+  "popup.search.type.plugin": {
+    "defaultMessage": "Eklentiler"
+  },
+  "popup.search.type.resourcepack": {
+    "defaultMessage": "Kaynak Paketlerİ"
+  },
+  "popup.search.type.server": {
+    "defaultMessage": "Sunucular"
+  },
+  "popup.search.type.shader": {
+    "defaultMessage": "Shaderlar"
+  },
+  "popup.signIn.button": {
+    "defaultMessage": "Oturum aç"
+  },
+  "popup.tab.projects": {
+    "defaultMessage": "Projeler"
   },
   "search.any": {
     "defaultMessage": "Herhangi"

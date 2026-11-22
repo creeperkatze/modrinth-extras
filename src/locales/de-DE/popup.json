@@ -1,19 +1,4 @@
 {
-  "feature.accentColor.color": {
-    "defaultMessage": "Farbe"
-  },
-  "feature.accentColor.description": {
-    "defaultMessage": "Ersetze das Modrinth-Grün durch eine eigene Akzentfarbe."
-  },
-  "feature.accentColor.lowContrast": {
-    "defaultMessage": "Diese Farbe ist auf deinem Modrinth-Farbschema Thema schwer zu erkennen."
-  },
-  "feature.accentColor.title": {
-    "defaultMessage": "Akzentfarbe"
-  },
-  "feature.accentColor.unreadableButtons": {
-    "defaultMessage": "Text auf Schaltflächen in dieser Farbe ist auf deinem Modrinth-Farbschema schwer zu lesen."
-  },
   "feature.activitySparkline.days": {
     "defaultMessage": "{count, plural, one {# Tag} other {# Tage}}"
   },
@@ -36,10 +21,16 @@
     "defaultMessage": "Beispielbenachrichtigung"
   },
   "feature.browserNotifications.sendTest": {
-    "defaultMessage": "Testbenachrichtigung senden"
+    "defaultMessage": "Test senden"
   },
   "feature.browserNotifications.title": {
     "defaultMessage": "Browser-Benachrichtigungen"
+  },
+  "feature.collectionDownload.description": {
+    "defaultMessage": "Lade eine Kollektion als Modpack oder ZIP-Datei herunter, mit allen Projekten, die deine Spielversion und deinen Loader unterstützen."
+  },
+  "feature.collectionDownload.title": {
+    "defaultMessage": "Kollektionen herunterladen"
   },
   "feature.compareVersions.description": {
     "defaultMessage": "Vergleiche den dekompilierten Code von Versionen in modsrc, auf den Versionsseiten, in der Versionsliste und bei den Änderungen."
@@ -123,7 +114,7 @@
     "defaultMessage": "Andere Plattformen"
   },
   "feature.quickActions.description": {
-    "defaultMessage": "Projekte direkt über ihre Projektkarten herunterladen, folgen und speichern."
+    "defaultMessage": "Lade Projekte direkt über ihre Projektkarten herunter, folge ihnen und speichere sie."
   },
   "feature.quickActions.downloadDependencies": {
     "defaultMessage": "Abhängigkeiten herunterladen"
@@ -139,6 +130,9 @@
   },
   "feature.quickActions.shaderLoader": {
     "defaultMessage": "Shader-Loader"
+  },
+  "feature.quickActions.title": {
+    "defaultMessage": "Schnellaktionen"
   },
   "feature.quickSearch.description": {
     "defaultMessage": "Strg+K oder / für eine Suche im Stil einer Befehlspalette mit gefilterten Tags für Loader, Versionen, Kategorien und Typen."
@@ -170,6 +164,27 @@
   "feature.telemetry.title": {
     "defaultMessage": "Telemetrie"
   },
+  "feature.themes.accentColor": {
+    "defaultMessage": "Akzentfarbe"
+  },
+  "feature.themes.accentLowContrast": {
+    "defaultMessage": "Diese Farbe ist auf deinem Farbschema schwer zu erkennen."
+  },
+  "feature.themes.accentUnreadableButtons": {
+    "defaultMessage": "Text auf Schaltflächen in dieser Farbe ist auf deinem Farbschema schwer zu lesen."
+  },
+  "feature.themes.customAccent": {
+    "defaultMessage": "Eigene Akzentfarbe"
+  },
+  "feature.themes.description": {
+    "defaultMessage": "Weitere Farbschemas für Modrinth und deine eigenen."
+  },
+  "feature.themes.presets": {
+    "defaultMessage": "Vorgefertigte Farbschemas einbeziehen"
+  },
+  "feature.themes.title": {
+    "defaultMessage": "Farbschemas"
+  },
   "feature.toolsSidebar.decompiler": {
     "defaultMessage": "Dekompiler"
   },
@@ -191,8 +206,68 @@
   "feature.translateDescription.title": {
     "defaultMessage": "Beschreibung übersetzen"
   },
+  "popup.creator.analytics": {
+    "defaultMessage": "Analysen"
+  },
+  "popup.creator.availableNow": {
+    "defaultMessage": "Jetzt verfügbar"
+  },
+  "popup.creator.balance": {
+    "defaultMessage": "Guthaben"
+  },
+  "popup.creator.createProject": {
+    "defaultMessage": "Projekt erstellen"
+  },
+  "popup.creator.downloads": {
+    "defaultMessage": "Downloads"
+  },
+  "popup.creator.estimated": {
+    "defaultMessage": "Voraussichtlich {date}"
+  },
+  "popup.creator.failed": {
+    "defaultMessage": "Analysen konnten nicht geladen werden"
+  },
+  "popup.creator.fullAnalytics": {
+    "defaultMessage": "Alle Analysen öffnen"
+  },
+  "popup.creator.fullRevenue": {
+    "defaultMessage": "Alle Einnahmen öffnen"
+  },
+  "popup.creator.loading": {
+    "defaultMessage": "Deine Projekte werden geladen..."
+  },
+  "popup.creator.noProjectsDescription": {
+    "defaultMessage": "Sobald du ein Projekt veröffentlichst, erscheinen hier seine Ansichten, Downloads und Einnahmen."
+  },
+  "popup.creator.noProjectsTitle": {
+    "defaultMessage": "Noch keine Projekte"
+  },
+  "popup.creator.previousPeriod": {
+    "defaultMessage": "Vorheriger Zeitraum"
+  },
+  "popup.creator.processing": {
+    "defaultMessage": "In Bearbeitung"
+  },
+  "popup.creator.rangeDays": {
+    "defaultMessage": "{days} T"
+  },
+  "popup.creator.revenue": {
+    "defaultMessage": "Einnahmen"
+  },
+  "popup.creator.signIn": {
+    "defaultMessage": "Melde dich an, um hier deine Analysen und Einnahmen zu sehen."
+  },
+  "popup.creator.total": {
+    "defaultMessage": "Gesamt"
+  },
+  "popup.creator.views": {
+    "defaultMessage": "Ansichten"
+  },
   "popup.discordPrompt.dismiss": {
     "defaultMessage": "Schließen"
+  },
+  "popup.discordPrompt.join": {
+    "defaultMessage": "Server beitreten"
   },
   "popup.discordPrompt.message": {
     "defaultMessage": "Erhalte Hilfe, teile Feedback und folge Updates auf dem Discord-Server."
@@ -202,6 +277,9 @@
   },
   "popup.donatePrompt.dismiss": {
     "defaultMessage": "Schließen"
+  },
+  "popup.donatePrompt.donate": {
+    "defaultMessage": "Spenden"
   },
   "popup.donatePrompt.message": {
     "defaultMessage": "Modrinth Extras wird immer kostenlos, Open Source und werbefrei bleiben. Wenn du es nützlich findest, unterstütze die Entwicklung mit einer kleinen Spende."
@@ -224,6 +302,12 @@
   "popup.footer.updateAvailable": {
     "defaultMessage": "Aktualisierung verfügbar"
   },
+  "popup.found.looking": {
+    "defaultMessage": "Dieses Projekt wird auf Modrinth gesucht..."
+  },
+  "popup.found.title": {
+    "defaultMessage": "Auch auf Modrinth"
+  },
   "popup.group.extension": {
     "defaultMessage": "Erweiterung"
   },
@@ -233,8 +317,212 @@
   "popup.group.sidebar": {
     "defaultMessage": "Seitenleiste"
   },
+  "popup.introductionTour.creator.description": {
+    "defaultMessage": "Behalte die Ansichten, Downloads und Einnahmen deiner Projekte im Blick."
+  },
+  "popup.introductionTour.creator.title": {
+    "defaultMessage": "Ersteller"
+  },
+  "popup.introductionTour.notifications.description": {
+    "defaultMessage": "Lies deine Benachrichtigungen und nimm Einladungen direkt hier an."
+  },
+  "popup.introductionTour.notifications.title": {
+    "defaultMessage": "Benachrichtigungen"
+  },
+  "popup.introductionTour.progress": {
+    "defaultMessage": "{current} von {total}"
+  },
+  "popup.introductionTour.search.description": {
+    "defaultMessage": "Finde Mods, Modpacks, Server und mehr, ohne Modrinth zu öffnen."
+  },
+  "popup.introductionTour.search.title": {
+    "defaultMessage": "Suche"
+  },
+  "popup.introductionTour.settings.description": {
+    "defaultMessage": "Passe alles an, was Modrinth Extras zu bieten hat."
+  },
+  "popup.introductionTour.settings.title": {
+    "defaultMessage": "Einstellungen"
+  },
+  "popup.introductionTour.settings.updatedDescription": {
+    "defaultMessage": "Die Einstellungen sind jetzt hier. Hier passt du alles an, was Modrinth Extras zu bieten hat."
+  },
+  "popup.introductionTour.skip": {
+    "defaultMessage": "Überspringen"
+  },
+  "popup.nav.back": {
+    "defaultMessage": "Zurück"
+  },
+  "popup.nav.creator": {
+    "defaultMessage": "Ersteller"
+  },
+  "popup.nav.notifications": {
+    "defaultMessage": "Benachrichtigungen"
+  },
+  "popup.nav.search": {
+    "defaultMessage": "Suche"
+  },
+  "popup.nav.settings": {
+    "defaultMessage": "Einstellungen"
+  },
+  "popup.notifications.emptyDescription": {
+    "defaultMessage": "Hier erscheinen Projekt-Updates, Einladungen und Nachrichten von Moderatoren."
+  },
+  "popup.notifications.emptyTitle": {
+    "defaultMessage": "Keine ungelesenen Benachrichtigungen"
+  },
+  "popup.notifications.failed": {
+    "defaultMessage": "Benachrichtigungen konnten nicht geladen werden"
+  },
+  "popup.notifications.loading": {
+    "defaultMessage": "Deine Benachrichtigungen werden geladen..."
+  },
+  "popup.notifications.markAllAsRead": {
+    "defaultMessage": "Alle als gelesen markieren"
+  },
+  "popup.notifications.signIn": {
+    "defaultMessage": "Melde dich an, um hier deine Benachrichtigungen zu sehen."
+  },
+  "popup.notifications.unread": {
+    "defaultMessage": "Ungelesen"
+  },
+  "popup.notifications.viewAll": {
+    "defaultMessage": "Alle anzeigen"
+  },
+  "popup.notifications.viewHistory": {
+    "defaultMessage": "Verlauf anzeigen"
+  },
+  "popup.project.by": {
+    "defaultMessage": "von {author}"
+  },
+  "popup.project.environment.client": {
+    "defaultMessage": "Client"
+  },
+  "popup.project.environment.clientAndServer": {
+    "defaultMessage": "Client und Server"
+  },
+  "popup.project.environment.clientOrServer": {
+    "defaultMessage": "Client oder Server"
+  },
+  "popup.project.environment.dedicatedServer": {
+    "defaultMessage": "Dedizierter Server"
+  },
+  "popup.project.environment.server": {
+    "defaultMessage": "Server"
+  },
+  "popup.project.environment.singleplayer": {
+    "defaultMessage": "Einzelspieler"
+  },
+  "popup.resetSettings.button": {
+    "defaultMessage": "Zurücksetzen"
+  },
+  "popup.resetSettings.cancel": {
+    "defaultMessage": "Abbrechen"
+  },
+  "popup.resetSettings.confirmMessage": {
+    "defaultMessage": "Alle Einstellungen werden auf ihre Standardwerte zurückgesetzt, einschließlich Sprache und Anordnung der Seitenleiste, und deine eigenen Farbschemas werden gelöscht. Diese Aktion kann nicht rückgängig gemacht werden."
+  },
+  "popup.resetSettings.confirmTitle": {
+    "defaultMessage": "Alle Einstellungen zurücksetzen?"
+  },
+  "popup.resetSettings.description": {
+    "defaultMessage": "Setzt alle Einstellungen auf ihre Standardwerte zurück und löscht deine eigenen Farbschemas."
+  },
+  "popup.resetSettings.title": {
+    "defaultMessage": "Alle Einstellungen zurücksetzen"
+  },
+  "popup.search.clear": {
+    "defaultMessage": "Suche löschen"
+  },
+  "popup.search.failedHeading": {
+    "defaultMessage": "Suche fehlgeschlagen"
+  },
+  "popup.search.noResults": {
+    "defaultMessage": "Keine Projekte gefunden"
+  },
+  "popup.search.placeholder": {
+    "defaultMessage": "Modrinth durchsuchen"
+  },
+  "popup.search.placeholder.datapack": {
+    "defaultMessage": "Datenpakete durchsuchen"
+  },
+  "popup.search.placeholder.mod": {
+    "defaultMessage": "Mods durchsuchen"
+  },
+  "popup.search.placeholder.modpack": {
+    "defaultMessage": "Modpacks durchsuchen"
+  },
+  "popup.search.placeholder.plugin": {
+    "defaultMessage": "Plugins durchsuchen"
+  },
+  "popup.search.placeholder.resourcepack": {
+    "defaultMessage": "Ressourcenpakete durchsuchen"
+  },
+  "popup.search.placeholder.server": {
+    "defaultMessage": "Server durchsuchen"
+  },
+  "popup.search.placeholder.shader": {
+    "defaultMessage": "Shader durchsuchen"
+  },
+  "popup.search.searching": {
+    "defaultMessage": "Wird gesucht..."
+  },
+  "popup.search.type.all": {
+    "defaultMessage": "Alle"
+  },
+  "popup.search.type.datapack": {
+    "defaultMessage": "Datenpakete"
+  },
+  "popup.search.type.mod": {
+    "defaultMessage": "Mods"
+  },
+  "popup.search.type.modpack": {
+    "defaultMessage": "Modpacks"
+  },
+  "popup.search.type.plugin": {
+    "defaultMessage": "Plugins"
+  },
+  "popup.search.type.resourcepack": {
+    "defaultMessage": "Ressourcenpakete"
+  },
+  "popup.search.type.server": {
+    "defaultMessage": "Server"
+  },
+  "popup.search.type.shader": {
+    "defaultMessage": "Shader"
+  },
+  "popup.signIn.button": {
+    "defaultMessage": "Anmelden"
+  },
+  "popup.signIn.title": {
+    "defaultMessage": "Bei Modrinth anmelden"
+  },
   "popup.tab.projects": {
     "defaultMessage": "Projekte"
+  },
+  "quickActionProfiles.defaultName": {
+    "defaultMessage": "Profil"
+  },
+  "quickActionProfiles.delete": {
+    "defaultMessage": "Profil löschen"
+  },
+  "quickActionProfiles.limit": {
+    "defaultMessage": "Du kannst bis zu {max} Profile speichern."
+  },
+  "quickActionProfiles.name": {
+    "defaultMessage": "Name"
+  },
+  "quickActionProfiles.none": {
+    "defaultMessage": "Keins"
+  },
+  "quickActionProfiles.profile": {
+    "defaultMessage": "Profil"
+  },
+  "quickActionProfiles.save": {
+    "defaultMessage": "Als Profil speichern"
+  },
+  "quickActionProfiles.saveAsNew": {
+    "defaultMessage": "Als neues Profil speichern"
   },
   "search.any": {
     "defaultMessage": "Beliebig"

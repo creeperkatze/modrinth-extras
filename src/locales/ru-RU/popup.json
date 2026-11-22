@@ -1,19 +1,4 @@
 {
-  "feature.accentColor.color": {
-    "defaultMessage": "Цвет"
-  },
-  "feature.accentColor.description": {
-    "defaultMessage": "Замените зелёный цвет Modrinth другим акцентным цветом."
-  },
-  "feature.accentColor.lowContrast": {
-    "defaultMessage": "Этот цвет плохо виден в вашей теме Modrinth."
-  },
-  "feature.accentColor.title": {
-    "defaultMessage": "Акцентный цвет"
-  },
-  "feature.accentColor.unreadableButtons": {
-    "defaultMessage": "Текст на кнопках этого цвета плохо читается в вашей теме Modrinth."
-  },
   "feature.activitySparkline.days": {
     "defaultMessage": "{count, plural, one {# день} few {# дня} other {# дней}}"
   },
@@ -36,10 +21,16 @@
     "defaultMessage": "Пример уведомления"
   },
   "feature.browserNotifications.sendTest": {
-    "defaultMessage": "Отправить тестовое уведомление"
+    "defaultMessage": "Проверить"
   },
   "feature.browserNotifications.title": {
     "defaultMessage": "Браузерные уведомления"
+  },
+  "feature.collectionDownload.description": {
+    "defaultMessage": "Скачать коллекцию как сборку или архив, с каждым проектом, поддерживающим нужную игру и загрузчик."
+  },
+  "feature.collectionDownload.title": {
+    "defaultMessage": "Скачивание коллекции"
   },
   "feature.compareVersions.description": {
     "defaultMessage": "Сравнивать декомпилированный код версий в modsrc — на страницах версий, в списке версий и в списке изменений."
@@ -126,7 +117,7 @@
     "defaultMessage": "Скачивайте, подписывайтесь и сохраняйте проекты прямо из карточек проектов."
   },
   "feature.quickActions.downloadDependencies": {
-    "defaultMessage": "Скачивание зависимостей"
+    "defaultMessage": "Скачать зависимости"
   },
   "feature.quickActions.gameVersion": {
     "defaultMessage": "Версия игры"
@@ -139,6 +130,9 @@
   },
   "feature.quickActions.shaderLoader": {
     "defaultMessage": "Загрузчик шейдеров"
+  },
+  "feature.quickActions.title": {
+    "defaultMessage": "Быстрые действия"
   },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K или / для поиска в стиле командной палитры с фильтрами по загрузчикам, версиям, категориям и типам."
@@ -170,6 +164,27 @@
   "feature.telemetry.title": {
     "defaultMessage": "Телеметрия"
   },
+  "feature.themes.accentColor": {
+    "defaultMessage": "Акцентный цвет"
+  },
+  "feature.themes.accentLowContrast": {
+    "defaultMessage": "Этот цвет плохо виден в вашей теме."
+  },
+  "feature.themes.accentUnreadableButtons": {
+    "defaultMessage": "Текст на кнопках этого цвета плохо читается в вашей теме."
+  },
+  "feature.themes.customAccent": {
+    "defaultMessage": "Свой акцентным цвет"
+  },
+  "feature.themes.description": {
+    "defaultMessage": "Больше тем для Modrinth, плюсом ваши собственные."
+  },
+  "feature.themes.presets": {
+    "defaultMessage": "Включать готовые темы"
+  },
+  "feature.themes.title": {
+    "defaultMessage": "Темы"
+  },
   "feature.toolsSidebar.decompiler": {
     "defaultMessage": "Декомпилятор"
   },
@@ -191,8 +206,68 @@
   "feature.translateDescription.title": {
     "defaultMessage": "Перевод описания"
   },
+  "popup.creator.analytics": {
+    "defaultMessage": "Аналитика"
+  },
+  "popup.creator.availableNow": {
+    "defaultMessage": "Уже доступно"
+  },
+  "popup.creator.balance": {
+    "defaultMessage": "Баланс"
+  },
+  "popup.creator.createProject": {
+    "defaultMessage": "Создать проект"
+  },
+  "popup.creator.downloads": {
+    "defaultMessage": "Скачивания"
+  },
+  "popup.creator.estimated": {
+    "defaultMessage": "Ожидается {date}"
+  },
+  "popup.creator.failed": {
+    "defaultMessage": "Не удалось загрузить аналитику"
+  },
+  "popup.creator.fullAnalytics": {
+    "defaultMessage": "Открыть полную аналитику"
+  },
+  "popup.creator.fullRevenue": {
+    "defaultMessage": "Открыть полный доход"
+  },
+  "popup.creator.loading": {
+    "defaultMessage": "Загрузка проектов..."
+  },
+  "popup.creator.noProjectsDescription": {
+    "defaultMessage": "После публикации проекта здесь отобразятся его просмотры, скачивания и доход."
+  },
+  "popup.creator.noProjectsTitle": {
+    "defaultMessage": "Проектов пока нет"
+  },
+  "popup.creator.previousPeriod": {
+    "defaultMessage": "Прошлый период"
+  },
+  "popup.creator.processing": {
+    "defaultMessage": "В обработке"
+  },
+  "popup.creator.rangeDays": {
+    "defaultMessage": "{days, plural, one {# день} few {# дня} other {# дней}}"
+  },
+  "popup.creator.revenue": {
+    "defaultMessage": "Доход"
+  },
+  "popup.creator.signIn": {
+    "defaultMessage": "Войдите, чтобы увидеть аналитику и доход."
+  },
+  "popup.creator.total": {
+    "defaultMessage": "Всего"
+  },
+  "popup.creator.views": {
+    "defaultMessage": "Просмотры"
+  },
   "popup.discordPrompt.dismiss": {
     "defaultMessage": "Закрыть"
+  },
+  "popup.discordPrompt.join": {
+    "defaultMessage": "Присоединиться к серверу"
   },
   "popup.discordPrompt.message": {
     "defaultMessage": "Обращайтесь за помощью, делитесь мнением и следите за обновлениями в Discord."
@@ -202,6 +277,9 @@
   },
   "popup.donatePrompt.dismiss": {
     "defaultMessage": "Закрыть"
+  },
+  "popup.donatePrompt.donate": {
+    "defaultMessage": "Поддержать"
   },
   "popup.donatePrompt.message": {
     "defaultMessage": "Modrinth Extras всегда будет бесплатным, открытым и без рекламы. Если он пригодился, поддержите разработку копеечкой."
@@ -224,6 +302,12 @@
   "popup.footer.updateAvailable": {
     "defaultMessage": "Обновить"
   },
+  "popup.found.looking": {
+    "defaultMessage": "Поиск проекта на Modrinth..."
+  },
+  "popup.found.title": {
+    "defaultMessage": "Также на Modrinth"
+  },
   "popup.group.extension": {
     "defaultMessage": "Браузер"
   },
@@ -233,8 +317,212 @@
   "popup.group.sidebar": {
     "defaultMessage": "Панель"
   },
+  "popup.introductionTour.creator.description": {
+    "defaultMessage": "Следите за просмотрами, скачивания и доходом ваших проектов."
+  },
+  "popup.introductionTour.creator.title": {
+    "defaultMessage": "Автор"
+  },
+  "popup.introductionTour.notifications.description": {
+    "defaultMessage": "Читайте уведомления, и принимайте приглашения прямо отсюда."
+  },
+  "popup.introductionTour.notifications.title": {
+    "defaultMessage": "Уведомления"
+  },
+  "popup.introductionTour.progress": {
+    "defaultMessage": "{current}/{total}"
+  },
+  "popup.introductionTour.search.description": {
+    "defaultMessage": "Находите моды, сборки, серверы и многое другое, не открывая Modrinth."
+  },
+  "popup.introductionTour.search.title": {
+    "defaultMessage": "Поиск"
+  },
+  "popup.introductionTour.settings.description": {
+    "defaultMessage": "Настройте всё, что предлагает Modrinth Extras."
+  },
+  "popup.introductionTour.settings.title": {
+    "defaultMessage": "Настройки"
+  },
+  "popup.introductionTour.settings.updatedDescription": {
+    "defaultMessage": "Настройки переместились сюда. Здесь настраивается всё, что предлагает Modrinth Extras."
+  },
+  "popup.introductionTour.skip": {
+    "defaultMessage": "Пропустить"
+  },
+  "popup.nav.back": {
+    "defaultMessage": "Назад"
+  },
+  "popup.nav.creator": {
+    "defaultMessage": "Автор"
+  },
+  "popup.nav.notifications": {
+    "defaultMessage": "Уведомления"
+  },
+  "popup.nav.search": {
+    "defaultMessage": "Поиск"
+  },
+  "popup.nav.settings": {
+    "defaultMessage": "Настройки"
+  },
+  "popup.notifications.emptyDescription": {
+    "defaultMessage": "Обновления проектов, приглашения и сообщения от модераторов появляются здесь."
+  },
+  "popup.notifications.emptyTitle": {
+    "defaultMessage": "Нет непрочитанных уведомлений"
+  },
+  "popup.notifications.failed": {
+    "defaultMessage": "Не удалось загрузить уведомления"
+  },
+  "popup.notifications.loading": {
+    "defaultMessage": "Загрузка уведомлений..."
+  },
+  "popup.notifications.markAllAsRead": {
+    "defaultMessage": "Отметить всё как прочитанное"
+  },
+  "popup.notifications.signIn": {
+    "defaultMessage": "Войдите, чтобы посмотреть уведомления здесь."
+  },
+  "popup.notifications.unread": {
+    "defaultMessage": "Непрочитано"
+  },
+  "popup.notifications.viewAll": {
+    "defaultMessage": "Посмотреть всё"
+  },
+  "popup.notifications.viewHistory": {
+    "defaultMessage": "Посмотреть историю"
+  },
+  "popup.project.by": {
+    "defaultMessage": "от {author}"
+  },
+  "popup.project.environment.client": {
+    "defaultMessage": "Клиент"
+  },
+  "popup.project.environment.clientAndServer": {
+    "defaultMessage": "Клиент и сервер"
+  },
+  "popup.project.environment.clientOrServer": {
+    "defaultMessage": "Клиент или сервер"
+  },
+  "popup.project.environment.dedicatedServer": {
+    "defaultMessage": "Выделенный сервер"
+  },
+  "popup.project.environment.server": {
+    "defaultMessage": "Сервер"
+  },
+  "popup.project.environment.singleplayer": {
+    "defaultMessage": "Одиночная игра"
+  },
+  "popup.resetSettings.button": {
+    "defaultMessage": "Сбросить"
+  },
+  "popup.resetSettings.cancel": {
+    "defaultMessage": "Отмена"
+  },
+  "popup.resetSettings.confirmMessage": {
+    "defaultMessage": "Все настройки будут сброшены, включая язык и боковую панель, а ваши темы будут удалены. Это действие необратимо."
+  },
+  "popup.resetSettings.confirmTitle": {
+    "defaultMessage": "Сбросить все настройки?"
+  },
+  "popup.resetSettings.description": {
+    "defaultMessage": "Вернуть все настройки к стандартным значениям и удалить свои темы."
+  },
+  "popup.resetSettings.title": {
+    "defaultMessage": "Сбросить все настройки"
+  },
+  "popup.search.clear": {
+    "defaultMessage": "Очистить поиск"
+  },
+  "popup.search.failedHeading": {
+    "defaultMessage": "Ошибка поиска"
+  },
+  "popup.search.noResults": {
+    "defaultMessage": "Проекты не найдены"
+  },
+  "popup.search.placeholder": {
+    "defaultMessage": "Поиск в Modrinth"
+  },
+  "popup.search.placeholder.datapack": {
+    "defaultMessage": "Поиск наборов данные"
+  },
+  "popup.search.placeholder.mod": {
+    "defaultMessage": "Поиск модов"
+  },
+  "popup.search.placeholder.modpack": {
+    "defaultMessage": "Поиск сборок"
+  },
+  "popup.search.placeholder.plugin": {
+    "defaultMessage": "Поиск плагинов"
+  },
+  "popup.search.placeholder.resourcepack": {
+    "defaultMessage": "Поиск наборов ресурсов"
+  },
+  "popup.search.placeholder.server": {
+    "defaultMessage": "Поиск серверов"
+  },
+  "popup.search.placeholder.shader": {
+    "defaultMessage": "Поиск шейдеров"
+  },
+  "popup.search.searching": {
+    "defaultMessage": "Поиск..."
+  },
+  "popup.search.type.all": {
+    "defaultMessage": "Все"
+  },
+  "popup.search.type.datapack": {
+    "defaultMessage": "Наборы данных"
+  },
+  "popup.search.type.mod": {
+    "defaultMessage": "Моды"
+  },
+  "popup.search.type.modpack": {
+    "defaultMessage": "Сборки"
+  },
+  "popup.search.type.plugin": {
+    "defaultMessage": "Плагины"
+  },
+  "popup.search.type.resourcepack": {
+    "defaultMessage": "Наборы ресурсов"
+  },
+  "popup.search.type.server": {
+    "defaultMessage": "Серверы"
+  },
+  "popup.search.type.shader": {
+    "defaultMessage": "Шейдеры"
+  },
+  "popup.signIn.button": {
+    "defaultMessage": "Войти"
+  },
+  "popup.signIn.title": {
+    "defaultMessage": "Войдите в Modrinth"
+  },
   "popup.tab.projects": {
     "defaultMessage": "Проекты"
+  },
+  "quickActionProfiles.defaultName": {
+    "defaultMessage": "Профиль"
+  },
+  "quickActionProfiles.delete": {
+    "defaultMessage": "Удалить профиль"
+  },
+  "quickActionProfiles.limit": {
+    "defaultMessage": "Можно сохранить до {max} профилей."
+  },
+  "quickActionProfiles.name": {
+    "defaultMessage": "Название"
+  },
+  "quickActionProfiles.none": {
+    "defaultMessage": "Отсутствует"
+  },
+  "quickActionProfiles.profile": {
+    "defaultMessage": "Профиль"
+  },
+  "quickActionProfiles.save": {
+    "defaultMessage": "Сохранить как профиль"
+  },
+  "quickActionProfiles.saveAsNew": {
+    "defaultMessage": "Сохранить как новый профиль"
   },
   "search.any": {
     "defaultMessage": "Неважно"

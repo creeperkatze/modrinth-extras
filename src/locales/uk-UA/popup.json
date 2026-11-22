@@ -1,19 +1,4 @@
 {
-  "feature.accentColor.color": {
-    "defaultMessage": "Колір"
-  },
-  "feature.accentColor.description": {
-    "defaultMessage": "Замініть зелений колір Modrinth на власний акцентний колір."
-  },
-  "feature.accentColor.lowContrast": {
-    "defaultMessage": "Цей колір важко розрізняється на поточній темі Modrinth."
-  },
-  "feature.accentColor.title": {
-    "defaultMessage": "Акцентний колір"
-  },
-  "feature.accentColor.unreadableButtons": {
-    "defaultMessage": "Текст на кнопках із цим кольором важко читається на поточній темі Modrinth."
-  },
   "feature.activitySparkline.days": {
     "defaultMessage": "{count, plural, one {# день} few {# дні} many {# днів} other {# днів}}"
   },
@@ -34,9 +19,6 @@
   },
   "feature.browserNotifications.exampleTitle": {
     "defaultMessage": "Приклад повідомлення"
-  },
-  "feature.browserNotifications.sendTest": {
-    "defaultMessage": "Надіслати тестове повідомлення"
   },
   "feature.browserNotifications.title": {
     "defaultMessage": "Повідомлення у браузері"
@@ -121,24 +103,6 @@
   },
   "feature.platformsSidebar.title": {
     "defaultMessage": "Інші платформи"
-  },
-  "feature.quickActions.description": {
-    "defaultMessage": "Завантажуйте, підписуйтесь та зберігайте проєкти прямо з їхніх карток."
-  },
-  "feature.quickActions.downloadDependencies": {
-    "defaultMessage": "Завантажити залежності"
-  },
-  "feature.quickActions.gameVersion": {
-    "defaultMessage": "Версія гри"
-  },
-  "feature.quickActions.modLoader": {
-    "defaultMessage": "Завантажувач модів"
-  },
-  "feature.quickActions.pluginLoader": {
-    "defaultMessage": "Завантажувач плагінів"
-  },
-  "feature.quickActions.shaderLoader": {
-    "defaultMessage": "Завантажувач шейдерів"
   },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K або / для пошуку у стилі палітри команд із фільтрами для завантажувачів, версій, категорій та типів."

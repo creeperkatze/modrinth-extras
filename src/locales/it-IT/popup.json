@@ -26,15 +26,6 @@
   "feature.notifications.title": {
     "defaultMessage": "Notifiche"
   },
-  "feature.quickActions.description": {
-    "defaultMessage": "Scarica, segui e salva i progetti direttamente dalle loro schede."
-  },
-  "feature.quickActions.modLoader": {
-    "defaultMessage": "Caricatore di mod"
-  },
-  "feature.quickActions.pluginLoader": {
-    "defaultMessage": "Caricatore dei plugin"
-  },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K o / per una ricerca in stile palette dei comandi con filtri per caricatori, versioni, categorie e tipi."
   },

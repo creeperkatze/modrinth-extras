@@ -1,10 +1,4 @@
 {
-  "feature.accentColor.color": {
-    "defaultMessage": "Couleur"
-  },
-  "feature.accentColor.title": {
-    "defaultMessage": "Couleur d'accentuation"
-  },
   "feature.activitySparkline.description": {
     "defaultMessage": "Graphique d'activité de publications sur les pages de projet."
   },
@@ -37,15 +31,6 @@
   },
   "feature.notifications.title": {
     "defaultMessage": "Notifications"
-  },
-  "feature.quickActions.description": {
-    "defaultMessage": "Télécharge, suis et enregistre des projets directement depuis leurs fiches de projet."
-  },
-  "feature.quickActions.modLoader": {
-    "defaultMessage": "Mod loader"
-  },
-  "feature.quickActions.pluginLoader": {
-    "defaultMessage": "Plugin loader"
   },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K ou / pour une recherche de type palette de commandes avec des filtres par balises pour les loaders, les versions, les catégories et les types."

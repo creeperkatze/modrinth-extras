@@ -398,42 +398,6 @@
   "projectReviews.tab": {
     "defaultMessage": "Відгуки"
   },
-  "quickActions.checkingDownload": {
-    "defaultMessage": "Перевірка доступної версії..."
-  },
-  "quickActions.copied": {
-    "defaultMessage": "Скопійовано!"
-  },
-  "quickActions.copyLink": {
-    "defaultMessage": "Скопіювати посилання"
-  },
-  "quickActions.download": {
-    "defaultMessage": "Завантажити"
-  },
-  "quickActions.downloadUnavailable": {
-    "defaultMessage": "{loader, select, none {Версія недоступна для {version}} other {Версія недоступна для {loader} {version}}}"
-  },
-  "quickActions.follow": {
-    "defaultMessage": "Підписатися"
-  },
-  "quickActions.newCollection": {
-    "defaultMessage": "Створити нову колекцію"
-  },
-  "quickActions.noCollections": {
-    "defaultMessage": "Колекцій не знайдено."
-  },
-  "quickActions.save": {
-    "defaultMessage": "Зберегти"
-  },
-  "quickActions.saved": {
-    "defaultMessage": "Збережено"
-  },
-  "quickActions.searchPlaceholder": {
-    "defaultMessage": "Пошук..."
-  },
-  "quickActions.unfollow": {
-    "defaultMessage": "Відписатися"
-  },
   "quickSearch.clearRecent": {
     "defaultMessage": "Очистити останнє"
   },

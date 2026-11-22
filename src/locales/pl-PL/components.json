@@ -299,36 +299,6 @@
   "projectReviews.tab": {
     "defaultMessage": "Recenzje"
   },
-  "quickActions.checkingDownload": {
-    "defaultMessage": "Sprawdzanie dostępnej wersji..."
-  },
-  "quickActions.copied": {
-    "defaultMessage": "Skopiowano!"
-  },
-  "quickActions.copyLink": {
-    "defaultMessage": "Skopiuj link"
-  },
-  "quickActions.download": {
-    "defaultMessage": "Pobierz"
-  },
-  "quickActions.newCollection": {
-    "defaultMessage": "Utwórz nową kolekcję"
-  },
-  "quickActions.noCollections": {
-    "defaultMessage": "Nie znaleziono żadnych kolekcji."
-  },
-  "quickActions.save": {
-    "defaultMessage": "Zapisz"
-  },
-  "quickActions.saved": {
-    "defaultMessage": "Zapisano"
-  },
-  "quickActions.searchPlaceholder": {
-    "defaultMessage": "Szukaj..."
-  },
-  "quickActions.unfollow": {
-    "defaultMessage": "Przestań obserwować"
-  },
   "quickSearch.clearRecent": {
     "defaultMessage": "Wyczyść ostatnie"
   },

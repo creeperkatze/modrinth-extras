@@ -23,36 +23,6 @@
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "Xem lịch sử"
   },
-  "quickActions.copied": {
-    "defaultMessage": "Đã sao chép!"
-  },
-  "quickActions.copyLink": {
-    "defaultMessage": "Sao chép liên kết"
-  },
-  "quickActions.download": {
-    "defaultMessage": "Tải xuống"
-  },
-  "quickActions.follow": {
-    "defaultMessage": "Theo dõi"
-  },
-  "quickActions.newCollection": {
-    "defaultMessage": "Tạo bộ sưu tập mới"
-  },
-  "quickActions.noCollections": {
-    "defaultMessage": "Không tìm thấy bộ sưu tập."
-  },
-  "quickActions.save": {
-    "defaultMessage": "Lưu"
-  },
-  "quickActions.saved": {
-    "defaultMessage": "Đã lưu"
-  },
-  "quickActions.searchPlaceholder": {
-    "defaultMessage": "Tìm kiếm..."
-  },
-  "quickActions.unfollow": {
-    "defaultMessage": "Bỏ theo dõi"
-  },
   "quickSearch.examples": {
     "defaultMessage": "Ví dụ"
   },

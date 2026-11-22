@@ -1,16 +1,4 @@
 {
-  "feature.accentColor.color": {
-    "defaultMessage": "カラー"
-  },
-  "feature.accentColor.description": {
-    "defaultMessage": "Modrinthの緑をカスタムのアクセントカラーで変更します。"
-  },
-  "feature.accentColor.title": {
-    "defaultMessage": "アクセントカラー"
-  },
-  "feature.browserNotifications.sendTest": {
-    "defaultMessage": "テスト通知を送る"
-  },
   "feature.browserNotifications.title": {
     "defaultMessage": "ブラウザーの通知"
   },
@@ -28,9 +16,6 @@
   },
   "feature.platformsSidebar.description": {
     "defaultMessage": "CurseForge、Hangar、とSpigotMCで同じのプロジェクトや開発者を見つけます。"
-  },
-  "feature.quickActions.gameVersion": {
-    "defaultMessage": "ゲームバージョン"
   },
   "feature.telemetry.disabledTooltip": {
     "defaultMessage": "Firefoxのデータ収集設定で制御しています"
