@@ -1,3 +1,4 @@
+import { storage } from '@wxt-dev/storage'
 import type { ReviewSort } from 'moddex-js'
 import { browser } from 'wxt/browser'
 
@@ -30,6 +31,7 @@ import {
 	type SerializedError,
 	trackExtensionStarted,
 } from '../core/telemetry'
+import { refreshAccount } from '../features/account/account'
 import type { Notification } from '../features/notifications/notifications'
 import type { MatchableProject } from '../features/platforms/matching'
 import type { PlatformPage } from '../features/platforms/pages'
@@ -200,11 +202,26 @@ export default defineBackground(() => {
 		}
 	})
 
+	// The account only changes when the user signs in or out, so polling doesn't fetch it
+	async function refreshAccountAndBadge() {
+		try {
+			await refreshAccount()
+		} catch (err) {
+			console.error('[Modrinth Extras] Failed to refresh the signed in account:', err)
+		}
+		await updateBadge()
+	}
+
 	browser.runtime.onInstalled.addListener((details) => {
+		void refreshAccountAndBadge()
 		if (details.reason === 'install') {
 			void analytics.track('extension_installed')
 		} else if (details.reason === 'update') {
 			void analytics.track('extension_updated', { from_extension_version: details.previousVersion })
+			// Replaced by the shared account
+			storage
+				.removeItem('local:popupAccount')
+				.catch((err) => console.error('[Modrinth Extras] Failed to remove the old account:', err))
 			markExtensionUpdated().catch((err) =>
 				console.error('[Modrinth Extras] Failed to save the extension update:', err),
 			)
@@ -215,13 +232,13 @@ export default defineBackground(() => {
 	browser.runtime.onStartup.addListener(() => {
 		void trackExtensionStarted()
 		showCachedBadge()
-		updateBadge()
+		void refreshAccountAndBadge()
 	})
 
 	// React instantly when the user signs in or out
 	browser.cookies.onChanged.addListener((changeInfo) => {
 		if (changeInfo.cookie.name === 'auth-token' && changeInfo.cookie.domain.includes('modrinth')) {
-			updateBadge()
+			void refreshAccountAndBadge()
 		}
 	})
 

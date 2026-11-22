@@ -1,8 +1,8 @@
 import { storage } from '@wxt-dev/storage'
 import { browser } from 'wxt/browser'
 
-import { getBackgroundAuthToken, modrinthClient } from '../api/client'
 import { getSettings } from '../core/settings'
+import { accountItem } from '../features/account/account'
 import {
 	fetchNotifications,
 	groupNotifications,
@@ -10,21 +10,36 @@ import {
 } from '../features/notifications/notifications'
 import { sendBrowserNotifications } from './notifications'
 
-export const notificationsItem = storage.defineItem<Notification[] | null>('local:notifications', {
-	defaultValue: null,
-})
-export const userIdItem = storage.defineItem<string | null>('local:userId', { defaultValue: null })
+interface CachedNotifications {
+	// Another account's notifications can't serve as the baseline
+	userId: string
+	notifications: Notification[]
+}
+
+const OLD_USER_ID_KEY = 'local:userId'
+
+export const notificationsItem = storage.defineItem<CachedNotifications | null>(
+	'local:notifications',
+	{
+		defaultValue: null,
+		version: 2,
+		migrations: {
+			// The owner used to be saved under its own key
+			2: async (notifications: Notification[] | null) => {
+				const userId = await storage.getItem<string>(OLD_USER_ID_KEY)
+				await storage.removeItem(OLD_USER_ID_KEY)
+				return userId && Array.isArray(notifications) ? { userId, notifications } : null
+			},
+		},
+	},
+)
 export const lastUpdatedItem = storage.defineItem<number | null>('local:lastUpdated', {
 	defaultValue: null,
 })
 
-// Another account's notifications can't serve as the baseline
 export async function getPreviousNotifications(userId: string): Promise<Notification[] | null> {
-	const [prevUserId, prevNotifs] = await Promise.all([
-		userIdItem.getValue(),
-		notificationsItem.getValue(),
-	])
-	return prevUserId === userId && Array.isArray(prevNotifs) ? prevNotifs : null
+	const cached = await notificationsItem.getValue()
+	return cached?.userId === userId ? cached.notifications : null
 }
 
 export async function setBadge(unread: number) {
@@ -35,12 +50,12 @@ export async function setBadge(unread: number) {
 }
 
 export async function showCachedBadge() {
-	const [{ notificationBadge }, notifications] = await Promise.all([
+	const [{ notificationBadge }, cached] = await Promise.all([
 		getSettings(),
 		notificationsItem.getValue(),
 	])
-	if (!notificationBadge.enabled || !Array.isArray(notifications)) return
-	const unread = groupNotifications((notifications as Notification[]).filter((n) => !n.read)).length
+	if (!notificationBadge.enabled || !cached) return
+	const unread = groupNotifications(cached.notifications.filter((n) => !n.read)).length
 	console.log(`[Modrinth Extras] Badge: Restored cached: ${unread} unread`)
 	await setBadge(unread)
 }
@@ -48,7 +63,7 @@ export async function showCachedBadge() {
 export async function applyNotifications(
 	newNotifs: Notification[],
 	prevNotifs: Notification[] | null,
-	userId?: string,
+	userId: string,
 ) {
 	const { notificationBadge } = await getSettings()
 	const unread = groupNotifications(newNotifs.filter((n) => !n.read)).length
@@ -60,37 +75,29 @@ export async function applyNotifications(
 	}
 	await sendBrowserNotifications(newNotifs, prevNotifs)
 	await Promise.all([
-		...(userId ? [userIdItem.setValue(userId)] : []),
-		notificationsItem.setValue(newNotifs),
+		notificationsItem.setValue({ userId, notifications: newNotifs }),
 		lastUpdatedItem.setValue(Date.now()),
 	])
 }
 
 export async function updateBadge() {
 	try {
+		const account = await accountItem.getValue()
 		const { notificationBadge } = await getSettings()
 		if (!notificationBadge.enabled) {
 			await setBadge(0)
 			return
 		}
 
-		const token = await getBackgroundAuthToken()
-		if (!token) {
-			console.log('[Modrinth Extras] Badge: No auth token, clearing badge')
+		if (!account) {
+			console.log('[Modrinth Extras] Badge: Signed out, clearing badge')
 			await setBadge(0)
-			await Promise.all([
-				userIdItem.setValue(null),
-				notificationsItem.setValue(null),
-				lastUpdatedItem.setValue(Date.now()),
-			])
+			await Promise.all([notificationsItem.setValue(null), lastUpdatedItem.setValue(Date.now())])
 			return
 		}
 
-		const user = await modrinthClient.labrinth.users_v3.getAuthenticated()
-		if (!user?.id) throw new Error('Failed to fetch user')
-
-		const notifs = await fetchNotifications(user.id)
-		await applyNotifications(notifs, await getPreviousNotifications(user.id), user.id)
+		const notifs = await fetchNotifications(account.id)
+		await applyNotifications(notifs, await getPreviousNotifications(account.id), account.id)
 	} catch (err) {
 		console.error('[Modrinth Extras] Badge: Background update failed:', err)
 		await setBadge(0)

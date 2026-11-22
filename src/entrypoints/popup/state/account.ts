@@ -1,45 +1,20 @@
-import { ModrinthApiError } from '@modrinth/api-client'
-import { storage } from '@wxt-dev/storage'
 import { ref } from 'vue'
 
-import { getBackgroundAuthToken, modrinthClient } from '../../../api/client'
+import { type Account, accountItem } from '../../../features/account/account'
 
-export interface Account {
-	id: string
-	username: string
-	avatarUrl: string | null
-}
-
+// Kept up to date by the background, the popup only shows it
 export const account = ref<Account | null>(null)
 export const accountLoaded = ref(false)
 
-const accountItem = storage.defineItem<Account | null>('local:popupAccount', {
-	defaultValue: null,
+accountItem.watch((value) => {
+	account.value = value
 })
 
 export async function loadAccount() {
 	try {
-		const token = await getBackgroundAuthToken()
-		if (!token) {
-			account.value = null
-			await accountItem.setValue(null)
-			return
-		}
-
-		// The account from last time is shown while it is checked again
 		account.value = await accountItem.getValue()
-		if (account.value) accountLoaded.value = true
-
-		const user = await modrinthClient.labrinth.users_v3.getAuthenticated()
-		account.value = { id: user.id, username: user.username, avatarUrl: user.avatar_url ?? null }
-		await accountItem.setValue(account.value)
 	} catch (err) {
-		if (err instanceof ModrinthApiError && err.statusCode === 401) {
-			account.value = null
-			await accountItem.setValue(null)
-		} else {
-			console.error('[Modrinth Extras] Failed to load the signed in account:', err)
-		}
+		console.error('[Modrinth Extras] Failed to load the signed in account:', err)
 	} finally {
 		accountLoaded.value = true
 	}
