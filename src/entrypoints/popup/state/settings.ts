@@ -120,10 +120,14 @@ export function renameQuickActionProfile(id: string, name: string) {
 	scheduleSave()
 }
 
+// Deleting the picked profile picks its neighbour, so one stays picked while any are left
 export function deleteQuickActionProfile(id: string) {
-	profiles.items = profiles.items.filter((profile) => profile.id !== id)
-	if (profiles.selected === id) profiles.selected = ''
-	scheduleSave()
+	const index = profiles.items.findIndex((profile) => profile.id === id)
+	if (index === -1) return
+	profiles.items.splice(index, 1)
+	if (profiles.selected !== id) return scheduleSave()
+	const next = profiles.items[Math.min(index, profiles.items.length - 1)]
+	selectQuickActionProfile(next?.id ?? '')
 }
 
 window.addEventListener('pagehide', flushPendingSave)
