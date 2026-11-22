@@ -34,6 +34,8 @@
 - Fixed highlighted backgrounds being fainter than Modrinth's own with a custom accent color in dark mode.
 - Fixed pages with hundreds of projects, like large collections, lagging and failing to load because of quick actions.
 
+A huge thank you to all the translators on [Crowdin](https://crowdin.com/project/modrinth-extras), who keep up with every new feature in more and more languages <3
+
 ## [1.9.1] - 2026-11-12
 
 ### Fixed
