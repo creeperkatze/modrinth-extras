@@ -115,17 +115,80 @@ interface DynamicInjectionConfig {
 	attach: (target: HTMLElement) => HTMLElement | null
 	createApp: (target: HTMLElement) => App
 	onSchedule?: () => void
+	// Only mounts on targets near the viewport, for pages that can list hundreds of them
+	lazy?: boolean
 }
 
 export function createDynamicInjection(config: DynamicInjectionConfig) {
 	const injected = new Map<Element, { container: HTMLElement; app: App }>()
+	const nearViewport = new Set<Element>()
+	const observed = new Set<Element>()
+	const observer = config.lazy
+		? new IntersectionObserver(onIntersect, { rootMargin: '100% 0px' })
+		: null
 
-	function unmount(): void {
-		for (const { container, app } of injected.values()) {
+	function unmountTarget(target: Element): void {
+		const entry = injected.get(target)
+		if (!entry) return
+		entry.app.unmount()
+		entry.container.parentElement?.removeChild(entry.container)
+		injected.delete(target)
+	}
+
+	function mountTarget(target: HTMLElement): void {
+		if (injected.has(target)) return
+		const container = config.attach(target)
+		if (!container) return
+		const app = config.createApp(target)
+		try {
+			app.mount(container)
+			injected.set(target, { container, app })
+		} catch (err) {
+			console.error(`[Modrinth Extras] Failed to mount injection for target:`, err)
 			app.unmount()
 			container.parentElement?.removeChild(container)
 		}
-		injected.clear()
+	}
+
+	// Unmounting a card far off screen also cancels its pending requests
+	function onIntersect(entries: IntersectionObserverEntry[]): void {
+		for (const entry of entries) {
+			const target = entry.target as HTMLElement
+			if (entry.isIntersecting) {
+				nearViewport.add(target)
+				if (pageState.hydrated && config.isEnabled()) mountTarget(target)
+			} else {
+				nearViewport.delete(target)
+				unmountTarget(target)
+			}
+		}
+	}
+
+	function forget(target: Element): void {
+		observer?.unobserve(target)
+		observed.delete(target)
+		nearViewport.delete(target)
+	}
+
+	function unmount(): void {
+		for (const target of injected.keys()) unmountTarget(target)
+		observer?.disconnect()
+		observed.clear()
+		nearViewport.clear()
+	}
+
+	function checkDetached(): boolean {
+		let any = false
+		for (const [target, { container }] of injected) {
+			if (!document.contains(target) || !document.contains(container)) {
+				unmountTarget(target)
+				any = true
+			}
+		}
+		for (const target of observed) {
+			if (!document.contains(target)) forget(target)
+		}
+		return any
 	}
 
 	function schedule(): void {
@@ -135,42 +198,20 @@ export function createDynamicInjection(config: DynamicInjectionConfig) {
 			return
 		}
 		config.onSchedule?.()
-		// Remove stale entries whose target or injected container left the DOM
-		for (const [target, { container, app }] of injected) {
-			if (!document.contains(target) || !document.contains(container)) {
-				app.unmount()
-				container.parentElement?.removeChild(container)
-				injected.delete(target)
-			}
-		}
-		// Inject into any new targets
+		checkDetached()
 		for (const target of document.querySelectorAll<HTMLElement>(config.targets)) {
-			if (injected.has(target)) continue
-			const container = config.attach(target)
-			if (!container) continue
-			const app = config.createApp(target)
-			try {
-				app.mount(container)
-				injected.set(target, { container, app })
-			} catch (err) {
-				console.error(`[Modrinth Extras] Failed to mount injection for target:`, err)
-				app.unmount()
-				container.parentElement?.removeChild(container)
+			if (!observer) {
+				mountTarget(target)
+				continue
+			}
+			if (!observed.has(target)) {
+				observed.add(target)
+				observer.observe(target)
+			} else if (nearViewport.has(target)) {
+				// Retries targets whose attach failed while they were still rendering
+				mountTarget(target)
 			}
 		}
-	}
-
-	function checkDetached(): boolean {
-		let any = false
-		for (const [target, { container, app }] of injected) {
-			if (!document.contains(target) || !document.contains(container)) {
-				app.unmount()
-				container.parentElement?.removeChild(container)
-				injected.delete(target)
-				any = true
-			}
-		}
-		return any
 	}
 
 	return { unmount, schedule, refresh: schedule, checkDetached, config }

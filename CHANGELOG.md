@@ -31,6 +31,7 @@
 
 - Fixed the text color of the buttons on the Discord and donate banners in the popup.
 - Fixed highlighted backgrounds being fainter than Modrinth's own with a custom accent color in dark mode.
+- Fixed pages with hundreds of projects, like large collections, lagging and failing to load because of quick actions.
 
 ## [1.9.1] - 2026-11-12
 

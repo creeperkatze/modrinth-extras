@@ -45,6 +45,7 @@ function attachQuickActions(card: HTMLElement): HTMLElement | null {
 export function searchInjections(settings: SettingsGetter) {
 	const quickActions = createDynamicInjection({
 		persistent: false,
+		lazy: true,
 		isEnabled: () => settings().projectCardActions.enabled,
 		targets: '.project-card-container',
 		onSchedule: () => initFollowState(),
