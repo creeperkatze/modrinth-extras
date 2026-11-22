@@ -1,4 +1,94 @@
 {
+  "collectionDownload.button": {
+    "defaultMessage": "İndir"
+  },
+  "collectionDownload.cancel": {
+    "defaultMessage": "İptal"
+  },
+  "collectionDownload.dependency": {
+    "defaultMessage": "Bağımlılık"
+  },
+  "collectionDownload.gameVersion": {
+    "defaultMessage": "Oyun sürümü"
+  },
+  "collectionDownload.incompatible": {
+    "defaultMessage": "Uyumlu değil"
+  },
+  "collectionDownload.loader": {
+    "defaultMessage": "Yükleyici"
+  },
+  "collectionDownload.mod": {
+    "defaultMessage": "Mod"
+  },
+  "collectionDownload.resourcepack": {
+    "defaultMessage": "Kaynak paketi"
+  },
+  "collectionDownload.zip": {
+    "defaultMessage": "Zip dosyası"
+  },
+  "curseforgeComments.author": {
+    "defaultMessage": "Yazar"
+  },
+  "curseforgeComments.empty": {
+    "defaultMessage": "Henüz yorum yok."
+  },
+  "curseforgeComments.pinned": {
+    "defaultMessage": "Sabitlenmiş"
+  },
+  "curseforgeComments.writeComment": {
+    "defaultMessage": "Bir yorum yaz"
+  },
+  "customTheme.blue": {
+    "defaultMessage": "Mavi"
+  },
+  "customTheme.cancel": {
+    "defaultMessage": "İptal"
+  },
+  "customTheme.colors": {
+    "defaultMessage": "Renkler"
+  },
+  "customTheme.dark": {
+    "defaultMessage": "Karanlık"
+  },
+  "customTheme.delete": {
+    "defaultMessage": "Sil"
+  },
+  "customTheme.light": {
+    "defaultMessage": "Aydınlık"
+  },
+  "customTheme.name": {
+    "defaultMessage": "İsim"
+  },
+  "customTheme.namePlaceholder": {
+    "defaultMessage": "Benim Temam"
+  },
+  "customTheme.orange": {
+    "defaultMessage": "Turuncu"
+  },
+  "customTheme.previewButton": {
+    "defaultMessage": "İndir"
+  },
+  "customTheme.previewDescription": {
+    "defaultMessage": "Temanız Modrinth'te böyle görünüyor."
+  },
+  "customTheme.previewTitle": {
+    "defaultMessage": "Örnek proje"
+  },
+  "customTheme.purple": {
+    "defaultMessage": "Mor"
+  },
+  "customTheme.red": {
+    "defaultMessage": "Kırmızı"
+  },
+  "customTheme.save": {
+    "defaultMessage": "Kaydet"
+  },
+  "customTheme.secondary": {
+    "defaultMessage": "İkincil metin"
+  },
+  "customTheme.text": {
+    "defaultMessage": "Metin"
+  },
   "dependencyExplorer.centerView": {
     "defaultMessage": "Merkez görünümü"
   },
@@ -149,6 +239,18 @@
   "moddexReviews.writeReview": {
     "defaultMessage": "Değerlendirme yaz"
   },
+  "modgradeSidebar.malware": {
+    "defaultMessage": "Kötü amaçlı yazılım bulundu"
+  },
+  "modgradeSidebar.notChecked": {
+    "defaultMessage": "Henüz kontrol edilmedi"
+  },
+  "modgradeSidebar.someFiles": {
+    "defaultMessage": "Yalnızca bazı dosyalar etkilendi"
+  },
+  "modgradeSidebar.warning": {
+    "defaultMessage": "Şüpheli kod bulundu"
+  },
   "modpacksSidebar.title": {
     "defaultMessage": "Mod paketleri"
   },
@@ -209,42 +311,6 @@
   "projectReviews.tab": {
     "defaultMessage": "Değerlendirmeler"
   },
-  "quickActions.checkingDownload": {
-    "defaultMessage": "Mevcut sürüm kontrol ediliyor..."
-  },
-  "quickActions.copied": {
-    "defaultMessage": "Kopyalandı!"
-  },
-  "quickActions.copyLink": {
-    "defaultMessage": "Bağlantıyı kopyala"
-  },
-  "quickActions.download": {
-    "defaultMessage": "İndir"
-  },
-  "quickActions.downloadUnavailable": {
-    "defaultMessage": "{loader, select, none {{version} için uygun sürüm yok} other {{loader} {version} için uygun sürüm yok}}"
-  },
-  "quickActions.follow": {
-    "defaultMessage": "Takip et"
-  },
-  "quickActions.newCollection": {
-    "defaultMessage": "Yeni koleksiyon oluştur"
-  },
-  "quickActions.noCollections": {
-    "defaultMessage": "Hiç koleksiyon bulunmadı."
-  },
-  "quickActions.save": {
-    "defaultMessage": "Kaydet"
-  },
-  "quickActions.saved": {
-    "defaultMessage": "Kaydedildi"
-  },
-  "quickActions.searchPlaceholder": {
-    "defaultMessage": "Ara..."
-  },
-  "quickActions.unfollow": {
-    "defaultMessage": "Takibi bırak"
-  },
   "quickSearch.clearRecent": {
     "defaultMessage": "Son ögeleri temizle"
   },
@@ -280,6 +346,12 @@
   },
   "reviewStars.rating": {
     "defaultMessage": "5 üzerinden {rating} puan verildi"
+  },
+  "sidebarLayout.done": {
+    "defaultMessage": "Tamamlandı"
+  },
+  "sidebarLayout.hide": {
+    "defaultMessage": "Gizle"
   },
   "spigotReviews.authorResponse": {
     "defaultMessage": "Geliştirici Yanıtı:"
@@ -334,6 +406,24 @@
   },
   "spigotReviews.writeReview": {
     "defaultMessage": "İnceleme Yaz"
+  },
+  "themes.create": {
+    "defaultMessage": "Tema oluştur"
+  },
+  "themes.delete": {
+    "defaultMessage": "Temayı sil"
+  },
+  "themes.edit": {
+    "defaultMessage": "Temayı düzenle"
+  },
+  "themes.import": {
+    "defaultMessage": "İçe aktar"
+  },
+  "themes.newTheme": {
+    "defaultMessage": "Benim Temam"
+  },
+  "themes.section.minecraft": {
+    "defaultMessage": "Minecraft"
   },
   "toolsSidebar.copied": {
     "defaultMessage": "Kopyalandı!"

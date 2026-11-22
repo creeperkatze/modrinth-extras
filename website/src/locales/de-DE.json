@@ -2,31 +2,37 @@
 	"meta": {
 		"summary": "Eine Browser-Erweiterung, die Modrinth auf der Website und darüber hinaus erweitert.",
 		"feature": {
-			"popup": {
-				"title": "Jede Funktion ist nur ein Klick entfernt"
-			},
-			"cardActions": {
-				"title": "Handle, ohne die Liste zu verlassen",
-				"description": "Downloade, Folge, speicher und kopiere Links für Projekte direkt von der Beschreibungskarte, ohne das man jede Seite einzeln öffnen muss."
-			},
 			"galleryBackground": {
 				"title": "Eine Seite, die zum Projekt passt",
 				"description": "Zeige das vorgestellte Galeriebild eines Projekts als Vollbild Banner Hintergrund, damit Shader und Ressourcenpakete passend aussehen."
 			},
-			"notifications": {
-				"title": "Benachrichtigungen, direkt im Header"
+			"themes": {
+				"title": "Mach Modrinth zu deinem",
+				"description": "Wähle aus Dutzenden neuen Farbschemas, von Cherry Grove und The End bis Catppuccin, Nord und Dracula. Oder erstelle dein eigenes, in dem du jede Farbe anpassen kannst, und teile es mit Freunden."
 			},
 			"dependencyExplorer": {
-				"title": "Entdecke den gesamten Abhängigkeitsbaum"
+				"title": "Entdecke den gesamten Abhängigkeitsbaum",
+				"description": "Ein interaktiver Graph, mit dem du die erforderlichen, optionalen und eingebetteten Abhängigkeiten eines Projekts so tief erkunden kannst, wie du willst."
+			},
+			"popupTabs": {
+				"title": "Modrinth in jedem Tab",
+				"description": "Suche nach Projekten und Servern, lies deine Benachrichtigungen, nimm Einladungen an und sieh dir deine Einnahmen und Statistiken als Ersteller an, alles im Popup der Erweiterung."
 			},
 			"quickSearch": {
-				"title": "Finde alles in Sekunden"
+				"title": "Finde alles in Sekunden",
+				"description": "Drücke Strg+K oder /, um eine Suche im Stil einer Befehlspalette zu öffnen, mit Filter-Tags für Loader, Versionen, Kategorien und Typen direkt in deiner Suchanfrage."
 			},
-			"sparkline": {
-				"title": "Finde heraus, wie aktiv ein Projekt wirklich ist"
+			"quickActions": {
+				"title": "Direkt aus den Suchergebnissen",
+				"description": "Lade Projekte direkt über ihre Karten herunter, folge ihnen und speichere sie. Speichere deine Spielversion und Loader als Profile und wechsle im Popup zwischen ihnen."
 			},
-			"sidebar": {
-				"title": "Das Vollbild direkt in der Seitenleiste rechts"
+			"collectionDownload": {
+				"title": "Eine ganze Kollektion mit einem Download",
+				"description": "Mach aus jeder Kollektion ein Modpack oder eine ZIP-Datei mit allen Projekten, die deine Spielversion und deinen Loader unterstützen, samt erforderlicher Abhängigkeiten."
+			},
+			"notifications": {
+				"title": "Benachrichtigungen direkt in der Kopfzeile",
+				"description": "Sieh dir ungelesene Benachrichtigungen an, verwalte und lösche sie, ohne die aktuelle Seite zu verlassen, mit optionalen Browser-Benachrichtigungen und einem Abzeichen für Ungelesenes auf dem Erweiterungssymbol."
 			}
 		}
 	},

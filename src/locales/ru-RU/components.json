@@ -1,4 +1,106 @@
 {
+  "collectionDownload.button": {
+    "defaultMessage": "Скачать"
+  },
+  "collectionDownload.cancel": {
+    "defaultMessage": "Отмена"
+  },
+  "collectionDownload.datapack": {
+    "defaultMessage": "Набор данных"
+  },
+  "collectionDownload.dependencies": {
+    "defaultMessage": "Включить зависимости"
+  },
+  "collectionDownload.dependenciesDescription": {
+    "defaultMessage": "Добавляет моды, нужные другим модам для работы."
+  },
+  "collectionDownload.dependency": {
+    "defaultMessage": "Зависимость"
+  },
+  "collectionDownload.download": {
+    "defaultMessage": "Скачать {count, plural, one {# проект} few {# проекта} other {# проектов}}"
+  },
+  "collectionDownload.downloading": {
+    "defaultMessage": "Скачивание: {done}/{total}"
+  },
+  "collectionDownload.exportFailed": {
+    "defaultMessage": "Не удалось скачать коллекцию"
+  },
+  "collectionDownload.exportFailedText": {
+    "defaultMessage": "Не удалось скачать некоторые файлы. Повторите попытку позже."
+  },
+  "collectionDownload.failed": {
+    "defaultMessage": "Не удалось загрузить проекты из этой коллекции."
+  },
+  "collectionDownload.gameVersion": {
+    "defaultMessage": "Версия игры"
+  },
+  "collectionDownload.included": {
+    "defaultMessage": "Включено"
+  },
+  "collectionDownload.incompatible": {
+    "defaultMessage": "Несовместимо"
+  },
+  "collectionDownload.incompatibleDescription": {
+    "defaultMessage": "Нет версии для {loader} {gameVersion}."
+  },
+  "collectionDownload.incompatibleVersionDescription": {
+    "defaultMessage": "Нет версии для {gameVersion}."
+  },
+  "collectionDownload.loader": {
+    "defaultMessage": "Загрузчик"
+  },
+  "collectionDownload.loading": {
+    "defaultMessage": "Загрузка проектов..."
+  },
+  "collectionDownload.mod": {
+    "defaultMessage": "Мод"
+  },
+  "collectionDownload.mrpack": {
+    "defaultMessage": "Сборка"
+  },
+  "collectionDownload.mrpackDescription": {
+    "defaultMessage": "Файл .mrpack для импорта в Modrinth App, Prism Launcher и т.п."
+  },
+  "collectionDownload.noLoaderVersion": {
+    "defaultMessage": "Нет версии {loader} для {gameVersion}."
+  },
+  "collectionDownload.noneIncluded": {
+    "defaultMessage": "Нет проектов с версией для этой версии игры и загрузчика."
+  },
+  "collectionDownload.nothing": {
+    "defaultMessage": "Проекты из коллекции нельзя скачать вместе."
+  },
+  "collectionDownload.projectCount": {
+    "defaultMessage": "{count, plural, one {# совместимый проект} few {# совместимых проекта} other {# совместимых проектов}}"
+  },
+  "collectionDownload.resolvingProgress": {
+    "defaultMessage": "Поиск нужных версий... {done, number}/{total, number}"
+  },
+  "collectionDownload.resourcepack": {
+    "defaultMessage": "Набор ресурсов"
+  },
+  "collectionDownload.retry": {
+    "defaultMessage": "Повторить"
+  },
+  "collectionDownload.shader": {
+    "defaultMessage": "Шейдер"
+  },
+  "collectionDownload.title": {
+    "defaultMessage": "Скачать коллекцию"
+  },
+  "collectionDownload.unsupported": {
+    "defaultMessage": "Нельзя включить"
+  },
+  "collectionDownload.unsupportedDescription": {
+    "defaultMessage": "В сборки не добавляются их содержимое и плагины."
+  },
+  "collectionDownload.zip": {
+    "defaultMessage": "Архив"
+  },
+  "collectionDownload.zipDescription": {
+    "defaultMessage": "Каждый файл отсортирован в папку, готовый к добавлению в сборку."
+  },
   "compareVersions.compareWith": {
     "defaultMessage": "Сравнить с"
   },
@@ -27,7 +129,7 @@
     "defaultMessage": "Скрыть {count, plural, one {# ответ} few {# ответа} other {# ответов}}"
   },
   "curseforgeComments.loadError": {
-    "defaultMessage": "Не удалось загрузить комментарии из CurseForge"
+    "defaultMessage": "Не удалось загрузить комментарии с CurseForge"
   },
   "curseforgeComments.loading": {
     "defaultMessage": "Загрузка комментариев..."
@@ -49,6 +151,99 @@
   },
   "curseforgeComments.writeComment": {
     "defaultMessage": "Написать комментарий"
+  },
+  "customTheme.accent": {
+    "defaultMessage": "Акцент"
+  },
+  "customTheme.accentColor": {
+    "defaultMessage": "Акцентный цвет"
+  },
+  "customTheme.accentText": {
+    "defaultMessage": "Текст с акцентом"
+  },
+  "customTheme.base": {
+    "defaultMessage": "Стандартный"
+  },
+  "customTheme.blue": {
+    "defaultMessage": "Синий"
+  },
+  "customTheme.body": {
+    "defaultMessage": "Основной текст"
+  },
+  "customTheme.cancel": {
+    "defaultMessage": "Отмена"
+  },
+  "customTheme.colors": {
+    "defaultMessage": "Цвета"
+  },
+  "customTheme.createTitle": {
+    "defaultMessage": "Создать тему"
+  },
+  "customTheme.dark": {
+    "defaultMessage": "Тёмная"
+  },
+  "customTheme.delete": {
+    "defaultMessage": "Удалить"
+  },
+  "customTheme.divider": {
+    "defaultMessage": "Разделители"
+  },
+  "customTheme.editTitle": {
+    "defaultMessage": "Изменить тему"
+  },
+  "customTheme.export": {
+    "defaultMessage": "Экспорт"
+  },
+  "customTheme.headings": {
+    "defaultMessage": "Заголовки"
+  },
+  "customTheme.light": {
+    "defaultMessage": "Светлая"
+  },
+  "customTheme.name": {
+    "defaultMessage": "Название"
+  },
+  "customTheme.namePlaceholder": {
+    "defaultMessage": "Моя тема"
+  },
+  "customTheme.orange": {
+    "defaultMessage": "Оранжевая"
+  },
+  "customTheme.previewButton": {
+    "defaultMessage": "Скачать"
+  },
+  "customTheme.previewDescription": {
+    "defaultMessage": "Вот как выглядит Modrinth с вашей темой."
+  },
+  "customTheme.previewTitle": {
+    "defaultMessage": "Пример проекта"
+  },
+  "customTheme.purple": {
+    "defaultMessage": "Фиолетовая"
+  },
+  "customTheme.red": {
+    "defaultMessage": "Красная"
+  },
+  "customTheme.save": {
+    "defaultMessage": "Сохранить"
+  },
+  "customTheme.secondary": {
+    "defaultMessage": "Вторичный текст"
+  },
+  "customTheme.startFrom": {
+    "defaultMessage": "Начать с"
+  },
+  "customTheme.startFromPlaceholder": {
+    "defaultMessage": "Выберите тему"
+  },
+  "customTheme.surfaces": {
+    "defaultMessage": "Поверхности"
+  },
+  "customTheme.surfacesDescription": {
+    "defaultMessage": "От фона страницы слева до границ справа."
+  },
+  "customTheme.text": {
+    "defaultMessage": "Текст"
   },
   "dependencyExplorer.centerView": {
     "defaultMessage": "Центрировать"
@@ -482,6 +677,9 @@
   "sidebarLayout.hide": {
     "defaultMessage": "Скрыть"
   },
+  "sidebarLayout.resetOrder": {
+    "defaultMessage": "Сбросить порядок"
+  },
   "sidebarLayout.revert": {
     "defaultMessage": "Откатить"
   },
@@ -541,6 +739,42 @@
   },
   "spigotReviews.writeReview": {
     "defaultMessage": "Написать отзыв"
+  },
+  "themes.create": {
+    "defaultMessage": "Создать тему"
+  },
+  "themes.delete": {
+    "defaultMessage": "Удалить тему"
+  },
+  "themes.edit": {
+    "defaultMessage": "Изменить тему"
+  },
+  "themes.import": {
+    "defaultMessage": "Импорт"
+  },
+  "themes.importFailed": {
+    "defaultMessage": "Не удалось импортировать {file}"
+  },
+  "themes.importInvalid": {
+    "defaultMessage": "Файл не является действительной темой."
+  },
+  "themes.importNewer": {
+    "defaultMessage": "Эта тема создана для новых версий Modrinth Extras. Обновите расширение, чтобы импортировать её."
+  },
+  "themes.limit": {
+    "defaultMessage": "Можно сохранить до {max} тем."
+  },
+  "themes.newTheme": {
+    "defaultMessage": "Моя тема"
+  },
+  "themes.section.classics": {
+    "defaultMessage": "Классические"
+  },
+  "themes.section.custom": {
+    "defaultMessage": "Свои"
+  },
+  "themes.section.minecraft": {
+    "defaultMessage": "Minecraft"
   },
   "toolsSidebar.copied": {
     "defaultMessage": "Скопировано!"

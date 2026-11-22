@@ -1,4 +1,106 @@
 {
+  "collectionDownload.button": {
+    "defaultMessage": "Herunterladen"
+  },
+  "collectionDownload.cancel": {
+    "defaultMessage": "Abbrechen"
+  },
+  "collectionDownload.datapack": {
+    "defaultMessage": "Datenpaket"
+  },
+  "collectionDownload.dependencies": {
+    "defaultMessage": "Abhängigkeiten einbeziehen"
+  },
+  "collectionDownload.dependenciesDescription": {
+    "defaultMessage": "Fügt die Mods hinzu, die die enthaltenen Mods zum Laufen brauchen."
+  },
+  "collectionDownload.dependency": {
+    "defaultMessage": "Abhängigkeit"
+  },
+  "collectionDownload.download": {
+    "defaultMessage": "{count, plural, one {# Projekt} other {# Projekte}} herunterladen"
+  },
+  "collectionDownload.downloading": {
+    "defaultMessage": "Wird heruntergeladen: {done} von {total}"
+  },
+  "collectionDownload.exportFailed": {
+    "defaultMessage": "Die Kollektion konnte nicht heruntergeladen werden"
+  },
+  "collectionDownload.exportFailedText": {
+    "defaultMessage": "Einige Dateien konnten nicht heruntergeladen werden. Versuche es gleich noch einmal."
+  },
+  "collectionDownload.failed": {
+    "defaultMessage": "Die Projekte dieser Kollektion konnten nicht geladen werden."
+  },
+  "collectionDownload.gameVersion": {
+    "defaultMessage": "Spielversion"
+  },
+  "collectionDownload.included": {
+    "defaultMessage": "Enthalten"
+  },
+  "collectionDownload.incompatible": {
+    "defaultMessage": "Nicht kompatibel"
+  },
+  "collectionDownload.incompatibleDescription": {
+    "defaultMessage": "Keine Version für {loader} {gameVersion}."
+  },
+  "collectionDownload.incompatibleVersionDescription": {
+    "defaultMessage": "Keine Version für {gameVersion}."
+  },
+  "collectionDownload.loader": {
+    "defaultMessage": "Loader"
+  },
+  "collectionDownload.loading": {
+    "defaultMessage": "Projekte werden geladen…"
+  },
+  "collectionDownload.mod": {
+    "defaultMessage": "Mod"
+  },
+  "collectionDownload.mrpack": {
+    "defaultMessage": "Modpack"
+  },
+  "collectionDownload.mrpackDescription": {
+    "defaultMessage": "Eine .mrpack-Datei zum Importieren in die Modrinth App, Prism Launcher und andere."
+  },
+  "collectionDownload.noLoaderVersion": {
+    "defaultMessage": "Für {gameVersion} gibt es noch keine Version von {loader}."
+  },
+  "collectionDownload.noneIncluded": {
+    "defaultMessage": "Kein Projekt hat eine Version für diese Spielversion und diesen Loader."
+  },
+  "collectionDownload.nothing": {
+    "defaultMessage": "Keines der Projekte in dieser Kollektion kann zusammen heruntergeladen werden."
+  },
+  "collectionDownload.projectCount": {
+    "defaultMessage": "{count, plural, one {# kompatibles Projekt} other {# kompatible Projekte}}"
+  },
+  "collectionDownload.resolvingProgress": {
+    "defaultMessage": "Passende Versionen werden gesucht… {done, number} von {total, number}"
+  },
+  "collectionDownload.resourcepack": {
+    "defaultMessage": "Ressourcenpaket"
+  },
+  "collectionDownload.retry": {
+    "defaultMessage": "Erneut versuchen"
+  },
+  "collectionDownload.shader": {
+    "defaultMessage": "Shader"
+  },
+  "collectionDownload.title": {
+    "defaultMessage": "Kollektion herunterladen"
+  },
+  "collectionDownload.unsupported": {
+    "defaultMessage": "Kann nicht aufgenommen werden"
+  },
+  "collectionDownload.unsupportedDescription": {
+    "defaultMessage": "Plugins und Modpacks gehören nicht in eine Instanz."
+  },
+  "collectionDownload.zip": {
+    "defaultMessage": "ZIP-Datei"
+  },
+  "collectionDownload.zipDescription": {
+    "defaultMessage": "Jede Datei ist in ihren Ordner einsortiert und kann direkt in eine Instanz gezogen werden."
+  },
   "compareVersions.compareWith": {
     "defaultMessage": "Vergleichen mit"
   },
@@ -49,6 +151,99 @@
   },
   "curseforgeComments.writeComment": {
     "defaultMessage": "Schreibe einen Kommentar"
+  },
+  "customTheme.accent": {
+    "defaultMessage": "Akzent"
+  },
+  "customTheme.accentColor": {
+    "defaultMessage": "Akzentfarbe"
+  },
+  "customTheme.accentText": {
+    "defaultMessage": "Text auf Akzent"
+  },
+  "customTheme.base": {
+    "defaultMessage": "Basis"
+  },
+  "customTheme.blue": {
+    "defaultMessage": "Blau"
+  },
+  "customTheme.body": {
+    "defaultMessage": "Fließtext"
+  },
+  "customTheme.cancel": {
+    "defaultMessage": "Abbrechen"
+  },
+  "customTheme.colors": {
+    "defaultMessage": "Farben"
+  },
+  "customTheme.createTitle": {
+    "defaultMessage": "Farbschema erstellen"
+  },
+  "customTheme.dark": {
+    "defaultMessage": "Dunkel"
+  },
+  "customTheme.delete": {
+    "defaultMessage": "Löschen"
+  },
+  "customTheme.divider": {
+    "defaultMessage": "Trennlinien"
+  },
+  "customTheme.editTitle": {
+    "defaultMessage": "Farbschema bearbeiten"
+  },
+  "customTheme.export": {
+    "defaultMessage": "Exportieren"
+  },
+  "customTheme.headings": {
+    "defaultMessage": "Überschriften"
+  },
+  "customTheme.light": {
+    "defaultMessage": "Hell"
+  },
+  "customTheme.name": {
+    "defaultMessage": "Name"
+  },
+  "customTheme.namePlaceholder": {
+    "defaultMessage": "Mein Farbschema"
+  },
+  "customTheme.orange": {
+    "defaultMessage": "Orange"
+  },
+  "customTheme.previewButton": {
+    "defaultMessage": "Herunterladen"
+  },
+  "customTheme.previewDescription": {
+    "defaultMessage": "So sieht dein Farbschema auf Modrinth aus."
+  },
+  "customTheme.previewTitle": {
+    "defaultMessage": "Beispielprojekt"
+  },
+  "customTheme.purple": {
+    "defaultMessage": "Violett"
+  },
+  "customTheme.red": {
+    "defaultMessage": "Rot"
+  },
+  "customTheme.save": {
+    "defaultMessage": "Speichern"
+  },
+  "customTheme.secondary": {
+    "defaultMessage": "Sekundärer Text"
+  },
+  "customTheme.startFrom": {
+    "defaultMessage": "Basierend auf"
+  },
+  "customTheme.startFromPlaceholder": {
+    "defaultMessage": "Farbschema auswählen"
+  },
+  "customTheme.surfaces": {
+    "defaultMessage": "Flächen"
+  },
+  "customTheme.surfacesDescription": {
+    "defaultMessage": "Vom Seitenhintergrund links bis zu den Rändern rechts."
+  },
+  "customTheme.text": {
+    "defaultMessage": "Text"
   },
   "dependencyExplorer.centerView": {
     "defaultMessage": "Ansicht zentrieren"
@@ -399,7 +594,7 @@
     "defaultMessage": "Bewertungen"
   },
   "quickActions.checkingDownload": {
-    "defaultMessage": "Überprüfe auf verfügbare Version..."
+    "defaultMessage": "Verfügbare Version wird überprüft..."
   },
   "quickActions.copied": {
     "defaultMessage": "Kopiert!"
@@ -411,7 +606,7 @@
     "defaultMessage": "Herunterladen"
   },
   "quickActions.downloadUnavailable": {
-    "defaultMessage": "{loader, select, none {Keine Version verfügbar für {version}} other {Keine Version verfügbar für {loader} {version}}}"
+    "defaultMessage": "{loader, select, none {Keine Version für {version} verfügbar} other {Keine Version für {loader} {version} verfügbar}}"
   },
   "quickActions.follow": {
     "defaultMessage": "Folgen"
@@ -482,6 +677,9 @@
   "sidebarLayout.hide": {
     "defaultMessage": "Ausblenden"
   },
+  "sidebarLayout.resetOrder": {
+    "defaultMessage": "Reihenfolge zurücksetzen"
+  },
   "sidebarLayout.revert": {
     "defaultMessage": "Rückgängig"
   },
@@ -541,6 +739,42 @@
   },
   "spigotReviews.writeReview": {
     "defaultMessage": "Schreibe eine Bewertung"
+  },
+  "themes.create": {
+    "defaultMessage": "Farbschema erstellen"
+  },
+  "themes.delete": {
+    "defaultMessage": "Farbschema löschen"
+  },
+  "themes.edit": {
+    "defaultMessage": "Farbschema bearbeiten"
+  },
+  "themes.import": {
+    "defaultMessage": "Importieren"
+  },
+  "themes.importFailed": {
+    "defaultMessage": "{file} konnte nicht importiert werden"
+  },
+  "themes.importInvalid": {
+    "defaultMessage": "Diese Datei ist kein gültiges Farbschema."
+  },
+  "themes.importNewer": {
+    "defaultMessage": "Dieses Farbschema wurde mit einer neueren Version von Modrinth Extras erstellt. Aktualisiere die Erweiterung, um es zu importieren."
+  },
+  "themes.limit": {
+    "defaultMessage": "Du kannst bis zu {max} eigene Farbschemas haben."
+  },
+  "themes.newTheme": {
+    "defaultMessage": "Mein Farbschema"
+  },
+  "themes.section.classics": {
+    "defaultMessage": "Klassiker"
+  },
+  "themes.section.custom": {
+    "defaultMessage": "Benutzerdefiniert"
+  },
+  "themes.section.minecraft": {
+    "defaultMessage": "Minecraft"
   },
   "toolsSidebar.copied": {
     "defaultMessage": "Kopiert!"

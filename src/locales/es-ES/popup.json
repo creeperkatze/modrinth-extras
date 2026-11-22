@@ -1,13 +1,4 @@
 {
-  "feature.accentColor.color": {
-    "defaultMessage": "Color"
-  },
-  "feature.accentColor.description": {
-    "defaultMessage": "Remplaza el Modrinth verde con color de acento personalizado."
-  },
-  "feature.accentColor.title": {
-    "defaultMessage": "Color de acento"
-  },
   "feature.activitySparkline.days": {
     "defaultMessage": "{count, plural, one {# día} other {# días}}"
   },
@@ -28,9 +19,6 @@
   },
   "feature.browserNotifications.exampleTitle": {
     "defaultMessage": "Ejemplo de notificación"
-  },
-  "feature.browserNotifications.sendTest": {
-    "defaultMessage": "Enviar notificación de prueba"
   },
   "feature.browserNotifications.title": {
     "defaultMessage": "Notificaciones del navegador"
@@ -85,24 +73,6 @@
   },
   "feature.platformsSidebar.description": {
     "defaultMessage": "Encuentre el mismo proyecto o autor en CurseForge, Hangar y SpigotMC."
-  },
-  "feature.quickActions.description": {
-    "defaultMessage": "Descargar, seguir, y guardar proyectos directamente de sus fichas."
-  },
-  "feature.quickActions.downloadDependencies": {
-    "defaultMessage": "Descargar dependencias"
-  },
-  "feature.quickActions.gameVersion": {
-    "defaultMessage": "Versión del juego"
-  },
-  "feature.quickActions.modLoader": {
-    "defaultMessage": "Plataformas del mod"
-  },
-  "feature.quickActions.pluginLoader": {
-    "defaultMessage": "Plataformas del plugin"
-  },
-  "feature.quickActions.shaderLoader": {
-    "defaultMessage": "Plataformas del shader"
   },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K o / para buscar el estilo de la paleta de comandos con etiquetas de versiones, categorías y tipos."

@@ -44,21 +44,6 @@
   "feature.notifications.title": {
     "defaultMessage": "Notificaciones"
   },
-  "feature.quickActions.description": {
-    "defaultMessage": "Descarga, sigue y guarda proyectos directamente desde sus fichas de proyecto."
-  },
-  "feature.quickActions.gameVersion": {
-    "defaultMessage": "Versión del juego"
-  },
-  "feature.quickActions.modLoader": {
-    "defaultMessage": "Cargador de mods"
-  },
-  "feature.quickActions.pluginLoader": {
-    "defaultMessage": "Cargador de plugins"
-  },
-  "feature.quickActions.shaderLoader": {
-    "defaultMessage": "Cargador de sombreadores"
-  },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K o / para realizar una búsqueda al estilo de la paleta de comandos con etiquetas facetadas para cargadores, versiones, categorías y tipos."
   },

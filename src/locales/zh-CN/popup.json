@@ -1,19 +1,4 @@
 {
-  "feature.accentColor.color": {
-    "defaultMessage": "强调色"
-  },
-  "feature.accentColor.description": {
-    "defaultMessage": "将 Modrinth 的标志性绿色替换为自定义强调色。"
-  },
-  "feature.accentColor.lowContrast": {
-    "defaultMessage": "在你的 Modrinth 主题上，这种颜色很难看清。"
-  },
-  "feature.accentColor.title": {
-    "defaultMessage": "强调色"
-  },
-  "feature.accentColor.unreadableButtons": {
-    "defaultMessage": "在您的 Modrinth 主题中，这种颜色的按钮文字很难看清。"
-  },
   "feature.activitySparkline.days": {
     "defaultMessage": "{count, plural, one {# 天} other {# 天}}"
   },
@@ -34,9 +19,6 @@
   },
   "feature.browserNotifications.exampleTitle": {
     "defaultMessage": "测试通知"
-  },
-  "feature.browserNotifications.sendTest": {
-    "defaultMessage": "发送测试通知"
   },
   "feature.browserNotifications.title": {
     "defaultMessage": "浏览器通知"
@@ -100,24 +82,6 @@
   },
   "feature.platformsSidebar.description": {
     "defaultMessage": "在CurseForge、Hangar和SpigotMC上找到同一个项目或作者。"
-  },
-  "feature.quickActions.description": {
-    "defaultMessage": "直接从项目卡片下载、关注和保存项目。"
-  },
-  "feature.quickActions.downloadDependencies": {
-    "defaultMessage": "下载依赖项"
-  },
-  "feature.quickActions.gameVersion": {
-    "defaultMessage": "游戏版本"
-  },
-  "feature.quickActions.modLoader": {
-    "defaultMessage": "模组加载器"
-  },
-  "feature.quickActions.pluginLoader": {
-    "defaultMessage": "插件加载器"
-  },
-  "feature.quickActions.shaderLoader": {
-    "defaultMessage": "光影包加载器"
   },
   "feature.quickSearch.description": {
     "defaultMessage": "按 Ctrl+K 或 / 键，即可使用类似命令面板的搜索功能，支持按加载器、版本、类别和类型进行多维标签搜索。"

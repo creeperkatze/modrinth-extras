@@ -29,36 +29,6 @@
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "Visualizza la cronologia"
   },
-  "quickActions.copied": {
-    "defaultMessage": "Copiato!"
-  },
-  "quickActions.copyLink": {
-    "defaultMessage": "Copia Collegamento"
-  },
-  "quickActions.download": {
-    "defaultMessage": "Scarica"
-  },
-  "quickActions.follow": {
-    "defaultMessage": "Segui"
-  },
-  "quickActions.newCollection": {
-    "defaultMessage": "Crea una nuova collezione"
-  },
-  "quickActions.noCollections": {
-    "defaultMessage": "Nessuna collezione trovata."
-  },
-  "quickActions.save": {
-    "defaultMessage": "Salva"
-  },
-  "quickActions.saved": {
-    "defaultMessage": "Salvato"
-  },
-  "quickActions.searchPlaceholder": {
-    "defaultMessage": "Cerca..."
-  },
-  "quickActions.unfollow": {
-    "defaultMessage": "Smetti di seguire"
-  },
   "quickSearch.examples": {
     "defaultMessage": "Esempi"
   },

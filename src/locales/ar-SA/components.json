@@ -74,42 +74,6 @@
   "notificationsIndicator.viewHistory": {
     "defaultMessage": "عرض السجل"
   },
-  "quickActions.checkingDownload": {
-    "defaultMessage": "جار التحقق من الإصدار المتاح..."
-  },
-  "quickActions.copied": {
-    "defaultMessage": "تم النسخ!"
-  },
-  "quickActions.copyLink": {
-    "defaultMessage": "نسخ الرابط"
-  },
-  "quickActions.download": {
-    "defaultMessage": "تنزيل"
-  },
-  "quickActions.downloadUnavailable": {
-    "defaultMessage": "{loader, select, none {لا توجد نسخة متاحة لـ {version}} other {لا توجد نسخة متاحة لـ {loader} {version}}}"
-  },
-  "quickActions.follow": {
-    "defaultMessage": "متابعة"
-  },
-  "quickActions.newCollection": {
-    "defaultMessage": "إنشاء مجموعة جديدة"
-  },
-  "quickActions.noCollections": {
-    "defaultMessage": "لم يتم العثور على أية مجموعة."
-  },
-  "quickActions.save": {
-    "defaultMessage": "حفظ"
-  },
-  "quickActions.saved": {
-    "defaultMessage": "محفوظ"
-  },
-  "quickActions.searchPlaceholder": {
-    "defaultMessage": "بحث..."
-  },
-  "quickActions.unfollow": {
-    "defaultMessage": "إلغاء المتابعة"
-  },
   "quickSearch.clearRecent": {
     "defaultMessage": "مسح عمليات البحث الأخيرة"
   },

@@ -1,7 +1,4 @@
 {
-  "feature.accentColor.color": {
-    "defaultMessage": "สี"
-  },
   "popup.discordPrompt.dismiss": {
     "defaultMessage": "ปิด"
   },

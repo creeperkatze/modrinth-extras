@@ -50,36 +50,6 @@
   "platformsSidebar.loading": {
     "defaultMessage": "読み込み中"
   },
-  "quickActions.copied": {
-    "defaultMessage": "コピー済み！"
-  },
-  "quickActions.copyLink": {
-    "defaultMessage": "リンクをコピー"
-  },
-  "quickActions.download": {
-    "defaultMessage": "ダウンロード"
-  },
-  "quickActions.follow": {
-    "defaultMessage": "フォロー"
-  },
-  "quickActions.newCollection": {
-    "defaultMessage": "新しいコレクショーンを作成"
-  },
-  "quickActions.noCollections": {
-    "defaultMessage": "コレクショーンが見つかりません。"
-  },
-  "quickActions.save": {
-    "defaultMessage": "保存"
-  },
-  "quickActions.saved": {
-    "defaultMessage": "保存済み"
-  },
-  "quickActions.searchPlaceholder": {
-    "defaultMessage": "検索..."
-  },
-  "quickActions.unfollow": {
-    "defaultMessage": "フォローをキャンセル"
-  },
   "quickSearch.examples": {
     "defaultMessage": "実例"
   },
