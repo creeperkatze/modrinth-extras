@@ -10,7 +10,7 @@
 - Creator tab in the popup with your revenue balance, upcoming payouts and charts of your views, downloads and revenue.
 - Notifications tab in the popup, where you can read your notifications, accept or decline invites and mark them as read.
 - Download button on collections, which bundles every project that supports your game version and loader into a modpack (.mrpack) or zip file, with their required dependencies.
-- Your settings, custom themes and quick action profiles now follow you to your other browsers when browser sync is on. You can have up to 50 custom themes and 20 profiles.
+- Your settings, custom themes and quick action profiles now follow you to your other browsers when browser sync is on. You can have up to 100 custom themes and 30 profiles.
 - A short tour the first time you open the popup, which also points out what's new after an update.
 - Lucy as a mod manager option for the copy install command in the Tools card.
 - Reset order button when customizing the sidebar.

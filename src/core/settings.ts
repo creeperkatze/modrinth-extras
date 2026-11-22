@@ -171,8 +171,8 @@ function keepUnknown(stored: object, value: object): object {
 // Tied to this browser
 const LOCAL_SETTINGS: (keyof ExtensionSettings)[] = ['desktopNotifications']
 
-export const MAX_CUSTOM_THEMES = 50
-export const MAX_QUICK_ACTION_PROFILES = 20
+export const MAX_CUSTOM_THEMES = 100
+export const MAX_QUICK_ACTION_PROFILES = 30
 
 // Synced as a list of ids, with each entry in its own item to stay under 8 KB per item
 const LISTS = [
