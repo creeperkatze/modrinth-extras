@@ -1,20 +1,18 @@
 import { createRequire } from 'node:module'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import type { Plugin } from 'vite'
 import svgLoader from 'vite-svg-loader'
-import { defineConfig, type WxtViteConfig } from 'wxt'
+import { defineConfig } from 'wxt'
 
 import { SEARCH_RESULT_ORIGINS } from './src/features/curseforge-integration/search-hosts'
 
 const { version } = createRequire(import.meta.url)('./package.json')
 
-// Taken from wxt because vite is not a direct dependency
-type VitePlugin = Extract<NonNullable<WxtViteConfig['plugins']>[number], { name: string }>
-
 const IMAGE_FILE = /\.(png|webp|jpe?g|gif|avif|svg)$/i
 
 // Vite emits imported images even if the code using them is tree-shaken
-function dropUnusedImages(): VitePlugin {
+function dropUnusedImages(): Plugin {
 	return {
 		name: 'modrinth-extras:drop-unused-images',
 		apply: 'build',
@@ -90,8 +88,7 @@ export default defineConfig({
 				},
 			}),
 			dropUnusedImages(),
-			// oxlint-disable-next-line typescript/no-explicit-any
-		] as any,
+		],
 		resolve: {
 			alias: {
 				'@stripe/stripe-js/pure': fileURLToPath(
