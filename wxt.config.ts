@@ -30,11 +30,18 @@ function dropUnusedImages(): Plugin {
 	}
 }
 
+// Warnings about dependencies and the Modrinth packages can't be fixed here
+function isDependencyWarning(warning: { id?: string; message: string }): boolean {
+	const source = (warning.id ?? warning.message).replaceAll('\\', '/')
+	return source.includes('node_modules/') || source.includes('modrinth/packages/')
+}
+
 export default defineConfig({
 	srcDir: 'src',
 	publicDir: 'src/public',
 	outDir: '.output',
 	modules: ['@wxt-dev/module-vue'],
+	alias: { '#ui': fileURLToPath(new URL('./modrinth/packages/ui/src', import.meta.url)) },
 	manifest: {
 		name: '__MSG_extName__',
 		description: '__MSG_extDescription__',
@@ -89,6 +96,20 @@ export default defineConfig({
 			}),
 			dropUnusedImages(),
 		],
+		css: {
+			// Modrinth's stylesheets still use @import
+			preprocessorOptions: { scss: { silenceDeprecations: ['import'] } },
+		},
+		build: {
+			// Extension files load from disk, so big chunks cost nothing
+			chunkSizeWarningLimit: 4096,
+			rolldownOptions: {
+				checks: { pluginTimings: false },
+				onwarn(warning, warn) {
+					if (!isDependencyWarning(warning)) warn(warning)
+				},
+			},
+		},
 		resolve: {
 			alias: {
 				'@stripe/stripe-js/pure': fileURLToPath(
