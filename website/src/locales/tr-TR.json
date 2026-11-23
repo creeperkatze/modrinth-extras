@@ -4,15 +4,35 @@
 		"feature": {
 			"galleryBackground": {
 				"title": "Projeyle uyumlu bir sayfa",
-				"description": "Shader ve kaynak paketlerinin tam da görünmesi gerektiği gibi durması için projenin öne çıkan galeri görselini tam ekran afiş arka planı olarak sergile."
+				"description": "Shader ve kaynak paketlerinin tam da görünmesi gerektiği gibi durması için projenin öne çıkan galeri görselini tam ekran afiş arka planı olarak sergileyin."
+			},
+			"themes": {
+				"title": "Modrinth’i kendinize göre uyarlayın",
+				"description": "Cherry Grove ve The End'den Catppuccin'e, Nord ve Dracula’ya kadar düzinelerce yeni renk teması arasından seçim yapın. Ya da tüm renkleri istediğiniz gibi ayarlayarak kendi temanızı oluşturun ve arkadaşlarınızla paylaşın."
 			},
 			"dependencyExplorer": {
-				"title": "Tüm bağımlılık ağacını keşfet",
-				"description": "Etkileşimli bir grafik; bir projenin gerekli, isteğe bağlı ve gömülü bağımlılıklarını dilediğin derinliğe inerek incelemeni sağlar."
+				"title": "Tüm bağımlılık ağacını keşfedin",
+				"description": "Etkileşimli bir grafik sayesinde bir projenin zorunlu, isteğe bağlı ve gömülü bağımlılıklarını dilediğiniz derinliğe inerek incelemenizi sağlar."
+			},
+			"popupTabs": {
+				"title": "Modrinth, herhangi bir sekmeden",
+				"description": "Tek bir eklenti penceresiyle proje ve sunucuları arayın, bildirimlerinizi okuyun, davetleri kabul edin ve içerik oluşturucu geliriniz ile istatistiklerinizi kontrol edin."
 			},
 			"quickSearch": {
-				"title": "Saniyeler içinde dilediğini bul",
+				"title": "Saniyeler içinde dilediğinizi bulun",
 				"description": "Yükleyiciler, sürümler, kategoriler ve türler için filtre etiketlerini doğrudan sorguna ekleyen komut paleti tarzı aramayı açmak için Ctrl+K veya / tuşuna bas."
+			},
+			"quickActions": {
+				"title": "Doğrudan arama sonuçlarından",
+				"description": "Projeleri doğrudan kartlarından indirin, t akip edin ve kaydedin. Oyun versiyonunuzu ve yükleyicilerinizi profiller olarak kaydedin ve açılır pencereden aralarında geçiş yapın."
+			},
+			"collectionDownload": {
+				"title": "Tek indirmeyle tüm koleksiyon",
+				"description": "Herhangi bir koleksiyonu, oyun sürümünüzü ve yükleyicinizi destekleyen tüm projelerle gerekli bağımlılıklar da dahil olmak üzere bir mod paketi veya zip dosyasına dönüştürün."
+			},
+			"notifications": {
+				"title": "Başlıktaki bildirimler",
+				"description": "İsteğe bağlı tarayıcı bildirimleri ve uzantı simgesinde okunmamış rozeti sayesinde bulunduğunuz sayfadan ayrılmadan okunmamış bildirimleri görüntüleyin, yönetin ve temizleyin."
 			}
 		}
 	},

@@ -84,7 +84,7 @@
     "defaultMessage": "Modgrade"
   },
   "feature.modpacksSidebar.description": {
-    "defaultMessage": "Показать все сборки с модом."
+    "defaultMessage": "Показывать все сборки с модом."
   },
   "feature.modpacksSidebar.title": {
     "defaultMessage": "Сборки"
@@ -117,7 +117,7 @@
     "defaultMessage": "Скачивайте, подписывайтесь и сохраняйте проекты прямо из карточек проектов."
   },
   "feature.quickActions.downloadDependencies": {
-    "defaultMessage": "Скачать зависимости"
+    "defaultMessage": "Скачивание зависимостей"
   },
   "feature.quickActions.gameVersion": {
     "defaultMessage": "Версия игры"
@@ -174,13 +174,13 @@
     "defaultMessage": "Текст на кнопках этого цвета плохо читается в вашей теме."
   },
   "feature.themes.customAccent": {
-    "defaultMessage": "Свой акцентным цвет"
+    "defaultMessage": "Свой акцентный цвет"
   },
   "feature.themes.description": {
     "defaultMessage": "Больше тем для Modrinth, плюсом ваши собственные."
   },
   "feature.themes.presets": {
-    "defaultMessage": "Включать готовые темы"
+    "defaultMessage": "Дополнительные темы"
   },
   "feature.themes.title": {
     "defaultMessage": "Темы"
@@ -210,7 +210,7 @@
     "defaultMessage": "Аналитика"
   },
   "popup.creator.availableNow": {
-    "defaultMessage": "Уже доступно"
+    "defaultMessage": "Доступно"
   },
   "popup.creator.balance": {
     "defaultMessage": "Баланс"
@@ -255,7 +255,7 @@
     "defaultMessage": "Доход"
   },
   "popup.creator.signIn": {
-    "defaultMessage": "Войдите, чтобы увидеть аналитику и доход."
+    "defaultMessage": "Войдите, чтобы посмотреть аналитику и доход."
   },
   "popup.creator.total": {
     "defaultMessage": "Всего"
@@ -318,10 +318,10 @@
     "defaultMessage": "Панель"
   },
   "popup.introductionTour.creator.description": {
-    "defaultMessage": "Следите за просмотрами, скачивания и доходом ваших проектов."
+    "defaultMessage": "Следите за просмотрами, скачиваниями и доходом ваших проектов."
   },
   "popup.introductionTour.creator.title": {
-    "defaultMessage": "Автор"
+    "defaultMessage": "Авторам"
   },
   "popup.introductionTour.notifications.description": {
     "defaultMessage": "Читайте уведомления, и принимайте приглашения прямо отсюда."
@@ -354,7 +354,7 @@
     "defaultMessage": "Назад"
   },
   "popup.nav.creator": {
-    "defaultMessage": "Автор"
+    "defaultMessage": "Авторам"
   },
   "popup.nav.notifications": {
     "defaultMessage": "Уведомления"
@@ -381,7 +381,7 @@
     "defaultMessage": "Отметить всё как прочитанное"
   },
   "popup.notifications.signIn": {
-    "defaultMessage": "Войдите, чтобы посмотреть уведомления здесь."
+    "defaultMessage": "Войдите, чтобы посмотреть уведомления."
   },
   "popup.notifications.unread": {
     "defaultMessage": "Непрочитано"
@@ -429,7 +429,7 @@
     "defaultMessage": "Вернуть все настройки к стандартным значениям и удалить свои темы."
   },
   "popup.resetSettings.title": {
-    "defaultMessage": "Сбросить все настройки"
+    "defaultMessage": "Сброс настроек"
   },
   "popup.search.clear": {
     "defaultMessage": "Очистить поиск"
@@ -500,6 +500,9 @@
   "popup.tab.projects": {
     "defaultMessage": "Проекты"
   },
+  "quickActionProfiles.choose": {
+    "defaultMessage": "Выберите профиль"
+  },
   "quickActionProfiles.defaultName": {
     "defaultMessage": "Профиль"
   },
@@ -510,19 +513,19 @@
     "defaultMessage": "Можно сохранить до {max} профилей."
   },
   "quickActionProfiles.name": {
-    "defaultMessage": "Название"
+    "defaultMessage": "Название профиля"
   },
-  "quickActionProfiles.none": {
-    "defaultMessage": "Отсутствует"
+  "quickActionProfiles.new": {
+    "defaultMessage": "Новый профиль"
   },
   "quickActionProfiles.profile": {
     "defaultMessage": "Профиль"
   },
+  "quickActionProfiles.rename": {
+    "defaultMessage": "Переименовать профиль"
+  },
   "quickActionProfiles.save": {
     "defaultMessage": "Сохранить как профиль"
-  },
-  "quickActionProfiles.saveAsNew": {
-    "defaultMessage": "Сохранить как новый профиль"
   },
   "search.any": {
     "defaultMessage": "Неважно"

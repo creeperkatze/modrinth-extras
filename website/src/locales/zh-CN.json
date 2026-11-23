@@ -6,13 +6,33 @@
 				"title": "页面与项目匹配",
 				"description": "将项目的精选图库图片作为全屏横幅背景显示，让光影包和资源包的项目页面看起来更符合主题。"
 			},
+			"themes": {
+				"title": "自定义 Modrinth 外观",
+				"description": "从数十种全新配色方案中任选其一，从“Cherry Grove”和“The End”到“Catppuccin”、“Nord”和“Dracula”。或者通过调整每种颜色自定义专属配色，并分享给朋友。"
+			},
 			"dependencyExplorer": {
 				"title": "浏览完整的依赖关系树",
 				"description": "通过交互式图表，您可以深入查看项目的必需、可选和嵌入的依赖关系，深度完全由您决定。"
 			},
+			"popupTabs": {
+				"title": "Modrinth，从任意标签页访问",
+				"description": "通过 Modrinth Extras 的弹出窗口，您可以搜索项目和服务器、查看通知、接受邀请，以及查看创作者收入和统计数据。"
+			},
 			"quickSearch": {
 				"title": "快速查找任何内容",
 				"description": "按 Ctrl+K 或 / 键，即可使用类似命令面板的搜索功能，支持按加载器、版本、类别和类型进行多维标签搜索。"
+			},
+			"quickActions": {
+				"title": "直接在搜索结果列表中进行操作",
+				"description": "直接从项目卡片下载、关注并收藏项目。将游戏版本和加载器保存为配置方案，并在弹出窗口中切换配置方案。"
+			},
+			"collectionDownload": {
+				"title": "一次性下载完整收藏夹",
+				"description": "将任何收藏夹下载为整合包或 Zip 文件，其中包含所有支持您游戏版本和加载器的项目，并已包含所需的依赖项。"
+			},
+			"notifications": {
+				"title": "通知，就在页眉中",
+				"description": "无需离开当前页面即可查看、管理和清除未读通知，还可选择启用浏览器通知，并在扩展程序图标上显示未读标记。"
 			}
 		}
 	},

@@ -500,6 +500,9 @@
   "popup.tab.projects": {
     "defaultMessage": "Projekte"
   },
+  "quickActionProfiles.choose": {
+    "defaultMessage": "Profil auswählen"
+  },
   "quickActionProfiles.defaultName": {
     "defaultMessage": "Profil"
   },
@@ -510,19 +513,19 @@
     "defaultMessage": "Du kannst bis zu {max} Profile speichern."
   },
   "quickActionProfiles.name": {
-    "defaultMessage": "Name"
+    "defaultMessage": "Profilname"
   },
-  "quickActionProfiles.none": {
-    "defaultMessage": "Keins"
+  "quickActionProfiles.new": {
+    "defaultMessage": "Neues Profil"
   },
   "quickActionProfiles.profile": {
     "defaultMessage": "Profil"
   },
+  "quickActionProfiles.rename": {
+    "defaultMessage": "Profil umbenennen"
+  },
   "quickActionProfiles.save": {
     "defaultMessage": "Als Profil speichern"
-  },
-  "quickActionProfiles.saveAsNew": {
-    "defaultMessage": "Als neues Profil speichern"
   },
   "search.any": {
     "defaultMessage": "Beliebig"
