@@ -74,7 +74,7 @@ jobs:
         run: |
           {
             echo 'body<<RELEASE_NOTES_EOF'
-            node scripts/changelog.js notes "$TAG"
+            node scripts/changelog.ts notes "$TAG"
             echo 'RELEASE_NOTES_EOF'
           } >> "$GITHUB_OUTPUT"
 

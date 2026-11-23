@@ -9,7 +9,7 @@ if (command === 'notes') {
 	const notes = section
 		.slice(section.indexOf('\n') + 1)
 		.split(/^\[.+\]: /m)[0]
-		.trim()
+		?.trim()
 	if (!notes) {
 		console.error(`No notes for ${version} in CHANGELOG.md`)
 		process.exit(1)
@@ -29,6 +29,6 @@ if (command === 'notes') {
 			),
 	)
 } else {
-	console.error('Usage: node scripts/changelog.js notes <version> | release')
+	console.error('Usage: node scripts/changelog.ts notes <version> | release')
 	process.exit(1)
 }

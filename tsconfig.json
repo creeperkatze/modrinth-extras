@@ -1,4 +1,4 @@
 {
 	"extends": "./.wxt/tsconfig.json",
-	"include": ["src", "*.ts", ".wxt/wxt.d.ts"]
+	"include": ["src", "scripts", "*.ts", ".wxt/wxt.d.ts"]
 }

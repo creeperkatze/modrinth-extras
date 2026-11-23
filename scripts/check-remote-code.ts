@@ -1,49 +1,24 @@
-import { readdirSync, readFileSync, statSync } from 'fs'
-import { dirname, join, resolve } from 'path'
-import { fileURLToPath } from 'url'
+import { readdirSync, readFileSync } from 'node:fs'
 
-// Chrome Web Store rejects extensions that load remote scripts. Catch that early.
-
-const directory = dirname(fileURLToPath(import.meta.url))
-const outDir = resolve(directory, '../.output')
-
+// Chrome Web Store rejects extensions that load remote scripts
 const SCRIPT_INJECTION = /createElement\(\s*(["'`])script\1\s*\)/g
 
-function walk(dir: string): string[] {
-	return readdirSync(dir).flatMap((name) => {
-		const full = join(dir, name)
-		const stat = statSync(full)
-		if (stat.isDirectory()) return walk(full)
-		return full.endsWith('.js') ? [full] : []
-	})
-}
-
-let files: string[]
-try {
-	files = walk(outDir)
-} catch {
-	console.error(`No build output found at ${outDir}.`)
-	process.exit(1)
-}
-
-let violations = 0
+const files = readdirSync('.output', { recursive: true, encoding: 'utf8' }).filter((file) =>
+	file.endsWith('.js'),
+)
+let found = 0
 
 for (const file of files) {
-	const content = readFileSync(file, 'utf8')
-	for (const match of content.matchAll(SCRIPT_INJECTION)) {
-		violations++
-		const start = Math.max(0, match.index - 60)
-		const end = Math.min(content.length, match.index + 120)
-		console.error(`${file.slice(outDir.length + 1)}:`)
-		console.error(`  ...${content.slice(start, end).replace(/\s+/g, ' ')}...`)
+	const content = readFileSync(`.output/${file}`, 'utf8')
+	for (const { index } of content.matchAll(SCRIPT_INJECTION)) {
+		found++
+		const context = content.slice(Math.max(0, index - 60), index + 120).replace(/\s+/g, ' ')
+		console.error(`${file}: ...${context}...`)
 	}
 }
 
-if (violations > 0) {
-	console.error(
-		`\nFound ${violations} dynamic <script> injection${violations === 1 ? '' : 's'} in the build output.`,
-	)
+if (found) {
+	console.error(`Found ${found} dynamic script injections in the build output.`)
 	process.exit(1)
 }
-
-console.log(`Checked ${files.length} file(s), no remote script injection found.`)
+console.log(`Checked ${files.length} files, no remote script injection found.`)

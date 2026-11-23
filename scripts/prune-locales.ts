@@ -1,14 +1,8 @@
-import { readdirSync, readFileSync, rmSync, writeFileSync } from 'fs'
-import { dirname, join, resolve } from 'path'
-import { fileURLToPath } from 'url'
+import { readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 
 type Messages = { [key: string]: string | Messages }
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const extensionLocales = join(root, 'src/locales')
-const websiteLocales = join(root, 'website/src/locales')
-const sourceLocale = 'en-US'
-
+// Crowdin leaves untranslated strings empty, so they're removed to fall back to English
 function prune(messages: Messages): Messages {
 	const pruned: Messages = {}
 	for (const [key, value] of Object.entries(messages)) {
@@ -38,16 +32,15 @@ function pruneFile(path: string): boolean {
 	return true
 }
 
-for (const locale of readdirSync(extensionLocales)) {
-	if (locale === sourceLocale) continue
-	const dir = join(extensionLocales, locale)
+for (const locale of readdirSync('src/locales')) {
+	if (locale === 'en-US') continue
+	const dir = `src/locales/${locale}`
 	const kept = readdirSync(dir)
 		.filter((file) => file.endsWith('.json'))
-		.map((file) => pruneFile(join(dir, file)))
+		.map((file) => pruneFile(`${dir}/${file}`))
 	if (!kept.includes(true)) rmSync(dir, { recursive: true })
 }
 
-for (const file of readdirSync(websiteLocales)) {
-	if (file.endsWith('.json') && file !== `${sourceLocale}.json`)
-		pruneFile(join(websiteLocales, file))
+for (const file of readdirSync('website/src/locales')) {
+	if (file.endsWith('.json') && file !== 'en-US.json') pruneFile(`website/src/locales/${file}`)
 }
