@@ -1,6 +1,7 @@
 import { createRequire } from 'node:module'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import tailwindcss from 'tailwindcss'
 import type { Plugin } from 'vite'
 import svgLoader from 'vite-svg-loader'
 import { defineConfig } from 'wxt'
@@ -97,6 +98,7 @@ export default defineConfig({
 			dropUnusedImages(),
 		],
 		css: {
+			postcss: { plugins: [tailwindcss()] },
 			// Modrinth's stylesheets still use @import
 			preprocessorOptions: { scss: { silenceDeprecations: ['import'] } },
 		},
