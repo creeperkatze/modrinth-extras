@@ -565,11 +565,11 @@ const messages = defineMessages({
 	},
 	'feature.curseforgeIntegration.searchResults.show': {
 		id: 'feature.curseforgeIntegration.searchResults.show',
-		defaultMessage: 'Open on Modrinth',
+		defaultMessage: 'Show Button',
 	},
 	'feature.curseforgeIntegration.searchResults.hide': {
 		id: 'feature.curseforgeIntegration.searchResults.hide',
-		defaultMessage: 'Hide CurseForge results',
+		defaultMessage: 'Hide result',
 	},
 	'feature.telemetry.title': { id: 'feature.telemetry.title', defaultMessage: 'Telemetry' },
 	'feature.telemetry.description': {

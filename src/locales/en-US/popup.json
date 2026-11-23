@@ -54,10 +54,10 @@
     "defaultMessage": "Search results"
   },
   "feature.curseforgeIntegration.searchResults.hide": {
-    "defaultMessage": "Hide CurseForge results"
+    "defaultMessage": "Hide result"
   },
   "feature.curseforgeIntegration.searchResults.show": {
-    "defaultMessage": "Open on Modrinth"
+    "defaultMessage": "Add link"
   },
   "feature.curseforgeIntegration.searchResultsAction": {
     "defaultMessage": "Action"
