@@ -1,4 +1,106 @@
 {
+  "collectionDownload.button": {
+    "defaultMessage": "下载"
+  },
+  "collectionDownload.cancel": {
+    "defaultMessage": "取消"
+  },
+  "collectionDownload.datapack": {
+    "defaultMessage": "数据包"
+  },
+  "collectionDownload.dependencies": {
+    "defaultMessage": "包含依赖项"
+  },
+  "collectionDownload.dependenciesDescription": {
+    "defaultMessage": "添加所选模组运行所需的前置模组。"
+  },
+  "collectionDownload.dependency": {
+    "defaultMessage": "依赖项"
+  },
+  "collectionDownload.download": {
+    "defaultMessage": "下载 {count, plural, other {# 项目}}"
+  },
+  "collectionDownload.downloading": {
+    "defaultMessage": "正在下载，已完成 {done} / {total}"
+  },
+  "collectionDownload.exportFailed": {
+    "defaultMessage": "无法下载该收藏夹"
+  },
+  "collectionDownload.exportFailedText": {
+    "defaultMessage": "某些文件无法下载。请稍后再试。"
+  },
+  "collectionDownload.failed": {
+    "defaultMessage": "无法加载此收藏夹中的项目。"
+  },
+  "collectionDownload.gameVersion": {
+    "defaultMessage": "游戏版本"
+  },
+  "collectionDownload.included": {
+    "defaultMessage": "已包含"
+  },
+  "collectionDownload.incompatible": {
+    "defaultMessage": "不兼容"
+  },
+  "collectionDownload.incompatibleDescription": {
+    "defaultMessage": "没有适用于 {loader} {gameVersion} 的版本。"
+  },
+  "collectionDownload.incompatibleVersionDescription": {
+    "defaultMessage": "没有适用于 {gameVersion} 的版本。"
+  },
+  "collectionDownload.loader": {
+    "defaultMessage": "加载器"
+  },
+  "collectionDownload.loading": {
+    "defaultMessage": "正在加载项目……"
+  },
+  "collectionDownload.mod": {
+    "defaultMessage": "模组"
+  },
+  "collectionDownload.mrpack": {
+    "defaultMessage": "整合包"
+  },
+  "collectionDownload.mrpackDescription": {
+    "defaultMessage": "可导入至 Modrinth App、Prism Launcher 等启动器的 .mrpack 文件。"
+  },
+  "collectionDownload.noLoaderVersion": {
+    "defaultMessage": "目前尚无适用于 {gameVersion} 的 {loader} 版本。"
+  },
+  "collectionDownload.noneIncluded": {
+    "defaultMessage": "目前尚无任何项目支持此游戏版本和加载器。"
+  },
+  "collectionDownload.nothing": {
+    "defaultMessage": "此合集中没有任何项目可共同兼容并打包下载。"
+  },
+  "collectionDownload.projectCount": {
+    "defaultMessage": "{count, plural, other {# 兼容项目}}"
+  },
+  "collectionDownload.resolvingProgress": {
+    "defaultMessage": "正在查找适配的版本…… {done, number}/{total, number}"
+  },
+  "collectionDownload.resourcepack": {
+    "defaultMessage": "资源包"
+  },
+  "collectionDownload.retry": {
+    "defaultMessage": "重试"
+  },
+  "collectionDownload.shader": {
+    "defaultMessage": "光影包"
+  },
+  "collectionDownload.title": {
+    "defaultMessage": "下载收藏夹"
+  },
+  "collectionDownload.unsupported": {
+    "defaultMessage": "不可包含"
+  },
+  "collectionDownload.unsupportedDescription": {
+    "defaultMessage": "游戏实例不支持安装插件和整合包。"
+  },
+  "collectionDownload.zip": {
+    "defaultMessage": "Zip 文件"
+  },
+  "collectionDownload.zipDescription": {
+    "defaultMessage": "每个文件都已分类放入相应的文件夹中，随时可以拖放到实例中。"
+  },
   "compareVersions.compareWith": {
     "defaultMessage": "与...比较"
   },
@@ -7,6 +109,141 @@
   },
   "compareVersions.tooltip": {
     "defaultMessage": "在 modsrc 中与 {version} 进行比较"
+  },
+  "curseforgeComments.author": {
+    "defaultMessage": "作者"
+  },
+  "curseforgeComments.commentCount": {
+    "defaultMessage": "{count, plural, one {# 条评论} other {# 条评论}}"
+  },
+  "curseforgeComments.credit": {
+    "defaultMessage": "评论来自 <link>CurseForge</link>，由其用户撰写。"
+  },
+  "curseforgeComments.edited": {
+    "defaultMessage": "已编辑"
+  },
+  "curseforgeComments.empty": {
+    "defaultMessage": "暂无评论。"
+  },
+  "curseforgeComments.hideReplies": {
+    "defaultMessage": "{count, plural, other {隐藏 # 条回复}}"
+  },
+  "curseforgeComments.loadError": {
+    "defaultMessage": "无法从 CurseForge 加载评论"
+  },
+  "curseforgeComments.loading": {
+    "defaultMessage": "正在加载评论……"
+  },
+  "curseforgeComments.notFound": {
+    "defaultMessage": "在 CurseForge 上找不到该项目。"
+  },
+  "curseforgeComments.pinned": {
+    "defaultMessage": "已置顶"
+  },
+  "curseforgeComments.posted": {
+    "defaultMessage": "{time} 发布"
+  },
+  "curseforgeComments.showReplies": {
+    "defaultMessage": "{count, plural, one {显示 # 条回复} other {显示 # 条回复}}"
+  },
+  "curseforgeComments.title": {
+    "defaultMessage": "社区评论"
+  },
+  "curseforgeComments.writeComment": {
+    "defaultMessage": "撰写评论"
+  },
+  "customTheme.accent": {
+    "defaultMessage": "强调色"
+  },
+  "customTheme.accentColor": {
+    "defaultMessage": "强调色"
+  },
+  "customTheme.accentText": {
+    "defaultMessage": "强调色文本"
+  },
+  "customTheme.base": {
+    "defaultMessage": "基调"
+  },
+  "customTheme.blue": {
+    "defaultMessage": "蓝色"
+  },
+  "customTheme.body": {
+    "defaultMessage": "正文文本"
+  },
+  "customTheme.cancel": {
+    "defaultMessage": "取消"
+  },
+  "customTheme.colors": {
+    "defaultMessage": "颜色"
+  },
+  "customTheme.createTitle": {
+    "defaultMessage": "创建主题"
+  },
+  "customTheme.dark": {
+    "defaultMessage": "深色主题"
+  },
+  "customTheme.delete": {
+    "defaultMessage": "删除"
+  },
+  "customTheme.divider": {
+    "defaultMessage": "分割线"
+  },
+  "customTheme.editTitle": {
+    "defaultMessage": "编辑主题"
+  },
+  "customTheme.export": {
+    "defaultMessage": "导出"
+  },
+  "customTheme.headings": {
+    "defaultMessage": "标题文本"
+  },
+  "customTheme.light": {
+    "defaultMessage": "浅色主题"
+  },
+  "customTheme.name": {
+    "defaultMessage": "名称"
+  },
+  "customTheme.namePlaceholder": {
+    "defaultMessage": "我的主题"
+  },
+  "customTheme.orange": {
+    "defaultMessage": "橙色"
+  },
+  "customTheme.previewButton": {
+    "defaultMessage": "下载"
+  },
+  "customTheme.previewDescription": {
+    "defaultMessage": "这就是你的主题在 Modrinth 上的显示效果。"
+  },
+  "customTheme.previewTitle": {
+    "defaultMessage": "示例项目"
+  },
+  "customTheme.purple": {
+    "defaultMessage": "紫色"
+  },
+  "customTheme.red": {
+    "defaultMessage": "红色"
+  },
+  "customTheme.save": {
+    "defaultMessage": "保存"
+  },
+  "customTheme.secondary": {
+    "defaultMessage": "次要文本"
+  },
+  "customTheme.startFrom": {
+    "defaultMessage": "基于现有主题"
+  },
+  "customTheme.startFromPlaceholder": {
+    "defaultMessage": "选择主题"
+  },
+  "customTheme.surfaces": {
+    "defaultMessage": "界面层级"
+  },
+  "customTheme.surfacesDescription": {
+    "defaultMessage": "从左侧的页面背景色依次过渡到右侧的边框色。"
+  },
+  "customTheme.text": {
+    "defaultMessage": "文本"
   },
   "dependencyExplorer.centerView": {
     "defaultMessage": "居中视图"
@@ -164,6 +401,9 @@
   "modgradeSidebar.checked": {
     "defaultMessage": "{checked} of {total, plural, other {# 最新文件}} 已检查"
   },
+  "modgradeSidebar.lastChecked": {
+    "defaultMessage": "上次检测于 {time}"
+  },
   "modgradeSidebar.loadError": {
     "defaultMessage": "加载 Modgrade 数据失败"
   },
@@ -188,8 +428,95 @@
   "modgradeSidebar.readInPart": {
     "defaultMessage": "{count, plural, other {# 文件}} 仅部分可读"
   },
+  "modgradeSidebar.reason.discordWebhook": {
+    "defaultMessage": "将数据发送至 Discord Webhook"
+  },
+  "modgradeSidebar.reason.disguisedFile": {
+    "defaultMessage": "包含一个文件，其内容与其文件名不符"
+  },
+  "modgradeSidebar.reason.downloadsAndRunsCode": {
+    "defaultMessage": "未经校验即下载并执行远程代码"
+  },
+  "modgradeSidebar.reason.downloadsCodeHttp": {
+    "defaultMessage": "通过未加密连接下载代码"
+  },
+  "modgradeSidebar.reason.hiddenAddress": {
+    "defaultMessage": "在其代码中隐藏了一个网址"
+  },
+  "modgradeSidebar.reason.installsProgram": {
+    "defaultMessage": "下载或携带程序并启动它"
+  },
+  "modgradeSidebar.reason.knownMalware": {
+    "defaultMessage": "匹配已知恶意软件"
+  },
+  "modgradeSidebar.reason.licenceUnlockedCode": {
+    "defaultMessage": "下载并执行由许可证密钥解锁的代码"
+  },
+  "modgradeSidebar.reason.loadsCodeAtStart": {
+    "defaultMessage": "启动时从固定地址加载远程代码"
+  },
+  "modgradeSidebar.reason.matchesSecurityReport": {
+    "defaultMessage": "匹配公开安全报告"
+  },
+  "modgradeSidebar.reason.miner": {
+    "defaultMessage": "运行一个隐藏的加密货币挖矿程序"
+  },
+  "modgradeSidebar.reason.namesStartupPlaces": {
+    "defaultMessage": "代码中包含登录自启动目录路径"
+  },
+  "modgradeSidebar.reason.readsBrowserHistory": {
+    "defaultMessage": "读取浏览器历史记录"
+  },
+  "modgradeSidebar.reason.readsClipboardCrypto": {
+    "defaultMessage": "从剪贴板读取加密货币地址"
+  },
+  "modgradeSidebar.reason.readsLoginData": {
+    "defaultMessage": "读取其他程序的登录数据"
+  },
+  "modgradeSidebar.reason.recordsAndClipboard": {
+    "defaultMessage": "录制麦克风或屏幕并替换剪贴板内容"
+  },
+  "modgradeSidebar.reason.remoteControl": {
+    "defaultMessage": "允许他人在这台计算机或服务器上运行命令"
+  },
+  "modgradeSidebar.reason.replacedProgram": {
+    "defaultMessage": "最新版本文件已被替换为另一程序，且对网络地址进行了混淆隐藏"
+  },
+  "modgradeSidebar.reason.runsDownloadedCode": {
+    "defaultMessage": "下载隐藏代码并运行它"
+  },
+  "modgradeSidebar.reason.sendsClipboard": {
+    "defaultMessage": "发送剪贴板内容"
+  },
+  "modgradeSidebar.reason.sendsComputerId": {
+    "defaultMessage": "发送计算机标识符"
+  },
+  "modgradeSidebar.reason.sendsIpAddress": {
+    "defaultMessage": "将 IP 地址和位置发送至 Discord"
+  },
+  "modgradeSidebar.reason.sendsScreenshots": {
+    "defaultMessage": "发送屏幕截图"
+  },
+  "modgradeSidebar.reason.sendsSessionToken": {
+    "defaultMessage": "发送 Minecraft 登录令牌到除 Mojang 以外的其他地方"
+  },
+  "modgradeSidebar.reason.startsAtLogin": {
+    "defaultMessage": "将自身写入开机/登录自启动项"
+  },
+  "modgradeSidebar.reason.stealsLogins": {
+    "defaultMessage": "窃取登录凭据、令牌或游戏会话"
+  },
+  "modgradeSidebar.reason.swapsCryptoAddresses": {
+    "defaultMessage": "替换复制到剪贴板的加密货币地址"
+  },
   "modgradeSidebar.someFiles": {
     "defaultMessage": "只有部分文件受到影响"
+  },
+  "modgradeSidebar.unknownMalwareReason": {
+    "defaultMessage": "其他恶意行为"
+  },
+  "modgradeSidebar.unknownWarningReason": {
+    "defaultMessage": "其他可疑行为"
   },
   "modgradeSidebar.viewReport": {
     "defaultMessage": "在 Modgrade 上查看"
@@ -251,11 +578,56 @@
   "platformsSidebar.title": {
     "defaultMessage": "其他平台"
   },
+  "projectReviews.loading": {
+    "defaultMessage": "正在加载评论……"
+  },
+  "projectReviews.notFoundDescription": {
+    "defaultMessage": "该项目在 {sources} 上尚无评论。"
+  },
+  "projectReviews.notFoundTitle": {
+    "defaultMessage": "还没有评论"
+  },
   "projectReviews.source": {
     "defaultMessage": "评论来源"
   },
   "projectReviews.tab": {
     "defaultMessage": "评论"
+  },
+  "quickActions.checkingDownload": {
+    "defaultMessage": "正在检查可用版本……"
+  },
+  "quickActions.copied": {
+    "defaultMessage": "已复制！"
+  },
+  "quickActions.copyLink": {
+    "defaultMessage": "复制链接"
+  },
+  "quickActions.download": {
+    "defaultMessage": "下载"
+  },
+  "quickActions.downloadUnavailable": {
+    "defaultMessage": "{loader, select, none {未找到适用于 {version} 的版本} other {未找到适用于 {loader} {version} 的版本}}"
+  },
+  "quickActions.follow": {
+    "defaultMessage": "关注"
+  },
+  "quickActions.newCollection": {
+    "defaultMessage": "创建新收藏夹"
+  },
+  "quickActions.noCollections": {
+    "defaultMessage": "还没有收藏夹。"
+  },
+  "quickActions.save": {
+    "defaultMessage": "保存"
+  },
+  "quickActions.saved": {
+    "defaultMessage": "已保存"
+  },
+  "quickActions.searchPlaceholder": {
+    "defaultMessage": "搜索……"
+  },
+  "quickActions.unfollow": {
+    "defaultMessage": "取消关注"
   },
   "quickSearch.clearRecent": {
     "defaultMessage": "清除最近搜索"
@@ -304,6 +676,9 @@
   },
   "sidebarLayout.hide": {
     "defaultMessage": "隐藏"
+  },
+  "sidebarLayout.resetOrder": {
+    "defaultMessage": "重置排序"
   },
   "sidebarLayout.revert": {
     "defaultMessage": "撤销"
@@ -364,6 +739,42 @@
   },
   "spigotReviews.writeReview": {
     "defaultMessage": "撰写评论"
+  },
+  "themes.create": {
+    "defaultMessage": "创建主题"
+  },
+  "themes.delete": {
+    "defaultMessage": "删除主题"
+  },
+  "themes.edit": {
+    "defaultMessage": "编辑主题"
+  },
+  "themes.import": {
+    "defaultMessage": "导入"
+  },
+  "themes.importFailed": {
+    "defaultMessage": "无法导入 {file}"
+  },
+  "themes.importInvalid": {
+    "defaultMessage": "该文件不是一个有效的主题。"
+  },
+  "themes.importNewer": {
+    "defaultMessage": "该主题是使用较新版本的 Modrinth Extras 制作的。请更新此扩展程序以导入该主题。"
+  },
+  "themes.limit": {
+    "defaultMessage": "您最多可以拥有 {max} 个自定义主题。"
+  },
+  "themes.newTheme": {
+    "defaultMessage": "我的主题"
+  },
+  "themes.section.classics": {
+    "defaultMessage": "经典"
+  },
+  "themes.section.custom": {
+    "defaultMessage": "自定义"
+  },
+  "themes.section.minecraft": {
+    "defaultMessage": "Minecraft"
   },
   "toolsSidebar.copied": {
     "defaultMessage": "已复制！"

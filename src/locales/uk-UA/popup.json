@@ -20,8 +20,17 @@
   "feature.browserNotifications.exampleTitle": {
     "defaultMessage": "Приклад повідомлення"
   },
+  "feature.browserNotifications.sendTest": {
+    "defaultMessage": "Надіслати тестове"
+  },
   "feature.browserNotifications.title": {
     "defaultMessage": "Повідомлення у браузері"
+  },
+  "feature.collectionDownload.description": {
+    "defaultMessage": "Завантажте колекцію у вигляді збірки або ZIP-файлу, що містить усі проєкти, сумісні з вашою версією гри та завантажувачем."
+  },
+  "feature.collectionDownload.title": {
+    "defaultMessage": "Завантажити колекцію"
   },
   "feature.compareVersions.description": {
     "defaultMessage": "Порівнюйте декомпільований код версій у modsrc, на сторінках версій, у списку версій та в журналі змін."
@@ -104,6 +113,27 @@
   "feature.platformsSidebar.title": {
     "defaultMessage": "Інші платформи"
   },
+  "feature.quickActions.description": {
+    "defaultMessage": "Завантажуйте, підписуйтесь та зберігайте проєкти прямо з їхніх карток."
+  },
+  "feature.quickActions.downloadDependencies": {
+    "defaultMessage": "Завантажити залежності"
+  },
+  "feature.quickActions.gameVersion": {
+    "defaultMessage": "Версія гри"
+  },
+  "feature.quickActions.modLoader": {
+    "defaultMessage": "Завантажувач модів"
+  },
+  "feature.quickActions.pluginLoader": {
+    "defaultMessage": "Завантажувач плаґінів"
+  },
+  "feature.quickActions.shaderLoader": {
+    "defaultMessage": "Завантажувач шейдерів"
+  },
+  "feature.quickActions.title": {
+    "defaultMessage": "Швидкі дії"
+  },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K або / для пошуку у стилі палітри команд із фільтрами для завантажувачів, версій, категорій та типів."
   },
@@ -134,6 +164,27 @@
   "feature.telemetry.title": {
     "defaultMessage": "Телеметрія"
   },
+  "feature.themes.accentColor": {
+    "defaultMessage": "Акцентний колір"
+  },
+  "feature.themes.accentLowContrast": {
+    "defaultMessage": "Цей колір важко розрізняється на вашій темі."
+  },
+  "feature.themes.accentUnreadableButtons": {
+    "defaultMessage": "Текст на кнопках із цим кольором важко читається на вашій темі."
+  },
+  "feature.themes.customAccent": {
+    "defaultMessage": "Власний акцентний колір"
+  },
+  "feature.themes.description": {
+    "defaultMessage": "Більше колірних тем для Modrinth, а також ваші власні."
+  },
+  "feature.themes.presets": {
+    "defaultMessage": "Включити готові теми"
+  },
+  "feature.themes.title": {
+    "defaultMessage": "Теми"
+  },
   "feature.toolsSidebar.decompiler": {
     "defaultMessage": "Декомпілятор"
   },
@@ -155,8 +206,68 @@
   "feature.translateDescription.title": {
     "defaultMessage": "Перекласти опис"
   },
+  "popup.creator.analytics": {
+    "defaultMessage": "Аналітика"
+  },
+  "popup.creator.availableNow": {
+    "defaultMessage": "Доступно зараз"
+  },
+  "popup.creator.balance": {
+    "defaultMessage": "Рахунок"
+  },
+  "popup.creator.createProject": {
+    "defaultMessage": "Створити проєкт"
+  },
+  "popup.creator.downloads": {
+    "defaultMessage": "Завантаження"
+  },
+  "popup.creator.estimated": {
+    "defaultMessage": "Орієнтовно {date}"
+  },
+  "popup.creator.failed": {
+    "defaultMessage": "Не вдалося завантажити аналітичні дані"
+  },
+  "popup.creator.fullAnalytics": {
+    "defaultMessage": "Відкрити повну аналітику"
+  },
+  "popup.creator.fullRevenue": {
+    "defaultMessage": "Відкрити повну інформацію про доходи"
+  },
+  "popup.creator.loading": {
+    "defaultMessage": "Завантаження ваших проєктів…"
+  },
+  "popup.creator.noProjectsDescription": {
+    "defaultMessage": "Після публікації проєкту тут відображаються кількість переглядів, завантажень та дохід від нього."
+  },
+  "popup.creator.noProjectsTitle": {
+    "defaultMessage": "Поки що немає проєктів"
+  },
+  "popup.creator.previousPeriod": {
+    "defaultMessage": "Попередній період"
+  },
+  "popup.creator.processing": {
+    "defaultMessage": "Обробка"
+  },
+  "popup.creator.rangeDays": {
+    "defaultMessage": "{days} д"
+  },
+  "popup.creator.revenue": {
+    "defaultMessage": "Дохід"
+  },
+  "popup.creator.signIn": {
+    "defaultMessage": "Увійдіть, щоб переглянути тут свої аналітичні дані та доходи."
+  },
+  "popup.creator.total": {
+    "defaultMessage": "Усього"
+  },
+  "popup.creator.views": {
+    "defaultMessage": "Переглядів"
+  },
   "popup.discordPrompt.dismiss": {
     "defaultMessage": "Відхилити"
+  },
+  "popup.discordPrompt.join": {
+    "defaultMessage": "Приєднатися до сервера"
   },
   "popup.discordPrompt.message": {
     "defaultMessage": "Отримуйте допомогу, діліться відгуками та стежте за оновленнями на сервері Discord."
@@ -166,6 +277,9 @@
   },
   "popup.donatePrompt.dismiss": {
     "defaultMessage": "Відхилити"
+  },
+  "popup.donatePrompt.donate": {
+    "defaultMessage": "Підтримка"
   },
   "popup.donatePrompt.message": {
     "defaultMessage": "Modrinth Extras завжди буде безплатним, з відкритим кодом та без реклами. Якщо ви вважаєте його корисним, розгляньте можливість підтримати його розробку невеликим пожертвуванням."
@@ -188,6 +302,12 @@
   "popup.footer.updateAvailable": {
     "defaultMessage": "Доступне оновлення"
   },
+  "popup.found.looking": {
+    "defaultMessage": "Шукаємо цей проєкт на Modrinth…"
+  },
+  "popup.found.title": {
+    "defaultMessage": "Також на Modrinth"
+  },
   "popup.group.extension": {
     "defaultMessage": "Розширення"
   },
@@ -197,8 +317,215 @@
   "popup.group.sidebar": {
     "defaultMessage": "Бічна панель"
   },
+  "popup.introductionTour.creator.description": {
+    "defaultMessage": "Слідкуйте за переглядами, завантаженнями та доходами від ваших проєктів."
+  },
+  "popup.introductionTour.creator.title": {
+    "defaultMessage": "Творець"
+  },
+  "popup.introductionTour.notifications.description": {
+    "defaultMessage": "Переглядайте свої сповіщення та приймайте запрошення прямо звідси."
+  },
+  "popup.introductionTour.notifications.title": {
+    "defaultMessage": "Повідомлення"
+  },
+  "popup.introductionTour.progress": {
+    "defaultMessage": "{current} з {total}"
+  },
+  "popup.introductionTour.search.description": {
+    "defaultMessage": "Знаходьте моди, збірки, сервери та багато іншого, не відкриваючи Modrinth."
+  },
+  "popup.introductionTour.search.title": {
+    "defaultMessage": "Пошук"
+  },
+  "popup.introductionTour.settings.description": {
+    "defaultMessage": "Налаштуйте всі можливості, які пропонує Modrinth Extras."
+  },
+  "popup.introductionTour.settings.title": {
+    "defaultMessage": "Налаштування"
+  },
+  "popup.introductionTour.settings.updatedDescription": {
+    "defaultMessage": "Налаштування переміщено сюди. Саме тут ви можете налаштувати всі функції, які пропонує Modrinth Extras."
+  },
+  "popup.introductionTour.skip": {
+    "defaultMessage": "Пропустити"
+  },
+  "popup.nav.back": {
+    "defaultMessage": "Назад"
+  },
+  "popup.nav.creator": {
+    "defaultMessage": "Творець"
+  },
+  "popup.nav.notifications": {
+    "defaultMessage": "Повідомлення"
+  },
+  "popup.nav.search": {
+    "defaultMessage": "Пошук"
+  },
+  "popup.nav.settings": {
+    "defaultMessage": "Налаштування"
+  },
+  "popup.notifications.emptyDescription": {
+    "defaultMessage": "Тут з’являються новини про проєкт, запрошення та повідомлення від модераторів."
+  },
+  "popup.notifications.emptyTitle": {
+    "defaultMessage": "Немає непрочитаних повідомлень"
+  },
+  "popup.notifications.failed": {
+    "defaultMessage": "Не вдалося завантажити сповіщення"
+  },
+  "popup.notifications.loading": {
+    "defaultMessage": "Завантаження ваших повідомлень…"
+  },
+  "popup.notifications.markAllAsRead": {
+    "defaultMessage": "Позначити все як прочитане"
+  },
+  "popup.notifications.signIn": {
+    "defaultMessage": "Увійдіть, щоб переглянути тут свої повідомлення."
+  },
+  "popup.notifications.unread": {
+    "defaultMessage": "Непрочитане"
+  },
+  "popup.notifications.viewAll": {
+    "defaultMessage": "Переглянути все"
+  },
+  "popup.notifications.viewHistory": {
+    "defaultMessage": "Переглянути історію"
+  },
+  "popup.project.by": {
+    "defaultMessage": "від {author}"
+  },
+  "popup.project.environment.client": {
+    "defaultMessage": "Клієнт"
+  },
+  "popup.project.environment.clientAndServer": {
+    "defaultMessage": "Клієнт та сервер"
+  },
+  "popup.project.environment.clientOrServer": {
+    "defaultMessage": "Клієнт чи сервер"
+  },
+  "popup.project.environment.dedicatedServer": {
+    "defaultMessage": "Виділений сервер"
+  },
+  "popup.project.environment.server": {
+    "defaultMessage": "Сервер"
+  },
+  "popup.project.environment.singleplayer": {
+    "defaultMessage": "Гра наодинці"
+  },
+  "popup.resetSettings.button": {
+    "defaultMessage": "Скинути"
+  },
+  "popup.resetSettings.cancel": {
+    "defaultMessage": "Скасувати"
+  },
+  "popup.resetSettings.confirmMessage": {
+    "defaultMessage": "Усі налаштування повернуться до типових значень, включаючи мову та макет бічної панелі, а ваші власні теми будуть видалені. Цю дію неможливо скасувати."
+  },
+  "popup.resetSettings.confirmTitle": {
+    "defaultMessage": "Скинути всі налаштування?"
+  },
+  "popup.resetSettings.description": {
+    "defaultMessage": "Повернути усі налаштування до типових значень і видалити власні теми."
+  },
+  "popup.resetSettings.title": {
+    "defaultMessage": "Скинути всі налаштування"
+  },
+  "popup.search.clear": {
+    "defaultMessage": "Очистити пошук"
+  },
+  "popup.search.failedHeading": {
+    "defaultMessage": "Не вдалося здійснити пошук"
+  },
+  "popup.search.noResults": {
+    "defaultMessage": "Проєктів не знайдено"
+  },
+  "popup.search.placeholder": {
+    "defaultMessage": "Пошук у Modrinth"
+  },
+  "popup.search.placeholder.datapack": {
+    "defaultMessage": "Пошук пакетів даних"
+  },
+  "popup.search.placeholder.mod": {
+    "defaultMessage": "Пошук модів"
+  },
+  "popup.search.placeholder.modpack": {
+    "defaultMessage": "Пошук збірок"
+  },
+  "popup.search.placeholder.plugin": {
+    "defaultMessage": "Пошук плаґінів"
+  },
+  "popup.search.placeholder.resourcepack": {
+    "defaultMessage": "Пошук пакетів ресурсів"
+  },
+  "popup.search.placeholder.server": {
+    "defaultMessage": "Пошук серверів"
+  },
+  "popup.search.placeholder.shader": {
+    "defaultMessage": "Пошук шейдерів"
+  },
+  "popup.search.searching": {
+    "defaultMessage": "Пошук…"
+  },
+  "popup.search.type.all": {
+    "defaultMessage": "Усе"
+  },
+  "popup.search.type.datapack": {
+    "defaultMessage": "Пакети даних"
+  },
+  "popup.search.type.mod": {
+    "defaultMessage": "Моди"
+  },
+  "popup.search.type.modpack": {
+    "defaultMessage": "Збірки"
+  },
+  "popup.search.type.plugin": {
+    "defaultMessage": "Плаґіни"
+  },
+  "popup.search.type.resourcepack": {
+    "defaultMessage": "Пакети ресурсів"
+  },
+  "popup.search.type.server": {
+    "defaultMessage": "Сервери"
+  },
+  "popup.search.type.shader": {
+    "defaultMessage": "Шейдери"
+  },
+  "popup.signIn.button": {
+    "defaultMessage": "Увійти"
+  },
+  "popup.signIn.title": {
+    "defaultMessage": "Увійти до Modrinth"
+  },
   "popup.tab.projects": {
     "defaultMessage": "Проєкти"
+  },
+  "quickActionProfiles.choose": {
+    "defaultMessage": "Виберіть профіль"
+  },
+  "quickActionProfiles.defaultName": {
+    "defaultMessage": "Профіль"
+  },
+  "quickActionProfiles.delete": {
+    "defaultMessage": "Видалити профіль"
+  },
+  "quickActionProfiles.limit": {
+    "defaultMessage": "Ви можете мати до {max} профілей."
+  },
+  "quickActionProfiles.name": {
+    "defaultMessage": "Назва профілю"
+  },
+  "quickActionProfiles.new": {
+    "defaultMessage": "Новий профіль"
+  },
+  "quickActionProfiles.profile": {
+    "defaultMessage": "Профіль"
+  },
+  "quickActionProfiles.rename": {
+    "defaultMessage": "Перейменувати профіль"
+  },
+  "quickActionProfiles.save": {
+    "defaultMessage": "Зберегти в профіль"
   },
   "search.any": {
     "defaultMessage": "Будь-який"
