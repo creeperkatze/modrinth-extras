@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+### Added
+
+- Choice between opening Modrinth in the current tab or a new tab from CurseForge.
+- CurseForge results on Google, Bing and DuckDuckGo can be hidden or complemented with an Open on Modrinth button. Access to those search engines is only requested when you turn the option on.
+
+### Changed
+
+- CurseForge redirect is now CurseForge integration. Instead of redirecting you automatically, it adds an Open on Modrinth button next to CurseForge's Download buttons.
+
 ## [2.0.0] - 2026-11-22
 
 ### Added

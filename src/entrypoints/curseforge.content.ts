@@ -1,14 +1,19 @@
 import { type Labrinth, ModrinthApiError } from '@modrinth/api-client'
 
 import { modrinthClient } from '../api/client'
-import { getSettings } from '../core/settings'
+import { detectBrowserLocale, i18n } from '../core/i18n/i18n'
+import { followSettingsChanges, loadSettingsStore, useSettings } from '../core/settings-store'
+import { hideModrinthButton, showModrinthButton } from '../features/curseforge-integration/button'
 
 async function getProjectBySlug(slug: string): Promise<Labrinth.Projects.v3.Project | null> {
 	try {
 		return await modrinthClient.labrinth.projects_v3.get(slug)
 	} catch (err) {
 		if (err instanceof ModrinthApiError && err.statusCode === 404) return null
-		console.error(`[Modrinth Extras] CurseForge redirect: Failed to fetch project "${slug}":`, err)
+		console.error(
+			`[Modrinth Extras] CurseForge integration: Failed to fetch project "${slug}":`,
+			err,
+		)
 		return null
 	}
 }
@@ -17,7 +22,7 @@ async function searchProjects(title: string): Promise<Labrinth.Projects.v2.Searc
 	try {
 		return await modrinthClient.labrinth.projects_v2.search({ query: title, limit: 5 })
 	} catch (err) {
-		console.error(`[Modrinth Extras] CurseForge redirect: Failed to search for "${title}":`, err)
+		console.error(`[Modrinth Extras] CurseForge integration: Failed to search for "${title}":`, err)
 		return null
 	}
 }
@@ -89,34 +94,29 @@ function waitForTitleChange(oldTitle: string): Promise<void> {
 	})
 }
 
-async function tryRedirect(waitForDom = false): Promise<void> {
+async function findModrinthProject(waitForDom = false): Promise<string | null> {
 	const titleAtNavigation = document.title
-
-	const settings = await getSettings()
-	if (!settings.curseforgeRedirect.enabled) {
-		return
-	}
-
 	const match = window.location.pathname.match(
 		/^\/minecraft\/(?:mc-mods|modpacks|shaders|bukkit-plugins|texture-packs|data-packs)\/([^/]+)/,
 	)
 	const slug = match?.[1]
-	if (!slug) return
+	if (!slug) return null
 
-	console.log(`[Modrinth Extras] CurseForge redirect: Trying slug "${slug}"`)
+	console.log(`[Modrinth Extras] CurseForge integration: Trying slug "${slug}"`)
 
 	const direct = await getProjectBySlug(slug)
 	if (direct) {
 		const projectType = direct.project_types[0]
-		if (!projectType || !direct.slug) return
+		if (!projectType || !direct.slug) return null
 		console.log(
-			`[Modrinth Extras] CurseForge redirect: Direct slug match, redirecting to ${projectType}/${direct.slug}`,
+			`[Modrinth Extras] CurseForge integration: Direct slug match: ${projectType}/${direct.slug}`,
 		)
-		window.location.href = `https://modrinth.com/${projectType}/${direct.slug}`
-		return
+		return `https://modrinth.com/${projectType}/${direct.slug}`
 	}
 
-	console.log('[Modrinth Extras] CurseForge redirect: No direct slug match, falling back to search')
+	console.log(
+		'[Modrinth Extras] CurseForge integration: No direct slug match, falling back to search',
+	)
 
 	// Wait for CurseForge's SPA navigation to finish before reading the new page metadata
 	if (waitForDom) {
@@ -128,47 +128,75 @@ async function tryRedirect(waitForDom = false): Promise<void> {
 
 	if (!cfAuthor) {
 		console.log(
-			'[Modrinth Extras] CurseForge redirect: Could not determine author, aborting to avoid false redirect',
+			'[Modrinth Extras] CurseForge integration: Could not determine author, aborting to avoid a false match',
 		)
-		return
+		return null
 	}
 
 	const searchResult = await searchProjects(title)
 	if (!searchResult?.hits?.length) {
-		console.log(`[Modrinth Extras] CurseForge redirect: No search results for "${title}"`)
-		return
+		console.log(`[Modrinth Extras] CurseForge integration: No search results for "${title}"`)
+		return null
 	}
 
 	console.log(
-		`[Modrinth Extras] CurseForge redirect: ${searchResult.hits.length} result(s), checking authors`,
+		`[Modrinth Extras] CurseForge integration: ${searchResult.hits.length} result(s), checking authors`,
 	)
 	for (const hit of searchResult.hits) {
 		if (roughlyMatches(cfAuthor, hit.author)) {
 			console.log(
-				`[Modrinth Extras] CurseForge redirect: Author match for CurseForge author "${cfAuthor}": "${hit.author}", redirecting to ${hit.project_type}/${hit.slug}`,
+				`[Modrinth Extras] CurseForge integration: Author match for CurseForge author "${cfAuthor}": "${hit.author}", matched ${hit.project_type}/${hit.slug}`,
 			)
-			window.location.href = `https://modrinth.com/${hit.project_type}/${hit.slug}`
-			return
+			return `https://modrinth.com/${hit.project_type}/${hit.slug}`
 		}
 	}
 
-	console.log('[Modrinth Extras] CurseForge redirect: No author match found, not redirecting')
+	console.log('[Modrinth Extras] CurseForge integration: No author match found')
+	return null
+}
+
+let lookupAttempt = 0
+
+async function updateModrinthButton(waitForDom = false): Promise<void> {
+	const attempt = ++lookupAttempt
+	const pageUrl = window.location.href
+	hideModrinthButton()
+
+	const settings = await loadSettingsStore()
+	if (attempt !== lookupAttempt || !settings.curseforgeIntegration.enabled) return
+
+	const url = await findModrinthProject(waitForDom)
+	if (attempt !== lookupAttempt || window.location.href !== pageUrl || !url) return
+
+	showModrinthButton(url)
 }
 
 export default defineContentScript({
 	matches: ['https://www.curseforge.com/*'],
+	cssInjectionMode: 'manual',
 	runAt: 'document_idle',
 
 	main(ctx) {
-		console.log('[Modrinth Extras] CurseForge redirect: content script loaded')
+		console.log('[Modrinth Extras] CurseForge integration: content script loaded')
+		const settings = useSettings()
+		const applyLocale = () => {
+			i18n.global.locale.value = settings.locale.value || detectBrowserLocale()
+		}
+		void loadSettingsStore().then(applyLocale)
+		const stopFollowingSettings = followSettingsChanges(applyLocale)
 
 		ctx.addEventListener(window, 'modrinth-extras:cf-navigated', () => {
 			console.log(
-				`[Modrinth Extras] CurseForge redirect: SPA navigation detected to ${window.location.pathname}`,
+				`[Modrinth Extras] CurseForge integration: SPA navigation detected to ${window.location.pathname}`,
 			)
-			tryRedirect(true)
+			void updateModrinthButton(true)
 		})
 
-		tryRedirect()
+		ctx.onInvalidated(() => {
+			lookupAttempt++
+			stopFollowingSettings()
+			hideModrinthButton()
+		})
+		void updateModrinthButton()
 	},
 })

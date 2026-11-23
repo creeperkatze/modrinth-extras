@@ -170,7 +170,26 @@
 					:disabled-tooltip="f.disabledTooltip"
 					@update:model-value="updateEnabled(f.key, $event)"
 					@action="f.onAction?.()"
-				/>
+				>
+					<template v-if="f.options">
+						<template v-for="opt in f.options.filter((o) => o.visible?.() ?? true)" :key="opt.key">
+							<OptionFieldToggle
+								v-if="opt.type === 'toggle'"
+								:label="opt.label"
+								:model-value="!!(settings[f.key] as unknown as Record<string, boolean>)[opt.key]"
+								@update:model-value="updateOption(f.key, opt.key, $event)"
+							/>
+							<OptionFieldSelect
+								v-else
+								:label="opt.label"
+								:model-value="(settings[f.key] as unknown as Record<string, string>)[opt.key] ?? ''"
+								:items="opt.items"
+								:include-any="opt.includeAny ?? true"
+								@update:model-value="updateOption(f.key, opt.key, $event)"
+							/>
+						</template>
+					</template>
+				</FeatureRow>
 				<ResetSettingsCard @reset="resetSettings" />
 			</FeatureGroup>
 		</ScrollablePanel>
@@ -516,13 +535,41 @@ const messages = defineMessages({
 		id: 'feature.browserNotifications.sendTest',
 		defaultMessage: 'Send test',
 	},
-	'feature.curseforgeRedirect.title': {
-		id: 'feature.curseforgeRedirect.title',
-		defaultMessage: 'CurseForge redirect',
+	'feature.curseforgeIntegration.title': {
+		id: 'feature.curseforgeIntegration.title',
+		defaultMessage: 'CurseForge integration',
 	},
-	'feature.curseforgeRedirect.description': {
-		id: 'feature.curseforgeRedirect.description',
-		defaultMessage: 'Redirect CurseForge project pages to Modrinth when available.',
+	'feature.curseforgeIntegration.description': {
+		id: 'feature.curseforgeIntegration.description',
+		defaultMessage: 'Open CurseForge projects on Modrinth from their pages or from search results.',
+	},
+	'feature.curseforgeIntegration.openIn': {
+		id: 'feature.curseforgeIntegration.openIn',
+		defaultMessage: 'Open in',
+	},
+	'feature.curseforgeIntegration.openIn.current': {
+		id: 'feature.curseforgeIntegration.openIn.current',
+		defaultMessage: 'Current tab',
+	},
+	'feature.curseforgeIntegration.openIn.new': {
+		id: 'feature.curseforgeIntegration.openIn.new',
+		defaultMessage: 'New tab',
+	},
+	'feature.curseforgeIntegration.searchResults': {
+		id: 'feature.curseforgeIntegration.searchResults',
+		defaultMessage: 'Search results',
+	},
+	'feature.curseforgeIntegration.searchResultsAction': {
+		id: 'feature.curseforgeIntegration.searchResultsAction',
+		defaultMessage: 'Action',
+	},
+	'feature.curseforgeIntegration.searchResults.show': {
+		id: 'feature.curseforgeIntegration.searchResults.show',
+		defaultMessage: 'Open on Modrinth',
+	},
+	'feature.curseforgeIntegration.searchResults.hide': {
+		id: 'feature.curseforgeIntegration.searchResults.hide',
+		defaultMessage: 'Hide CurseForge results',
 	},
 	'feature.telemetry.title': { id: 'feature.telemetry.title', defaultMessage: 'Telemetry' },
 	'feature.telemetry.description': {
@@ -587,6 +634,28 @@ const DAY_RANGE_ITEMS = computed<SelectItem[]>(() =>
 		value: String(days),
 	})),
 )
+
+const CURSEFORGE_INTEGRATION_TAB_ITEMS = computed<SelectItem[]>(() => [
+	{
+		label: formatMessage(messages['feature.curseforgeIntegration.openIn.current']),
+		value: 'current',
+	},
+	{
+		label: formatMessage(messages['feature.curseforgeIntegration.openIn.new']),
+		value: 'new',
+	},
+])
+
+const CURSEFORGE_SEARCH_ACTION_ITEMS = computed<SelectItem[]>(() => [
+	{
+		label: formatMessage(messages['feature.curseforgeIntegration.searchResults.show']),
+		value: 'show',
+	},
+	{
+		label: formatMessage(messages['feature.curseforgeIntegration.searchResults.hide']),
+		value: 'hide',
+	},
+])
 
 // Colored per loader like Modrinth's search filters. Inline so it wins over the dropdown's icon color.
 function loaderIcon(loader: string): Component | undefined {
@@ -894,10 +963,32 @@ const extensionFeatures = computed<FeatureDef[]>(() => [
 		},
 	},
 	{
-		key: 'curseforgeRedirect',
+		key: 'curseforgeIntegration',
 		icon: CurseForgeIcon,
-		title: formatMessage(messages['feature.curseforgeRedirect.title']),
-		description: formatMessage(messages['feature.curseforgeRedirect.description']),
+		title: formatMessage(messages['feature.curseforgeIntegration.title']),
+		description: formatMessage(messages['feature.curseforgeIntegration.description']),
+		options: [
+			{
+				key: 'openIn',
+				type: 'select',
+				label: formatMessage(messages['feature.curseforgeIntegration.openIn']),
+				items: CURSEFORGE_INTEGRATION_TAB_ITEMS.value,
+				includeAny: false,
+			},
+			{
+				key: 'searchResults',
+				type: 'toggle',
+				label: formatMessage(messages['feature.curseforgeIntegration.searchResults']),
+			},
+			{
+				key: 'searchResultsAction',
+				type: 'select',
+				label: formatMessage(messages['feature.curseforgeIntegration.searchResultsAction']),
+				items: CURSEFORGE_SEARCH_ACTION_ITEMS.value,
+				includeAny: false,
+				visible: () => settings.curseforgeIntegration.searchResults,
+			},
+		],
 	},
 	{
 		key: 'telemetry',

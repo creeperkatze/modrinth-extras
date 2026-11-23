@@ -38,11 +38,32 @@
   "feature.compareVersions.title": {
     "defaultMessage": "Compare versions"
   },
-  "feature.curseforgeRedirect.description": {
-    "defaultMessage": "Redirect CurseForge project pages to Modrinth when available."
+  "feature.curseforgeIntegration.description": {
+    "defaultMessage": "Open CurseForge projects on Modrinth from their pages or from search results."
   },
-  "feature.curseforgeRedirect.title": {
-    "defaultMessage": "CurseForge redirect"
+  "feature.curseforgeIntegration.openIn": {
+    "defaultMessage": "Open in"
+  },
+  "feature.curseforgeIntegration.openIn.current": {
+    "defaultMessage": "Current tab"
+  },
+  "feature.curseforgeIntegration.openIn.new": {
+    "defaultMessage": "New tab"
+  },
+  "feature.curseforgeIntegration.searchResults": {
+    "defaultMessage": "Search results"
+  },
+  "feature.curseforgeIntegration.searchResults.hide": {
+    "defaultMessage": "Hide CurseForge results"
+  },
+  "feature.curseforgeIntegration.searchResults.show": {
+    "defaultMessage": "Open on Modrinth"
+  },
+  "feature.curseforgeIntegration.searchResultsAction": {
+    "defaultMessage": "Action"
+  },
+  "feature.curseforgeIntegration.title": {
+    "defaultMessage": "CurseForge integration"
   },
   "feature.dependencyExplorer.description": {
     "defaultMessage": "Interactive graph for exploring the full dependency tree."

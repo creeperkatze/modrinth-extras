@@ -57,7 +57,12 @@ export interface ExtensionSettings {
 	reviews: { enabled: boolean; moddex: boolean; curseforge: boolean; spigot: boolean }
 	notificationBadge: { enabled: boolean }
 	desktopNotifications: { enabled: boolean }
-	curseforgeRedirect: { enabled: boolean }
+	curseforgeIntegration: {
+		enabled: boolean
+		openIn: 'current' | 'new'
+		searchResults: boolean
+		searchResultsAction: 'show' | 'hide'
+	}
 	themes: { enabled: boolean; presets: boolean; customAccent: boolean; accentColor: string }
 	telemetry: { enabled: boolean }
 }
@@ -92,7 +97,12 @@ export const DEFAULTS: ExtensionSettings = {
 	reviews: { enabled: true, moddex: true, curseforge: true, spigot: true },
 	notificationBadge: { enabled: true },
 	desktopNotifications: { enabled: false },
-	curseforgeRedirect: { enabled: false },
+	curseforgeIntegration: {
+		enabled: false,
+		openIn: 'current',
+		searchResults: false,
+		searchResultsAction: 'show',
+	},
 	themes: { enabled: true, presets: true, customAccent: false, accentColor: '#1bd96a' },
 	telemetry: { enabled: true },
 }

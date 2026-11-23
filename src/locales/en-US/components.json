@@ -152,6 +152,12 @@
   "curseforgeComments.writeComment": {
     "defaultMessage": "Write a comment"
   },
+  "curseforgeIntegrationButton.open": {
+    "defaultMessage": "Open on Modrinth"
+  },
+  "curseforgeSearchResult.open": {
+    "defaultMessage": "Open on Modrinth"
+  },
   "customTheme.accent": {
     "defaultMessage": "Accent"
   },
