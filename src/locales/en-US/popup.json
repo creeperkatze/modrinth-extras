@@ -57,7 +57,7 @@
     "defaultMessage": "Hide result"
   },
   "feature.curseforgeIntegration.searchResults.show": {
-    "defaultMessage": "Add link"
+    "defaultMessage": "Show Button"
   },
   "feature.curseforgeIntegration.searchResultsAction": {
     "defaultMessage": "Action"

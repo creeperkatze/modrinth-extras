@@ -12,8 +12,8 @@
 </template>
 
 <script setup lang="ts">
-import { ModrinthIcon } from '@modrinth/assets'
-import { defineMessages, useVIntl } from '@modrinth/ui'
+import ModrinthIcon from '@modrinth/assets/branding/logo.svg?component'
+import { defineMessages, useVIntl } from '@modrinth/ui/src/composables/i18n.ts'
 import { computed } from 'vue'
 
 import { useSettings } from '../../core/settings-store'

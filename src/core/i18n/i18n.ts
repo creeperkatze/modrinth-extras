@@ -1,10 +1,9 @@
 import {
 	createMessageCompiler,
 	type CrowdinMessages,
-	I18N_INJECTION_KEY,
-	type I18nContext,
 	transformCrowdinMessages,
-} from '@modrinth/ui'
+} from '@modrinth/ui/src/composables/i18n.ts'
+import { I18N_INJECTION_KEY, type I18nContext } from '@modrinth/ui/src/providers/i18n.ts'
 import type { App } from 'vue'
 import { createI18n } from 'vue-i18n'
 
