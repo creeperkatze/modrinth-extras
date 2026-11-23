@@ -20,8 +20,17 @@
   "feature.browserNotifications.exampleTitle": {
     "defaultMessage": "测试通知"
   },
+  "feature.browserNotifications.sendTest": {
+    "defaultMessage": "发送测试通知"
+  },
   "feature.browserNotifications.title": {
     "defaultMessage": "浏览器通知"
+  },
+  "feature.collectionDownload.description": {
+    "defaultMessage": "将合集下载为整合包或zip文件，其中包含所有支持您游戏版本和加载器的项目。"
+  },
+  "feature.collectionDownload.title": {
+    "defaultMessage": "收藏夹下载"
   },
   "feature.compareVersions.description": {
     "defaultMessage": "从版本页、版本列表和更新日志比较不同版本的在 modsrc 中反编译后的代码。"
@@ -38,14 +47,23 @@
   "feature.dependencyExplorer.description": {
     "defaultMessage": "用于探查完整依赖树的交互式图表。"
   },
+  "feature.dependencyExplorer.disabledTooltip": {
+    "defaultMessage": "需要先启用“依赖项”侧边栏"
+  },
   "feature.dependencyExplorer.title": {
     "defaultMessage": "依赖关系浏览器"
   },
   "feature.dependencySidebar.description": {
     "defaultMessage": "项目页面上的可折叠依赖树。"
   },
+  "feature.dependencySidebar.title": {
+    "defaultMessage": "依赖项"
+  },
   "feature.discordSidebar.description": {
     "defaultMessage": "已关联 Discord 服务器的名称、描述、成员数量及在线人数。"
+  },
+  "feature.discordSidebar.title": {
+    "defaultMessage": "Discord"
   },
   "feature.galleryBackground.description": {
     "defaultMessage": "在项目页面上将精选图库图片显示为背景横幅。"
@@ -56,11 +74,20 @@
   "feature.githubSidebar.description": {
     "defaultMessage": "显示已关联的 GitHub、GitLab、Codeberg 和 Bitbucket 仓库的 Star、Issue、Pull Request 及 Fork 数量。"
   },
+  "feature.githubSidebar.title": {
+    "defaultMessage": "代码仓库"
+  },
   "feature.modgradeSidebar.description": {
     "defaultMessage": "展示项目的 Modgrade 安全检查结果。"
   },
+  "feature.modgradeSidebar.title": {
+    "defaultMessage": "Modgrade"
+  },
   "feature.modpacksSidebar.description": {
     "defaultMessage": "显示包含该模组的所有整合包。"
+  },
+  "feature.modpacksSidebar.title": {
+    "defaultMessage": "整合包"
   },
   "feature.monetizationBadge.description": {
     "defaultMessage": "在侧边栏中显示项目的盈利状态。"
@@ -83,11 +110,41 @@
   "feature.platformsSidebar.description": {
     "defaultMessage": "在CurseForge、Hangar和SpigotMC上找到同一个项目或作者。"
   },
+  "feature.platformsSidebar.title": {
+    "defaultMessage": "其他平台"
+  },
+  "feature.quickActions.description": {
+    "defaultMessage": "直接从项目卡片下载、关注和收藏项目。"
+  },
+  "feature.quickActions.downloadDependencies": {
+    "defaultMessage": "下载依赖项"
+  },
+  "feature.quickActions.gameVersion": {
+    "defaultMessage": "游戏版本"
+  },
+  "feature.quickActions.modLoader": {
+    "defaultMessage": "模组加载器"
+  },
+  "feature.quickActions.pluginLoader": {
+    "defaultMessage": "插件加载器"
+  },
+  "feature.quickActions.shaderLoader": {
+    "defaultMessage": "光影包加载器"
+  },
+  "feature.quickActions.title": {
+    "defaultMessage": "快捷操作"
+  },
   "feature.quickSearch.description": {
     "defaultMessage": "按 Ctrl+K 或 / 键，即可使用类似命令面板的搜索功能，支持按加载器、版本、类别和类型进行多维标签搜索。"
   },
   "feature.quickSearch.title": {
     "defaultMessage": "快速搜索"
+  },
+  "feature.reviews.curseforge": {
+    "defaultMessage": "CurseForge 评论"
+  },
+  "feature.reviews.description": {
+    "defaultMessage": "为项目页添加一个“评论”选项卡，展示来自 ModDex、CurseForge 和 SpigotMC 的评论。"
   },
   "feature.reviews.moddex": {
     "defaultMessage": "ModDex 评论"
@@ -107,6 +164,27 @@
   "feature.telemetry.title": {
     "defaultMessage": "遥测数据"
   },
+  "feature.themes.accentColor": {
+    "defaultMessage": "强调色"
+  },
+  "feature.themes.accentLowContrast": {
+    "defaultMessage": "在你的 Modrinth 主题上，这种颜色很难看清。"
+  },
+  "feature.themes.accentUnreadableButtons": {
+    "defaultMessage": "在您的 Modrinth 主题中，这种颜色的按钮文字很难看清。"
+  },
+  "feature.themes.customAccent": {
+    "defaultMessage": "自定义强调色"
+  },
+  "feature.themes.description": {
+    "defaultMessage": "为 Modrinth 提供更多配色主题，并支持完全自定义。"
+  },
+  "feature.themes.presets": {
+    "defaultMessage": "包含预设主题"
+  },
+  "feature.themes.title": {
+    "defaultMessage": "主题"
+  },
   "feature.toolsSidebar.decompiler": {
     "defaultMessage": "反编译器"
   },
@@ -115,6 +193,9 @@
   },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "模组管理器"
+  },
+  "feature.toolsSidebar.title": {
+    "defaultMessage": "工具"
   },
   "feature.translateDescription.description": {
     "defaultMessage": "当项目简介语言与你的语言不同时，在本地设备上将其翻译为你的语言。"
@@ -125,8 +206,68 @@
   "feature.translateDescription.title": {
     "defaultMessage": "翻译项目简介"
   },
+  "popup.creator.analytics": {
+    "defaultMessage": "分析"
+  },
+  "popup.creator.availableNow": {
+    "defaultMessage": "可提现"
+  },
+  "popup.creator.balance": {
+    "defaultMessage": "余额"
+  },
+  "popup.creator.createProject": {
+    "defaultMessage": "创建项目"
+  },
+  "popup.creator.downloads": {
+    "defaultMessage": "下载量"
+  },
+  "popup.creator.estimated": {
+    "defaultMessage": "预计于 {date} 到账"
+  },
+  "popup.creator.failed": {
+    "defaultMessage": "无法加载分析数据"
+  },
+  "popup.creator.fullAnalytics": {
+    "defaultMessage": "查看完整分析"
+  },
+  "popup.creator.fullRevenue": {
+    "defaultMessage": "查看完整收入信息"
+  },
+  "popup.creator.loading": {
+    "defaultMessage": "正在加载您的项目……"
+  },
+  "popup.creator.noProjectsDescription": {
+    "defaultMessage": "发布项目后，其浏览量、下载量和收益数据将显示在此处。"
+  },
+  "popup.creator.noProjectsTitle": {
+    "defaultMessage": "尚无项目"
+  },
+  "popup.creator.previousPeriod": {
+    "defaultMessage": "上一周期"
+  },
+  "popup.creator.processing": {
+    "defaultMessage": "结算中"
+  },
+  "popup.creator.rangeDays": {
+    "defaultMessage": "{days} 天"
+  },
+  "popup.creator.revenue": {
+    "defaultMessage": "收益"
+  },
+  "popup.creator.signIn": {
+    "defaultMessage": "请登录以在此处查看您的收益及相关分析。"
+  },
+  "popup.creator.total": {
+    "defaultMessage": "总计"
+  },
+  "popup.creator.views": {
+    "defaultMessage": "浏览量"
+  },
   "popup.discordPrompt.dismiss": {
     "defaultMessage": "忽略"
+  },
+  "popup.discordPrompt.join": {
+    "defaultMessage": "加入服务器"
   },
   "popup.discordPrompt.message": {
     "defaultMessage": "在我们的 Discord 服务器获取帮助、分享反馈并关注最新动态。"
@@ -136,6 +277,9 @@
   },
   "popup.donatePrompt.dismiss": {
     "defaultMessage": "忽略"
+  },
+  "popup.donatePrompt.donate": {
+    "defaultMessage": "捐赠"
   },
   "popup.donatePrompt.message": {
     "defaultMessage": "Modrinth Extras 将永远保持免费、开源且无广告。如果你觉得它对你有帮助，可以考虑通过小额赞助来支持其后续开发。"
@@ -158,6 +302,9 @@
   "popup.footer.updateAvailable": {
     "defaultMessage": "有可用更新"
   },
+  "popup.found.looking": {
+    "defaultMessage": "在Modrinth上寻找这个项目……"
+  },
   "popup.group.extension": {
     "defaultMessage": "扩展"
   },
@@ -167,8 +314,215 @@
   "popup.group.sidebar": {
     "defaultMessage": "侧边栏"
   },
+  "popup.introductionTour.creator.description": {
+    "defaultMessage": "密切关注您项目的浏览量、下载量和收入。"
+  },
+  "popup.introductionTour.creator.title": {
+    "defaultMessage": "创作者"
+  },
+  "popup.introductionTour.notifications.description": {
+    "defaultMessage": "您可以在这里直接查看通知并接受邀请。"
+  },
+  "popup.introductionTour.notifications.title": {
+    "defaultMessage": "通知"
+  },
+  "popup.introductionTour.progress": {
+    "defaultMessage": "{current}，总计 {total}"
+  },
+  "popup.introductionTour.search.description": {
+    "defaultMessage": "无需打开 Modrinth，即可查找模组、整合包、服务器等内容。"
+  },
+  "popup.introductionTour.search.title": {
+    "defaultMessage": "搜索"
+  },
+  "popup.introductionTour.settings.description": {
+    "defaultMessage": "自定义 Modrinth Extra 所提供的一切。"
+  },
+  "popup.introductionTour.settings.title": {
+    "defaultMessage": "设置"
+  },
+  "popup.introductionTour.settings.updatedDescription": {
+    "defaultMessage": "设置已移至此处。您可以在这里自定义 Modrinth Extras 提供的所有功能。"
+  },
+  "popup.introductionTour.skip": {
+    "defaultMessage": "跳过"
+  },
+  "popup.nav.back": {
+    "defaultMessage": "返回"
+  },
+  "popup.nav.creator": {
+    "defaultMessage": "创作者"
+  },
+  "popup.nav.notifications": {
+    "defaultMessage": "通知"
+  },
+  "popup.nav.search": {
+    "defaultMessage": "搜索"
+  },
+  "popup.nav.settings": {
+    "defaultMessage": "设置"
+  },
+  "popup.notifications.emptyDescription": {
+    "defaultMessage": "项目更新、邀请以及版主的留言都会显示在这里。"
+  },
+  "popup.notifications.emptyTitle": {
+    "defaultMessage": "没有未读通知"
+  },
+  "popup.notifications.failed": {
+    "defaultMessage": "无法加载通知"
+  },
+  "popup.notifications.loading": {
+    "defaultMessage": "正在加载您的通知……"
+  },
+  "popup.notifications.markAllAsRead": {
+    "defaultMessage": "全部标记为已读"
+  },
+  "popup.notifications.signIn": {
+    "defaultMessage": "请登录以在此查看您的通知。"
+  },
+  "popup.notifications.unread": {
+    "defaultMessage": "未读"
+  },
+  "popup.notifications.viewAll": {
+    "defaultMessage": "查看全部"
+  },
+  "popup.notifications.viewHistory": {
+    "defaultMessage": "查看历史"
+  },
+  "popup.project.by": {
+    "defaultMessage": "作者：{author}"
+  },
+  "popup.project.environment.client": {
+    "defaultMessage": "客户端"
+  },
+  "popup.project.environment.clientAndServer": {
+    "defaultMessage": "客户端和服务端"
+  },
+  "popup.project.environment.clientOrServer": {
+    "defaultMessage": "客户端或服务端"
+  },
+  "popup.project.environment.dedicatedServer": {
+    "defaultMessage": "专用服务器"
+  },
+  "popup.project.environment.server": {
+    "defaultMessage": "服务端"
+  },
+  "popup.project.environment.singleplayer": {
+    "defaultMessage": "单人游戏"
+  },
+  "popup.resetSettings.button": {
+    "defaultMessage": "重置"
+  },
+  "popup.resetSettings.cancel": {
+    "defaultMessage": "取消"
+  },
+  "popup.resetSettings.confirmMessage": {
+    "defaultMessage": "所有设置都将恢复为默认值，包括语言和侧边栏布局，且您的自定义主题将被删除。此操作无法撤销。"
+  },
+  "popup.resetSettings.confirmTitle": {
+    "defaultMessage": "重置所有设置？"
+  },
+  "popup.resetSettings.description": {
+    "defaultMessage": "将所有设置恢复为默认值，并删除您的自定义主题。"
+  },
+  "popup.resetSettings.title": {
+    "defaultMessage": "重置所有设置"
+  },
+  "popup.search.clear": {
+    "defaultMessage": "清空搜索"
+  },
+  "popup.search.failedHeading": {
+    "defaultMessage": "搜索失败"
+  },
+  "popup.search.noResults": {
+    "defaultMessage": "未找到项目"
+  },
+  "popup.search.placeholder": {
+    "defaultMessage": "搜索 Modrinth"
+  },
+  "popup.search.placeholder.datapack": {
+    "defaultMessage": "搜索 数据包"
+  },
+  "popup.search.placeholder.mod": {
+    "defaultMessage": "搜索 模组"
+  },
+  "popup.search.placeholder.modpack": {
+    "defaultMessage": "搜索 整合包"
+  },
+  "popup.search.placeholder.plugin": {
+    "defaultMessage": "搜索 插件"
+  },
+  "popup.search.placeholder.resourcepack": {
+    "defaultMessage": "搜索 资源包"
+  },
+  "popup.search.placeholder.server": {
+    "defaultMessage": "搜索 服务器"
+  },
+  "popup.search.placeholder.shader": {
+    "defaultMessage": "搜索 光影包"
+  },
+  "popup.search.searching": {
+    "defaultMessage": "正在搜索……"
+  },
+  "popup.search.type.all": {
+    "defaultMessage": "全部"
+  },
+  "popup.search.type.datapack": {
+    "defaultMessage": "数据包"
+  },
+  "popup.search.type.mod": {
+    "defaultMessage": "模组"
+  },
+  "popup.search.type.modpack": {
+    "defaultMessage": "整合包"
+  },
+  "popup.search.type.plugin": {
+    "defaultMessage": "插件"
+  },
+  "popup.search.type.resourcepack": {
+    "defaultMessage": "资源包"
+  },
+  "popup.search.type.server": {
+    "defaultMessage": "服务器"
+  },
+  "popup.search.type.shader": {
+    "defaultMessage": "光影包"
+  },
+  "popup.signIn.button": {
+    "defaultMessage": "登录"
+  },
+  "popup.signIn.title": {
+    "defaultMessage": "登录到 Modrinth"
+  },
   "popup.tab.projects": {
     "defaultMessage": "项目"
+  },
+  "quickActionProfiles.choose": {
+    "defaultMessage": "选择配置方案"
+  },
+  "quickActionProfiles.defaultName": {
+    "defaultMessage": "配置方案"
+  },
+  "quickActionProfiles.delete": {
+    "defaultMessage": "删除配置方案"
+  },
+  "quickActionProfiles.limit": {
+    "defaultMessage": "您最多可以拥有 {max} 个自配置方案。"
+  },
+  "quickActionProfiles.name": {
+    "defaultMessage": "配置方案名称"
+  },
+  "quickActionProfiles.new": {
+    "defaultMessage": "新建配置方案"
+  },
+  "quickActionProfiles.profile": {
+    "defaultMessage": "配置方案"
+  },
+  "quickActionProfiles.rename": {
+    "defaultMessage": "重命名配置方案"
+  },
+  "quickActionProfiles.save": {
+    "defaultMessage": "保存为配置方案"
   },
   "search.any": {
     "defaultMessage": "任何"

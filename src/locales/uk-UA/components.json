@@ -1,4 +1,106 @@
 {
+  "collectionDownload.button": {
+    "defaultMessage": "Завантажити"
+  },
+  "collectionDownload.cancel": {
+    "defaultMessage": "Скасувати"
+  },
+  "collectionDownload.datapack": {
+    "defaultMessage": "Пакет даних"
+  },
+  "collectionDownload.dependencies": {
+    "defaultMessage": "Включити залежності"
+  },
+  "collectionDownload.dependenciesDescription": {
+    "defaultMessage": "Додає моди, необхідні для роботи включених модів."
+  },
+  "collectionDownload.dependency": {
+    "defaultMessage": "Залежність"
+  },
+  "collectionDownload.download": {
+    "defaultMessage": "Завантажити {count, plural, one {# проєкт} few {# проєкти} many {# проєктів} other {# проєктів}}"
+  },
+  "collectionDownload.downloading": {
+    "defaultMessage": "Завантаження {done} з {total}"
+  },
+  "collectionDownload.exportFailed": {
+    "defaultMessage": "Не вдалося завантажити колекцію"
+  },
+  "collectionDownload.exportFailedText": {
+    "defaultMessage": "Деякі файли не вдалося завантажити. Спробуйте ще раз через деякий час."
+  },
+  "collectionDownload.failed": {
+    "defaultMessage": "Не вдалося завантажити проекти з цієї колекції."
+  },
+  "collectionDownload.gameVersion": {
+    "defaultMessage": "Версія гри"
+  },
+  "collectionDownload.included": {
+    "defaultMessage": "Включно"
+  },
+  "collectionDownload.incompatible": {
+    "defaultMessage": "Несумісно"
+  },
+  "collectionDownload.incompatibleDescription": {
+    "defaultMessage": "Для {loader} {gameVersion} доступних версій немає."
+  },
+  "collectionDownload.incompatibleVersionDescription": {
+    "defaultMessage": "Для {gameVersion} доступної версії немає."
+  },
+  "collectionDownload.loader": {
+    "defaultMessage": "Завантажувач"
+  },
+  "collectionDownload.loading": {
+    "defaultMessage": "Завантаження проєктів…"
+  },
+  "collectionDownload.mod": {
+    "defaultMessage": "Мод"
+  },
+  "collectionDownload.mrpack": {
+    "defaultMessage": "Збірка"
+  },
+  "collectionDownload.mrpackDescription": {
+    "defaultMessage": "Файл .mrpack для імпорту в Modrinth App, Prism Launcher та інші."
+  },
+  "collectionDownload.noLoaderVersion": {
+    "defaultMessage": "Наразі ще немає версії {loader} для {gameVersion}."
+  },
+  "collectionDownload.noneIncluded": {
+    "defaultMessage": "Жоден проєкт не має версії, сумісної з цією версією гри та завантажувачем."
+  },
+  "collectionDownload.nothing": {
+    "defaultMessage": "Жоден із проектів у цій колекції не можна завантажити всіма разом."
+  },
+  "collectionDownload.projectCount": {
+    "defaultMessage": "{count, plural, one {# сумісний проєкт} few {# сумісних проєктів} many {# сумісних проєктів} other {# сумісних проєктів}}"
+  },
+  "collectionDownload.resolvingProgress": {
+    "defaultMessage": "Пошук потрібних версій… {done, number} з {total, number}"
+  },
+  "collectionDownload.resourcepack": {
+    "defaultMessage": "Пакет ресурсів"
+  },
+  "collectionDownload.retry": {
+    "defaultMessage": "Спробувати ще раз"
+  },
+  "collectionDownload.shader": {
+    "defaultMessage": "Шейдер"
+  },
+  "collectionDownload.title": {
+    "defaultMessage": "Завантажити колекцію"
+  },
+  "collectionDownload.unsupported": {
+    "defaultMessage": "Не може бути включено"
+  },
+  "collectionDownload.unsupportedDescription": {
+    "defaultMessage": "Плаґіни та збірки не додаються до екземпляра."
+  },
+  "collectionDownload.zip": {
+    "defaultMessage": "Zip-файл"
+  },
+  "collectionDownload.zipDescription": {
+    "defaultMessage": "Кожен файл розміщений у відповідній теці, готовий до додавання у примірник."
+  },
   "compareVersions.compareWith": {
     "defaultMessage": "Порівняти з"
   },
@@ -49,6 +151,99 @@
   },
   "curseforgeComments.writeComment": {
     "defaultMessage": "Написати коментар"
+  },
+  "customTheme.accent": {
+    "defaultMessage": "Акцент"
+  },
+  "customTheme.accentColor": {
+    "defaultMessage": "Акцентний колір"
+  },
+  "customTheme.accentText": {
+    "defaultMessage": "Текст на акценті"
+  },
+  "customTheme.base": {
+    "defaultMessage": "Базова"
+  },
+  "customTheme.blue": {
+    "defaultMessage": "Синій"
+  },
+  "customTheme.body": {
+    "defaultMessage": "Основний текст"
+  },
+  "customTheme.cancel": {
+    "defaultMessage": "Скасувати"
+  },
+  "customTheme.colors": {
+    "defaultMessage": "Кольори"
+  },
+  "customTheme.createTitle": {
+    "defaultMessage": "Створити тему"
+  },
+  "customTheme.dark": {
+    "defaultMessage": "Темна"
+  },
+  "customTheme.delete": {
+    "defaultMessage": "Видалити"
+  },
+  "customTheme.divider": {
+    "defaultMessage": "Роздільники"
+  },
+  "customTheme.editTitle": {
+    "defaultMessage": "Редагувати тему"
+  },
+  "customTheme.export": {
+    "defaultMessage": "Експортувати"
+  },
+  "customTheme.headings": {
+    "defaultMessage": "Заголовки"
+  },
+  "customTheme.light": {
+    "defaultMessage": "Світла"
+  },
+  "customTheme.name": {
+    "defaultMessage": "Назва"
+  },
+  "customTheme.namePlaceholder": {
+    "defaultMessage": "Моя тема"
+  },
+  "customTheme.orange": {
+    "defaultMessage": "Помаранчевий"
+  },
+  "customTheme.previewButton": {
+    "defaultMessage": "Завантажити"
+  },
+  "customTheme.previewDescription": {
+    "defaultMessage": "Ось так виглядає ваша тема на Modrinth."
+  },
+  "customTheme.previewTitle": {
+    "defaultMessage": "Зразковий проєкт"
+  },
+  "customTheme.purple": {
+    "defaultMessage": "Фіолетовий"
+  },
+  "customTheme.red": {
+    "defaultMessage": "Червоний"
+  },
+  "customTheme.save": {
+    "defaultMessage": "Зберегти"
+  },
+  "customTheme.secondary": {
+    "defaultMessage": "Додатковий текст"
+  },
+  "customTheme.startFrom": {
+    "defaultMessage": "Початок з"
+  },
+  "customTheme.startFromPlaceholder": {
+    "defaultMessage": "Виберіть тему"
+  },
+  "customTheme.surfaces": {
+    "defaultMessage": "Поверхні"
+  },
+  "customTheme.surfacesDescription": {
+    "defaultMessage": "Від фону сторінки зліва до рамок праворуч."
+  },
+  "customTheme.text": {
+    "defaultMessage": "Текст"
   },
   "dependencyExplorer.centerView": {
     "defaultMessage": "Центрувати перегляд"
@@ -398,6 +593,42 @@
   "projectReviews.tab": {
     "defaultMessage": "Відгуки"
   },
+  "quickActions.checkingDownload": {
+    "defaultMessage": "Перевірка наявної версії…"
+  },
+  "quickActions.copied": {
+    "defaultMessage": "Скопійовано!"
+  },
+  "quickActions.copyLink": {
+    "defaultMessage": "Скопіювати посилання"
+  },
+  "quickActions.download": {
+    "defaultMessage": "Завантажити"
+  },
+  "quickActions.downloadUnavailable": {
+    "defaultMessage": "{loader, select, none {Немає доступної версії для {version}} other {Немає доступної версії для {loader}{version}}}"
+  },
+  "quickActions.follow": {
+    "defaultMessage": "Стежити"
+  },
+  "quickActions.newCollection": {
+    "defaultMessage": "Створити нову колекцію"
+  },
+  "quickActions.noCollections": {
+    "defaultMessage": "Колекцій не знайдено."
+  },
+  "quickActions.save": {
+    "defaultMessage": "Зберегти"
+  },
+  "quickActions.saved": {
+    "defaultMessage": "Збережено"
+  },
+  "quickActions.searchPlaceholder": {
+    "defaultMessage": "Пошук…"
+  },
+  "quickActions.unfollow": {
+    "defaultMessage": "Не стежити"
+  },
   "quickSearch.clearRecent": {
     "defaultMessage": "Очистити останнє"
   },
@@ -446,6 +677,9 @@
   "sidebarLayout.hide": {
     "defaultMessage": "Приховати"
   },
+  "sidebarLayout.resetOrder": {
+    "defaultMessage": "Скинути порядок"
+  },
   "sidebarLayout.revert": {
     "defaultMessage": "Відхилити"
   },
@@ -468,7 +702,7 @@
     "defaultMessage": "Завантажуємо відгуки…"
   },
   "spigotReviews.notFound": {
-    "defaultMessage": "Цей плагін не вдалося знайти на SpigotMC."
+    "defaultMessage": "Цей плаґін не вдалося знайти на SpigotMC."
   },
   "spigotReviews.posted": {
     "defaultMessage": "Опубліковано {time}"
@@ -505,6 +739,42 @@
   },
   "spigotReviews.writeReview": {
     "defaultMessage": "Написати відгук"
+  },
+  "themes.create": {
+    "defaultMessage": "Створити тему"
+  },
+  "themes.delete": {
+    "defaultMessage": "Видалити тему"
+  },
+  "themes.edit": {
+    "defaultMessage": "Редагувати тему"
+  },
+  "themes.import": {
+    "defaultMessage": "Імпортувати"
+  },
+  "themes.importFailed": {
+    "defaultMessage": "Не вдалося імпортувати {file}"
+  },
+  "themes.importInvalid": {
+    "defaultMessage": "Цей файл не є дійсною темою."
+  },
+  "themes.importNewer": {
+    "defaultMessage": "Ця тема створена з використанням нової версії Modrinth Extras. Щоб імпортувати її, оновіть розширення."
+  },
+  "themes.limit": {
+    "defaultMessage": "Ви можете мати до {max} власних тем."
+  },
+  "themes.newTheme": {
+    "defaultMessage": "Моя тема"
+  },
+  "themes.section.classics": {
+    "defaultMessage": "Класика"
+  },
+  "themes.section.custom": {
+    "defaultMessage": "Користувацька"
+  },
+  "themes.section.minecraft": {
+    "defaultMessage": "Minecraft"
   },
   "toolsSidebar.copied": {
     "defaultMessage": "Скопійовано!"

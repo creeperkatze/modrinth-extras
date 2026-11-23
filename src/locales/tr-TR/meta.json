@@ -2,6 +2,9 @@
   "meta.summary": {
     "defaultMessage": "Modrinth'i hem kendi sitesinde hem de ötesinde geliştiren bir tarayıcı uzantısı."
   },
+  "meta.description.more": {
+    "defaultMessage": "Ve burada hepsini listeleyemeyecek kadar çok daha fazla özellik."
+  },
   "meta.description.footer": {
     "defaultMessage": "Tüm özellikler isteğe bağlıdır ve uzantı penceresinden tek tek etkinleştirilebilir.\n\nModrinth Extras <link>açık kaynaklıdır</link>."
   },
