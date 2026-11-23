@@ -1,6 +1,6 @@
 <template>
 	<a
-		class="btn-cta flex flex-1 items-center justify-center gap-2 whitespace-nowrap !bg-[#1bd96a] px-4 py-2 !text-[#102014] no-underline hover:!bg-[#43e582] hover:!text-[#102014] hover:no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1bd96a]"
+		class="btn-cta flex flex-1 items-center justify-center gap-2 whitespace-nowrap !bg-[#1bd96a] px-4 py-2 !text-[#102014] no-underline hover:no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1bd96a]"
 		:href="url"
 		:target="openInNewTab ? '_blank' : '_self'"
 		:rel="openInNewTab ? 'noopener' : undefined"
