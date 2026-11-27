@@ -14,6 +14,8 @@
 ### Fixed
 
 - Tags on project cards with quick actions no longer run under the last updated date. Tags that don't fit are added to the +N count instead.
+- Notifications in the popup now match the toolbar badge and show up right away, instead of appearing after a moment. Reading them or answering an invite in the popup or on the page updates the badge, the popup and every open Modrinth tab at once.
+- Desktop notifications now arrive even when the toolbar badge is turned off.
 
 ## [2.0.0] - 2026-11-22
 

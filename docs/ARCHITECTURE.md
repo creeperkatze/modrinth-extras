@@ -24,6 +24,8 @@ Modrinth Extras is a WXT-based browser extension with two content-script worlds 
 
 Owns the extension badge, browser notifications, and background polling.
 
+It is the only writer of the stored notifications in `features/notifications/store.ts`, with their extra data attached. The badge, the popup and the page indicator all show that one copy. Other contexts send it `refresh-notifications` and `set-notifications-read` messages and watch the store through `useNotifications()`.
+
 ## Popup
 
 A standalone entrypoint, independent of the content scripts. `App.vue` is only the header, tabs and footer. Each tab is a view in `popup/views/`: Search, Creator and the settings behind the header button. Views share state through `popup/state/`, like the loaded settings and the signed in account.

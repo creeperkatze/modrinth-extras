@@ -1,46 +1,21 @@
-import { storage } from '@wxt-dev/storage'
 import { browser } from 'wxt/browser'
 
 import { getSettings } from '../core/settings'
 import { accountItem } from '../features/account/account'
 import {
+	fetchExtraNotificationData,
 	fetchNotifications,
-	groupNotifications,
 	type Notification,
 } from '../features/notifications/notifications'
+import {
+	lastUpdatedItem,
+	notificationsItem,
+	type StoredNotifications,
+	unreadNotifications,
+	withFetched,
+	withRead,
+} from '../features/notifications/store'
 import { sendBrowserNotifications } from './notifications'
-
-interface CachedNotifications {
-	// Another account's notifications can't serve as the baseline
-	userId: string
-	notifications: Notification[]
-}
-
-const OLD_USER_ID_KEY = 'local:userId'
-
-export const notificationsItem = storage.defineItem<CachedNotifications | null>(
-	'local:notifications',
-	{
-		defaultValue: null,
-		version: 2,
-		migrations: {
-			// The owner used to be saved under its own key
-			2: async (notifications: Notification[] | null) => {
-				const userId = await storage.getItem<string>(OLD_USER_ID_KEY)
-				await storage.removeItem(OLD_USER_ID_KEY)
-				return userId && Array.isArray(notifications) ? { userId, notifications } : null
-			},
-		},
-	},
-)
-export const lastUpdatedItem = storage.defineItem<number | null>('local:lastUpdated', {
-	defaultValue: null,
-})
-
-export async function getPreviousNotifications(userId: string): Promise<Notification[] | null> {
-	const cached = await notificationsItem.getValue()
-	return cached?.userId === userId ? cached.notifications : null
-}
 
 export async function setBadge(unread: number) {
 	const action = browser.action ?? browser.browserAction
@@ -49,57 +24,117 @@ export async function setBadge(unread: number) {
 	await action.setBadgeText({ text: unread > 0 ? String(unread) : '' })
 }
 
-export async function showCachedBadge() {
-	const [{ notificationBadge }, cached] = await Promise.all([
-		getSettings(),
-		notificationsItem.getValue(),
-	])
-	if (!notificationBadge.enabled || !cached) return
-	const unread = groupNotifications(cached.notifications.filter((n) => !n.read)).length
-	console.log(`[Modrinth Extras] Badge: Restored cached: ${unread} unread`)
-	await setBadge(unread)
-}
-
-export async function applyNotifications(
-	newNotifs: Notification[],
-	prevNotifs: Notification[] | null,
-	userId: string,
-) {
+async function showBadge(stored: StoredNotifications | null) {
 	const { notificationBadge } = await getSettings()
-	const unread = groupNotifications(newNotifs.filter((n) => !n.read)).length
-	console.log(
-		`[Modrinth Extras] Badge: Applying ${newNotifs.length} notifications: ${unread} unread`,
-	)
-	if (notificationBadge.enabled) {
-		await setBadge(unread)
-	}
-	await sendBrowserNotifications(newNotifs, prevNotifs)
-	await Promise.all([
-		notificationsItem.setValue({ userId, notifications: newNotifs }),
-		lastUpdatedItem.setValue(Date.now()),
-	])
+	const unread = unreadNotifications(stored, stored?.userId)?.length ?? 0
+	await setBadge(notificationBadge.enabled ? unread : 0)
 }
 
-export async function updateBadge() {
-	try {
-		const account = await accountItem.getValue()
-		const { notificationBadge } = await getSettings()
-		if (!notificationBadge.enabled) {
-			await setBadge(0)
-			return
-		}
+export async function syncBadge() {
+	await showBadge(await notificationsItem.getValue())
+}
 
-		if (!account) {
-			console.log('[Modrinth Extras] Badge: Signed out, clearing badge')
-			await setBadge(0)
-			await Promise.all([notificationsItem.setValue(null), lastUpdatedItem.setValue(Date.now())])
-			return
-		}
+let writes: Promise<unknown> = Promise.resolve()
 
-		const notifs = await fetchNotifications(account.id)
-		await applyNotifications(notifs, await getPreviousNotifications(account.id), account.id)
-	} catch (err) {
-		console.error('[Modrinth Extras] Badge: Background update failed:', err)
-		await setBadge(0)
+// One change at a time, so a slow fetch can't overwrite a newer one
+function updateStored(
+	change: (stored: StoredNotifications | null) => StoredNotifications | null | undefined,
+): Promise<void> {
+	const run = writes.then(async () => {
+		const previous = await notificationsItem.getValue()
+		const next = change(previous)
+		// Every change is sent to every open tab, so an unchanged fetch isn't saved
+		if (next === undefined || JSON.stringify(next) === JSON.stringify(previous)) return
+		await notificationsItem.setValue(next)
+		await showBadge(next)
+		if (!next) return
+		try {
+			await sendBrowserNotifications(
+				next.notifications,
+				previous?.userId === next.userId ? previous.notifications : null,
+			)
+		} catch (err) {
+			console.error('[Modrinth Extras] Failed to send browser notifications:', err)
+		}
+	})
+	writes = run.catch(() => {})
+	return run
+}
+
+export function setNotificationsRead(userId: string, ids: string[], read: boolean) {
+	return updateStored((stored) =>
+		stored?.userId === userId ? withRead(stored, ids, read) : undefined,
+	)
+}
+
+function hasExtraData(notification: Notification): boolean {
+	const { extra_data: extra, body } = notification
+	if (!extra) return false
+	return (
+		(!body?.project_id || !!extra.project) &&
+		(!body?.organization_id || !!extra.organization) &&
+		(!body?.version_id || !!extra.version)
+	)
+}
+
+async function fetchAndStore(maxAge: number) {
+	const account = await accountItem.getValue()
+	if (!account) {
+		console.log('[Modrinth Extras] Notifications: Signed out, cleared them')
+		await updateStored((stored) => (stored ? null : undefined))
+		return
 	}
+
+	const [stored, lastUpdated] = await Promise.all([
+		notificationsItem.getValue(),
+		lastUpdatedItem.getValue(),
+	])
+	const isSameAccount = stored?.userId === account.id
+	const known = isSameAccount ? stored.notifications : []
+	if (maxAge > 0 && isSameAccount && lastUpdated && Date.now() - lastUpdated < maxAge) return
+
+	const startedAt = Date.now()
+	const fetched = await fetchNotifications(account.id)
+
+	const knownById = new Map(known.map((n) => [n.id, n]))
+	const missing: Notification[] = []
+	for (const notification of fetched) {
+		if (notification.read) continue
+		const previous = knownById.get(notification.id)
+		if (previous && hasExtraData(previous)) notification.extra_data = previous.extra_data
+		else missing.push(notification)
+	}
+	await fetchExtraNotificationData(missing)
+
+	await updateStored((current) => withFetched(current, account.id, fetched, startedAt))
+	await lastUpdatedItem.setValue(Date.now())
+	console.log(
+		`[Modrinth Extras] Notifications: Fetched ${fetched.length}, extra data for ${missing.length}`,
+	)
+}
+
+let pending: Promise<void> | null = null
+
+export function refreshNotifications(maxAge = 0): Promise<void> {
+	pending ??= fetchAndStore(maxAge).finally(() => (pending = null))
+	return pending
+}
+
+export async function pollNotifications() {
+	try {
+		const { notificationBadge, desktopNotifications } = await getSettings()
+		// Signing out still clears them
+		const account = await accountItem.getValue()
+		if (account && !notificationBadge.enabled && !desktopNotifications.enabled) return
+		await refreshNotifications()
+	} catch (err) {
+		console.error('[Modrinth Extras] Failed to poll the notifications:', err)
+	}
+}
+
+// The popup used to keep its own copy of the notifications
+export async function removeOldNotificationCache() {
+	const all = await browser.storage.local.get(null)
+	const keys = Object.keys(all).filter((key) => key.startsWith('popupCache:notifications:'))
+	if (keys.length > 0) await browser.storage.local.remove(keys)
 }

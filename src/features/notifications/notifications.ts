@@ -1,18 +1,15 @@
 import type { Labrinth } from '@modrinth/api-client'
-import { browser } from 'wxt/browser'
 
 import { chunkIdsForQuery } from '../../api/chunk-ids'
 import { modrinthClient } from '../../api/client'
 import { chunk } from '../../utils/array'
 
+// Kept small since it's stored and sent to every context
 export type NotificationExtraData = {
-	project?: Labrinth.Projects.v3.Project
-	organization?: Labrinth.Organizations.v3.Organization
-	user?: Labrinth.Users.v2.User
-	report?: Labrinth.Reports.v3.Report
-	version?: Labrinth.Versions.v3.Version
-	thread?: Labrinth.Threads.v3.Thread
-	invited_by?: Labrinth.Users.v2.User
+	project?: Pick<Labrinth.Projects.v3.Project, 'id' | 'slug' | 'name' | 'icon_url'>
+	organization?: Pick<Labrinth.Organizations.v3.Organization, 'id' | 'slug' | 'name' | 'icon_url'>
+	user?: Pick<Labrinth.Users.v2.User, 'id' | 'username' | 'avatar_url'>
+	version?: Pick<Labrinth.Versions.v3.Version, 'id' | 'project_id'>
 }
 
 export type Notification = Labrinth.Notifications.v2.Notification & {
@@ -69,7 +66,6 @@ export async function fetchExtraNotificationData(
 	const bulk = {
 		projects: [] as string[],
 		reports: [] as string[],
-		threads: [] as string[],
 		users: [] as string[],
 		versions: [] as string[],
 		organizations: [] as string[],
@@ -80,8 +76,6 @@ export async function fetchExtraNotificationData(
 			if (notification.body.project_id) bulk.projects.push(notification.body.project_id)
 			if (notification.body.version_id) bulk.versions.push(notification.body.version_id)
 			if (notification.body.report_id) bulk.reports.push(notification.body.report_id)
-			if (notification.body.thread_id) bulk.threads.push(notification.body.thread_id)
-			if (notification.body.invited_by) bulk.users.push(notification.body.invited_by)
 			if (notification.body.organization_id)
 				bulk.organizations.push(notification.body.organization_id)
 		}
@@ -102,38 +96,46 @@ export async function fetchExtraNotificationData(
 	)
 	for (const v of versions) bulk.projects.push(v.project_id)
 
-	const [projects, threads, users, organizations] = await Promise.all([
+	const [projects, users, organizations] = await Promise.all([
 		getBulk(bulk.projects, (ids) => modrinthClient.labrinth.projects_v3.getMultiple(ids)),
-		getBulk(bulk.threads, (ids) => modrinthClient.labrinth.threads_v3.getMultiple(ids)),
 		getBulk(bulk.users, (ids) => modrinthClient.labrinth.users_v2.getMultiple(ids)),
 		getBulk(bulk.organizations, (ids) => modrinthClient.labrinth.organizations_v3.getMultiple(ids)),
 	])
 
+	const findProject = (id: string | undefined) => {
+		const p = projects.find((x) => x.id === id)
+		return p && { id: p.id, slug: p.slug, name: p.name, icon_url: p.icon_url }
+	}
+	const findVersion = (id: string | undefined) => {
+		const v = versions.find((x) => x.id === id)
+		return v && { id: v.id, project_id: v.project_id }
+	}
+	const findUser = (id: string | undefined) => {
+		const u = users.find((x) => x.id === id)
+		return u && { id: u.id, username: u.username, avatar_url: u.avatar_url }
+	}
+	const findOrganization = (id: string | undefined) => {
+		const o = organizations.find((x) => x.id === id)
+		return o && { id: o.id, slug: o.slug, name: o.name, icon_url: o.icon_url }
+	}
+
 	for (const n of notifications) {
-		n.extra_data = {} as NotificationExtraData
+		const extra: NotificationExtraData = {}
 		if (n.body) {
-			if (n.body.project_id)
-				n.extra_data.project = projects.find((x) => x.id === n.body!.project_id)
-			if (n.body.organization_id)
-				n.extra_data.organization = organizations.find((x) => x.id === n.body!.organization_id)
+			if (n.body.project_id) extra.project = findProject(n.body.project_id)
+			if (n.body.organization_id) extra.organization = findOrganization(n.body.organization_id)
 			if (n.body.report_id) {
-				n.extra_data.report = reports.find((x) => x.id === n.body!.report_id)
-				const t = n.extra_data.report?.item_type
-				if (t === 'project')
-					n.extra_data.project = projects.find((x) => x.id === n.extra_data?.report?.item_id)
-				else if (t === 'user')
-					n.extra_data.user = users.find((x) => x.id === n.extra_data?.report?.item_id)
-				else if (t === 'version') {
-					n.extra_data.version = versions.find((x) => x.id === n.extra_data?.report?.item_id)
-					n.extra_data.project = projects.find((x) => x.id === n.extra_data?.version?.project_id)
+				const report = reports.find((x) => x.id === n.body!.report_id)
+				if (report?.item_type === 'project') extra.project = findProject(report.item_id)
+				else if (report?.item_type === 'user') extra.user = findUser(report.item_id)
+				else if (report?.item_type === 'version') {
+					extra.version = findVersion(report.item_id)
+					extra.project = findProject(extra.version?.project_id)
 				}
 			}
-			if (n.body.thread_id) n.extra_data.thread = threads.find((x) => x.id === n.body!.thread_id)
-			if (n.body.invited_by)
-				n.extra_data.invited_by = users.find((x) => x.id === n.body!.invited_by)
-			if (n.body.version_id)
-				n.extra_data.version = versions.find((x) => x.id === n.body!.version_id)
+			if (n.body.version_id) extra.version = findVersion(n.body.version_id)
 		}
+		n.extra_data = extra
 	}
 	return notifications
 }
@@ -143,10 +145,4 @@ export async function markNotificationsAsRead(ids: string[]): Promise<void> {
 	for (const batch of chunk([...new Set(ids)], BATCH_SIZE)) {
 		await modrinthClient.labrinth.notifications_v2.markMultipleAsRead(batch)
 	}
-}
-
-export function syncToBackground(notifications: Notification[], userId: string) {
-	browser.runtime
-		.sendMessage({ type: 'notifications-fetched', notifications, userId })
-		.catch(() => {})
 }

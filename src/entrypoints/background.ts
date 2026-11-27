@@ -2,11 +2,11 @@ import type { ReviewSort } from 'moddex-js'
 import { browser } from 'wxt/browser'
 
 import {
-	applyNotifications,
-	getPreviousNotifications,
-	setBadge,
-	showCachedBadge,
-	updateBadge,
+	pollNotifications,
+	refreshNotifications,
+	removeOldNotificationCache,
+	setNotificationsRead,
+	syncBadge,
 } from '../background/badge'
 import { fetchDiscordInvite } from '../background/external/discord'
 import { fetchModdexReviews, hasModdexProject } from '../background/external/moddex'
@@ -33,7 +33,6 @@ import {
 	trackExtensionStarted,
 } from '../core/telemetry'
 import { refreshAccount } from '../features/account/account'
-import type { Notification } from '../features/notifications/notifications'
 import type { MatchableProject } from '../features/platforms/matching'
 import type { PlatformPage } from '../features/platforms/pages'
 import { movePromptsToSync, saveInstallDate } from '../features/prompts/state'
@@ -64,8 +63,8 @@ export default defineBackground(() => {
 			area === 'local' &&
 			newSettings?.notificationBadge?.enabled !== oldSettings?.notificationBadge?.enabled
 		) {
-			if (newSettings?.notificationBadge?.enabled === false) void setBadge(0)
-			else updateBadge()
+			void syncBadge()
+			if (newSettings?.notificationBadge?.enabled) void pollNotifications()
 		}
 		if (
 			JSON.stringify(newSettings?.curseforgeIntegration) !==
@@ -87,7 +86,7 @@ export default defineBackground(() => {
 	browser.alarms.create(ALARM_NAME, { periodInMinutes: POLL_INTERVAL_MINUTES })
 
 	browser.alarms.onAlarm.addListener((alarm) => {
-		if (alarm.name === ALARM_NAME) updateBadge()
+		if (alarm.name === ALARM_NAME) void pollNotifications()
 	})
 
 	browser.runtime.onMessage.addListener((message, _sender, sendResponse) => {
@@ -98,8 +97,26 @@ export default defineBackground(() => {
 			)
 			return
 		}
-		if (message.type === 'refresh') {
-			updateBadge().then(() => sendResponse({ ok: true }))
+		if (message.type === 'refresh-notifications') {
+			refreshNotifications(message.maxAge as number)
+				.then(() => sendResponse({ ok: true }))
+				.catch((err) => {
+					console.error('[Modrinth Extras] Failed to refresh the notifications:', err)
+					sendResponse({ ok: false })
+				})
+			return true
+		}
+		if (message.type === 'set-notifications-read') {
+			setNotificationsRead(
+				message.userId as string,
+				message.ids as string[],
+				message.read as boolean,
+			)
+				.then(() => sendResponse({ ok: true }))
+				.catch((err) => {
+					console.error('[Modrinth Extras] Failed to save the read notifications:', err)
+					sendResponse({ ok: false })
+				})
 			return true
 		}
 		if (message.type === 'resolve-curseforge-search-result') {
@@ -122,24 +139,6 @@ export default defineBackground(() => {
 				sendResponse({ ok: false })
 			})
 			return true
-		}
-		if (message.type === 'badge-count') {
-			const count = message.count as number
-			;(async () => {
-				void setBadge(count)
-				sendResponse({ ok: true })
-			})()
-			return true
-		}
-		if (message.type === 'notifications-fetched') {
-			const newNotifs = message.notifications as Notification[]
-			const userId = message.userId as string
-			;(async () => {
-				const prevNotifs = await getPreviousNotifications(userId)
-				await applyNotifications(newNotifs, prevNotifs, userId)
-			})().catch((err) => {
-				console.error('[Modrinth Extras] Failed to apply synced notifications:', err)
-			})
 		}
 		if (message.type === 'repository-stats') {
 			const platform = message.platform as RepositoryPlatform
@@ -243,17 +242,17 @@ export default defineBackground(() => {
 	})
 
 	// The account only changes when the user signs in or out, so polling doesn't fetch it
-	async function refreshAccountAndBadge() {
+	async function refreshAccountAndNotifications() {
 		try {
 			await refreshAccount()
 		} catch (err) {
 			console.error('[Modrinth Extras] Failed to refresh the signed in account:', err)
 		}
-		await updateBadge()
+		await pollNotifications()
 	}
 
 	browser.runtime.onInstalled.addListener((details) => {
-		void refreshAccountAndBadge()
+		void refreshAccountAndNotifications()
 		void syncSearchResultsScript()
 		if (details.reason === 'install') {
 			void analytics.track('extension_installed')
@@ -268,23 +267,26 @@ export default defineBackground(() => {
 			movePromptsToSync().catch((err) =>
 				console.error('[Modrinth Extras] Failed to move the prompts to sync:', err),
 			)
+			removeOldNotificationCache().catch((err) =>
+				console.error('[Modrinth Extras] Failed to remove the old notification cache:', err),
+			)
 		}
 	})
 
 	browser.runtime.onStartup.addListener(() => {
 		void trackExtensionStarted()
-		showCachedBadge()
-		void refreshAccountAndBadge()
+		void syncBadge()
+		void refreshAccountAndNotifications()
 		void syncSearchResultsScript()
 	})
 
 	browser.cookies.onChanged.addListener((changeInfo) => {
 		if (changeInfo.cookie.name === 'auth-token' && changeInfo.cookie.domain.includes('modrinth')) {
-			void refreshAccountAndBadge()
+			void refreshAccountAndNotifications()
 		}
 	})
 
-	showCachedBadge()
-	updateBadge()
+	void syncBadge()
+	void pollNotifications()
 	void syncSearchResultsScript()
 })

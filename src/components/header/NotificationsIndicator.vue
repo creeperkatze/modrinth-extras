@@ -1,6 +1,6 @@
 <template>
 	<TeleportPopoutMenu
-		v-if="userId !== false"
+		v-if="userId"
 		ref="notificationsPopout"
 		type="quiet"
 		class="btn-dropdown-animation"
@@ -77,16 +77,10 @@ import {
 } from '@modrinth/ui'
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
-import { getAuthToken, modrinthClient } from '../../api/client'
 import { navigate, resolveLink } from '../../content/page-router'
-import { useNotificationActions } from '../../features/notifications/actions'
-import {
-	fetchExtraNotificationData,
-	fetchNotifications,
-	groupNotifications,
-	type Notification,
-	syncToBackground,
-} from '../../features/notifications/notifications'
+import { accountItem } from '../../features/account/account'
+import { useNotifications } from '../../features/notifications/actions'
+import type { Notification } from '../../features/notifications/notifications'
 import NotificationCard from '../notifications/NotificationCard.vue'
 
 const { formatMessage } = useVIntl()
@@ -113,68 +107,13 @@ const messages = defineMessages({
 	},
 })
 
-const userId = ref<string | null | false>(null)
+const userId = ref<string | null>(null)
 
-const notificationsData = ref<Notification[] | null>(null)
+const { unread, refresh, markAsRead, acceptInvite, declineInvite } = useNotifications(
+	() => userId.value,
+)
 
-async function refreshNotifications() {
-	const id = userId.value
-	if (!id) return
-	try {
-		const notifs = await fetchNotifications(id)
-		// The account may have been switched while fetching
-		if (userId.value !== id) return
-		// Synced before the extra data is attached, which would make the message huge
-		syncToBackground(notifs, id)
-		const unread = await fetchExtraNotificationData(notifs.filter((n) => !n.read))
-		if (userId.value !== id) return
-		notificationsData.value = unread
-	} catch (err) {
-		console.error('[Modrinth Extras] Failed to fetch notifications:', err)
-	}
-}
-
-async function fetchUserId(): Promise<string | null> {
-	try {
-		const user = await modrinthClient.labrinth.users_v3.getAuthenticated()
-		return user.id
-	} catch {
-		return null
-	}
-}
-
-let authToken = ''
-let authenticating = false
-
-async function signIn() {
-	userId.value = (authToken && (await fetchUserId())) || false
-	await refreshNotifications()
-}
-
-// Compares the token so switching accounts is caught, not just signing in or out
-async function syncAuth() {
-	if (authenticating) return
-	const token = getAuthToken()
-	if (token !== authToken) {
-		authToken = token
-		userId.value = token ? null : false
-		notificationsData.value = null
-		currentPage.value = 1
-	} else if (userId.value || !token) {
-		return
-	}
-	authenticating = true
-	try {
-		await signIn()
-	} finally {
-		authenticating = false
-	}
-}
-
-const recentNotifications = computed(() => {
-	if (!notificationsData.value) return []
-	return groupNotifications(notificationsData.value.filter((n) => !n.read))
-})
+const recentNotifications = computed(() => unread.value ?? [])
 
 const unreadCount = computed(() => recentNotifications.value.length)
 
@@ -205,32 +144,29 @@ function goToPage(page: number) {
 }
 
 const notificationsPopout = ref<InstanceType<typeof TeleportPopoutMenu> | null>(null)
-let authWatchInterval: ReturnType<typeof setInterval> | null = null
 let refreshInterval: ReturnType<typeof setInterval> | null = null
+let unwatchAccount: (() => void) | null = null
+
+// Other tabs and the background poll too, so a recent fetch is reused
+const REFRESH_MAX_AGE = 30_000
 
 onMounted(async () => {
-	authToken = getAuthToken()
-	await signIn()
-	authWatchInterval = setInterval(syncAuth, 1_000)
-
+	unwatchAccount = accountItem.watch((account) => {
+		const id = account?.id ?? null
+		if (id === userId.value) return
+		userId.value = id
+		currentPage.value = 1
+	})
+	userId.value = (await accountItem.getValue())?.id ?? null
+	void refresh(REFRESH_MAX_AGE)
 	refreshInterval = setInterval(() => {
-		if (userId.value) refreshNotifications()
+		if (userId.value) void refresh(REFRESH_MAX_AGE)
 	}, 60_000)
 })
 
 onBeforeUnmount(() => {
-	if (authWatchInterval) clearInterval(authWatchInterval)
+	unwatchAccount?.()
 	if (refreshInterval) clearInterval(refreshInterval)
-})
-
-const { markAsRead, acceptInvite, declineInvite } = useNotificationActions({
-	userId: () => userId.value || null,
-	dismiss: (ids) => {
-		for (const notification of notificationsData.value ?? []) {
-			if (ids.includes(notification.id)) notification.read = true
-		}
-	},
-	unreadCount: () => unreadCount.value,
 })
 
 function handleMarkAllAsRead() {

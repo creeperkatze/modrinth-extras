@@ -5,31 +5,31 @@
 			:description="formatMessage(messages['popup.notifications.signIn'])"
 		/>
 
-		<template v-else-if="account">
-			<div
-				v-if="!notifications && loading"
-				class="flex items-center justify-center gap-2 p-6 text-sm text-secondary"
-			>
-				<SpinnerIcon class="size-4 animate-spin" aria-hidden="true" />
-				{{ formatMessage(messages['popup.notifications.loading']) }}
-			</div>
-
+		<template v-else-if="account && loaded">
 			<EmptyState
-				v-else-if="!notifications && failed"
+				v-if="!unread && failed"
 				type="error"
 				:heading="formatMessage(messages['popup.notifications.failed'])"
 			>
 				<template #actions>
-					<Button @click="refresh">
+					<Button @click="refresh()">
 						<RefreshCwIcon aria-hidden="true" />
 						{{ formatMessage(commonMessages.retryButton) }}
 					</Button>
 				</template>
 			</EmptyState>
 
-			<template v-else-if="notifications">
+			<div
+				v-else-if="!unread"
+				class="flex items-center justify-center gap-2 p-6 text-sm text-secondary"
+			>
+				<SpinnerIcon class="size-4 animate-spin" aria-hidden="true" />
+				{{ formatMessage(messages['popup.notifications.loading']) }}
+			</div>
+
+			<template v-else>
 				<EmptyState
-					v-if="grouped.length === 0"
+					v-if="unread.length === 0"
 					type="empty-inbox"
 					:heading="formatMessage(messages['popup.notifications.emptyTitle'])"
 					:description="formatMessage(messages['popup.notifications.emptyDescription'])"
@@ -49,7 +49,7 @@
 							size="sm"
 							type="quiet"
 							:label="formatMessage(messages['popup.notifications.markAllAsRead'])"
-							@click="markAsRead(grouped)"
+							@click="markAsRead(unread)"
 						>
 							<CheckCheckIcon aria-hidden="true" />
 						</IconButton>
@@ -74,7 +74,7 @@
 					</template>
 
 					<NotificationCard
-						v-for="notification in grouped"
+						v-for="notification in unread"
 						:key="notification.id"
 						:notification="notification"
 						:resolve-href="modrinthUrl"
@@ -100,21 +100,14 @@ import {
 	SpinnerIcon,
 } from '@modrinth/assets'
 import { Button, commonMessages, defineMessages, IconButton, useVIntl } from '@modrinth/ui'
-import { computed } from 'vue'
+import { onMounted } from 'vue'
 
 import NotificationCard from '../../../components/notifications/NotificationCard.vue'
-import { useNotificationActions } from '../../../features/notifications/actions'
-import {
-	fetchExtraNotificationData,
-	fetchNotifications,
-	groupNotifications,
-	type Notification,
-	syncToBackground,
-} from '../../../features/notifications/notifications'
+import { useNotifications } from '../../../features/notifications/actions'
+import type { Notification } from '../../../features/notifications/notifications'
 import EmptyState from '../components/EmptyState.vue'
 import PopupSection from '../components/PopupSection.vue'
 import SignInCard from '../components/SignInCard.vue'
-import { useCachedResource } from '../composables/cached'
 import { account, accountLoaded } from '../state/account'
 import { modrinthUrl, openModrinth } from '../utils/tabs'
 
@@ -159,34 +152,10 @@ const messages = defineMessages({
 	},
 })
 
-// A max age of 0 shows the last result right away and always fetches a fresh one
-const {
-	data: notifications,
-	loading,
-	failed,
-	refresh,
-	save,
-} = useCachedResource<Notification[]>(
-	() => (account.value ? `notifications:${account.value.id}` : null),
-	async () => {
-		const userId = account.value!.id
-		const all = await fetchNotifications(userId)
-		// Synced before the extra data is attached, which would make the message huge
-		syncToBackground(all, userId)
-		return fetchExtraNotificationData(all.filter((n) => !n.read))
-	},
-	0,
-)
+const { unread, loaded, failed, refresh, markAsRead, acceptInvite, declineInvite } =
+	useNotifications(() => account.value?.id)
 
-const grouped = computed(() => groupNotifications(notifications.value ?? []))
-
-const { markAsRead, acceptInvite, declineInvite } = useNotificationActions({
-	userId: () => account.value?.id,
-	dismiss: (ids) => {
-		if (notifications.value) void save(notifications.value.filter((n) => !ids.includes(n.id)))
-	},
-	unreadCount: () => grouped.value.length,
-})
+onMounted(() => refresh())
 
 async function openNotification(notification: Notification) {
 	// Opening the page closes the popup, which would cancel the request

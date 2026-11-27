@@ -1,11 +1,7 @@
 import { browser } from 'wxt/browser'
 
 import { getSettings } from '../core/settings'
-import {
-	fetchExtraNotificationData,
-	groupNotifications,
-	type Notification,
-} from '../features/notifications/notifications'
+import { groupNotifications, type Notification } from '../features/notifications/notifications'
 
 // Maps notification ID to the relative link so the click handler can open the right page
 export const notificationLinks = new Map<string, string>()
@@ -37,11 +33,6 @@ export async function sendBrowserNotifications(
 		console.log('[Modrinth Extras] Browser notifications: No new notifications')
 		return
 	}
-
-	console.log(
-		`[Modrinth Extras] Browser notifications: ${brandNew.length} new, fetching extra data`,
-	)
-	await fetchExtraNotificationData(brandNew)
 
 	const grouped = groupNotifications(brandNew)
 	console.log(
