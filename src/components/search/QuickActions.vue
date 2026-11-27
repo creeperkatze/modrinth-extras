@@ -136,9 +136,11 @@ import {
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import { getAuthToken } from '../../api/client'
+import { pageState } from '../../content/injection'
 import { navigate } from '../../content/page-router'
 import type { QuickDownloadSettings } from '../../core/settings'
 import { useSettings } from '../../core/settings-store'
+import { fitCardTags } from '../../features/quick-actions/card-tags'
 import {
 	collections,
 	initCollections,
@@ -264,72 +266,17 @@ const filteredCollections = computed(() => {
 })
 
 const downloadAction = ref<HTMLElement | null>(null)
-let unfitTags: (() => void) | null = null
-
-// Our actions take space from the tags row, so tags that no longer fit get folded into the +N badge.
-function fitCardTags(card: HTMLElement): () => void {
-	const area = card.querySelector<HTMLElement>('.grid-project-card-list__tags')
-	const list = area?.querySelector<HTMLElement>(':scope > div > div.gap-1')
-	if (!area || !list) return () => {}
-
-	const tags = [...list.children] as HTMLElement[]
-	const badge = tags.pop()?.firstElementChild
-	// Vue holds this text node, so it's updated in place rather than replaced
-	const badgeText = [...(badge?.childNodes ?? [])].find(
-		(node): node is Text => node.nodeType === Node.TEXT_NODE && /\+\d+/.test(node.nodeValue ?? ''),
-	)
-	const originalBadgeText = badgeText?.nodeValue ?? ''
-	const baseCount = Number(originalBadgeText.trim().slice(1))
-	let addedBadge: HTMLElement | null = null
-
-	function setOverflowCount(count: number) {
-		if (badgeText) {
-			badgeText.nodeValue = count > baseCount ? ` +${count} ` : originalBadgeText
-		} else if (count === 0) {
-			addedBadge?.remove()
-			addedBadge = null
-		} else {
-			if (!addedBadge) {
-				addedBadge = tags[0]!.cloneNode(false) as HTMLElement
-				addedBadge.removeAttribute('style')
-				list!.appendChild(addedBadge)
-			}
-			addedBadge.textContent = `+${count}`
-		}
-	}
-
-	function showAll() {
-		for (const tag of tags) tag.style.display = ''
-		setOverflowCount(baseCount)
-	}
-
-	const observer = new ResizeObserver(() => {
-		showAll()
-		const limit = area.getBoundingClientRect().right
-		let hidden = 0
-		while (hidden < tags.length && list.getBoundingClientRect().right > limit) {
-			tags[tags.length - ++hidden]!.style.display = 'none'
-			setOverflowCount(baseCount + hidden)
-		}
-	})
-	area.style.minWidth = '0'
-	observer.observe(area)
-
-	return () => {
-		observer.disconnect()
-		showAll()
-		area.style.minWidth = ''
-	}
-}
+let releaseTags: ((restore: boolean) => void) | null = null
 
 onMounted(() => {
 	if (isLoggedIn) initCollections()
 	void refreshDownloadAvailability()
 	const card = downloadAction.value?.closest<HTMLElement>('.grid-project-card-list')
-	if (card) unfitTags = fitCardTags(card)
+	if (card) releaseTags = fitCardTags(card)
 })
 
-onBeforeUnmount(() => unfitTags?.())
+// Navigating away unmounts us while the old page still shows, and its cards leave with it
+onBeforeUnmount(() => releaseTags?.(!pageState.navigating))
 
 watch(
 	() => [

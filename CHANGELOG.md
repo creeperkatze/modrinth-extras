@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- Tags on project cards with quick actions no longer run under the last updated date for a moment after clicking a card.
+
 ## [2.1.0] - 2026-11-27
 
 ### Added
