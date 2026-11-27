@@ -11,6 +11,10 @@
 
 - CurseForge redirect is now CurseForge integration. Instead of redirecting you automatically, it adds an Open on Modrinth button next to CurseForge's Download buttons.
 
+### Fixed
+
+- Tags on project cards with quick actions no longer run under the last updated date. Tags that don't fit are added to the +N count instead.
+
 ## [2.0.0] - 2026-11-22
 
 ### Added

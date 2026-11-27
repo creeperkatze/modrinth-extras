@@ -1,5 +1,5 @@
 <template>
-	<span v-tooltip="downloadTooltip" class="download-action">
+	<span ref="downloadAction" v-tooltip="downloadTooltip" class="download-action">
 		<Button
 			type="colored"
 			color="brand"
@@ -263,10 +263,73 @@ const filteredCollections = computed(() => {
 	return sorted.filter((c) => c.name.toLowerCase().includes(q))
 })
 
+const downloadAction = ref<HTMLElement | null>(null)
+let unfitTags: (() => void) | null = null
+
+// Our actions take space from the tags row, so tags that no longer fit get folded into the +N badge.
+function fitCardTags(card: HTMLElement): () => void {
+	const area = card.querySelector<HTMLElement>('.grid-project-card-list__tags')
+	const list = area?.querySelector<HTMLElement>(':scope > div > div.gap-1')
+	if (!area || !list) return () => {}
+
+	const tags = [...list.children] as HTMLElement[]
+	const badge = tags.pop()?.firstElementChild
+	// Vue holds this text node, so it's updated in place rather than replaced
+	const badgeText = [...(badge?.childNodes ?? [])].find(
+		(node): node is Text => node.nodeType === Node.TEXT_NODE && /\+\d+/.test(node.nodeValue ?? ''),
+	)
+	const originalBadgeText = badgeText?.nodeValue ?? ''
+	const baseCount = Number(originalBadgeText.trim().slice(1))
+	let addedBadge: HTMLElement | null = null
+
+	function setOverflowCount(count: number) {
+		if (badgeText) {
+			badgeText.nodeValue = count > baseCount ? ` +${count} ` : originalBadgeText
+		} else if (count === 0) {
+			addedBadge?.remove()
+			addedBadge = null
+		} else {
+			if (!addedBadge) {
+				addedBadge = tags[0]!.cloneNode(false) as HTMLElement
+				addedBadge.removeAttribute('style')
+				list!.appendChild(addedBadge)
+			}
+			addedBadge.textContent = `+${count}`
+		}
+	}
+
+	function showAll() {
+		for (const tag of tags) tag.style.display = ''
+		setOverflowCount(baseCount)
+	}
+
+	const observer = new ResizeObserver(() => {
+		showAll()
+		const limit = area.getBoundingClientRect().right
+		let hidden = 0
+		while (hidden < tags.length && list.getBoundingClientRect().right > limit) {
+			tags[tags.length - ++hidden]!.style.display = 'none'
+			setOverflowCount(baseCount + hidden)
+		}
+	})
+	area.style.minWidth = '0'
+	observer.observe(area)
+
+	return () => {
+		observer.disconnect()
+		showAll()
+		area.style.minWidth = ''
+	}
+}
+
 onMounted(() => {
 	if (isLoggedIn) initCollections()
 	void refreshDownloadAvailability()
+	const card = downloadAction.value?.closest<HTMLElement>('.grid-project-card-list')
+	if (card) unfitTags = fitCardTags(card)
 })
+
+onBeforeUnmount(() => unfitTags?.())
 
 watch(
 	() => [
