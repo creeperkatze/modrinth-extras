@@ -7,7 +7,7 @@ import {
 } from '@modrinth/api-client'
 import { browser } from 'wxt/browser'
 
-import { MockHostingFeature } from '../mocks/hosting'
+import { mockFeatures } from '../mocks'
 import { RequestCacheFeature } from './features/cache'
 import { RequestThrottleFeature } from './features/throttle'
 
@@ -58,7 +58,7 @@ class ArchonFeature extends PanelVersionFeature {
 export const modrinthClient = new GenericModrinthClient({
 	userAgent: USER_AGENT,
 	features: [
-		new MockHostingFeature(),
+		...mockFeatures(),
 		new RequestThrottleFeature(),
 		requestCache,
 		// Listed before auth so it runs after it and sees the token

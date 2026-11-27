@@ -75,6 +75,7 @@ export default defineConfig({
 		sourcesTemplate: 'modrinth-extras-{{version}}-sources.zip',
 	},
 	vite: () => ({
+		define: { 'import.meta.env.MOCK_HOSTING': JSON.stringify(!!process.env.MOCK_HOSTING) },
 		plugins: [
 			svgLoader({
 				svgoConfig: {
