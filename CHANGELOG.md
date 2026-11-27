@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [2.1.1] - 2026-11-27
+
 ### Fixed
 
 - Tags on project cards with quick actions no longer run under the last updated date for a moment after clicking a card.
@@ -696,7 +698,8 @@ Thanks for using Modrinth Extras, and a big thank you to everyone helping transl
 
 Initial release
 
-[Unreleased]: https://github.com/creeperkatze/modrinth-extras/compare/v2.1.0...HEAD
+[Unreleased]: https://github.com/creeperkatze/modrinth-extras/compare/v2.1.1...HEAD
+[2.1.1]: https://github.com/creeperkatze/modrinth-extras/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/creeperkatze/modrinth-extras/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/creeperkatze/modrinth-extras/compare/v1.9.1...v2.0.0
 [1.9.1]: https://github.com/creeperkatze/modrinth-extras/compare/v1.9.0...v1.9.1
