@@ -1,7 +1,10 @@
 import { parseUrl } from '../../utils/url'
 
+// Slugs are only unique within a class, like mc-mods or modpacks
+export type CurseForgePage = { platform: 'curseforge'; category: string; slug: string }
+
 export type PlatformPage =
-	| { platform: 'curseforge'; slug: string }
+	| CurseForgePage
 	| { platform: 'hangar'; owner: string; slug: string }
 	| { platform: 'spigot'; id: number }
 
@@ -17,7 +20,7 @@ export interface ModrinthMatch {
 }
 
 const CURSEFORGE_PATTERN =
-	/^\/minecraft\/(?:mc-mods|modpacks|shaders|bukkit-plugins|texture-packs|data-packs)\/([^/?#]+)/
+	/^\/minecraft\/(mc-mods|modpacks|shaders|bukkit-plugins|texture-packs|data-packs)\/([^/?#]+)/
 // Resource URLs look like /resources/luckperms.28140/ or just /resources/28140/
 const SPIGOT_PATTERN = /^\/resources\/(?:[^/]*\.)?(\d+)(?:\/|$)/
 const HANGAR_PATTERN = /^\/([^/?#]+)\/([^/?#]+)/
@@ -37,8 +40,8 @@ export function parsePlatformPage(url: string): PlatformPage | null {
 	if (!parsed) return null
 
 	if (parsed.hostname === 'www.curseforge.com') {
-		const slug = parsed.pathname.match(CURSEFORGE_PATTERN)?.[1]
-		return slug ? { platform: 'curseforge', slug } : null
+		const [, category, slug] = parsed.pathname.match(CURSEFORGE_PATTERN) ?? []
+		return category && slug ? { platform: 'curseforge', category, slug } : null
 	}
 	if (parsed.hostname === 'www.spigotmc.org') {
 		const id = parsed.pathname.match(SPIGOT_PATTERN)?.[1]

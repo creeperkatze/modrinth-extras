@@ -10,7 +10,6 @@ import {
 } from '../../../core/settings'
 import { loadSettingsStore, useSettings } from '../../../core/settings-store'
 import { setTelemetryEnabled } from '../../../core/telemetry'
-import { SEARCH_RESULT_ORIGINS } from '../../../features/curseforge-integration/search-hosts'
 import {
 	type QuickActionProfile,
 	quickActionProfiles,
@@ -77,21 +76,11 @@ function scheduleSave() {
 	pendingSave ??= setTimeout(flushPendingSave, 500)
 }
 
-export async function updateOption(
+export function updateOption(
 	featureKey: keyof ExtensionSettings,
 	optionKey: string,
 	value: string | boolean,
 ) {
-	// Search engine results need host access, which is only asked for when turned on
-	if (featureKey === 'curseforgeIntegration' && optionKey === 'searchResults' && value === true) {
-		const granted = await browser.permissions
-			.request({ origins: SEARCH_RESULT_ORIGINS })
-			.catch((err) => {
-				console.error('[Modrinth Extras] Failed to request search engine access:', err)
-				return false
-			})
-		if (!granted) return
-	}
 	;(settings[featureKey] as Record<string, unknown>)[optionKey] = value
 	// Changing a download option while a profile is picked edits that profile
 	if (featureKey === 'projectCardActions') {

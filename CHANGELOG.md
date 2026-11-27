@@ -5,17 +5,18 @@
 ### Added
 
 - Choice between opening Modrinth in the current tab or a new tab from CurseForge.
-- CurseForge results on Google, Bing and DuckDuckGo can be hidden or complemented with an Open on Modrinth button. Access to those search engines is only requested when you turn the option on.
 
 ### Changed
 
-- CurseForge redirect is now CurseForge integration. Instead of redirecting you automatically, it adds an Open on Modrinth button next to CurseForge's Download buttons.
+- CurseForge redirect is now CurseForge integration. Instead of redirecting you automatically, it adds an Open on Modrinth button next to CurseForge's Download buttons. If you had the redirect turned on, the integration starts out turned on.
+- CurseForge projects are matched to Modrinth the same way as in the Other platforms card, so a Modrinth project that only shares the slug is no longer linked.
 
 ### Fixed
 
 - Tags on project cards with quick actions no longer run under the last updated date. Tags that don't fit are added to the +N count instead.
 - Notifications in the popup now match the toolbar badge and show up right away, instead of appearing after a moment. Reading them or answering an invite in the popup or on the page updates the badge, the popup and every open Modrinth tab at once.
 - Desktop notifications now arrive even when the toolbar badge is turned off.
+- CurseForge projects that share their slug with a modpack or resource pack, like Create, are now found on Modrinth.
 
 ## [2.0.0] - 2026-11-22
 

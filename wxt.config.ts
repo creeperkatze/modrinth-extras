@@ -6,8 +6,6 @@ import type { Plugin } from 'vite'
 import svgLoader from 'vite-svg-loader'
 import { defineConfig } from 'wxt'
 
-import { SEARCH_RESULT_ORIGINS } from './src/features/curseforge-integration/search-hosts'
-
 const { version } = createRequire(import.meta.url)('./package.json')
 
 const IMAGE_FILE = /\.(png|webp|jpe?g|gif|avif|svg)$/i
@@ -54,15 +52,13 @@ export default defineConfig({
 			48: '/icon-48.png',
 			128: '/icon-128.png',
 		},
-		permissions: ['cookies', 'storage', 'alarms', 'activeTab', 'scripting'],
+		permissions: ['cookies', 'storage', 'alarms', 'activeTab'],
 		optional_permissions: ['notifications'],
 		host_permissions: [
 			'https://modrinth.com/*',
 			'https://api.modrinth.com/*',
 			'https://www.curseforge.com/*',
 		],
-		// Search engines are asked for only when the integration is turned on
-		optional_host_permissions: [...SEARCH_RESULT_ORIGINS],
 
 		browser_specific_settings: {
 			gecko: {

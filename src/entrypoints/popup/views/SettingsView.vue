@@ -541,7 +541,7 @@ const messages = defineMessages({
 	},
 	'feature.curseforgeIntegration.description': {
 		id: 'feature.curseforgeIntegration.description',
-		defaultMessage: 'Open CurseForge projects on Modrinth from their pages or from search results.',
+		defaultMessage: 'Adds an Open on Modrinth button to CurseForge project pages.',
 	},
 	'feature.curseforgeIntegration.openIn': {
 		id: 'feature.curseforgeIntegration.openIn',
@@ -554,22 +554,6 @@ const messages = defineMessages({
 	'feature.curseforgeIntegration.openIn.new': {
 		id: 'feature.curseforgeIntegration.openIn.new',
 		defaultMessage: 'New tab',
-	},
-	'feature.curseforgeIntegration.searchResults': {
-		id: 'feature.curseforgeIntegration.searchResults',
-		defaultMessage: 'Search results',
-	},
-	'feature.curseforgeIntegration.searchResultsAction': {
-		id: 'feature.curseforgeIntegration.searchResultsAction',
-		defaultMessage: 'Action',
-	},
-	'feature.curseforgeIntegration.searchResults.show': {
-		id: 'feature.curseforgeIntegration.searchResults.show',
-		defaultMessage: 'Show Button',
-	},
-	'feature.curseforgeIntegration.searchResults.hide': {
-		id: 'feature.curseforgeIntegration.searchResults.hide',
-		defaultMessage: 'Hide result',
 	},
 	'feature.telemetry.title': { id: 'feature.telemetry.title', defaultMessage: 'Telemetry' },
 	'feature.telemetry.description': {
@@ -643,17 +627,6 @@ const CURSEFORGE_INTEGRATION_TAB_ITEMS = computed<SelectItem[]>(() => [
 	{
 		label: formatMessage(messages['feature.curseforgeIntegration.openIn.new']),
 		value: 'new',
-	},
-])
-
-const CURSEFORGE_SEARCH_ACTION_ITEMS = computed<SelectItem[]>(() => [
-	{
-		label: formatMessage(messages['feature.curseforgeIntegration.searchResults.show']),
-		value: 'show',
-	},
-	{
-		label: formatMessage(messages['feature.curseforgeIntegration.searchResults.hide']),
-		value: 'hide',
 	},
 ])
 
@@ -974,19 +947,6 @@ const extensionFeatures = computed<FeatureDef[]>(() => [
 				label: formatMessage(messages['feature.curseforgeIntegration.openIn']),
 				items: CURSEFORGE_INTEGRATION_TAB_ITEMS.value,
 				includeAny: false,
-			},
-			{
-				key: 'searchResults',
-				type: 'toggle',
-				label: formatMessage(messages['feature.curseforgeIntegration.searchResults']),
-			},
-			{
-				key: 'searchResultsAction',
-				type: 'select',
-				label: formatMessage(messages['feature.curseforgeIntegration.searchResultsAction']),
-				items: CURSEFORGE_SEARCH_ACTION_ITEMS.value,
-				includeAny: false,
-				visible: () => settings.curseforgeIntegration.searchResults,
 			},
 		],
 	},

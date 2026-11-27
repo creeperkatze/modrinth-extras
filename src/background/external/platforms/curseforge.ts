@@ -151,9 +151,15 @@ export async function findCurseForgeProject(
 	return mod ? toMatch(mod) : null
 }
 
-export async function getCurseForgeSource(slug: string): Promise<MatchableProject | null> {
+export async function getCurseForgeSource(
+	category: string,
+	slug: string,
+): Promise<MatchableProject | null> {
 	const response = await client.mods.search({ gameId: GameId.Minecraft, slug })
-	const mod = (response.data ?? []).find((candidate) => candidate.slug === slug)
+	const path = `/minecraft/${category}/${slug}`
+	const mod = (response.data ?? []).find(
+		(candidate) => candidate.slug === slug && candidate.links?.websiteUrl?.endsWith(path),
+	)
 	if (!mod) return null
 	return { name: mod.name, slug: mod.slug, authors: mod.authors.map((author) => author.name) }
 }

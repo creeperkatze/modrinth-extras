@@ -39,7 +39,7 @@
     "defaultMessage": "Compare versions"
   },
   "feature.curseforgeIntegration.description": {
-    "defaultMessage": "Open CurseForge projects on Modrinth from their pages or from search results."
+    "defaultMessage": "Adds an Open on Modrinth button to CurseForge project pages."
   },
   "feature.curseforgeIntegration.openIn": {
     "defaultMessage": "Open in"
@@ -49,18 +49,6 @@
   },
   "feature.curseforgeIntegration.openIn.new": {
     "defaultMessage": "New tab"
-  },
-  "feature.curseforgeIntegration.searchResults": {
-    "defaultMessage": "Search results"
-  },
-  "feature.curseforgeIntegration.searchResults.hide": {
-    "defaultMessage": "Hide result"
-  },
-  "feature.curseforgeIntegration.searchResults.show": {
-    "defaultMessage": "Show Button"
-  },
-  "feature.curseforgeIntegration.searchResultsAction": {
-    "defaultMessage": "Action"
   },
   "feature.curseforgeIntegration.title": {
     "defaultMessage": "CurseForge integration"

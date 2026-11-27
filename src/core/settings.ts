@@ -57,12 +57,7 @@ export interface ExtensionSettings {
 	reviews: { enabled: boolean; moddex: boolean; curseforge: boolean; spigot: boolean }
 	notificationBadge: { enabled: boolean }
 	desktopNotifications: { enabled: boolean }
-	curseforgeIntegration: {
-		enabled: boolean
-		openIn: 'current' | 'new'
-		searchResults: boolean
-		searchResultsAction: 'show' | 'hide'
-	}
+	curseforgeIntegration: { enabled: boolean; openIn: 'current' | 'new' }
 	themes: { enabled: boolean; presets: boolean; customAccent: boolean; accentColor: string }
 	telemetry: { enabled: boolean }
 }
@@ -97,12 +92,7 @@ export const DEFAULTS: ExtensionSettings = {
 	reviews: { enabled: true, moddex: true, curseforge: true, spigot: true },
 	notificationBadge: { enabled: true },
 	desktopNotifications: { enabled: false },
-	curseforgeIntegration: {
-		enabled: false,
-		openIn: 'current',
-		searchResults: false,
-		searchResultsAction: 'show',
-	},
+	curseforgeIntegration: { enabled: false, openIn: 'current' },
 	themes: { enabled: true, presets: true, customAccent: false, accentColor: '#1bd96a' },
 	telemetry: { enabled: true },
 }
@@ -153,6 +143,13 @@ function split(settings: object): { synced: StoredSettings; local: StoredSetting
 	return { synced, local }
 }
 
+// Older versions and other devices may still have the CurseForge redirect key
+function withRenamedKeys(value: StoredSettings): StoredSettings {
+	const redirect = value.curseforgeRedirect
+	if (!redirect || value.curseforgeIntegration) return value
+	return { ...value, curseforgeIntegration: { enabled: redirect.enabled } }
+}
+
 const syncedItem = storage.defineItem<StoredSettings>('sync:settings')
 
 const localItem = storage.defineItem<StoredSettings>('local:settings', {
@@ -167,7 +164,10 @@ const localItem = storage.defineItem<StoredSettings>('local:settings', {
 			}
 			// Drops old keys that may hold secrets
 			const { synced, local } = split(
-				deepMerge(DEFAULTS, { ...value, themes } as DeepPartial<ExtensionSettings>),
+				deepMerge(DEFAULTS, {
+					...withRenamedKeys(value),
+					themes,
+				} as DeepPartial<ExtensionSettings>),
 			)
 			// Another browser may have moved its settings first
 			if (!(await syncedItem.getValue())) await syncedItem.setValue(synced)
@@ -183,7 +183,7 @@ const listeners = new Set<(settings: ExtensionSettings) => void>()
 
 function mergeStored(): ExtensionSettings {
 	return deepMerge(DEFAULTS, {
-		...stored.synced,
+		...withRenamedKeys(stored.synced),
 		...stored.local,
 	} as DeepPartial<ExtensionSettings>)
 }

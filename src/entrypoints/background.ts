@@ -24,8 +24,6 @@ import {
 import { fetchRepositoryStats } from '../background/external/repositories'
 import { findModrinthMatch } from '../background/modrinth-match'
 import { handleNotificationClick } from '../background/notifications'
-import { syncSearchResultsScript } from '../background/search-results-script'
-import type { ExtensionSettings } from '../core/settings'
 import {
 	analytics,
 	initTelemetry,
@@ -48,16 +46,10 @@ export default defineBackground(() => {
 	browser.storage.onChanged.addListener((changes, area) => {
 		if (!('settings' in changes)) return
 		const newSettings = changes.settings?.newValue as
-			| {
-					notificationBadge?: { enabled?: boolean }
-					curseforgeIntegration?: ExtensionSettings['curseforgeIntegration']
-			  }
+			| { notificationBadge?: { enabled?: boolean } }
 			| undefined
 		const oldSettings = changes.settings?.oldValue as
-			| {
-					notificationBadge?: { enabled?: boolean }
-					curseforgeIntegration?: ExtensionSettings['curseforgeIntegration']
-			  }
+			| { notificationBadge?: { enabled?: boolean } }
 			| undefined
 		if (
 			area === 'local' &&
@@ -65,12 +57,6 @@ export default defineBackground(() => {
 		) {
 			void syncBadge()
 			if (newSettings?.notificationBadge?.enabled) void pollNotifications()
-		}
-		if (
-			JSON.stringify(newSettings?.curseforgeIntegration) !==
-			JSON.stringify(oldSettings?.curseforgeIntegration)
-		) {
-			void syncSearchResultsScript(newSettings?.curseforgeIntegration)
 		}
 	})
 
@@ -80,8 +66,6 @@ export default defineBackground(() => {
 			browser.notifications.onClicked.addListener(handleNotificationClick)
 		}
 	})
-	browser.permissions.onAdded.addListener(() => void syncSearchResultsScript())
-	browser.permissions.onRemoved.addListener(() => void syncSearchResultsScript())
 
 	browser.alarms.create(ALARM_NAME, { periodInMinutes: POLL_INTERVAL_MINUTES })
 
@@ -117,27 +101,6 @@ export default defineBackground(() => {
 					console.error('[Modrinth Extras] Failed to save the read notifications:', err)
 					sendResponse({ ok: false })
 				})
-			return true
-		}
-		if (message.type === 'resolve-curseforge-search-result') {
-			;(async () => {
-				const url = new URL(message.url as string)
-				if (url.hostname !== 'www.google.com' || !['/url', '/goto'].includes(url.pathname)) {
-					sendResponse({ ok: false })
-					return
-				}
-				const response = await fetch(url.href, { redirect: 'follow', credentials: 'include' })
-				await response.body?.cancel()
-				const destination = new URL(response.url)
-				if (destination.hostname !== 'www.curseforge.com') {
-					sendResponse({ ok: false })
-					return
-				}
-				sendResponse({ ok: true, url: destination.href })
-			})().catch((err) => {
-				console.error('[Modrinth Extras] Failed to resolve a CurseForge search result:', err)
-				sendResponse({ ok: false })
-			})
 			return true
 		}
 		if (message.type === 'repository-stats') {
@@ -253,7 +216,6 @@ export default defineBackground(() => {
 
 	browser.runtime.onInstalled.addListener((details) => {
 		void refreshAccountAndNotifications()
-		void syncSearchResultsScript()
 		if (details.reason === 'install') {
 			void analytics.track('extension_installed')
 			saveInstallDate().catch((err) =>
@@ -277,7 +239,6 @@ export default defineBackground(() => {
 		void trackExtensionStarted()
 		void syncBadge()
 		void refreshAccountAndNotifications()
-		void syncSearchResultsScript()
 	})
 
 	browser.cookies.onChanged.addListener((changeInfo) => {
@@ -288,5 +249,4 @@ export default defineBackground(() => {
 
 	void syncBadge()
 	void pollNotifications()
-	void syncSearchResultsScript()
 })

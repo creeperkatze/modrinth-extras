@@ -17,7 +17,7 @@ const SEARCH_LIMIT = 10
 function getSource(page: PlatformPage): Promise<MatchableProject | null> {
 	switch (page.platform) {
 		case 'curseforge':
-			return getCurseForgeSource(page.slug)
+			return getCurseForgeSource(page.category, page.slug)
 		case 'hangar':
 			return getHangarSource(page.owner, page.slug)
 		case 'spigot':
