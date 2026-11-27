@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-11-27
+
 ### Added
 
 - Choice between opening Modrinth in the current tab or a new tab from CurseForge.
@@ -690,7 +692,8 @@ Thanks for using Modrinth Extras, and a big thank you to everyone helping transl
 
 Initial release
 
-[Unreleased]: https://github.com/creeperkatze/modrinth-extras/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/creeperkatze/modrinth-extras/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/creeperkatze/modrinth-extras/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/creeperkatze/modrinth-extras/compare/v1.9.1...v2.0.0
 [1.9.1]: https://github.com/creeperkatze/modrinth-extras/compare/v1.9.0...v1.9.1
 [1.9.0]: https://github.com/creeperkatze/modrinth-extras/compare/v1.8.3...v1.9.0
