@@ -64,7 +64,8 @@
 					<div ref="content">
 						<SearchView v-if="view === 'search'" key="search" />
 						<NotificationsView v-else-if="view === 'notifications'" key="notifications" />
-						<CreatorView v-else key="creator" />
+						<CreatorView v-else-if="view === 'creator'" key="creator" />
+						<HostingView v-else key="hosting" />
 					</div>
 				</div>
 			</template>
@@ -89,6 +90,7 @@ import {
 	DashboardIcon,
 	LeftArrowIcon,
 	SearchIcon,
+	ServerStackIcon,
 	SettingsIcon,
 } from '@modrinth/assets'
 import {
@@ -112,6 +114,7 @@ import PopupFooter from './components/PopupFooter.vue'
 import { loadAccount } from './state/account'
 import { loadPopupSettings, settings, settingsLoaded } from './state/settings'
 import CreatorView from './views/CreatorView.vue'
+import HostingView from './views/HostingView.vue'
 import NotificationsView from './views/NotificationsView.vue'
 import SearchView from './views/SearchView.vue'
 import SettingsView from './views/SettingsView.vue'
@@ -125,14 +128,15 @@ const messages = defineMessages({
 		defaultMessage: 'Notifications',
 	},
 	'popup.nav.creator': { id: 'popup.nav.creator', defaultMessage: 'Creator' },
+	'popup.nav.hosting': { id: 'popup.nav.hosting', defaultMessage: 'Hosting' },
 	'popup.nav.settings': { id: 'popup.nav.settings', defaultMessage: 'Settings' },
 	'popup.nav.back': { id: 'popup.nav.back', defaultMessage: 'Back' },
 })
 
-type MainTab = 'search' | 'notifications' | 'creator'
+type MainTab = 'search' | 'notifications' | 'creator' | 'hosting'
 type PopupView = MainTab | 'settings'
 
-const MAIN_TABS: MainTab[] = ['search', 'notifications', 'creator']
+const MAIN_TABS: MainTab[] = ['search', 'notifications', 'creator', 'hosting']
 const VIEW_STORAGE_KEY = 'popup-view'
 
 const tabs = computed(() => [
@@ -143,6 +147,7 @@ const tabs = computed(() => [
 		icon: BellIcon,
 	},
 	{ value: 'creator', label: formatMessage(messages['popup.nav.creator']), icon: DashboardIcon },
+	{ value: 'hosting', label: formatMessage(messages['popup.nav.hosting']), icon: ServerStackIcon },
 ])
 
 function savedTab(): MainTab {

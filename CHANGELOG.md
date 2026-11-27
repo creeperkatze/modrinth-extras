@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Hosting tab in the popup with your Modrinth Hosting servers. It shows whether each server is running, its live CPU, memory and storage use, and its address to copy, and lets you start, stop and restart it.
+
 ## [2.1.1] - 2026-11-27
 
 ### Fixed

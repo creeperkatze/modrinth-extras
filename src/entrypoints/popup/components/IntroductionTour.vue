@@ -85,7 +85,7 @@ import {
 	type IntroductionTourState,
 } from '../../../features/tour/state'
 
-export type IntroductionTourTarget = 'search' | 'notifications' | 'creator' | 'settings'
+export type IntroductionTourTarget = 'search' | 'notifications' | 'creator' | 'hosting' | 'settings'
 
 interface IntroductionTourStep {
 	// Stored once seen, so never rename one
@@ -143,6 +143,14 @@ const messages = defineMessages({
 		id: 'popup.introductionTour.creator.description',
 		defaultMessage: 'Keep an eye on the views, downloads and revenue of your projects.',
 	},
+	hostingTitle: {
+		id: 'popup.introductionTour.hosting.title',
+		defaultMessage: 'Hosting',
+	},
+	hostingDescription: {
+		id: 'popup.introductionTour.hosting.description',
+		defaultMessage: 'Check on your Modrinth Hosting servers and start, stop or restart them.',
+	},
 	settingsTitle: {
 		id: 'popup.introductionTour.settings.title',
 		defaultMessage: 'Settings',
@@ -186,6 +194,13 @@ const STEPS: IntroductionTourStep[] = [
 		target: 'creator',
 		title: messages.creatorTitle,
 		description: messages.creatorDescription,
+		newFeature: true,
+	},
+	{
+		id: 'hosting-tab',
+		target: 'hosting',
+		title: messages.hostingTitle,
+		description: messages.hostingDescription,
 		newFeature: true,
 	},
 ]

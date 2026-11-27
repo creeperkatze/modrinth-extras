@@ -326,11 +326,113 @@
   "popup.group.sidebar": {
     "defaultMessage": "Sidebar"
   },
+  "popup.hosting.actionFailed": {
+    "defaultMessage": "The server could not be {action, select, Start {started} Stop {stopped} other {restarted}}."
+  },
+  "popup.hosting.allServers": {
+    "defaultMessage": "Open all servers"
+  },
+  "popup.hosting.broken": {
+    "defaultMessage": "Something went wrong with this server. Open the dashboard to see why."
+  },
+  "popup.hosting.connectionFailed": {
+    "defaultMessage": "The live status could not be loaded."
+  },
+  "popup.hosting.copyAddress": {
+    "defaultMessage": "Copy address"
+  },
+  "popup.hosting.cpu": {
+    "defaultMessage": "CPU"
+  },
+  "popup.hosting.crashed": {
+    "defaultMessage": "The server crashed. Open the dashboard to see why."
+  },
+  "popup.hosting.emptyDescription": {
+    "defaultMessage": "Once you have a Modrinth Hosting server, its status and controls show up here."
+  },
+  "popup.hosting.emptyTitle": {
+    "defaultMessage": "No servers yet"
+  },
+  "popup.hosting.failed": {
+    "defaultMessage": "Your servers could not be loaded"
+  },
+  "popup.hosting.getServer": {
+    "defaultMessage": "Get a server"
+  },
+  "popup.hosting.installing": {
+    "defaultMessage": "Installing..."
+  },
+  "popup.hosting.loading": {
+    "defaultMessage": "Loading your servers..."
+  },
+  "popup.hosting.manageBilling": {
+    "defaultMessage": "Manage billing"
+  },
+  "popup.hosting.memory": {
+    "defaultMessage": "Memory"
+  },
+  "popup.hosting.noPermission": {
+    "defaultMessage": "You don't have permission to do this"
+  },
+  "popup.hosting.notice.cancelled": {
+    "defaultMessage": "The subscription for this server was cancelled."
+  },
+  "popup.hosting.notice.moderated": {
+    "defaultMessage": "This server was suspended by the moderators. Contact support to learn more."
+  },
+  "popup.hosting.notice.other": {
+    "defaultMessage": "This server is suspended."
+  },
+  "popup.hosting.notice.paymentfailed": {
+    "defaultMessage": "The subscription for this server was cancelled because a payment failed."
+  },
+  "popup.hosting.notice.upgrading": {
+    "defaultMessage": "This server's hardware is being upgraded and will be back shortly."
+  },
+  "popup.hosting.resourceUsage": {
+    "defaultMessage": "{resource}: {used} of {total}"
+  },
+  "popup.hosting.resourceValue": {
+    "defaultMessage": "{resource}: {value}"
+  },
+  "popup.hosting.restart": {
+    "defaultMessage": "Restart"
+  },
+  "popup.hosting.servers": {
+    "defaultMessage": "Servers"
+  },
+  "popup.hosting.signIn": {
+    "defaultMessage": "Sign in to see your Modrinth Hosting servers here."
+  },
+  "popup.hosting.start": {
+    "defaultMessage": "Start"
+  },
+  "popup.hosting.startingServer": {
+    "defaultMessage": "Starting server..."
+  },
+  "popup.hosting.stop": {
+    "defaultMessage": "Stop"
+  },
+  "popup.hosting.stopping": {
+    "defaultMessage": "Stopping"
+  },
+  "popup.hosting.storage": {
+    "defaultMessage": "Storage"
+  },
+  "popup.hosting.uptime": {
+    "defaultMessage": "Online for {duration}"
+  },
   "popup.introductionTour.creator.description": {
     "defaultMessage": "Keep an eye on the views, downloads and revenue of your projects."
   },
   "popup.introductionTour.creator.title": {
     "defaultMessage": "Creator"
+  },
+  "popup.introductionTour.hosting.description": {
+    "defaultMessage": "Check on your Modrinth Hosting servers and start, stop or restart them."
+  },
+  "popup.introductionTour.hosting.title": {
+    "defaultMessage": "Hosting"
   },
   "popup.introductionTour.notifications.description": {
     "defaultMessage": "Read your notifications and accept invites right from here."
@@ -364,6 +466,9 @@
   },
   "popup.nav.creator": {
     "defaultMessage": "Creator"
+  },
+  "popup.nav.hosting": {
+    "defaultMessage": "Hosting"
   },
   "popup.nav.notifications": {
     "defaultMessage": "Notifications"

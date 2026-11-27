@@ -1,6 +1,13 @@
-import { type AuthConfig, AuthFeature, GenericModrinthClient } from '@modrinth/api-client'
+import {
+	type AuthConfig,
+	AuthFeature,
+	GenericModrinthClient,
+	PanelVersionFeature,
+	type RequestContext,
+} from '@modrinth/api-client'
 import { browser } from 'wxt/browser'
 
+import { MockHostingFeature } from '../mocks/hosting'
 import { RequestCacheFeature } from './features/cache'
 import { RequestThrottleFeature } from './features/throttle'
 
@@ -31,12 +38,31 @@ function trackToken(token: string): string {
 	return token
 }
 
+// Archon wants a Bearer token and a panel version, or it answers 401 and 426.
+// Labrinth takes the bare token, and a custom header there would add a preflight.
+class ArchonFeature extends PanelVersionFeature {
+	override async execute<T>(next: () => Promise<T>, context: RequestContext): Promise<T> {
+		const token = context.options.headers?.Authorization
+		if (token && !token.startsWith('Bearer ')) {
+			context.options.headers = { ...context.options.headers, Authorization: `Bearer ${token}` }
+		}
+		return super.execute(next, context)
+	}
+
+	override shouldApply(context: RequestContext): boolean {
+		return context.options.api === 'archon'
+	}
+}
+
 // Features run from last to first, so cache hits return before the throttle queues anything.
 export const modrinthClient = new GenericModrinthClient({
 	userAgent: USER_AGENT,
 	features: [
+		new MockHostingFeature(),
 		new RequestThrottleFeature(),
 		requestCache,
+		// Listed before auth so it runs after it and sees the token
+		new ArchonFeature(),
 		new AuthFeature({
 			token: async () =>
 				trackToken(
