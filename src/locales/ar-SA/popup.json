@@ -8,12 +8,6 @@
   "feature.activitySparkline.title": {
     "defaultMessage": "خط شرارة النشاط"
   },
-  "feature.curseforgeRedirect.description": {
-    "defaultMessage": "إعادة توجيه صفحات مشروع CurseForge إلى Modrinth عندما تكون متاحة."
-  },
-  "feature.curseforgeRedirect.title": {
-    "defaultMessage": "إعادة التوجيه إلى CurseForge"
-  },
   "feature.dependencyExplorer.description": {
     "defaultMessage": "رسم بياني تفاعلي لاستكشاف شجرة التوابع الكاملة."
   },

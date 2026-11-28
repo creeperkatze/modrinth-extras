@@ -38,11 +38,20 @@
   "feature.compareVersions.title": {
     "defaultMessage": "Versionen vergleichen"
   },
-  "feature.curseforgeRedirect.description": {
-    "defaultMessage": "Leite CurseForge-Projektseiten zu Modrinth um, falls verfügbar."
+  "feature.curseforgeIntegration.description": {
+    "defaultMessage": "Fügt CurseForge-Projektseiten eine Schaltfläche „Auf Modrinth öffnen“ hinzu."
   },
-  "feature.curseforgeRedirect.title": {
-    "defaultMessage": "CurseForge-Weiterleitung"
+  "feature.curseforgeIntegration.openIn": {
+    "defaultMessage": "Öffnen in"
+  },
+  "feature.curseforgeIntegration.openIn.current": {
+    "defaultMessage": "Aktueller Tab"
+  },
+  "feature.curseforgeIntegration.openIn.new": {
+    "defaultMessage": "Neuer Tab"
+  },
+  "feature.curseforgeIntegration.title": {
+    "defaultMessage": "CurseForge-Integration"
   },
   "feature.dependencyExplorer.description": {
     "defaultMessage": "Interaktiver Graph, um den vollständigen Abhängigkeitsbaum zu erkunden."
@@ -317,11 +326,119 @@
   "popup.group.sidebar": {
     "defaultMessage": "Seitenleiste"
   },
+  "popup.hosting.actionFailed": {
+    "defaultMessage": "Der Server konnte nicht {action, select, Start {gestartet} Stop {gestoppt} other {neu gestartet}} werden."
+  },
+  "popup.hosting.allServers": {
+    "defaultMessage": "Alle Server öffnen"
+  },
+  "popup.hosting.broken": {
+    "defaultMessage": "Bei diesem Server ist etwas schiefgelaufen. Öffne das Dashboard, um den Grund zu sehen."
+  },
+  "popup.hosting.connectionFailed": {
+    "defaultMessage": "Der Live-Status konnte nicht geladen werden."
+  },
+  "popup.hosting.copyAddress": {
+    "defaultMessage": "Adresse kopieren"
+  },
+  "popup.hosting.cpu": {
+    "defaultMessage": "CPU"
+  },
+  "popup.hosting.crashed": {
+    "defaultMessage": "Der Server ist abgestürzt. Öffne das Dashboard, um den Grund zu sehen."
+  },
+  "popup.hosting.emptyDescription": {
+    "defaultMessage": "Sobald du einen Server bei Modrinth Hosting hast, erscheinen hier sein Status und seine Steuerung."
+  },
+  "popup.hosting.emptyTitle": {
+    "defaultMessage": "Noch keine Server"
+  },
+  "popup.hosting.failed": {
+    "defaultMessage": "Deine Server konnten nicht geladen werden"
+  },
+  "popup.hosting.getServer": {
+    "defaultMessage": "Server holen"
+  },
+  "popup.hosting.installing": {
+    "defaultMessage": "Wird installiert..."
+  },
+  "popup.hosting.loading": {
+    "defaultMessage": "Deine Server werden geladen..."
+  },
+  "popup.hosting.manageBilling": {
+    "defaultMessage": "Abrechnung verwalten"
+  },
+  "popup.hosting.memory": {
+    "defaultMessage": "Arbeitsspeicher"
+  },
+  "popup.hosting.noPermission": {
+    "defaultMessage": "Dafür hast du keine Berechtigung"
+  },
+  "popup.hosting.notice.cancelled": {
+    "defaultMessage": "Das Abonnement für diesen Server wurde gekündigt."
+  },
+  "popup.hosting.notice.medalEnded": {
+    "defaultMessage": "Die Testphase deines Medal-Servers ist abgelaufen und dein Server wurde deaktiviert. Bitte upgrade, um deinen Server weiterhin nutzen zu können."
+  },
+  "popup.hosting.notice.moderated": {
+    "defaultMessage": "Dieser Server wurde von den Moderatoren deaktiviert. Wende dich an den Support, um mehr zu erfahren."
+  },
+  "popup.hosting.notice.other": {
+    "defaultMessage": "Dieser Server ist deaktiviert."
+  },
+  "popup.hosting.notice.paymentfailed": {
+    "defaultMessage": "Das Abonnement für diesen Server wurde gekündigt, weil eine Zahlung fehlgeschlagen ist."
+  },
+  "popup.hosting.notice.upgrading": {
+    "defaultMessage": "Die Hardware dieses Servers wird aufgerüstet. Er ist in Kürze wieder verfügbar."
+  },
+  "popup.hosting.resourceUsage": {
+    "defaultMessage": "{resource}: {used} von {total}"
+  },
+  "popup.hosting.resourceValue": {
+    "defaultMessage": "{resource}: {value}"
+  },
+  "popup.hosting.restart": {
+    "defaultMessage": "Neu starten"
+  },
+  "popup.hosting.servers": {
+    "defaultMessage": "Server"
+  },
+  "popup.hosting.signIn": {
+    "defaultMessage": "Melde dich an, um hier deine Server von Modrinth Hosting zu sehen."
+  },
+  "popup.hosting.start": {
+    "defaultMessage": "Starten"
+  },
+  "popup.hosting.startingServer": {
+    "defaultMessage": "Server wird gestartet..."
+  },
+  "popup.hosting.stop": {
+    "defaultMessage": "Stoppen"
+  },
+  "popup.hosting.stopping": {
+    "defaultMessage": "Wird gestoppt"
+  },
+  "popup.hosting.storage": {
+    "defaultMessage": "Speicherplatz"
+  },
+  "popup.hosting.upgrade": {
+    "defaultMessage": "Upgraden"
+  },
+  "popup.hosting.uptime": {
+    "defaultMessage": "Seit {duration} online"
+  },
   "popup.introductionTour.creator.description": {
     "defaultMessage": "Behalte die Ansichten, Downloads und Einnahmen deiner Projekte im Blick."
   },
   "popup.introductionTour.creator.title": {
     "defaultMessage": "Ersteller"
+  },
+  "popup.introductionTour.hosting.description": {
+    "defaultMessage": "Behalte deine Server von Modrinth Hosting im Blick und starte, stoppe oder starte sie neu."
+  },
+  "popup.introductionTour.hosting.title": {
+    "defaultMessage": "Hosting"
   },
   "popup.introductionTour.notifications.description": {
     "defaultMessage": "Lies deine Benachrichtigungen und nimm Einladungen direkt hier an."
@@ -355,6 +472,9 @@
   },
   "popup.nav.creator": {
     "defaultMessage": "Ersteller"
+  },
+  "popup.nav.hosting": {
+    "defaultMessage": "Hosting"
   },
   "popup.nav.notifications": {
     "defaultMessage": "Benachrichtigungen"

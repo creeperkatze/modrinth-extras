@@ -23,12 +23,6 @@
   "feature.browserNotifications.title": {
     "defaultMessage": "Notificaciones del navegador"
   },
-  "feature.curseforgeRedirect.description": {
-    "defaultMessage": "Redirigir páginas de CurseForge a las de Modrinth si existen."
-  },
-  "feature.curseforgeRedirect.title": {
-    "defaultMessage": "Redirección de CurseForge"
-  },
   "feature.dependencyExplorer.description": {
     "defaultMessage": "Gráfico interactivo para explorar el árbol de dependencias."
   },
