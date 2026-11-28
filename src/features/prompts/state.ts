@@ -28,23 +28,29 @@ export async function saveInstallDate() {
 	}
 }
 
+// Without a saved install date, like after updating from an older version, the delay starts now
 export async function shouldShowPrompt({ item, delay }: Prompt): Promise<boolean> {
 	const state = await item.getValue()
 	if (state?.dismissed) return false
-	return !state?.installedAt || Date.now() - state.installedAt >= delay
+	if (!state?.installedAt) {
+		await item.setValue({ dismissed: false, installedAt: Date.now() })
+		return false
+	}
+	return Date.now() - state.installedAt >= delay
 }
 
 export async function dismissPrompt({ item }: Prompt) {
 	await item.setValue({ dismissed: true })
 }
 
-// Only a dismissal is copied, so one from another browser is never undone
+// A dismissal always wins, so one from another browser is never undone
 export async function movePromptsToSync() {
 	for (const { item } of PROMPTS) {
 		const localKey = item.key.replace('sync:', 'local:') as `local:${string}`
 		const old = await storage.getItem<PromptState>(localKey)
 		if (!old) continue
-		if (old.dismissed) await item.setValue(old)
+		const synced = await item.getValue()
+		if (old.dismissed || (!synced?.dismissed && !synced?.installedAt)) await item.setValue(old)
 		await storage.removeItem(localKey)
 	}
 }

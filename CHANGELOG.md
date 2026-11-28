@@ -10,6 +10,10 @@
 
 - Features on Modrinth pages show up about a second sooner when you open or reload a page.
 
+### Fixed
+
+- The donate and Discord cards in the popup no longer show up right after updating.
+
 ## [2.1.1] - 2026-11-27
 
 ### Fixed
