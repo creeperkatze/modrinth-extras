@@ -51,7 +51,7 @@
 					<Tabs
 						:value="view"
 						:tabs="tabs"
-						class="!w-full [&>button]:min-w-0 [&>button]:flex-auto [&>button]:px-2 [&_span]:truncate"
+						class="!w-full [&>button[aria-selected=false]>span]:sr-only [&>button[aria-selected=false]]:flex-1 [&>button[aria-selected=true]]:flex-auto [&>button]:min-w-0 [&>button]:px-2 [&_span]:truncate"
 						@update:value="selectTab"
 					/>
 				</div>
