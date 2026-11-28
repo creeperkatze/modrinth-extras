@@ -66,7 +66,17 @@
 				<template v-if="server.status === 'suspended'">
 					<p class="m-0 text-sm text-secondary">{{ suspendedNotice }}</p>
 					<Button
-						v-if="server.suspensionReason !== 'moderated'"
+						v-if="trialEnded"
+						type="outlined"
+						color="medal_promotion"
+						class="w-fit smart-clickable:allow-pointer-events"
+						@click="openModrinth('/hosting/manage')"
+					>
+						<RocketIcon aria-hidden="true" />
+						{{ formatMessage(messages['popup.hosting.upgrade']) }}
+					</Button>
+					<Button
+						v-else-if="server.suspensionReason !== 'moderated'"
 						type="colored"
 						color="brand"
 						class="w-fit smart-clickable:allow-pointer-events"
@@ -206,6 +216,7 @@ import {
 	LoaderCircleIcon,
 	MemoryStickIcon,
 	PlayIcon,
+	RocketIcon,
 	StopCircleIcon,
 	TimerIcon,
 	UpdatedIcon,
@@ -229,6 +240,12 @@ const messages = defineMessages({
 	'popup.hosting.uptime': {
 		id: 'popup.hosting.uptime',
 		defaultMessage: 'Online for {duration}',
+	},
+	'popup.hosting.upgrade': { id: 'popup.hosting.upgrade', defaultMessage: 'Upgrade' },
+	'popup.hosting.notice.medalEnded': {
+		id: 'popup.hosting.notice.medalEnded',
+		defaultMessage:
+			'Your Medal server trial has ended and your server has been suspended. Please upgrade to continue using your server.',
 	},
 	'popup.hosting.manageBilling': {
 		id: 'popup.hosting.manageBilling',
@@ -360,7 +377,13 @@ const notice = computed(() => {
 	return null
 })
 
+// The website shows an ended Medal trial as a cancelled server
+const trialEnded = computed(
+	() => props.server.isMedal && props.server.suspensionReason === 'cancelled',
+)
+
 const suspendedNotice = computed(() => {
+	if (trialEnded.value) return formatMessage(messages['popup.hosting.notice.medalEnded'])
 	switch (props.server.suspensionReason) {
 		case 'cancelled':
 			return formatMessage(messages['popup.hosting.notice.cancelled'])

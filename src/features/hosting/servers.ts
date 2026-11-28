@@ -21,6 +21,8 @@ export interface HostingServer {
 	address: string
 	iconUrl: string | null
 	canUsePowerActions: boolean
+	// A free Medal trial server
+	isMedal: boolean
 }
 
 // Matches the website's server list limit
@@ -104,6 +106,7 @@ export async function fetchHostingServers(): Promise<HostingServer[]> {
 				address: getHostingServerAddress(server.net),
 				iconUrl: icons[index] ?? null,
 				canUsePowerActions: hasServerPermission(server.current_user_permissions, 'POWER_ACTIONS'),
+				isMedal: server.is_medal,
 			}
 		})
 		.sort(

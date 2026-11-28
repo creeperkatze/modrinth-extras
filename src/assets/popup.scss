@@ -1,6 +1,18 @@
 // Modrinth's global base styles. Injections inherit these from the page, the popup must ship its own copy.
 @import '@modrinth/assets/omorphia.scss';
 
+// Despite the name, the website's Medal color is blue. It's defined in its own stylesheet, not omorphia.
+:root,
+.dark-mode,
+.oled-mode,
+.retro-mode {
+	--medal-promotion-text-orange: #42abff;
+}
+
+.light-mode {
+	--medal-promotion-text-orange: #156db8;
+}
+
 input {
 	border-radius: var(--size-rounded-sm);
 	box-sizing: border-box;

@@ -377,6 +377,9 @@
   "popup.hosting.notice.cancelled": {
     "defaultMessage": "The subscription for this server was cancelled."
   },
+  "popup.hosting.notice.medalEnded": {
+    "defaultMessage": "Your Medal server trial has ended and your server has been suspended. Please upgrade to continue using your server."
+  },
   "popup.hosting.notice.moderated": {
     "defaultMessage": "This server was suspended by the moderators. Contact support to learn more."
   },
@@ -418,6 +421,9 @@
   },
   "popup.hosting.storage": {
     "defaultMessage": "Storage"
+  },
+  "popup.hosting.upgrade": {
+    "defaultMessage": "Upgrade"
   },
   "popup.hosting.uptime": {
     "defaultMessage": "Online for {duration}"

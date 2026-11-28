@@ -23,6 +23,7 @@ interface MockServer {
 	name: string
 	status: Archon.Servers.v0.Status
 	suspensionReason?: Archon.Servers.v0.SuspensionReason
+	medal?: boolean
 	loader: Archon.Servers.v0.Loader
 	loaderVersion: string
 	mcVersion: string
@@ -130,6 +131,24 @@ const SERVERS: MockServer[] = [
 		ramUse: 0,
 		cpuBase: 0,
 		storageUsedGb: 0.2,
+		storageTotalGb: 25,
+		initial: { power: 'stopped', minutesAgo: 0 },
+	},
+	{
+		id: 'mock-server-medal',
+		name: 'Medal Trial',
+		status: 'suspended',
+		suspensionReason: 'cancelled',
+		medal: true,
+		loader: 'Vanilla',
+		loaderVersion: '',
+		mcVersion: '1.21.4',
+		domain: 'medal-trial',
+		permissions: OWNER,
+		ramGb: 4,
+		ramUse: 0,
+		cpuBase: 0,
+		storageUsedGb: 1.2,
 		storageTotalGb: 25,
 		initial: { power: 'stopped', minutesAgo: 0 },
 	},
@@ -249,7 +268,7 @@ function toArchonServer(server: MockServer): Archon.Servers.v0.Server {
 		notices: [],
 		node: { token: 'mock', instance: MOCK_NODE },
 		flows: { intro: false },
-		is_medal: false,
+		is_medal: !!server.medal,
 		current_user_permissions: server.permissions,
 		locked_since: null,
 		icon: server.icon ? { hash: `mock-${server.id}`, config: null } : null,
