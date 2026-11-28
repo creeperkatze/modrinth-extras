@@ -8,7 +8,7 @@ import { installErrorReporting } from '../core/telemetry'
 
 export type SettingsGetter = () => ExtensionSettings
 
-// Injections wait for Nuxt hydration, which the MAIN world bridge reports with "modrinth-extras:router-ready".
+// Injections wait until the MAIN world bridge reports that Nuxt finished hydrating
 export const pageState = { hydrated: false, navigating: false }
 
 let tooltipHostMounted = false

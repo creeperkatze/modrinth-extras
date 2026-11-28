@@ -50,7 +50,8 @@ export default defineContentScript({
 			for (const inj of injections) inj.schedule()
 		}
 
-		ctx.addEventListener(window, 'modrinth-extras:router-ready', markHydrated, { once: true })
+		if ('modrinthExtrasHydrated' in document.documentElement.dataset) markHydrated()
+		else ctx.addEventListener(window, 'modrinth-extras:hydrated', markHydrated, { once: true })
 
 		// Answers so the popup knows the page handled it and doesn't open a new tab
 		function onRuntimeMessage(

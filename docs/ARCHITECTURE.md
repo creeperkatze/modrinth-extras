@@ -15,7 +15,7 @@ Modrinth Extras is a WXT-based browser extension with two content-script worlds 
 ## Content script worlds
 
 - The main content script runs in the ISOLATED world. It cannot access page JavaScript; it mounts all Vue components, handles settings, and listens for browser messages.
-- A bridge content script runs in the MAIN world on Modrinth pages. It hooks into the Nuxt router, dispatching a `modrinth-extras:router-ready` event once Nuxt's suspense boundary resolves, plus `beforeEach`/`afterEach` navigation CustomEvents. It locates the router via `window.__nuxt_app.$router` or the `#__nuxt` element's Vue app instance.
+- A bridge content script runs in the MAIN world on Modrinth pages. It reaches the Vue app through the `#__nuxt` element's `__vue_app__`, and Nuxt through its `$nuxt`. Once Nuxt finishes hydrating it dispatches `modrinth-extras:hydrated` and sets `data-modrinth-extras-hydrated` on `<html>`, for a content script that starts later. It also turns the router's `beforeEach`/`afterEach` into navigation CustomEvents. Injecting before hydration finishes makes Nuxt throw.
 - A separate bridge patches `history.pushState`/`replaceState` on curseforge.com to detect SPA navigation there, since it has no equivalent router hook available.
 - UI injected into CurseForge can't use Modrinth's CSS variables or `@modrinth/ui` styles. Its components in `src/components/curseforge/` get their own Tailwind build from `tailwind.external.config.ts`, scoped under the `modrinth-extras-ui` class so it never touches the host page.
 

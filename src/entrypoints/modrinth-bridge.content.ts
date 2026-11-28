@@ -4,32 +4,32 @@ export default defineContentScript({
 	runAt: 'document_idle',
 
 	main() {
-		const w = window as Window &
-			typeof globalThis & {
-				__nuxt_app?: {
-					$router?: unknown
-					hook?: (event: string, cb: () => void) => void
-					isHydrating?: boolean
-				}
-			}
-
 		type VueRouter = {
 			beforeEach: (cb: () => void) => void
 			afterEach: (cb: () => void) => void
 			push: (path: string) => Promise<unknown>
 		}
 
-		function getRouter(): VueRouter | null {
+		type NuxtApp = {
+			isHydrating?: boolean
+			hook?: (event: string, cb: () => void) => () => void
+		}
+
+		type VueApp = {
+			$nuxt?: NuxtApp
+			config?: { globalProperties?: { $router?: VueRouter } }
+		}
+
+		// Vue keeps its app on the mount element even in production builds, and Nuxt hangs off it
+		function getVueApp(): VueApp | null {
 			const nuxtEl = document.getElementById('__nuxt') as
-				| (HTMLElement & {
-						__vue_app__?: { config?: { globalProperties?: { $router?: VueRouter } } }
-				  })
+				| (HTMLElement & { __vue_app__?: VueApp })
 				| null
-			return (
-				(w.__nuxt_app?.$router as VueRouter | undefined) ??
-				nuxtEl?.__vue_app__?.config?.globalProperties?.$router ??
-				null
-			)
+			return nuxtEl?.__vue_app__ ?? null
+		}
+
+		function getRouter(): VueRouter | null {
+			return getVueApp()?.config?.globalProperties?.$router ?? null
 		}
 
 		window.addEventListener('message', (e: MessageEvent) => {
@@ -101,10 +101,6 @@ export default defineContentScript({
 			manager.addNotification({ title, text, type: notificationType })
 		})
 
-		function dispatchReady() {
-			window.dispatchEvent(new CustomEvent('modrinth-extras:router-ready'))
-		}
-
 		function onHydrated() {
 			const router = getRouter()
 			if (router) {
@@ -115,58 +111,31 @@ export default defineContentScript({
 					window.dispatchEvent(new CustomEvent('modrinth-extras:after-navigate'))
 				})
 			}
-			dispatchReady()
+			// Also left on the page for a content script that starts after the event
+			document.documentElement.dataset.modrinthExtrasHydrated = ''
+			window.dispatchEvent(new CustomEvent('modrinth-extras:hydrated'))
 		}
 
-		// Nuxt lifecycle: mount > isHydrating=false > app:suspense:resolve
-		let settling = false
-
-		function waitForNuxtApp() {
-			const nuxtApp = w.__nuxt_app
-			if (nuxtApp?.hook) {
-				let resolved = false
-				nuxtApp.hook('app:suspense:resolve', () => {
-					if (resolved) return
-					resolved = true
+		// Injecting while Nuxt still hydrates makes it throw, so this waits for it to finish
+		function checkReady(): boolean {
+			const vueApp = getVueApp()
+			if (!vueApp) return false
+			const nuxtApp = vueApp.$nuxt
+			if (nuxtApp?.isHydrating === false) {
+				requestAnimationFrame(onHydrated)
+			} else if (nuxtApp?.hook) {
+				// It fires again on every page change
+				const unhook = nuxtApp.hook('app:suspense:resolve', () => {
+					unhook()
 					requestAnimationFrame(onHydrated)
 				})
-				if (nuxtApp.isHydrating === false) {
-					requestAnimationFrame(() => {
-						if (!resolved) {
-							resolved = true
-							onHydrated()
-						}
-					})
-				}
-				return true
+			} else {
+				// A Nuxt version that works differently, so it's given time to hydrate
+				console.error(
+					'[Modrinth Extras] Failed to find the Nuxt hydration hook, injecting in 2 seconds instead',
+				)
+				setTimeout(onHydrated, 2000)
 			}
-			if (nuxtApp?.isHydrating === false) {
-				onHydrated()
-				return true
-			}
-			return false
-		}
-
-		function checkReady(): boolean {
-			if (waitForNuxtApp()) return true
-
-			// __vue_app__ is observable via MutationObserver, __nuxt_app isn't
-			const nuxtEl = document.getElementById('__nuxt') as
-				| (HTMLElement & { __vue_app__?: object })
-				| null
-			if (!nuxtEl?.__vue_app__ || settling) return false
-
-			settling = true
-			let frames = 0
-			const poll = () => {
-				if (waitForNuxtApp()) return
-				if (++frames < 120) {
-					requestAnimationFrame(poll)
-				} else {
-					onHydrated()
-				}
-			}
-			requestAnimationFrame(poll)
 			return true
 		}
 
