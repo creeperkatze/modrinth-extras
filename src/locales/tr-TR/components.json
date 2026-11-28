@@ -5,41 +5,173 @@
   "collectionDownload.cancel": {
     "defaultMessage": "İptal"
   },
+  "collectionDownload.datapack": {
+    "defaultMessage": "Veri paketi"
+  },
+  "collectionDownload.dependencies": {
+    "defaultMessage": "Bağımlılıkları dahil et"
+  },
+  "collectionDownload.dependenciesDescription": {
+    "defaultMessage": "Dahil edilen modların çalışması için gereken modları ekle."
+  },
   "collectionDownload.dependency": {
     "defaultMessage": "Bağımlılık"
+  },
+  "collectionDownload.download": {
+    "defaultMessage": "{count, plural, one {# projeyi} other {# projeyi}} indir"
+  },
+  "collectionDownload.downloading": {
+    "defaultMessage": "{total} öğeden {done} tanesi indiriliyor"
+  },
+  "collectionDownload.exportFailed": {
+    "defaultMessage": "Koleksiyon indirilemedi"
+  },
+  "collectionDownload.exportFailedText": {
+    "defaultMessage": "Bazı dosyalar indirilemedi. Bir süre sonra tekrar deneyin."
+  },
+  "collectionDownload.failed": {
+    "defaultMessage": "Bu koleksyondaki projeler yüklenemedi."
   },
   "collectionDownload.gameVersion": {
     "defaultMessage": "Oyun sürümü"
   },
+  "collectionDownload.included": {
+    "defaultMessage": "Dahil"
+  },
   "collectionDownload.incompatible": {
     "defaultMessage": "Uyumlu değil"
+  },
+  "collectionDownload.incompatibleDescription": {
+    "defaultMessage": "{loader} {gameVersion} için sürüm bulunmamaktadır."
+  },
+  "collectionDownload.incompatibleVersionDescription": {
+    "defaultMessage": "{gameVersion} için sürüm bulunmamaktadır."
   },
   "collectionDownload.loader": {
     "defaultMessage": "Yükleyici"
   },
+  "collectionDownload.loading": {
+    "defaultMessage": "Projeler yükleniyor..."
+  },
   "collectionDownload.mod": {
     "defaultMessage": "Mod"
+  },
+  "collectionDownload.mrpack": {
+    "defaultMessage": "Mod Paketi"
+  },
+  "collectionDownload.mrpackDescription": {
+    "defaultMessage": "Modrinth App'e, Prism Launcher'e ve diğerlerine içe aktarılacak bir .mrpack dosyası."
+  },
+  "collectionDownload.noLoaderVersion": {
+    "defaultMessage": "{gameVersion} için henüz bir {loader} sürümü yok."
+  },
+  "collectionDownload.noneIncluded": {
+    "defaultMessage": "Hiçbir projede bu oyun versiyonu ve yükleyicisi için bir sürüm bulunmamaktadır."
+  },
+  "collectionDownload.nothing": {
+    "defaultMessage": "Bu koleksiyondaki projelerin hiçbiri beraber indirilemez."
+  },
+  "collectionDownload.projectCount": {
+    "defaultMessage": "{count, plural, one {# uyumlu proje} other {# uyumlu proje}}"
+  },
+  "collectionDownload.resolvingProgress": {
+    "defaultMessage": "Doğru sürümler bulunuyor... {total, number} öğeden {done, number} öğe tamamlandı"
   },
   "collectionDownload.resourcepack": {
     "defaultMessage": "Kaynak paketi"
   },
+  "collectionDownload.retry": {
+    "defaultMessage": "Tekrar dene"
+  },
+  "collectionDownload.shader": {
+    "defaultMessage": "Shader"
+  },
+  "collectionDownload.title": {
+    "defaultMessage": "Koleksiyonu indir"
+  },
+  "collectionDownload.unsupported": {
+    "defaultMessage": "Dahil edilemez"
+  },
+  "collectionDownload.unsupportedDescription": {
+    "defaultMessage": "Eklentiler ve mod paketleri bir örneğe eklenmez."
+  },
   "collectionDownload.zip": {
     "defaultMessage": "Zip dosyası"
+  },
+  "collectionDownload.zipDescription": {
+    "defaultMessage": "Her dosya klasörüne yerleştirilmiş, bir örneğe yerleştirilmeye hazır."
+  },
+  "compareVersions.compareWith": {
+    "defaultMessage": "Karşılaştır"
+  },
+  "compareVersions.label": {
+    "defaultMessage": "Öncekiyle karşılaştır"
+  },
+  "compareVersions.tooltip": {
+    "defaultMessage": "Modsrc'deki {version} ile karşılaştır"
   },
   "curseforgeComments.author": {
     "defaultMessage": "Yazar"
   },
+  "curseforgeComments.commentCount": {
+    "defaultMessage": "{count, plural, one {# yorum} other {# yorum}}"
+  },
+  "curseforgeComments.credit": {
+    "defaultMessage": "<link>CurseForge</link> topluluğu tarafından yazılan incelemeler."
+  },
+  "curseforgeComments.edited": {
+    "defaultMessage": "Düzenlendi"
+  },
   "curseforgeComments.empty": {
     "defaultMessage": "Henüz yorum yok."
+  },
+  "curseforgeComments.hideReplies": {
+    "defaultMessage": "{count, plural, one {# yanıtı gizle} other {# yanıtı gizle}}"
+  },
+  "curseforgeComments.loadError": {
+    "defaultMessage": "Yorumlar CurseForge'dan yüklenemedi"
+  },
+  "curseforgeComments.loading": {
+    "defaultMessage": "Yorumlar yükleniyor..."
+  },
+  "curseforgeComments.notFound": {
+    "defaultMessage": "Bu proje CurseForge'da bulunamadı."
   },
   "curseforgeComments.pinned": {
     "defaultMessage": "Sabitlenmiş"
   },
+  "curseforgeComments.posted": {
+    "defaultMessage": "{time} paylaşıldı"
+  },
+  "curseforgeComments.showReplies": {
+    "defaultMessage": "{count, plural, one {# yanıtı göster} other {# yanıtı göster}}"
+  },
+  "curseforgeComments.title": {
+    "defaultMessage": "Topluluk yorumları"
+  },
   "curseforgeComments.writeComment": {
     "defaultMessage": "Bir yorum yaz"
   },
+  "curseforgeIntegrationButton.open": {
+    "defaultMessage": "Modrinth'de aç"
+  },
+  "customTheme.accent": {
+    "defaultMessage": "Vurgu"
+  },
+  "customTheme.accentColor": {
+    "defaultMessage": "Vurgu rengi"
+  },
+  "customTheme.accentText": {
+    "defaultMessage": "Vurgu üzerindeki metin"
+  },
+  "customTheme.base": {
+    "defaultMessage": "Temel"
+  },
   "customTheme.blue": {
     "defaultMessage": "Mavi"
+  },
+  "customTheme.body": {
+    "defaultMessage": "Gövde metni"
   },
   "customTheme.cancel": {
     "defaultMessage": "İptal"
@@ -47,11 +179,26 @@
   "customTheme.colors": {
     "defaultMessage": "Renkler"
   },
+  "customTheme.createTitle": {
+    "defaultMessage": "Tema oluştur"
+  },
   "customTheme.dark": {
     "defaultMessage": "Karanlık"
   },
   "customTheme.delete": {
     "defaultMessage": "Sil"
+  },
+  "customTheme.divider": {
+    "defaultMessage": "Ayırıcılar"
+  },
+  "customTheme.editTitle": {
+    "defaultMessage": "Temayı düzenle"
+  },
+  "customTheme.export": {
+    "defaultMessage": "Dışa Aktar"
+  },
+  "customTheme.headings": {
+    "defaultMessage": "Başlıklar"
   },
   "customTheme.light": {
     "defaultMessage": "Aydınlık"
@@ -85,6 +232,18 @@
   },
   "customTheme.secondary": {
     "defaultMessage": "İkincil metin"
+  },
+  "customTheme.startFrom": {
+    "defaultMessage": "Itibaren"
+  },
+  "customTheme.startFromPlaceholder": {
+    "defaultMessage": "Bir tema seç"
+  },
+  "customTheme.surfaces": {
+    "defaultMessage": "Yüzeyler"
+  },
+  "customTheme.surfacesDescription": {
+    "defaultMessage": "Soldaki sayfa arka planından sağdaki kenarlıklara kadar."
   },
   "customTheme.text": {
     "defaultMessage": "Metin"
@@ -239,14 +398,131 @@
   "moddexReviews.writeReview": {
     "defaultMessage": "Değerlendirme yaz"
   },
+  "modgradeSidebar.cannotCheck": {
+    "defaultMessage": "{count, plural, one {# dosya} other {# dosya}} kontrol için indirilemez"
+  },
+  "modgradeSidebar.checked": {
+    "defaultMessage": "{checked} için {total, plural, one {# güncel dosya} other {# güncel dosya}} kontrol edildi"
+  },
+  "modgradeSidebar.lastChecked": {
+    "defaultMessage": "Son denetleme: {time}"
+  },
+  "modgradeSidebar.loadError": {
+    "defaultMessage": "Modgrade verileri yüklenemedi"
+  },
   "modgradeSidebar.malware": {
     "defaultMessage": "Kötü amaçlı yazılım bulundu"
+  },
+  "modgradeSidebar.malwareElsewhere": {
+    "defaultMessage": "Sadece başka bir platformda bulunan kötü amaçlı yazılım tespit edildi"
   },
   "modgradeSidebar.notChecked": {
     "defaultMessage": "Henüz kontrol edilmedi"
   },
+  "modgradeSidebar.partlyChecked": {
+    "defaultMessage": "Kısmen kontrol edildi"
+  },
+  "modgradeSidebar.passed": {
+    "defaultMessage": "Sorun bulunmadı"
+  },
+  "modgradeSidebar.possibleMalware": {
+    "defaultMessage": "Dahil edilen bir projede olası kötü amaçlı yazılım"
+  },
+  "modgradeSidebar.readInPart": {
+    "defaultMessage": "{count, plural, one {# dosya} other {# dosya}} sadece kısmen okunabiilir"
+  },
+  "modgradeSidebar.reason.discordWebhook": {
+    "defaultMessage": "Discord webhook’una veri gönderir"
+  },
+  "modgradeSidebar.reason.disguisedFile": {
+    "defaultMessage": "İsminin onu doğru tanımlamadığı bir dosya bulunuyor"
+  },
+  "modgradeSidebar.reason.downloadsAndRunsCode": {
+    "defaultMessage": "Kodu kontrol etmeden indirir ve çalıştırır"
+  },
+  "modgradeSidebar.reason.downloadsCodeHttp": {
+    "defaultMessage": "Kodları şifrelemeden indirir"
+  },
+  "modgradeSidebar.reason.hiddenAddress": {
+    "defaultMessage": "Kodunda bir web adresi saklar"
+  },
+  "modgradeSidebar.reason.installsProgram": {
+    "defaultMessage": "Bir programı indirir veya taşır ve başlatır"
+  },
+  "modgradeSidebar.reason.knownMalware": {
+    "defaultMessage": "Bilinen kötü amaçlı yazılımlarla eşleşir"
+  },
+  "modgradeSidebar.reason.licenceUnlockedCode": {
+    "defaultMessage": "Lisans anahtarıyla erişilebilen kodu indirir ve çalıştırır"
+  },
+  "modgradeSidebar.reason.loadsCodeAtStart": {
+    "defaultMessage": "Başlangıçta sabitlenmiş adresten kod yükler"
+  },
+  "modgradeSidebar.reason.matchesSecurityReport": {
+    "defaultMessage": "Herkese açık bir güvenlik raporu ile eşleşir"
+  },
+  "modgradeSidebar.reason.miner": {
+    "defaultMessage": "Gizli bir kripto para madencisi çalıştırır"
+  },
+  "modgradeSidebar.reason.namesStartupPlaces": {
+    "defaultMessage": "Giriş sırasında programları başlatan yerleri ifade eder"
+  },
+  "modgradeSidebar.reason.readsBrowserHistory": {
+    "defaultMessage": "Tarayıcı geçmişini okur"
+  },
+  "modgradeSidebar.reason.readsClipboardCrypto": {
+    "defaultMessage": "Kopyalama panosundaki kripto adreslerini okur"
+  },
+  "modgradeSidebar.reason.readsLoginData": {
+    "defaultMessage": "Diğer programların oturum açma verilerini okur"
+  },
+  "modgradeSidebar.reason.recordsAndClipboard": {
+    "defaultMessage": "Mikrofonu veya ekranı kaydeder ve kopyalama panosunu değiştirir"
+  },
+  "modgradeSidebar.reason.remoteControl": {
+    "defaultMessage": "Bilgisayarda veya sunucuda başkalarının komut çalıştırmasına izin verir"
+  },
+  "modgradeSidebar.reason.replacedProgram": {
+    "defaultMessage": "En yeni dosya, adreslerini gizleyen farklı bir programdır"
+  },
+  "modgradeSidebar.reason.runsDownloadedCode": {
+    "defaultMessage": "Gizli kod indirir ve onu çalıştırır"
+  },
+  "modgradeSidebar.reason.sendsClipboard": {
+    "defaultMessage": "Kopyalama panosundaki içerikleri gönderir"
+  },
+  "modgradeSidebar.reason.sendsComputerId": {
+    "defaultMessage": "Bir bilgisayar tanımlayıcısı gönderir"
+  },
+  "modgradeSidebar.reason.sendsIpAddress": {
+    "defaultMessage": "IP adresini ve konumunu Discord'a gönderir"
+  },
+  "modgradeSidebar.reason.sendsScreenshots": {
+    "defaultMessage": "Ekran görüntüleri gönderir"
+  },
+  "modgradeSidebar.reason.sendsSessionToken": {
+    "defaultMessage": "Minecraft giriş tokenini Mojang'ın dışında bir yere gönderir"
+  },
+  "modgradeSidebar.reason.startsAtLogin": {
+    "defaultMessage": "Oturum açıldığında başlamak için kendisini indirir"
+  },
+  "modgradeSidebar.reason.stealsLogins": {
+    "defaultMessage": "Oturum açma bilgilerini, tokenleri ya da oyun oturumunu çalar"
+  },
+  "modgradeSidebar.reason.swapsCryptoAddresses": {
+    "defaultMessage": "Kopyalama panosundaki kripto adreslerini değiştirir"
+  },
   "modgradeSidebar.someFiles": {
     "defaultMessage": "Yalnızca bazı dosyalar etkilendi"
+  },
+  "modgradeSidebar.unknownMalwareReason": {
+    "defaultMessage": "Diğer kötü amaçlı davranışlar"
+  },
+  "modgradeSidebar.unknownWarningReason": {
+    "defaultMessage": "Diğer şüpheli davranışlar"
+  },
+  "modgradeSidebar.viewReport": {
+    "defaultMessage": "Modgrade'de görüntüle"
   },
   "modgradeSidebar.warning": {
     "defaultMessage": "Şüpheli kod bulundu"
@@ -305,11 +581,56 @@
   "platformsSidebar.title": {
     "defaultMessage": "Diğer platformlar"
   },
+  "projectReviews.loading": {
+    "defaultMessage": "Değerlendirmeler yükleniyor…"
+  },
+  "projectReviews.notFoundDescription": {
+    "defaultMessage": "Bu projenin {sources}'de hiç değerlendirmesi yok."
+  },
+  "projectReviews.notFoundTitle": {
+    "defaultMessage": "Değerlendirme bulunamadı"
+  },
   "projectReviews.source": {
     "defaultMessage": "Değerlendirme Kaynağı"
   },
   "projectReviews.tab": {
     "defaultMessage": "Değerlendirmeler"
+  },
+  "quickActions.checkingDownload": {
+    "defaultMessage": "Mevcut sürüm kontrol ediliyor..."
+  },
+  "quickActions.copied": {
+    "defaultMessage": "Kopyalandı!"
+  },
+  "quickActions.copyLink": {
+    "defaultMessage": "Bağlantıyı kopyala"
+  },
+  "quickActions.download": {
+    "defaultMessage": "İndir"
+  },
+  "quickActions.downloadUnavailable": {
+    "defaultMessage": "{loader, select, none {{version} için hiçbir sürüm bulunamadı} other {{loader} {version} için hiçbir sürüm bulunamadı}}"
+  },
+  "quickActions.follow": {
+    "defaultMessage": "Takip et"
+  },
+  "quickActions.newCollection": {
+    "defaultMessage": "Yeni koleksiyon oluştur"
+  },
+  "quickActions.noCollections": {
+    "defaultMessage": "Hiç koleksiyon bulunmadı."
+  },
+  "quickActions.save": {
+    "defaultMessage": "Kaydet"
+  },
+  "quickActions.saved": {
+    "defaultMessage": "Kaydedildi"
+  },
+  "quickActions.searchPlaceholder": {
+    "defaultMessage": "Ara..."
+  },
+  "quickActions.unfollow": {
+    "defaultMessage": "Takipten çık"
   },
   "quickSearch.clearRecent": {
     "defaultMessage": "Son ögeleri temizle"
@@ -347,11 +668,26 @@
   "reviewStars.rating": {
     "defaultMessage": "5 üzerinden {rating} puan verildi"
   },
+  "sidebarLayout.customize": {
+    "defaultMessage": "Kenar çubuğunu özelleştir"
+  },
   "sidebarLayout.done": {
     "defaultMessage": "Tamamlandı"
   },
+  "sidebarLayout.drag": {
+    "defaultMessage": "Yeniden sıralamak için sürükleyin"
+  },
   "sidebarLayout.hide": {
     "defaultMessage": "Gizle"
+  },
+  "sidebarLayout.resetOrder": {
+    "defaultMessage": "Sıralamayı sıfırla"
+  },
+  "sidebarLayout.revert": {
+    "defaultMessage": "Geri al"
+  },
+  "sidebarLayout.show": {
+    "defaultMessage": "Göster"
   },
   "spigotReviews.authorResponse": {
     "defaultMessage": "Geliştirici Yanıtı:"
@@ -419,8 +755,26 @@
   "themes.import": {
     "defaultMessage": "İçe aktar"
   },
+  "themes.importFailed": {
+    "defaultMessage": "{file} dosyası içe aktarılamadı"
+  },
+  "themes.importInvalid": {
+    "defaultMessage": "Bu dosya geçerli bir tema değil."
+  },
+  "themes.importNewer": {
+    "defaultMessage": "Bu tema Modrinth Extras'ın daha yeni bir sürümü ile oluşturulmuştur. İçe aktarmak için eklentiyi güncelleyiniz."
+  },
+  "themes.limit": {
+    "defaultMessage": "En fazla {max} özel temaya sahip olabilirsiniz."
+  },
   "themes.newTheme": {
     "defaultMessage": "Benim Temam"
+  },
+  "themes.section.classics": {
+    "defaultMessage": "Klasikler"
+  },
+  "themes.section.custom": {
+    "defaultMessage": "Özelleştirilmiş"
   },
   "themes.section.minecraft": {
     "defaultMessage": "Minecraft"
@@ -430,6 +784,9 @@
   },
   "toolsSidebar.copyInstallCommand": {
     "defaultMessage": "{manager} komutunu kopyala"
+  },
+  "toolsSidebar.decompileWith": {
+    "defaultMessage": "{tool} ile decompile et"
   },
   "toolsSidebar.generateEmbed": {
     "defaultMessage": "Embed oluştur"

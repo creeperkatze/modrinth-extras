@@ -38,11 +38,17 @@
   "feature.compareVersions.title": {
     "defaultMessage": "Порівняти версії"
   },
-  "feature.curseforgeRedirect.description": {
-    "defaultMessage": "За можливости переадресовувати сторінки проєктів CurseForge на Modrinth."
+  "feature.curseforgeIntegration.openIn": {
+    "defaultMessage": "Відкривати у"
   },
-  "feature.curseforgeRedirect.title": {
-    "defaultMessage": "Переадресування CurseForge"
+  "feature.curseforgeIntegration.openIn.current": {
+    "defaultMessage": "Поточній вкладці"
+  },
+  "feature.curseforgeIntegration.openIn.new": {
+    "defaultMessage": "Новій вкладці"
+  },
+  "feature.curseforgeIntegration.title": {
+    "defaultMessage": "Інтеграція з CurseForge"
   },
   "feature.dependencyExplorer.description": {
     "defaultMessage": "Інтерактивний граф для дослідження повного дерева залежностей."

@@ -38,11 +38,20 @@
   "feature.compareVersions.title": {
     "defaultMessage": "Сравнение версий"
   },
-  "feature.curseforgeRedirect.description": {
-    "defaultMessage": "Перенаправлять страницы проектов CurseForge на Modrinth, когда это возможно."
+  "feature.curseforgeIntegration.description": {
+    "defaultMessage": "Добавляет кнопку «Открыть в Modrinth» на страницы проектов из CurseForge."
   },
-  "feature.curseforgeRedirect.title": {
-    "defaultMessage": "Перенаправление CurseForge"
+  "feature.curseforgeIntegration.openIn": {
+    "defaultMessage": "Открывать в"
+  },
+  "feature.curseforgeIntegration.openIn.current": {
+    "defaultMessage": "Текущей вкладке"
+  },
+  "feature.curseforgeIntegration.openIn.new": {
+    "defaultMessage": "Новой вкладке"
+  },
+  "feature.curseforgeIntegration.title": {
+    "defaultMessage": "Интеграция с CurseForge"
   },
   "feature.dependencyExplorer.description": {
     "defaultMessage": "Интерактивный график для просмотра полного древа зависимостей."
@@ -317,11 +326,119 @@
   "popup.group.sidebar": {
     "defaultMessage": "Панель"
   },
+  "popup.hosting.actionFailed": {
+    "defaultMessage": "Не удалось {action, select, Start {запустить} Stop {остановить} other {перезапустить}} сервер."
+  },
+  "popup.hosting.allServers": {
+    "defaultMessage": "Открыть все серверы"
+  },
+  "popup.hosting.broken": {
+    "defaultMessage": "Произошла ошибка с сервером. Откройте панель управления и узнайте причину."
+  },
+  "popup.hosting.connectionFailed": {
+    "defaultMessage": "Не удалось загрузить статус."
+  },
+  "popup.hosting.copyAddress": {
+    "defaultMessage": "Копировать адрес"
+  },
+  "popup.hosting.cpu": {
+    "defaultMessage": "ЦП"
+  },
+  "popup.hosting.crashed": {
+    "defaultMessage": "Произошёл сбой. Откройте панель управления и узнайте причину."
+  },
+  "popup.hosting.emptyDescription": {
+    "defaultMessage": "Как только появится сервер Modrinth Hosting, его статус и управление отобразятся здесь."
+  },
+  "popup.hosting.emptyTitle": {
+    "defaultMessage": "Серверов пока нет"
+  },
+  "popup.hosting.failed": {
+    "defaultMessage": "Не удалось загрузить серверы"
+  },
+  "popup.hosting.getServer": {
+    "defaultMessage": "Получить сервер"
+  },
+  "popup.hosting.installing": {
+    "defaultMessage": "Установка..."
+  },
+  "popup.hosting.loading": {
+    "defaultMessage": "Загрузка серверов..."
+  },
+  "popup.hosting.manageBilling": {
+    "defaultMessage": "Управление платежами"
+  },
+  "popup.hosting.memory": {
+    "defaultMessage": "Память"
+  },
+  "popup.hosting.noPermission": {
+    "defaultMessage": "У вас нет разрешения на это"
+  },
+  "popup.hosting.notice.cancelled": {
+    "defaultMessage": "Подписка на сервер отменена."
+  },
+  "popup.hosting.notice.medalEnded": {
+    "defaultMessage": "Ваш пробный сервер от Medal окончен и был остановлен. Приобретите улучшение для доступа к серверу."
+  },
+  "popup.hosting.notice.moderated": {
+    "defaultMessage": "Сервер заблокирован модераторами. Свяжитесь с поддержкой."
+  },
+  "popup.hosting.notice.other": {
+    "defaultMessage": "Сервер заблокирован."
+  },
+  "popup.hosting.notice.paymentfailed": {
+    "defaultMessage": "Подписка на сервер отменена. Платёж не прошёл."
+  },
+  "popup.hosting.notice.upgrading": {
+    "defaultMessage": "Оборудование сервера обновляется, и он скоро снова заработает."
+  },
+  "popup.hosting.resourceUsage": {
+    "defaultMessage": "{resource}: {used}/{total}"
+  },
+  "popup.hosting.resourceValue": {
+    "defaultMessage": "{resource}: {value}"
+  },
+  "popup.hosting.restart": {
+    "defaultMessage": "Перезапустить"
+  },
+  "popup.hosting.servers": {
+    "defaultMessage": "Серверы"
+  },
+  "popup.hosting.signIn": {
+    "defaultMessage": "Войдите, чтобы посмотреть серверы Modrinth Hosting."
+  },
+  "popup.hosting.start": {
+    "defaultMessage": "Запустить"
+  },
+  "popup.hosting.startingServer": {
+    "defaultMessage": "Запуск сервера..."
+  },
+  "popup.hosting.stop": {
+    "defaultMessage": "Остановить"
+  },
+  "popup.hosting.stopping": {
+    "defaultMessage": "Остановка"
+  },
+  "popup.hosting.storage": {
+    "defaultMessage": "Объём диска"
+  },
+  "popup.hosting.upgrade": {
+    "defaultMessage": "Улучшить"
+  },
+  "popup.hosting.uptime": {
+    "defaultMessage": "Онлайн на {duration}"
+  },
   "popup.introductionTour.creator.description": {
     "defaultMessage": "Следите за просмотрами, скачиваниями и доходом ваших проектов."
   },
   "popup.introductionTour.creator.title": {
     "defaultMessage": "Авторам"
+  },
+  "popup.introductionTour.hosting.description": {
+    "defaultMessage": "Проверять свои серверы Modrinth Hosting и запускать, останавливать или перезапускать их."
+  },
+  "popup.introductionTour.hosting.title": {
+    "defaultMessage": "Hosting"
   },
   "popup.introductionTour.notifications.description": {
     "defaultMessage": "Читайте уведомления, и принимайте приглашения прямо отсюда."
@@ -355,6 +472,9 @@
   },
   "popup.nav.creator": {
     "defaultMessage": "Авторам"
+  },
+  "popup.nav.hosting": {
+    "defaultMessage": "Hosting"
   },
   "popup.nav.notifications": {
     "defaultMessage": "Уведомления"

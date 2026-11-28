@@ -152,6 +152,9 @@
   "curseforgeComments.writeComment": {
     "defaultMessage": "撰写评论"
   },
+  "curseforgeIntegrationButton.open": {
+    "defaultMessage": "在 Modrinth 打开"
+  },
   "customTheme.accent": {
     "defaultMessage": "强调色"
   },

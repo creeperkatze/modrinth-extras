@@ -20,26 +20,50 @@
   "feature.browserNotifications.exampleTitle": {
     "defaultMessage": "Örnek bildirim"
   },
+  "feature.browserNotifications.sendTest": {
+    "defaultMessage": "Test gönder"
+  },
   "feature.browserNotifications.title": {
     "defaultMessage": "Tarayıcı bildirimleri"
+  },
+  "feature.collectionDownload.description": {
+    "defaultMessage": "Oyun sürümünüzü ve yükleyicinizi destekleyen tüm projeleri içeren bir koleksiyonu mod paketi veya zip dosyası olarak indirin."
+  },
+  "feature.collectionDownload.title": {
+    "defaultMessage": "Koleksiyon indirme"
+  },
+  "feature.compareVersions.description": {
+    "defaultMessage": "Modsrc’deki sürümlerin decompiled kodlarını, sürüm sayfalarındaki, sürüm listesindeki ve değişiklik günlüğündeki sürümlerle karşılaştır."
   },
   "feature.compareVersions.title": {
     "defaultMessage": "Sürümleri karşılaştır"
   },
-  "feature.curseforgeRedirect.description": {
-    "defaultMessage": "Mevcut olduğunda CurseForge proje sayfalarını Modrinth'e yönlendir."
+  "feature.curseforgeIntegration.openIn": {
+    "defaultMessage": "Bununla aç"
   },
-  "feature.curseforgeRedirect.title": {
-    "defaultMessage": "CurseForge yönlendirmesi"
+  "feature.curseforgeIntegration.openIn.current": {
+    "defaultMessage": "Mevcut sekme"
+  },
+  "feature.curseforgeIntegration.openIn.new": {
+    "defaultMessage": "Yeni sekme"
+  },
+  "feature.curseforgeIntegration.title": {
+    "defaultMessage": "CurseForge entegrasyonu"
   },
   "feature.dependencyExplorer.description": {
     "defaultMessage": "Bağımlılık ağacının tamamını incelemek için etkileşimli grafik."
+  },
+  "feature.dependencyExplorer.disabledTooltip": {
+    "defaultMessage": "Bağımlılıkların etkinleştirilmesi gerekiyor"
   },
   "feature.dependencyExplorer.title": {
     "defaultMessage": "Bağımlılık Gezgini"
   },
   "feature.dependencySidebar.description": {
     "defaultMessage": "Proje sayfalarında katlanabilir bağımlılık ağacı."
+  },
+  "feature.dependencySidebar.title": {
+    "defaultMessage": "Bağımlılıklar"
   },
   "feature.discordSidebar.description": {
     "defaultMessage": "Bağlı Discord sunucularının sunucu adı, açıklaması, üye sayısı ve çevrim içi sayısı."
@@ -56,8 +80,20 @@
   "feature.githubSidebar.description": {
     "defaultMessage": "Bağlantılı GitHub, GitLab, Codeberg ve Bitbucket repo'larına ait star'lar, issue'lar, pull request'ler ve fork'lar."
   },
+  "feature.githubSidebar.title": {
+    "defaultMessage": "Depo"
+  },
+  "feature.modgradeSidebar.description": {
+    "defaultMessage": "Bir projenin Modgrade güvenlik kontrolü sonuçlarını göster."
+  },
+  "feature.modgradeSidebar.title": {
+    "defaultMessage": "Modgrade"
+  },
   "feature.modpacksSidebar.description": {
     "defaultMessage": "Bu modun yer aldığı tüm mod paketlerini göster."
+  },
+  "feature.modpacksSidebar.title": {
+    "defaultMessage": "Mod Paketleri"
   },
   "feature.monetizationBadge.description": {
     "defaultMessage": "Bir projenin gelir elde etme durumunu kenar çubuğunda göster."
@@ -83,11 +119,38 @@
   "feature.platformsSidebar.title": {
     "defaultMessage": "Diğer platformlar"
   },
+  "feature.quickActions.description": {
+    "defaultMessage": "Projeleri doğrudan proje kartlarından kolayca indirin, takip edin ve kaydedin."
+  },
+  "feature.quickActions.downloadDependencies": {
+    "defaultMessage": "Bağımlılıkları indir"
+  },
+  "feature.quickActions.gameVersion": {
+    "defaultMessage": "Oyun sürümü"
+  },
+  "feature.quickActions.modLoader": {
+    "defaultMessage": "Mod yükleyicisi"
+  },
+  "feature.quickActions.pluginLoader": {
+    "defaultMessage": "Eklenti yükleyicisi"
+  },
+  "feature.quickActions.shaderLoader": {
+    "defaultMessage": "Shader yükleyicisi"
+  },
+  "feature.quickActions.title": {
+    "defaultMessage": "Hızlı eylemler"
+  },
   "feature.quickSearch.description": {
     "defaultMessage": "Ctrl+K veya / tuşlarına basarak, yükleyiciler, sürümler, kategoriler ve türler için filtrelenmiş etiketlere sahip komut paleti tarzı bir arama yapabilirsiniz."
   },
   "feature.quickSearch.title": {
     "defaultMessage": "Hızlı Arama"
+  },
+  "feature.reviews.curseforge": {
+    "defaultMessage": "CurseForge yorumları"
+  },
+  "feature.reviews.description": {
+    "defaultMessage": "Projeye ModDex, CurseForge ve SpigotMC'den topluluk incelemelerini içeren bir incelemeler sekmesi ekler."
   },
   "feature.reviews.moddex": {
     "defaultMessage": "ModDex incelemeleri"
@@ -107,11 +170,38 @@
   "feature.telemetry.title": {
     "defaultMessage": "Telemetri"
   },
+  "feature.themes.accentColor": {
+    "defaultMessage": "Vurgu rengi"
+  },
+  "feature.themes.accentLowContrast": {
+    "defaultMessage": "Bu rengi temanızda görmek zor."
+  },
+  "feature.themes.accentUnreadableButtons": {
+    "defaultMessage": "Temanızda bu renkteki düğmelerin üzerindeki yazıların okunması zordur."
+  },
+  "feature.themes.customAccent": {
+    "defaultMessage": "Özel vurgu rengi"
+  },
+  "feature.themes.description": {
+    "defaultMessage": "Modrinth için daha fazla tema, artı kendi temaların."
+  },
+  "feature.themes.presets": {
+    "defaultMessage": "Ön ayarlı temalar ekle"
+  },
   "feature.themes.title": {
     "defaultMessage": "Temalar"
   },
+  "feature.toolsSidebar.decompiler": {
+    "defaultMessage": "Dekompilatör"
+  },
+  "feature.toolsSidebar.description": {
+    "defaultMessage": "Gömülü Bağlantılar oluşturun, mod yöneticisi yükleme komutlarını kopyalayın ve decompile edin."
+  },
   "feature.toolsSidebar.modManager": {
     "defaultMessage": "Mod yöneticisi"
+  },
+  "feature.toolsSidebar.title": {
+    "defaultMessage": "Araçlar"
   },
   "feature.translateDescription.description": {
     "defaultMessage": "Bir projenin açıklaması, kendi dilinizden farklıysa, cihaz üzerinde kendi dilinize çevrilir."
@@ -122,11 +212,56 @@
   "feature.translateDescription.title": {
     "defaultMessage": "Açıklamayı çevir"
   },
+  "popup.creator.analytics": {
+    "defaultMessage": "İstatistikler"
+  },
+  "popup.creator.availableNow": {
+    "defaultMessage": "Şimdi mevcut"
+  },
+  "popup.creator.balance": {
+    "defaultMessage": "Bakiye"
+  },
+  "popup.creator.createProject": {
+    "defaultMessage": "Proje oluştur"
+  },
   "popup.creator.downloads": {
     "defaultMessage": "İndirmeler"
   },
+  "popup.creator.estimated": {
+    "defaultMessage": "Tahmini {date}"
+  },
+  "popup.creator.failed": {
+    "defaultMessage": "İstatistikler yüklenemedi"
+  },
+  "popup.creator.fullAnalytics": {
+    "defaultMessage": "Tam istatistikleri aç"
+  },
+  "popup.creator.fullRevenue": {
+    "defaultMessage": "Toplam geliri aç"
+  },
+  "popup.creator.loading": {
+    "defaultMessage": "Projeleriniz yükleniyor..."
+  },
+  "popup.creator.noProjectsDescription": {
+    "defaultMessage": "Bir projeyi yayınladığınızda, projenin görüntülenme sayısı, indirme sayısı ve gelir bilgileri burada görünür."
+  },
+  "popup.creator.noProjectsTitle": {
+    "defaultMessage": "Henüz proje yok"
+  },
+  "popup.creator.previousPeriod": {
+    "defaultMessage": "Önceki dönem"
+  },
+  "popup.creator.processing": {
+    "defaultMessage": "İşleniyor"
+  },
   "popup.creator.rangeDays": {
     "defaultMessage": "{days}g"
+  },
+  "popup.creator.revenue": {
+    "defaultMessage": "Gelir"
+  },
+  "popup.creator.signIn": {
+    "defaultMessage": "Analitik verilerinizi ve gelirinizi görmek için oturum açın."
   },
   "popup.creator.total": {
     "defaultMessage": "Toplam"
@@ -136,6 +271,9 @@
   },
   "popup.discordPrompt.dismiss": {
     "defaultMessage": "Vazgeç"
+  },
+  "popup.discordPrompt.join": {
+    "defaultMessage": "Sunucuya katıl"
   },
   "popup.discordPrompt.message": {
     "defaultMessage": "Discord sunucusunda yardım alın, görüşlerinizi paylaşın ve güncellemeleri takip edin."
@@ -170,17 +308,56 @@
   "popup.footer.updateAvailable": {
     "defaultMessage": "Güncelleme mevcut"
   },
+  "popup.found.looking": {
+    "defaultMessage": "Modrinth'te bu projey aranıyor..."
+  },
+  "popup.found.title": {
+    "defaultMessage": "Ayrıca Modrinth'te"
+  },
   "popup.group.extension": {
     "defaultMessage": "Uzantı"
   },
   "popup.group.general": {
     "defaultMessage": "Genel"
   },
+  "popup.group.sidebar": {
+    "defaultMessage": "Kenar Çubuğu"
+  },
+  "popup.introductionTour.creator.description": {
+    "defaultMessage": "Projelerinizin görüntülenme sayılarını, indirme sayılarını ve gelirlerini takip edin."
+  },
   "popup.introductionTour.creator.title": {
     "defaultMessage": "Yapımcı"
   },
+  "popup.introductionTour.notifications.description": {
+    "defaultMessage": "Bildirimlerinizi buradan okuyun ve davetleri buradan kabul edin."
+  },
+  "popup.introductionTour.notifications.title": {
+    "defaultMessage": "Bildirimler"
+  },
+  "popup.introductionTour.progress": {
+    "defaultMessage": "{current}/{total}"
+  },
+  "popup.introductionTour.search.description": {
+    "defaultMessage": "Modrinth’i açmadan modları, mod paketlerini, sunucuları ve daha fazlasını bulun."
+  },
+  "popup.introductionTour.search.title": {
+    "defaultMessage": "Ara"
+  },
+  "popup.introductionTour.settings.description": {
+    "defaultMessage": "Modrinth Extras'ın sunduğu her şeyi özelleştirin."
+  },
   "popup.introductionTour.settings.title": {
     "defaultMessage": "Ayarlar"
+  },
+  "popup.introductionTour.settings.updatedDescription": {
+    "defaultMessage": "Ayarlar buraya taşındı. Modrinth Extras’ın sunduğu tüm özellikleri buradan özelleştirin."
+  },
+  "popup.introductionTour.skip": {
+    "defaultMessage": "Atla"
+  },
+  "popup.nav.back": {
+    "defaultMessage": "Geri"
   },
   "popup.nav.creator": {
     "defaultMessage": "Yapımcı"
@@ -194,17 +371,104 @@
   "popup.nav.settings": {
     "defaultMessage": "Ayarlar"
   },
+  "popup.notifications.emptyDescription": {
+    "defaultMessage": "Projeyle ilgili güncellemeler, davetler ve moderatörlerden gelen mesajlar burada görüntülenir."
+  },
+  "popup.notifications.emptyTitle": {
+    "defaultMessage": "Okunmamış bildirim yok"
+  },
+  "popup.notifications.failed": {
+    "defaultMessage": "Bildirimler yüklenemedi"
+  },
+  "popup.notifications.loading": {
+    "defaultMessage": "Bildirimleriniz yükleniyor..."
+  },
   "popup.notifications.markAllAsRead": {
     "defaultMessage": "Tümünü okundu olarak işaretle"
+  },
+  "popup.notifications.signIn": {
+    "defaultMessage": "Bildirimlerinizi görmek için oturum açın."
   },
   "popup.notifications.unread": {
     "defaultMessage": "Okunmamış"
   },
+  "popup.notifications.viewAll": {
+    "defaultMessage": "Tümünü gör"
+  },
+  "popup.notifications.viewHistory": {
+    "defaultMessage": "Geçmişi görüntüle"
+  },
+  "popup.project.by": {
+    "defaultMessage": "{author} tarafından"
+  },
+  "popup.project.environment.client": {
+    "defaultMessage": "İstemci"
+  },
+  "popup.project.environment.clientAndServer": {
+    "defaultMessage": "İstemci ve sunucu"
+  },
+  "popup.project.environment.clientOrServer": {
+    "defaultMessage": "İstemci veya sunucu"
+  },
+  "popup.project.environment.dedicatedServer": {
+    "defaultMessage": "Adanmış sunucu"
+  },
   "popup.project.environment.server": {
     "defaultMessage": "Sunucu"
   },
+  "popup.project.environment.singleplayer": {
+    "defaultMessage": "Tek Oyunculu"
+  },
+  "popup.resetSettings.button": {
+    "defaultMessage": "Sıfırla"
+  },
   "popup.resetSettings.cancel": {
     "defaultMessage": "İptal"
+  },
+  "popup.resetSettings.confirmMessage": {
+    "defaultMessage": "Bütün ayarlar varsayılanlara geri dönecek, dil ve yan çubuk düzeni ve özel temalar dahil. Bu geri alınamaz bir işlemdir."
+  },
+  "popup.resetSettings.confirmTitle": {
+    "defaultMessage": "Tüm ayarlar sıfırlansın mı?"
+  },
+  "popup.resetSettings.description": {
+    "defaultMessage": "Tüm ayarları varsayılan değerlerine geri getir ve özel temaları sil."
+  },
+  "popup.resetSettings.title": {
+    "defaultMessage": "Tüm ayarları sıfırla"
+  },
+  "popup.search.clear": {
+    "defaultMessage": "Aramayı temizle"
+  },
+  "popup.search.failedHeading": {
+    "defaultMessage": "Arama başarısız oldu"
+  },
+  "popup.search.noResults": {
+    "defaultMessage": "Proje bulunamadı"
+  },
+  "popup.search.placeholder": {
+    "defaultMessage": "Modrinth'te Ara"
+  },
+  "popup.search.placeholder.datapack": {
+    "defaultMessage": "Veri paketlerini ara"
+  },
+  "popup.search.placeholder.mod": {
+    "defaultMessage": "Mod ara"
+  },
+  "popup.search.placeholder.modpack": {
+    "defaultMessage": "Mod paketlerini ara"
+  },
+  "popup.search.placeholder.plugin": {
+    "defaultMessage": "Eklenti ara"
+  },
+  "popup.search.placeholder.resourcepack": {
+    "defaultMessage": "Kaynak paketlerini ara"
+  },
+  "popup.search.placeholder.server": {
+    "defaultMessage": "Sunucu ara"
+  },
+  "popup.search.placeholder.shader": {
+    "defaultMessage": "Shaderler ara"
   },
   "popup.search.searching": {
     "defaultMessage": "Aranıyor..."
@@ -212,8 +476,14 @@
   "popup.search.type.all": {
     "defaultMessage": "Tümü"
   },
+  "popup.search.type.datapack": {
+    "defaultMessage": "Veri Paketleri"
+  },
   "popup.search.type.mod": {
     "defaultMessage": "Modlar"
+  },
+  "popup.search.type.modpack": {
+    "defaultMessage": "Mod Paketleri"
   },
   "popup.search.type.plugin": {
     "defaultMessage": "Eklentiler"
@@ -230,8 +500,38 @@
   "popup.signIn.button": {
     "defaultMessage": "Oturum aç"
   },
+  "popup.signIn.title": {
+    "defaultMessage": "Modrinth'e giriş yap"
+  },
   "popup.tab.projects": {
     "defaultMessage": "Projeler"
+  },
+  "quickActionProfiles.choose": {
+    "defaultMessage": "Bir profil seç"
+  },
+  "quickActionProfiles.defaultName": {
+    "defaultMessage": "Profil"
+  },
+  "quickActionProfiles.delete": {
+    "defaultMessage": "Profili sil"
+  },
+  "quickActionProfiles.limit": {
+    "defaultMessage": "En fazla {max} profile sahip olabilirsiniz."
+  },
+  "quickActionProfiles.name": {
+    "defaultMessage": "Profil adı"
+  },
+  "quickActionProfiles.new": {
+    "defaultMessage": "Yeni profil"
+  },
+  "quickActionProfiles.profile": {
+    "defaultMessage": "Profil"
+  },
+  "quickActionProfiles.rename": {
+    "defaultMessage": "Profili yeniden adlandır"
+  },
+  "quickActionProfiles.save": {
+    "defaultMessage": "Profil olarak kaydet"
   },
   "search.any": {
     "defaultMessage": "Herhangi"

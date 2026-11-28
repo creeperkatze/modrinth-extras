@@ -38,11 +38,20 @@
   "feature.compareVersions.title": {
     "defaultMessage": "比较版本"
   },
-  "feature.curseforgeRedirect.description": {
-    "defaultMessage": "在可用的情况下，将 CurseForge 项目页面重定向至 Modrinth。"
+  "feature.curseforgeIntegration.description": {
+    "defaultMessage": "在 CurseForge 项目页面中添加一个“在 Modrinth 上打开”按钮。"
   },
-  "feature.curseforgeRedirect.title": {
-    "defaultMessage": "CurseForge 重定向"
+  "feature.curseforgeIntegration.openIn": {
+    "defaultMessage": "打开于"
+  },
+  "feature.curseforgeIntegration.openIn.current": {
+    "defaultMessage": "当前标签页"
+  },
+  "feature.curseforgeIntegration.openIn.new": {
+    "defaultMessage": "新标签页"
+  },
+  "feature.curseforgeIntegration.title": {
+    "defaultMessage": "CurseForge 集成"
   },
   "feature.dependencyExplorer.description": {
     "defaultMessage": "用于探查完整依赖树的交互式图表。"
@@ -305,6 +314,9 @@
   "popup.found.looking": {
     "defaultMessage": "在Modrinth上寻找这个项目……"
   },
+  "popup.found.title": {
+    "defaultMessage": "也在 Modrinth 上"
+  },
   "popup.group.extension": {
     "defaultMessage": "扩展"
   },
@@ -314,11 +326,113 @@
   "popup.group.sidebar": {
     "defaultMessage": "侧边栏"
   },
+  "popup.hosting.actionFailed": {
+    "defaultMessage": "无法 {action, select, Start {启动} Stop {停止} other {重启}} 该服务器。"
+  },
+  "popup.hosting.allServers": {
+    "defaultMessage": "打开所有服务器"
+  },
+  "popup.hosting.broken": {
+    "defaultMessage": "该服务器出现了一些问题。请打开仪表盘查看原因。"
+  },
+  "popup.hosting.connectionFailed": {
+    "defaultMessage": "无法加载在线状态。"
+  },
+  "popup.hosting.copyAddress": {
+    "defaultMessage": "复制地址"
+  },
+  "popup.hosting.cpu": {
+    "defaultMessage": "CPU"
+  },
+  "popup.hosting.crashed": {
+    "defaultMessage": "服务器崩溃了。请打开仪表盘查看原因。"
+  },
+  "popup.hosting.emptyDescription": {
+    "defaultMessage": "如果您有 Modrinth Hosting 服务器，其状态和控制选项就会显示在此处。"
+  },
+  "popup.hosting.emptyTitle": {
+    "defaultMessage": "暂无服务器"
+  },
+  "popup.hosting.failed": {
+    "defaultMessage": "无法加载您的服务器"
+  },
+  "popup.hosting.getServer": {
+    "defaultMessage": "获取服务器"
+  },
+  "popup.hosting.installing": {
+    "defaultMessage": "安装中……"
+  },
+  "popup.hosting.loading": {
+    "defaultMessage": "正在加载您的服务器……"
+  },
+  "popup.hosting.manageBilling": {
+    "defaultMessage": "管理账单"
+  },
+  "popup.hosting.memory": {
+    "defaultMessage": "内存"
+  },
+  "popup.hosting.noPermission": {
+    "defaultMessage": "你没有权限执行此操作"
+  },
+  "popup.hosting.notice.cancelled": {
+    "defaultMessage": "此服务器的订阅已取消。"
+  },
+  "popup.hosting.notice.moderated": {
+    "defaultMessage": "该服务器已被版主暂停。请联系客服以了解更多信息。"
+  },
+  "popup.hosting.notice.other": {
+    "defaultMessage": "该服务器已被暂停。"
+  },
+  "popup.hosting.notice.paymentfailed": {
+    "defaultMessage": "由于付款失败，该服务器的订阅已被取消。"
+  },
+  "popup.hosting.notice.upgrading": {
+    "defaultMessage": "该服务器的硬件正在升级，稍后将恢复服务。"
+  },
+  "popup.hosting.resourceUsage": {
+    "defaultMessage": "{resource}：已使用 {used} / {total}"
+  },
+  "popup.hosting.resourceValue": {
+    "defaultMessage": "{resource}: {value}"
+  },
+  "popup.hosting.restart": {
+    "defaultMessage": "重新启动"
+  },
+  "popup.hosting.servers": {
+    "defaultMessage": "服务器"
+  },
+  "popup.hosting.signIn": {
+    "defaultMessage": "登录以查看您的 Modrinth Hosting 服务器。"
+  },
+  "popup.hosting.start": {
+    "defaultMessage": "启动"
+  },
+  "popup.hosting.startingServer": {
+    "defaultMessage": "启动服务器……"
+  },
+  "popup.hosting.stop": {
+    "defaultMessage": "停止"
+  },
+  "popup.hosting.stopping": {
+    "defaultMessage": "正在停止"
+  },
+  "popup.hosting.storage": {
+    "defaultMessage": "存储空间"
+  },
+  "popup.hosting.uptime": {
+    "defaultMessage": "在线时间： {duration}"
+  },
   "popup.introductionTour.creator.description": {
     "defaultMessage": "密切关注您项目的浏览量、下载量和收入。"
   },
   "popup.introductionTour.creator.title": {
     "defaultMessage": "创作者"
+  },
+  "popup.introductionTour.hosting.description": {
+    "defaultMessage": "查看您的 Modrinth Hosting 服务器，并启动、停止或重启它们。"
+  },
+  "popup.introductionTour.hosting.title": {
+    "defaultMessage": "Hosting"
   },
   "popup.introductionTour.notifications.description": {
     "defaultMessage": "您可以在这里直接查看通知并接受邀请。"
@@ -352,6 +466,9 @@
   },
   "popup.nav.creator": {
     "defaultMessage": "创作者"
+  },
+  "popup.nav.hosting": {
+    "defaultMessage": "Hosting"
   },
   "popup.nav.notifications": {
     "defaultMessage": "通知"
