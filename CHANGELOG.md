@@ -10,7 +10,7 @@
 
 ### Changed
 
-- Features on Modrinth pages show up about a second sooner when you open or reload a page.
+- Features on Modrinth pages show up way sooner when you open or reload a page.
 
 ### Fixed
 
